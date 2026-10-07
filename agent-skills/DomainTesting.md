@@ -566,9 +566,9 @@ Output:
 ---
 
 - Xuất toàn bộ kết quả thành **một file Markdown (`.md`)**.
-- Lưu file trong thư mục `reports/` tại thư mục gốc của project.
-- Tên file tương ứng với Feature được yêu cầu: `reports/<feature-name>.md`.
-- Nếu thư mục `reports/` chưa tồn tại, Agent phải tự tạo.
+- Lưu file trong thư mục `reports/DomainTesting` tại thư mục gốc của project.
+- Tên file tương ứng với Feature được yêu cầu: `reports/DomainTesting/<Feature-name>.md`.
+- Nếu thư mục `reports/DomainTesting` chưa tồn tại, Agent phải tự tạo.
 
 Ví dụ:
 
