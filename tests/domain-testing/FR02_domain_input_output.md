@@ -1,11 +1,11 @@
-# Domain Input Analysis - FR-02
+# Domain Input / Output Analysis - FR-02
 
 ## 1. Phạm vi
 
 - **Requirement:** FR-02 - Đăng nhập và Khóa tài khoản
 - **Module:** Quản lý tài khoản / Authentication & Authorization
 - **Nguồn yêu cầu:** `README.md`
-- **Mục đích:** Xác định loại yêu cầu, input, miền dữ liệu và các biên cần xem xét trước khi thiết kế test case.
+- **Mục đích:** Xác định loại yêu cầu, input, output, miền dữ liệu và các biên cần xem xét trước khi thiết kế test case.
 
 ## 2. Phân loại yêu cầu
 
@@ -17,6 +17,7 @@
 | FR02-04 | Đăng nhập thành công trả về JWT Token | Functional | Phát hành token sau khi xác thực thành công |
 | FR02-05 | Client lưu JWT và gửi qua `Authorization: Bearer <token>` | Functional | Quản lý phiên và xác thực các request tiếp theo |
 | FR02-06 | Trường email dùng `type="email"` và validate HTML5 | Functional | Kiểm tra định dạng input ở giao diện |
+| FR02 (error response) | Khi đăng nhập thất bại, hệ thống trả lỗi phù hợp và không để lộ chi tiết nguyên nhân | Functional | Kiểm tra mã lỗi, thông báo lỗi và thông tin nhạy cảm trong phản hồi |
 | FR02-P01 | Thời gian phản hồi, throughput, số người dùng đồng thời | Performance | Chưa được quy định trong FR-02 |
 
 **Kết luận về performance:** FR-02 không cung cấp yêu cầu định lượng về hiệu năng. Không được tự suy diễn giới hạn thời gian phản hồi, số request/giây hoặc số người dùng đồng thời. Các kiểm thử performance chỉ có thể được thiết kế sau khi chủ sở hữu yêu cầu bổ sung các ngưỡng này.
@@ -33,6 +34,17 @@
 | FR02-04 | Kết quả xác thực | Trạng thái | Email và mật khẩu hợp lệ | Email không tồn tại, mật khẩu sai hoặc tài khoản đang khóa | Chỉ trạng thái đăng nhập thành công mới tạo JWT |
 | FR02-05 | JWT token | Chuỗi token | Token tồn tại, hợp lệ và được gửi đúng dạng Bearer | Thiếu token, token rỗng, sai cấu trúc, token không hợp lệ hoặc hết hạn | FR-02 không nêu thời hạn JWT cụ thể |
 | FR02-06 | Giá trị email trên form | Chuỗi / HTML input | Giá trị thỏa định dạng email HTML5 | Giá trị không thỏa định dạng email HTML5 | Đây là input giao diện, không phải ngưỡng hiệu năng |
+| FR02 (error response) | Nội dung phản hồi khi đăng nhập thất bại | Mã lỗi / thông báo / dữ liệu phản hồi | Lỗi phù hợp, thông báo không chứa số lần sai, truy vấn hoặc stack trace | Phản hồi làm lộ email có tồn tại, số lần sai, dữ liệu nội bộ hoặc nguyên nhân chi tiết | Đây là output cần kiểm tra sau mỗi lần đăng nhập thất bại |
+
+## 3.1. Phân tích output
+
+| Requirement | Output / biến kiểm thử | Kiểu dữ liệu | Miền hợp lệ | Miền không hợp lệ | Ghi chú |
+|---|---|---|---|---|---|
+| FR02-04 | Phản hồi đăng nhập thành công | HTTP response / JSON | Phản hồi thành công chứa JWT hợp lệ và thông tin cần thiết | Thành công nhưng thiếu JWT, JWT rỗng hoặc trả dữ liệu nhạy cảm | Mã HTTP cụ thể cần đối chiếu với API thực tế |
+| FR02-03, FR02 (error response) | Phản hồi khi tài khoản bị khóa | HTTP response / JSON | Từ chối đăng nhập và thông báo phù hợp, không chứa chi tiết nội bộ | Cho phép đăng nhập, không trả lỗi, hoặc tiết lộ bộ đếm/thời điểm nội bộ | Cần xác nhận mức độ chi tiết cho phép trong thông báo khóa |
+| FR02-02, FR02 (error response) | Phản hồi sau lần đăng nhập sai | HTTP response / JSON | Từ chối đăng nhập, thông báo chung, không trả JWT | Nêu rõ email tồn tại, mật khẩu sai, số lần sai hoặc lý do nội bộ | Phải kiểm tra cả body và status code |
+| FR02-05 | Header xác thực của request sau đăng nhập | HTTP header | Có dạng `Authorization: Bearer <valid-token>` | Thiếu header, sai scheme hoặc chứa token không hợp lệ | Đây là output phía client khi gọi API cần xác thực |
+| FR02-04 | Dữ liệu nhạy cảm trong phản hồi thành công | JSON fields | Không trả mật khẩu hoặc thông tin bí mật không cần thiết | Trả plaintext password, secret hoặc dữ liệu nội bộ | Kiểm tra cùng với JWT response |
 
 ## 4. Equivalence Partitions
 
