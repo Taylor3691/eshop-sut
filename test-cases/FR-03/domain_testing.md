@@ -154,8 +154,17 @@ Quản lý Tài khoản / Chức năng / Phân hoạch Tương đương
 - Hệ thống sinh mã OTP 6 chữ số ngẫu nhiên.
 - Mã OTP hiển thị trực tiếp trên màn hình (môi trường demo).
 - Biểu mẫu chuyển sang Bước 2.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+OTP sinh ra có 4 chữ số (ví dụ: 5984) thay vì 6 chữ số theo đặc tả. Nhãn trường nhập liệu tại Bước 2 ghi "Mã OTP (4 số)". Giao diện hoàn toàn không có chỉ báo bước ("Bước 1 / 2").
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-001](test-cases/FR-03/screenshots/TC-FORGOT-001.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-01, DEF-FR03-04
 
 ---
 
@@ -177,8 +186,17 @@ Quản lý Tài khoản / Chức năng / Phân hoạch Tương đương
 ## Kết quả Mong đợi
 - Hệ thống trả về thông báo lỗi chỉ ra người dùng/email không tồn tại.
 - Không sinh mã OTP; hệ thống không chuyển sang Bước 2.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Hệ thống hiển thị alert lỗi: "Lỗi: User not found". Không sinh mã OTP và giao diện giữ nguyên ở Bước 1.
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-002](test-cases/FR-03/screenshots/TC-FORGOT-002.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 
 ---
 
@@ -199,8 +217,17 @@ Quản lý Tài khoản / Chức năng / Phân hoạch Tương đương
 3. Nhấn gửi biểu mẫu.
 ## Kết quả Mong đợi
 - Trình duyệt/form cảnh báo định dạng email không hợp lệ. Biểu mẫu không được gửi đi.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Thẻ input email ở Bước 1 sử dụng type="text" thay vì type="email". Trình duyệt không kích hoạt validation HTML5; request được gửi lên backend và trả về alert: "Lỗi: User not found".
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-003](test-cases/FR-03/screenshots/TC-FORGOT-003.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-02
 
 ---
 
@@ -220,8 +247,17 @@ Quản lý Tài khoản / Chức năng / Điều hướng UI
 2. Nhấn nút hoặc liên kết "Quay lại đăng nhập".
 ## Kết quả Mong đợi
 - Ứng dụng điều hướng người dùng về trang Đăng nhập (`/login`).
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Giao diện biểu mẫu Bước 1 chỉ có trường nhập email và nút "Lấy mã OTP". Hoàn toàn không có nút hoặc liên kết "Quay lại đăng nhập" trong biểu mẫu.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-004](test-cases/FR-03/screenshots/TC-FORGOT-004.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-03
 
 ---
 
@@ -247,8 +283,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (min)
 ## Kết quả Mong đợi
 - Đặt lại mật khẩu thành công.
 - Người dùng đăng nhập thành công trên `/login` với `Abc123@!`.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu hợp lệ 8 ký tự "Pass123@" (hoặc "Abc123@!") bị biểu thức chính quy của Client (/(?=.*\s)[A-Za-z\d\s]{8,}$/) từ chối với alert: "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.". Regex đòi hỏi khoảng trắng và cấm ký tự đặc biệt.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-005](test-cases/FR-03/screenshots/TC-FORGOT-005.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-05
 
 ---
 
@@ -272,8 +317,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (min + 1)
 4. Gửi biểu mẫu đặt lại mật khẩu.
 ## Kết quả Mong đợi
 - Đặt lại mật khẩu thành công.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu hợp lệ 9 ký tự "Passw123!" bị regex Client từ chối do chứa ký tự đặc biệt "!" và không có khoảng trắng; hiển thị alert cảnh báo mật khẩu quá yếu.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-006](test-cases/FR-03/screenshots/TC-FORGOT-006.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-05
 
 ---
 
@@ -298,8 +352,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (min - 1)
 ## Kết quả Mong đợi
 - Hệ thống từ chối yêu cầu do mật khẩu ngắn hơn 8 ký tự.
 - Mật khẩu không bị cập nhật.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu 7 ký tự "Pas12@!" bị chặn thành công với alert: "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-007](test-cases/FR-03/screenshots/TC-FORGOT-007.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 
 ---
 
@@ -323,8 +386,17 @@ Quản lý Tài khoản / Chức năng / Phân hoạch Tương đương
 4. Gửi biểu mẫu.
 ## Kết quả Mong đợi
 - Từ chối với thông báo lỗi yêu cầu mật khẩu phải có ít nhất 1 chữ hoa.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu thiếu chữ hoa "validpass1!" bị từ chối chính xác với alert: "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự...".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-008](test-cases/FR-03/screenshots/TC-FORGOT-008.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 
 ---
 
@@ -348,8 +420,17 @@ Quản lý Tài khoản / Chức năng / Phân hoạch Tương đương
 4. Gửi biểu mẫu.
 ## Kết quả Mong đợi
 - Từ chối với thông báo lỗi yêu cầu mật khẩu phải có ít nhất 1 chữ thường.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu thiếu chữ thường "VALIDPASS1!" bị từ chối chính xác với alert: "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự...".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-009](test-cases/FR-03/screenshots/TC-FORGOT-009.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 
 ---
 
@@ -373,8 +454,17 @@ Quản lý Tài khoản / Chức năng / Phân hoạch Tương đương
 4. Gửi biểu mẫu.
 ## Kết quả Mong đợi
 - Từ chối với thông báo lỗi yêu cầu mật khẩu phải có ít nhất 1 chữ số.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu thiếu chữ số "ValidPass!" bị từ chối chính xác với alert: "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự...".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-010](test-cases/FR-03/screenshots/TC-FORGOT-010.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 
 ---
 
@@ -398,8 +488,17 @@ Quản lý Tài khoản / Chức năng / Phân hoạch Tương đương
 4. Gửi biểu mẫu.
 ## Kết quả Mong đợi
 - Từ chối với thông báo lỗi yêu cầu mật khẩu phải có ít nhất 1 ký tự đặc biệt từ `@, $, !, %, *, ?, &`.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu thiếu ký tự đặc biệt "ValidPass1" bị từ chối chính xác với alert: "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự...".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-011](test-cases/FR-03/screenshots/TC-FORGOT-011.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 
 ---
 
@@ -423,8 +522,17 @@ Quản lý Tài khoản / Chức năng / Phân hoạch Tương đương
 4. Gửi biểu mẫu.
 ## Kết quả Mong đợi
 - Hệ thống từ chối vì `#` không thuộc tập hợp ký tự đặc biệt được đặc tả cho phép.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu chứa ký tự đặc biệt không cho phép "#" ("ValidPass1#") bị từ chối với alert: "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự...".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-012](test-cases/FR-03/screenshots/TC-FORGOT-012.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 
 ---
 
@@ -448,8 +556,17 @@ Quản lý Tài khoản / Chức năng / Phân hoạch Tương đương
 4. Gửi biểu mẫu.
 ## Kết quả Mong đợi
 - Hệ thống từ chối với thông báo lỗi hai trường mật khẩu không khớp nhau.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Giao diện Bước 2 chỉ có đúng 1 trường mật khẩu ("Mật khẩu mới"). Ô "Xác nhận mật khẩu mới" hoàn toàn không tồn tại trong mã nguồn HTML của giao diện.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-013](test-cases/FR-03/screenshots/TC-FORGOT-013.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-07
 
 ---
 
@@ -472,8 +589,17 @@ Quản lý Tài khoản / Chức năng / Phân hoạch Tương đương
 3. Gửi biểu mẫu.
 ## Kết quả Mong đợi
 - Hệ thống từ chối yêu cầu với thông báo lỗi mã OTP không đúng. Mật khẩu không bị thay đổi.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Hệ thống từ chối mã OTP không chính xác ("654321") và hiển thị alert: "Mã OTP không đúng hoặc có lỗi xảy ra.".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-014](test-cases/FR-03/screenshots/TC-FORGOT-014.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 
 ---
 
@@ -496,8 +622,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (len - 1)
 3. Gửi biểu mẫu.
 ## Kết quả Mong đợi
 - Hệ thống từ chối do định dạng/độ dài OTP không hợp lệ (phải đủ 6 chữ số).
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Hệ thống từ chối mã OTP 5 chữ số ("12345") với alert: "Mã OTP không đúng hoặc có lỗi xảy ra.".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-015](test-cases/FR-03/screenshots/TC-FORGOT-015.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 
 ---
 
@@ -520,8 +655,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (len + 1)
 3. Gửi biểu mẫu.
 ## Kết quả Mong đợi
 - Hệ thống từ chối do độ dài OTP vượt quá quy định.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Hệ thống từ chối mã OTP 7 chữ số ("1234567") với alert: "Mã OTP không đúng hoặc có lỗi xảy ra.".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-016](test-cases/FR-03/screenshots/TC-FORGOT-016.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 
 ---
 
@@ -544,8 +688,17 @@ Quản lý Tài khoản / Chức năng / Phân hoạch Tương đương
 3. Gửi biểu mẫu.
 ## Kết quả Mong đợi
 - Hệ thống từ chối đầu vào (mã OTP phải là 6 chữ số).
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Hệ thống từ chối mã OTP chứa ký tự chữ và ký tự đặc biệt ("12A45!") với alert: "Mã OTP không đúng hoặc có lỗi xảy ra.".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-017](test-cases/FR-03/screenshots/TC-FORGOT-017.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 
 ---
 
@@ -570,8 +723,17 @@ Quản lý Tài khoản / Chức năng & Bảo mật / Phân hoạch Tương đ�
 ## Kết quả Mong đợi
 - Hệ thống từ chối yêu cầu; OTP của `test@eshop.com` không có hiệu lực cho `admin@eshop.com`.
 - Mật khẩu của tài khoản Admin không bị thay đổi.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Hệ thống cô lập OTP theo email chuẩn xác; sử dụng OTP của test@eshop.com cho admin@eshop.com bị từ chối với alert: "Mã OTP không đúng hoặc có lỗi xảy ra.".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-FORGOT-018](test-cases/FR-03/screenshots/TC-FORGOT-018.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 
 ---
 

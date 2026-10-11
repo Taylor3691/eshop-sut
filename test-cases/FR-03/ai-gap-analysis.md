@@ -71,7 +71,7 @@ Toàn bộ các test case và lỗ hổng ghi nhận trong tài liệu này đ�
 
 ## 4. Bảng Kết quả Thực thi Kiểm thử Thực tế (Live Execution Results Table)
 
-Các test case từ [`domain_testing.md`](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/test-cases/FR-03/domain_testing.md), [`bva_testing.md`](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/test-cases/FR-03/bva_testing.md) và các kịch bản phát hiện lỗ hổng đã được thực thi trực tiếp trên hệ thống đang chạy.
+Các test case từ [`domain_testing.md`](test-cases/FR-03/domain_testing.md), [`bva_testing.md`](test-cases/FR-03/bva_testing.md) và các kịch bản phát hiện lỗ hổng đã được thực thi trực tiếp trên hệ thống đang chạy.
 
 | Mã Kiểm thử (Test ID) | Kịch bản Kiểm thử | Dữ liệu Đầu vào / Thao tác | Kết quả Mong đợi (Oracle) | Kết quả Thực tế (Ghi nhận) | Trạng thái | Minh chứng (Evidence) | Mã Lỗi (Defect ID) |
 |---|---|---|---|---|---|---|---|
@@ -97,15 +97,15 @@ Các test case từ [`domain_testing.md`](file:///d:/HK1%2026-27/Software%20Test
 - **Mức độ Nghiêm trọng**: Cao (Chức năng / Vi phạm Đặc tả Yêu cầu)
 - **Đặc tả Yêu cầu Oracle**: FR-03 Bước 1: *"Hệ thống sinh mã OTP 6 chữ số ngẫu nhiên"*.
 - **Hành vi Ghi nhận**:
-  - [`backend/server.js:72`](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/server.js#L72): `const resetToken = Math.floor(1000 + Math.random() * 9000).toString();` tạo số ngẫu nhiên trong khoảng 1000–9999 (chỉ 4 chữ số).
-  - [`frontend-web/src/pages/ForgotPassword.jsx:69`](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/frontend-web/src/pages/ForgotPassword.jsx#L69): Nhãn hướng dẫn hiển thị `Mã OTP (4 số)`.
+  - [`backend/server.js:72`](backend/server.js#L72): `const resetToken = Math.floor(1000 + Math.random() * 9000).toString();` tạo số ngẫu nhiên trong khoảng 1000–9999 (chỉ 4 chữ số).
+  - [`frontend-web/src/pages/ForgotPassword.jsx:69`](frontend-web/src/pages/ForgotPassword.jsx#L69): Nhãn hướng dẫn hiển thị `Mã OTP (4 số)`.
 - **Hệ quả**: Độ phức tạp không gian mã (entropy) thấp hơn rất nhiều so với đặc tả (chỉ 9.000 khả năng thay vì 900.000 khả năng), tạo nguy cơ bị tấn công dò quét (brute-force).
 
 ### DEF-FR03-02: Trường email sử dụng `type="text"` thay vì `type="email"`
 - **Mức độ Nghiêm trọng**: Trung bình (Xác thực / Vi phạm Đặc tả)
 - **Đặc tả Yêu cầu Oracle**: FR-02/FR-01: *"Trường email phải dùng type="email" (có validate HTML5 format)"*.
 - **Hành vi Ghi nhận**:
-  - [`frontend-web/src/pages/ForgotPassword.jsx:50`](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/frontend-web/src/pages/ForgotPassword.jsx#L50): `<input type="text" ... />`.
+  - [`frontend-web/src/pages/ForgotPassword.jsx:50`](frontend-web/src/pages/ForgotPassword.jsx#L50): `<input type="text" ... />`.
 - **Hệ quả**: Trình duyệt không kích hoạt kiểm tra tính hợp lệ của định dạng email trước khi gửi form.
 
 ### DEF-FR03-03: Thiếu nút "Quay lại đăng nhập" ở Bước 1
@@ -126,7 +126,7 @@ Các test case từ [`domain_testing.md`](file:///d:/HK1%2026-27/Software%20Test
 - **Mức độ Nghiêm trọng**: Cao (Chức năng / Lỗi Logic)
 - **Đặc tả Yêu cầu Oracle**: FR-03 Bước 2 / FR-01: *"Tối thiểu 8 ký tự, có ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt (@, $, !, %, *, ?, &)"*.
 - **Hành vi Ghi nhận**:
-  - [`frontend-web/src/pages/ForgotPassword.jsx:26`](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/frontend-web/src/pages/ForgotPassword.jsx#L26):
+  - [`frontend-web/src/pages/ForgotPassword.jsx:26`](frontend-web/src/pages/ForgotPassword.jsx#L26):
     ```javascript
     const flawedStrongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\s)[A-Za-z\d\s]{8,}$/;
     ```
@@ -138,7 +138,7 @@ Các test case từ [`domain_testing.md`](file:///d:/HK1%2026-27/Software%20Test
 - **Mức độ Nghiêm trọng**: Nghiêm trọng (Bảo mật / Logic Nghiệp vụ)
 - **Đặc tả Yêu cầu Oracle**: FR-03 Bước 2: *"Mật khẩu mới phải tuân thủ điều kiện như FR-01"*.
 - **Hành vi Ghi nhận**:
-  - [`backend/server.js:88-98`](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/server.js#L88-L98) cập nhật trực tiếp chuỗi `newPassword` vào cơ sở dữ liệu mà không kiểm tra bất kỳ điều kiện nào về độ dài hay độ phức tạp.
+  - [`backend/server.js:88-98`](backend/server.js#L88-L98) cập nhật trực tiếp chuỗi `newPassword` vào cơ sở dữ liệu mà không kiểm tra bất kỳ điều kiện nào về độ dài hay độ phức tạp.
   - Gửi `newPassword: "weak"` thành công với mã HTTP 200, mật khẩu mới được cập nhật thành `"weak"`.
 - **Hệ quả**: Kẻ tấn công hoặc client bên ngoài có thể vượt qua kiểm tra của frontend để đặt các mật khẩu yếu, dễ đoán.
 
@@ -146,8 +146,8 @@ Các test case từ [`domain_testing.md`](file:///d:/HK1%2026-27/Software%20Test
 - **Mức độ Nghiêm trọng**: Cao (Giao diện & Chức năng / Vi phạm Đặc tả)
 - **Đặc tả Yêu cầu Oracle**: FR-03 Bước 2: *"Người dùng nhập OTP, Mật khẩu mới, và Xác nhận mật khẩu mới. Hai trường mật khẩu phải khớp nhau."*
 - **Hành vi Ghi nhận**:
-  - Trong [`frontend-web/src/pages/ForgotPassword.jsx:63-97`](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/frontend-web/src/pages/ForgotPassword.jsx#L63-L97), chỉ có ô `resetToken` và `newPassword`.
-  - Trong [`backend/server.js:88-98`](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/server.js#L88-L98), API không nhận và không kiểm tra trường xác nhận.
+  - Trong [`frontend-web/src/pages/ForgotPassword.jsx:63-97`](frontend-web/src/pages/ForgotPassword.jsx#L63-L97), chỉ có ô `resetToken` và `newPassword`.
+  - Trong [`backend/server.js:88-98`](backend/server.js#L88-L98), API không nhận và không kiểm tra trường xác nhận.
 - **Hệ quả**: Người dùng không có cơ chế đối chiếu để tránh lỗi gõ nhầm khi nhập mật khẩu mới.
 
 ---

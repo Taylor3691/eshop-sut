@@ -384,7 +384,7 @@ Toàn bộ các ca kiểm thử lỗ hổng dưới đây đã được **thực
 - **Mức độ Nghiêm trọng**: Cao (Major - Business Logic & Input Validation)
 - **Đặc tả Yêu cầu Oracle**: `README.md` FR-14: *"Tên danh mục là bắt buộc, không được để trống"*.
 - **Hiện trạng Thực tế**:
-  - Mã nguồn [backend/server.js:249-255](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/server.js#L249-L255):
+  - Mã nguồn [backend/server.js:249-255](backend/server.js#L249-L255):
     ```javascript
     app.post("/api/categories", authenticateToken, (req, res) => {
       const { name } = req.body;
@@ -394,7 +394,7 @@ Toàn bộ các ca kiểm thử lỗ hổng dưới đây đã được **thực
       });
     });
     ```
-  - Schema [backend/database.js:23-26](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/database.js#L23-L26) chỉ định nghĩa `name TEXT` (không có `NOT NULL`).
+  - Schema [backend/database.js:23-26](backend/database.js#L23-L26) chỉ định nghĩa `name TEXT` (không có `NOT NULL`).
 - **Hệ quả Thực tế**: Backend chấp nhận lưu các chuỗi rỗng `""`, chuỗi khoảng trắng `"   "` và giá trị `null`, làm vỡ hiển thị danh mục trên Storefront và Admin.
 
 ---
@@ -403,7 +403,7 @@ Toàn bộ các ca kiểm thử lỗ hổng dưới đây đã được **thực
 - **Mức độ Nghiêm trọng**: Khẩn cấp (Critical - Security & Authorization Defect)
 - **Đặc tả Yêu cầu Oracle**: `README.md` Mục 6 (Dòng 177): *"Tất cả các API Admin... và các API có tính ảnh hưởng dữ liệu (POST/PUT/DELETE /api/products, /api/categories, /api/coupons) đều phải yêu cầu Token hợp lệ và Role là admin. Nếu role khác admin, API phải trả về HTTP 403 (không có quyền)"*.
 - **Hiện trạng Thực tế**:
-  - Middleware [backend/server.js:100-110](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/server.js#L100-L110):
+  - Middleware [backend/server.js:100-110](backend/server.js#L100-L110):
     ```javascript
     const authenticateToken = (req, res, next) => {
       ...
@@ -423,7 +423,7 @@ Toàn bộ các ca kiểm thử lỗ hổng dưới đây đã được **thực
 - **Mức độ Nghiêm trọng**: Trung bình (Medium - API Logic & Integrity)
 - **Đặc tả Yêu cầu Oracle**: Khi tài nguyên không tồn tại, API RESTful chuẩn phải trả về HTTP 404 Not Found.
 - **Hiện trạng Thực tế**:
-  - [backend/server.js:257-278](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/server.js#L257-L278): Lệnh `UPDATE` và `DELETE` chạy qua `db.run` nhưng callback không kiểm tra thuộc tính `this.changes`.
+  - [backend/server.js:257-278](backend/server.js#L257-L278): Lệnh `UPDATE` và `DELETE` chạy qua `db.run` nhưng callback không kiểm tra thuộc tính `this.changes`.
 - **Hệ quả Thực tế**: Khi gọi với ID không tồn tại (`id = 9999`), server vẫn trả về HTTP 200 `{ message: "Category updated" }` hoặc `{ message: "Category deleted" }`, đánh lừa ứng dụng client rằng bản ghi đã được xử lý.
 
 ---
@@ -451,7 +451,7 @@ Toàn bộ các ca kiểm thử lỗ hổng dưới đây đã được **thực
 - **Mức độ Nghiêm trọng**: Trung bình (Medium - UI/UX & Form Validation)
 - **Đặc tả Yêu cầu Oracle**: Form thêm danh mục phải yêu cầu nhập tên hợp lệ.
 - **Hiện trạng Thực tế**:
-  - Trong [frontend-admin/src/App.jsx:298-308](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/frontend-admin/src/App.jsx#L298-L308):
+  - Trong [frontend-admin/src/App.jsx:298-308](frontend-admin/src/App.jsx#L298-L308):
     `<input type="text" placeholder="Tên danh mục mới" className="border p-2 rounded flex-1" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} />`
     Thẻ input thiếu thuộc tính `required`, và hàm `handleCategorySubmit` (dòng 142) không kiểm tra điều kiện `categoryName.trim()`.
 - **Hệ quả Thực tế**: Admin vô tình nhấn nút "Thêm mới" khi chưa gõ tên sẽ lập tức tạo ra một danh mục không tên trên bảng.

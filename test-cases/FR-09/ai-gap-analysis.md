@@ -5,8 +5,8 @@
 ## 1. Tóm tắt Rà soát Bộ Kiểm thử Hiện có (Review of Existing Test Suites)
 
 Hệ thống EShop hiện có hai bộ kiểm thử dành cho **FR-09 (Mã Giảm Giá / Discount Coupons)**:
-- [domain_testing.md](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/test-cases/FR-09/domain_testing.md): Gồm 20 test case (`TC-COUPON-001` đến `TC-COUPON-020`) bao phủ 5 điều kiện hợp lệ C1–C5, các lớp tương đương hợp lệ/không hợp lệ, phân loại percent/fixed và các kịch bản tích hợp.
-- [bva_testing.md](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/test-cases/FR-09/bva_testing.md): Gồm 18 test case (`TC-BVA-COUPON-001` đến `TC-BVA-COUPON-018`) tập trung vào các điểm biên `min_order_amount` (-1, at, +1), số lượt dùng `max_uses_per_user`, ngày hết hạn `expired_at`, và giới hạn số tiền thanh toán `final_amount = 0`.
+- [domain_testing.md](test-cases/FR-09/domain_testing.md): Gồm 20 test case (`TC-COUPON-001` đến `TC-COUPON-020`) bao phủ 5 điều kiện hợp lệ C1–C5, các lớp tương đương hợp lệ/không hợp lệ, phân loại percent/fixed và các kịch bản tích hợp.
+- [bva_testing.md](test-cases/FR-09/bva_testing.md): Gồm 18 test case (`TC-BVA-COUPON-001` đến `TC-BVA-COUPON-018`) tập trung vào các điểm biên `min_order_amount` (-1, at, +1), số lượt dùng `max_uses_per_user`, ngày hết hạn `expired_at`, và giới hạn số tiền thanh toán `final_amount = 0`.
 
 Quá trình đối chiếu giữa **Đặc tả Yêu cầu Oracle (`README.md` FR-09 & FR-08)**, **Mã nguồn Cài đặt Thực tế (`backend/server.js`, `frontend-web/src/pages/Checkout.jsx`)**, và **Kết quả Thực thi Thực tế trên hệ thống đang chạy (`http://127.0.0.1:3000`)** cho thấy nhiều lỗ hổng thiết kế kiểm thử AI nghiêm trọng.
 
@@ -106,7 +106,7 @@ Toàn bộ các ca kiểm thử dưới đây đã được **thực thi và xá
   - `README.md` FR-09: *"Loại percent: `discount_amount = total × discount_value / 100`"*
   - `final_amount = total - discount_amount`
 - **Hiện trạng Thực tế**:
-  - File [backend/server.js:399-401](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/server.js#L399-L401) và [L419-L421](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/server.js#L419-L421):
+  - File [backend/server.js:399-401](backend/server.js#L399-L401) và [L419-L421](backend/server.js#L419-L421):
     ```javascript
     if (coupon.type === "percent") {
       discount_amount = Math.floor(
@@ -126,7 +126,7 @@ Toàn bộ các ca kiểm thử dưới đây đã được **thực thi và xá
 - **Đặc tả Yêu cầu Oracle**:
   - `README.md` FR-09 Điều kiện C3: *"Tổng đơn hàng **>= (lớn hơn hoặc bằng)** `min_order_amount`"*.
 - **Hiện trạng Thực tế**:
-  - File [backend/server.js:379](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/server.js#L379):
+  - File [backend/server.js:379](backend/server.js#L379):
     ```javascript
     if (total_amount > coupon.min_order_amount) {
     ```
@@ -141,7 +141,7 @@ Toàn bộ các ca kiểm thử dưới đây đã được **thực thi và xá
 - **Đặc tả Yêu cầu Oracle**:
   - `README.md` FR-09 Điều kiện C4: *"Đã đăng nhập - Người dùng phải có JWT Token hợp lệ"*.
 - **Hiện trạng Thực tế**:
-  - File [backend/server.js:363](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/server.js#L363):
+  - File [backend/server.js:363](backend/server.js#L363):
     ```javascript
     app.post("/api/apply-coupon", (req, res) => {
       const { code, total_amount, user_id } = req.body;
@@ -158,7 +158,7 @@ Toàn bộ các ca kiểm thử dưới đây đã được **thực thi và xá
 - **Đặc tả Yêu cầu Oracle**:
   - `README.md` FR-09 Điều kiện C5: *"Số lần đã dùng mã này của user < `max_uses_per_user`"*.
 - **Hiện trạng Thực tế**:
-  - File [backend/server.js:386-433](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/server.js#L386-L433):
+  - File [backend/server.js:386-433](backend/server.js#L386-L433):
     Nếu request không gửi `user_id`, mã chạy vào khối `else` (dòng 416) và áp dụng mã thành công mà hoàn toàn không kiểm tra bảng `coupon_usage`.
 - **Hệ quả Thực tế**:
   - Người dùng đã dùng hết lượt cho phép chỉ cần gửi request không có `user_id` là có thể tiếp tục sử dụng mã không giới hạn số lần.
@@ -171,8 +171,8 @@ Toàn bộ các ca kiểm thử dưới đây đã được **thực thi và xá
   - `README.md` FR-08: *"Backend phải tự tính lại tổng tiền; không chấp nhận giá trị `total_amount` do client gửi lên."*
   - `README.md` FR-09: Hệ thống áp dụng mã giảm giá và ghi nhận việc sử dụng mã cho đơn hàng.
 - **Hiện trạng Thực tế**:
-  - File [backend/server.js:297-309](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/server.js#L297-L309): `/api/checkout` chấp nhận trực tiếp `total_amount` từ request body mà không xác thực mã giảm giá.
-  - File [frontend-web/src/pages/Checkout.jsx:53-59](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/frontend-web/src/pages/Checkout.jsx#L53-L59): Frontend tự gọi riêng `POST /api/coupon-usage` sau khi checkout xong.
+  - File [backend/server.js:297-309](backend/server.js#L297-L309): `/api/checkout` chấp nhận trực tiếp `total_amount` từ request body mà không xác thực mã giảm giá.
+  - File [frontend-web/src/pages/Checkout.jsx:53-59](frontend-web/src/pages/Checkout.jsx#L53-L59): Frontend tự gọi riêng `POST /api/coupon-usage` sau khi checkout xong.
 - **Hệ quả Thực tế**:
   - Người dùng có thể chặn (block) request gọi `/api/coupon-usage`, hưởng tiền giảm giá nhưng không bị ghi nhận đã dùng mã.
   - Người mua có thể sửa `total_amount` thành bất kỳ giá trị nào (ví dụ 1 ₫) khi gửi request checkout.
@@ -184,7 +184,7 @@ Toàn bộ các ca kiểm thử dưới đây đã được **thực thi và xá
 - **Đặc tả Yêu cầu Oracle**:
   - Mã giảm giá trong thực tế người dùng thường nhập chữ thường hoặc có khoảng trắng vô tình copy/paste.
 - **Hiện trạng Thực tế**:
-  - Truy vấn CSDL [backend/server.js:370](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/backend/server.js#L370): `SELECT * FROM coupons WHERE code = ? AND is_active = 1` so khớp chính xác từng ký tự hoa/thường.
-  - Frontend [frontend-web/src/pages/Checkout.jsx:114](file:///d:/HK1%2026-27/Software%20Testing/Homework/HW2/eshop-sut/frontend-web/src/pages/Checkout.jsx#L114) chỉ dùng class CSS `uppercase` mà không thực hiện `.toUpperCase()` dữ liệu trong state.
+  - Truy vấn CSDL [backend/server.js:370](backend/server.js#L370): `SELECT * FROM coupons WHERE code = ? AND is_active = 1` so khớp chính xác từng ký tự hoa/thường.
+  - Frontend [frontend-web/src/pages/Checkout.jsx:114](frontend-web/src/pages/Checkout.jsx#L114) chỉ dùng class CSS `uppercase` mà không thực hiện `.toUpperCase()` dữ liệu trong state.
 - **Hệ quả Thực tế**:
   - Nếu gửi trực tiếp qua API hoặc thao tác paste, mã chữ thường như `save10` hoặc có khoảng trắng thừa ` SAVE10 ` đều bị trả về lỗi không tìm thấy mã (HTTP 404).

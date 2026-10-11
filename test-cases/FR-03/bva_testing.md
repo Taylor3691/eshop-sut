@@ -84,8 +84,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (len - 1)
 ## Kết quả Mong đợi
 - Hệ thống từ chối yêu cầu do độ dài mã OTP không hợp lệ (phải chính xác 6 chữ số).
 - Mật khẩu không bị thay đổi.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Hệ thống từ chối OTP 5 chữ số ("12345") với alert: "Mã OTP không đúng hoặc có lỗi xảy ra.".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-BVA-OTP-001](test-cases/FR-03/screenshots/TC-BVA-OTP-001.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 ## Cơ sở Lý luận
 Kiểm tra giá trị biên ngay dưới yêu cầu 6 chữ số (`6 - 1 = 5`).
 
@@ -114,8 +123,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (biên ch�
 ## Kết quả Mong đợi
 - Hệ thống chấp nhận mã OTP 6 chữ số.
 - Đặt lại mật khẩu thành công; người dùng có thể đăng nhập bằng `ValidPass1!`.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Backend chỉ tạo mã OTP 4 chữ số (server.js:72). Nhãn giao diện ghi rõ "Mã OTP (4 số)". Hệ thống không sinh và không chấp nhận mã OTP 6 chữ số theo đặc tả.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-BVA-OTP-002](test-cases/FR-03/screenshots/TC-BVA-OTP-002.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-01
 ## Cơ sở Lý luận
 Kiểm tra đúng ngưỡng 6 chữ số theo yêu cầu của FR-03.
 
@@ -142,8 +160,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (len + 1)
 ## Kết quả Mong đợi
 - Hệ thống từ chối yêu cầu do độ dài mã OTP không hợp lệ.
 - Mật khẩu không bị thay đổi.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Hệ thống từ chối OTP 7 chữ số ("1234567") với alert: "Mã OTP không đúng hoặc có lỗi xảy ra.".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-BVA-OTP-003](test-cases/FR-03/screenshots/TC-BVA-OTP-003.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 ## Cơ sở Lý luận
 Kiểm tra giá trị biên ngay trên yêu cầu 6 chữ số (`6 + 1 = 7`).
 
@@ -170,8 +197,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (min - 1)
 ## Kết quả Mong đợi
 - Hệ thống từ chối yêu cầu với thông báo lỗi xác thực yêu cầu mật khẩu phải có ít nhất 8 ký tự.
 - Mật khẩu không bị thay đổi.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Chặn mật khẩu 7 ký tự thành công với alert: "Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT.".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-BVA-PW-LEN-001](test-cases/FR-03/screenshots/TC-BVA-PW-LEN-001.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 ## Cơ sở Lý luận
 Kiểm tra ngưỡng độ dài số nguyên ngay dưới mức tối thiểu (`8 - 1 = 7`).
 
@@ -197,8 +233,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (min)
 4. Nhấn nút gửi.
 ## Kết quả Mong đợi
 - Hệ thống chấp nhận mật khẩu; đặt lại mật khẩu thành công.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu đúng 8 ký tự hợp lệ "Pass123@" bị regex Client từ chối vì có ký tự "@" và thiếu khoảng trắng.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-BVA-PW-LEN-002](test-cases/FR-03/screenshots/TC-BVA-PW-LEN-002.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-05
 ## Cơ sở Lý luận
 Kiểm tra chính xác biên tối thiểu được bao gồm (`min = 8`).
 
@@ -224,8 +269,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (min + 1)
 4. Nhấn nút gửi.
 ## Kết quả Mong đợi
 - Hệ thống chấp nhận mật khẩu; đặt lại mật khẩu thành công.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu đúng 9 ký tự hợp lệ "Passw123!" bị regex Client từ chối do ký tự "!" bị cấm bởi flawed regex.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-BVA-PW-LEN-003](test-cases/FR-03/screenshots/TC-BVA-PW-LEN-003.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-05
 ## Cơ sở Lý luận
 Kiểm tra độ dài danh định ngay trên ngưỡng tối thiểu (`8 + 1 = 9`).
 
@@ -250,8 +304,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (count = 0
 3. Nhấn nút gửi.
 ## Kết quả Mong đợi
 - Hệ thống từ chối mật khẩu do thiếu ký tự viết hoa (`min = 1`).
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Từ chối mật khẩu 0 chữ hoa ("pass123@!") với alert: "Mật khẩu quá yếu...".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-BVA-COMP-UPPER-001](test-cases/FR-03/screenshots/TC-BVA-COMP-UPPER-001.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 ## Cơ sở Lý luận
 Kiểm tra biên số lượng chữ hoa dưới ngưỡng (`1 - 1 = 0`).
 
@@ -276,8 +339,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (count = 1
 3. Nhấn nút gửi.
 ## Kết quả Mong đợi
 - Xác thực mật khẩu vượt qua yêu cầu chữ hoa. Đặt lại mật khẩu thành công.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu có đúng 1 chữ hoa và ký tự đặc biệt "Pass123@!" bị regex Client từ chối do chứa ký tự đặc biệt.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-BVA-COMP-UPPER-002](test-cases/FR-03/screenshots/TC-BVA-COMP-UPPER-002.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-05
 ## Cơ sở Lý luận
 Kiểm tra số lượng chữ hoa chính xác tại ngưỡng tối thiểu (`min = 1`).
 
@@ -302,8 +374,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (count = 0
 3. Nhấn nút gửi.
 ## Kết quả Mong đợi
 - Hệ thống từ chối mật khẩu do thiếu ký tự viết thường (`min = 1`).
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Từ chối mật khẩu 0 chữ thường ("PASS123@!") với alert: "Mật khẩu quá yếu...".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-BVA-COMP-LOWER-001](test-cases/FR-03/screenshots/TC-BVA-COMP-LOWER-001.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 ## Cơ sở Lý luận
 Kiểm tra biên số lượng chữ thường dưới ngưỡng (`1 - 1 = 0`).
 
@@ -328,8 +409,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (count = 1
 3. Nhấn nút gửi.
 ## Kết quả Mong đợi
 - Xác thực mật khẩu vượt qua yêu cầu chữ thường. Đặt lại mật khẩu thành công.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu có đúng 1 chữ thường và ký tự đặc biệt "pASS123@!" bị regex Client từ chối do chứa ký tự đặc biệt.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-BVA-COMP-LOWER-002](test-cases/FR-03/screenshots/TC-BVA-COMP-LOWER-002.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-05
 ## Cơ sở Lý luận
 Kiểm tra số lượng chữ thường chính xác tại ngưỡng tối thiểu (`min = 1`).
 
@@ -354,8 +444,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (count = 0
 3. Nhấn nút gửi.
 ## Kết quả Mong đợi
 - Hệ thống từ chối mật khẩu do thiếu chữ số (`min = 1`).
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Từ chối mật khẩu 0 chữ số ("PassWord@!") với alert: "Mật khẩu quá yếu...".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-BVA-COMP-DIGIT-001](test-cases/FR-03/screenshots/TC-BVA-COMP-DIGIT-001.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 ## Cơ sở Lý luận
 Kiểm tra biên số lượng chữ số dưới ngưỡng (`1 - 1 = 0`).
 
@@ -380,8 +479,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (count = 1
 3. Nhấn nút gửi.
 ## Kết quả Mong đợi
 - Xác thực mật khẩu vượt qua yêu cầu chữ số. Đặt lại mật khẩu thành công.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu có đúng 1 chữ số và ký tự đặc biệt "PassWord1@!" bị regex Client từ chối do chứa ký tự đặc biệt.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-BVA-COMP-DIGIT-002](test-cases/FR-03/screenshots/TC-BVA-COMP-DIGIT-002.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-05
 ## Cơ sở Lý luận
 Kiểm tra số lượng chữ số chính xác tại ngưỡng tối thiểu (`min = 1`).
 
@@ -406,8 +514,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (count = 0
 3. Nhấn nút gửi.
 ## Kết quả Mong đợi
 - Hệ thống từ chối mật khẩu do thiếu ký tự đặc biệt thuộc tập `@, $, !, %, *, ?, &`.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Từ chối mật khẩu 0 ký tự đặc biệt ("Password123") với alert: "Mật khẩu quá yếu...".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-BVA-COMP-SPEC-001](test-cases/FR-03/screenshots/TC-BVA-COMP-SPEC-001.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 ## Cơ sở Lý luận
 Kiểm tra biên số lượng ký tự đặc biệt dưới ngưỡng (`1 - 1 = 0`).
 
@@ -432,8 +549,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (count = 1
 3. Nhấn nút gửi.
 ## Kết quả Mong đợi
 - Xác thực mật khẩu vượt qua yêu cầu ký tự đặc biệt. Đặt lại mật khẩu thành công.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Mật khẩu có đúng 1 ký tự đặc biệt "Password123@" bị regex Client từ chối do ký tự "@" không được chấp nhận.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-BVA-COMP-SPEC-002](test-cases/FR-03/screenshots/TC-BVA-COMP-SPEC-002.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-05
 ## Cơ sở Lý luận
 Kiểm tra số lượng ký tự đặc biệt chính xác tại ngưỡng tối thiểu (`min = 1`).
 
@@ -459,8 +585,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (diff = 0)
 4. Nhấn nút gửi.
 ## Kết quả Mong đợi
 - Hệ thống xác nhận cả hai trường khớp nhau; đặt lại mật khẩu thành công.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Giao diện Bước 2 thiếu trường "Xác nhận mật khẩu mới"; không có trường dữ liệu để so khớp.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-BVA-MATCH-001](test-cases/FR-03/screenshots/TC-BVA-MATCH-001.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-07
 ## Cơ sở Lý luận
 Kiểm tra biên đồng nhất chính xác nơi độ lệch giữa hai trường bằng 0.
 
@@ -486,8 +621,17 @@ Quản lý Tài khoản / Chức năng / Phân tích Giá trị Biên (diff = 1)
 4. Nhấn nút gửi.
 ## Kết quả Mong đợi
 - Hệ thống từ chối yêu cầu do mật khẩu mới và xác nhận mật khẩu không khớp nhau.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Giao diện Bước 2 thiếu trường "Xác nhận mật khẩu mới"; không thể kiểm thử hành vi lệch mật khẩu.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-BVA-MATCH-002](test-cases/FR-03/screenshots/TC-BVA-MATCH-002.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-07
 ## Cơ sở Lý luận
 Kiểm tra biên ngay ngoài điều kiện khớp (lệch đúng 1 ký tự).
 
@@ -511,8 +655,17 @@ Quản lý Tài khoản / Chức năng & Bảo mật / Phân tích Giá trị Bi
 1. Gửi yêu cầu đặt lại mật khẩu cho `test@eshop.com` bằng OTP-A.
 ## Kết quả Mong đợi
 - Đặt lại thành công vì OTP-A thuộc về tài khoản `test@eshop.com`.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Đổi mật khẩu thành công khi mã OTP trùng khớp với email yêu cầu: alert "Đổi mật khẩu thành công!".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-BVA-ASSOC-001](test-cases/FR-03/screenshots/TC-BVA-ASSOC-001.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 ## Cơ sở Lý luận
 Điều kiện biên hợp lệ khi định danh người yêu cầu và đối tượng đặt lại trùng khớp (độ lệch định danh bằng 0).
 
@@ -538,8 +691,17 @@ Quản lý Tài khoản / Bảo mật / Phân tích Giá trị Biên
 ## Kết quả Mong đợi
 - Yêu cầu bị từ chối vì OTP-A không hợp lệ cho `admin@eshop.com`.
 - Mật khẩu của tài khoản Admin không bị thay đổi.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Từ chối mã OTP khi sử dụng chéo tài khoản: alert "Mã OTP không đúng hoặc có lỗi xảy ra.".
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-BVA-ASSOC-002](test-cases/FR-03/screenshots/TC-BVA-ASSOC-002.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 ## Cơ sở Lý luận
 Kiểm thử biên bảo mật nhằm xác minh tính cô lập tài khoản: OTP CHỈ hợp lệ cho chính email đã yêu cầu.
 
@@ -565,8 +727,17 @@ Quản lý Tài khoản / Chức năng / Biên Chuyển đổi Trạng thái
 - Trạng thái chuyển đổi từ Bước 1 sang Bước 2.
 - Chỉ báo bước cập nhật hiển thị Bước 2/2.
 - Mã OTP được hiển thị trên màn hình (môi trường demo).
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Chuyển sang Bước 2 thành công nhưng thiếu chỉ báo bước ("Bước 2 / 2") và OTP chỉ có 4 số.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-BVA-TRANS-001](test-cases/FR-03/screenshots/TC-BVA-TRANS-001.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-01, DEF-FR03-04
 ## Cơ sở Lý luận
 Kiểm tra biên chuyển đổi tích cực qua các giai đoạn của biểu mẫu.
 
@@ -589,8 +760,17 @@ Quản lý Tài khoản / Chức năng / Biên Chuyển đổi Trạng thái
 ## Kết quả Mong đợi
 - Biểu mẫu KHÔNG chuyển sang Bước 2.
 - Người dùng vẫn ở lại Bước 1 với thông báo lỗi xác thực hiển thị.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Trình duyệt chặn gửi form khi ô email để trống nhờ thuộc tính HTML5 required; giữ nguyên ở Bước 1.
+
+## Trạng thái (Status)
+**PASS**
+
+## Minh chứng (Evidence)
+![TC-BVA-TRANS-002](test-cases/FR-03/screenshots/TC-BVA-TRANS-002.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+Không có
 ## Cơ sở Lý luận
 Kiểm tra biên chuyển đổi tiêu cực khi thiếu dữ liệu đầu vào chặn tiến trình chuyển bước.
 
@@ -612,8 +792,17 @@ Quản lý Tài khoản / Điều hướng UI / Phân tích Giá trị Biên
 2. Tìm và nhấn nút "Quay lại đăng nhập".
 ## Kết quả Mong đợi
 - Ứng dụng thoát khỏi luồng đặt lại mật khẩu và chuyển hướng điều hướng về `/login`.
-## Trạng thái / Lỗi Liên quan
-Chưa chạy / Không có
+## Kết quả Thực tế (Actual Result)
+Giao diện Bước 1 không có nút hoặc liên kết "Quay lại đăng nhập" trong biểu mẫu.
+
+## Trạng thái (Status)
+**FAIL**
+
+## Minh chứng (Evidence)
+![TC-BVA-TRANS-003](test-cases/FR-03/screenshots/TC-BVA-TRANS-003.png)
+
+## Mã Lỗi Liên quan (Defect ID)
+DEF-FR03-03
 ## Cơ sở Lý luận
 Kiểm tra biên điều hướng thoát khỏi quy trình đặt lại mật khẩu.
 
