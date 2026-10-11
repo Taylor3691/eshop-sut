@@ -1,0 +1,5 @@
+.agents
+backend/*
+frontend-admin/*
+frontend-web/*
+frontend-mobile/*
