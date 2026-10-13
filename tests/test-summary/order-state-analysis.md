@@ -1,6 +1,6 @@
 # Pool B — FR-10: Trạng thái đơn hàng
 
-Trạng thái: đã hoàn thành bản thiết kế để người dùng review; chưa phê duyệt, chưa execute. Áp dụng skill `domain-testing-bva`, cùng quy trình và template đã dùng cho Pool A. Người dùng yêu cầu bắt đầu Pool B; việc này không tự xác nhận Pool A đã được review/phê duyệt.
+Trạng thái: đã tinh gọn Pool B từ 52 xuống 32 cases theo yêu cầu người dùng; sẵn cho review, chưa phê duyệt, chưa execute. Áp dụng skill `domain-testing-bva`, cùng quy trình và template đã dùng cho Pool A. Người dùng yêu cầu bắt đầu Pool B; việc này không tự xác nhận Pool A đã được review/phê duyệt.
 
 ## Requirement Analysis
 
@@ -60,7 +60,7 @@ R-OS-* là nhãn nội bộ để truy vết, không phải requirement mới.
 
 - AS-OS-01: Bộ test dùng chuỗi trạng thái lowercase đúng tên trong API; không giả định tự chuẩn hóa chữ hoa/whitespace.
 - AS-OS-02: Đúng order_id cần được cập nhật độc lập, không đổi owner/tổng tiền/địa chỉ; dùng snapshot để phát hiện tác động ngoài thao tác status. Đây là bất biến chức năng thay trạng thái, không phải quy tắc về payment.
-- AS-OS-03: User chỉ được hủy đơn của mình. FR-11 nêu chỉ xem đơn của mình, nhưng FR-10/API chưa ghi riêng quy tắc ownership cho mutation. Cases ownership là thiết kế đề xuất theo giả định này, cần người dùng xác nhận; không tự coi FR-11 là câu cấm cập nhật đơn khác.
+- AS-OS-03: User chỉ được hủy đơn của mình. FR-11 nêu chỉ xem đơn của mình, nhưng FR-10/API chưa ghi riêng quy tắc ownership cho mutation. Case ownership 027 là thiết kế đề xuất theo giả định này, cần người dùng xác nhận; không tự coi FR-11 là câu cấm cập nhật đơn khác.
 - AS-OS-04: Trạng thái tại server ngay trước request quyết định quyền chuyển, không phải trạng thái UI đã đọc trước đó; stale cases thực hiện tuần tự với readback xác nhận, không kiểm thử race/atomicity đồng thời.
 - AS-OS-05: Các tài khoản/đơn test được chuẩn bị độc lập và ID/JWT là runtime values. Fixture không phải seed có sẵn.
 
@@ -120,7 +120,7 @@ V = chuyển được phép; I = chuyển sang trạng thái khác bị cấm th
 | delivered | canceled | INVALID | Lỗi, giữ delivered |
 | canceled | canceled | Chưa phân loại response | Giữ canceled; chưa xác định lỗi hoặc no-op |
 
-Case cho user canceled kiểm tra bất biến final state và ghi response thực tế khi tester execute; không đặt Expected Result “phải báo lỗi” cho same-state retry. Do đó case này kiểm tra partition final-state preservation, không được đếm là đã giải quyết self-transition.
+Miền user canceled chỉ có bất biến final state, không có oracle “phải báo lỗi” cho same-state retry. Cases 024/050 đã giảm ưu tiên, không còn active coverage cho miền này. EP-OS-15 giữ trong analysis để ghi khoảng trống, không được đếm là đã giải quyết self-transition.
 
 ### Quan hệ và cách cô lập domain
 
@@ -133,7 +133,7 @@ Case cho user canceled kiểm tra bất biến final state và ghi response th�
 
 ## Equivalence Partitions
 
-ID `EP-OS-*` ổn định. VALID/INVALID gắn với điều kiện đầy đủ về state/role/auth/resource; không phải mọi input cùng target đều tương đương. Với nhóm nhiều cặp invalid, vẫn viết case riêng cho từng cặp để không bỏ sót nhánh state machine.
+ID `EP-OS-*` ổn định. VALID/INVALID gắn với điều kiện đầy đủ về state/role/auth/resource; không phải mọi input cùng target đều tương đương. Sau tinh gọn, giữ đại diện invalid theo source state/direction và final→earlier/final→final. Một số cặp trong cùng partition không còn case riêng; không suy rằng mọi cặp tương đương hoặc đã covered.
 
 | Partition ID | Variable | Class | Condition | Representative Value | Requirement |
 |---|---|---|---|---|---|
@@ -144,7 +144,7 @@ ID `EP-OS-*` ổn định. VALID/INVALID gắn với điều kiện đầy đủ
 | EP-OS-05 | `Admin: state pair` | `VALID` | `confirmed → canceled` | `confirmed / canceled` | `FR-10 R-OS-03` |
 | EP-OS-06 | `Admin: state pair` | `INVALID` | `pending → shipping hoặc delivered` | `pending / shipping` | `FR-10 R-OS-06` |
 | EP-OS-07 | `Admin: state pair` | `INVALID` | `confirmed → pending hoặc delivered` | `confirmed / pending` | `FR-10 R-OS-06` |
-| EP-OS-08 | `Admin: state pair` | `INVALID` | `shipping → pending hoặc confirmed` | `shipping / pending` | `FR-10 R-OS-06` |
+| EP-OS-08 | `Admin: state pair` | `INVALID` | `shipping → pending hoặc confirmed` | `shipping / confirmed` | `FR-10 R-OS-06` |
 | EP-OS-09 | `Admin: final state` | `INVALID` | `delivered → một trong 4 trạng thái khác` | `delivered / canceled` | `FR-10 R-OS-05` |
 | EP-OS-10 | `Admin: final state` | `INVALID` | `canceled → một trong 4 trạng thái khác` | `canceled / delivered` | `FR-10 R-OS-05` |
 | EP-OS-11 | `User cancel` | `VALID` | `Own pending → canceled` | `A hủy own pending` | `FR-10 R-OS-03` |
@@ -168,7 +168,7 @@ ID `EP-OS-*` ổn định. VALID/INVALID gắn với điều kiện đầy đủ
 | EP-OS-29 | `Target string` | `INVALID` | `status chuỗi rỗng` | `{"status":""}` | `FR-10 R-OS-01/06; AM-OS-05` |
 | EP-OS-30 | `Target type` | `INVALID` | `status không phải chuỗi trạng thái` | `{"status":3}` | `FR-10 R-OS-01/06; AM-OS-05` |
 
-EP-OS-15 phân loại **bất biến đầu ra**, không quyết định retry canceled phải thành công hay báo lỗi. EP-OS-23 phụ thuộc assumption và chưa là kết luận nghiệp vụ đã xác nhận. 6 ô `?` của ma trận admin không bị giấu trong INVALID partitions; chúng được lưu riêng dưới AM-OS-01/02.
+EP-OS-15 phân loại **bất biến đầu ra**, không quyết định retry canceled phải thành công hay báo lỗi. Sau tinh gọn EP-OS-15/28/29 là **deferred**, không còn active case; giữ partition để không che coverage gap. EP-OS-23 phụ thuộc assumption và chưa là kết luận nghiệp vụ đã xác nhận. 6 ô `?` của ma trận admin không bị giấu trong INVALID partitions; chúng được lưu riêng dưới AM-OS-01/02.
 
 ## Boundary Analysis
 
@@ -190,35 +190,35 @@ AMBIGUITY: Đặc tả không định nghĩa boundary chính xác cho order_id, 
 | current_status / target_status | Không áp dụng | Không có min−1/min/min+1 | N/A | Enum không có thứ tự tuyến tính được đặc tả |
 | order_id / thời gian / counter | Chưa định nghĩa | Chưa sinh giá trị BVA | Chờ requirement | Không được dùng ID 0/1 hoặc thời gian tự đặt làm boundary |
 
-Thay cho việc ép BVA: dùng 19 cặp admin có oracle xác định (5 valid, 14 invalid), 5 trạng thái nguồn trên đường user cancel (4 có kết quả thao tác xác định, 1 chỉ kiểm tra bất biến), dữ liệu target ngoài enum, auth/role/ownership và chuỗi thao tác stale. Các giá trị này thuộc EP và domain phụ thuộc state, không được ghi nhãn BVA. Ma trận transition dùng hỗ trợ phân tích; giữ Technique `Equivalence Partitioning` để bám template skill, giải thích phần state-transition trong analysis/steps.
+Thay cho việc ép BVA: phân tích 19 cặp admin có oracle (5 valid, 14 invalid), 5 source states User cancel và payload/auth/role/ownership/stale. Bộ tinh gọn giữ 13 cặp admin có standalone API case, 4 User source states có thao tác xác định; canceled retry deferred. Stale 052 có thể exercise thêm canceled→shipping nếu request được gửi. Các giá trị này thuộc EP và domain phụ thuộc state, không được ghi nhãn BVA. Ma trận transition dùng hỗ trợ phân tích; giữ Technique `Equivalence Partitioning` để bám template skill, giải thích phần state-transition trong analysis/steps.
 
 ## Generated Test Cases
 
-- [Danh mục và fixture](../test-cases/order-state/README.md): 52 file, `TC-ORDER-STATE-001`–`TC-ORDER-STATE-052`, đủ template lớp học, mọi case `Not Run / None`.
-- 001–019: toàn bộ 19 cặp admin đã có oracle (5 allowed, 14 forbidden), một cặp mỗi case để cô lập nhánh.
-- 020–024: 5 current states qua user cancel; canceled chỉ kiểm tra bảo toàn final state, response retry chưa xác định.
-- 025–028: user gọi admin API và ownership (027/028 theo AS-OS-03 cần review).
-- 029–033: thiếu/sai token và JWT sửa role nhưng giữ chữ ký cũ.
-- 034–038: target ngoài enum, thiếu/null/rỗng/sai kiểu; 039–040: resource không tồn tại.
-- 041–050: UI admin/user với các chuyển hợp lệ và bảo vệ final/shipping; 051–052: stale page theo trình tự tuần tự có readback giữa các thao tác.
-- Tổng 52 EP, 0 BVA. Việc có 0 BVA là kết quả đánh giá applicability của requirement, không phải bỏ qua bước Boundary/BVA.
+- [Danh mục và fixture](../test-cases/order-state/README.md): **32 files**, giữ ID gốc: 001–006, 008–009, 011–012, 015–016, 019–023, 025, 027, 029–030, 032–035, 038–041, 046, 051–052.
+- 13 standalone Admin API pairs: đủ 5 allowed + 8 forbidden đại diện (skip/backward, final→earlier/final→final). 6 forbidden pairs không còn standalone cases; 052 còn conditional canceled→shipping.
+- 020–023: User cancel pending/confirmed hợp lệ, shipping/delivered bị từ chối. Canceled retry 024/050 đã loại.
+- 025/027: role gate và foreign pending ownership (AS-OS-03); 029/030: thiếu token hai endpoint; 032/033: malformed/JWT sửa role trên Admin endpoint.
+- 034/035/038: outside-enum/missing/wrong-type; null/empty deferred. 039/040: missing resource hai endpoint.
+- 041: chuỗi UI Admin; 046: UI User pending cancel; 051/052: hai stale sequences có server readback, không chứng minh concurrency.
+- Tổng **32 EP, 0 BVA; 28 API + 4 UI/sequence/stale**. Giữ ID và nội dung cases còn lại, không ghép mới/renumber. Mọi case `Not Run / None`.
+- Đã loại 007/010/013/014/017/018/024/026/028/031/036/037/042/043/044/045/047/048/049/050; lý do/tradeoffs ghi trong Coverage Summary. File cũ còn ở Git history.
 
 ## Coverage Summary
 
 - Requirements analyzed: FR-10 chính; một phần FR-11/12/18, SEC-02/03 liên quan.
 - Variables identified: 8 domain groups D-OS-STATE, CANCEL, ROLE, AUTH, RESOURCE, OWNER, PAYLOAD, FRESHNESS.
-- Equivalence partitions: 30; Partitions covered trong thiết kế: 30/30, trong đó EP-OS-23 có điều kiện AS-OS-03.
-- Admin transition pairs: 19/19 có oracle đã có case (5 valid, 14 invalid); tổng 25 cặp còn 6 chưa rõ. Không tuyên bố 25/25 đã giải quyết.
-- User cancel source states: 5/5 có case; 4 thao tác có oracle response, 1 kiểm tra bất biến canceled với retry response chưa rõ.
+- Equivalence partitions: giữ 30; **27/30 có active case**, EP-OS-15/28/29 deferred. EP-OS-23 còn có điều kiện AS-OS-03.
+- Admin transition pairs: **13/19 known pairs có standalone API case** (5 valid + 8 invalid); 6 không còn standalone case. Trong 6, canceled→shipping còn stale case 052 có điều kiện; 5 cặp còn lại deferred hoàn toàn. Tổng 25 cặp vẫn có 6 chưa rõ oracle; không coi deferred là unknown hoặc covered.
+- User cancel source states: **4/5 có active standalone API case**; canceled→canceled retry deferred, response policy vẫn AM-OS-02.
 - Boundaries identified: 0; Boundaries covered: N/A. Không có ordered threshold trong requirement.
-- Test cases generated: 52 EP, 0 BVA; 40 API cases + 12 UI/sequence/stale cases. Tất cả Not Run / None.
+- Test cases generated: 32 EP, 0 BVA; 28 API cases + 4 UI/sequence/stale cases. Tất cả Not Run / None.
 - [Traceability Matrix chung](traceability-matrix.md) giữ phần Pool A và bổ sung mapping riêng cho Pool B.
 
 ### Kiểm tra coverage của thiết kế
 
 - [x] Phân tích các input/state/role/ownership/auth/resource trong scope.
-- [x] Tất cả partitions được định nghĩa có case đại diện, ghi rõ partition phụ thuộc assumption.
-- [x] 19 cặp admin có oracle được kiểm tra riêng; final-state transitions không bị gộp thành một case đại diện duy nhất.
+- [x] 27 partitions có active case; 3 deferred có lý do. Ghi rõ EP-OS-23 theo assumption; không nhận toàn bộ 30 partitions covered.
+- [x] Giữ 5 allowed và 8 forbidden admin pairs riêng; 6 known pairs không còn standalone coverage. Hai final states đều có final→earlier và final→final representatives.
 - [x] Phân biệt thiếu token, sai token và token user hợp lệ nhưng thiếu role.
 - [x] Tương tác current/target/role, owner và dữ liệu UI cũ được xét; readback giữa các thao tác sequence.
 - [x] Boundary/BVA applicability được phân tích và ghi không áp dụng, không tự tạo numeric state/order_id/time boundary.
@@ -226,20 +226,20 @@ Thay cho việc ép BVA: dùng 19 cặp admin có oracle xác định (5 valid, 
 - [ ] Human review: đang chờ; các assumption và ambiguity chưa được tự xác nhận.
 - [ ] Execution/evidence: do người dùng thực hiện, chưa có kết quả.
 
-Kiểm tra tài liệu đã thực hiện: 52 ID/tên file liên tục; 7 headings đúng template; Test Data/steps/requirement/technique/status đầy đủ; đích các liên kết file local tồn tại; ma trận có 30 partition và 52 case; 19 cặp admin distinct đúng phân loại 5 valid/14 invalid, target JSON trùng target trong case; tổng case A+B = 80. Đây là kiểm tra tài liệu, không phải execution SUT hoặc xác nhận business correctness.
+Kiểm tra tài liệu sau tinh gọn được ghi tại mục bàn giao bên dưới; ID có khoảng trống do loại file, không yêu cầu liên tục. Tổng active cases A+B = 51; không tiếp tục dùng 52/80 hoặc 30/30 làm số đếm hiện tại. Đây là kiểm tra tài liệu, không phải execution SUT hoặc xác nhận business correctness.
 
-### Kế hoạch tinh gọn theo yêu cầu người dùng
+### Quyết định tinh gọn theo yêu cầu người dùng
 
 Người dùng yêu cầu xử lý Pool B theo cùng nguyên tắc đã áp dụng cho Pool A: giảm cases tương tự/ít quan trọng, giữ ID gốc và commit trong quá trình. Lượt này không giảm cases A/C/D; không gộp nhiều request độc lập để chỉ giảm số file.
 
-Mục tiêu: **52 → 32 cases**, loại 20 (khoảng 38%). Giữ toàn bộ 5 admin transitions hợp lệ và 8 forbidden pairs đại diện; không tiếp tục tuyên bố 19/19 forbidden/allowed pairs covered.
+Đã giảm **52 → 32 cases**, loại 20 (khoảng 38%). Giữ toàn bộ 5 admin transitions hợp lệ và 8 forbidden pairs đại diện; không tiếp tục tuyên bố 19/19 forbidden/allowed pairs covered.
 
-| IDs dự kiến loại (TC-ORDER-STATE-) | Cases giữ / phần chồng lấp | Tradeoff |
+| IDs đã loại (TC-ORDER-STATE-) | Cases giữ / phần chồng lấp | Tradeoff |
 |---|---|---|
 | 007 | 006: pending bỏ confirmed để sang shipping | Giữ một skip từ pending; pending→delivered chưa được kiểm riêng |
 | 010 | 011: shipping lùi về confirmed | Giữ một backward transition; shipping→pending chưa được kiểm riêng |
 | 013, 014 | 012/015: delivered→pending/canceled | Giữ final→earlier và final→final; delivered→confirmed/shipping được giảm ưu tiên |
-| 017, 018 | 016/019: canceled→pending/delivered | Giữ hồi sinh canceled về pending và sang final khác; canceled→confirmed/shipping giảm ưu tiên |
+| 017, 018 | 016/019: canceled→pending/delivered | Giữ hồi sinh canceled về pending và sang final khác; canceled→confirmed giảm ưu tiên; shipping chỉ còn stale 052 có điều kiện |
 | 024, 050 | Final-state Admin cases; retry còn AM-OS-02 | Không giữ một same-state retry chưa có response policy rõ. EP-OS-15 deferred, không suy nó covered bởi chuyển sang state khác |
 | 026 | 025: token user gọi Admin API trên own order | Giữ role gate; variation foreign order qua Admin endpoint giảm ưu tiên |
 | 028 | 027: token A hủy pending của B | Giữ ownership đề xuất AS-OS-03; variation foreign confirmed giảm ưu tiên |
@@ -251,10 +251,10 @@ Mục tiêu: **52 → 32 cases**, loại 20 (khoảng 38%). Giữ toàn bộ 5 a
 | 048 | 022 API shipping cancel; 051 stale UI shipping | Fresh shipping UI khác stale sequence, không coi hoàn toàn tương đương |
 | 049 | 023 API delivered cancel | Bỏ variation User UI delivered; server final rule vẫn có case |
 
-Cases dự kiến giữ: **001–006, 008–009, 011–012, 015–016, 019–023, 025, 027, 029–030, 032–035, 038–041, 046, 051–052** = 32 EP, 0 BVA.
+Cases giữ: **001–006, 008–009, 011–012, 015–016, 019–023, 025, 027, 029–030, 032–035, 038–041, 046, 051–052** = 32 EP, 0 BVA.
 
-- Domain giữ 30 partitions; dự kiến 27 có active case, 3 deferred (EP-OS-15/28/29). Không xóa partition để nâng tỷ lệ coverage.
-- Admin có 13/19 known pairs với standalone API cases (5 valid + 8 invalid), 6 known pairs giảm ưu tiên, 6 ambiguity pairs vẫn chưa có oracle.
+- Domain giữ 30 partitions; 27 có active case, 3 deferred (EP-OS-15/28/29). Không xóa partition để nâng tỷ lệ coverage.
+- Admin có 13/19 known pairs với standalone API cases (5 valid + 8 invalid); 5 known pairs deferred hoàn toàn, canceled→shipping chỉ còn 052 có điều kiện; 6 ambiguity pairs vẫn chưa có oracle.
 - User có 4/5 source states bằng standalone API cases; canceled same-state chưa được exercise sau khi loại 024/050.
 - Giữ 029 và 030 riêng vì endpoint/role context khác; 039 và 040 riêng vì resource lookup thuộc hai controller; không tự coi JWT/lookup paths giống nhau.
 - Giữ 041 là chuỗi UI integration đã có readback từng bước, không phải ghép mới để giảm số case. Giữ 046 User UI và 051/052 cho hai stale interactions khác nhau.
@@ -263,8 +263,8 @@ Cases dự kiến giữ: **001–006, 008–009, 011–012, 015–016, 019–023
 ### Potential Coverage Gaps
 
 - Admin shipping→canceled và 5 self-transition response policies chưa có oracle đủ rõ. Không lấy code/UI làm hành vi đúng.
-- Ownership mutation của user chưa ghi trực tiếp trong FR-10/API: 027/028 là đề xuất theo AS-OS-03.
-- Bad payload có năm dạng đại diện, không phải fuzzing toàn bộ JSON/string; whitespace/case normalization chưa được xác định.
+- Ownership mutation của user chưa ghi trực tiếp trong FR-10/API: 027 là đề xuất theo AS-OS-03; confirmed foreign variation 028 đã loại.
+- Bad payload giữ outside-enum/missing/wrong-type; null/empty deferred, không phải fuzzing toàn bộ JSON/string; whitespace/case normalization chưa được xác định.
 - Không kiểm thử current_status bị database corrupt, ID serialization khác, TTL/revocation, JWT algorithm attacks hoặc toàn bộ security ngoài scope.
 - Stale cases tuần tự không bao phủ hai request thực sự đồng thời, locking, transaction isolation, retry auto hoặc response ordering.
 - UI có thể tự cập nhật trước thao tác và chặn request stale; phải ghi giới hạn, không suy backend stale đã được exercise.
@@ -285,18 +285,18 @@ Trạng thái: **chờ người dùng review**, chưa tự phê duyệt. Skill y
 
 1. Xác nhận R-OS-01–08 và việc dùng README làm oracle; API “chưa giao” không làm user được hủy khi shipping.
 2. Làm rõ AM-OS-01: “chỉ Admin mới có thể thao tác” có cho admin shipping→canceled không? Ma trận và cases hiện chưa gán kết quả cho cặp này.
-3. Làm rõ AM-OS-02: các self-transition/retry, đặc biệt canceled→canceled, phải lỗi hay no-op? Cases 024/050 chỉ kiểm tra giữ final state.
-4. Xác nhận hoặc sửa AS-OS-03: user chỉ hủy đơn của mình. Cases 027/028 chưa có oracle mutation ownership trực tiếp trong requirement.
-5. Kiểm tra 30 partitions, 19 cặp admin có oracle và 5 user source states: có tổ hợp state/role/owner quan trọng bị bỏ sót không?
+3. Làm rõ AM-OS-02: các self-transition/retry, đặc biệt canceled→canceled, phải lỗi hay no-op? 024/050 đã loại, EP-OS-15 deferred; không suy canceled retry từ final→state khác.
+4. Xác nhận hoặc sửa AS-OS-03: user chỉ hủy đơn của mình. Case 027 chưa có oracle mutation ownership trực tiếp trong requirement; variation 028 giảm ưu tiên.
+5. Kiểm tra 30 partitions (27 active/3 deferred), 13 standalone admin pairs và 4 User source states: reviewer chấp nhận các variations/cặp giảm ưu tiên không? 052 thêm canceled→shipping có điều kiện, không tuyên bố 19/19 pair coverage.
 6. Xác nhận không tạo BVA giả từ số thứ tự state, ID hoặc timeout. Nếu có requirement ordered threshold bổ sung, trích nguồn rồi cập nhật Boundary/BVA trước khi thêm case.
 7. Kiểm tra fixture A/B/M, 12 đơn tồn tại, MISSING_ORDER_ID, token roles và cách khôi phục baseline độc lập. Không dùng việc endpoint lỗi làm Expected Result của setup.
 8. Kiểm tra từng case dùng target/current_status/owner đúng, đọc lại đúng ID, và error message ở invalid request có thể quan sát; không dựa vào message thành công.
 9. Kiểm tra stale cases 051/052 theo thứ tự có xác minh server-state; phân biệt UI chặn trước request và backend từ chối request stale. Không coi tuần tự là kiểm thử concurrency.
-10. Kiểm tra duplicate: 001–019 API một cặp/case, 041 UI chuỗi có mục tiêu integration; UI/API không gộp kết quả dù chung cặp. Các partitions rộng vẫn có case cho mọi cặp xác định.
+10. Kiểm tra quyết định loại 20 cases: không đồng nhất các cặp forbidden, null/empty với missing, UI với API hoặc token handling giữa controllers. 041 là integration sequence gốc; không ghép case mới để giảm số file.
 11. Xem AS-OS-02/04: bất biến dữ liệu ngoài status và server-current-state đã được requirement bảo đảm đủ rõ chưa? Ghi nguồn nếu reviewer bổ sung.
 12. Review Expected Result/coverage gaps; sửa domain/partition trước khi sửa case nếu có rule mới. Không ghi confirmed bug, Pass/Fail hay đã được phê duyệt khi chưa có review/evidence.
 
-Sau review, lưu sửa đổi thiết kế trong commit riêng. Người dùng execute và cung cấp evidence/test run theo scope đã thống nhất. Pool C/D chưa bắt đầu.
+Sau review, lưu sửa đổi thiết kế trong commit riêng. Người dùng execute và cung cấp evidence/test run theo scope đã thống nhất. Pool C/D đã có thiết kế; lượt này chỉ tinh gọn Pool B, không giảm cases A/C/D.
 
 ## AI Gap Candidates
 
@@ -312,7 +312,7 @@ Các điểm dưới đây là ứng viên thiếu oracle/coverage theo bước 
 
 - Possible missed case: Chính sách user hủy đơn khác có thể chưa được yêu cầu ghi đầy đủ; quyền của admin khi gọi user cancel endpoint cũng chưa nói rõ.
 - Why it may have been missed: FR-11 nói về xem own orders; chỉ dẫn view không tự chứng minh mutation policy. AS-OS-03 được nêu để tránh suy diễn âm thầm.
-- Human action required: xác nhận quyền trên từng endpoint/role; giữ 027/028 là đề xuất tới khi đủ oracle, mở rộng role/ownership partitions nếu có rule mới.
+- Human action required: xác nhận quyền trên từng endpoint/role; giữ 027 là đề xuất tới khi đủ oracle, 028 đã giảm ưu tiên, mở rộng role/ownership partitions nếu có rule mới.
 
 ### Candidate 3 — UI cũ và concurrency
 

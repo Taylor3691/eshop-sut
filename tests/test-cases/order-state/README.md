@@ -1,6 +1,6 @@
 # Pool B — Bộ test cases trạng thái đơn hàng
 
-Thiết kế theo [Domain/BVA Analysis](../../test-summary/order-state-analysis.md), template `TC-[MODULE]-[NUMBER]`. Module `ORDER-STATE` chỉ xét storefront/Admin/API; Mobile ngoài scope. **52 cases, tất cả Not Run / None; 0 BVA cases** vì FR-10 không có ordered domain/threshold.
+Thiết kế theo [Domain/BVA Analysis](../../test-summary/order-state-analysis.md), template `TC-[MODULE]-[NUMBER]`. Module `ORDER-STATE` chỉ xét storefront/Admin/API; Mobile ngoài scope. **32 cases EP sau tinh gọn 52 → 32, tất cả Not Run / None; 0 BVA cases** vì FR-10 không có ordered domain/threshold.
 
 ## Fixture tài khoản
 
@@ -48,8 +48,8 @@ Các số tiền chỉ là dữ liệu fixture; không phải boundary hoặc b�
 - Với request thiếu token, xóa Authorization và tắt auth/cookie kế thừa. Với case role, JWT user phải hợp lệ để cô lập role gate.
 - State trên storefront có thể có nhãn Việt: pending = Chờ xác nhận; confirmed = Đã xác nhận; shipping = Đang giao; delivered = Đã giao; canceled = Đã hủy. Luôn đối chiếu giá trị API và ID.
 - Cases negative UI chấp nhận ẩn/disable nút hoặc request bị từ chối; không tự áp requirement mọi nút cấm phải ẩn.
-- Cases 027–028 phụ thuộc AS-OS-03 về user không được hủy đơn người khác. Cần review oracle này trước khi coi khác biệt là bug đã xác nhận.
-- Cases 024/050 kiểm tra giữ canceled, không ấn định response same-state retry. Cases 051–052 chỉ exercise backend stale nếu request tới server sau khi trạng thái đã đổi.
+- Case 027 phụ thuộc AS-OS-03 về user không được hủy đơn người khác. Cần review oracle này trước khi coi khác biệt là bug đã xác nhận.
+- 024/050 đã loại, canceled retry còn AM-OS-02 và EP-OS-15 deferred; không ấn định response. Cases 051–052 chỉ exercise backend stale nếu request tới server sau khi trạng thái đã đổi.
 - Không có case gán kết quả cho admin shipping→canceled hoặc 5 same-state response policies. Những phần này đang mở tại AM-OS-01/02.
 - Không gọi `pending=1…canceled=5` là BVA; không viết Pass/Fail khi chưa execute. Actual Result, evidence và bug links thuộc test run do người dùng thực hiện sau này.
 
@@ -63,49 +63,38 @@ Các số tiền chỉ là dữ liệu fixture; không phải boundary hoặc b�
 | [TC-ORDER-STATE-004](TC-ORDER-STATE-004.md) | API Admin — cho phép pending → canceled | Equivalence Partitioning |
 | [TC-ORDER-STATE-005](TC-ORDER-STATE-005.md) | API Admin — cho phép confirmed → canceled | Equivalence Partitioning |
 | [TC-ORDER-STATE-006](TC-ORDER-STATE-006.md) | API Admin — từ chối pending → shipping | Equivalence Partitioning |
-| [TC-ORDER-STATE-007](TC-ORDER-STATE-007.md) | API Admin — từ chối pending → delivered | Equivalence Partitioning |
 | [TC-ORDER-STATE-008](TC-ORDER-STATE-008.md) | API Admin — từ chối confirmed → pending | Equivalence Partitioning |
 | [TC-ORDER-STATE-009](TC-ORDER-STATE-009.md) | API Admin — từ chối confirmed → delivered | Equivalence Partitioning |
-| [TC-ORDER-STATE-010](TC-ORDER-STATE-010.md) | API Admin — từ chối shipping → pending | Equivalence Partitioning |
 | [TC-ORDER-STATE-011](TC-ORDER-STATE-011.md) | API Admin — từ chối shipping → confirmed | Equivalence Partitioning |
 | [TC-ORDER-STATE-012](TC-ORDER-STATE-012.md) | API Admin — từ chối delivered → pending | Equivalence Partitioning |
-| [TC-ORDER-STATE-013](TC-ORDER-STATE-013.md) | API Admin — từ chối delivered → confirmed | Equivalence Partitioning |
-| [TC-ORDER-STATE-014](TC-ORDER-STATE-014.md) | API Admin — từ chối delivered → shipping | Equivalence Partitioning |
 | [TC-ORDER-STATE-015](TC-ORDER-STATE-015.md) | API Admin — từ chối delivered → canceled | Equivalence Partitioning |
 | [TC-ORDER-STATE-016](TC-ORDER-STATE-016.md) | API Admin — từ chối canceled → pending | Equivalence Partitioning |
-| [TC-ORDER-STATE-017](TC-ORDER-STATE-017.md) | API Admin — từ chối canceled → confirmed | Equivalence Partitioning |
-| [TC-ORDER-STATE-018](TC-ORDER-STATE-018.md) | API Admin — từ chối canceled → shipping | Equivalence Partitioning |
 | [TC-ORDER-STATE-019](TC-ORDER-STATE-019.md) | API Admin — từ chối canceled → delivered | Equivalence Partitioning |
 | [TC-ORDER-STATE-020](TC-ORDER-STATE-020.md) | API User — hủy đơn pending | Equivalence Partitioning |
 | [TC-ORDER-STATE-021](TC-ORDER-STATE-021.md) | API User — hủy đơn confirmed | Equivalence Partitioning |
 | [TC-ORDER-STATE-022](TC-ORDER-STATE-022.md) | API User — không được hủy đơn shipping | Equivalence Partitioning |
 | [TC-ORDER-STATE-023](TC-ORDER-STATE-023.md) | API User — không được hủy đơn delivered | Equivalence Partitioning |
-| [TC-ORDER-STATE-024](TC-ORDER-STATE-024.md) | API User — gửi lại cancel giữ final state đơn canceled | Equivalence Partitioning |
 | [TC-ORDER-STATE-025](TC-ORDER-STATE-025.md) | API — user thường không có quyền xác nhận đơn A qua endpoint Admin | Equivalence Partitioning |
-| [TC-ORDER-STATE-026](TC-ORDER-STATE-026.md) | API — user thường không có quyền xác nhận đơn B qua endpoint Admin | Equivalence Partitioning |
 | [TC-ORDER-STATE-027](TC-ORDER-STATE-027.md) | API — A không được hủy đơn pending của B (AS-OS-03) | Equivalence Partitioning |
-| [TC-ORDER-STATE-028](TC-ORDER-STATE-028.md) | API — A không được hủy đơn confirmed của B (AS-OS-03) | Equivalence Partitioning |
 | [TC-ORDER-STATE-029](TC-ORDER-STATE-029.md) | API User — không có token bị từ chối | Equivalence Partitioning |
 | [TC-ORDER-STATE-030](TC-ORDER-STATE-030.md) | API Admin — không có token bị từ chối | Equivalence Partitioning |
-| [TC-ORDER-STATE-031](TC-ORDER-STATE-031.md) | API User — token sai định dạng bị từ chối | Equivalence Partitioning |
 | [TC-ORDER-STATE-032](TC-ORDER-STATE-032.md) | API Admin — token sai định dạng bị từ chối | Equivalence Partitioning |
 | [TC-ORDER-STATE-033](TC-ORDER-STATE-033.md) | API Admin — JWT user sửa role nhưng giữ chữ ký cũ bị từ chối | Equivalence Partitioning |
 | [TC-ORDER-STATE-034](TC-ORDER-STATE-034.md) | API Admin — từ chối chuỗi target ngoài enum | Equivalence Partitioning |
 | [TC-ORDER-STATE-035](TC-ORDER-STATE-035.md) | API Admin — từ chối thiếu trường status | Equivalence Partitioning |
-| [TC-ORDER-STATE-036](TC-ORDER-STATE-036.md) | API Admin — từ chối status null | Equivalence Partitioning |
-| [TC-ORDER-STATE-037](TC-ORDER-STATE-037.md) | API Admin — từ chối status chuỗi rỗng | Equivalence Partitioning |
 | [TC-ORDER-STATE-038](TC-ORDER-STATE-038.md) | API Admin — từ chối status sai kiểu number | Equivalence Partitioning |
 | [TC-ORDER-STATE-039](TC-ORDER-STATE-039.md) | API Admin — không chuyển được đơn không tồn tại | Equivalence Partitioning |
 | [TC-ORDER-STATE-040](TC-ORDER-STATE-040.md) | API User — không chuyển được đơn không tồn tại | Equivalence Partitioning |
 | [TC-ORDER-STATE-041](TC-ORDER-STATE-041.md) | UI Admin — chuỗi xác nhận, giao và hoàn thành đơn của B | Equivalence Partitioning |
-| [TC-ORDER-STATE-042](TC-ORDER-STATE-042.md) | UI Admin — hủy đơn pending | Equivalence Partitioning |
-| [TC-ORDER-STATE-043](TC-ORDER-STATE-043.md) | UI Admin — hủy đơn confirmed | Equivalence Partitioning |
-| [TC-ORDER-STATE-044](TC-ORDER-STATE-044.md) | UI Admin — không chuyển đơn final canceled sang trạng thái khác | Equivalence Partitioning |
-| [TC-ORDER-STATE-045](TC-ORDER-STATE-045.md) | UI Admin — không chuyển đơn final delivered sang trạng thái khác | Equivalence Partitioning |
 | [TC-ORDER-STATE-046](TC-ORDER-STATE-046.md) | UI User — hủy đơn pending | Equivalence Partitioning |
-| [TC-ORDER-STATE-047](TC-ORDER-STATE-047.md) | UI User — hủy đơn confirmed | Equivalence Partitioning |
-| [TC-ORDER-STATE-048](TC-ORDER-STATE-048.md) | UI User — không đổi state khi thử hủy đơn shipping | Equivalence Partitioning |
-| [TC-ORDER-STATE-049](TC-ORDER-STATE-049.md) | UI User — không đổi state khi thử hủy đơn delivered | Equivalence Partitioning |
-| [TC-ORDER-STATE-050](TC-ORDER-STATE-050.md) | UI User — không đổi state khi thử hủy đơn canceled | Equivalence Partitioning |
 | [TC-ORDER-STATE-051](TC-ORDER-STATE-051.md) | UI User cũ — confirmed đã thành shipping không còn được hủy | Equivalence Partitioning |
 | [TC-ORDER-STATE-052](TC-ORDER-STATE-052.md) | UI Admin cũ — confirmed đã bị user hủy không thể thành shipping | Equivalence Partitioning |
+
+## Phạm vi sau tinh gọn
+
+- 32 active cases (28 API + 4 UI/sequence/stale), giữ ID gốc và nội dung cases còn lại. Loại 007/010/013/014/017/018/024/026/028/031/036/037/042/043/044/045/047/048/049/050; file cũ có trong Git history.
+- Admin: giữ đủ 5 allowed + 8 forbidden pairs đại diện; không còn exhaustive 19/19 known-pair coverage. Trong 6 pairs không có standalone case, canceled→shipping còn stale 052 có điều kiện; 5 pairs hoàn toàn deferred.
+- User: giữ API cancel pending/confirmed, từ chối shipping/delivered; canceled retry deferred. UI giữ Admin normal chain, User pending cancel và hai stale sequences.
+- 30 partitions giữ trong analysis; 27 active, EP-OS-15/28/29 deferred. Giảm null/empty, foreign-confirmed ownership, malformed cancel JWT, Admin cancel/fresh final UI và User confirmed/delivered/fresh shipping UI variations.
+- Không coi API results thay native/UI path hoặc deferred variation covered bởi case khác. UI tự refresh/chặn request stale thì chưa exercise backend stale.
+- Lý do/tradeoffs: [quyết định tinh gọn](../../test-summary/order-state-analysis.md#quyết-định-tinh-gọn-theo-yêu-cầu-người-dùng). Review trước execution; không tạo BVA cho enum.
