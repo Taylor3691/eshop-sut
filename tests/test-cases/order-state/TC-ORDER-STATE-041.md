@@ -31,7 +31,7 @@ ORDER-STATE / Functional / Equivalence Partitioning
 3. Bấm Xác nhận. Đọc lại bằng TOKEN_B và TOKEN_M, xác nhận confirmed trước khi thực hiện bước tiếp.
 4. Trên đúng đơn đã đổi, bấm Giao hàng. Đọc lại và xác nhận shipping.
 5. Trên đúng đơn đó, bấm Hoàn thành. Đọc lại và xác nhận delivered.
-6. Tải lại trang Admin và `/profile` trong phiên B; đối chiếu ID/status cuối. Đối chiếu các đơn control.
+6. Tải lại trang Admin. Trong cửa sổ trình duyệt riêng, đăng nhập B bằng fixture và mở `/profile`; đối chiếu ID/status cuối. Đối chiếu các đơn control.
 
 ## Expected Result
 

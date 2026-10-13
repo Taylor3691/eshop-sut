@@ -1,6 +1,6 @@
 # Pool B — FR-10: Trạng thái đơn hàng
 
-Trạng thái: đang xây dựng thiết kế; chưa execute. Áp dụng skill `domain-testing-bva`, cùng quy trình và template đã dùng cho Pool A. Người dùng yêu cầu bắt đầu Pool B; việc này không tự xác nhận Pool A đã được review/phê duyệt.
+Trạng thái: đã hoàn thành bản thiết kế để người dùng review; chưa phê duyệt, chưa execute. Áp dụng skill `domain-testing-bva`, cùng quy trình và template đã dùng cho Pool A. Người dùng yêu cầu bắt đầu Pool B; việc này không tự xác nhận Pool A đã được review/phê duyệt.
 
 ## Requirement Analysis
 
@@ -226,6 +226,8 @@ Thay cho việc ép BVA: dùng 19 cặp admin có oracle xác định (5 valid, 
 - [ ] Human review: đang chờ; các assumption và ambiguity chưa được tự xác nhận.
 - [ ] Execution/evidence: do người dùng thực hiện, chưa có kết quả.
 
+Kiểm tra tài liệu đã thực hiện: 52 ID/tên file liên tục; 7 headings đúng template; Test Data/steps/requirement/technique/status đầy đủ; đích các liên kết file local tồn tại; ma trận có 30 partition và 52 case; 19 cặp admin distinct đúng phân loại 5 valid/14 invalid, target JSON trùng target trong case; tổng case A+B = 80. Đây là kiểm tra tài liệu, không phải execution SUT hoặc xác nhận business correctness.
+
 ### Potential Coverage Gaps
 
 - Admin shipping→canceled và 5 self-transition response policies chưa có oracle đủ rõ. Không lấy code/UI làm hành vi đúng.
@@ -264,3 +266,30 @@ Trạng thái: **chờ người dùng review**, chưa tự phê duyệt. Skill y
 
 Sau review, lưu sửa đổi thiết kế trong commit riêng. Người dùng execute và cung cấp evidence/test run theo scope đã thống nhất. Pool C/D chưa bắt đầu.
 
+## AI Gap Candidates
+
+Các điểm dưới đây là ứng viên thiếu oracle/coverage theo bước 9 của skill, không phải AI gap đã được người dùng xác nhận; không phải AI Audit Report hoặc nhật ký tương tác.
+
+### Candidate 1 — Quyền Admin khi shipping và cùng-state retry
+
+- Possible missed case: Admin shipping→canceled; response của 5 admin self-transitions, kể cả final-state retry.
+- Why it may have been missed: diagram/prose không thống nhất rõ về shipping cancellation; “không chuyển sang trạng thái khác” chưa định nghĩa no-op/retry cùng state (AM-OS-01/02).
+- Human action required: xin xác nhận nghiệp vụ từ nguồn yêu cầu; bổ sung partition/case với Expected Result có căn cứ. Không lấy branch code hiện tại để tự quyết.
+
+### Candidate 2 — Ownership mutation bị suy từ view rule
+
+- Possible missed case: Chính sách user hủy đơn khác có thể chưa được yêu cầu ghi đầy đủ; quyền của admin khi gọi user cancel endpoint cũng chưa nói rõ.
+- Why it may have been missed: FR-11 nói về xem own orders; chỉ dẫn view không tự chứng minh mutation policy. AS-OS-03 được nêu để tránh suy diễn âm thầm.
+- Human action required: xác nhận quyền trên từng endpoint/role; giữ 027/028 là đề xuất tới khi đủ oracle, mở rộng role/ownership partitions nếu có rule mới.
+
+### Candidate 3 — UI cũ và concurrency
+
+- Possible missed case: Hai request chuyển trạng thái thật sự đồng thời, hoặc UI tự refresh khiến backend stale request không được gửi.
+- Why it may have been missed: Bộ cases chỉ có trình tự tuần tự có readback; FR-10 chưa quy định locking/versioning/atomicity hoặc thời gian refresh (AM-OS-07/08).
+- Human action required: ghi phần đã exercise trong execution; nếu cần concurrency scope, bổ sung yêu cầu và chiến lược evidence trước khi viết oracle đồng thời. Không dùng một case stale Pass để kết luận không có race.
+
+### Candidate 4 — Payload/fixture/readback chưa đủ
+
+- Possible missed case: Chuẩn hóa status, ID khác kiểu, state lưu bị corrupt hoặc readback endpoint bị lỗi khiến không xác minh được mutation.
+- Why it may have been missed: Enum API có tên rõ nhưng thiếu schema normalization/resource contract; các domain phá dữ liệu setup chưa có oracle đầy đủ.
+- Human action required: xác nhận API schema và nguồn fixture; bổ sung partitions có nguồn, hoặc ghi Blocked/giới hạn với evidence khi dependency không đáp ứng. Chưa thể gọi là bug/AI gap đã xác nhận nếu chỉ có suy đoán.
