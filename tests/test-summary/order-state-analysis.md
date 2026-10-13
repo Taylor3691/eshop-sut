@@ -183,3 +183,12 @@ EP-OS-15 phân loại **bất biến đầu ra**, không quyết định retry c
 
 AMBIGUITY: Đặc tả không định nghĩa boundary chính xác cho order_id, thời gian hoặc số lần chuyển trạng thái. BVA cho các biến này chưa thể thiết kế đáng tin cậy nếu không có nguồn requirement bổ sung. BVA không áp dụng cho enum state không phải do thiếu giá trị min/max, mà do bản chất categorical của domain.
 
+## BVA Values
+
+| Variable | Boundary | Test Value | Classification | Reason |
+|---|---|---|---|---|
+| current_status / target_status | Không áp dụng | Không có min−1/min/min+1 | N/A | Enum không có thứ tự tuyến tính được đặc tả |
+| order_id / thời gian / counter | Chưa định nghĩa | Chưa sinh giá trị BVA | Chờ requirement | Không được dùng ID 0/1 hoặc thời gian tự đặt làm boundary |
+
+Thay cho việc ép BVA: dùng 19 cặp admin có oracle xác định (5 valid, 14 invalid), 5 trạng thái nguồn trên đường user cancel (4 có kết quả thao tác xác định, 1 chỉ kiểm tra bất biến), dữ liệu target ngoài enum, auth/role/ownership và chuỗi thao tác stale. Các giá trị này thuộc EP và domain phụ thuộc state, không được ghi nhãn BVA. Ma trận transition dùng hỗ trợ phân tích; giữ Technique `Equivalence Partitioning` để bám template skill, giải thích phần state-transition trong analysis/steps.
+
