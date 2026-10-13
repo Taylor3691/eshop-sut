@@ -82,3 +82,51 @@ R-OS-* là nhãn nội bộ để truy vết, không phải requirement mới.
 - Backend `server.js`: PUT `/api/orders/:id/cancel`; PUT `/api/admin/orders/:id/status`; GET lists để readback.
 - Storefront `Profile.jsx`: hủy đơn và hiển thị trạng thái. Admin `App.jsx`: các nút chuyển trạng thái trong tab đơn hàng.
 - Code chỉ dùng xác định đường thao tác/điểm hiển thị. Chưa có Actual Result, evidence hoặc confirmed bug.
+
+## Domain Analysis
+
+| Variable | Data Type | Valid Domain | Invalid Domain(s) | Constraints / Notes |
+|---|---|---|---|---|
+| current_status × target_status | Cặp categorical | Các cặp V trong ma trận admin bên dưới | Các cặp I; trạng thái đích ngoài 5 giá trị | D-OS-STATE; 6 cặp `?` chưa có oracle cuối cùng |
+| thao tác user cancel | Action + categorical state | Pending/confirmed của đơn được phép thao tác | Shipping/delivered; request phục hồi đơn canceled sang trạng thái khác | D-OS-CANCEL; lặp cancel trên canceled giữ final state nhưng response còn AM-OS-02 |
+| actor_role | Claim categorical | Admin trên status endpoint; user trên own cancel | User thường trên endpoint admin | D-OS-ROLE; có token hợp lệ chưa đủ quyền admin |
+| Authorization | Header/token | JWT hợp lệ do môi trường cấp | Không token, chuỗi không phải JWT, payload bị sửa nhưng chữ ký cũ | D-OS-AUTH; không có BVA thời hạn |
+| order_id/existence | Định danh tài nguyên | ID của đơn test đã xác nhận tồn tại | ID xác nhận không tồn tại | D-OS-RESOURCE; không phân loại theo lớn/nhỏ, không giả định max ID |
+| ownership | Quan hệ categorical | Own order với user; mọi owner với admin | User hủy đơn B theo AS-OS-03 | D-OS-OWNER; partition có điều kiện giả định |
+| target_status payload | Chuỗi/giá trị JSON/vắng mặt | Một trong 5 chuỗi và cặp chuyển được phép | Chuỗi `returned`, thiếu trường, null, rỗng, kiểu number | D-OS-PAYLOAD; chỉ đại diện sai kiểu, không tạo range số |
+| snapshot UI/server | Cặp giá trị trạng thái quan sát | Server hiện tại cho phép thao tác | UI còn confirmed nhưng server đã shipping/canceled khiến thao tác trở thành cấm | D-OS-FRESHNESS; hiện tại server có ưu tiên theo AS-OS-04 |
+
+### Miền phụ thuộc trạng thái — Admin API
+
+V = chuyển được phép; I = chuyển sang trạng thái khác bị cấm theo diagram/final states; `?` = chưa có oracle đủ rõ, không tự gán VALID/INVALID. Ma trận áp dụng khi JWT/role admin hợp lệ và đơn tồn tại.
+
+| Current \ Target | pending | confirmed | shipping | delivered | canceled |
+|---|---|---|---|---|---|
+| pending | ? | V | I | I | V |
+| confirmed | I | ? | V | I | V |
+| shipping | I | I | ? | V | ? |
+| delivered | I | I | I | ? | I |
+| canceled | I | I | I | I | ? |
+
+25 cặp: 5 V, 14 I, 6 `?` (5 self-transition + shipping→canceled). Canceled→delivered là I vì phá final state, dù UI/code có thể cho làm. Chưa dùng hành vi code để giải quyết các `?`.
+
+### Miền phụ thuộc trạng thái — User cancel API
+
+| Current | Target ngầm định | Phân loại | Expected Result |
+|---|---|---|---|
+| pending | canceled | VALID | Chuyển thành canceled |
+| confirmed | canceled | VALID | Chuyển thành canceled |
+| shipping | canceled | INVALID | Lỗi, giữ shipping |
+| delivered | canceled | INVALID | Lỗi, giữ delivered |
+| canceled | canceled | Chưa phân loại response | Giữ canceled; chưa xác định lỗi hoặc no-op |
+
+Case cho user canceled kiểm tra bất biến final state và ghi response thực tế khi tester execute; không đặt Expected Result “phải báo lỗi” cho same-state retry. Do đó case này kiểm tra partition final-state preservation, không được đếm là đã giải quyết self-transition.
+
+### Quan hệ và cách cô lập domain
+
+1. Cùng target `canceled` có thể hợp lệ hay cấm tùy current_status và role; không partition target riêng rồi tuyên bố mọi state giống nhau.
+2. Khi kiểm tra invalid pair, dùng token admin hợp lệ và order tồn tại để lỗi role/resource không che lỗi chuyển trạng thái.
+3. Khi kiểm tra auth/role, dùng cặp hợp lệ `pending → confirmed` hoặc own `pending → canceled` để lỗi transition không che lỗi quyền.
+4. Ownership: dùng pending/confirmed, là trạng thái cho hủy, để tập trung vào AS-OS-03. Admin chuyển đơn B trong positive sequence để xác minh quyền toàn hệ thống FR-18.
+5. Bad payload và missing resource dùng admin/token hợp lệ, tách case theo lớp điều kiện. Không suy ra code lỗi HTTP chính xác từ implementation.
+6. Stale cases: một tác nhân đọc confirmed, tác nhân khác đổi state thành shipping/canceled và xác minh xong; sau đó mới gửi thao tác cũ. Không có sleep/timeout giả định.
