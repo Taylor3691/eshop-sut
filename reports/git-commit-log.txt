@@ -1,0 +1,1223 @@
+commit b82b7c381a50d19e9345d0371a2c4fd40677b425
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-14T03:36:01+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-14T03:36:01+07:00
+
+    docs(hw02): add editable main report draft
+
+ HW02_MAIN_REPORT.md | 504 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 504 insertions(+)
+
+commit 49fcc205eeb1a45a83628b2d27258e96ea424ccc
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T23:10:49+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T23:10:49+07:00
+
+    docs(tests): link Pool D failures to GitHub issues
+
+ tests/test-runs/pool-d-test-run.md | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 021ddf0441439cf26ded74331dde4d08821ad023
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T23:05:46+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T23:05:46+07:00
+
+    docs(tests): link Pool C failures to GitHub issues
+
+ tests/test-runs/pool-c-test-run.md | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+commit 5e1bc2549e2d0e7835e69b99e962c1dbf0647099
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T23:02:03+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T23:02:03+07:00
+
+    docs(tests): link Pool B failures to GitHub issues
+
+ tests/test-runs/pool-b-test-run.md | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 4fa538445010a6d5d9bcf3fb226adba942bee907
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T22:56:30+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T22:56:30+07:00
+
+    docs(tests): link Pool A failures to GitHub issues
+
+ tests/test-runs/pool-a-test-run.md | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+commit 60d79123191b80c3889d2033018579cce0c4d3ca
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T22:48:52+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T22:48:52+07:00
+
+    docs(tests): update Pool D execution results and notes
+
+ tests/test-runs/pool-d-test-run.md | 38 +++++++++++++++++++-------------------
+ 1 file changed, 19 insertions(+), 19 deletions(-)
+
+commit 716a8343e2248167f48d2c37045daff0c438cbb9
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T22:48:52+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T22:48:52+07:00
+
+    docs(tests): update Pool C execution results and notes
+
+ tests/test-runs/pool-c-test-run.md | 58 +++++++++++++++++++-------------------
+ 1 file changed, 29 insertions(+), 29 deletions(-)
+
+commit b1be42c239b6914f68a690434ca4855bda15ee40
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T22:48:52+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T22:48:52+07:00
+
+    docs(tests): update Pool B execution results and notes
+
+ tests/test-runs/pool-b-test-run.md | 48 ++++++++++++++++++++------------------
+ 1 file changed, 25 insertions(+), 23 deletions(-)
+
+commit 95fac739cc5b6720a8d2b394c2b738e43be26471
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T22:48:44+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T22:48:44+07:00
+
+    docs(tests): update Pool A execution results and notes
+
+ tests/test-runs/pool-a-test-run.md | 34 +++++++++++++++++-----------------
+ 1 file changed, 17 insertions(+), 17 deletions(-)
+
+commit 64dfa7f0db4a2409b654470b333e1e6d4ab5a52c
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T19:16:19+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T19:16:19+07:00
+
+    Simplify test cases for manual web and mobile testing
+
+ tests/test-cases/order-state/README.md             | 151 ++---
+ tests/test-cases/order-state/TC-ORDER-STATE-001.md |  45 --
+ tests/test-cases/order-state/TC-ORDER-STATE-002.md |  45 --
+ tests/test-cases/order-state/TC-ORDER-STATE-003.md |  45 --
+ tests/test-cases/order-state/TC-ORDER-STATE-004.md |  35 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-005.md |  35 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-006.md |  36 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-008.md |  36 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-009.md |  36 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-011.md |  36 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-012.md |  36 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-015.md |  36 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-016.md |  36 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-019.md |  36 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-020.md |  44 --
+ tests/test-cases/order-state/TC-ORDER-STATE-021.md |  34 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-022.md |  34 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-023.md |  34 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-025.md |  33 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-027.md |  45 --
+ tests/test-cases/order-state/TC-ORDER-STATE-029.md |  44 --
+ tests/test-cases/order-state/TC-ORDER-STATE-030.md |  44 --
+ tests/test-cases/order-state/TC-ORDER-STATE-032.md |  44 --
+ tests/test-cases/order-state/TC-ORDER-STATE-033.md |  44 --
+ tests/test-cases/order-state/TC-ORDER-STATE-034.md |  44 --
+ tests/test-cases/order-state/TC-ORDER-STATE-035.md |  44 --
+ tests/test-cases/order-state/TC-ORDER-STATE-038.md |  44 --
+ tests/test-cases/order-state/TC-ORDER-STATE-039.md |  42 --
+ tests/test-cases/order-state/TC-ORDER-STATE-040.md |  42 --
+ tests/test-cases/order-state/TC-ORDER-STATE-041.md |  35 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-046.md |  32 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-051.md |  37 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-052.md |  37 +-
+ tests/test-cases/product-crud/README.md            | 160 ++---
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-001.md |  42 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-002.md |  41 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-003.md |  41 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-004.md |  41 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-005.md |  41 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-006.md |  42 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-007.md |  45 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-012.md |  45 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-013.md |  42 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-014.md |  41 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-017.md |  41 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-018.md |  42 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-019.md |  45 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-024.md |  45 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-025.md |  42 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-026.md |  42 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-027.md |  41 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-028.md |  44 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-029.md |  44 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-032.md |  42 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-033.md |  41 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-034.md |  40 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-035.md |  44 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-037.md |  39 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-039.md |  39 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-041.md |  33 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-043.md |  28 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-045.md |  43 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-047.md |  43 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-049.md |  43 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-051.md |  39 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-052.md |  43 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-054.md |  39 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-055.md |  43 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-057.md |  44 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-058.md |  43 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-060.md |  44 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-061.md |  44 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-062.md |  44 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-063.md |  43 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-064.md |  44 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-067.md |  45 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-068.md |  45 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-069.md |  44 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-071.md |  45 --
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-073.md |  30 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-075.md |  40 +-
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-076.md |  43 --
+ tests/test-cases/profile-mobile/README.md          | 132 ++--
+ .../profile-mobile/TC-PROFILE-MOBILE-001.md        |  35 +-
+ .../profile-mobile/TC-PROFILE-MOBILE-002.md        |  34 +-
+ .../profile-mobile/TC-PROFILE-MOBILE-003.md        |  34 +-
+ .../profile-mobile/TC-PROFILE-MOBILE-004.md        |  35 +-
+ .../profile-mobile/TC-PROFILE-MOBILE-005.md        |  35 +-
+ .../profile-mobile/TC-PROFILE-MOBILE-006.md        |  35 +-
+ .../profile-mobile/TC-PROFILE-MOBILE-013.md        |  36 +-
+ .../profile-mobile/TC-PROFILE-MOBILE-014.md        |  35 +-
+ .../profile-mobile/TC-PROFILE-MOBILE-016.md        |  28 +-
+ .../profile-mobile/TC-PROFILE-MOBILE-017.md        |  29 +-
+ .../profile-mobile/TC-PROFILE-MOBILE-018.md        |  40 +-
+ .../profile-mobile/TC-PROFILE-MOBILE-020.md        |  31 -
+ .../profile-mobile/TC-PROFILE-MOBILE-021.md        |  33 -
+ .../profile-mobile/TC-PROFILE-MOBILE-023.md        |  33 -
+ .../profile-mobile/TC-PROFILE-MOBILE-024.md        |  33 -
+ .../profile-mobile/TC-PROFILE-MOBILE-025.md        |  34 -
+ .../profile-mobile/TC-PROFILE-MOBILE-027.md        |  34 -
+ .../profile-mobile/TC-PROFILE-MOBILE-028.md        |  42 +-
+ .../profile-mobile/TC-PROFILE-MOBILE-029.md        |  42 +-
+ .../profile-mobile/TC-PROFILE-MOBILE-030.md        |  39 +-
+ tests/test-cases/profile-web/README.md             |  91 ++-
+ tests/test-cases/profile-web/TC-PROFILE-WEB-001.md |  30 +-
+ tests/test-cases/profile-web/TC-PROFILE-WEB-002.md |  30 +-
+ tests/test-cases/profile-web/TC-PROFILE-WEB-003.md |  34 +-
+ tests/test-cases/profile-web/TC-PROFILE-WEB-004.md |  31 +-
+ tests/test-cases/profile-web/TC-PROFILE-WEB-007.md |  42 --
+ tests/test-cases/profile-web/TC-PROFILE-WEB-008.md |  42 --
+ tests/test-cases/profile-web/TC-PROFILE-WEB-010.md |  29 +-
+ tests/test-cases/profile-web/TC-PROFILE-WEB-012.md |  29 +-
+ tests/test-cases/profile-web/TC-PROFILE-WEB-015.md |  27 +-
+ tests/test-cases/profile-web/TC-PROFILE-WEB-016.md |  23 +-
+ tests/test-cases/profile-web/TC-PROFILE-WEB-017.md |  42 --
+ tests/test-cases/profile-web/TC-PROFILE-WEB-018.md |  43 --
+ tests/test-cases/profile-web/TC-PROFILE-WEB-020.md |  43 --
+ tests/test-cases/profile-web/TC-PROFILE-WEB-021.md |  43 --
+ tests/test-cases/profile-web/TC-PROFILE-WEB-023.md |  44 --
+ tests/test-cases/profile-web/TC-PROFILE-WEB-024.md |  43 --
+ tests/test-cases/profile-web/TC-PROFILE-WEB-025.md |  34 +-
+ tests/test-cases/profile-web/TC-PROFILE-WEB-026.md |  34 +-
+ tests/test-cases/profile-web/TC-PROFILE-WEB-028.md |  31 +-
+ .../pool-a-history-before-manual-steps.md          |  62 ++
+ tests/test-runs/pool-a-test-run.md                 |  65 +-
+ tests/test-runs/pool-b-test-run.md                 |  46 ++
+ tests/test-runs/pool-c-test-run.md                 |  52 ++
+ tests/test-runs/pool-d-test-run.md                 |  42 ++
+ tests/test-summary/manual-testing-scope.md         |  65 ++
+ tests/test-summary/order-state-analysis.md         | 367 +++--------
+ tests/test-summary/product-crud-analysis.md        | 360 +++--------
+ tests/test-summary/profile-mobile-analysis.md      | 306 ++-------
+ tests/test-summary/profile-web-analysis.md         | 293 +++------
+ tests/test-summary/traceability-matrix.md          | 706 ++++++++-------------
+ 134 files changed, 2238 insertions(+), 5285 deletions(-)
+
+commit faa527ef86ef8a35f2c800348cd7ffb103eee69c
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T15:55:27+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T15:55:27+07:00
+
+    test(profile-web): record UI rejection of twelve-digit phone
+
+ tests/test-cases/profile-web/TC-PROFILE-WEB-004.md | 2 +-
+ tests/test-runs/pool-a-test-run.md                 | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+commit a4ec8f1a66e87de2892fd3d4d62b643740c13ae7
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T15:54:03+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T15:54:03+07:00
+
+    test(profile-web): record UI rejection of nine-digit phone
+
+ tests/test-cases/profile-web/TC-PROFILE-WEB-003.md | 2 +-
+ tests/test-runs/pool-a-test-run.md                 | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+commit 340d15dcaff35f6e3f4596b44b760b0b5d723df8
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T15:50:27+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T15:50:27+07:00
+
+    test(profile-web): record valid 11-digit phone rejected by UI
+
+ tests/bug-reports/BUG-PROFILE-WEB-001.md           |  10 ++++++----
+ tests/bug-reports/TC-PROFILE-WEB-002-alert.png     | Bin 0 -> 56826 bytes
+ tests/bug-reports/TC-PROFILE-WEB-002-input.png     | Bin 0 -> 76758 bytes
+ tests/test-cases/profile-web/TC-PROFILE-WEB-002.md |   2 +-
+ tests/test-runs/pool-a-test-run.md                 |   4 ++--
+ 5 files changed, 9 insertions(+), 7 deletions(-)
+
+commit ad9f33c6f88ce6c4e649aee23ddcf58940767468
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T15:47:01+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T15:47:01+07:00
+
+    test(profile-web): record valid 10-digit phone rejected by UI
+
+ tests/bug-reports/BUG-PROFILE-WEB-001.md           |  54 +++++++++++++++++++++
+ .../TC-PROFILE-WEB-001-after-reload.png            | Bin 0 -> 71470 bytes
+ tests/bug-reports/TC-PROFILE-WEB-001-alert.png     | Bin 0 -> 66213 bytes
+ tests/test-cases/profile-web/TC-PROFILE-WEB-001.md |   2 +-
+ tests/test-runs/pool-a-test-run.md                 |   7 +--
+ 5 files changed, 59 insertions(+), 4 deletions(-)
+
+commit ef0291581e01d5619aac294d208a5b34f20fdec5
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T15:36:56+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T15:36:56+07:00
+
+    docs(test): prepare first six Pool A cases for execution
+
+ tests/test-runs/pool-a-test-run.md | 43 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
+
+commit 01d2a68220edff9e1ccca585bc66f57d4dce16a6
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T12:43:37+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T12:43:37+07:00
+
+    docs(test): verify reduced Pool D suite and review tradeoffs
+
+ tests/test-summary/profile-mobile-analysis.md | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 1bb91f984630754b967c7670174175b7f11d2fea
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T12:43:02+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T12:43:02+07:00
+
+    test(docs): reduce Pool D mobile cases from 30 to 20
+
+ tests/test-cases/profile-mobile/README.md          | 32 +++++-----
+ .../profile-mobile/TC-PROFILE-MOBILE-007.md        | 36 ------------
+ .../profile-mobile/TC-PROFILE-MOBILE-008.md        | 36 ------------
+ .../profile-mobile/TC-PROFILE-MOBILE-009.md        | 36 ------------
+ .../profile-mobile/TC-PROFILE-MOBILE-010.md        | 35 -----------
+ .../profile-mobile/TC-PROFILE-MOBILE-011.md        | 35 -----------
+ .../profile-mobile/TC-PROFILE-MOBILE-012.md        | 35 -----------
+ .../profile-mobile/TC-PROFILE-MOBILE-015.md        | 31 ----------
+ .../profile-mobile/TC-PROFILE-MOBILE-019.md        | 34 -----------
+ .../profile-mobile/TC-PROFILE-MOBILE-022.md        | 31 ----------
+ .../profile-mobile/TC-PROFILE-MOBILE-026.md        | 34 -----------
+ tests/test-summary/product-crud-analysis.md        |  2 +-
+ tests/test-summary/profile-mobile-analysis.md      | 68 ++++++++++++----------
+ tests/test-summary/traceability-matrix.md          | 56 ++++++++----------
+ 14 files changed, 77 insertions(+), 424 deletions(-)
+
+commit 0c120653fb1362a773c329c6f8004cefa31ad4d9
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T12:36:57+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T12:36:57+07:00
+
+    docs(test): prioritize Pool D cases for reduction
+
+ tests/test-summary/profile-mobile-analysis.md | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+commit 8840f905794902a3678518d8e9fe3785831f6eb0
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T12:32:29+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T12:32:29+07:00
+
+    docs(test): verify reduced Pool C suite and review tradeoffs
+
+ tests/test-cases/product-crud/README.md     | 2 +-
+ tests/test-summary/product-crud-analysis.md | 3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+commit b936c4caac8dbe8299434cb4a1a6e0c5adc4d6f3
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T12:32:01+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T12:32:01+07:00
+
+    test(docs): reduce Pool C product cases from 78 to 48
+
+ tests/test-cases/product-crud/README.md            |  47 +++----
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-008.md |  44 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-009.md |  44 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-010.md |  44 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-011.md |  44 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-015.md |  47 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-016.md |  47 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-020.md |  44 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-021.md |  44 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-022.md |  44 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-023.md |  44 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-030.md |  43 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-031.md |  46 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-036.md |  43 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-038.md |  42 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-040.md |  42 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-042.md |  45 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-044.md |  41 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-046.md |  43 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-048.md |  43 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-050.md |  43 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-053.md |  43 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-056.md |  43 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-059.md |  43 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-065.md |  44 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-066.md |  43 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-070.md |  45 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-072.md |  44 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-074.md |  49 --------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-077.md |  45 -------
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-078.md |  45 -------
+ tests/test-summary/product-crud-analysis.md        |  83 +++++++------
+ tests/test-summary/profile-mobile-analysis.md      |   2 +-
+ tests/test-summary/traceability-matrix.md          | 136 +++++++++------------
+ 34 files changed, 117 insertions(+), 1472 deletions(-)
+
+commit b5dce463c62804a65bd227bc28d742b6df64e889
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T12:23:29+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T12:23:29+07:00
+
+    docs(test): prioritize Pool C cases for reduction
+
+ tests/test-summary/product-crud-analysis.md | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+commit 54361b9a6356823314ca5a75d95aaea4a6ece6ae
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T11:40:20+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T11:40:20+07:00
+
+    docs(test): verify reduced Pool B suite and review tradeoffs
+
+ tests/test-summary/order-state-analysis.md | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit d8dcbe27b1d56c10d9e74ed0f641a01537cf532e
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T11:40:19+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T11:40:19+07:00
+
+    test(docs): reduce Pool B order cases from 52 to 32
+
+ tests/test-cases/order-state/README.md             |  35 ++---
+ tests/test-cases/order-state/TC-ORDER-STATE-007.md |  45 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-010.md |  45 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-013.md |  45 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-014.md |  45 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-017.md |  45 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-018.md |  45 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-024.md |  45 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-026.md |  44 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-028.md |  45 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-031.md |  44 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-036.md |  44 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-037.md |  44 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-042.md |  43 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-043.md |  43 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-044.md |  42 ------
+ tests/test-cases/order-state/TC-ORDER-STATE-045.md |  42 ------
+ tests/test-cases/order-state/TC-ORDER-STATE-047.md |  42 ------
+ tests/test-cases/order-state/TC-ORDER-STATE-048.md |  43 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-049.md |  43 -------
+ tests/test-cases/order-state/TC-ORDER-STATE-050.md |  43 -------
+ tests/test-summary/order-state-analysis.md         |  74 +++++------
+ tests/test-summary/product-crud-analysis.md        |   4 +-
+ tests/test-summary/profile-mobile-analysis.md      |   2 +-
+ tests/test-summary/traceability-matrix.md          | 141 +++++++++------------
+ 25 files changed, 114 insertions(+), 1019 deletions(-)
+
+commit 179931316a5e422a2244156aa2fa569c4f18731d
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T11:34:15+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T11:34:15+07:00
+
+    docs(test): prioritize Pool B cases for reduction
+
+ tests/test-summary/order-state-analysis.md | 32 ++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+
+commit 14ca0e0cd05140bc8d373637a8715f7381ca1e02
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T11:28:06+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T11:28:06+07:00
+
+    docs(test): verify reduced Pool A suite and review tradeoffs
+
+ tests/test-summary/profile-web-analysis.md | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 029ed238708a3e52f386f28b2e5880a367bcde57
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T11:27:17+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T11:27:17+07:00
+
+    test(docs): reduce Pool A profile cases from 28 to 19
+
+ tests/test-cases/profile-mobile/README.md          |  2 +-
+ tests/test-cases/profile-web/README.md             | 19 +++--
+ tests/test-cases/profile-web/TC-PROFILE-WEB-005.md | 42 -----------
+ tests/test-cases/profile-web/TC-PROFILE-WEB-006.md | 42 -----------
+ tests/test-cases/profile-web/TC-PROFILE-WEB-009.md | 44 -----------
+ tests/test-cases/profile-web/TC-PROFILE-WEB-011.md | 44 -----------
+ tests/test-cases/profile-web/TC-PROFILE-WEB-013.md | 43 -----------
+ tests/test-cases/profile-web/TC-PROFILE-WEB-014.md | 43 -----------
+ tests/test-cases/profile-web/TC-PROFILE-WEB-019.md | 42 -----------
+ tests/test-cases/profile-web/TC-PROFILE-WEB-022.md | 43 -----------
+ tests/test-cases/profile-web/TC-PROFILE-WEB-027.md | 40 ----------
+ tests/test-summary/product-crud-analysis.md        |  4 +-
+ tests/test-summary/profile-mobile-analysis.md      |  6 +-
+ tests/test-summary/profile-web-analysis.md         | 51 ++++++-------
+ tests/test-summary/traceability-matrix.md          | 85 ++++++++++------------
+ 15 files changed, 81 insertions(+), 469 deletions(-)
+
+commit 893deed8e7920d96cefc4b163647ac729a6b11f4
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T11:23:06+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T11:23:06+07:00
+
+    docs(test): prioritize Pool A cases for reduction
+
+ tests/test-summary/profile-web-analysis.md | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+commit 105e6ccf2a4d1dad02c2d2fab38931813318ccf0
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:35:02+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:35:02+07:00
+
+    docs(test): record Pool D design gap candidates
+
+ tests/test-summary/profile-mobile-analysis.md | 36 ++++++++++++++++++++++++++-
+ 1 file changed, 35 insertions(+), 1 deletion(-)
+
+commit 8b71e7c615eafa17fee50f1dc8dd9babb3875f76
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:32:32+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:32:32+07:00
+
+    docs(test): prepare Pool D human review checklist
+
+ .../profile-mobile/TC-PROFILE-MOBILE-019.md           |  1 +
+ .../profile-mobile/TC-PROFILE-MOBILE-028.md           |  8 ++++----
+ .../profile-mobile/TC-PROFILE-MOBILE-029.md           |  8 ++++----
+ tests/test-summary/profile-mobile-analysis.md         | 19 +++++++++++++++++--
+ 4 files changed, 26 insertions(+), 10 deletions(-)
+
+commit fb75b328c56b3f14cd3f40acc48dfcb36e8dce2d
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:30:51+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:30:51+07:00
+
+    docs(test): review Pool D coverage and traceability
+
+ tests/test-summary/profile-mobile-analysis.md | 36 ++++++++++
+ tests/test-summary/traceability-matrix.md     | 99 +++++++++++++++++++++++++--
+ 2 files changed, 131 insertions(+), 4 deletions(-)
+
+commit 5b97cda78802bd1aed0be827fe19d5b740a9b1f5
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:29:02+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:29:02+07:00
+
+    test(docs): design Pool D mobile profile test cases
+
+ tests/test-cases/profile-mobile/README.md          | 76 ++++++++++++++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-001.md        | 36 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-002.md        | 35 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-003.md        | 35 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-004.md        | 36 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-005.md        | 36 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-006.md        | 36 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-007.md        | 36 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-008.md        | 36 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-009.md        | 36 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-010.md        | 35 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-011.md        | 35 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-012.md        | 35 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-013.md        | 35 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-014.md        | 37 +++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-015.md        | 31 +++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-016.md        | 31 +++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-017.md        | 31 +++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-018.md        | 37 +++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-019.md        | 33 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-020.md        | 31 +++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-021.md        | 33 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-022.md        | 31 +++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-023.md        | 33 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-024.md        | 33 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-025.md        | 34 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-026.md        | 34 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-027.md        | 34 ++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-028.md        | 37 +++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-029.md        | 37 +++++++++++
+ .../profile-mobile/TC-PROFILE-MOBILE-030.md        | 34 ++++++++++
+ tests/test-summary/profile-mobile-analysis.md      | 12 ++++
+ 32 files changed, 1121 insertions(+)
+
+commit 36bd45fb77cbc99958e7a296cc24609da224b670
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:24:06+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:24:06+07:00
+
+    docs(test): derive Pool D robust BVA values
+
+ tests/test-summary/profile-mobile-analysis.md | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+commit 30286e4ea208f94f1a2d2062f95057d1152d09e2
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:24:05+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:24:05+07:00
+
+    docs(test): identify Pool D phone length boundaries
+
+ tests/test-summary/profile-mobile-analysis.md | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+commit b33173c9eb0d0d26ca1e5c5b9dd3e10a6397b575
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:23:27+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:23:27+07:00
+
+    docs(test): partition Pool D mobile profile domains
+
+ tests/test-summary/profile-mobile-analysis.md | 35 +++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+
+commit c8ec2e944c44ac5429e325e427f04142e3b75908
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:23:27+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:23:27+07:00
+
+    docs(test): define Pool D mobile profile domains
+
+ tests/test-summary/profile-mobile-analysis.md | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
+commit aa950b544bab18174a9cdf8ffebbdf914950b54c
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:21:45+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:21:45+07:00
+
+    docs(test): analyze Pool D mobile profile requirements
+
+ tests/test-summary/profile-mobile-analysis.md | 91 +++++++++++++++++++++++++++
+ 1 file changed, 91 insertions(+)
+
+commit 17ca992c34bab49f6f6bf08be2f32dfa868fb160
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:15:48+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:15:48+07:00
+
+    docs(test): record Pool C design gap candidates
+
+ tests/test-summary/product-crud-analysis.md | 38 ++++++++++++++++++++++++++++-
+ 1 file changed, 37 insertions(+), 1 deletion(-)
+
+commit 76f3dc9df4abfb976227ddfe74093cb499815590
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:14:46+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:14:46+07:00
+
+    docs(test): prepare Pool C human review checklist
+
+ tests/test-summary/product-crud-analysis.md | 21 ++++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
+
+commit cf38d49d6b50c4f7ab07a5a9b4667ec174b48556
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:12:48+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:12:48+07:00
+
+    docs(test): review Pool C coverage and traceability
+
+ tests/test-summary/product-crud-analysis.md |  41 +++++++
+ tests/test-summary/traceability-matrix.md   | 171 +++++++++++++++++++++++++++-
+ 2 files changed, 208 insertions(+), 4 deletions(-)
+
+commit 742195bec7ef227c7f0360e7a836bf689372e729
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:10:34+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:10:34+07:00
+
+    test(docs): design Pool C product CRUD test cases
+
+ tests/test-cases/product-crud/README.md            | 134 +++++++++++++++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-001.md |  47 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-002.md |  47 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-003.md |  47 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-004.md |  47 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-005.md |  47 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-006.md |  47 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-007.md |  45 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-008.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-009.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-010.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-011.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-012.md |  45 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-013.md |  47 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-014.md |  47 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-015.md |  47 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-016.md |  47 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-017.md |  47 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-018.md |  47 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-019.md |  45 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-020.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-021.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-022.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-023.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-024.md |  45 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-025.md |  46 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-026.md |  46 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-027.md |  46 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-028.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-029.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-030.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-031.md |  46 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-032.md |  46 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-033.md |  46 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-034.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-035.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-036.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-037.md |  46 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-038.md |  42 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-039.md |  46 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-040.md |  42 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-041.md |  46 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-042.md |  45 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-043.md |  42 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-044.md |  41 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-045.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-046.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-047.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-048.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-049.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-050.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-051.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-052.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-053.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-054.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-055.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-056.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-057.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-058.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-059.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-060.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-061.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-062.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-063.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-064.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-065.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-066.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-067.md |  45 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-068.md |  45 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-069.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-070.md |  45 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-071.md |  45 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-072.md |  44 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-073.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-074.md |  49 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-075.md |  47 ++++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-076.md |  43 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-077.md |  45 +++++++
+ .../test-cases/product-crud/TC-PRODUCT-CRUD-078.md |  45 +++++++
+ tests/test-summary/product-crud-analysis.md        |  11 ++
+ 80 files changed, 3621 insertions(+)
+
+commit 0c41f2023c91aea7ae55770ad8a8ef0b7ca08bb8
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:02:27+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:02:27+07:00
+
+    docs(test): derive Pool C robust BVA values
+
+ tests/test-summary/product-crud-analysis.md | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+commit fafbd1acda9215275d9b83b45c35c8fcb9cf8ada
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:02:26+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:02:26+07:00
+
+    docs(test): identify Pool C name and price boundaries
+
+ tests/test-summary/product-crud-analysis.md | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+commit 7bc80bdd0e27fb7470d641870a015bf7d081dfff
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:02:25+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:02:25+07:00
+
+    docs(test): partition Pool C product CRUD domains
+
+ tests/test-summary/product-crud-analysis.md | 39 +++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
+
+commit 2ec7b1c3f209578171188b8fdca0edbafa4ff8b4
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T10:02:24+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T10:02:24+07:00
+
+    docs(test): define Pool C product input domains
+
+ tests/test-summary/product-crud-analysis.md | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
+commit 2eb38d9c752de96d086ae7b32e04e2e0730daecc
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:59:34+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:59:34+07:00
+
+    docs(test): analyze Pool C product CRUD requirements
+
+ tests/test-summary/product-crud-analysis.md | 87 +++++++++++++++++++++++++++++
+ 1 file changed, 87 insertions(+)
+
+commit 423dea189e7ddd18e46d3a39a262e499cfc0865d
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:53:01+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:53:25+07:00
+
+    docs(test): record Pool B design gap candidates
+
+ tests/test-cases/order-state/TC-ORDER-STATE-041.md |  2 +-
+ tests/test-summary/order-state-analysis.md         | 31 +++++++++++++++++++++-
+ 2 files changed, 31 insertions(+), 2 deletions(-)
+
+commit b07395bb13dedb049f5dc09b2b6ca507d6ac9736
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:50:59+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:50:59+07:00
+
+    docs(test): prepare Pool B human review checklist
+
+ tests/test-cases/order-state/TC-ORDER-STATE-034.md |  2 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-035.md |  2 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-036.md |  2 +-
+ tests/test-cases/order-state/TC-ORDER-STATE-037.md |  2 +-
+ tests/test-summary/order-state-analysis.md         | 19 +++++++++++++++++++
+ 5 files changed, 23 insertions(+), 4 deletions(-)
+
+commit 44697b9d044ccd1c3cd3efe96fc9421f7fafec9b
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:49:18+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:49:18+07:00
+
+    docs(test): review Pool B coverage and traceability
+
+ tests/test-summary/order-state-analysis.md |  42 +++++++
+ tests/test-summary/traceability-matrix.md  | 174 ++++++++++++++++++++++++++++-
+ 2 files changed, 214 insertions(+), 2 deletions(-)
+
+commit 7909d7e76d7d7aef9c6515d25cc4ce928327451a
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:47:23+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:47:23+07:00
+
+    test(docs): design Pool B order state test cases
+
+ tests/test-cases/order-state/README.md             | 111 +++++++++++++++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-001.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-002.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-003.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-004.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-005.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-006.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-007.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-008.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-009.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-010.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-011.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-012.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-013.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-014.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-015.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-016.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-017.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-018.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-019.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-020.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-021.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-022.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-023.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-024.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-025.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-026.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-027.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-028.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-029.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-030.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-031.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-032.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-033.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-034.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-035.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-036.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-037.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-038.md |  44 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-039.md |  42 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-040.md |  42 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-041.md |  45 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-042.md |  43 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-043.md |  43 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-044.md |  42 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-045.md |  42 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-046.md |  42 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-047.md |  42 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-048.md |  43 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-049.md |  43 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-050.md |  43 ++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-051.md |  46 +++++++++
+ tests/test-cases/order-state/TC-ORDER-STATE-052.md |  46 +++++++++
+ tests/test-summary/order-state-analysis.md         |  11 ++
+ 54 files changed, 2420 insertions(+)
+
+commit 56033398be9db46a91f1a9270fd0beaa6fc70bdf
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:42:49+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:42:49+07:00
+
+    docs(test): document Pool B BVA values as not applicable
+
+ tests/test-summary/order-state-analysis.md | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+commit ad12cc33717127dd9e5498a74ea407f8d7d89ab1
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:42:48+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:42:48+07:00
+
+    docs(test): assess Pool B BVA applicability
+
+ tests/test-summary/order-state-analysis.md | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+commit 75865345d3e1b25f6834e23ee6274e4b23d4bd6c
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:42:47+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:42:47+07:00
+
+    docs(test): partition Pool B order state domains
+
+ tests/test-summary/order-state-analysis.md | 40 ++++++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+
+commit 6035720e43c836098bd448160f527af46d456244
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:41:28+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:41:28+07:00
+
+    docs(test): define Pool B state dependent domains
+
+ tests/test-summary/order-state-analysis.md | 48 ++++++++++++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
+
+commit 79769f5956626bb2bccda660184b382d45da3127
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:40:40+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:40:40+07:00
+
+    docs(test): analyze Pool B order state requirements
+
+ tests/test-summary/order-state-analysis.md | 84 ++++++++++++++++++++++++++++++
+ 1 file changed, 84 insertions(+)
+
+commit 19db5590a0c5c6edf6d5f6a3d64e704c51afde28
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:34:43+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:34:43+07:00
+
+    docs(test): record Pool A design gap candidates
+
+ tests/test-summary/profile-web-analysis.md | 26 +++++++++++++++++++++++++-
+ 1 file changed, 25 insertions(+), 1 deletion(-)
+
+commit 76cd1e577d0d86d5968bc782121e5848fe3a5119
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:34:00+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:34:00+07:00
+
+    docs(test): prepare Pool A human review checklist
+
+ tests/test-summary/profile-web-analysis.md | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+commit 368f7b07a271c9181aec8b7fe3d381968c52b278
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:32:43+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:32:43+07:00
+
+    docs(test): review Pool A coverage and traceability
+
+ tests/test-summary/profile-web-analysis.md | 37 +++++++++++++
+ tests/test-summary/traceability-matrix.md  | 89 ++++++++++++++++++++++++++++++
+ 2 files changed, 126 insertions(+)
+
+commit 12c9b721c3135cb72a399d847dca68c2fa31d640
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:31:21+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:31:21+07:00
+
+    test(docs): design Pool A profile test cases
+
+ tests/test-cases/profile-web/README.md             | 62 ++++++++++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-001.md | 44 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-002.md | 44 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-003.md | 45 ++++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-004.md | 44 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-005.md | 42 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-006.md | 42 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-007.md | 42 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-008.md | 42 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-009.md | 44 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-010.md | 42 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-011.md | 44 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-012.md | 42 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-013.md | 43 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-014.md | 43 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-015.md | 40 ++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-016.md | 39 ++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-017.md | 42 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-018.md | 43 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-019.md | 42 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-020.md | 43 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-021.md | 43 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-022.md | 43 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-023.md | 44 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-024.md | 43 +++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-025.md | 45 ++++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-026.md | 45 ++++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-027.md | 40 ++++++++++++++
+ tests/test-cases/profile-web/TC-PROFILE-WEB-028.md | 43 +++++++++++++++
+ tests/test-summary/profile-web-analysis.md         |  9 ++++
+ 30 files changed, 1269 insertions(+)
+
+commit 360216cb9dec07ebc9bb7c7699ef6c376637ed9d
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:27:35+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:27:35+07:00
+
+    docs(test): derive Pool A robust BVA values
+
+ tests/test-summary/profile-web-analysis.md | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+commit 44316c22e5aaffd5f7de953ef1f5d4a266bdc24b
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:27:34+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:27:34+07:00
+
+    docs(test): identify Pool A phone boundaries
+
+ tests/test-summary/profile-web-analysis.md | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+commit 5d629ee4d0db9d1ca0e7c00c4ed112cc58d45204
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:27:34+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:27:34+07:00
+
+    docs(test): partition Pool A profile domains
+
+ tests/test-summary/profile-web-analysis.md | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+
+commit e68377346e6cc462123244956fa16ca0fd077c2e
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:26:17+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:26:17+07:00
+
+    docs(test): define Pool A profile input domains
+
+ tests/test-summary/profile-web-analysis.md | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+commit 4833eb164a39ffcc5fecf85d6aa65e26cdfa7d5a
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-13T09:25:33+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-13T09:25:33+07:00
+
+    docs(test): analyze Pool A profile requirements
+
+ tests/test-summary/profile-web-analysis.md | 84 ++++++++++++++++++++++++++++++
+ 1 file changed, 84 insertions(+)
+
+commit 13e4a5c9d79992b38d73db99f3388a39f5a5fec2
+Author:     Toan <toan09833@gmail.com>
+AuthorDate: 2026-10-06T12:44:26+07:00
+Commit:     Toan <toan09833@gmail.com>
+CommitDate: 2026-10-06T12:44:26+07:00
+
+    docs: add agent specs and skills
+
+ .agents/skills/domain-testing-bva/SKILL.md | 486 +++++++++++++++++++++++++++++
+ AGENTS.md                                  |  61 ++++
+ 2 files changed, 547 insertions(+)
+
+commit 85af3ba875c88283615e22cb108f13e2fccaf0e9
+Author:     ttbhanh-hcmus <ttbhanh@hcmus.edu.vn>
+AuthorDate: 2026-05-15T08:30:35+07:00
+Commit:     ttbhanh-hcmus <ttbhanh@hcmus.edu.vn>
+CommitDate: 2026-05-15T08:30:35+07:00
+
+    first upload
+
+ README.md                                 |  290 +-
+ api_specification.md                      |  214 +
+ backend/database.js                       |  119 +
+ backend/database.sqlite                   |  Bin 0 -> 36864 bytes
+ backend/package-lock.json                 | 1663 ++++++
+ backend/package.json                      |   20 +
+ backend/server.js                         |  572 ++
+ backend/test_profile.js                   |    8 +
+ frontend-admin/.gitignore                 |   24 +
+ frontend-admin/README.md                  |   16 +
+ frontend-admin/eslint.config.js           |   21 +
+ frontend-admin/index.html                 |   13 +
+ frontend-admin/package-lock.json          | 3681 ++++++++++++
+ frontend-admin/package.json               |   32 +
+ frontend-admin/postcss.config.js          |    6 +
+ frontend-admin/public/favicon.svg         |    1 +
+ frontend-admin/public/icons.svg           |   24 +
+ frontend-admin/src/App.css                |  184 +
+ frontend-admin/src/App.jsx                |  922 +++
+ frontend-admin/src/assets/hero.png        |  Bin 0 -> 13057 bytes
+ frontend-admin/src/assets/react.svg       |    1 +
+ frontend-admin/src/assets/vite.svg        |    1 +
+ frontend-admin/src/index.css              |    8 +
+ frontend-admin/src/main.jsx               |   10 +
+ frontend-admin/tailwind.config.js         |   11 +
+ frontend-admin/vite.config.js             |   11 +
+ frontend-mobile/.gitignore                |   41 +
+ frontend-mobile/App.js                    | 1300 +++++
+ frontend-mobile/app.json                  |   29 +
+ frontend-mobile/assets/adaptive-icon.png  |  Bin 0 -> 17547 bytes
+ frontend-mobile/assets/favicon.png        |  Bin 0 -> 1466 bytes
+ frontend-mobile/assets/icon.png           |  Bin 0 -> 22380 bytes
+ frontend-mobile/assets/splash-icon.png    |  Bin 0 -> 17547 bytes
+ frontend-mobile/index.js                  |    8 +
+ frontend-mobile/package-lock.json         | 8773 +++++++++++++++++++++++++++++
+ frontend-mobile/package.json              |   18 +
+ frontend-web/.gitignore                   |   24 +
+ frontend-web/README.md                    |   16 +
+ frontend-web/eslint.config.js             |   21 +
+ frontend-web/index.html                   |   13 +
+ frontend-web/package-lock.json            | 3681 ++++++++++++
+ frontend-web/package.json                 |   32 +
+ frontend-web/postcss.config.js            |    6 +
+ frontend-web/public/favicon.svg           |    1 +
+ frontend-web/public/icons.svg             |   24 +
+ frontend-web/src/App.css                  |  184 +
+ frontend-web/src/App.jsx                  |   71 +
+ frontend-web/src/assets/hero.png          |  Bin 0 -> 13057 bytes
+ frontend-web/src/assets/react.svg         |    1 +
+ frontend-web/src/assets/vite.svg          |    1 +
+ frontend-web/src/context/AuthContext.jsx  |   50 +
+ frontend-web/src/context/CartContext.jsx  |   36 +
+ frontend-web/src/index.css                |   14 +
+ frontend-web/src/main.jsx                 |   10 +
+ frontend-web/src/pages/Cart.jsx           |   79 +
+ frontend-web/src/pages/Checkout.jsx       |  151 +
+ frontend-web/src/pages/ForgotPassword.jsx |  100 +
+ frontend-web/src/pages/Home.jsx           |  116 +
+ frontend-web/src/pages/Login.jsx          |   69 +
+ frontend-web/src/pages/ProductDetail.jsx  |   73 +
+ frontend-web/src/pages/Profile.jsx        |  217 +
+ frontend-web/src/pages/Register.jsx       |   83 +
+ frontend-web/tailwind.config.js           |   11 +
+ frontend-web/vite.config.js               |    7 +
+ run_servers.sh                            |    5 +
+ setup_guide.md                            |  117 +
+ 66 files changed, 23232 insertions(+), 2 deletions(-)
+
+commit 2f9bf2bab45855abf211377a5d5eba10031649e3
+Author:     Hanh Tran <ttbhanh@fit.hcmus.edu.vn>
+AuthorDate: 2026-05-15T08:27:44+07:00
+Commit:     GitHub <noreply@github.com>
+CommitDate: 2026-05-15T08:27:44+07:00
+
+    Initial commit
+
+ README.md | 2 ++
+ 1 file changed, 2 insertions(+)
