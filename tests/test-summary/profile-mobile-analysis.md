@@ -188,6 +188,42 @@ Robust BVA cho khoảng ngắn [10,11] rút thành **4 giá trị riêng biệt*
 - Mỗi positive giữ phone đúng FR-04; input clipboard và API companion có kênh rõ. API metadata/GET/fresh login đủ phân biệt native local state với server.
 - Chưa execute, chưa có bug evidence; case bị chặn trước request không chứng minh coverage downstream. Acceptance markup/unknown domains không được âm thầm biến thành requirement.
 
+## Coverage Summary
+
+- Requirements analyzed: FR-04, FR-20 (chỉ phần Hồ sơ), SEC-02, SEC-04, SEC-06; không tuyên bố bao phủ toàn bộ các FR/SEC liên quan.
+- Variables identified: 11 nhóm trong Domain Analysis; entry method/data flow là dependencies của partitions, không invent business classes.
+- Equivalence partitions: 21 (9 VALID, 12 INVALID).
+- Partitions covered: 21/21 có thiết kế; EP-PM-06/07 dùng AS-PM-02, EP-PM-18 dùng AS-PM-04; EP-PM-20/21 có điều kiện dữ liệu đến renderer.
+- Boundaries identified / covered: 2/2 phone-length; 4/4 giá trị riêng 9/10/11/12 trên native form.
+- Test cases generated: 30 (4 BVA + 26 EP); 19 Native UI + 8 API companion + 2 Fixture → Native UI + 1 API → Native UI.
+- Traceability: [ma trận chung](traceability-matrix.md#pool-d--fr-04--fr-20-hồ-sơ-mobile), mapping rule/partition/boundary/case và kênh. A/B/C/D có tổng 188 cases (140 EP + 48 BVA), tất cả Not Run / None.
+
+### Checklist thiết kế
+
+- [x] Inputs có thể kiểm thử đã phân tích; phần chưa xác định ghi ambiguity.
+- [x] Các lớp valid/invalid đã xác định có case; không gọi unspecified name/address invalid domains là đã phủ.
+- [x] Lower/upper và ngay dưới/trên covered; overlapping values 10/11 không nhân cases.
+- [x] Phone prefix/digits/length, gõ/dán, name/address + valid phone, email/role, identity/session và server/native data flow được xét.
+- [x] Mỗi case có requirement, technique, Test Data, steps, observable Expected Result; không lấy static implementation làm oracle.
+- [x] API companions và fixture/display flows có kênh riêng; không kết luận native server contract đúng từ API body được gửi thủ công.
+- [x] Status thiết kế không dùng Actual Result/Pass-Fail; chưa có execution/bug evidence.
+
+### Potential Coverage Gaps
+
+- Chưa có device/OS matrix, Unicode/blank/null/trim/length rules, expiry/retry/offline requirements hoặc acceptance markup; không thể khẳng định requirement coverage toàn bộ.
+- Native phone validation có thể chặn valid update trước network; khi execute cần ghi checkpoint và giới hạn persistence/address coverage. Case 030 chỉ kiểm chiều server → Mobile, không thay native save.
+- Safe-render 028/029 với markup vô hại chỉ kiểm native surfaces đã nêu; không exhaust payloads, WebView, screen khác hoặc platforms chưa chạy.
+- Backend phone BVA reuse từ Pool A; không có Pool D duplicate API BVA. Reviewer cân nhắc regression nếu backend thay đổi.
+- Chưa có concurrency/đa thiết bị, transaction rollback, partial PUT, email API mutation hoặc JWT revoked/expired coverage vì oracle chưa rõ hoặc ngoài phạm vi.
+
+### Assumptions
+
+AS-PM-01–06 được ghi tại Requirement Analysis; đặc biệt persistence bằng GET/login mới, ASCII phone và native logout không đồng nghĩa JWT revocation.
+
+### Ambiguities Requiring Clarification
+
+AM-PM-01–08 còn mở. Chưa có giới hạn name/address; transport `shipping_address` lấy theo API contract, acceptance/runtime và lỗi thực tế chỉ xác nhận khi người dùng execute. Chưa tự coi human review đã hoàn tất.
+
 
 
 

@@ -1,6 +1,6 @@
-# Traceability Matrix — Pool A / FR-04, Pool B / FR-10 và Pool C / FR-15
+# Traceability Matrix — Pool A / FR-04, Pool B / FR-10, Pool C / FR-15 và Pool D / FR-04–FR-20
 
-Ma trận **thiết kế**, không phải kết quả execution. Pool A dùng `TC-PROFILE-WEB-` cho hồ sơ storefront/API; Pool B dùng `TC-ORDER-STATE-` cho trạng thái đơn; Pool C dùng `TC-PRODUCT-CRUD-` cho quản lý sản phẩm. Toàn bộ Result `Not Run`, Related Bugs `None`.
+Ma trận **thiết kế**, không phải kết quả execution. Pool A dùng `TC-PROFILE-WEB-` cho hồ sơ storefront/API; Pool B dùng `TC-ORDER-STATE-` cho trạng thái đơn; Pool C dùng `TC-PRODUCT-CRUD-` cho quản lý sản phẩm; Pool D dùng `TC-PROFILE-MOBILE-` cho hồ sơ Mobile. Toàn bộ Result `Not Run`, Related Bugs `None`.
 
 Nguồn phân tích: [Requirement → Domain → Partition → Boundary](profile-web-analysis.md).
 Fixture và danh mục: [profile-web](../test-cases/profile-web/README.md).
@@ -255,9 +255,10 @@ Nguồn: [phân tích Pool B](order-state-analysis.md), [fixture/danh mục case
 | A | FR-04 | 20 | 8 | 28 |
 | B | FR-10 | 52 | 0 | 52 |
 | C | FR-15 | 42 | 36 | 78 |
-| Tổng | 3 features | 114 | 44 | 158 |
+| D | FR-04 / FR-20 Mobile | 26 | 4 | 30 |
+| Tổng | 4 features | 140 | 48 | 188 |
 
-Số đếm trên chỉ là thiết kế; không tự xác nhận review/phê duyệt của Pool A/B/C.
+Số đếm trên chỉ là thiết kế; không tự xác nhận review/phê duyệt của Pool A/B/C/D.
 
 ## Pool C — FR-15: Product CRUD
 
@@ -420,3 +421,93 @@ Name dùng ASCII, min 1 theo required không rỗng. Price dùng bước dữ li
 | [TC-PRODUCT-CRUD-078](../test-cases/product-crud/TC-PRODUCT-CRUD-078.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-11, EP-PC-16, EP-PC-12, EP-PC-23, EP-PC-21 | — | Equivalence Partitioning | Not Run | None |
 
 30/30 partitions có case thiết kế; 3 boundaries và 9 giá trị theo biến có mapping trên 4 đường = 36 BVA cases. EP-PC-30 có assumption timing; những ambiguity ngoài các partitions này còn mở. Không có coverage execution hay confirmed bug.
+
+## Pool D — FR-04 / FR-20: Hồ sơ Mobile
+
+Nguồn: [phân tích Pool D](profile-mobile-analysis.md), [fixture/danh mục](../test-cases/profile-mobile/README.md). 30 cases: 4 BVA + 26 EP; 21 partitions, 2 boundaries. Module `PROFILE-MOBILE`, tất cả Not Run / None. API companions không thay native form coverage.
+
+### Requirement → Test Case (Pool D)
+
+| Requirement / Quy tắc nội bộ | Cases | Giới hạn |
+|---|---|---|
+| FR-04; FR-20 / R-PM-01: tải và sửa ba trường | [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [010](../test-cases/profile-mobile/TC-PROFILE-MOBILE-010.md), [011](../test-cases/profile-mobile/TC-PROFILE-MOBILE-011.md), [012](../test-cases/profile-mobile/TC-PROFILE-MOBILE-012.md), [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [019](../test-cases/profile-mobile/TC-PROFILE-MOBILE-019.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | GET và fresh login; từng field và kết hợp; API → Mobile không thay native save |
+| FR-04; FR-20 / R-PM-02: phone | [001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md), [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md), [005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md), [006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md), [007](../test-cases/profile-mobile/TC-PROFILE-MOBILE-007.md), [008](../test-cases/profile-mobile/TC-PROFILE-MOBILE-008.md), [009](../test-cases/profile-mobile/TC-PROFILE-MOBILE-009.md), [010](../test-cases/profile-mobile/TC-PROFILE-MOBILE-010.md) | 9/10/11/12, prefix, letter/internal-space/hyphen, empty, native paste; ASCII |
+| FR-04; FR-20 / R-PM-03: email UI | [014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md) | Native gõ/dán; không HTML type hoặc email API rule |
+| FR-04; FR-20 / R-PM-04: chính chủ/session | [016](../test-cases/profile-mobile/TC-PROFILE-MOBILE-016.md), [017](../test-cases/profile-mobile/TC-PROFILE-MOBILE-017.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [019](../test-cases/profile-mobile/TC-PROFILE-MOBILE-019.md), [025](../test-cases/profile-mobile/TC-PROFILE-MOBILE-025.md), [026](../test-cases/profile-mobile/TC-PROFILE-MOBILE-026.md), [027](../test-cases/profile-mobile/TC-PROFILE-MOBILE-027.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Native anonymous/logout/account-switch; body/query/JWT companions; snapshot A/B trong positive updates |
+| FR-04; SEC-06 / R-PM-05: role | [015](../test-cases/profile-mobile/TC-PROFILE-MOBILE-015.md), [024](../test-cases/profile-mobile/TC-PROFILE-MOBILE-024.md) | UI không tự đổi role; API mutation + fresh login; chưa toàn bộ authorization |
+| SEC-02 / R-PM-06: JWT | [020](../test-cases/profile-mobile/TC-PROFILE-MOBILE-020.md), [021](../test-cases/profile-mobile/TC-PROFILE-MOBILE-021.md), [022](../test-cases/profile-mobile/TC-PROFILE-MOBILE-022.md), [023](../test-cases/profile-mobile/TC-PROFILE-MOBILE-023.md), [024](../test-cases/profile-mobile/TC-PROFILE-MOBILE-024.md), [025](../test-cases/profile-mobile/TC-PROFILE-MOBILE-025.md), [026](../test-cases/profile-mobile/TC-PROFILE-MOBILE-026.md), [027](../test-cases/profile-mobile/TC-PROFILE-MOBILE-027.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Missing/malformed GET+PUT, valid token, tampered signature PUT; không expiry/BVA |
+| SEC-04; FR-20 / R-PM-07: native safe display | [028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md), [029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md) | Fixture phải tới form/header; benign markup smoke, chưa toàn bộ payload/platform |
+
+### Partition → Test Case (Pool D)
+
+| Partition | Class | Cases | Điều kiện / phạm vi |
+|---|---|---|---|
+| EP-PM-01 | VALID | [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [010](../test-cases/profile-mobile/TC-PROFILE-MOBILE-010.md), [011](../test-cases/profile-mobile/TC-PROFILE-MOBILE-011.md), [012](../test-cases/profile-mobile/TC-PROFILE-MOBILE-012.md), [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [019](../test-cases/profile-mobile/TC-PROFILE-MOBILE-019.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Bắt đầu 0, 10–11 ASCII digits |
+| EP-PM-02 | INVALID | [001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md), [009](../test-cases/profile-mobile/TC-PROFILE-MOBILE-009.md) | Rỗng hoặc <10; giá trị không rỗng vẫn giữ prefix 0/all-digits |
+| EP-PM-03 | INVALID | [004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md) | >11; giữ prefix 0/all-digits |
+| EP-PM-04 | INVALID | [005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md) | Dài 10–11/all-digits nhưng không bắt đầu 0 |
+| EP-PM-05 | INVALID | [006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md), [007](../test-cases/profile-mobile/TC-PROFILE-MOBILE-007.md), [008](../test-cases/profile-mobile/TC-PROFILE-MOBILE-008.md) | Dài 10, bắt đầu 0, có non-digit |
+| EP-PM-06 | VALID | [011](../test-cases/profile-mobile/TC-PROFILE-MOBILE-011.md), [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [019](../test-cases/profile-mobile/TC-PROFILE-MOBILE-019.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Tên thông thường theo AS-PM-02 |
+| EP-PM-07 | VALID | [012](../test-cases/profile-mobile/TC-PROFILE-MOBILE-012.md), [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [019](../test-cases/profile-mobile/TC-PROFILE-MOBILE-019.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Địa chỉ thông thường theo AS-PM-02 |
+| EP-PM-08 | INVALID | [014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md) | Thử thay email qua native UI |
+| EP-PM-09 | VALID | [015](../test-cases/profile-mobile/TC-PROFILE-MOBILE-015.md) | Chủ thể user không có thao tác tự đổi role |
+| EP-PM-10 | INVALID | [024](../test-cases/profile-mobile/TC-PROFILE-MOBILE-024.md) | Gửi role khác từ client để nâng quyền |
+| EP-PM-11 | VALID | [001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md), [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md), [005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md), [006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md), [007](../test-cases/profile-mobile/TC-PROFILE-MOBILE-007.md), [008](../test-cases/profile-mobile/TC-PROFILE-MOBILE-008.md), [009](../test-cases/profile-mobile/TC-PROFILE-MOBILE-009.md), [010](../test-cases/profile-mobile/TC-PROFILE-MOBILE-010.md), [011](../test-cases/profile-mobile/TC-PROFILE-MOBILE-011.md), [012](../test-cases/profile-mobile/TC-PROFILE-MOBILE-012.md), [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md), [015](../test-cases/profile-mobile/TC-PROFILE-MOBILE-015.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [019](../test-cases/profile-mobile/TC-PROFILE-MOBILE-019.md), [024](../test-cases/profile-mobile/TC-PROFILE-MOBILE-024.md), [025](../test-cases/profile-mobile/TC-PROFILE-MOBILE-025.md), [026](../test-cases/profile-mobile/TC-PROFILE-MOBILE-026.md), [028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md), [029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Token thật, hợp lệ của tài khoản hiện tại |
+| EP-PM-12 | INVALID | [020](../test-cases/profile-mobile/TC-PROFILE-MOBILE-020.md), [021](../test-cases/profile-mobile/TC-PROFILE-MOBILE-021.md) | Không có Authorization |
+| EP-PM-13 | INVALID | [022](../test-cases/profile-mobile/TC-PROFILE-MOBILE-022.md), [023](../test-cases/profile-mobile/TC-PROFILE-MOBILE-023.md) | Chuỗi không phải JWT hợp lệ |
+| EP-PM-14 | INVALID | [027](../test-cases/profile-mobile/TC-PROFILE-MOBILE-027.md) | Payload ID đổi nhưng chữ ký cũ |
+| EP-PM-15 | VALID | [001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md), [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md), [005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md), [006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md), [007](../test-cases/profile-mobile/TC-PROFILE-MOBILE-007.md), [008](../test-cases/profile-mobile/TC-PROFILE-MOBILE-008.md), [009](../test-cases/profile-mobile/TC-PROFILE-MOBILE-009.md), [010](../test-cases/profile-mobile/TC-PROFILE-MOBILE-010.md), [011](../test-cases/profile-mobile/TC-PROFILE-MOBILE-011.md), [012](../test-cases/profile-mobile/TC-PROFILE-MOBILE-012.md), [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md), [015](../test-cases/profile-mobile/TC-PROFILE-MOBILE-015.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [019](../test-cases/profile-mobile/TC-PROFILE-MOBILE-019.md), [024](../test-cases/profile-mobile/TC-PROFILE-MOBILE-024.md), [028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md), [029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Chỉ đọc/sửa profile chính chủ |
+| EP-PM-16 | INVALID | [025](../test-cases/profile-mobile/TC-PROFILE-MOBILE-025.md), [026](../test-cases/profile-mobile/TC-PROFILE-MOBILE-026.md) | Token A nhưng selector body/query trỏ B |
+| EP-PM-17 | INVALID | [016](../test-cases/profile-mobile/TC-PROFILE-MOBILE-016.md) | Chưa login mà yêu cầu profile update |
+| EP-PM-18 | INVALID | [017](../test-cases/profile-mobile/TC-PROFILE-MOBILE-017.md) | Đã logout A nhưng còn quyền/dữ liệu sửa A trong app; AS-PM-04 về native logout, không JWT revocation |
+| EP-PM-19 | VALID | [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md) | Login B sau logout A; form/save chỉ tác động B |
+| EP-PM-20 | VALID | [028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md) | Markup-like string đã đến native renderer, phải an toàn; có điều kiện fixture tới renderer, không khẳng định acceptance |
+| EP-PM-21 | VALID | [029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md) | Markup-like address đã đến native renderer, phải an toàn; có điều kiện fixture tới renderer, không khẳng định acceptance |
+
+21/21 partitions có case thiết kế (9 VALID, 12 INVALID); EP-PM-06/07/18 cần review assumptions; EP-PM-20/21 có điều kiện điểm hiển thị. Không coi đây là execution coverage hoặc toàn bộ domain chưa được đặc tả.
+
+### Boundary → Test Case (Pool D)
+
+| Boundary | Giá trị / lớp | Native case | Kênh |
+|---|---|---|---|
+| B-PM-01 lower=10 | 9 INVALID / 10 VALID / 11 VALID | [001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md), [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md) | Native gõ; prefix 0/all ASCII digits |
+| B-PM-02 upper=11 | 10 VALID / 11 VALID / 12 INVALID | [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md) | Native gõ; 10/11 dùng chung, không nhân số đếm |
+
+BVA chỉ dùng length phone; API phone BVA Pool A 005–008 được reuse tùy regression, không đếm lại trong Pool D.
+
+### Test Case → Requirement / Partition / Boundary (Pool D)
+
+| Test Case | Requirement | Partitions | Boundary | Technique | Kênh | Result | Related Bugs |
+|---|---|---|---|---|---|---|---|
+| [TC-PROFILE-MOBILE-001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md) | FR-04; FR-20 | EP-PM-02, EP-PM-11, EP-PM-15 | B-PM-01 | BVA | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md) | FR-04; FR-20 | EP-PM-01, EP-PM-11, EP-PM-15 | B-PM-01, B-PM-02 | BVA | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md) | FR-04; FR-20 | EP-PM-01, EP-PM-11, EP-PM-15 | B-PM-01, B-PM-02 | BVA | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md) | FR-04; FR-20 | EP-PM-03, EP-PM-11, EP-PM-15 | B-PM-02 | BVA | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md) | FR-04; FR-20 | EP-PM-04, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md) | FR-04; FR-20 | EP-PM-05, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-007](../test-cases/profile-mobile/TC-PROFILE-MOBILE-007.md) | FR-04; FR-20 | EP-PM-05, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-008](../test-cases/profile-mobile/TC-PROFILE-MOBILE-008.md) | FR-04; FR-20 | EP-PM-05, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-009](../test-cases/profile-mobile/TC-PROFILE-MOBILE-009.md) | FR-04; FR-20 | EP-PM-02, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-010](../test-cases/profile-mobile/TC-PROFILE-MOBILE-010.md) | FR-04; FR-20 | EP-PM-01, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-011](../test-cases/profile-mobile/TC-PROFILE-MOBILE-011.md) | FR-04; FR-20 | EP-PM-06, EP-PM-01, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-012](../test-cases/profile-mobile/TC-PROFILE-MOBILE-012.md) | FR-04; FR-20 | EP-PM-07, EP-PM-01, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md) | FR-04; FR-20 | EP-PM-06, EP-PM-07, EP-PM-01, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md) | FR-04; FR-20 | EP-PM-08, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-015](../test-cases/profile-mobile/TC-PROFILE-MOBILE-015.md) | FR-04; FR-20; SEC-06 | EP-PM-09, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-016](../test-cases/profile-mobile/TC-PROFILE-MOBILE-016.md) | FR-04; FR-20 | EP-PM-17 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-017](../test-cases/profile-mobile/TC-PROFILE-MOBILE-017.md) | FR-04; FR-20 | EP-PM-18 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md) | FR-04; FR-20 | EP-PM-19, EP-PM-11, EP-PM-15, EP-PM-06, EP-PM-07, EP-PM-01 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-019](../test-cases/profile-mobile/TC-PROFILE-MOBILE-019.md) | FR-04; FR-20 | EP-PM-11, EP-PM-15, EP-PM-06, EP-PM-07, EP-PM-01 | — | Equivalence Partitioning | Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-020](../test-cases/profile-mobile/TC-PROFILE-MOBILE-020.md) | SEC-02; FR-04 | EP-PM-12 | — | Equivalence Partitioning | API companion | Not Run | None |
+| [TC-PROFILE-MOBILE-021](../test-cases/profile-mobile/TC-PROFILE-MOBILE-021.md) | SEC-02; FR-04 | EP-PM-12 | — | Equivalence Partitioning | API companion | Not Run | None |
+| [TC-PROFILE-MOBILE-022](../test-cases/profile-mobile/TC-PROFILE-MOBILE-022.md) | SEC-02; FR-04 | EP-PM-13 | — | Equivalence Partitioning | API companion | Not Run | None |
+| [TC-PROFILE-MOBILE-023](../test-cases/profile-mobile/TC-PROFILE-MOBILE-023.md) | SEC-02; FR-04 | EP-PM-13 | — | Equivalence Partitioning | API companion | Not Run | None |
+| [TC-PROFILE-MOBILE-024](../test-cases/profile-mobile/TC-PROFILE-MOBILE-024.md) | FR-04; SEC-06; SEC-02 | EP-PM-10, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | API companion | Not Run | None |
+| [TC-PROFILE-MOBILE-025](../test-cases/profile-mobile/TC-PROFILE-MOBILE-025.md) | FR-04; SEC-02 | EP-PM-16, EP-PM-11 | — | Equivalence Partitioning | API companion | Not Run | None |
+| [TC-PROFILE-MOBILE-026](../test-cases/profile-mobile/TC-PROFILE-MOBILE-026.md) | FR-04; SEC-02 | EP-PM-16, EP-PM-11 | — | Equivalence Partitioning | API companion | Not Run | None |
+| [TC-PROFILE-MOBILE-027](../test-cases/profile-mobile/TC-PROFILE-MOBILE-027.md) | SEC-02; FR-04 | EP-PM-14 | — | Equivalence Partitioning | API companion | Not Run | None |
+| [TC-PROFILE-MOBILE-028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md) | SEC-04; FR-20 | EP-PM-20, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Fixture → Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md) | SEC-04; FR-20 | EP-PM-21, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Fixture → Native UI | Not Run | None |
+| [TC-PROFILE-MOBILE-030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | FR-04; FR-20; SEC-02 | EP-PM-01, EP-PM-06, EP-PM-07, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | API → Native UI | Not Run | None |
+
+19 Native UI + 8 API companion + 2 Fixture → Native UI + 1 API → Native UI. Một case có nhiều checkpoints vẫn là một case; chưa có Actual Result, tỷ lệ Pass/Fail hoặc confirmed bugs.
