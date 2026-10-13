@@ -192,3 +192,14 @@ AMBIGUITY: Đặc tả không định nghĩa boundary chính xác cho order_id, 
 
 Thay cho việc ép BVA: dùng 19 cặp admin có oracle xác định (5 valid, 14 invalid), 5 trạng thái nguồn trên đường user cancel (4 có kết quả thao tác xác định, 1 chỉ kiểm tra bất biến), dữ liệu target ngoài enum, auth/role/ownership và chuỗi thao tác stale. Các giá trị này thuộc EP và domain phụ thuộc state, không được ghi nhãn BVA. Ma trận transition dùng hỗ trợ phân tích; giữ Technique `Equivalence Partitioning` để bám template skill, giải thích phần state-transition trong analysis/steps.
 
+## Generated Test Cases
+
+- [Danh mục và fixture](../test-cases/order-state/README.md): 52 file, `TC-ORDER-STATE-001`–`TC-ORDER-STATE-052`, đủ template lớp học, mọi case `Not Run / None`.
+- 001–019: toàn bộ 19 cặp admin đã có oracle (5 allowed, 14 forbidden), một cặp mỗi case để cô lập nhánh.
+- 020–024: 5 current states qua user cancel; canceled chỉ kiểm tra bảo toàn final state, response retry chưa xác định.
+- 025–028: user gọi admin API và ownership (027/028 theo AS-OS-03 cần review).
+- 029–033: thiếu/sai token và JWT sửa role nhưng giữ chữ ký cũ.
+- 034–038: target ngoài enum, thiếu/null/rỗng/sai kiểu; 039–040: resource không tồn tại.
+- 041–050: UI admin/user với các chuyển hợp lệ và bảo vệ final/shipping; 051–052: stale page theo trình tự tuần tự có readback giữa các thao tác.
+- Tổng 52 EP, 0 BVA. Việc có 0 BVA là kết quả đánh giá applicability của requirement, không phải bỏ qua bước Boundary/BVA.
+
