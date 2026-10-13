@@ -161,3 +161,19 @@ EP-PC-30 phụ thuộc timing AS-PC-05; chưa chứng minh mọi concurrency cas
 3 boundary đã xác định: name lower/upper và price threshold 0. Chọn 0/1/2 và 254/255/256 ký tự cho name; -1/0/1 cho price trong lát cắt số nguyên. Không gọi giá 1 là min price toàn miền; không coi đây là đầy đủ BVA cho precision nhỏ hơn 1 ₫.
 
 AMBIGUITY: Đặc tả chưa có đơn vị precision/delta nhỏ nhất của giá, upper price hoặc length limits cho description/image. Chưa thể sinh “nearest” fractional boundary hoặc max values đáng tin cậy cho những phần đó. Không lấy SQLite INTEGER/HTML step làm requirement nghiệp vụ.
+
+## BVA Values
+
+| Variable | Boundary | Test Value | Classification | Reason |
+|---|---|---|---|---|
+| name.length | B-PC-NL min−1 | 0: chuỗi rỗng | INVALID, EP-PC-02 | Required, không rỗng |
+| name.length | B-PC-NL min | 1: `A` | VALID, EP-PC-01 | Tại biên dưới |
+| name.length | B-PC-NL min+1 | 2: `AA` | VALID, EP-PC-01 | Ngay trên biên dưới |
+| name.length | B-PC-NU max−1 | 254: `A` lặp 254 lần | VALID, EP-PC-01 | Ngay dưới biên trên |
+| name.length | B-PC-NU max | 255: `A` lặp 255 lần | VALID, EP-PC-01 | Tại biên trên |
+| name.length | B-PC-NU max+1 | 256: `A` lặp 256 lần | INVALID, EP-PC-03 | Ngay trên biên trên |
+| price | B-PC-P0 threshold−1 | -1 | INVALID, EP-PC-08 | Dưới 0, integer slice |
+| price | B-PC-P0 threshold | 0 | INVALID, EP-PC-07 | 0 exclusive |
+| price | B-PC-P0 threshold+1 | 1 | VALID, EP-PC-06 | Trên 0, integer slice; không phải business min price |
+
+Nominal name `PC sản phẩm mới`, nominal price 100000 được dùng khi thử trường còn lại. Tổng 9 giá trị BVA theo biến, lặp ở 4 đường UI-create/API-create/UI-edit/API-edit = 36 case; không cross-product name và price thành 6×3×4 vì làm nhiều biến thay đổi che lỗi. Test Data trong từng file chứa chuỗi ASCII đầy đủ; không chỉ dùng nhãn “max+1” để tester phải đoán dữ liệu.
