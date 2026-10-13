@@ -226,7 +226,7 @@ Thay cho việc ép BVA: phân tích 19 cặp admin có oracle (5 valid, 14 inva
 - [ ] Human review: đang chờ; các assumption và ambiguity chưa được tự xác nhận.
 - [ ] Execution/evidence: do người dùng thực hiện, chưa có kết quả.
 
-Kiểm tra tài liệu sau tinh gọn được ghi tại mục bàn giao bên dưới; ID có khoảng trống do loại file, không yêu cầu liên tục. Tổng active cases A+B = 51; không tiếp tục dùng 52/80 hoặc 30/30 làm số đếm hiện tại. Đây là kiểm tra tài liệu, không phải execution SUT hoặc xác nhận business correctness.
+Kiểm tra tài liệu sau tinh gọn: 32 ID gốc duy nhất, đúng 7 headings/template, steps/data/requirement/technique/status; 32 EP và 0 BVA; 28 JSON bodies đọc được. Nội dung các case giữ tương đương byte với bản trước tinh gọn (chuẩn hóa CRLF/LF). 30 inverse partition mappings đúng (27 active/3 deferred), 13 standalone Admin pairs distinct đúng 5 valid/8 invalid và target JSON khớp; 1447 links/anchors local toàn tests tồn tại. A/C/D giữ 19/78/30 cases, tổng 159 (113 EP + 46 BVA); A+B=51. ID có khoảng trống, không yêu cầu liên tục; `git diff --check` sạch. Đây là kiểm tra tài liệu, không execute SUT hoặc xác nhận business correctness.
 
 ### Quyết định tinh gọn theo yêu cầu người dùng
 
@@ -295,6 +295,7 @@ Trạng thái: **chờ người dùng review**, chưa tự phê duyệt. Skill y
 10. Kiểm tra quyết định loại 20 cases: không đồng nhất các cặp forbidden, null/empty với missing, UI với API hoặc token handling giữa controllers. 041 là integration sequence gốc; không ghép case mới để giảm số file.
 11. Xem AS-OS-02/04: bất biến dữ liệu ngoài status và server-current-state đã được requirement bảo đảm đủ rõ chưa? Ghi nguồn nếu reviewer bổ sung.
 12. Review Expected Result/coverage gaps; sửa domain/partition trước khi sửa case nếu có rule mới. Không ghi confirmed bug, Pass/Fail hay đã được phê duyệt khi chưa có review/evidence.
+13. Review tradeoffs của 20 cases bị loại: 6 known pairs không có standalone coverage, canceled retry/null/empty deferred, các UI/owner/token variations giảm ưu tiên. 052 chỉ thêm canceled→shipping có điều kiện request; không coi đó là exhaustive transition coverage. Có thể khôi phục từ Git history nếu risk thực tế cần các variations này. Lượt này không giảm cases A/C/D.
 
 Sau review, lưu sửa đổi thiết kế trong commit riêng. Người dùng execute và cung cấp evidence/test run theo scope đã thống nhất. Pool C/D đã có thiết kế; lượt này chỉ tinh gọn Pool B, không giảm cases A/C/D.
 
