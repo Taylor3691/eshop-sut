@@ -165,3 +165,40 @@ Tổng: 2 boundary, 6 vị trí BVA được đại diện bằng 4 giá trị d
 - 017–020: GET/PUT thiếu token hoặc token sai định dạng; 021–024: ownership, role và token sửa payload.
 - 025–026: dữ liệu giống HTML tại các điểm hiển thị của name/address; 027–028: cập nhật đồng thời cả ba trường hợp lệ qua API/UI.
 - Tất cả `Not Run / None`; không có Actual Result hoặc confirmed bug. Cases 027–028 bổ sung kiểm tra tương tác/ánh xạ nhiều trường, khác với cases BVA chỉ thay phone.
+
+## Coverage Summary
+
+- Requirements analyzed: FR-04 chính; SEC-02, SEC-04, SEC-06 liên quan; hai điểm FR-22.
+- Variables identified: 8 nhóm domain D-PHONE, D-NAME, D-ADDRESS, D-EMAIL, D-AUTH, D-OWNER, D-ROLE, D-RENDER.
+- Equivalence partitions: 19; partitions có case thiết kế: 19/19, gồm 17 không phụ thuộc lưu HTML và 2 có điều kiện AM-07.
+- Boundaries identified: 2 trên độ dài phone; cả 2 có giá trị dưới/tại/trên, 4 giá trị duy nhất được kiểm tra ở cả UI/API.
+- Test cases generated: 28 = 8 BVA + 20 Equivalence Partitioning; tất cả Not Run. Không có kết quả Pass/Fail hoặc confirmed bug.
+- [Traceability Matrix](traceability-matrix.md) liên kết R/EP/BVA với từng file case và trạng thái.
+
+### Kiểm tra coverage của thiết kế
+
+- [x] Các inputs trong phạm vi FR-04 đã được phân tích; miền chưa đủ oracle được nêu riêng.
+- [x] Các partitions VALID/INVALID đã định nghĩa đều có case đại diện.
+- [x] Biên dưới/trên và giá trị ngay dưới/trên đã được đưa vào thiết kế ở cả UI/API.
+- [x] Tương tác length/prefix/digits, auth/ownership, role/field permissions, cập nhật đồng thời được xem xét.
+- [x] Cases có requirement, technique, dữ liệu, Preconditions, steps và Expected Result; ID ổn định.
+- [x] Expected Result không được lấy từ code lỗi; không tạo giới hạn name/address, TTL hoặc quy tắc email API chưa có trong requirement.
+- [ ] Người dùng review thiết kế và các assumption/ambiguity.
+- [ ] Execution và evidence: thuộc phần người dùng, chưa thực hiện.
+
+### Potential Coverage Gaps
+
+- Chưa có oracle rõ cho rỗng/null/thiếu trường, kiểu JSON khác, Unicode digits và chuẩn hóa phone. Không tuyên bố bao phủ toàn bộ miền dữ liệu tùy ý.
+- Một chữ cái đại diện nhóm ký tự sai; chưa kiểm tra mọi ký tự, tổ hợp nhiều điều kiện sai, fuzzing hoặc payload security khác.
+- Ownership dùng hai tài khoản thường và hai vị trí selector đại diện. Không tuyên bố mọi tham số/role đều đã được kiểm tra.
+- SEC-04 mới xét name/header và address trên trang hồ sơ; nếu bị chặn trước điểm hiển thị thì phải ghi khoảng trống execution. Không bao phủ các trang admin/checkout.
+- Các quy tắc GUI chung còn lại, lịch sử đơn hàng và Mobile ngoài phạm vi bộ case này.
+- Fixture phải chuẩn bị độc lập vì validation UI lỗi có thể chặn đường tạo baseline. Nếu không thiết lập được fixture, không đổi Expected Result hoặc nhận đã execute case.
+
+### Assumptions
+
+AS-01–AS-05 cần người dùng xác nhận; đặc biệt ASCII digits, fixture A/B, dữ liệu tên/địa chỉ thông thường và request PUT đủ ba trường.
+
+### Ambiguities Requiring Clarification
+
+AM-01–AM-07 còn mở. Ưu tiên làm rõ phone có bắt buộc không; quy tắc blank/null/trim; name/address có giới hạn gì; partial PUT; chính sách email API. Chưa tạo case có kết quả chắc chắn cho các điều chưa được đặc tả.
