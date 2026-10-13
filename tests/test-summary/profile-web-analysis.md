@@ -188,6 +188,28 @@ Tổng: 2 boundary, 6 vị trí BVA được đại diện bằng 4 giá trị d
 
 Kiểm tra cấu trúc tài liệu đã thực hiện: 28 ID/tên file liên tục và duy nhất; đủ heading template; toàn bộ trạng thái Not Run / None; đích liên kết file local tồn tại; 28 case và 19 partition có trong ma trận; độ dài bốn chuỗi BVA đúng 9/10/11/12; `git diff --check` không có lỗi whitespace. Đây là kiểm tra tài liệu, không phải chạy test trên SUT hoặc chứng minh business correctness.
 
+### Kế hoạch tinh gọn theo yêu cầu người dùng
+
+Người dùng yêu cầu giảm cases tương tự/ít quan trọng, xử lý **một feature mỗi lần**. Lượt này chỉ giảm Pool A; không giảm cases B/C/D. Đây là thay đổi thiết kế, không phải AI Audit Report hoặc kết quả execution.
+
+Mục tiêu: **28 → 19 cases**, loại 9 (khoảng 32%). Giữ ID gốc, không đánh số lại hoặc tái sử dụng ID bị loại; không ghép các request độc lập vào một case để chỉ giảm số file.
+
+| ID dự kiến loại (TC-PROFILE-WEB-) | Phần chồng lấp / case giữ | Lý do và coverage giảm |
+|---|---|---|
+| 005, 006 | 001, 002: UI positive 10/11 có GET/reload | Cùng giá trị hợp lệ và kiểm dữ liệu server; bỏ đường positive gửi API trực tiếp. Nếu UI chặn trước request thì chưa kiểm chứng server chấp nhận |
+| 009, 011 | 010, 012: API wrong-prefix/letter; 003: UI lỗi form | Giữ đường API bypass để kiểm validation server. Không coi API rejection thay coverage UI prefix/letter |
+| 013, 014 | 028: sửa name/phone/address và readback từng field | Giữ chức năng sửa cả ba field; bỏ isolation name-only/address-only và variation tên có dấu nháy |
+| 019 | 017: GET thiếu token; 020: PUT malformed JWT | Giữ read/write auth đại diện; malformed-token GET là variation được giảm ưu tiên, chưa có coverage |
+| 022 | 021: body selector trỏ B | Cùng bất biến ownership, giữ một vị trí selector. Query selector chưa được kiểm riêng |
+| 027 | 028: full update UI → GET/reload | Cùng ba giá trị và server invariants; bỏ full update API trực tiếp khi không qua form |
+
+Cases dự kiến giữ: **001–004, 007–008, 010, 012, 015–018, 020–021, 023–026, 028** = 19 (6 BVA + 13 EP).
+
+- Giữ 4 BVA UI và 2 BVA API-negative để UI validation không che server bypass; không coi hai đường negative là trùng hoàn toàn.
+- Giữ GET và PUT không token riêng vì một kiểm bảo mật đọc, một kiểm bảo mật ghi; giữ JWT sửa payload và role mutation vì rủi ro khác nhau.
+- Giữ cả name và address safe-display vì renderer khác nhau; điều kiện AM-07 vẫn áp dụng.
+- Giữ mọi partition đã định nghĩa có đại diện (19/19), nhưng không tuyên bố bao phủ mọi combination/kênh. Risk còn lại cần reviewer chấp nhận.
+
 ### Potential Coverage Gaps
 
 - Chưa có oracle rõ cho rỗng/null/thiếu trường, kiểu JSON khác, Unicode digits và chuẩn hóa phone. Không tuyên bố bao phủ toàn bộ miền dữ liệu tùy ý.
