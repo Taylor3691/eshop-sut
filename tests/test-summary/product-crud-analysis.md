@@ -188,3 +188,44 @@ Nominal name `PC sản phẩm mới`, nominal price 100000 được dùng khi th
 - 061–069: POST/PUT/DELETE thiếu token, malformed token, token user thường; 070–072: token user sửa role nhưng giữ chữ ký cũ.
 - 073: quyền UI Admin; 074: stale category (AS-PC-05); 075: đổi target edit P→Q; 076: body id không ghi đè target URL; 077–078: UI price trống qua create/edit.
 - 36 BVA + 42 EP. Description/image chỉ nominal, không dựng thêm validation ngoài requirement; cases create/edit độc lập, negative chỉ một field sai.
+
+## Coverage Summary
+
+- Requirements analyzed: FR-15 chính, FR-12 và SEC-02/03 cho access mutation/UI Admin.
+- Variables identified: 9 nhóm domain D-PC-NAME, PRICE, CATEGORY, ACCESS, TARGET, MODE, DESC, IMAGE, FRESHNESS.
+- Equivalence partitions: 30; partitions có case thiết kế 30/30, EP-PC-30 có timing assumption AS-PC-05.
+- Boundaries identified: 3 (name lower/upper, price 0 exclusive); cả 3 có mapping dưới/tại/trên. Name ASCII; price integer slice, không bao phủ toàn bộ precision chưa rõ.
+- Test cases generated: 78 = 36 BVA + 42 EP; 29 UI + 49 API. Tất cả Not Run / None.
+- [Traceability Matrix chung](traceability-matrix.md) giữ mapping A/B và bổ sung C; tổng thiết kế 158 cases, không phải số đã execute.
+
+### Kiểm tra coverage của thiết kế
+
+- [x] Các input được nêu trong hợp đồng product và access/selected target đã phân tích.
+- [x] Mỗi partition đã định nghĩa có đại diện; domain chưa đủ oracle ghi riêng.
+- [x] Name min/max và price threshold có giá trị quanh biên ở UI/API create/edit độc lập.
+- [x] Required fields missing/null và membership category không bị gộp vào việc check ID số dương.
+- [x] Thử đủ POST/PUT/DELETE với thiếu/malformed/user/tampered token; không tự áp admin gate lên GET catalog.
+- [x] Edit isolation kiểm tra Q/R ở API, UI ngay sau lưu và sau reload; target switch/body extra ID có case riêng.
+- [x] Negative cases chỉ một field sai; payload/token khác giữ hợp lệ để tránh masking.
+- [x] Tất cả cases có requirement, technique, data, steps, Expected Result, status.
+- [ ] Human review assumption/ambiguity và thiết kế, chưa phê duyệt.
+- [ ] Execute/evidence/test run thuộc người dùng, chưa có kết quả.
+
+### Potential Coverage Gaps
+
+- Fractional price/precision/delta nhỏ hơn 1, max price, Unicode grapheme length, whitespace-only/trim chưa đủ oracle để nhận xét đầy đủ (AM-PC-01/02).
+- API coercion/numeric string, malformed JSON/name object/array và duplicate name không được tự phân loại qua ví dụ request; chưa phải fuzzing schema.
+- Description/image chỉ nominal; chưa có quy tắc length/format/HTML để thiết kế validation hoặc toàn bộ security payloads.
+- GET missing resource, update missing ID, delete retry và cascade khi sản phẩm có order/cart chưa có oracle chi tiết; fixture delete cố ý không có liên kết.
+- UI không thể gửi name 256 nếu có maxlength/truncation; cần ghi backend chưa exercise ở UI case, API case độc lập vẫn có giá trị 256.
+- Category empty toàn bộ hệ thống, simultaneous category/product deletion và isolation không được chứng minh bằng stale tuần tự 074.
+- Nếu dependency setup/readback lỗi, ghi Blocked/giới hạn khi người dùng execute, không đổi Expected Result theo implementation.
+- Không đánh giá toàn bộ FR-21/22/24 hoặc storefront/search/import/mobile ngoài scope Product CRUD này.
+
+### Assumptions
+
+AS-PC-01–07 cần reviewer xem lại; đặc biệt name required suy min 1 trên ASCII, BVA price theo integer slice, coercion response, category timing và extra-body-ID policy.
+
+### Ambiguities Requiring Clarification
+
+AM-PC-01/02/03 ưu tiên: length counting/trim, price precision/max và JSON coercion. AM-PC-04–08: description/image, uniqueness/partial PUT, delete/cascade, category timing/concurrency và response/UI semantics chưa rõ.
