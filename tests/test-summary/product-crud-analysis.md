@@ -196,7 +196,7 @@ Nominal name `PC sản phẩm mới`, nominal price 100000 được dùng khi th
 - Equivalence partitions: 30; partitions có case thiết kế 30/30, EP-PC-30 có timing assumption AS-PC-05.
 - Boundaries identified: 3 (name lower/upper, price 0 exclusive); cả 3 có mapping dưới/tại/trên. Name ASCII; price integer slice, không bao phủ toàn bộ precision chưa rõ.
 - Test cases generated: 78 = 36 BVA + 42 EP; 27 UI + 51 API. Tất cả Not Run / None.
-- [Traceability Matrix chung](traceability-matrix.md) giữ mapping A/B và bổ sung C; tổng thiết kế 158 cases, không phải số đã execute.
+- [Traceability Matrix chung](traceability-matrix.md) giữ mapping A/B và bổ sung C; sau tinh gọn Pool A, tổng A/B/C là 149 cases, không phải số đã execute.
 
 ### Kiểm tra coverage của thiết kế
 
@@ -211,7 +211,7 @@ Nominal name `PC sản phẩm mới`, nominal price 100000 được dùng khi th
 - [ ] Human review assumption/ambiguity và thiết kế, chưa phê duyệt.
 - [ ] Execute/evidence/test run thuộc người dùng, chưa có kết quả.
 
-Kiểm tra tài liệu đã thực hiện: 78 ID/tên file liên tục, đúng 7 headings/template, trạng thái Not Run / None, technique totals 36 BVA + 42 EP; liên kết file local tồn tại; 30 partitions và toàn bộ cases trong ma trận; literal name BVA dài đúng 0/1/2/254/255/256, price đúng -1/0/1 trên bốn đường; body JSON parse được sau thay runtime ID, field missing thật sự bị bỏ. Tổng cases A/B/C = 158. Đây là kiểm tra cấu trúc thiết kế, không phải execute SUT hay xác nhận business correctness.
+Kiểm tra tài liệu đã thực hiện: 78 ID/tên file liên tục, đúng 7 headings/template, trạng thái Not Run / None, technique totals 36 BVA + 42 EP; liên kết file local tồn tại; 30 partitions và toàn bộ cases trong ma trận; literal name BVA dài đúng 0/1/2/254/255/256, price đúng -1/0/1 trên bốn đường; body JSON parse được sau thay runtime ID, field missing thật sự bị bỏ. Tổng cases A/B/C hiện tại = 149 sau tinh gọn Pool A (158 tại thời điểm thiết kế Pool C). Đây là kiểm tra cấu trúc thiết kế, không phải execute SUT hay xác nhận business correctness.
 
 ### Potential Coverage Gaps
 

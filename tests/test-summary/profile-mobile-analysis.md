@@ -175,7 +175,7 @@ Robust BVA cho khoảng ngắn [10,11] rút thành **4 giá trị riêng biệt*
 - 4 cases BVA trên native form bằng gõ; đều giữ name/address baseline và phone ASCII bắt đầu 0. Leading zero phải tồn tại trong GET và login mới đối với positive cases.
 - Dán phone hợp lệ dùng 11 chữ số là variation EP của native entry, không đếm thêm boundary.
 - Empty phone là EP dưới min, không gọi là “biên mới”; letter/internal-space/hyphen có độ dài 10 và prefix đúng để cô lập format.
-- API phone BVA đã có Pool A 005–008; có thể reuse khi regression backend, không sao chép/đếm lại là Pool D native coverage. Pool D trực tiếp kiểm native validation/persistence và API companions về auth/ownership/role.
+- Sau tinh gọn Pool A, API-negative phone BVA 007–008 còn active để reuse khi regression backend; positive 10/11 dùng UI 001–002 với GET/reload, không còn direct-API positive BVA. Không đếm lại là Pool D native coverage. Pool D trực tiếp kiểm native validation/persistence và API companions về auth/ownership/role.
 
 ## Generated Test Cases
 
@@ -196,7 +196,7 @@ Robust BVA cho khoảng ngắn [10,11] rút thành **4 giá trị riêng biệt*
 - Partitions covered: 21/21 có thiết kế; EP-PM-06/07 dùng AS-PM-02, EP-PM-18 dùng AS-PM-04; EP-PM-20/21 có điều kiện dữ liệu đến renderer.
 - Boundaries identified / covered: 2/2 phone-length; 4/4 giá trị riêng 9/10/11/12 trên native form.
 - Test cases generated: 30 (4 BVA + 26 EP); 19 Native UI + 8 API companion + 2 Fixture → Native UI + 1 API → Native UI.
-- Traceability: [ma trận chung](traceability-matrix.md#pool-d--fr-04--fr-20-hồ-sơ-mobile), mapping rule/partition/boundary/case và kênh. A/B/C/D có tổng 188 cases (140 EP + 48 BVA), tất cả Not Run / None.
+- Traceability: [ma trận chung](traceability-matrix.md#pool-d--fr-04--fr-20-hồ-sơ-mobile), mapping rule/partition/boundary/case và kênh. Sau tinh gọn Pool A, A/B/C/D có tổng 179 cases (133 EP + 46 BVA), tất cả Not Run / None.
 
 ### Checklist thiết kế
 
@@ -213,7 +213,7 @@ Robust BVA cho khoảng ngắn [10,11] rút thành **4 giá trị riêng biệt*
 - Chưa có device/OS matrix, Unicode/blank/null/trim/length rules, expiry/retry/offline requirements hoặc acceptance markup; không thể khẳng định requirement coverage toàn bộ.
 - Native phone validation có thể chặn valid update trước network; khi execute cần ghi checkpoint và giới hạn persistence/address coverage. Case 030 chỉ kiểm chiều server → Mobile, không thay native save.
 - Safe-render 028/029 với markup vô hại chỉ kiểm native surfaces đã nêu; không exhaust payloads, WebView, screen khác hoặc platforms chưa chạy.
-- Backend phone BVA reuse từ Pool A; không có Pool D duplicate API BVA. Reviewer cân nhắc regression nếu backend thay đổi.
+- Backend negative phone BVA reuse từ Pool A 007–008; direct-positive API BVA Pool A đã giảm ưu tiên. Không có Pool D duplicate API BVA. Reviewer cân nhắc regression nếu backend thay đổi.
 - Chưa có concurrency/đa thiết bị, transaction rollback, partial PUT, email API mutation hoặc JWT revoked/expired coverage vì oracle chưa rõ hoặc ngoài phạm vi.
 
 ### Assumptions

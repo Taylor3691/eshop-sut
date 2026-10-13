@@ -71,6 +71,6 @@ Thiết kế theo [phân tích Domain/BVA](../../test-summary/profile-mobile-ana
 
 ## Reuse và giới hạn
 
-- [Pool A 005–008](../profile-web/README.md) có API phone BVA trên backend dùng chung; có thể reuse khi regression. Không sao chép/đếm lại chúng là Pool D native tests.
+- [Pool A 007–008](../profile-web/README.md) giữ API-negative phone BVA trên backend dùng chung sau tinh gọn; có thể reuse khi regression. Positive 10/11 còn UI 001–002 với server readback, không còn direct-positive API BVA. Không đếm lại chúng là Pool D native tests.
 - 19 Native UI + 8 API companion + 2 Fixture → Native UI + 1 API → Native UI = 30 cases. 22 cases có bước quan sát native, trong đó chỉ 19 bắt đầu bằng tương tác native.
 - 21/21 partitions có thiết kế; safe-display coverage có điều kiện fixture. Unknown name/address boundaries, Unicode phone, offline/session expiry và device matrix cần human review trong analysis.

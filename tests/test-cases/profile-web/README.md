@@ -1,6 +1,6 @@
 # Pool A — Bộ test cases hồ sơ Web/API
 
-Thiết kế theo [phân tích Domain/BVA](../../test-summary/profile-web-analysis.md). Module `PROFILE-WEB` gồm UI và API phục vụ storefront; Pool D sẽ có module riêng. Tất cả cases là **Not Run / None**. Người dùng tự execute; tài liệu này không phải test run.
+Thiết kế theo [phân tích Domain/BVA](../../test-summary/profile-web-analysis.md). Module `PROFILE-WEB` gồm UI và API phục vụ storefront; Pool D có module riêng. Đã giảm **28 → 19 cases (6 BVA + 13 EP)** theo yêu cầu người dùng; ID gốc được giữ, không đánh số lại. Tất cả cases là **Not Run / None**. Người dùng tự execute; tài liệu này không phải test run.
 
 ## Fixture dùng chung
 
@@ -36,27 +36,26 @@ Thiết kế theo [phân tích Domain/BVA](../../test-summary/profile-web-analys
 | [TC-PROFILE-WEB-002](TC-PROFILE-WEB-002.md) | UI — chấp nhận phone 11 chữ số | BVA |
 | [TC-PROFILE-WEB-003](TC-PROFILE-WEB-003.md) | UI — từ chối phone 9 chữ số | BVA |
 | [TC-PROFILE-WEB-004](TC-PROFILE-WEB-004.md) | UI — từ chối phone 12 chữ số | BVA |
-| [TC-PROFILE-WEB-005](TC-PROFILE-WEB-005.md) | API — chấp nhận phone 10 chữ số | BVA |
-| [TC-PROFILE-WEB-006](TC-PROFILE-WEB-006.md) | API — chấp nhận phone 11 chữ số | BVA |
 | [TC-PROFILE-WEB-007](TC-PROFILE-WEB-007.md) | API — từ chối phone 9 chữ số | BVA |
 | [TC-PROFILE-WEB-008](TC-PROFILE-WEB-008.md) | API — từ chối phone 12 chữ số | BVA |
-| [TC-PROFILE-WEB-009](TC-PROFILE-WEB-009.md) | UI — từ chối phone không bắt đầu bằng 0 | Equivalence Partitioning |
 | [TC-PROFILE-WEB-010](TC-PROFILE-WEB-010.md) | API — từ chối phone không bắt đầu bằng 0 | Equivalence Partitioning |
-| [TC-PROFILE-WEB-011](TC-PROFILE-WEB-011.md) | UI — từ chối phone chứa chữ cái | Equivalence Partitioning |
 | [TC-PROFILE-WEB-012](TC-PROFILE-WEB-012.md) | API — từ chối phone chứa chữ cái | Equivalence Partitioning |
-| [TC-PROFILE-WEB-013](TC-PROFILE-WEB-013.md) | UI — chỉ cập nhật Họ Tên | Equivalence Partitioning |
-| [TC-PROFILE-WEB-014](TC-PROFILE-WEB-014.md) | UI — chỉ cập nhật Địa chỉ | Equivalence Partitioning |
 | [TC-PROFILE-WEB-015](TC-PROFILE-WEB-015.md) | UI — email chỉ đọc và đúng loại trường | Equivalence Partitioning |
 | [TC-PROFILE-WEB-016](TC-PROFILE-WEB-016.md) | UI — truy cập hồ sơ khi chưa đăng nhập | Equivalence Partitioning |
 | [TC-PROFILE-WEB-017](TC-PROFILE-WEB-017.md) | API — GET hồ sơ không có token | Equivalence Partitioning |
 | [TC-PROFILE-WEB-018](TC-PROFILE-WEB-018.md) | API — PUT hồ sơ không có token | Equivalence Partitioning |
-| [TC-PROFILE-WEB-019](TC-PROFILE-WEB-019.md) | API — GET hồ sơ với token sai định dạng | Equivalence Partitioning |
 | [TC-PROFILE-WEB-020](TC-PROFILE-WEB-020.md) | API — PUT hồ sơ với token sai định dạng | Equivalence Partitioning |
 | [TC-PROFILE-WEB-021](TC-PROFILE-WEB-021.md) | API — token A không được chọn hồ sơ B qua body | Equivalence Partitioning |
-| [TC-PROFILE-WEB-022](TC-PROFILE-WEB-022.md) | API — token A không được chọn hồ sơ B qua query | Equivalence Partitioning |
 | [TC-PROFILE-WEB-023](TC-PROFILE-WEB-023.md) | API — người dùng không thể tự nâng role thành admin | Equivalence Partitioning |
 | [TC-PROFILE-WEB-024](TC-PROFILE-WEB-024.md) | API — JWT sửa danh tính nhưng giữ chữ ký cũ bị từ chối | Equivalence Partitioning |
 | [TC-PROFILE-WEB-025](TC-PROFILE-WEB-025.md) | API → UI — tên giống HTML được hiển thị an toàn | Equivalence Partitioning |
 | [TC-PROFILE-WEB-026](TC-PROFILE-WEB-026.md) | API → UI — địa chỉ giống HTML được hiển thị an toàn | Equivalence Partitioning |
-| [TC-PROFILE-WEB-027](TC-PROFILE-WEB-027.md) | API — cập nhật đồng thời ba trường hợp lệ | Equivalence Partitioning |
 | [TC-PROFILE-WEB-028](TC-PROFILE-WEB-028.md) | UI — cập nhật đồng thời ba trường hợp lệ | Equivalence Partitioning |
+
+## Phạm vi sau tinh gọn
+
+- 19 active cases, đã loại 005/006/009/011/013/014/019/022/027. File cũ giữ trong Git history; không còn trong danh mục thực thi hiện tại.
+- Giữ đủ 4 phone lengths ở UI và direct-API rejection 9/12/prefix/letter, email readonly, anonymous UI, GET/PUT thiếu JWT, PUT malformed JWT, body ownership, role, JWT signature, hai safe-display surfaces và full update.
+- Positive API trực tiếp, UI prefix/letter, name-only/address-only, malformed-token GET và query selector là variations giảm ưu tiên. Case 028 kiểm giá trị từng field sau full update, không chứng minh isolation khi chỉ sửa một field.
+- 19/19 partitions còn có đại diện thiết kế; không tuyên bố mọi kênh/tổ hợp covered. Nếu UI chặn valid update trước network, direct API acceptance chưa được exercise.
+- Các lý do và tradeoffs ở [analysis](../../test-summary/profile-web-analysis.md#quyết-định-tinh-gọn-theo-yêu-cầu-người-dùng); reviewer kiểm trước execution.

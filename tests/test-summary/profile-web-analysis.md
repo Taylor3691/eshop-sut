@@ -1,6 +1,6 @@
 # Pool A — FR-04: Quản lý hồ sơ cá nhân trên Web/API
 
-Trạng thái: đã hoàn thành bản thiết kế để người dùng review; chưa phê duyệt, chưa execute. Tài liệu áp dụng skill `domain-testing-bva`. Expected Result lấy từ [README](../../README.md), không lấy từ hành vi code hiện tại.
+Trạng thái: đã tinh gọn Pool A theo yêu cầu người dùng từ 28 xuống 19 cases; sẵn cho review, chưa phê duyệt, chưa execute. Tài liệu áp dụng skill `domain-testing-bva`. Expected Result lấy từ [README](../../README.md), không lấy từ hành vi code hiện tại.
 
 ## Requirement Analysis
 
@@ -88,7 +88,7 @@ Các mã R dưới đây chỉ là nhãn truy vết nội bộ; không thay th�
 | Variable | Data Type | Valid Domain | Invalid Domain(s) | Constraints / Notes |
 |---|---|---|---|---|
 | phone | Chuỗi ASCII không rỗng trong miền đã xác định | `0` + 9 hoặc 10 chữ số ASCII | Chuỗi toàn chữ số bắt đầu `0` dài 1–9 hoặc >=12; chuỗi 10–11 chữ số bắt đầu 1–9; chuỗi dài 10–11 bắt đầu `0` chứa chữ cái | D-PHONE; độ dài tính bằng ký tự, không chuyển thành số; blank/null/chuẩn hóa chưa phân loại |
-| name | Chuỗi | Tên thông thường có dấu, ví dụ `Nguyễn Thị An`; một tên có dấu nháy làm đại diện bổ sung | Chưa có domain validation INVALID được quy định | D-NAME; không mặc định name dài 256 hay rỗng là sai |
+| name | Chuỗi | Tên thông thường có dấu, ví dụ `Nguyễn Thị An`; variation dấu nháy được giảm ưu tiên | Chưa có domain validation INVALID được quy định | D-NAME; không mặc định name dài 256 hay rỗng là sai |
 | shipping_address | Chuỗi | Địa chỉ tiếng Việt thông thường | Chưa có domain validation INVALID được quy định | D-ADDRESS; không áp format địa chỉ, độ dài hay quy tắc bắt buộc tự đặt |
 | email ở UI | Giá trị hiển thị | Giữ email hiện có; thao tác xem | Hành động đổi email qua form | D-EMAIL; INVALID ở đây là thao tác bị cấm, không phải email sai định dạng |
 | Authorization | Header/token | JWT hợp lệ của A hoặc B | Không có token; token không phải JWT; JWT sửa payload nhưng giữ chữ ký cũ | D-AUTH; thiếu token khác token sai; không giả định TTL |
@@ -103,7 +103,7 @@ Các mã R dưới đây chỉ là nhãn truy vết nội bộ; không thay th�
 3. Quyền sở hữu phụ thuộc token đã xác thực, không phụ thuộc `id`/`user_id` do client thêm. Snapshot B giúp phân biệt cập nhật A và sửa nhầm B.
 4. Quyền cập nhật name/phone/address không bao gồm quyền cập nhật role. Case role dùng phone hợp lệ để cô lập lỗi quyền.
 5. Name/address cần an toàn ở các điểm hiển thị dù được nhập qua API; reload trang để không nhầm React state cũ với dữ liệu lưu.
-6. Tách case UI và API dù dùng cùng boundary: chúng kiểm tra hai lớp validation khác nhau. Một case UI bị chặn không được đổi dữ liệu để cố đi tới backend.
+6. Giữ BVA UI và API-negative độc lập để kiểm server bypass; giảm positive API trực tiếp vì UI positive có GET/reload. Nếu UI bị chặn trước request thì server acceptance chưa được kiểm chứng; không đổi input hoặc gộp kết quả để che hạn chế.
 
 ## Equivalence Partitions
 
@@ -116,7 +116,7 @@ ID `EP-PW-*` ổn định trong Pool A. VALID/INVALID của auth, ownership, ema
 | EP-PW-03 | phone | INVALID | Bắt đầu `0`, toàn chữ số, dài >11 | `091234567890` | FR-04 R2 |
 | EP-PW-04 | phone | INVALID | Dài 10–11, toàn chữ số, ký tự đầu khác `0` | `1912345678` | FR-04 R2 |
 | EP-PW-05 | phone | INVALID | Dài 10–11, bắt đầu `0`, chứa chữ cái | `09123A5678` | FR-04 R2 |
-| EP-PW-06 | name | VALID | Tên người thông thường, không có restriction bổ sung | `Nguyễn O'Neil` | FR-04 R1; AS-03 |
+| EP-PW-06 | name | VALID | Tên người thông thường, không có restriction bổ sung | `Nguyễn Thị An` | FR-04 R1; AS-03 |
 | EP-PW-07 | shipping_address | VALID | Địa chỉ thông thường | `45 Nguyễn Huệ, Phường Bến Nghé, TP.HCM` | FR-04 R1; AS-03 |
 | EP-PW-08 | email UI | VALID | Xem email hiện tại | `profile.a@example.com` | FR-04 R3 |
 | EP-PW-09 | email UI | INVALID | Thử chỉnh email qua UI | Nhập `changed.a@example.com` vào email của A | FR-04 R3 |
@@ -125,7 +125,7 @@ ID `EP-PW-*` ổn định trong Pool A. VALID/INVALID của auth, ownership, ema
 | EP-PW-12 | Authorization | INVALID | Chuỗi không phải JWT hợp lệ | `Bearer not-a-jwt` | SEC-02 R6 |
 | EP-PW-13 | Authorization | INVALID | Payload JWT bị sửa, chữ ký không tương ứng | Token A đổi claim `id` thành B_ID, giữ chữ ký cũ | SEC-02 R6 |
 | EP-PW-14 | ownership | VALID | Người gọi A cập nhật chính A | Token A, `/api/users/me`, body ba trường | FR-04 R4 |
-| EP-PW-15 | ownership | INVALID | Người gọi A cố chọn B | Body `id=B_ID`; hoặc query `user_id=B_ID` | FR-04 R4 |
+| EP-PW-15 | ownership | INVALID | Người gọi A cố chọn B | Body `id=B_ID`; query selector giảm ưu tiên | FR-04 R4 |
 | EP-PW-16 | role | VALID | Giữ role hiện tại khi cập nhật trường được phép | A vẫn là `user` | FR-04 R5, SEC-06 |
 | EP-PW-17 | role | INVALID | A tự nâng quyền | Body thêm `"role":"admin"` | FR-04 R5, SEC-06 |
 | EP-PW-18 | name tại điểm hiển thị | VALID | Chuỗi giống HTML được hiển thị dưới dạng text nếu được lưu | `<b data-profile-probe="name">Tên kiểm tra</b>` | SEC-04 R7; AM-07 |
@@ -155,46 +155,47 @@ Phương pháp: giữ token hợp lệ, name/address baseline và chữ số đ�
 | phone.length | B-PW-L: min+1; B-PW-U: max | 11: `09123456789` | VALID, EP-PW-01 | Ngay trên biên dưới; tại biên trên |
 | phone.length | B-PW-U: max+1 | 12: `091234567890` | INVALID, EP-PW-03 | Ngay trên 11 |
 
-Tổng: 2 boundary, 6 vị trí BVA được đại diện bằng 4 giá trị duy nhất. Mỗi giá trị có một case UI và một case API, tổng 8 case BVA. Baseline phone `0987654321` khác cả hai giá trị valid để nhận biết cập nhật có thực sự xảy ra.
+Tổng: 2 boundary, 6 vị trí BVA được đại diện bằng 4 giá trị duy nhất. Giữ 4 case UI (9/10/11/12) và 2 case API-negative (9/12), tổng 6 BVA cases. UI positive 10/11 có GET/reload nhưng không thay direct-API coverage nếu bị chặn trước request. Baseline phone `0987654321` khác cả hai giá trị valid để nhận biết cập nhật có thực sự xảy ra.
 
 ## Generated Test Cases
 
-- [Danh mục và fixture](../test-cases/profile-web/README.md): 28 test cases Markdown riêng biệt, ID `TC-PROFILE-WEB-001` đến `TC-PROFILE-WEB-028`.
-- 001–008: BVA phone ở UI và API; 009–012: sai tiền tố/ký tự với độ dài hợp lệ.
-- 013–016: sửa name/address độc lập, email chỉ đọc và phiên chưa đăng nhập.
-- 017–020: GET/PUT thiếu token hoặc token sai định dạng; 021–024: ownership, role và token sửa payload.
-- 025–026: dữ liệu giống HTML tại các điểm hiển thị của name/address; 027–028: cập nhật đồng thời cả ba trường hợp lệ qua API/UI.
-- Tất cả `Not Run / None`; không có Actual Result hoặc confirmed bug. Cases 027–028 bổ sung kiểm tra tương tác/ánh xạ nhiều trường, khác với cases BVA chỉ thay phone.
+- [Danh mục và fixture](../test-cases/profile-web/README.md): **19 test cases** Markdown, giữ ID gốc: 001–004, 007–008, 010, 012, 015–018, 020–021, 023–026, 028.
+- 001–004: BVA UI đủ 9/10/11/12; 007–008: API negative dưới/trên biên; 010/012: API sai prefix/letter.
+- 015–018: email readonly, UI anonymous, API GET/PUT thiếu token; 020: PUT malformed token.
+- 021/023/024: body-selector ownership, role protection và JWT sửa ID nhưng giữ chữ ký cũ.
+- 025–026: safe-display name/header và address, có điều kiện AM-07; 028: cập nhật cả ba trường UI với GET/reload và đối chứng B.
+- 19 = **6 BVA + 13 EP**; tất cả `Not Run / None`. Không ghép các request độc lập thành một case hoặc renumber IDs.
+- Đã loại 005/006/009/011/013/014/019/022/027; lý do/tradeoffs tại mục tinh gọn bên dưới. File cũ còn trong Git history, không còn là active cases.
 
 ## Coverage Summary
 
 - Requirements analyzed: FR-04 chính; SEC-02, SEC-04, SEC-06 liên quan; hai điểm FR-22.
 - Variables identified: 8 nhóm domain D-PHONE, D-NAME, D-ADDRESS, D-EMAIL, D-AUTH, D-OWNER, D-ROLE, D-RENDER.
 - Equivalence partitions: 19; partitions có case thiết kế: 19/19, gồm 17 không phụ thuộc lưu HTML và 2 có điều kiện AM-07.
-- Boundaries identified: 2 trên độ dài phone; cả 2 có giá trị dưới/tại/trên, 4 giá trị duy nhất được kiểm tra ở cả UI/API.
-- Test cases generated: 28 = 8 BVA + 20 Equivalence Partitioning; tất cả Not Run. Không có kết quả Pass/Fail hoặc confirmed bug.
+- Boundaries identified: 2 trên độ dài phone; cả 2 có giá trị dưới/tại/trên, 4 giá trị có BVA UI; 9/12 có API-negative trực tiếp. Không còn direct-API positive BVA.
+- Test cases generated: 19 = 6 BVA + 13 Equivalence Partitioning; tất cả Not Run. Không có kết quả Pass/Fail hoặc confirmed bug.
 - [Traceability Matrix](traceability-matrix.md) liên kết R/EP/BVA với từng file case và trạng thái.
 
 ### Kiểm tra coverage của thiết kế
 
 - [x] Các inputs trong phạm vi FR-04 đã được phân tích; miền chưa đủ oracle được nêu riêng.
 - [x] Các partitions VALID/INVALID đã định nghĩa đều có case đại diện.
-- [x] Biên dưới/trên và giá trị ngay dưới/trên đã được đưa vào thiết kế ở cả UI/API.
+- [x] Biên dưới/trên và giá trị ngay dưới/trên có BVA UI; direct API giữ 9/12 negative. Positive direct API được giảm ưu tiên, không giả nhận coverage.
 - [x] Tương tác length/prefix/digits, auth/ownership, role/field permissions, cập nhật đồng thời được xem xét.
 - [x] Cases có requirement, technique, dữ liệu, Preconditions, steps và Expected Result; ID ổn định.
 - [x] Expected Result không được lấy từ code lỗi; không tạo giới hạn name/address, TTL hoặc quy tắc email API chưa có trong requirement.
 - [ ] Người dùng review thiết kế và các assumption/ambiguity.
 - [ ] Execution và evidence: thuộc phần người dùng, chưa thực hiện.
 
-Kiểm tra cấu trúc tài liệu đã thực hiện: 28 ID/tên file liên tục và duy nhất; đủ heading template; toàn bộ trạng thái Not Run / None; đích liên kết file local tồn tại; 28 case và 19 partition có trong ma trận; độ dài bốn chuỗi BVA đúng 9/10/11/12; `git diff --check` không có lỗi whitespace. Đây là kiểm tra tài liệu, không phải chạy test trên SUT hoặc chứng minh business correctness.
+Kiểm tra cấu trúc tài liệu sau tinh gọn được ghi tại mục kiểm tra bàn giao bên dưới. ID giữ nguyên và có khoảng trống do loại cases; không yêu cầu liên tục. Đây là kiểm tra tài liệu, không phải chạy SUT hoặc chứng minh business correctness.
 
-### Kế hoạch tinh gọn theo yêu cầu người dùng
+### Quyết định tinh gọn theo yêu cầu người dùng
 
 Người dùng yêu cầu giảm cases tương tự/ít quan trọng, xử lý **một feature mỗi lần**. Lượt này chỉ giảm Pool A; không giảm cases B/C/D. Đây là thay đổi thiết kế, không phải AI Audit Report hoặc kết quả execution.
 
-Mục tiêu: **28 → 19 cases**, loại 9 (khoảng 32%). Giữ ID gốc, không đánh số lại hoặc tái sử dụng ID bị loại; không ghép các request độc lập vào một case để chỉ giảm số file.
+Đã giảm **28 → 19 cases**, loại 9 (khoảng 32%). Giữ ID gốc, không đánh số lại hoặc tái sử dụng ID bị loại; không ghép các request độc lập vào một case để chỉ giảm số file.
 
-| ID dự kiến loại (TC-PROFILE-WEB-) | Phần chồng lấp / case giữ | Lý do và coverage giảm |
+| ID đã loại (TC-PROFILE-WEB-) | Phần chồng lấp / case giữ | Lý do và coverage giảm |
 |---|---|---|
 | 005, 006 | 001, 002: UI positive 10/11 có GET/reload | Cùng giá trị hợp lệ và kiểm dữ liệu server; bỏ đường positive gửi API trực tiếp. Nếu UI chặn trước request thì chưa kiểm chứng server chấp nhận |
 | 009, 011 | 010, 012: API wrong-prefix/letter; 003: UI lỗi form | Giữ đường API bypass để kiểm validation server. Không coi API rejection thay coverage UI prefix/letter |
@@ -203,7 +204,7 @@ Mục tiêu: **28 → 19 cases**, loại 9 (khoảng 32%). Giữ ID gốc, khôn
 | 022 | 021: body selector trỏ B | Cùng bất biến ownership, giữ một vị trí selector. Query selector chưa được kiểm riêng |
 | 027 | 028: full update UI → GET/reload | Cùng ba giá trị và server invariants; bỏ full update API trực tiếp khi không qua form |
 
-Cases dự kiến giữ: **001–004, 007–008, 010, 012, 015–018, 020–021, 023–026, 028** = 19 (6 BVA + 13 EP).
+Cases giữ: **001–004, 007–008, 010, 012, 015–018, 020–021, 023–026, 028** = 19 (6 BVA + 13 EP).
 
 - Giữ 4 BVA UI và 2 BVA API-negative để UI validation không che server bypass; không coi hai đường negative là trùng hoàn toàn.
 - Giữ GET và PUT không token riêng vì một kiểm bảo mật đọc, một kiểm bảo mật ghi; giữ JWT sửa payload và role mutation vì rủi ro khác nhau.
@@ -214,7 +215,7 @@ Cases dự kiến giữ: **001–004, 007–008, 010, 012, 015–018, 020–021,
 
 - Chưa có oracle rõ cho rỗng/null/thiếu trường, kiểu JSON khác, Unicode digits và chuẩn hóa phone. Không tuyên bố bao phủ toàn bộ miền dữ liệu tùy ý.
 - Một chữ cái đại diện nhóm ký tự sai; chưa kiểm tra mọi ký tự, tổ hợp nhiều điều kiện sai, fuzzing hoặc payload security khác.
-- Ownership dùng hai tài khoản thường và hai vị trí selector đại diện. Không tuyên bố mọi tham số/role đều đã được kiểm tra.
+- Ownership dùng hai tài khoản thường và một body selector đại diện; query selector không còn active case. Không tuyên bố mọi tham số/role đều đã được kiểm tra.
 - SEC-04 mới xét name/header và address trên trang hồ sơ; nếu bị chặn trước điểm hiển thị thì phải ghi khoảng trống execution. Không bao phủ các trang admin/checkout.
 - Các quy tắc GUI chung còn lại, lịch sử đơn hàng và Mobile ngoài phạm vi bộ case này.
 - Fixture phải chuẩn bị độc lập vì validation UI lỗi có thể chặn đường tạo baseline. Nếu không thiết lập được fixture, không đổi Expected Result hoặc nhận đã execute case.
@@ -232,17 +233,17 @@ AM-01–AM-07 còn mở. Ưu tiên làm rõ phone có bắt buộc không; quy t
 Trạng thái: **chờ người dùng review**, chưa coi thiết kế là đã được phê duyệt. Skill yêu cầu “Require human review before treating the analysis as final.” Context yêu cầu làm một feature rồi bàn giao review trước khi sang pool tiếp theo.
 
 1. Xác nhận R1–R8 diễn giải đúng FR-04 và các requirement liên quan; không nhầm profile web với Mobile hoặc lịch sử đơn hàng.
-2. Xem AS-01–AS-05: chữ số ASCII, dữ liệu A/B, tên có dấu/dấu nháy đơn, PUT đủ trường, cách readback. Quy tắc nào chưa được nguồn yêu cầu bảo đảm?
+2. Xem AS-01–AS-05: chữ số ASCII, dữ liệu A/B, tên có dấu, PUT đủ trường, cách readback. Variation dấu nháy đã giảm ưu tiên. Quy tắc nào chưa được nguồn yêu cầu bảo đảm?
 3. Xem AM-01–AM-07: có tài liệu lớp học hoặc yêu cầu bổ sung giải quyết blank/null, trimming, độ dài name/address, token expiry và email API không?
 4. Kiểm tra 19 partitions có bỏ sót nhóm khác biệt về requirement; nếu có, bổ sung nguồn và partition trước khi thêm test case.
 5. Kiểm tra BVA 9/10/11/12 ký tự: 10 và 11 hợp lệ, không bỏ số `0` đầu; không cần thêm nominal trùng lặp cho miền chỉ có hai độ dài hợp lệ.
-6. Kiểm tra case 021–024: lấy chủ thể từ token, đọc cả A/B, không dùng token cũ để kết luận role hiện tại; reject hoặc ignore trường cấm đều giữ được bất biến yêu cầu.
+6. Kiểm tra case 021/023/024: lấy chủ thể từ token, đọc cả A/B, không dùng token cũ để kết luận role hiện tại; reject hoặc ignore trường cấm đều giữ được bất biến yêu cầu.
 7. Kiểm tra fixture có thể thiết lập độc lập và mỗi case có thể thực hiện lại. Nếu auth/fixture lỗi, ghi Blocked có lý do khi execute thay vì sửa dữ liệu để che lỗi.
 8. Kiểm tra case 025–026 phân biệt “input bị chặn” và “đã exercise an toàn render”; không đánh Pass cho điểm hiển thị chưa được tiếp cận.
-9. Kiểm tra cases 027–028 bao phủ cập nhật nhiều trường; cases BVA chỉ thay phone để cô lập boundary. UI/API không được gộp kết quả vì là hai lớp khác nhau.
+9. Kiểm tra case 028 bao phủ cập nhật nhiều trường và GET/reload; BVA chỉ thay phone để cô lập boundary. Chấp nhận hoặc điều chỉnh tradeoffs: direct positive API, UI format, isolated field changes, malformed-token GET, query selector. Không suy coverage giữa UI/API.
 10. Kiểm tra Expected Result và traceability của từng case; xác định case trùng lặp hoặc rủi ro nghiệp vụ còn thiếu. Đánh giá độc lập, không xem output AI là mặc nhiên đúng.
 
-Sau review: sửa các giả định/partition/case có bằng chứng yêu cầu bổ sung và commit thay đổi thiết kế. Việc execute, ghi Actual Result và liên kết bug chỉ thực hiện khi người dùng cung cấp evidence hoặc thay đổi phạm vi. Pool B/C/D chưa bắt đầu.
+Sau review: sửa các giả định/partition/case có bằng chứng yêu cầu bổ sung và commit thay đổi thiết kế. Việc execute, ghi Actual Result và liên kết bug chỉ thực hiện khi người dùng cung cấp evidence hoặc thay đổi phạm vi. Pool B/C/D đã có thiết kế; lượt tinh gọn hiện tại chỉ xử lý Pool A.
 
 ## AI Gap Candidates
 
