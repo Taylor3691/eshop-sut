@@ -31,14 +31,14 @@
 | [TC-ORDER-STATE-012](../test-cases/order-state/TC-ORDER-STATE-012.md) | ORDER-STATE | vt-toan | Pass   | None        | None                                                                                       |
 | [TC-ORDER-STATE-015](../test-cases/order-state/TC-ORDER-STATE-015.md) | ORDER-STATE | vt-toan | Pass   | None        | None                                                                                       |
 | [TC-ORDER-STATE-016](../test-cases/order-state/TC-ORDER-STATE-016.md) | ORDER-STATE | vt-toan | Pass   | None        | None                                                                                       |
-| [TC-ORDER-STATE-019](../test-cases/order-state/TC-ORDER-STATE-019.md) | ORDER-STATE | vt-toan | Fail   | None        | Có nút chuyển từ Đã hủy sang Đã giao                                                       |
+| [TC-ORDER-STATE-019](../test-cases/order-state/TC-ORDER-STATE-019.md) | ORDER-STATE | vt-toan | Fail   | [#17](https://github.com/Taylor3691/eshop-sut/issues/17) | Có nút chuyển từ Đã hủy sang Đã giao                                                       |
 | [TC-ORDER-STATE-021](../test-cases/order-state/TC-ORDER-STATE-021.md) | ORDER-STATE | vt-toan | Pass   | None        | None                                                                                       |
-| [TC-ORDER-STATE-022](../test-cases/order-state/TC-ORDER-STATE-022.md) | ORDER-STATE | vt-toan | Fail   | None        | Khách hàng vẫn hủy được đơn hàng Đang giao                                                 |
+| [TC-ORDER-STATE-022](../test-cases/order-state/TC-ORDER-STATE-022.md) | ORDER-STATE | vt-toan | Fail   | [#18](https://github.com/Taylor3691/eshop-sut/issues/18) | Khách hàng vẫn hủy được đơn hàng Đang giao                                                 |
 | [TC-ORDER-STATE-023](../test-cases/order-state/TC-ORDER-STATE-023.md) | ORDER-STATE | vt-toan | Pass   | None        | None                                                                                       |
 | [TC-ORDER-STATE-025](../test-cases/order-state/TC-ORDER-STATE-025.md) | ORDER-STATE | vt-toan | Pass   | None        | None                                                                                       |
 | [TC-ORDER-STATE-041](../test-cases/order-state/TC-ORDER-STATE-041.md) | ORDER-STATE | vt-toan | Pass   | None        | None                                                                                       |
 | [TC-ORDER-STATE-046](../test-cases/order-state/TC-ORDER-STATE-046.md) | ORDER-STATE | vt-toan | Pass   | None        | None                                                                                       |
-| [TC-ORDER-STATE-051](../test-cases/order-state/TC-ORDER-STATE-051.md) | ORDER-STATE | vt-toan | Fail   | None        | Khách hàng hủy được đơn đang giao từ trang profile chưa tải lại                            |
+| [TC-ORDER-STATE-051](../test-cases/order-state/TC-ORDER-STATE-051.md) | ORDER-STATE | vt-toan | Fail   | [#19](https://github.com/Taylor3691/eshop-sut/issues/19) | Khách hàng hủy được đơn đang giao từ trang profile chưa tải lại                            |
 | [TC-ORDER-STATE-052](../test-cases/order-state/TC-ORDER-STATE-052.md) | ORDER-STATE | vt-toan | Pass   | None        | None                                                                                       |
 
 
