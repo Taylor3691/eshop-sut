@@ -132,3 +132,16 @@ ID `EP-PW-*` ổn định trong Pool A. VALID/INVALID của auth, ownership, ema
 | EP-PW-19 | address tại điểm hiển thị | VALID | Chuỗi giống HTML được hiển thị dưới dạng text nếu được lưu | `<b data-profile-probe="address">Địa chỉ kiểm tra</b>` | SEC-04 R7; AM-07 |
 
 EP-PW-18/19 là phân hoạch dữ liệu cho oracle an toàn đầu ra, không khẳng định backend bắt buộc nhận HTML. Name và address có điểm hiển thị khác nhau nên cần hai case riêng. Các case ownership/role cho phép request bị reject hoặc trường cấm bị ignore; điều kiện quyết định là không vi phạm quyền và dữ liệu bảo vệ.
+
+## Boundary Analysis
+
+| Variable | Lower Boundary | Upper Boundary | Inclusiveness | Requirement | Notes |
+|---|---:|---:|---|---|---|
+| Độ dài phone, với toàn chữ số và bắt đầu `0` | 10 | 11 | Inclusive ở cả hai đầu | FR-04 R2 | B-PW-L và B-PW-U; khoảng rất hẹp, không có số nguyên nằm giữa 10 và 11 |
+| name/address | Chưa xác định | Chưa xác định | Chưa xác định | FR-04 R1 | AM-01; không kế thừa giới hạn 255 của tên sản phẩm FR-15 |
+| JWT validity | Không áp dụng | Không áp dụng | Không áp dụng | SEC-02 | Dùng EP; không có TTL để thiết kế BVA thời gian |
+| Tiền tố phone, email-edit, ownership, role, HTML rendering | Không áp dụng | Không áp dụng | Không áp dụng | FR-04, SEC-04, SEC-06 | Thuộc tính categorical; không biến `0`, user ID hoặc role thành khoảng số |
+
+AMBIGUITY: Đặc tả chưa định nghĩa boundary chính xác cho name/address. Chưa thể hoàn thành BVA đáng tin cậy cho hai trường này trước khi làm rõ. Đây không phải kết luận các trường không có giới hạn trong implementation.
+
+Phương pháp: giữ token hợp lệ, name/address baseline và chữ số đầu `0`; thay duy nhất độ dài phone. Chọn `min-1`, `min`, `min+1`, `max-1`, `max`, `max+1`, rồi loại giá trị trùng. Dùng 10 làm nominal; nominal trùng boundary là điều bình thường với miền chỉ có hai độ dài hợp lệ.
