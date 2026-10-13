@@ -177,3 +177,14 @@ AMBIGUITY: Đặc tả chưa có đơn vị precision/delta nhỏ nhất của g
 | price | B-PC-P0 threshold+1 | 1 | VALID, EP-PC-06 | Trên 0, integer slice; không phải business min price |
 
 Nominal name `PC sản phẩm mới`, nominal price 100000 được dùng khi thử trường còn lại. Tổng 9 giá trị BVA theo biến, lặp ở 4 đường UI-create/API-create/UI-edit/API-edit = 36 case; không cross-product name và price thành 6×3×4 vì làm nhiều biến thay đổi che lỗi. Test Data trong từng file chứa chuỗi ASCII đầy đủ; không chỉ dùng nhãn “max+1” để tester phải đoán dữ liệu.
+
+## Generated Test Cases
+
+- [Danh mục và fixture](../test-cases/product-crud/README.md): 78 file `TC-PRODUCT-CRUD-001`–`078`, tất cả Not Run / None.
+- 001–024: name BVA 0/1/2/254/255/256 ở UI-create/API-create/UI-edit/API-edit.
+- 025–036: price BVA -1/0/1 ở cùng bốn đường; chỉ integer slice, không kết luận fractional precision.
+- 037–044: CRUD hợp lệ UI/API; sửa đủ năm trường, xem đúng dữ liệu, xóa fixture không có tham chiếu.
+- 045–048: name missing/null; 049–054: price missing/null/nonnumeric; 055–060: category missing/null/not-existing, mỗi dạng qua POST/PUT.
+- 061–069: POST/PUT/DELETE thiếu token, malformed token, token user thường; 070–072: token user sửa role nhưng giữ chữ ký cũ.
+- 073: quyền UI Admin; 074: stale category (AS-PC-05); 075: đổi target edit P→Q; 076: body id không ghi đè target URL; 077–078: UI price trống qua create/edit.
+- 36 BVA + 42 EP. Description/image chỉ nominal, không dựng thêm validation ngoài requirement; cases create/edit độc lập, negative chỉ một field sai.
