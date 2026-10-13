@@ -228,6 +228,38 @@ Thay cho việc ép BVA: dùng 19 cặp admin có oracle xác định (5 valid, 
 
 Kiểm tra tài liệu đã thực hiện: 52 ID/tên file liên tục; 7 headings đúng template; Test Data/steps/requirement/technique/status đầy đủ; đích các liên kết file local tồn tại; ma trận có 30 partition và 52 case; 19 cặp admin distinct đúng phân loại 5 valid/14 invalid, target JSON trùng target trong case; tổng case A+B = 80. Đây là kiểm tra tài liệu, không phải execution SUT hoặc xác nhận business correctness.
 
+### Kế hoạch tinh gọn theo yêu cầu người dùng
+
+Người dùng yêu cầu xử lý Pool B theo cùng nguyên tắc đã áp dụng cho Pool A: giảm cases tương tự/ít quan trọng, giữ ID gốc và commit trong quá trình. Lượt này không giảm cases A/C/D; không gộp nhiều request độc lập để chỉ giảm số file.
+
+Mục tiêu: **52 → 32 cases**, loại 20 (khoảng 38%). Giữ toàn bộ 5 admin transitions hợp lệ và 8 forbidden pairs đại diện; không tiếp tục tuyên bố 19/19 forbidden/allowed pairs covered.
+
+| IDs dự kiến loại (TC-ORDER-STATE-) | Cases giữ / phần chồng lấp | Tradeoff |
+|---|---|---|
+| 007 | 006: pending bỏ confirmed để sang shipping | Giữ một skip từ pending; pending→delivered chưa được kiểm riêng |
+| 010 | 011: shipping lùi về confirmed | Giữ một backward transition; shipping→pending chưa được kiểm riêng |
+| 013, 014 | 012/015: delivered→pending/canceled | Giữ final→earlier và final→final; delivered→confirmed/shipping được giảm ưu tiên |
+| 017, 018 | 016/019: canceled→pending/delivered | Giữ hồi sinh canceled về pending và sang final khác; canceled→confirmed/shipping giảm ưu tiên |
+| 024, 050 | Final-state Admin cases; retry còn AM-OS-02 | Không giữ một same-state retry chưa có response policy rõ. EP-OS-15 deferred, không suy nó covered bởi chuyển sang state khác |
+| 026 | 025: token user gọi Admin API trên own order | Giữ role gate; variation foreign order qua Admin endpoint giảm ưu tiên |
+| 028 | 027: token A hủy pending của B | Giữ ownership đề xuất AS-OS-03; variation foreign confirmed giảm ưu tiên |
+| 031 | 032: malformed token Admin; 029: cancel thiếu token | Giữ auth trên cả endpoint nhưng không còn malformed-token cancel case |
+| 036, 037 | 034/035/038: outside-enum, missing, wrong-type | Null/empty không hoàn toàn tương đương; EP-OS-28/29 deferred, không nhận là covered |
+| 042, 043 | 004/005 API Admin cancel; 041 UI Admin chain | UI Admin cancel-control/path chưa được kiểm riêng |
+| 044, 045 | API final-state cases; 052 stale canceled Admin | Giữ server invariants; fresh UI final controls không còn case riêng |
+| 047 | 021 API confirmed cancel; 046 UI pending cancel | Giữ một positive User UI path; confirmed UI positive giảm ưu tiên |
+| 048 | 022 API shipping cancel; 051 stale UI shipping | Fresh shipping UI khác stale sequence, không coi hoàn toàn tương đương |
+| 049 | 023 API delivered cancel | Bỏ variation User UI delivered; server final rule vẫn có case |
+
+Cases dự kiến giữ: **001–006, 008–009, 011–012, 015–016, 019–023, 025, 027, 029–030, 032–035, 038–041, 046, 051–052** = 32 EP, 0 BVA.
+
+- Domain giữ 30 partitions; dự kiến 27 có active case, 3 deferred (EP-OS-15/28/29). Không xóa partition để nâng tỷ lệ coverage.
+- Admin có 13/19 known pairs với standalone API cases (5 valid + 8 invalid), 6 known pairs giảm ưu tiên, 6 ambiguity pairs vẫn chưa có oracle.
+- User có 4/5 source states bằng standalone API cases; canceled same-state chưa được exercise sau khi loại 024/050.
+- Giữ 029 và 030 riêng vì endpoint/role context khác; 039 và 040 riêng vì resource lookup thuộc hai controller; không tự coi JWT/lookup paths giống nhau.
+- Giữ 041 là chuỗi UI integration đã có readback từng bước, không phải ghép mới để giảm số case. Giữ 046 User UI và 051/052 cho hai stale interactions khác nhau.
+- IDs giữ nguyên, cases còn lại không đổi steps/data/Expected Result; không thực thi SUT hoặc tạo Actual Result/confirmed bugs.
+
 ### Potential Coverage Gaps
 
 - Admin shipping→canceled và 5 self-transition response policies chưa có oracle đủ rõ. Không lấy code/UI làm hành vi đúng.
