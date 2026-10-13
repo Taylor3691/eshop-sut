@@ -41,4 +41,4 @@ PROFILE-WEB / Functional / BVA
 
 ## Status / Related Bugs
 
-Not Run / None
+Pass / None — xem [test run](../../test-runs/pool-a-test-run.md).

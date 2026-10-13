@@ -34,11 +34,11 @@ Storefront đã login A và hiển thị baseline. Mỗi case bắt đầu với
 | [TC-PROFILE-WEB-001](../test-cases/profile-web/TC-PROFILE-WEB-001.md) | PROFILE-WEB | vt-toan | Fail | [BUG-PROFILE-WEB-001](../bug-reports/BUG-PROFILE-WEB-001.md) — Issue pending | 15:39 UTC+07; 0912345678 bị alert từ chối, không có PUT; GET/reload vẫn 0987654321; các trường khác A và B giữ snapshot |
 | [TC-PROFILE-WEB-002](../test-cases/profile-web/TC-PROFILE-WEB-002.md) | PROFILE-WEB | vt-toan | Fail | [BUG-PROFILE-WEB-001](../bug-reports/BUG-PROFILE-WEB-001.md) — Issue pending | 15:48 UTC+07; input 09123456789 bị alert từ chối; GET/reload vẫn 0987654321; các trường khác A và B giữ snapshot |
 | [TC-PROFILE-WEB-003](../test-cases/profile-web/TC-PROFILE-WEB-003.md) | PROFILE-WEB | vt-toan | Pass | None | 15:53 UTC+07; 091234567 bị alert từ chối; không PUT; GET/reload giữ baseline A và B; vị trí alert được người dùng chấp nhận |
-| [TC-PROFILE-WEB-004](../test-cases/profile-web/TC-PROFILE-WEB-004.md) | PROFILE-WEB | vt-toan | Not Run | None | UI, phone 12 chữ số: 091234567890 |
+| [TC-PROFILE-WEB-004](../test-cases/profile-web/TC-PROFILE-WEB-004.md) | PROFILE-WEB | vt-toan | Pass | None | 15:54 UTC+07; 091234567890 bị UI từ chối, không PUT; GET/reload giữ baseline A và B |
 | [TC-PROFILE-WEB-007](../test-cases/profile-web/TC-PROFILE-WEB-007.md) | PROFILE-WEB | vt-toan | Not Run | None | API PUT, phone 9 chữ số: 091234567 |
 | [TC-PROFILE-WEB-008](../test-cases/profile-web/TC-PROFILE-WEB-008.md) | PROFILE-WEB | vt-toan | Not Run | None | API PUT, phone 12 chữ số: 091234567890 |
 
 ## Tổng hợp batch
 
-- Được chỉ định: 6; executed: 3; Pass: 1; Fail: 2; Blocked: 0; Not Run: 3.
+- Được chỉ định: 6; executed: 4; Pass: 2; Fail: 2; Blocked: 0; Not Run: 2.
 - Bugs được xác nhận: 1 UI; chưa publish Issue.
