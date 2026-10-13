@@ -1,6 +1,6 @@
 # Pool D — FR-04 / FR-20: Hồ sơ cá nhân trên Mobile
 
-Trạng thái: đã hoàn thành bản thiết kế theo 9 bước của skill `domain-testing-bva`, sẵn cho human review; chưa execute, chưa phê duyệt. Người dùng yêu cầu bắt đầu Pool D; chỉ dẫn này không xác nhận review/phê duyệt Pool A/B/C.
+Trạng thái: đã tinh gọn bản thiết kế **30 → 20 cases** theo skill `domain-testing-bva`, sẵn cho human review; chưa execute, chưa phê duyệt. Người dùng yêu cầu bắt đầu Pool D; chỉ dẫn này không xác nhận review/phê duyệt Pool A/B/C.
 
 ## Requirement Analysis
 
@@ -109,7 +109,7 @@ R-PM-* là nhãn truy vết nội bộ, không tạo requirement mới.
 
 - Prefix, digits và length phải đồng thời đúng. BVA length luôn giữ prefix 0 và ASCII digits; format-negative dài 10 để chỉ làm sai format.
 - Mọi positive update giữ phone hợp lệ; không thay bằng phone sai để đi qua regex implementation.
-- Name-only/address-only giữ các field khác baseline; three-field case dùng cả ba hợp lệ và đối chiếu A/B. Không giả định atomic rollback cho request đa lỗi.
+- Three-field case 013 và account-switch update 018 dùng cả ba field hợp lệ, đối chiếu A/B. Isolated name/address 011/012 đã giảm ưu tiên; không suy full update chứng minh từng đường riêng. Không giả định atomic rollback cho request đa lỗi.
 - JWT, owner, role và session phụ thuộc nhau: token A chỉ cho sửa A, đổi sang B phải tải B và dùng token B.
 - Persistence: GET là readback độc lập; login mới là native checkpoint. Đi ra/vào profile trong cùng phiên có thể chỉ đọc React state.
 - API companions dùng body chính thức `name/phone/shipping_address`; case native không tự sửa payload do app gửi. Nếu valid phone bị chặn trước network, ghi điểm dừng và hạn chế downstream coverage.
@@ -141,12 +141,12 @@ R-PM-* là nhãn truy vết nội bộ, không tạo requirement mới.
 | EP-PM-20 | name tại display | VALID | Markup-like string đã đến native renderer, phải an toàn | `<b>Tên thử</b>` | SEC-04; FR-20 |
 | EP-PM-21 | address tại display | VALID | Markup-like address đã đến native renderer, phải an toàn | `<b>Địa chỉ thử</b>` | SEC-04; FR-20 |
 
-21 partitions cho miền đã có oracle hoặc assumption ghi rõ. EP-PM-20/21 là VALID **tại domain hiển thị an toàn**, không khẳng định API/UI phải chấp nhận chuỗi markup. Name/address chưa có invalid input partitions với oracle đáng tin; AM-PM-01 giữ phần đó chưa xác định.
+21 partitions giữ nguyên cho miền đã có oracle hoặc assumption ghi rõ; sau tinh gọn **20 active / 1 deferred (EP-PM-09)**. Không xóa definition để tuyên bố coverage đầy đủ. EP-PM-20/21 là VALID **tại domain hiển thị an toàn**, không khẳng định API/UI phải chấp nhận chuỗi markup. Name/address chưa có invalid input partitions với oracle đáng tin; AM-PM-01 giữ phần đó chưa xác định.
 
 - EP-PM-08 phân loại **thao tác đổi email** INVALID; email hiện tại vẫn là dữ liệu hợp lệ và được quan sát trong các own-profile cases.
-- EP-PM-09 thể hiện cấu hình quyền UI hợp lệ; negative client change nằm EP-PM-10. Không yêu cầu native app có TextInput role để thực hiện negative.
-- EP-PM-12/13 mỗi lớp có GET và PUT để không dùng kết quả read thay update.
-- EP-PM-16 có body và query representatives; reject/ignore được phép nếu không ghi B. Không áp “mọi extra field phải bị từ chối”.
+- EP-PM-09 thể hiện cấu hình quyền UI hợp lệ, đã deferred sau khi loại 015; EP-PM-10 vẫn có API negative role 024. API enforcement không chứng minh absence của native role controls. Không yêu cầu native app có TextInput role để thực hiện negative.
+- EP-PM-12 giữ missing JWT GET/PUT 020/021; EP-PM-13 chỉ giữ malformed PUT 023, malformed GET 022 đã giảm ưu tiên. Không dùng kết quả PUT để tuyên bố đã thử malformed GET.
+- EP-PM-16 chỉ còn body selector 025; query selector 026 giảm ưu tiên. Reject/ignore được phép nếu không ghi B; body không chứng minh query. Không áp “mọi extra field phải bị từ chối”.
 - Entry method gõ/dán, việc thay từng field và đọc server/login mới là variation/interaction trong partitions sẵn có, không tạo lớp chỉ để tăng số đếm.
 
 ## Boundary Analysis
@@ -173,46 +173,48 @@ R-PM-* là nhãn truy vết nội bộ, không tạo requirement mới.
 Robust BVA cho khoảng ngắn [10,11] rút thành **4 giá trị riêng biệt**, không tạo case trùng min+1/max hoặc max−1/min. Nominal dùng 10 trong cases EP; không có integer length nằm giữa 10 và 11.
 
 - 4 cases BVA trên native form bằng gõ; đều giữ name/address baseline và phone ASCII bắt đầu 0. Leading zero phải tồn tại trong GET và login mới đối với positive cases.
-- Dán phone hợp lệ dùng 11 chữ số là variation EP của native entry, không đếm thêm boundary.
-- Empty phone là EP dưới min, không gọi là “biên mới”; letter/internal-space/hyphen có độ dài 10 và prefix đúng để cô lập format.
+- Positive paste 11 chữ số 010 đã giảm ưu tiên; positive native gõ 002/003 không chứng minh acceptance qua paste. Negative paste letter 006 vẫn giữ, không đếm thêm boundary.
+- Empty phone thuộc EP dưới min, không gọi là “biên mới”; 009 đã giảm ưu tiên, còn representative length 9 ở 001. EP-PM-05 giữ letter 006 dài 10/prefix 0; internal-space/hyphen 007/008 đã giảm ưu tiên, không coi covered bởi letter.
 - Sau tinh gọn Pool A, API-negative phone BVA 007–008 còn active để reuse khi regression backend; positive 10/11 dùng UI 001–002 với GET/reload, không còn direct-API positive BVA. Không đếm lại là Pool D native coverage. Pool D trực tiếp kiểm native validation/persistence và API companions về auth/ownership/role.
 
 ## Generated Test Cases
 
 - Bộ cases/fixture: [profile-mobile/README](../test-cases/profile-mobile/README.md).
-- ID ổn định: TC-PROFILE-MOBILE-001–030; từng case một file, đúng 8 heading template, status `Not Run / None`.
-- 30 cases: 4 BVA + 26 EP; 19 Native UI, 8 API companion, 2 Fixture → Native UI, 1 API → Native UI. Không đếm API companions là native save.
-- 001–004: phone length 9/10/11/12 bằng native gõ; 005–009: prefix/letter/internal-space/hyphen/rỗng; 010: valid paste.
-- 011–013: name-only/address-only/ba field và server persistence; 014–019: email, role UI, anonymous/logout/account-switch/load đúng profile.
-- 020–027: API GET/PUT thiếu/sai JWT, role, selectors và JWT thay ID; 028–029: native safe display; 030: server update → fresh native login.
-- Mỗi positive giữ phone đúng FR-04; input clipboard và API companion có kênh rõ. API metadata/GET/fresh login đủ phân biệt native local state với server.
-- Chưa execute, chưa có bug evidence; case bị chặn trước request không chứng minh coverage downstream. Acceptance markup/unknown domains không được âm thầm biến thành requirement.
+- **20 files**, IDs giữ nguyên có khoảng trống; mỗi case một file, 7 headings cấp 2 và title theo template, status `Not Run / None`.
+- **4 BVA + 16 EP; 11 Native UI + 6 API companion + 2 Fixture → Native UI + 1 API → Native UI**. API companions có checkpoints Mobile nhưng không được đếm là native save.
+- 001–004: native gõ phone 9/10/11/12; 005: prefix; 006: negative paste letter.
+- 013: native full update name/phone/address có GET/login mới; 014: email readonly; 016/017/018: anonymous/logout/account-switch và đúng chủ thể.
+- 020/021: API missing JWT GET/PUT; 023: malformed PUT; 024: role mutation; 025: body owner selector; 027: JWT thay ID giữ signature cũ.
+- 028/029: hai native safe-display surfaces qua fixture; 030: API update → fresh native login, chỉ chiều server → Mobile.
+- Nội dung case giữ lại không đổi; không renumber/ghép requests. Isolated name/address, phone blank/space/hyphen/positive paste, role-control UI, standalone initial load, malformed GET và query selector giảm ưu tiên.
+- Mỗi positive giữ phone đúng FR-04; không sửa app payload. Nếu bị chặn trước request, không coi address/persistence đã được exercise. Acceptance markup/unknown domains vẫn ghi ambiguity.
 
 ## Coverage Summary
 
 - Requirements analyzed: FR-04, FR-20 (chỉ phần Hồ sơ), SEC-02, SEC-04, SEC-06; không tuyên bố bao phủ toàn bộ các FR/SEC liên quan.
 - Variables identified: 11 nhóm trong Domain Analysis; entry method/data flow là dependencies của partitions, không invent business classes.
 - Equivalence partitions: 21 (9 VALID, 12 INVALID).
-- Partitions covered: 21/21 có thiết kế; EP-PM-06/07 dùng AS-PM-02, EP-PM-18 dùng AS-PM-04; EP-PM-20/21 có điều kiện dữ liệu đến renderer.
+- Partitions có case active: **20/21; EP-PM-09 deferred** (role-control UI). EP-PM-06/07 dùng AS-PM-02, EP-PM-18 dùng AS-PM-04; EP-PM-20/21 có điều kiện dữ liệu đến renderer. Active không nghĩa đã execute/Pass.
 - Boundaries identified / covered: 2/2 phone-length; 4/4 giá trị riêng 9/10/11/12 trên native form.
-- Test cases generated: 30 (4 BVA + 26 EP); 19 Native UI + 8 API companion + 2 Fixture → Native UI + 1 API → Native UI.
-- Traceability: [ma trận chung](traceability-matrix.md#pool-d--fr-04--fr-20-hồ-sơ-mobile), mapping rule/partition/boundary/case và kênh. Sau tinh gọn Pool A/B/C, A/B/C/D có tổng 129 cases (96 EP + 33 BVA), tất cả Not Run / None.
+- Test cases retained: **20 (4 BVA + 16 EP)**, giảm 10 EP từ 30; **11 Native UI + 6 API companion + 2 Fixture → Native UI + 1 API → Native UI**.
+- Traceability: [ma trận chung](traceability-matrix.md#pool-d--fr-04--fr-20-hồ-sơ-mobile), mapping rule/partition/boundary/case và kênh. Sau tinh gọn Pool A/B/C/D, tổng có 119 cases (86 EP + 33 BVA), tất cả Not Run / None.
 
 ### Checklist thiết kế
 
 - [x] Inputs có thể kiểm thử đã phân tích; phần chưa xác định ghi ambiguity.
-- [x] Các lớp valid/invalid đã xác định có case; không gọi unspecified name/address invalid domains là đã phủ.
+- [x] Giữ đủ 21 partition definitions và mapping ngược: 20 active, EP-PM-09 deferred; unknown name/address domains vẫn ghi ambiguity.
+- [ ] Mọi valid/invalid partition có case active: chưa đạt vì EP-PM-09 deferred.
 - [x] Lower/upper và ngay dưới/trên covered; overlapping values 10/11 không nhân cases.
-- [x] Phone prefix/digits/length, gõ/dán, name/address + valid phone, email/role, identity/session và server/native data flow được xét.
+- [x] Length/prefix và negative paste letter, native full update, email readonly, API role/ownership, session và server/native flow còn. Các variation đã loại được ghi tradeoffs, không tuyên bố đủ mọi đường vào.
 - [x] Mỗi case có requirement, technique, Test Data, steps, observable Expected Result; không lấy static implementation làm oracle.
 - [x] API companions và fixture/display flows có kênh riêng; không kết luận native server contract đúng từ API body được gửi thủ công.
 - [x] Status thiết kế không dùng Actual Result/Pass-Fail; chưa có execution/bug evidence.
 
-### Kế hoạch tinh gọn theo yêu cầu người dùng
+### Quyết định tinh gọn theo yêu cầu người dùng
 
-Mục tiêu: **30 → 20 cases**, loại 10 EP, dự kiến giữ **4 BVA + 16 EP; 11 Native UI + 6 API companion + 2 Fixture → Native UI + 1 API → Native UI**. Giữ nguyên ID/nội dung cases còn lại; không renumber hoặc ghép các request độc lập để giảm số file. Giữ định nghĩa 21 partitions/2 boundaries; dự kiến 20 partitions active, EP-PM-09 deferred. Các IDs bên dưới là lịch sử lựa chọn, không phải case active sau khi xóa.
+Kết quả: **30 → 20 cases**, loại 10 EP, giữ **4 BVA + 16 EP; 11 Native UI + 6 API companion + 2 Fixture → Native UI + 1 API → Native UI**. Giữ nguyên ID/nội dung cases còn lại; không renumber hoặc ghép các request độc lập để giảm số file. Giữ định nghĩa 21 partitions/2 boundaries; 20 partitions active, EP-PM-09 deferred. Các IDs bên dưới là lịch sử lựa chọn, không phải case active sau khi xóa.
 
-| Nhóm giảm ưu tiên | IDs dự kiến loại (TC-PROFILE-MOBILE-) | Đại diện giữ lại / tradeoff |
+| Nhóm giảm ưu tiên | IDs đã loại (TC-PROFILE-MOBILE-) | Đại diện giữ lại / tradeoff |
 |---|---|---|
 | Phone non-digit variations | 007/008 | Giữ dán letter 006 trong EP-PM-05; internal-space/hyphen khác dữ liệu letter, không chứng minh chúng bị chặn bằng kết quả 006 |
 | Phone rỗng | 009 | Giữ dưới min=9 ở 001 cho EP-PM-02; blank có thể đi nhánh required riêng, không còn case blank active |
@@ -228,7 +230,9 @@ Giữ 001–006 cho native length/prefix/digits, 013/014 cho full update và ema
 ### Potential Coverage Gaps
 
 - Chưa có device/OS matrix, Unicode/blank/null/trim/length rules, expiry/retry/offline requirements hoặc acceptance markup; không thể khẳng định requirement coverage toàn bộ.
-- Native phone validation có thể chặn valid update trước network; khi execute cần ghi checkpoint và giới hạn persistence/address coverage. Case 030 chỉ kiểm chiều server → Mobile, không thay native save.
+- Native phone validation có thể chặn valid update trước network; khi execute cần ghi checkpoint và giới hạn persistence/address coverage. Case 030 chỉ kiểm chiều server → Mobile, không thay native save 013/018.
+- EP-PM-09 không còn active case; 024 kiểm backend role enforcement, không chứng minh absence của native role controls.
+- Phone empty/internal-space/hyphen/positive paste, isolated name/address, standalone nominal initial-load và no-mutation, malformed GET, query selector đã giảm ưu tiên. 001/006/013/018/023/025/030 có đại diện khác; không coi chúng bao phủ đầy đủ các paths đã loại.
 - Safe-render 028/029 với markup vô hại chỉ kiểm native surfaces đã nêu; không exhaust payloads, WebView, screen khác hoặc platforms chưa chạy.
 - Backend negative phone BVA reuse từ Pool A 007–008; direct-positive API BVA Pool A đã giảm ưu tiên. Không có Pool D duplicate API BVA. Reviewer cân nhắc regression nếu backend thay đổi.
 - Chưa có concurrency/đa thiết bị, transaction rollback, partial PUT, email API mutation hoặc JWT revoked/expired coverage vì oracle chưa rõ hoặc ngoài phạm vi.
@@ -247,13 +251,13 @@ Thiết kế sẵn để reviewer kiểm tra, **chưa được phê duyệt**. C
 
 1. Xác nhận lựa chọn Pool D là hồ sơ Mobile FR-04 liên hệ FR-20; không hiểu FR-20 là thêm toàn bộ login/cart/history vào phạm vi. Việc yêu cầu Pool D không xác nhận A/B/C đã review.
 2. Kiểm tra R-PM-01–07 có diễn giải sai không; xác nhận AS-PM-01–06, đặc biệt ASCII digits, nominal name/address, server persistence và native logout.
-3. Xác nhận 21 partitions không bỏ lớp quan trọng; name/address blank/null/trim/Unicode và phone normalization cần yêu cầu rõ trước khi thêm verdict.
+3. Xác nhận 21 partitions giữ nguyên, 20 active và EP-PM-09 deferred. Chấp nhận không còn role-control UI case, không tái gán 024 vào EP-PM-09 chỉ để đạt 21/21; unknown name/address/phone normalization cần rule trước khi thêm verdict.
 4. Kiểm 2 boundaries inclusive 10/11 và 4 values 9/10/11/12; không đếm trùng min+1/max, không dùng integer phone/ID hoặc thêm maxLength từ code.
-5. Kiểm native steps: gõ/dán, header lời chào, email readonly, “Thoát”, session A → B. Chọn OS/device matrix và ghi cách clipboard thực thi nếu nền tảng khác nhau.
+5. Kiểm native steps: BVA gõ, negative paste letter 006, header lời chào, email readonly, “Thoát”, A → B. Positive paste/space/hyphen/blank đã giảm ưu tiên. Chọn OS/device matrix và ghi cách clipboard thực thi.
 6. Kiểm Expected Result và field mapping: dữ liệu phải đúng server `shipping_address`, GET/login mới theo ID. Không lấy regex/request/local state hiện tại làm oracle. Case update bị chặn phải ghi checkpoint và downstream limitation.
-7. Đánh giá tính cần thiết của API companions 020–027 so với Pool A: giữ chúng nếu cần bộ Mobile/API độc lập; có thể reuse sau review nhưng không biến API results thành native coverage. Check rejects/ignore selectors/role chỉ theo invariant; email API/expiry chưa có oracle.
+7. Review 6 API companions 020/021/023/024/025/027: missing JWT GET/PUT, malformed PUT, role, body selector và signature tampering. Malformed GET/query selector đã giảm ưu tiên; không suy covered từ PUT/body. Reject/ignore selectors/role theo invariant; API results không thay native coverage.
 8. Kiểm 028/029 chỉ là safe-display probes có điều kiện; chuẩn bị fixture/khôi phục được và không dùng rejection trước render làm Pass. Đánh giá các risk chưa covered: supported OS, offline/retry, partial PUT, concurrency, token lifecycle.
-9. Kiểm redundancy giữa native initial-load 019 và server-update → fresh-login 030: chúng có precondition/data-flow khác nhau; 030 không thay native save 011–013.
+9. Review bỏ standalone initial-load 019, giữ 030 server update → fresh native login và load B trước save 018. 019 có invariant no-mutation trên nominal baseline đã giảm ưu tiên. 030 không thay native save 013/018; nhắc 011–013 trong nguyên bản case 030 là IDs lịch sử, chỉ 013 còn active.
 10. Reviewer quyết định chấp nhận/sửa từng ambiguity và test; chỉ ghi phê duyệt hoặc execution khi có review/evidence thật. Agent không tạo Actual Result/bug report hoặc AI Audit Report trong nhiệm vụ này.
 
 ## AI Gap Candidates
@@ -269,13 +273,13 @@ Các mục sau là **ứng viên thiếu coverage/thiếu oracle**, chưa phải
 ### Candidate 2 — Native validation che downstream persistence/transport
 
 - Possible missed case: Quan sát request địa chỉ và dữ liệu server sau native update hợp lệ khi validation chặn trước network.
-- Why it may have been missed: Static review cho thấy phone regex/payload khác oracle và user state đổi cục bộ. 011–013 đã thiết kế readback nhưng execution có thể dừng trước transport; 030 chỉ chiều server → Mobile.
+- Why it may have been missed: Static review cho thấy phone regex/payload khác oracle và user state đổi cục bộ. Sau tinh gọn, native 013/018 giữ readback nhưng execution có thể dừng trước transport; 030 chỉ chiều server → Mobile, isolated 011/012 đã giảm ưu tiên.
 - Human action required: Execute giữ phone hợp lệ, ghi checkpoint và hạn chế. Nếu native request chưa được gửi, không kết luận field mapping Pass; reviewer lên lịch kiểm lại khi đường update hợp lệ hoạt động, không bypass bằng phone sai hoặc sửa body để đánh Pass.
 
 ### Candidate 3 — Platform/clipboard matrix chưa được xác định
 
 - Possible missed case: Khác biệt gõ/dán phone, email readonly và native markup display giữa các OS/device được hỗ trợ.
-- Why it may have been missed: AM-PM-06 thiếu danh sách platform; thiết kế 006–010/014/028–029 chưa có execution trên thiết bị nào.
+- Why it may have been missed: AM-PM-06 thiếu danh sách platform; native 006/014/028/029 chưa execute trên thiết bị nào. 007–010 đã giảm ưu tiên, không còn space/hyphen/positive-paste cases.
 - Human action required: Chọn supported OS/device/Expo versions và lặp cases phù hợp, ghi evidence theo môi trường. Không tuyên bố cross-platform coverage từ nguồn React Native chung.
 
 ### Candidate 4 — Session lifecycle và failure recovery chưa có rule
@@ -292,6 +296,6 @@ Các mục sau là **ứng viên thiếu coverage/thiếu oracle**, chưa phải
 
 ### Kết quả bàn giao thiết kế
 
-- Đã hoàn thành 9 bước của skill, 30 cases và ma trận; sẵn cho human review, chưa phê duyệt.
-- Kiểm tra tài liệu: IDs/headings/status/technique/steps/data, literal BVA, JSON templates, 21 partition mappings, 2 boundary mappings, local links và số đếm A/B/C/D.
+- Đã giữ đủ 9 bước của skill và tinh gọn 30→20 cases; ma trận ghi rõ 20 active/1 deferred partitions, sẵn cho human review, chưa phê duyệt.
+- Kiểm tra tài liệu sau tinh gọn: sẽ đối chiếu 20 IDs/headings/status/technique/steps/data, retained contents với Git trước tinh gọn, literal BVA/JSON, 21 inverse partition mappings, 2 boundaries, local links và số đếm A/B/C/D.
 - Không khởi động backend/Expo, gọi API, thao tác app, execute test cases hoặc tạo evidence/confirmed bug. Không sửa mã ứng dụng, push hoặc tạo GitHub Issues.

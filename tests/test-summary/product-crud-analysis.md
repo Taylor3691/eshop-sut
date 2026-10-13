@@ -221,7 +221,7 @@ Cả 3 boundaries/9 giá trị có đại diện toàn suite; không coi direct 
 - [ ] Human review assumption/ambiguity và thiết kế, chưa phê duyệt.
 - [ ] Execute/evidence/test run thuộc người dùng, chưa có kết quả.
 
-Kiểm tra tài liệu sau tinh gọn đã Passed: 48 ID/tên file giữ nguyên, đúng 7 headings/template và steps liên tục, trạng thái Not Run / None; 23 BVA + 25 EP, 21 UI + 27 API; 25 JSON bodies parse sau thay runtime ID, missing fields thật sự bị bỏ. Đối chiếu nội dung 48 cases giữ lại với Git trước tinh gọn (`54361b9`) không có thay đổi. Ma trận có 30 inverse partition mappings (26 active/4 deferred), 23 BVA cells/literals và đủ 9 giá trị; 1162 liên kết file/anchor local toàn tests hợp lệ. Tổng A/B/C=99, A/B/C/D=129 (96 EP + 33 BVA); cases/mapping A/B/D không đổi. `git diff --check` sạch. Đây là kiểm tra cấu trúc thiết kế, không phải execute SUT hay xác nhận business correctness.
+Kiểm tra tài liệu tại thời điểm tinh gọn Pool C (`8840f90`) đã Passed: 48 ID/tên file giữ nguyên, đúng 7 headings/template và steps liên tục, trạng thái Not Run / None; 23 BVA + 25 EP, 21 UI + 27 API; 25 JSON bodies parse sau thay runtime ID, missing fields thật sự bị bỏ. Đối chiếu nội dung 48 cases giữ lại với Git trước tinh gọn (`54361b9`) không có thay đổi. Ma trận có 30 inverse partition mappings (26 active/4 deferred), 23 BVA cells/literals và đủ 9 giá trị; 1162 liên kết file/anchor local toàn tests hợp lệ. Tổng A/B/C=99, A/B/C/D=129 (96 EP + 33 BVA); cases/mapping A/B/D không đổi. `git diff --check` sạch. Đây là kiểm tra cấu trúc thiết kế, không phải execute SUT hay xác nhận business correctness.
 
 ### Quyết định tinh gọn theo yêu cầu người dùng
 
