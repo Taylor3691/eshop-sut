@@ -177,6 +177,18 @@ Robust BVA cho khoảng ngắn [10,11] rút thành **4 giá trị riêng biệt*
 - Empty phone là EP dưới min, không gọi là “biên mới”; letter/internal-space/hyphen có độ dài 10 và prefix đúng để cô lập format.
 - API phone BVA đã có Pool A 005–008; có thể reuse khi regression backend, không sao chép/đếm lại là Pool D native coverage. Pool D trực tiếp kiểm native validation/persistence và API companions về auth/ownership/role.
 
+## Generated Test Cases
+
+- Bộ cases/fixture: [profile-mobile/README](../test-cases/profile-mobile/README.md).
+- ID ổn định: TC-PROFILE-MOBILE-001–030; từng case một file, đúng 8 heading template, status `Not Run / None`.
+- 30 cases: 4 BVA + 26 EP; 19 Native UI, 8 API companion, 2 Fixture → Native UI, 1 API → Native UI. Không đếm API companions là native save.
+- 001–004: phone length 9/10/11/12 bằng native gõ; 005–009: prefix/letter/internal-space/hyphen/rỗng; 010: valid paste.
+- 011–013: name-only/address-only/ba field và server persistence; 014–019: email, role UI, anonymous/logout/account-switch/load đúng profile.
+- 020–027: API GET/PUT thiếu/sai JWT, role, selectors và JWT thay ID; 028–029: native safe display; 030: server update → fresh native login.
+- Mỗi positive giữ phone đúng FR-04; input clipboard và API companion có kênh rõ. API metadata/GET/fresh login đủ phân biệt native local state với server.
+- Chưa execute, chưa có bug evidence; case bị chặn trước request không chứng minh coverage downstream. Acceptance markup/unknown domains không được âm thầm biến thành requirement.
+
+
 
 
 
