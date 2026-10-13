@@ -187,7 +187,7 @@ Tổng: 2 boundary, 6 vị trí BVA được đại diện bằng 4 giá trị d
 - [ ] Người dùng review thiết kế và các assumption/ambiguity.
 - [ ] Execution và evidence: thuộc phần người dùng, chưa thực hiện.
 
-Kiểm tra cấu trúc tài liệu sau tinh gọn được ghi tại mục kiểm tra bàn giao bên dưới. ID giữ nguyên và có khoảng trống do loại cases; không yêu cầu liên tục. Đây là kiểm tra tài liệu, không phải chạy SUT hoặc chứng minh business correctness.
+Kiểm tra cấu trúc tài liệu sau tinh gọn: 19 files có ID gốc duy nhất, đúng heading template/technique/steps/status; 6 BVA + 13 EP; body JSON đọc được sau thay runtime ID. ID có khoảng trống do loại cases, không yêu cầu liên tục. 19/19 inverse partition mappings và 2 boundaries/4 phone lengths đúng; 1620 links/anchors local toàn tests tồn tại. B/C/D giữ 52/78/30 cases, tổng 179 (133 EP + 46 BVA). `git diff --check` sạch. Đây là kiểm tra tài liệu, không chạy SUT hoặc chứng minh business correctness.
 
 ### Quyết định tinh gọn theo yêu cầu người dùng
 
@@ -242,6 +242,7 @@ Trạng thái: **chờ người dùng review**, chưa coi thiết kế là đã 
 8. Kiểm tra case 025–026 phân biệt “input bị chặn” và “đã exercise an toàn render”; không đánh Pass cho điểm hiển thị chưa được tiếp cận.
 9. Kiểm tra case 028 bao phủ cập nhật nhiều trường và GET/reload; BVA chỉ thay phone để cô lập boundary. Chấp nhận hoặc điều chỉnh tradeoffs: direct positive API, UI format, isolated field changes, malformed-token GET, query selector. Không suy coverage giữa UI/API.
 10. Kiểm tra Expected Result và traceability của từng case; xác định case trùng lặp hoặc rủi ro nghiệp vụ còn thiếu. Đánh giá độc lập, không xem output AI là mặc nhiên đúng.
+11. Review quyết định loại 9 cases trong mục tinh gọn: đây là giảm ưu tiên có tradeoff, không xác nhận UI/API, GET/PUT hoặc các renderer hoàn toàn tương đương. Cân nhắc khôi phục từ Git history nếu cần isolate lỗi name/address hoặc test server acceptance khi UI bị chặn. Lượt này chưa giảm cases B/C/D.
 
 Sau review: sửa các giả định/partition/case có bằng chứng yêu cầu bổ sung và commit thay đổi thiết kế. Việc execute, ghi Actual Result và liên kết bug chỉ thực hiện khi người dùng cung cấp evidence hoặc thay đổi phạm vi. Pool B/C/D đã có thiết kế; lượt tinh gọn hiện tại chỉ xử lý Pool A.
 
