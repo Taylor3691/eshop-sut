@@ -202,3 +202,20 @@ AS-01–AS-05 cần người dùng xác nhận; đặc biệt ASCII digits, fixt
 ### Ambiguities Requiring Clarification
 
 AM-01–AM-07 còn mở. Ưu tiên làm rõ phone có bắt buộc không; quy tắc blank/null/trim; name/address có giới hạn gì; partial PUT; chính sách email API. Chưa tạo case có kết quả chắc chắn cho các điều chưa được đặc tả.
+
+## Human Review Required
+
+Trạng thái: **chờ người dùng review**, chưa coi thiết kế là đã được phê duyệt. Skill yêu cầu “Require human review before treating the analysis as final.” Context yêu cầu làm một feature rồi bàn giao review trước khi sang pool tiếp theo.
+
+1. Xác nhận R1–R8 diễn giải đúng FR-04 và các requirement liên quan; không nhầm profile web với Mobile hoặc lịch sử đơn hàng.
+2. Xem AS-01–AS-05: chữ số ASCII, dữ liệu A/B, tên có dấu/dấu nháy đơn, PUT đủ trường, cách readback. Quy tắc nào chưa được nguồn yêu cầu bảo đảm?
+3. Xem AM-01–AM-07: có tài liệu lớp học hoặc yêu cầu bổ sung giải quyết blank/null, trimming, độ dài name/address, token expiry và email API không?
+4. Kiểm tra 19 partitions có bỏ sót nhóm khác biệt về requirement; nếu có, bổ sung nguồn và partition trước khi thêm test case.
+5. Kiểm tra BVA 9/10/11/12 ký tự: 10 và 11 hợp lệ, không bỏ số `0` đầu; không cần thêm nominal trùng lặp cho miền chỉ có hai độ dài hợp lệ.
+6. Kiểm tra case 021–024: lấy chủ thể từ token, đọc cả A/B, không dùng token cũ để kết luận role hiện tại; reject hoặc ignore trường cấm đều giữ được bất biến yêu cầu.
+7. Kiểm tra fixture có thể thiết lập độc lập và mỗi case có thể thực hiện lại. Nếu auth/fixture lỗi, ghi Blocked có lý do khi execute thay vì sửa dữ liệu để che lỗi.
+8. Kiểm tra case 025–026 phân biệt “input bị chặn” và “đã exercise an toàn render”; không đánh Pass cho điểm hiển thị chưa được tiếp cận.
+9. Kiểm tra cases 027–028 bao phủ cập nhật nhiều trường; cases BVA chỉ thay phone để cô lập boundary. UI/API không được gộp kết quả vì là hai lớp khác nhau.
+10. Kiểm tra Expected Result và traceability của từng case; xác định case trùng lặp hoặc rủi ro nghiệp vụ còn thiếu. Đánh giá độc lập, không xem output AI là mặc nhiên đúng.
+
+Sau review: sửa các giả định/partition/case có bằng chứng yêu cầu bổ sung và commit thay đổi thiết kế. Việc execute, ghi Actual Result và liên kết bug chỉ thực hiện khi người dùng cung cấp evidence hoặc thay đổi phạm vi. Pool B/C/D chưa bắt đầu.
