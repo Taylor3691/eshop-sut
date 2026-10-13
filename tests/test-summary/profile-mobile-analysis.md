@@ -138,8 +138,8 @@ R-PM-* là nhãn truy vết nội bộ, không tạo requirement mới.
 | EP-PM-17 | session | INVALID | Chưa login mà yêu cầu profile update | Phiên app không user/token | FR-04; FR-20 |
 | EP-PM-18 | session | INVALID | Đã logout A nhưng còn quyền/dữ liệu sửa A trong app | Logout → Hồ sơ | FR-04; FR-20; AS-PM-04 |
 | EP-PM-19 | session / owner | VALID | Login B sau logout A; form/save chỉ tác động B | A → logout → B | FR-04; FR-20 |
-| EP-PM-20 | name tại display | VALID | Markup-like string đã đến native renderer, phải an toàn | <b>Tên thử</b> | SEC-04; FR-20 |
-| EP-PM-21 | address tại display | VALID | Markup-like address đã đến native renderer, phải an toàn | <b>Địa chỉ thử</b> | SEC-04; FR-20 |
+| EP-PM-20 | name tại display | VALID | Markup-like string đã đến native renderer, phải an toàn | `<b>Tên thử</b>` | SEC-04; FR-20 |
+| EP-PM-21 | address tại display | VALID | Markup-like address đã đến native renderer, phải an toàn | `<b>Địa chỉ thử</b>` | SEC-04; FR-20 |
 
 21 partitions cho miền đã có oracle hoặc assumption ghi rõ. EP-PM-20/21 là VALID **tại domain hiển thị an toàn**, không khẳng định API/UI phải chấp nhận chuỗi markup. Name/address chưa có invalid input partitions với oracle đáng tin; AM-PM-01 giữ phần đó chưa xác định.
 
@@ -223,6 +223,21 @@ AS-PM-01–06 được ghi tại Requirement Analysis; đặc biệt persistence
 ### Ambiguities Requiring Clarification
 
 AM-PM-01–08 còn mở. Chưa có giới hạn name/address; transport `shipping_address` lấy theo API contract, acceptance/runtime và lỗi thực tế chỉ xác nhận khi người dùng execute. Chưa tự coi human review đã hoàn tất.
+
+## Human Review Required
+
+Thiết kế sẵn để reviewer kiểm tra, **chưa được phê duyệt**. Checklist này không phải kết quả review của con người.
+
+1. Xác nhận lựa chọn Pool D là hồ sơ Mobile FR-04 liên hệ FR-20; không hiểu FR-20 là thêm toàn bộ login/cart/history vào phạm vi. Việc yêu cầu Pool D không xác nhận A/B/C đã review.
+2. Kiểm tra R-PM-01–07 có diễn giải sai không; xác nhận AS-PM-01–06, đặc biệt ASCII digits, nominal name/address, server persistence và native logout.
+3. Xác nhận 21 partitions không bỏ lớp quan trọng; name/address blank/null/trim/Unicode và phone normalization cần yêu cầu rõ trước khi thêm verdict.
+4. Kiểm 2 boundaries inclusive 10/11 và 4 values 9/10/11/12; không đếm trùng min+1/max, không dùng integer phone/ID hoặc thêm maxLength từ code.
+5. Kiểm native steps: gõ/dán, header lời chào, email readonly, “Thoát”, session A → B. Chọn OS/device matrix và ghi cách clipboard thực thi nếu nền tảng khác nhau.
+6. Kiểm Expected Result và field mapping: dữ liệu phải đúng server `shipping_address`, GET/login mới theo ID. Không lấy regex/request/local state hiện tại làm oracle. Case update bị chặn phải ghi checkpoint và downstream limitation.
+7. Đánh giá tính cần thiết của API companions 020–027 so với Pool A: giữ chúng nếu cần bộ Mobile/API độc lập; có thể reuse sau review nhưng không biến API results thành native coverage. Check rejects/ignore selectors/role chỉ theo invariant; email API/expiry chưa có oracle.
+8. Kiểm 028/029 chỉ là safe-display probes có điều kiện; chuẩn bị fixture/khôi phục được và không dùng rejection trước render làm Pass. Đánh giá các risk chưa covered: supported OS, offline/retry, partial PUT, concurrency, token lifecycle.
+9. Kiểm redundancy giữa native initial-load 019 và server-update → fresh-login 030: chúng có precondition/data-flow khác nhau; 030 không thay native save 011–013.
+10. Reviewer quyết định chấp nhận/sửa từng ambiguity và test; chỉ ghi phê duyệt hoặc execution khi có review/evidence thật. Agent không tạo Actual Result/bug report hoặc AI Audit Report trong nhiệm vụ này.
 
 
 

@@ -24,6 +24,7 @@ PROFILE-MOBILE / Functional / Equivalence Partitioning
 1. GET A/B bằng token hợp lệ; lưu snapshot chính xác theo ID.
 2. Login A trên Mobile; chạm lời chào để mở hồ sơ.
 3. Đối chiếu name/phone/address/email form và tên trên lời chào với server snapshot; không bấm Cập nhật.
+4. GET A/B lại bằng token hợp lệ, xác nhận việc login/xem hồ sơ không làm thay đổi snapshot server.
 
 ## Expected Result
 - Form tải đúng name/phone/shipping_address/email A và lời chào phản ánh tên A; phone giữ 0 đầu.
