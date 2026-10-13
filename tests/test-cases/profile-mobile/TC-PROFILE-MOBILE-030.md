@@ -1,34 +1,41 @@
-# TC-PROFILE-MOBILE-030: API → Native — phiên login mới tải dữ liệu server đã cập nhật
+# TC-PROFILE-MOBILE-030: Đăng nhập lại trên điện thoại tải hồ sơ vừa đổi trên trang web
 
 ## Requirement ID
-FR-04; FR-20; SEC-02
+
+FR-04; FR-20
 
 ## Module / Test Type / Technique
+
 PROFILE-MOBILE / Functional / Equivalence Partitioning
 
 ## Preconditions
-- Fixture A/B và snapshot API theo [README bộ cases](README.md) đã xác minh; API client và Mobile dùng cùng backend/database.
-- Mỗi case độc lập, baseline được khôi phục; không restart backend giữa thao tác và readback.
-- Mobile đã login A (mobile.a@example.com / MobileA123!); chạm lời chào trên header để mở “Hồ sơ của bạn”.
+
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Mở ứng dụng EShop trên thiết bị di động đã được kết nối hệ thống. Dùng tài khoản A; chạm lời chào để mở Hồ sơ của bạn.
+- Máy tính và điện thoại dùng cùng hệ thống và cùng tài khoản A.
 
 ## Test Data
+
 | Field | Value |
 |---|---|
-| Method / endpoint | PUT /api/users/me |
-| Authorization | Bearer TOKEN_A |
-| Body JSON | `{"name":"Đặng Thị Lan","phone":"09412345678","shipping_address":"60 Đồng Khởi, Phường Bến Nghé, TP.HCM"}` |
+| Họ Tên | `Đặng Thị Lan` |
+| Số điện thoại | `09412345678` |
+| Địa chỉ | `60 Đồng Khởi, Phường Bến Nghé, TP.HCM` |
 
 ## Test Steps
-1. Mobile đang login A và hiển thị baseline; ghi snapshot A/B.
-2. Bằng API client, gửi PUT token A với body chính thức Test Data; không chỉnh state/code Mobile.
-3. Dùng API client GET /api/users/me với Bearer TOKEN_A và TOKEN_B; so sánh theo ID với snapshot trước case.
-4. Nếu GET A không lưu đúng body, ghi lỗi API update và điểm dừng; không dùng dữ liệu local giả làm server snapshot.
-5. Sau khi server đã có giá trị mới, logout/login lại A trên Mobile; mở hồ sơ và so name/phone/address/email với GET A hiện tại.
+
+1. Đăng nhập A trên điện thoại, mở hồ sơ và ghi dữ liệu hiện tại.
+2. Trên máy tính, mở http://localhost:5173 và đăng nhập chính tài khoản A. Mở hồ sơ, nhập ba giá trị Test Data rồi bấm Cập nhật.
+3. Tải lại trang web và kiểm tra ba giá trị đã lưu. Nếu chưa lưu được, dừng và ghi Blocked vì chưa tạo được dữ liệu để thử việc tải trên điện thoại.
+4. Trên điện thoại, chạm Thoát rồi đăng nhập lại A và mở hồ sơ.
+5. So sánh ba ô cùng lời chào với các giá trị đã lưu trên trang web.
 
 ## Expected Result
-- API hợp lệ cập nhật đúng A với field shipping_address; B và email/role A giữ nguyên.
-- Phiên Mobile sau login mới tải Đặng Thị Lan / 09412345678 / 60 Đồng Khởi, Phường Bến Nghé, TP.HCM; lời chào name cũng phản ánh user mới tải.
-- Không yêu cầu phiên đang mở tự refresh realtime trước logout; case này kiểm server → Mobile loading, không thay coverage native save ở 011–013.
+
+- Sau đăng nhập lại, điện thoại hiển thị đúng hồ sơ mới của A và đúng Email.
+- Không yêu cầu điện thoại tự đổi ngay khi phiên cũ còn mở.
 
 ## Status / Related Bugs
+
 Not Run / None

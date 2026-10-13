@@ -1,100 +1,69 @@
-# Pool B — Bộ test cases trạng thái đơn hàng
+# Pool B — Trạng thái đơn hàng
 
-Thiết kế theo [Domain/BVA Analysis](../../test-summary/order-state-analysis.md), template `TC-[MODULE]-[NUMBER]`. Module `ORDER-STATE` chỉ xét storefront/Admin/API; Mobile ngoài scope. **32 cases EP sau tinh gọn 52 → 32, tất cả Not Run / None; 0 BVA cases** vì FR-10 không có ordered domain/threshold.
+**18 cases: 0 BVA + 18 EP.** ID cũ được giữ nguyên; người dùng tự thực hiện. [Test run](../../test-runs/pool-b-test-run.md) · [Phân tích](../../test-summary/order-state-analysis.md).
 
-## Fixture tài khoản
+## Tài khoản
 
-| Chủ thể | Email | Mật khẩu test | Role |
+| Tài khoản | Email | Mật khẩu | Vai trò |
 |---|---|---|---|
-| A | orders.a@example.com | OrdersA123! | user |
-| B | orders.b@example.com | OrdersB123! | user |
-| M | admin@eshop.com | Admin123! | admin |
+| A (có thể dùng tài khoản mẫu) | test@eshop.com | Test1234! | Khách hàng |
+| M | admin@eshop.com | Admin123! | Quản trị viên |
 
-A/B là tài khoản test do tester tạo; M là admin seed nếu môi trường còn dùng seed gốc. Tester xác minh credential/role thực tế, ghi `A_ID`, `B_ID`, `M_ID` và `TOKEN_A`, `TOKEN_B`, `TOKEN_M` qua đăng nhập. Không dùng token user bị nâng role để giả làm admin fixture.
+Nếu đã có tài khoản thử đang dùng, tiếp tục dùng tài khoản đó và ghi email thực tế trong test run. Không thay thế hồ sơ của người khác. Tài khoản mẫu chỉ dùng được nếu chưa bị đổi/xóa. Các tên A/B/M trong tài liệu là ký hiệu để dễ theo dõi, không phải tên phải nhập vào form.
 
-## Fixture đơn hàng
+## Chuẩn bị đơn thử bằng trang web
 
-| ID ký hiệu (thay bằng ID thật) | Owner | status baseline | total_amount | shipping_address |
-|---|---|---|---|---|
-| A_PENDING_ID | A | pending | 200000 | 12 Lê Lợi, Phường Bến Nghé, TP.HCM |
-| B_PENDING_ID | B | pending | 200000 | 20 Hai Bà Trưng, Phường Bến Nghé, TP.HCM |
-| A_CONFIRMED_ID | A | confirmed | 200000 | 12 Lê Lợi, Phường Bến Nghé, TP.HCM |
-| B_CONFIRMED_ID | B | confirmed | 200000 | 20 Hai Bà Trưng, Phường Bến Nghé, TP.HCM |
-| A_SHIPPING_ID | A | shipping | 200000 | 12 Lê Lợi, Phường Bến Nghé, TP.HCM |
-| B_SHIPPING_ID | B | shipping | 200000 | 20 Hai Bà Trưng, Phường Bến Nghé, TP.HCM |
-| A_DELIVERED_ID | A | delivered | 200000 | 12 Lê Lợi, Phường Bến Nghé, TP.HCM |
-| B_DELIVERED_ID | B | delivered | 200000 | 20 Hai Bà Trưng, Phường Bến Nghé, TP.HCM |
-| A_CANCELED_ID | A | canceled | 200000 | 12 Lê Lợi, Phường Bến Nghé, TP.HCM |
-| B_CANCELED_ID | B | canceled | 200000 | 20 Hai Bà Trưng, Phường Bến Nghé, TP.HCM |
-| A_CONTROL_ID | A | pending | 300000 | 30 Lê Lợi, Phường Bến Nghé, TP.HCM |
-| B_CONTROL_ID | B | pending | 400000 | 40 Hai Bà Trưng, Phường Bến Nghé, TP.HCM |
-| MISSING_ORDER_ID | Không có | Không tồn tại | Không áp dụng | Không áp dụng |
+1. Đăng nhập A ở `http://localhost:5173`. Chọn một sản phẩm thử, thêm vào giỏ và đi đến thanh toán. Giữ tổng tiền hiển thị, bấm Xác Nhận Thanh Toán.
+2. Mở Hồ sơ của bạn → Lịch sử đơn hàng, ghi mã đơn mới và tổng tiền thực tế. Không cần số tiền cố định vì case chỉ thử trạng thái.
+3. Đăng nhập M ở `http://localhost:5174`, mở Đơn hàng và tìm đúng mã. Dùng một cửa sổ riêng cho khách hàng, một cửa sổ cho quản trị viên.
+4. Chuẩn bị trạng thái trước case theo bảng dưới. Tải lại hai trang để kiểm tra; nếu bước chuẩn bị thất bại, ghi Blocked cho case cần trạng thái đó.
+5. Tạo thêm một đơn thử khác để đối chiếu. Không thao tác đơn thật của người khác. Dùng đơn mới khi cần thử lại từ đầu; không đưa đơn đã hủy/đã giao quay về trạng thái trước.
 
-Các số tiền chỉ là dữ liệu fixture; không phải boundary hoặc bài kiểm thử checkout.
+| Trạng thái cần có | Cách chuẩn bị |
+|---|---|
+| Chờ xác nhận | Đơn mới đặt |
+| Đã xác nhận | M bấm Xác nhận trên đơn mới |
+| Đang giao | Từ Đã xác nhận, M bấm Giao hàng |
+| Đã giao | Từ Đang giao, M bấm Hoàn thành |
+| Đã hủy | A bấm Hủy đơn hoặc M bấm Hủy khi đơn còn Chờ xác nhận/Đã xác nhận |
 
-1. Tester chuẩn bị local SUT và A/B, ví dụ đăng ký qua `POST /api/register` rồi đăng nhập. Không đăng ký trùng email đã có; xác minh role/ID bằng nguồn độc lập phù hợp.
-2. Có thể tạo các đơn ban đầu bằng `POST /api/checkout`, token owner, body ví dụ `{"total_amount":200000,"shipping_address":"12 Lê Lợi, Phường Bến Nghé, TP.HCM"}`. Đây là setup của tester, không phải agent execute FR-08.
-3. Chuẩn bị trạng thái nguồn độc lập bằng fixture database có kiểm soát nếu API chuyển trạng thái đang lỗi. Chỉ điều chỉnh đúng đơn test sau khi xác nhận ID/owner; ghi nguồn tạo dữ liệu. Không ép terminal→nonterminal bằng endpoint đang kiểm thử để làm setup, cũng không coi việc sửa fixture là transition được phép của SUT.
-4. Ghi ID thực cho mỗi ký hiệu. Các ID phải khác nhau; MISSING_ORDER_ID là ID xác nhận không tồn tại, không giả định max+1/min−1.
-5. Ghi snapshot owner/status/total_amount/address/created_at từng đơn và hai control orders. Nếu tái dùng fixture sau case, khôi phục đúng baseline bằng cách đã kiểm soát và xác minh lại. Mỗi case bắt đầu độc lập.
-6. Backend startup drop/reseed database; không restart giữa request và readback. Đơn seed không có sẵn ở mọi trạng thái nên việc chuẩn bị fixture không được bỏ qua.
+Với thao tác bị cấm, không có nút/nút bị khóa là một cách chặn hợp lệ. Nếu vẫn có nút và bấm được, phải kiểm tra thông báo và trạng thái sau tải lại. Hai case trang cũ 051/052 giữ nguyên một cửa sổ, thao tác ở cửa sổ kia rồi quay lại; không bấm đồng thời.
 
-## Readback và thao tác
+## Cách thực hiện và ghi kết quả
 
-- API base `http://localhost:3000`; Admin `http://localhost:5174`; user `http://localhost:5173/profile`.
-- GET `/api/orders/my-orders` dùng token owner A/B; GET `/api/admin/orders` dùng TOKEN_M. Đối chiếu đúng ID, không suy trạng thái từ thứ tự hàng hoặc chỉ message.
-- Chỉ dùng GET lists có auth để readback; không dựa vào GET order detail không được kiểm tra quyền. Nếu đường đọc phụ thuộc lỗi, ghi hạn chế/Blocked rõ ràng hoặc bổ sung evidence đọc database độc lập do tester thực hiện; không tự kết luận mutation đúng.
-- API status: PUT `/api/admin/orders/<ID>/status`, body JSON `{"status":"<target>"}`. API cancel: PUT `/api/orders/<ID>/cancel`, body `{}`, target ngầm định canceled.
-- Với request thiếu token, xóa Authorization và tắt auth/cookie kế thừa. Với case role, JWT user phải hợp lệ để cô lập role gate.
-- State trên storefront có thể có nhãn Việt: pending = Chờ xác nhận; confirmed = Đã xác nhận; shipping = Đang giao; delivered = Đã giao; canceled = Đã hủy. Luôn đối chiếu giá trị API và ID.
-- Cases negative UI chấp nhận ẩn/disable nút hoặc request bị từ chối; không tự áp requirement mọi nút cấm phải ẩn.
-- Case 027 phụ thuộc AS-OS-03 về user không được hủy đơn người khác. Cần review oracle này trước khi coi khác biệt là bug đã xác nhận.
-- 024/050 đã loại, canceled retry còn AM-OS-02 và EP-OS-15 deferred; không ấn định response. Cases 051–052 chỉ exercise backend stale nếu request tới server sau khi trạng thái đã đổi.
-- Không có case gán kết quả cho admin shipping→canceled hoặc 5 same-state response policies. Những phần này đang mở tại AM-OS-01/02.
-- Không gọi `pending=1…canceled=5` là BVA; không viết Pass/Fail khi chưa execute. Actual Result, evidence và bug links thuộc test run do người dùng thực hiện sau này.
+1. Mở case từ bảng bên dưới, chuẩn bị dữ liệu trong Preconditions rồi làm lần lượt Test Steps.
+2. Ghi điều nhìn thấy: thông báo, dữ liệu trước/sau, ảnh màn hình nếu cần. Chỉ ghi Pass khi kiểm tra đủ Expected Result; ghi Fail khi hành vi sai yêu cầu.
+3. Nếu chưa đăng nhập được, chưa có dữ liệu cần thử hoặc không tạo được trạng thái ban đầu, ghi Blocked và lý do. Không dùng dữ liệu sai để vượt qua lỗi chuẩn bị.
+4. Kết thúc case, khôi phục dữ liệu thử bằng các màn hình của hệ thống. Nếu không khôi phục được, ghi rõ và dùng dữ liệu thử mới cho case tiếp theo.
+5. Không khởi động lại hệ thống giữa lúc lưu và kiểm tra lại: lần khởi động có thể làm mất dữ liệu thử.
+
+Các bước chỉ dùng thao tác trên màn hình; không cần công cụ lập trình. Việc thử bị chặn ở ô nhập/nút bấm chỉ chứng minh hành vi đã quan sát trên màn hình.
 
 ## Generated Test Cases
 
 | ID | Mục tiêu | Technique |
 |---|---|---|
-| [TC-ORDER-STATE-001](TC-ORDER-STATE-001.md) | API Admin — cho phép pending → confirmed | Equivalence Partitioning |
-| [TC-ORDER-STATE-002](TC-ORDER-STATE-002.md) | API Admin — cho phép confirmed → shipping | Equivalence Partitioning |
-| [TC-ORDER-STATE-003](TC-ORDER-STATE-003.md) | API Admin — cho phép shipping → delivered | Equivalence Partitioning |
-| [TC-ORDER-STATE-004](TC-ORDER-STATE-004.md) | API Admin — cho phép pending → canceled | Equivalence Partitioning |
-| [TC-ORDER-STATE-005](TC-ORDER-STATE-005.md) | API Admin — cho phép confirmed → canceled | Equivalence Partitioning |
-| [TC-ORDER-STATE-006](TC-ORDER-STATE-006.md) | API Admin — từ chối pending → shipping | Equivalence Partitioning |
-| [TC-ORDER-STATE-008](TC-ORDER-STATE-008.md) | API Admin — từ chối confirmed → pending | Equivalence Partitioning |
-| [TC-ORDER-STATE-009](TC-ORDER-STATE-009.md) | API Admin — từ chối confirmed → delivered | Equivalence Partitioning |
-| [TC-ORDER-STATE-011](TC-ORDER-STATE-011.md) | API Admin — từ chối shipping → confirmed | Equivalence Partitioning |
-| [TC-ORDER-STATE-012](TC-ORDER-STATE-012.md) | API Admin — từ chối delivered → pending | Equivalence Partitioning |
-| [TC-ORDER-STATE-015](TC-ORDER-STATE-015.md) | API Admin — từ chối delivered → canceled | Equivalence Partitioning |
-| [TC-ORDER-STATE-016](TC-ORDER-STATE-016.md) | API Admin — từ chối canceled → pending | Equivalence Partitioning |
-| [TC-ORDER-STATE-019](TC-ORDER-STATE-019.md) | API Admin — từ chối canceled → delivered | Equivalence Partitioning |
-| [TC-ORDER-STATE-020](TC-ORDER-STATE-020.md) | API User — hủy đơn pending | Equivalence Partitioning |
-| [TC-ORDER-STATE-021](TC-ORDER-STATE-021.md) | API User — hủy đơn confirmed | Equivalence Partitioning |
-| [TC-ORDER-STATE-022](TC-ORDER-STATE-022.md) | API User — không được hủy đơn shipping | Equivalence Partitioning |
-| [TC-ORDER-STATE-023](TC-ORDER-STATE-023.md) | API User — không được hủy đơn delivered | Equivalence Partitioning |
-| [TC-ORDER-STATE-025](TC-ORDER-STATE-025.md) | API — user thường không có quyền xác nhận đơn A qua endpoint Admin | Equivalence Partitioning |
-| [TC-ORDER-STATE-027](TC-ORDER-STATE-027.md) | API — A không được hủy đơn pending của B (AS-OS-03) | Equivalence Partitioning |
-| [TC-ORDER-STATE-029](TC-ORDER-STATE-029.md) | API User — không có token bị từ chối | Equivalence Partitioning |
-| [TC-ORDER-STATE-030](TC-ORDER-STATE-030.md) | API Admin — không có token bị từ chối | Equivalence Partitioning |
-| [TC-ORDER-STATE-032](TC-ORDER-STATE-032.md) | API Admin — token sai định dạng bị từ chối | Equivalence Partitioning |
-| [TC-ORDER-STATE-033](TC-ORDER-STATE-033.md) | API Admin — JWT user sửa role nhưng giữ chữ ký cũ bị từ chối | Equivalence Partitioning |
-| [TC-ORDER-STATE-034](TC-ORDER-STATE-034.md) | API Admin — từ chối chuỗi target ngoài enum | Equivalence Partitioning |
-| [TC-ORDER-STATE-035](TC-ORDER-STATE-035.md) | API Admin — từ chối thiếu trường status | Equivalence Partitioning |
-| [TC-ORDER-STATE-038](TC-ORDER-STATE-038.md) | API Admin — từ chối status sai kiểu number | Equivalence Partitioning |
-| [TC-ORDER-STATE-039](TC-ORDER-STATE-039.md) | API Admin — không chuyển được đơn không tồn tại | Equivalence Partitioning |
-| [TC-ORDER-STATE-040](TC-ORDER-STATE-040.md) | API User — không chuyển được đơn không tồn tại | Equivalence Partitioning |
-| [TC-ORDER-STATE-041](TC-ORDER-STATE-041.md) | UI Admin — chuỗi xác nhận, giao và hoàn thành đơn của B | Equivalence Partitioning |
-| [TC-ORDER-STATE-046](TC-ORDER-STATE-046.md) | UI User — hủy đơn pending | Equivalence Partitioning |
-| [TC-ORDER-STATE-051](TC-ORDER-STATE-051.md) | UI User cũ — confirmed đã thành shipping không còn được hủy | Equivalence Partitioning |
-| [TC-ORDER-STATE-052](TC-ORDER-STATE-052.md) | UI Admin cũ — confirmed đã bị user hủy không thể thành shipping | Equivalence Partitioning |
+| [TC-ORDER-STATE-004](TC-ORDER-STATE-004.md) | Quản trị viên hủy đơn Chờ xác nhận | Equivalence Partitioning |
+| [TC-ORDER-STATE-005](TC-ORDER-STATE-005.md) | Quản trị viên hủy đơn Đã xác nhận | Equivalence Partitioning |
+| [TC-ORDER-STATE-006](TC-ORDER-STATE-006.md) | Không cho chuyển đơn Chờ xác nhận sang Đang giao | Equivalence Partitioning |
+| [TC-ORDER-STATE-008](TC-ORDER-STATE-008.md) | Không cho chuyển đơn Đã xác nhận sang Chờ xác nhận | Equivalence Partitioning |
+| [TC-ORDER-STATE-009](TC-ORDER-STATE-009.md) | Không cho chuyển đơn Đã xác nhận sang Đã giao | Equivalence Partitioning |
+| [TC-ORDER-STATE-011](TC-ORDER-STATE-011.md) | Không cho chuyển đơn Đang giao sang Đã xác nhận | Equivalence Partitioning |
+| [TC-ORDER-STATE-012](TC-ORDER-STATE-012.md) | Không cho chuyển đơn Đã giao sang Chờ xác nhận | Equivalence Partitioning |
+| [TC-ORDER-STATE-015](TC-ORDER-STATE-015.md) | Không cho chuyển đơn Đã giao sang Đã hủy | Equivalence Partitioning |
+| [TC-ORDER-STATE-016](TC-ORDER-STATE-016.md) | Không cho chuyển đơn Đã hủy sang Chờ xác nhận | Equivalence Partitioning |
+| [TC-ORDER-STATE-019](TC-ORDER-STATE-019.md) | Không cho chuyển đơn Đã hủy sang Đã giao | Equivalence Partitioning |
+| [TC-ORDER-STATE-021](TC-ORDER-STATE-021.md) | Khách hàng hủy đơn Đã xác nhận | Equivalence Partitioning |
+| [TC-ORDER-STATE-022](TC-ORDER-STATE-022.md) | Khách hàng không được hủy đơn Đang giao | Equivalence Partitioning |
+| [TC-ORDER-STATE-023](TC-ORDER-STATE-023.md) | Khách hàng không được hủy đơn Đã giao | Equivalence Partitioning |
+| [TC-ORDER-STATE-025](TC-ORDER-STATE-025.md) | Khách hàng không được quản lý trạng thái đơn hàng | Equivalence Partitioning |
+| [TC-ORDER-STATE-041](TC-ORDER-STATE-041.md) | Xác nhận, giao hàng và hoàn thành một đơn | Equivalence Partitioning |
+| [TC-ORDER-STATE-046](TC-ORDER-STATE-046.md) | Khách hàng hủy đơn Chờ xác nhận | Equivalence Partitioning |
+| [TC-ORDER-STATE-051](TC-ORDER-STATE-051.md) | Không hủy được đơn đã giao đi từ trang chưa tải lại | Equivalence Partitioning |
+| [TC-ORDER-STATE-052](TC-ORDER-STATE-052.md) | Không chuyển đơn đã hủy sang Đang giao từ trang chưa tải lại | Equivalence Partitioning |
 
-## Phạm vi sau tinh gọn
+## Giới hạn phạm vi
 
-- 32 active cases (28 API + 4 UI/sequence/stale), giữ ID gốc và nội dung cases còn lại. Loại 007/010/013/014/017/018/024/026/028/031/036/037/042/043/044/045/047/048/049/050; file cũ có trong Git history.
-- Admin: giữ đủ 5 allowed + 8 forbidden pairs đại diện; không còn exhaustive 19/19 known-pair coverage. Trong 6 pairs không có standalone case, canceled→shipping còn stale 052 có điều kiện; 5 pairs hoàn toàn deferred.
-- User: giữ API cancel pending/confirmed, từ chối shipping/delivered; canceled retry deferred. UI giữ Admin normal chain, User pending cancel và hai stale sequences.
-- 30 partitions giữ trong analysis; 27 active, EP-OS-15/28/29 deferred. Giảm null/empty, foreign-confirmed ownership, malformed cancel JWT, Admin cancel/fresh final UI và User confirmed/delivered/fresh shipping UI variations.
-- Không coi API results thay native/UI path hoặc deferred variation covered bởi case khác. UI tự refresh/chặn request stale thì chưa exercise backend stale.
-- Lý do/tradeoffs: [quyết định tinh gọn](../../test-summary/order-state-analysis.md#quyết-định-tinh-gọn-theo-yêu-cầu-người-dùng). Review trước execution; không tạo BVA cho enum.
+Không kiểm tra xác thực/request giả, mã đơn không tồn tại hoặc trường trạng thái bị bỏ/null/sai kiểu. Không có toàn bộ các cặp chuyển trạng thái; không kết luận kiểm thử đồng thời từ hai thao tác nối tiếp. Quyền quản trị hủy đơn Đang giao và việc gửi lại đúng trạng thái cũ vẫn cần làm rõ.
+
+Các case yêu cầu gửi request trực tiếp đã loại theo [bảng thay đổi](../../test-summary/manual-testing-scope.md).

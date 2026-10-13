@@ -1,8 +1,8 @@
-# TC-PRODUCT-CRUD-075: UI — đổi lựa chọn Sửa P sang Sửa Q chỉ làm Q thay đổi
+# TC-PRODUCT-CRUD-075: Chuyển lựa chọn từ sản phẩm P sang Q rồi chỉ lưu Q
 
 ## Requirement ID
 
-FR-15; FR-12; SEC-02; SEC-03
+FR-15; FR-12
 
 ## Module / Test Type / Technique
 
@@ -10,37 +10,33 @@ PRODUCT-CRUD / Functional / Equivalence Partitioning
 
 ## Preconditions
 
-- Tester chuẩn bị fixture theo [README](README.md), admin M/user A, CAT_A_ID/CAT_B_ID tồn tại và P/Q/R có snapshot.
-- ID/JWT lấy từ môi trường thật; TOKEN_M hợp lệ có role admin. Không giả định ID cố định hoặc category_id>=1 là hợp lệ.
-- Case bắt đầu độc lập, baseline P: name PC-P Bàn phím, price 100000, description Mô tả kiểm tra sản phẩm, imageUrl http://localhost:5174/favicon.svg, category CAT_A_ID.
-- Không restart backend giữa thao tác và đọc lại; nếu đường setup bị lỗi dùng fixture có kiểm soát do tester chuẩn bị.
-- M đăng nhập http://localhost:5174, mở tab Sản phẩm. Có API client để kiểm tra catalog độc lập.
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Đăng nhập M tại `http://localhost:5174`, mở mục Sản phẩm; có ba sản phẩm thử P/Q/R theo README.
 
 ## Test Data
 
 | Field | Value |
 |---|---|
-| Product_before | `P_ID` |
-| Product_selected | `Q_ID` |
-| name | `PC-Q Cập nhật` |
-| price | `210000` |
-| description | `Mô tả Q` |
-| imageUrl | `http://localhost:5174/favicon.svg` |
-| category_id | `CAT_A_ID` |
+| Tên sản phẩm | `PC-Q Cập nhật` |
+| Giá tiền | `210000` |
+| Mô tả | `Mô tả Q` |
+| URL Ảnh | `http://localhost:5174/favicon.svg` |
+| Danh mục | `Phụ kiện` |
 
 ## Test Steps
 
-1. Đọc GET http://localhost:3000/api/products không search; so toàn bộ catalog theo ID với snapshot, bao gồm P/Q/R. Kiểm tra GET /api/categories riêng.
-2. Bấm Sửa P_ID, xác minh baseline P trong form; không lưu P.
-3. Bấm Sửa Q_ID; xác minh form đổi đúng baseline Q trước nhập dữ liệu mới.
-4. Nhập Test Data của Q, bấm Lưu; ghi response.
-5. Kiểm tra UI ngay sau lưu: chỉ Q đổi tên/giá, P/R giữ nguyên. Đọc GET products/details theo ID.
-6. Reload tab Sản phẩm và so snapshot từng ID.
+1. Ghi tên/giá của P/Q/R đang hiển thị. Khi cần đối chiếu đủ năm ô, bấm Sửa từng sản phẩm để đọc, rồi bấm Hủy sửa mà không lưu.
+2. Bấm Sửa P nhưng chưa nhập hoặc lưu.
+3. Bấm Sửa Q, kiểm tra form đã hiện dữ liệu Q.
+4. Nhập đủ năm ô theo Test Data và bấm Lưu sản phẩm.
+5. Quan sát danh sách ngay sau thao tác; ghi lại tên/giá của sản phẩm thử và P/Q/R trước khi tải lại.
+6. Tải lại trang, mở lại mục Sản phẩm; bấm Sửa đúng sản phẩm cần kiểm tra để đọc đủ Tên, Giá, Mô tả, URL Ảnh và Danh mục. Không bấm Lưu trong bước đọc.
+7. Đối chiếu P/Q/R với ghi chép trước khi thử; chỉ thao tác với dữ liệu thử của mình.
 
 ## Expected Result
 
-- Lưu đúng Q_ID với Test Data; P/R và các sản phẩm khác không đổi ở UI trước/sau reload và API.
-- Category list giữ snapshot; không gửi request với edit ID cũ P.
+- Chỉ Q có dữ liệu mới. P/R và các sản phẩm khác giữ nguyên ngay sau lưu và sau tải lại.
 
 ## Status / Related Bugs
 

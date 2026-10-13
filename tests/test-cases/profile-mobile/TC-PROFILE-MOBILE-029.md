@@ -1,37 +1,41 @@
-# TC-PROFILE-MOBILE-029: Fixture → Native — địa chỉ giống markup hiển thị an toàn
+# TC-PROFILE-MOBILE-029: Hiển thị an toàn nội dung giống thẻ định dạng trong Địa chỉ giao hàng
 
 ## Requirement ID
-SEC-04; FR-20
+
+FR-04; SEC-04; FR-20
 
 ## Module / Test Type / Technique
+
 PROFILE-MOBILE / Functional / Equivalence Partitioning
 
 ## Preconditions
-- Fixture A/B và snapshot API theo [README bộ cases](README.md) đã xác minh; API client và Mobile dùng cùng backend/database.
-- Mỗi case độc lập, baseline được khôi phục; không restart backend giữa thao tác và readback.
-- Tester chuẩn bị fixture A có shipping_address=`<b>Địa chỉ thử</b>` bằng database local có kiểm soát hoặc API nếu được chấp nhận; phone vẫn 0987654321. GET xác minh chuỗi đã đến server.
-- Không dùng native update có thể bị chặn làm điều kiện duy nhất. Nếu fixture không tới điểm hiển thị, ghi hạn chế/Blocked trong test run; không đánh Pass safe-render.
+
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Mở ứng dụng EShop trên thiết bị di động đã được kết nối hệ thống. Dùng tài khoản A; chạm lời chào để mở Hồ sơ của bạn.
 
 ## Test Data
+
 | Field | Value |
 |---|---|
-| Tài khoản / quyền | A / user |
-| name | Nguyễn Văn An |
-| phone | 0987654321 |
-| shipping_address / ô Địa chỉ | `<b>Địa chỉ thử</b>` |
-| Display target | Địa chỉ giao hàng native |
-| Markup | Chuỗi probe vô hại; `<b>` không được diễn giải thành markup |
+| Địa chỉ giao hàng | `<b>Địa chỉ thử</b>` |
+| Số điện thoại hợp lệ | `0987654321` |
 
 ## Test Steps
-1. GET A bằng token hợp lệ, xác nhận chuỗi probe thực tế trong field; lưu snapshot B.
-2. Login A trên Mobile, mở hồ sơ; quan sát đúng field có probe.
-3. Chạm ô địa chỉ và đọc chuỗi trong TextInput; không gửi Cập nhật.
-4. Ghi bằng chứng hiển thị; GET A/B đối chiếu không có mutation do chỉ xem; khôi phục fixture khi kết thúc.
+
+1. Đăng nhập A trên ứng dụng, chạm lời chào để mở Hồ sơ của bạn. Ghi lại dữ liệu hiện tại.
+2. Dán nguyên chuỗi `<b>Địa chỉ thử</b>` vào ô Địa chỉ giao hàng; giữ các ô khác như cũ và dùng số điện thoại hợp lệ trong Test Data.
+3. Chạm Cập nhật và ghi phản hồi. Nếu không lưu được chuỗi cần thử, dừng và ghi Blocked kèm thông báo; chưa kiểm tra được cách hiển thị dữ liệu đã lưu.
+4. Chạm Thoát rồi đăng nhập lại A và mở hồ sơ.
+5. Quan sát ô Địa chỉ giao hàng.
+6. Ghi/chụp kết quả; dùng form để trả lại dữ liệu cũ. Nếu không khôi phục được, ghi rõ tài khoản còn dữ liệu thử.
 
 ## Expected Result
-- Chuỗi probe, khi đã đến renderer, được hiển thị như văn bản user an toàn; không diễn giải tag `<b>` thành nội dung markup. Không có thực thi/điều hướng hoặc nội dung hoạt động từ dữ liệu user.
-- Không mất dữ liệu chữ tiếng Việt do render; form/header tương ứng đúng tài khoản A. B không đổi.
-- Đây là smoke case safe-display với markup vô hại, không chứng minh mọi XSS payload/platform hoặc acceptance mọi name/address. Fixture bị từ chối trước renderer không đồng nghĩa Pass SEC-04.
+
+- Khi chuỗi đã lưu được, nhìn thấy nguyên văn cả ký tự <b…> và </b>; chúng không biến thành thẻ định dạng làm mất nội dung chữ.
+- Tên có dấu/địa chỉ không mất ký tự; số điện thoại đúng Test Data, các ô không sửa giữ dữ liệu đã ghi.
+- Nếu bị chặn trước khi lưu/hiển thị lại, không ghi Pass cho khả năng hiển thị an toàn. Đây chỉ là kiểm tra bằng mắt trên những vị trí đã nêu.
 
 ## Status / Related Bugs
+
 Not Run / None

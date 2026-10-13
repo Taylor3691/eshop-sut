@@ -1,8 +1,8 @@
-# TC-ORDER-STATE-046: UI User — hủy đơn pending
+# TC-ORDER-STATE-046: Khách hàng hủy đơn Chờ xác nhận
 
 ## Requirement ID
 
-FR-10
+FR-10; FR-18
 
 ## Module / Test Type / Technique
 
@@ -10,32 +10,30 @@ ORDER-STATE / Functional / Equivalence Partitioning
 
 ## Preconditions
 
-- Tester đã chuẩn bị fixture theo [README](README.md), với admin M, user A/B và đơn ở đúng trạng thái; ghi snapshot trước case.
-- ID/JWT là runtime values: lấy TOKEN_M có role admin, TOKEN_A/TOKEN_B có role user và ID thật tương ứng; không dùng ID cố định.
-- Mỗi case độc lập. Không restart backend giữa thao tác và readback; không dựa vào case trước để tạo trạng thái nguồn.
-- User A đăng nhập `http://localhost:5173`, mở `/profile`. Có API client với token A/M để readback độc lập.
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Mở trang khách hàng `http://localhost:5173/profile` và trang quản trị `http://localhost:5174` trong hai cửa sổ riêng. Dùng A ở trang khách hàng và M ở trang quản trị.
+- Chuẩn bị một đơn thử ở trạng thái được ghi trong Test Data; ghi mã đơn, người đặt, tổng tiền và các thông tin đang hiển thị. Ghi thêm một đơn khác để đối chiếu.
 
 ## Test Data
 
 | Field | Value |
 |---|---|
-| Order | `A_PENDING_ID` |
-| current_status | `pending` |
-| Target endpoint cancel | `canceled` |
-| Actor | `A (owner)` |
+| Trạng thái ban đầu | `Chờ xác nhận` |
+| Người thao tác | `A — chủ đơn` |
 
 ## Test Steps
 
-1. Đọc GET `/api/orders/my-orders` với token A, tìm đúng `A_PENDING_ID`; đọc GET `/api/admin/orders` với TOKEN_M để đối chiếu trạng thái và các đơn đối chứng.
-2. Mở `/profile`, tìm đúng ID và trạng thái của đơn trong lịch sử.
-3. Bấm Hủy đơn của đúng hàng; nếu có dialog thì xác nhận.
-4. Đọc GET `/api/orders/my-orders` với token A, tìm đúng `A_PENDING_ID`; đọc GET `/api/admin/orders` với TOKEN_M để đối chiếu trạng thái và các đơn đối chứng.
-5. Tải lại `/profile`, tìm đúng ID và đối chiếu state.
+1. Đăng nhập A, mở Hồ sơ của bạn và tìm đúng mã đơn ở Lịch sử đơn hàng.
+2. Xác nhận trạng thái trong Test Data. Tìm nút Hủy đơn trên đúng dòng.
+3. Nếu nút hoạt động, bấm Hủy đơn, xử lý hộp xác nhận nếu có và ghi thông báo. Nếu nút không có hoặc bị khóa, ghi rõ điều đó.
+4. Tải lại cả trang quản trị và trang khách hàng. Tìm đúng mã đơn đã ghi và đối chiếu trạng thái.
+5. Kiểm tra người đặt, tổng tiền và thông tin đơn còn hiển thị như trước; đơn đối chiếu không đổi.
 
 ## Expected Result
 
-- Đơn mục tiêu được hủy và trạng thái đọc lại/reload là canceled.
-- Owner, total_amount, shipping_address, created_at của đơn mục tiêu giữ snapshot; A_CONTROL_ID và B_CONTROL_ID không đổi.
+- Hủy thành công, trạng thái là Đã hủy trên cả hai trang sau tải lại.
+- Đơn đối chiếu và thông tin khác không đổi.
 
 ## Status / Related Bugs
 

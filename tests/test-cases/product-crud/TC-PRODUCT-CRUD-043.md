@@ -1,8 +1,8 @@
-# TC-PRODUCT-CRUD-043: UI — xóa đúng sản phẩm không có liên kết order/cart
+# TC-PRODUCT-CRUD-043: Xóa đúng sản phẩm thử
 
 ## Requirement ID
 
-FR-15; FR-12; SEC-02; SEC-03
+FR-15; FR-12
 
 ## Module / Test Type / Technique
 
@@ -10,32 +10,26 @@ PRODUCT-CRUD / Functional / Equivalence Partitioning
 
 ## Preconditions
 
-- Tester chuẩn bị fixture theo [README](README.md), admin M/user A, CAT_A_ID/CAT_B_ID tồn tại và P/Q/R có snapshot.
-- ID/JWT lấy từ môi trường thật; TOKEN_M hợp lệ có role admin. Không giả định ID cố định hoặc category_id>=1 là hợp lệ.
-- Case bắt đầu độc lập, baseline P: name PC-P Bàn phím, price 100000, description Mô tả kiểm tra sản phẩm, imageUrl http://localhost:5174/favicon.svg, category CAT_A_ID.
-- Không restart backend giữa thao tác và đọc lại; nếu đường setup bị lỗi dùng fixture có kiểm soát do tester chuẩn bị.
-- M đăng nhập http://localhost:5174, mở tab Sản phẩm. Có API client để kiểm tra catalog độc lập.
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Đăng nhập M tại `http://localhost:5174`, mở mục Sản phẩm; có ba sản phẩm thử P/Q/R theo README.
 
 ## Test Data
 
 | Field | Value |
 |---|---|
-| Product | `P_ID` |
-| Liên kết order/cart | `Không có` |
+| Sản phẩm cần xóa | `P — chưa từng thêm vào giỏ hoặc đơn hàng` |
 
 ## Test Steps
 
-1. Đọc GET http://localhost:3000/api/products (không search); đối chiếu snapshot theo ID, không theo vị trí hàng. Nếu P còn tồn tại, đọc GET /api/products/P_ID; so price theo giá trị số.
-2. Tìm đúng P_ID trong tab Sản phẩm, đối chiếu dữ liệu để không nhầm Q.
-3. Bấm Xóa P; nếu có dialog thì xác nhận. Không áp requirement dialog bắt buộc.
-4. Quan sát danh sách UI ngay sau thao tác, ghi tên/giá P/Q/R trước reload; reload tab Sản phẩm và kiểm tra lại. Đối chiếu API riêng để không che lỗi local UI.
-5. Đọc GET http://localhost:3000/api/products (không search); đối chiếu snapshot theo ID, không theo vị trí hàng. Nếu P còn tồn tại, đọc GET /api/products/P_ID; so price theo giá trị số.
+1. Ghi tên/giá của P/Q/R đang hiển thị. Khi cần đối chiếu đủ năm ô, bấm Sửa từng sản phẩm để đọc, rồi bấm Hủy sửa mà không lưu.
+2. Bấm Xóa trên đúng dòng P. Nếu có hộp xác nhận, kiểm tra đúng sản phẩm rồi đồng ý.
+3. Ghi phản hồi; kiểm tra P biến mất và Q/R vẫn còn.
+4. Tải lại trang, mở mục Sản phẩm và kiểm tra lại danh sách.
 
 ## Expected Result
 
-- P_ID không còn trong catalog sau xóa; thao tác xóa thành công.
-- Q/R, các sản phẩm khác và danh sách category giữ snapshot; không có mutation ngoài mục tiêu.
-- P không còn trong UI ngay sau xóa và sau reload.
+- P được xóa và không xuất hiện lại sau tải lại; Q/R cùng các sản phẩm khác giữ nguyên.
 
 ## Status / Related Bugs
 

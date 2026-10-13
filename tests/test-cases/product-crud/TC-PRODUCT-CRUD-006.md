@@ -1,8 +1,8 @@
-# TC-PRODUCT-CRUD-006: UI thêm — từ chối name 256 ký tự
+# TC-PRODUCT-CRUD-006: Thêm sản phẩm với tên 256 ký tự
 
 ## Requirement ID
 
-FR-15; FR-12; SEC-02; SEC-03
+FR-15; FR-12
 
 ## Module / Test Type / Technique
 
@@ -10,37 +10,35 @@ PRODUCT-CRUD / Functional / BVA
 
 ## Preconditions
 
-- Tester chuẩn bị fixture theo [README](README.md), admin M/user A, CAT_A_ID/CAT_B_ID tồn tại và P/Q/R có snapshot.
-- ID/JWT lấy từ môi trường thật; TOKEN_M hợp lệ có role admin. Không giả định ID cố định hoặc category_id>=1 là hợp lệ.
-- Case bắt đầu độc lập, baseline P: name PC-P Bàn phím, price 100000, description Mô tả kiểm tra sản phẩm, imageUrl http://localhost:5174/favicon.svg, category CAT_A_ID.
-- Không restart backend giữa thao tác và đọc lại; nếu đường setup bị lỗi dùng fixture có kiểm soát do tester chuẩn bị.
-- M đăng nhập http://localhost:5174, mở tab Sản phẩm. Có API client để kiểm tra catalog độc lập.
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Đăng nhập M tại `http://localhost:5174`, mở mục Sản phẩm; có ba sản phẩm thử P/Q/R theo README.
 
 ## Test Data
 
 | Field | Value |
 |---|---|
-| name | `AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA` |
-| price | `100000` |
-| description | `Mô tả kiểm tra sản phẩm` |
-| imageUrl | `http://localhost:5174/favicon.svg` |
-| category_id | `CAT_A_ID` |
+| Tên sản phẩm | `AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA` |
+| Giá tiền | `100000` |
+| Mô tả | `Mô tả kiểm tra sản phẩm` |
+| URL Ảnh | `http://localhost:5174/favicon.svg` |
+| Danh mục | `Phụ kiện` |
 
 ## Test Steps
 
-1. Đọc GET http://localhost:3000/api/products (không search), so catalog theo ID với snapshot; đọc GET /api/products/P_ID khi P còn tồn tại. So price theo giá trị số theo AS-PC-06.
-2. Đưa form về Thêm sản phẩm mới, bảo đảm không chọn edit ID.
-3. Nhập Test Data; chỉ field name khác giá trị nominal/baseline dùng cho thử boundary. Không chỉnh đồng thời field khác.
-4. Kiểm tra value và độ dài thực trong ô name. Nếu UI ngăn nhập 256 ký tự, ghi nhận validation và không submit chuỗi bị cắt thành 255 để gọi là đã gửi 256.
-5. Bấm Lưu sản phẩm khi giá trị kiểm tra biểu diễn được; ghi nhận phản hồi. Nếu UI validation chặn, không dùng DevTools để vượt form.
-6. Quan sát danh sách UI ngay sau thao tác, kiểm tra tên/giá của P/Q/R; sau đó reload tab Sản phẩm và đối chiếu lại. Không chỉ kiểm tra sau reload.
-7. Đọc GET http://localhost:3000/api/products (không search), so catalog theo ID với snapshot; đọc GET /api/products/P_ID khi P còn tồn tại. So price theo giá trị số theo AS-PC-06.
+1. Ghi tên/giá của P/Q/R đang hiển thị. Khi cần đối chiếu đủ năm ô, bấm Sửa từng sản phẩm để đọc, rồi bấm Hủy sửa mà không lưu.
+2. Đưa form về Thêm sản phẩm mới; nếu đang sửa, bấm Hủy sửa.
+3. Điền các ô theo Test Data. Với tên dài, sao chép toàn bộ chuỗi chữ A trong bảng và dán vào ô Tên sản phẩm; không gõ thêm dấu nháy.
+4. Bấm Lưu sản phẩm và ghi thông báo. Nếu ô nhập ngăn dán đủ chuỗi hoặc tự cắt bớt, ghi rõ việc đó; không coi chuỗi đã bị cắt là giá trị ban đầu.
+5. Quan sát danh sách ngay sau thao tác; ghi lại tên/giá của sản phẩm thử và P/Q/R trước khi tải lại.
+6. Tải lại trang, mở lại mục Sản phẩm; bấm Sửa đúng sản phẩm cần kiểm tra để đọc đủ Tên, Giá, Mô tả, URL Ảnh và Danh mục. Không bấm Lưu trong bước đọc.
+7. Đối chiếu P/Q/R với ghi chép trước khi thử; chỉ thao tác với dữ liệu thử của mình.
 
 ## Expected Result
 
-- Không tạo sản phẩm mang dữ liệu invalid; catalog không tăng và giữ snapshot.
-- UI có thể chặn trước request; API trực tiếp phải từ chối dữ liệu invalid. Không chốt wording hay mã HTTP chưa được đặc tả.
-- Các sản phẩm khác (đặc biệt Q/R) và danh sách categories giữ snapshot; không sửa nhầm sản phẩm.
+- Tên không hợp lệ bị chặn; không lưu sản phẩm với tên rỗng hoặc dài quá 255 ký tự.
+- Không thêm bản ghi mới; danh sách giữ nguyên.
+- Các sản phẩm khác không đổi trước và sau tải lại.
 
 ## Status / Related Bugs
 

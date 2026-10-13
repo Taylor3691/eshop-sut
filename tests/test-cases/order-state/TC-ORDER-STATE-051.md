@@ -1,8 +1,8 @@
-# TC-ORDER-STATE-051: UI User cũ — confirmed đã thành shipping không còn được hủy
+# TC-ORDER-STATE-051: Không hủy được đơn đã giao đi từ trang chưa tải lại
 
 ## Requirement ID
 
-FR-10; FR-18; AS-OS-04
+FR-10; FR-18
 
 ## Module / Test Type / Technique
 
@@ -10,36 +10,31 @@ ORDER-STATE / Functional / Equivalence Partitioning
 
 ## Preconditions
 
-- Tester đã chuẩn bị fixture theo [README](README.md), với admin M, user A/B và đơn ở đúng trạng thái; ghi snapshot trước case.
-- ID/JWT là runtime values: lấy TOKEN_M có role admin, TOKEN_A/TOKEN_B có role user và ID thật tương ứng; không dùng ID cố định.
-- Mỗi case độc lập. Không restart backend giữa thao tác và readback; không dựa vào case trước để tạo trạng thái nguồn.
-- User A đăng nhập `http://localhost:5173`, mở `/profile`. Có API client với token A/M để readback độc lập.
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Mở trang khách hàng `http://localhost:5173/profile` và trang quản trị `http://localhost:5174` trong hai cửa sổ riêng. Dùng A ở trang khách hàng và M ở trang quản trị.
+- Chuẩn bị một đơn thử ở trạng thái được ghi trong Test Data; ghi mã đơn, người đặt, tổng tiền và các thông tin đang hiển thị. Ghi thêm một đơn khác để đối chiếu.
 
 ## Test Data
 
 | Field | Value |
 |---|---|
-| Order | `A_CONFIRMED_ID` |
-| UI đọc ban đầu | `confirmed` |
-| Admin đổi trước | `shipping` |
-| User thao tác sau | `cancel` |
-| Actor | `A và M` |
+| Trạng thái ban đầu | `Đã xác nhận` |
+| Trạng thái sau thao tác ở cửa sổ kia | `Đang giao` |
 
 ## Test Steps
 
-1. Đọc GET `/api/orders/my-orders` với token A, tìm đúng `A_CONFIRMED_ID`; đọc GET `/api/admin/orders` với TOKEN_M để đối chiếu trạng thái và các đơn đối chứng.
-2. A mở `/profile`, tìm A_CONFIRMED_ID ở confirmed; giữ trang này, chưa reload.
-3. Dùng API client của M gửi PUT `/api/admin/orders/A_CONFIRMED_ID/status`, Authorization Bearer TOKEN_M, body `{"status":"shipping"}`.
-4. Đọc lại bằng token owner và admin, xác nhận server đã shipping; nếu bước chuẩn bị không đạt, không coi phần stale đã exercise.
-5. Trên trang A còn dữ liệu confirmed, bấm Hủy đơn nếu nút còn hoạt động; nếu trang tự cập nhật/disable nút, ghi nhận việc chặn trước request.
-6. Đọc GET `/api/orders/my-orders` với token A, tìm đúng `A_CONFIRMED_ID`; đọc GET `/api/admin/orders` với TOKEN_M để đối chiếu trạng thái và các đơn đối chứng.
-7. Tải lại `/profile` để đối chiếu trạng thái.
+1. A mở Hồ sơ của bạn, nhìn thấy đơn thử Đã xác nhận; giữ trang này và chưa tải lại.
+2. Ở cửa sổ quản trị, M tìm đúng mã đơn và bấm Giao hàng. Tải lại trang quản trị, xác nhận Đang giao. Nếu chưa đạt trạng thái này, dừng và ghi Blocked, không làm bước tiếp.
+3. Quay về trang A đang mở cũ; bấm Hủy đơn nếu nút còn hoạt động. Nếu trang tự cập nhật hoặc nút biến mất, ghi rõ.
+4. Tải lại cả trang quản trị và trang khách hàng. Tìm đúng mã đơn đã ghi và đối chiếu trạng thái.
+5. Kiểm tra người đặt, tổng tiền và thông tin đơn còn hiển thị như trước; đơn đối chiếu không đổi.
 
 ## Expected Result
 
-- User không hủy được đơn đã shipping, dù UI trước đó đọc confirmed.
-- Nếu cancel request được gửi sau khi server là shipping, API báo lỗi phù hợp và giữ shipping; nếu UI cập nhật/chặn trước request thì ghi rõ phần backend stale chưa exercise.
-- Reload cho thấy shipping; các đơn đối chứng không đổi. Đây là trình tự tuần tự, không chứng minh atomicity của request đồng thời.
+- Khách hàng không hủy được; đơn vẫn Đang giao.
+- Nếu nút cũ còn bấm được, thao tác bị từ chối; nếu tự cập nhật/chặn nút, ghi rõ cách chặn đã quan sát.
+- Đơn đối chiếu không đổi. Đây là hai thao tác nối tiếp, không phải bấm đồng thời.
 
 ## Status / Related Bugs
 

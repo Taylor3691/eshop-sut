@@ -1,8 +1,8 @@
-# TC-ORDER-STATE-004: API Admin — cho phép pending → canceled
+# TC-ORDER-STATE-004: Quản trị viên hủy đơn Chờ xác nhận
 
 ## Requirement ID
 
-FR-10; FR-12; FR-18; SEC-02; SEC-03
+FR-10; FR-18
 
 ## Module / Test Type / Technique
 
@@ -10,35 +10,30 @@ ORDER-STATE / Functional / Equivalence Partitioning
 
 ## Preconditions
 
-- Tester đã chuẩn bị fixture theo [README](README.md), với admin M, user A/B và đơn ở đúng trạng thái; ghi snapshot trước case.
-- ID/JWT là runtime values: lấy TOKEN_M có role admin, TOKEN_A/TOKEN_B có role user và ID thật tương ứng; không dùng ID cố định.
-- Mỗi case độc lập. Không restart backend giữa thao tác và readback; không dựa vào case trước để tạo trạng thái nguồn.
-- Tester dùng API client tại `http://localhost:3000`; JSON gửi `Content-Type: application/json`. Kiểm tra header auth kế thừa khi thử thiếu/sai token.
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Mở trang khách hàng `http://localhost:5173/profile` và trang quản trị `http://localhost:5174` trong hai cửa sổ riêng. Dùng A ở trang khách hàng và M ở trang quản trị.
+- Chuẩn bị một đơn thử ở trạng thái được ghi trong Test Data; ghi mã đơn, người đặt, tổng tiền và các thông tin đang hiển thị. Ghi thêm một đơn khác để đối chiếu.
 
 ## Test Data
 
 | Field | Value |
 |---|---|
-| Method | `PUT` |
-| Endpoint | `http://localhost:3000/api/admin/orders/A_PENDING_ID/status` |
-| Authorization | `Bearer TOKEN_M` |
-| Body JSON | `{"status":"canceled"}` |
-| current_status | `pending` |
-| Chủ đơn | `A` |
+| Trạng thái ban đầu | `Chờ xác nhận` |
+| Trạng thái muốn chuyển | `Đã hủy` |
+| Người thao tác | `M — quản trị viên` |
 
 ## Test Steps
 
-1. Đọc GET `/api/orders/my-orders` với token A, tìm đúng `A_PENDING_ID`; đọc GET `/api/admin/orders` với TOKEN_M để đối chiếu trạng thái và các đơn đối chứng.
-2. Xác nhận đúng đơn `A_PENDING_ID` thuộc A và có current_status `pending`; ghi snapshot.
-3. Gửi PUT đúng endpoint/header/body trong Test Data, chỉ một request chuyển trạng thái.
-4. Ghi nhận response/error/message thực tế.
-5. Đọc GET `/api/orders/my-orders` với token A, tìm đúng `A_PENDING_ID`; đọc GET `/api/admin/orders` với TOKEN_M để đối chiếu trạng thái và các đơn đối chứng.
+1. Mở mục Đơn hàng trên trang quản trị, tìm đúng mã đơn thử và xác nhận trạng thái ban đầu.
+2. Bấm Hủy trên đúng dòng đơn.
+3. Tải lại cả trang quản trị và trang khách hàng. Tìm đúng mã đơn đã ghi và đối chiếu trạng thái.
+4. Kiểm tra người đặt, tổng tiền và thông tin đơn còn hiển thị như trước; đơn đối chiếu không đổi.
 
 ## Expected Result
 
-- Thao tác thành công; đúng đơn `A_PENDING_ID` chuyển từ `pending` sang `canceled`.
-- Owner, total_amount, shipping_address, created_at của đơn mục tiêu giữ snapshot; A_CONTROL_ID và B_CONTROL_ID không đổi.
-- Không ấn định mã HTTP/wording lỗi; response và dữ liệu đọc lại phải nhất quán.
+- Đơn chuyển sang Đã hủy và vẫn đúng sau tải lại.
+- Thông tin khác và đơn đối chiếu không đổi.
 
 ## Status / Related Bugs
 

@@ -1,0 +1,62 @@
+# Lịch sử Pool A — trước khi đổi sang bước thao tác đơn giản
+
+Bản lưu thông tin và kết quả đã ghi trước lần sửa hướng dẫn; không phải danh sách cần chạy hiện hành. Số lượng/phạm vi trong bản chụp dưới đây là của phiên bản cũ.
+
+# Test Run — Pool A / Hồ sơ Web/API
+
+## Phạm vi toàn pool
+
+- Danh sách thực thi gồm toàn bộ **17 test cases hiện hành** của Pool A, giữ ID gốc và kết quả/ghi chú đã có. API 007/008 (chưa chạy) đã loại; dùng UI 003/004 cho cùng phone lengths.
+- Module: `PROFILE-WEB`; requirements: FR-04; FR-22; SEC-02; SEC-04; SEC-06, tùy từng case.
+- Test oracle: [README.md](../../README.md); [fixture và danh mục cases](../test-cases/profile-web/README.md); [phân tích Domain/BVA](../test-summary/profile-web-analysis.md).
+- Tester dự kiến: `vt-toan`; điền người thực thi thực tế ở từng dòng.
+- Ngày/môi trường cho đợt chạy tiếp: [Điền ngày, OS, browser/version, API client, URL, build/commit].
+
+Thông tin môi trường và fixture bên dưới ghi lại batch đầu tiên ngày 2026-10-13. Khi tiếp tục hoặc chạy lại, xác minh fixture theo README và ghi môi trường/ngày thực tế; chỉ thay các trường được từng case chỉ định.
+
+## Cách sử dụng và điền kết quả
+
+1. Mở liên kết Test Case ID để đọc Preconditions, Test Data, Test Steps và Expected Result; chuẩn bị fixture theo README của pool trước khi chạy.
+2. Điền Tester thực tế và cập nhật Result bằng một trong bốn giá trị: `Not Run`, `Pass`, `Fail`, `Blocked`. Giữ `Not Run` cho case chưa chạy.
+3. Trong Note, ghi ngày/giờ thực thi (Asia/Saigon), Actual Result và checkpoint đã kiểm tra; nếu chạy lại, giữ ghi chú kết quả cũ kèm ngày để có lịch sử.
+4. Khi Fail hoặc Blocked, điền Related Bug bằng liên kết bug report/Issue hoặc ghi lý do Blocked rõ ràng trong Note. Bug report và screenshot đặt trong `tests/bug-reports/`, liên kết từ file này bằng `../bug-reports/<tên-file>`.
+5. Sau mỗi đợt chạy, cập nhật phần Tổng hợp pool bằng tay theo bảng kết quả. Các số tổng không tự động cập nhật.
+
+## Thông tin execution của batch đầu tiên — 2026-10-13
+
+- Tester: `vt-toan`.
+- Ngày chuẩn bị: 2026-10-13 (Asia/Saigon).
+- Batch được người dùng chỉ định: sáu cases đầu trong danh mục tại thời điểm batch đầu tiên, `TC-PROFILE-WEB-001`, `002`, `003`, `004`, `007`, `008`. IDs `005` và `006` đã bị loại khi tinh gọn; không execute lại.
+- Module: `PROFILE-WEB`; requirements `FR-04`, `FR-22` khi case yêu cầu.
+- Test oracle: [README.md](../../README.md); Test Data, steps và Expected Result theo từng [test case](../test-cases/profile-web/README.md).
+- Code ứng dụng được kiểm thử: commit `01d2a68` trên branch `feat/TToan-HW2`; không sửa code ứng dụng.
+- Môi trường: Windows 11; Chrome `154.0.8037.98`; Node.js `24.10.0`; npm `11.6.1`; Vite `8.0.12`.
+- Backend: `http://localhost:3000`; storefront: `http://localhost:5173`.
+- Backend/storefront dependencies được cài bằng `npm ci` theo lockfiles; SQLite driver load thành công. Backend và storefront đã khởi động.
+- Browser automation: browser-harness/CDP; screenshot của browser alert bằng computer-use khi cần.
+- GitHub bug Issues: `Taylor3691/eshop-sut`. Markdown bug reports và screenshots thuộc `tests/bug-reports/`. Người dùng không yêu cầu bundle evidence riêng cho test run.
+- Clarification của người dùng trước khi tiếp tục: vị trí thông báo lỗi **ở bất kỳ đâu đều chấp nhận**, bao gồm native browser alert. Với case 003, không đánh Fail chỉ vì lỗi không nằm inline phía trên nút submit; giữ các kiểm tra từ chối dữ liệu sai và persistence/isolation.
+- Database gốc được backup trước startup vì backend drop/reseed: SHA256 `C63F00544180BA1FBB1427A9B9DD3F1784842698809972F33CE90482E7420BA6`. Backup local không đưa vào commit; database gốc sẽ được khôi phục sau batch.
+
+## Fixture đã xác minh trong batch đầu tiên
+
+Hai tài khoản được tạo qua `POST /api/register`; ID/token thực lấy từ `POST /api/login`. Baseline được thiết lập bằng parameterized SQL trên đúng ID/email trong database local, độc lập với UI/API mutation đang kiểm thử. `GET /api/users/me` của từng tài khoản xác nhận các trường bên dưới; A/B khác ID và cùng role `user`. Token không đưa vào tài liệu.
+
+
+| Tài khoản | ID thực | Email                                                 | Role | name          | phone      | shipping\_address                        |
+| --------- | -------: | ----------------------------------------------------- | ---- | ------------- | ---------- | ---------------------------------------- |
+| A         | 3       | [profile.a@example.com](mailto:profile.a@example.com) | user | Nguyễn Văn An | 0987654321 | 12 Lê Lợi, Phường Bến Nghé, TP.HCM       |
+| B         | 4       | [profile.b@example.com](mailto:profile.b@example.com) | user | Trần Thị Bình | 0976543210 | 20 Hai Bà Trưng, Phường Bến Nghé, TP.HCM |
+
+
+Storefront đã login A và hiển thị baseline. Mỗi case bắt đầu với snapshot A/B đã xác minh; chỉ thay phone theo Test Data. Không restart backend giữa thao tác và readback. Sau case có mutation, khôi phục fixture độc lập và xác minh lại.
+
+
+## Kết quả đã ghi
+
+| Test Case ID | Module | Tester | Result | Related Bug | Note |
+|---|---|---|---|---|---|
+| [TC-PROFILE-WEB-001](../test-cases/profile-web/TC-PROFILE-WEB-001.md) | PROFILE-WEB | vt-toan | Fail    | [BUG-PROFILE-WEB-001](../bug-reports/BUG-PROFILE-WEB-001.md) — Issue pending | Hiển thị alert không cho phép số điện thoại 10 chứ số                                |
+| [TC-PROFILE-WEB-002](../test-cases/profile-web/TC-PROFILE-WEB-002.md) | PROFILE-WEB | vt-toan | Fail    | [BUG-PROFILE-WEB-001](../bug-reports/BUG-PROFILE-WEB-001.md) — Issue pending | Hiển thị alert không cho phép số điện thoại 11 chữ số                                |
+| [TC-PROFILE-WEB-003](../test-cases/profile-web/TC-PROFILE-WEB-003.md) | PROFILE-WEB | vt-toan | Pass    | None                                                                         | None                                                                                 |
+| [TC-PROFILE-WEB-004](../test-cases/profile-web/TC-PROFILE-WEB-004.md) | PROFILE-WEB | vt-toan | Pass    | None                                                                         | None                                                                                 |

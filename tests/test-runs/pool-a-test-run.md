@@ -1,44 +1,41 @@
-# Test Run — Pool A / Hồ sơ Web/API
+# Test Run — Pool A / Hồ sơ cá nhân
 
-## Phạm vi và thông tin execution
+## Phạm vi và môi trường
 
-- Tester: `vt-toan`.
-- Ngày chuẩn bị: 2026-10-13 (Asia/Saigon).
-- Batch được người dùng chỉ định: sáu cases đầu trong danh mục hiện hành, `TC-PROFILE-WEB-001`, `002`, `003`, `004`, `007`, `008`. IDs `005` và `006` đã bị loại khi tinh gọn; không execute lại.
-- Module: `PROFILE-WEB`; requirements `FR-04`, `FR-22` khi case yêu cầu.
-- Test oracle: [README.md](../../README.md); Test Data, steps và Expected Result theo từng [test case](../test-cases/profile-web/README.md).
-- Code ứng dụng được kiểm thử: commit `01d2a68` trên branch `feat/TToan-HW2`; không sửa code ứng dụng.
-- Môi trường: Windows 11; Chrome `154.0.8037.98`; Node.js `24.10.0`; npm `11.6.1`; Vite `8.0.12`.
-- Backend: `http://localhost:3000`; storefront: `http://localhost:5173`.
-- Backend/storefront dependencies được cài bằng `npm ci` theo lockfiles; SQLite driver load thành công. Backend và storefront đã khởi động.
-- Browser automation: browser-harness/CDP; screenshot của browser alert bằng computer-use khi cần.
-- GitHub bug Issues: `Taylor3691/eshop-sut`. Markdown bug reports và screenshots thuộc `tests/bug-reports/`. Người dùng không yêu cầu bundle evidence riêng cho test run.
-- Clarification của người dùng trước khi tiếp tục: vị trí thông báo lỗi **ở bất kỳ đâu đều chấp nhận**, bao gồm native browser alert. Với case 003, không đánh Fail chỉ vì lỗi không nằm inline phía trên nút submit; giữ các kiểm tra từ chối dữ liệu sai và persistence/isolation.
-- Database gốc được backup trước startup vì backend drop/reseed: SHA256 `C63F00544180BA1FBB1427A9B9DD3F1784842698809972F33CE90482E7420BA6`. Backup local không đưa vào commit; database gốc sẽ được khôi phục sau batch.
+- Toàn bộ **11 cases hiện hành**, giữ ID gốc.
+- Ngày/đợt chạy: [Điền].
+- Phiên bản hệ thống/commit: [Điền].
+- Máy tính/trình duyệt/phiên bản: [Điền].
+- Tài khoản và dữ liệu thực tế: [Điền theo hướng dẫn pool].
+- [Hướng dẫn chuẩn bị](../test-cases/profile-web/README.md) · [Phân tích](../test-summary/profile-web-analysis.md) · [Ma trận](../test-summary/traceability-matrix.md).
 
-## Fixture đã xác minh
+Bốn kết quả đã ghi được giữ nguyên từ [lịch sử trước lần sửa bước](pool-a-history-before-manual-steps.md); chưa phải lần chạy mới. Khi thử lại theo hướng dẫn mới, bổ sung ngày và kết quả, giữ ghi chú cũ để đối chiếu.
 
-Hai tài khoản được tạo qua `POST /api/register`; ID/token thực lấy từ `POST /api/login`. Baseline được thiết lập bằng parameterized SQL trên đúng ID/email trong database local, độc lập với UI/API mutation đang kiểm thử. `GET /api/users/me` của từng tài khoản xác nhận các trường bên dưới; A/B khác ID và cùng role `user`. Token không đưa vào tài liệu.
+## Cách điền
 
-| Tài khoản | ID thực | Email | Role | name | phone | shipping_address |
-|---|---:|---|---|---|---|---|
-| A | 3 | profile.a@example.com | user | Nguyễn Văn An | 0987654321 | 12 Lê Lợi, Phường Bến Nghé, TP.HCM |
-| B | 4 | profile.b@example.com | user | Trần Thị Bình | 0976543210 | 20 Hai Bà Trưng, Phường Bến Nghé, TP.HCM |
-
-Storefront đã login A và hiển thị baseline. Mỗi case bắt đầu với snapshot A/B đã xác minh; chỉ thay phone theo Test Data. Không restart backend giữa thao tác và readback. Sau case có mutation, khôi phục fixture độc lập và xác minh lại.
+1. Mở case qua liên kết, làm theo Preconditions và Test Steps.
+2. Điền Tester, ngày/giờ, dữ liệu thử thực tế và Actual Result trong Note.
+3. Result dùng `Not Run`, `Pass`, `Fail` hoặc `Blocked`. Chưa chạy giữ Not Run. Không chuẩn bị được dữ liệu/không đến được bước cần thử thì ghi Blocked kèm lý do.
+4. Nếu Fail, liên kết bug report ở Related Bug; giữ ảnh màn hình và mô tả điều mong đợi/điều thực tế.
+5. Cập nhật tổng hợp bằng tay sau mỗi đợt. Kết quả cũ không tự xác nhận phiên bản bước mới đã chạy.
 
 ## Kết quả execution
 
 | Test Case ID | Module | Tester | Result | Related Bug | Note |
 |---|---|---|---|---|---|
-| [TC-PROFILE-WEB-001](../test-cases/profile-web/TC-PROFILE-WEB-001.md) | PROFILE-WEB | vt-toan | Fail | [BUG-PROFILE-WEB-001](../bug-reports/BUG-PROFILE-WEB-001.md) — Issue pending | 15:39 UTC+07; 0912345678 bị alert từ chối, không có PUT; GET/reload vẫn 0987654321; các trường khác A và B giữ snapshot |
-| [TC-PROFILE-WEB-002](../test-cases/profile-web/TC-PROFILE-WEB-002.md) | PROFILE-WEB | vt-toan | Fail | [BUG-PROFILE-WEB-001](../bug-reports/BUG-PROFILE-WEB-001.md) — Issue pending | 15:48 UTC+07; input 09123456789 bị alert từ chối; GET/reload vẫn 0987654321; các trường khác A và B giữ snapshot |
-| [TC-PROFILE-WEB-003](../test-cases/profile-web/TC-PROFILE-WEB-003.md) | PROFILE-WEB | vt-toan | Pass | None | 15:53 UTC+07; 091234567 bị alert từ chối; không PUT; GET/reload giữ baseline A và B; vị trí alert được người dùng chấp nhận |
-| [TC-PROFILE-WEB-004](../test-cases/profile-web/TC-PROFILE-WEB-004.md) | PROFILE-WEB | vt-toan | Pass | None | 15:54 UTC+07; 091234567890 bị UI từ chối, không PUT; GET/reload giữ baseline A và B |
-| [TC-PROFILE-WEB-007](../test-cases/profile-web/TC-PROFILE-WEB-007.md) | PROFILE-WEB | vt-toan | Not Run | None | API PUT, phone 9 chữ số: 091234567 |
-| [TC-PROFILE-WEB-008](../test-cases/profile-web/TC-PROFILE-WEB-008.md) | PROFILE-WEB | vt-toan | Not Run | None | API PUT, phone 12 chữ số: 091234567890 |
+| [TC-PROFILE-WEB-001](../test-cases/profile-web/TC-PROFILE-WEB-001.md) | PROFILE-WEB | vt-toan | Fail    | [BUG-PROFILE-WEB-001](../bug-reports/BUG-PROFILE-WEB-001.md) — Issue pending | Hiển thị alert không cho phép số điện thoại 10 chứ số                                |
+| [TC-PROFILE-WEB-002](../test-cases/profile-web/TC-PROFILE-WEB-002.md) | PROFILE-WEB | vt-toan | Fail    | [BUG-PROFILE-WEB-001](../bug-reports/BUG-PROFILE-WEB-001.md) — Issue pending | Hiển thị alert không cho phép số điện thoại 11 chữ số                                |
+| [TC-PROFILE-WEB-003](../test-cases/profile-web/TC-PROFILE-WEB-003.md) | PROFILE-WEB | vt-toan | Pass    | None                                                                         | None                                                                                 |
+| [TC-PROFILE-WEB-004](../test-cases/profile-web/TC-PROFILE-WEB-004.md) | PROFILE-WEB | vt-toan | Pass    | None                                                                         | None                                                                                 |
+| [TC-PROFILE-WEB-010](../test-cases/profile-web/TC-PROFILE-WEB-010.md) | PROFILE-WEB | vt-toan | Not Run | None                                                                         | Từ chối số điện thoại không bắt đầu bằng 0; Actual Result/ngày chạy: ... |
+| [TC-PROFILE-WEB-012](../test-cases/profile-web/TC-PROFILE-WEB-012.md) | PROFILE-WEB | vt-toan | Not Run | None                                                                         | Từ chối số điện thoại chứa chữ cái; Actual Result/ngày chạy: ... |
+| [TC-PROFILE-WEB-015](../test-cases/profile-web/TC-PROFILE-WEB-015.md) | PROFILE-WEB | vt-toan | Not Run | None                                                                         | Email không được phép thay đổi; Actual Result/ngày chạy: ... |
+| [TC-PROFILE-WEB-016](../test-cases/profile-web/TC-PROFILE-WEB-016.md) | PROFILE-WEB | vt-toan | Not Run | None                                                                         | Chưa đăng nhập không thể sửa hồ sơ; Actual Result/ngày chạy: ... |
+| [TC-PROFILE-WEB-025](../test-cases/profile-web/TC-PROFILE-WEB-025.md) | PROFILE-WEB | vt-toan | Not Run | None                                                                         | Hiển thị an toàn nội dung giống thẻ định dạng trong Họ Tên; Actual Result/ngày chạy: ... |
+| [TC-PROFILE-WEB-026](../test-cases/profile-web/TC-PROFILE-WEB-026.md) | PROFILE-WEB | vt-toan | Not Run | None                                                                         | Hiển thị an toàn nội dung giống thẻ định dạng trong Địa chỉ giao hàng; Actual Result/ngày chạy: ... |
+| [TC-PROFILE-WEB-028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | PROFILE-WEB | vt-toan | Not Run | None                                                                         | Cập nhật đồng thời Họ Tên, Số điện thoại và Địa chỉ; Actual Result/ngày chạy: ... |
 
-## Tổng hợp batch
+## Tổng hợp pool
 
-- Được chỉ định: 6; executed: 4; Pass: 2; Fail: 2; Blocked: 0; Not Run: 2.
-- Bugs được xác nhận: 1 UI; chưa publish Issue.
+- Tổng số test cases: 11; đã ghi Pass/Fail: 4; Pass: 2; Fail: 2; Blocked: 0; Not Run: 7.
+- Ghi chú/ngày cập nhật: [Điền].

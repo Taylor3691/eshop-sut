@@ -1,8 +1,8 @@
-# TC-PRODUCT-CRUD-041: UI — xem đúng dữ liệu sản phẩm và form Sửa không tự lưu
+# TC-PRODUCT-CRUD-041: Xem sản phẩm và mở form sửa không làm thay đổi dữ liệu
 
 ## Requirement ID
 
-FR-15; FR-12; SEC-02; SEC-03
+FR-15; FR-12
 
 ## Module / Test Type / Technique
 
@@ -10,36 +10,27 @@ PRODUCT-CRUD / Functional / Equivalence Partitioning
 
 ## Preconditions
 
-- Tester chuẩn bị fixture theo [README](README.md), admin M/user A, CAT_A_ID/CAT_B_ID tồn tại và P/Q/R có snapshot.
-- ID/JWT lấy từ môi trường thật; TOKEN_M hợp lệ có role admin. Không giả định ID cố định hoặc category_id>=1 là hợp lệ.
-- Case bắt đầu độc lập, baseline P: name PC-P Bàn phím, price 100000, description Mô tả kiểm tra sản phẩm, imageUrl http://localhost:5174/favicon.svg, category CAT_A_ID.
-- Không restart backend giữa thao tác và đọc lại; nếu đường setup bị lỗi dùng fixture có kiểm soát do tester chuẩn bị.
-- M đăng nhập http://localhost:5174, mở tab Sản phẩm. Có API client để kiểm tra catalog độc lập.
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Đăng nhập M tại `http://localhost:5174`, mở mục Sản phẩm; có ba sản phẩm thử P/Q/R theo README.
 
 ## Test Data
 
 | Field | Value |
 |---|---|
-| Product | `P_ID` |
-| Danh sách | `P/Q/R baseline` |
-| name | `PC-P Bàn phím` |
-| price | `100000` |
-| description | `Mô tả kiểm tra sản phẩm` |
-| imageUrl | `http://localhost:5174/favicon.svg` |
-| category_id | `CAT_A_ID` |
+| Sản phẩm | `P — PC-P Bàn phím` |
 
 ## Test Steps
 
-1. Đọc GET http://localhost:3000/api/products (không search); đối chiếu snapshot theo ID, không theo vị trí hàng. Nếu P còn tồn tại, đọc GET /api/products/P_ID; so price theo giá trị số.
-2. M đăng nhập Admin, mở tab Sản phẩm; tìm P/Q/R theo ID/dữ liệu fixture, không theo thứ tự.
-3. Đối chiếu tên/giá/ảnh của P, bấm Sửa P để xem các trường description/image/category và giá trị đã nạp; không bấm Lưu.
-4. Đọc API và kiểm tra catalog chưa đổi sau thao tác xem.
+1. Ghi tên/giá của P/Q/R đang hiển thị. Khi cần đối chiếu đủ năm ô, bấm Sửa từng sản phẩm để đọc, rồi bấm Hủy sửa mà không lưu.
+2. Bấm Sửa ở dòng P; đối chiếu đủ năm ô với bảng dữ liệu P trong README.
+3. Không nhập hoặc lưu; bấm Hủy sửa rồi tải lại trang.
+4. Mở lại Sửa P để đọc; đối chiếu P/Q/R với ghi chép ban đầu.
 
 ## Expected Result
 
-- Danh sách hiển thị đúng fixture; form Sửa nạp đúng dữ liệu của P, không nhầm Q/R.
-- Giá trị năm field tương ứng snapshot theo giá trị nghiệp vụ; việc xem/mở Sửa không tự gây mutation.
-- Q/R, các sản phẩm khác và danh sách category giữ snapshot; không có mutation ngoài mục tiêu.
+- Danh sách và form hiển thị đúng dữ liệu P.
+- Chỉ xem/mở/hủy form không làm P/Q/R thay đổi.
 
 ## Status / Related Bugs
 

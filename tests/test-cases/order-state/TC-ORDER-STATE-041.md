@@ -1,8 +1,8 @@
-# TC-ORDER-STATE-041: UI Admin — chuỗi xác nhận, giao và hoàn thành đơn của B
+# TC-ORDER-STATE-041: Xác nhận, giao hàng và hoàn thành một đơn
 
 ## Requirement ID
 
-FR-10; FR-18; FR-12
+FR-10; FR-18
 
 ## Module / Test Type / Technique
 
@@ -10,35 +10,30 @@ ORDER-STATE / Functional / Equivalence Partitioning
 
 ## Preconditions
 
-- Tester đã chuẩn bị fixture theo [README](README.md), với admin M, user A/B và đơn ở đúng trạng thái; ghi snapshot trước case.
-- ID/JWT là runtime values: lấy TOKEN_M có role admin, TOKEN_A/TOKEN_B có role user và ID thật tương ứng; không dùng ID cố định.
-- Mỗi case độc lập. Không restart backend giữa thao tác và readback; không dựa vào case trước để tạo trạng thái nguồn.
-- Admin M đăng nhập `http://localhost:5174`, mở tab Đơn hàng. Có API client với token owner để readback độc lập.
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Mở trang khách hàng `http://localhost:5173/profile` và trang quản trị `http://localhost:5174` trong hai cửa sổ riêng. Dùng A ở trang khách hàng và M ở trang quản trị.
+- Chuẩn bị một đơn thử ở trạng thái được ghi trong Test Data; ghi mã đơn, người đặt, tổng tiền và các thông tin đang hiển thị. Ghi thêm một đơn khác để đối chiếu.
 
 ## Test Data
 
 | Field | Value |
 |---|---|
-| Order | `B_PENDING_ID` |
-| Owner | `B` |
-| Chuỗi status | `pending → confirmed → shipping → delivered` |
-| Actor | `M (admin)` |
+| Trạng thái ban đầu | `Chờ xác nhận` |
+| Chủ đơn | `A — khách hàng` |
 
 ## Test Steps
 
-1. Đọc GET `/api/orders/my-orders` với token B, tìm đúng `B_PENDING_ID`; đọc GET `/api/admin/orders` với TOKEN_M để đối chiếu trạng thái và các đơn đối chứng.
-2. Trong tab Đơn hàng, tìm đúng ID B_PENDING_ID đang pending.
-3. Bấm Xác nhận. Đọc lại bằng TOKEN_B và TOKEN_M, xác nhận confirmed trước khi thực hiện bước tiếp.
-4. Trên đúng đơn đã đổi, bấm Giao hàng. Đọc lại và xác nhận shipping.
-5. Trên đúng đơn đó, bấm Hoàn thành. Đọc lại và xác nhận delivered.
-6. Tải lại trang Admin. Trong cửa sổ trình duyệt riêng, đăng nhập B bằng fixture và mở `/profile`; đối chiếu ID/status cuối. Đối chiếu các đơn control.
+1. Mở mục Đơn hàng trên trang quản trị; chọn đúng mã đơn của A đang Chờ xác nhận.
+2. Bấm Xác nhận. Tải lại cả hai trang và kiểm tra đúng mã đơn đã thành Đã xác nhận.
+3. Bấm Giao hàng trên đơn đó. Tải lại cả hai trang và kiểm tra trạng thái Đang giao.
+4. Bấm Hoàn thành. Tải lại cả hai trang và kiểm tra trạng thái Đã giao.
+5. Ở mỗi bước, kiểm tra thông tin đơn và đơn đối chiếu. Nếu một bước sai, dừng và ghi rõ các bước sau chưa chạy.
 
 ## Expected Result
 
-- Cùng một đơn thuộc B đi đúng chuỗi confirmed, shipping, delivered; từng bước lưu đúng target và có thể tiếp tục từ trạng thái mới.
-- Admin thao tác được đơn của B; không bị giới hạn thành đơn sở hữu bởi tài khoản admin.
-- Sau reload trạng thái cuối vẫn delivered.
-- Owner, total_amount, shipping_address, created_at của đơn mục tiêu giữ snapshot; A_CONTROL_ID và B_CONTROL_ID không đổi.
+- Cùng một đơn đi lần lượt qua Đã xác nhận → Đang giao → Đã giao; kết quả còn nguyên sau tải lại ở mỗi bước.
+- Thông tin khác và đơn đối chiếu giữ nguyên.
 
 ## Status / Related Bugs
 

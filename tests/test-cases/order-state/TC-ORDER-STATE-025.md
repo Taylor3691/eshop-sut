@@ -1,8 +1,8 @@
-# TC-ORDER-STATE-025: API — user thường không có quyền xác nhận đơn A qua endpoint Admin
+# TC-ORDER-STATE-025: Khách hàng không được quản lý trạng thái đơn hàng
 
 ## Requirement ID
 
-FR-10; FR-12; SEC-02; SEC-03
+FR-12; FR-18; SEC-03
 
 ## Module / Test Type / Technique
 
@@ -10,34 +10,29 @@ ORDER-STATE / Functional / Equivalence Partitioning
 
 ## Preconditions
 
-- Tester đã chuẩn bị fixture theo [README](README.md), với admin M, user A/B và đơn ở đúng trạng thái; ghi snapshot trước case.
-- ID/JWT là runtime values: lấy TOKEN_M có role admin, TOKEN_A/TOKEN_B có role user và ID thật tương ứng; không dùng ID cố định.
-- Mỗi case độc lập. Không restart backend giữa thao tác và readback; không dựa vào case trước để tạo trạng thái nguồn.
-- Tester dùng API client tại `http://localhost:3000`; JSON gửi `Content-Type: application/json`. Kiểm tra header auth kế thừa khi thử thiếu/sai token.
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- M chuẩn bị một đơn thử của A; ghi mã đơn và trạng thái hiện tại để đối chiếu sau khi A thử vào trang quản trị.
+- Có tài khoản khách hàng A đăng nhập được ở trang mua hàng và tài khoản quản trị M để đối chiếu; mở cửa sổ riêng tư mới khi thử đăng nhập A vào trang quản trị.
 
 ## Test Data
 
 | Field | Value |
 |---|---|
-| Method | `PUT` |
-| Endpoint | `http://localhost:3000/api/admin/orders/A_PENDING_ID/status` |
-| Authorization | `Bearer TOKEN_A` |
-| Body JSON | `{"status":"confirmed"}` |
-| current_status | `pending` |
-| Chủ đơn | `A` |
+| Tài khoản | `A — khách hàng` |
+| Trang quản trị | `http://localhost:5174` |
 
 ## Test Steps
 
-1. Đọc GET `/api/orders/my-orders` với token A, tìm đúng `A_PENDING_ID`; đọc GET `/api/admin/orders` với TOKEN_M để đối chiếu trạng thái và các đơn đối chứng.
-2. Xác nhận cặp pending → confirmed hợp lệ cho Admin; TOKEN_A hợp lệ và role user.
-3. Gửi PUT status với TOKEN_A như Test Data.
-4. Ghi nhận phản hồi; không đổi role hoặc mượn token Admin để hoàn thành request.
-5. Đọc GET `/api/orders/my-orders` với token A, tìm đúng `A_PENDING_ID`; đọc GET `/api/admin/orders` với TOKEN_M để đối chiếu trạng thái và các đơn đối chứng.
+1. Mở trang quản trị trong cửa sổ riêng tư mới, chưa đăng nhập quản trị viên.
+2. Nhập email/mật khẩu của A vào màn hình đăng nhập và bấm Đăng nhập.
+3. Nếu vào được, tìm mục Đơn hàng và các nút thay đổi trạng thái; ghi nhận mọi quyền quản lý có thể dùng.
+4. Dùng cửa sổ của M kiểm tra đơn thử vẫn có trạng thái cũ.
 
 ## Expected Result
 
-- Request bị từ chối quyền; token user không đủ quyền endpoint admin dù cặp trạng thái hợp lệ.
-- Đơn mục tiêu giữ pending; các đơn đối chứng không đổi.
+- A không được vào chức năng quản trị hoặc thay đổi trạng thái đơn bằng quyền quản trị.
+- Đơn thử giữ nguyên.
 
 ## Status / Related Bugs
 

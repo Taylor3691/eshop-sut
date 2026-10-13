@@ -1,4 +1,4 @@
-# TC-PROFILE-WEB-016: UI — truy cập hồ sơ khi chưa đăng nhập
+# TC-PROFILE-WEB-016: Chưa đăng nhập không thể sửa hồ sơ
 
 ## Requirement ID
 
@@ -10,29 +10,26 @@ PROFILE-WEB / Functional / Equivalence Partitioning
 
 ## Preconditions
 
-- Tester đã chuẩn bị fixture A/B và snapshot theo [hướng dẫn fixture](README.md); mỗi case bắt đầu độc lập, không phụ thuộc case trước.
-- A có email `profile.a@example.com`, role `user`; B có email `profile.b@example.com`, role `user`; `A_ID`, `B_ID`, `TOKEN_A`, `TOKEN_B` được ghi nhận từ môi trường.
-- Hồ sơ baseline A: name `Nguyễn Văn An`, phone `0987654321`, shipping_address `12 Lê Lợi, Phường Bến Nghé, TP.HCM`.
-- Mở cửa sổ trình duyệt riêng chưa có phiên đăng nhập/token của storefront.
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Dùng tài khoản khách hàng A tại `http://localhost:5173`.
 
 ## Test Data
 
 | Field | Value |
 |---|---|
-| URL | `http://localhost:5173/profile` |
-| Phiên người dùng | `Chưa đăng nhập` |
+| Trang cần mở | `http://localhost:5173/profile` |
 
 ## Test Steps
 
-1. Truy cập trực tiếp URL `/profile` trong cửa sổ riêng.
-2. Quan sát nội dung và khả năng thao tác cập nhật hồ sơ.
-3. Dùng API client với token A/B đã chuẩn bị để đọc lại và so sánh snapshot.
+1. Mở một cửa sổ riêng tư/ẩn danh mới, chưa đăng nhập EShop.
+2. Nhập địa chỉ trong Test Data vào thanh địa chỉ và mở trang.
+3. Quan sát có hồ sơ của người khác hoặc ô chỉnh sửa hay không. Nếu có form, thử nhập tên Khách thử và bấm Cập nhật.
+4. Ghi thông báo và điều xảy ra; đóng cửa sổ riêng tư sau khi kiểm tra.
 
 ## Expected Result
 
-- Không hiển thị hồ sơ riêng tư của A/B và không cho cập nhật khi chưa đăng nhập.
-- Có thể yêu cầu đăng nhập hoặc điều hướng tới đăng nhập; không ấn định một cách điều hướng duy nhất.
-- Hồ sơ A/B giữ nguyên.
+- Yêu cầu đăng nhập hoặc chuyển đến trang đăng nhập; không cho khách chưa đăng nhập đọc/sửa hồ sơ cá nhân.
 
 ## Status / Related Bugs
 

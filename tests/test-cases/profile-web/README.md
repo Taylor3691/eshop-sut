@@ -1,61 +1,54 @@
-# Pool A — Bộ test cases hồ sơ Web/API
+# Pool A — Hồ sơ cá nhân
 
-Thiết kế theo [phân tích Domain/BVA](../../test-summary/profile-web-analysis.md). Module `PROFILE-WEB` gồm UI và API phục vụ storefront; Pool D có module riêng. Đã giảm **28 → 19 cases (6 BVA + 13 EP)** theo yêu cầu người dùng; ID gốc được giữ, không đánh số lại. Tất cả cases là **Not Run / None**. Người dùng tự execute; tài liệu này không phải test run.
+**11 cases: 4 BVA + 7 EP.** ID cũ được giữ nguyên; người dùng tự thực hiện. [Test run](../../test-runs/pool-a-test-run.md) · [Phân tích](../../test-summary/profile-web-analysis.md).
 
-## Fixture dùng chung
+## Tài khoản
 
-| Tài khoản | Email | Mật khẩu test | Role | Name | Phone | shipping_address |
-|---|---|---|---|---|---|---|
-| A | profile.a@example.com | ProfileA123! | user | Nguyễn Văn An | 0987654321 | 12 Lê Lợi, Phường Bến Nghé, TP.HCM |
-| B | profile.b@example.com | ProfileB123! | user | Trần Thị Bình | 0976543210 | 20 Hai Bà Trưng, Phường Bến Nghé, TP.HCM |
+| Tài khoản | Email | Mật khẩu | Vai trò |
+|---|---|---|---|
+| A (có thể dùng tài khoản mẫu) | test@eshop.com | Test1234! | Khách hàng |
+| M | admin@eshop.com | Admin123! | Quản trị viên |
 
-Đây là dữ liệu test đề xuất do tester tạo, không phải tài khoản seed có sẵn. Không dùng tài khoản admin thay cho B vì cần kiểm tra hai chủ thể có cùng role.
+Nếu đã có tài khoản thử đang dùng, tiếp tục dùng tài khoản đó và ghi email thực tế trong test run. Không thay thế hồ sơ của người khác. Tài khoản mẫu chỉ dùng được nếu chưa bị đổi/xóa. Các tên A/B/M trong tài liệu là ký hiệu để dễ theo dõi, không phải tên phải nhập vào form.
 
-1. Tester chuẩn bị SUT và hai tài khoản trong môi trường local. Có thể đăng ký bằng `POST /api/register` với `name/email/password` tương ứng. Nếu email đã có, dùng đúng tài khoản test đã tạo; không đăng ký trùng.
-2. Thiết lập baseline bằng fixture/database local có kiểm soát hoặc API nếu đã xác minh API chấp nhận; không phụ thuộc UI cập nhật đang bị kiểm thử để tạo dữ liệu tiên quyết. Không tự đổi phone sang giá trị sai requirement để vượt UI.
-3. Đăng nhập từng tài khoản bằng `POST /api/login`, body `{"email":"profile.a@example.com","password":"ProfileA123!"}` cho A và tương tự B. Ghi nhận ID thực và token: `A_ID`, `B_ID`, `TOKEN_A`, `TOKEN_B`. Không giả định ID cố định.
-4. Đọc GET `/api/users/me` với từng token; xác nhận name/phone/address/email/role đúng baseline, A_ID khác B_ID. Lưu snapshot trước case.
-5. Mỗi case bắt đầu với baseline đã xác minh. Khôi phục sau case, đặc biệt case role/HTML/ownership có thể làm thay đổi trạng thái trên SUT lỗi. Nếu baseline hoặc đăng nhập không chuẩn bị được, ghi lý do Blocked trong test run khi thực thi; không sửa Expected Result.
-6. Không restart backend giữa thao tác và readback: startup xóa và seed lại database. Reload trang và GET lại dùng để kiểm tra dữ liệu đã lưu.
+## Chuẩn bị
 
-## Quy tắc thực thi dành cho tester
+- Mở `http://localhost:5173/login`, đăng nhập A rồi mở `http://localhost:5173/profile`.
+- Ghi/chụp Họ Tên, Số điện thoại, Địa chỉ và Email đang có. Dữ liệu cũ dùng để đối chiếu, không bắt buộc trùng một hồ sơ giả định.
+- Với case chỉ thay số điện thoại, giữ nguyên các ô khác; Họ Tên phải có nội dung. Nếu cần chuẩn bị tên/địa chỉ, dùng form trước khi bắt đầu case và kiểm tra lại sau đăng nhập.
+- Với case hiển thị chuỗi giống thẻ định dạng, chỉ kết luận khi đã lưu được và mở lại để nhìn thấy chuỗi. Nếu không lưu được, ghi Blocked cho kiểm tra hiển thị.
+- Để đăng xuất, bấm nút Thoát trên thanh đầu trang; sau đó đăng nhập lại bằng cùng email/mật khẩu. Để mở hồ sơ, bấm lời chào ở đầu trang hoặc mở địa chỉ `/profile`.
 
-- Base API: `http://localhost:3000`; storefront: `http://localhost:5173`. JSON gửi `Content-Type: application/json`. Token/ID là các giá trị runtime duy nhất phải thay.
-- Case UI dùng form như người dùng; case API gửi trực tiếp để kiểm tra server. Không gộp kết luận giữa hai lớp.
-- Với API client, tắt auth kế thừa/cookie khi thử không token; request đọc lại dùng đúng token hợp lệ A/B.
-- Chỉ thay trường được chỉ định; giữ các trường khác như Test Data. PUT luôn đủ `name`, `phone`, `shipping_address`, trừ các trường bổ sung được case chỉ rõ.
-- Response thành công không đủ: đối chiếu GET và reload được nêu trong từng case. Không yêu cầu đúng nguyên văn thông báo hoặc một mã HTTP chưa được đặc tả.
-- Lưu Actual Result/evidence riêng trong `tests/test-runs/` khi người dùng execute, theo template lớp học. Chưa có test run, bug report hay bằng chứng execution được tạo trong giai đoạn thiết kế.
-- Case 025–026 có điều kiện exercise điểm hiển thị; nếu dữ liệu bị chặn trước đó, ghi hạn chế/Blocked có lý do thay vì coi là đã chứng minh an toàn render.
+Số điện thoại hợp lệ bắt đầu bằng `0`, có 10–11 chữ số. Không dùng hành vi hiện tại của hệ thống làm kết quả mong đợi.
+
+## Cách thực hiện và ghi kết quả
+
+1. Mở case từ bảng bên dưới, chuẩn bị dữ liệu trong Preconditions rồi làm lần lượt Test Steps.
+2. Ghi điều nhìn thấy: thông báo, dữ liệu trước/sau, ảnh màn hình nếu cần. Chỉ ghi Pass khi kiểm tra đủ Expected Result; ghi Fail khi hành vi sai yêu cầu.
+3. Nếu chưa đăng nhập được, chưa có dữ liệu cần thử hoặc không tạo được trạng thái ban đầu, ghi Blocked và lý do. Không dùng dữ liệu sai để vượt qua lỗi chuẩn bị.
+4. Kết thúc case, khôi phục dữ liệu thử bằng các màn hình của hệ thống. Nếu không khôi phục được, ghi rõ và dùng dữ liệu thử mới cho case tiếp theo.
+5. Không khởi động lại hệ thống giữa lúc lưu và kiểm tra lại: lần khởi động có thể làm mất dữ liệu thử.
+
+Các bước chỉ dùng thao tác trên màn hình; không cần công cụ lập trình. Việc thử bị chặn ở ô nhập/nút bấm chỉ chứng minh hành vi đã quan sát trên màn hình.
 
 ## Generated Test Cases
 
 | ID | Mục tiêu | Technique |
 |---|---|---|
-| [TC-PROFILE-WEB-001](TC-PROFILE-WEB-001.md) | UI — chấp nhận phone 10 chữ số | BVA |
-| [TC-PROFILE-WEB-002](TC-PROFILE-WEB-002.md) | UI — chấp nhận phone 11 chữ số | BVA |
-| [TC-PROFILE-WEB-003](TC-PROFILE-WEB-003.md) | UI — từ chối phone 9 chữ số | BVA |
-| [TC-PROFILE-WEB-004](TC-PROFILE-WEB-004.md) | UI — từ chối phone 12 chữ số | BVA |
-| [TC-PROFILE-WEB-007](TC-PROFILE-WEB-007.md) | API — từ chối phone 9 chữ số | BVA |
-| [TC-PROFILE-WEB-008](TC-PROFILE-WEB-008.md) | API — từ chối phone 12 chữ số | BVA |
-| [TC-PROFILE-WEB-010](TC-PROFILE-WEB-010.md) | API — từ chối phone không bắt đầu bằng 0 | Equivalence Partitioning |
-| [TC-PROFILE-WEB-012](TC-PROFILE-WEB-012.md) | API — từ chối phone chứa chữ cái | Equivalence Partitioning |
-| [TC-PROFILE-WEB-015](TC-PROFILE-WEB-015.md) | UI — email chỉ đọc và đúng loại trường | Equivalence Partitioning |
-| [TC-PROFILE-WEB-016](TC-PROFILE-WEB-016.md) | UI — truy cập hồ sơ khi chưa đăng nhập | Equivalence Partitioning |
-| [TC-PROFILE-WEB-017](TC-PROFILE-WEB-017.md) | API — GET hồ sơ không có token | Equivalence Partitioning |
-| [TC-PROFILE-WEB-018](TC-PROFILE-WEB-018.md) | API — PUT hồ sơ không có token | Equivalence Partitioning |
-| [TC-PROFILE-WEB-020](TC-PROFILE-WEB-020.md) | API — PUT hồ sơ với token sai định dạng | Equivalence Partitioning |
-| [TC-PROFILE-WEB-021](TC-PROFILE-WEB-021.md) | API — token A không được chọn hồ sơ B qua body | Equivalence Partitioning |
-| [TC-PROFILE-WEB-023](TC-PROFILE-WEB-023.md) | API — người dùng không thể tự nâng role thành admin | Equivalence Partitioning |
-| [TC-PROFILE-WEB-024](TC-PROFILE-WEB-024.md) | API — JWT sửa danh tính nhưng giữ chữ ký cũ bị từ chối | Equivalence Partitioning |
-| [TC-PROFILE-WEB-025](TC-PROFILE-WEB-025.md) | API → UI — tên giống HTML được hiển thị an toàn | Equivalence Partitioning |
-| [TC-PROFILE-WEB-026](TC-PROFILE-WEB-026.md) | API → UI — địa chỉ giống HTML được hiển thị an toàn | Equivalence Partitioning |
-| [TC-PROFILE-WEB-028](TC-PROFILE-WEB-028.md) | UI — cập nhật đồng thời ba trường hợp lệ | Equivalence Partitioning |
+| [TC-PROFILE-WEB-001](TC-PROFILE-WEB-001.md) | Chấp nhận số điện thoại 10 chữ số | BVA |
+| [TC-PROFILE-WEB-002](TC-PROFILE-WEB-002.md) | Chấp nhận số điện thoại 11 chữ số | BVA |
+| [TC-PROFILE-WEB-003](TC-PROFILE-WEB-003.md) | Từ chối số điện thoại 9 chữ số | BVA |
+| [TC-PROFILE-WEB-004](TC-PROFILE-WEB-004.md) | Từ chối số điện thoại 12 chữ số | BVA |
+| [TC-PROFILE-WEB-010](TC-PROFILE-WEB-010.md) | Từ chối số điện thoại không bắt đầu bằng 0 | Equivalence Partitioning |
+| [TC-PROFILE-WEB-012](TC-PROFILE-WEB-012.md) | Từ chối số điện thoại chứa chữ cái | Equivalence Partitioning |
+| [TC-PROFILE-WEB-015](TC-PROFILE-WEB-015.md) | Email không được phép thay đổi | Equivalence Partitioning |
+| [TC-PROFILE-WEB-016](TC-PROFILE-WEB-016.md) | Chưa đăng nhập không thể sửa hồ sơ | Equivalence Partitioning |
+| [TC-PROFILE-WEB-025](TC-PROFILE-WEB-025.md) | Hiển thị an toàn nội dung giống thẻ định dạng trong Họ Tên | Equivalence Partitioning |
+| [TC-PROFILE-WEB-026](TC-PROFILE-WEB-026.md) | Hiển thị an toàn nội dung giống thẻ định dạng trong Địa chỉ giao hàng | Equivalence Partitioning |
+| [TC-PROFILE-WEB-028](TC-PROFILE-WEB-028.md) | Cập nhật đồng thời Họ Tên, Số điện thoại và Địa chỉ | Equivalence Partitioning |
 
-## Phạm vi sau tinh gọn
+## Giới hạn phạm vi
 
-- 19 active cases, đã loại 005/006/009/011/013/014/019/022/027. File cũ giữ trong Git history; không còn trong danh mục thực thi hiện tại.
-- Giữ đủ 4 phone lengths ở UI và direct-API rejection 9/12/prefix/letter, email readonly, anonymous UI, GET/PUT thiếu JWT, PUT malformed JWT, body ownership, role, JWT signature, hai safe-display surfaces và full update.
-- Positive API trực tiếp, UI prefix/letter, name-only/address-only, malformed-token GET và query selector là variations giảm ưu tiên. Case 028 kiểm giá trị từng field sau full update, không chứng minh isolation khi chỉ sửa một field.
-- 19/19 partitions còn có đại diện thiết kế; không tuyên bố mọi kênh/tổ hợp covered. Nếu UI chặn valid update trước network, direct API acceptance chưa được exercise.
-- Các lý do và tradeoffs ở [analysis](../../test-summary/profile-web-analysis.md#quyết-định-tinh-gọn-theo-yêu-cầu-người-dùng); reviewer kiểm trước execution.
+Không kiểm tra xác thực bằng chuỗi truy cập bị sửa, giả danh người khác hoặc tự gửi thuộc tính quyền quản trị. Không kiểm tra kiểu kỹ thuật của ô Email. Name/address chưa có giới hạn độ dài được đặc tả. Các case hiển thị chỉ là quan sát bằng mắt khi chuỗi đã đến đúng màn hình.
+
+Các case yêu cầu gửi request trực tiếp đã loại theo [bảng thay đổi](../../test-summary/manual-testing-scope.md).

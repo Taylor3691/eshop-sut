@@ -1,31 +1,36 @@
-# TC-PROFILE-MOBILE-017: Native — logout không giữ quyền sửa hồ sơ A
+# TC-PROFILE-MOBILE-017: Đăng xuất không giữ quyền sửa hồ sơ trước đó
 
 ## Requirement ID
+
 FR-04; FR-20
 
 ## Module / Test Type / Technique
+
 PROFILE-MOBILE / Functional / Equivalence Partitioning
 
 ## Preconditions
-- Fixture A/B và snapshot API theo [README bộ cases](README.md) đã xác minh; API client và Mobile dùng cùng backend/database.
-- Mỗi case độc lập, baseline được khôi phục; không restart backend giữa thao tác và readback.
-- Mobile đã login A (mobile.a@example.com / MobileA123!); chạm lời chào trên header để mở “Hồ sơ của bạn”.
+
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Mở ứng dụng EShop trên thiết bị di động đã được kết nối hệ thống. Dùng tài khoản A; chạm lời chào để mở Hồ sơ của bạn.
 
 ## Test Data
+
 | Field | Value |
 |---|---|
-| Trước thao tác | A đang login; profile baseline |
-| Hành động | Thoát → chạm Đăng nhập trên header |
+| Tài khoản | `A` |
 
 ## Test Steps
-1. Mở hồ sơ A; ghi snapshot trước logout.
-2. Chạm “Thoát”; quan sát header/session và điều hướng tài khoản thông thường.
-3. Chạm liên kết tài khoản; kiểm tra không thể mở lại form A có quyền cập nhật khi chưa login.
-4. Dùng API client GET /api/users/me với Bearer TOKEN_A và TOKEN_B; so sánh theo ID với snapshot trước case.
+
+1. Đăng nhập A, mở hồ sơ và ghi dữ liệu đang hiển thị.
+2. Chạm Thoát. Dùng nút quay lại của thiết bị nếu có và thử mở lại hồ sơ từ màn hình chính.
+3. Nếu form A còn hiện, thử sửa tên thành Sau đăng xuất và chạm Cập nhật.
+4. Đăng nhập lại A, mở hồ sơ và đối chiếu dữ liệu trước khi thoát.
 
 ## Expected Result
-- Phiên Mobile đã logout, phải login lại để sửa profile; không phục hồi form có quyền cập nhật A bằng điều hướng thông thường.
-- A/B server không đổi do logout. Không yêu cầu revoke TOKEN_A cũ trên server hoặc kiểm cold restart (AS-PM-04).
+
+- Sau Thoát không được sửa hồ sơ bằng phiên cũ; dữ liệu A không bị đổi bởi thao tác khi đã đăng xuất.
 
 ## Status / Related Bugs
+
 Not Run / None

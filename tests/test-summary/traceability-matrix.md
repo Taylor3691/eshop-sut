@@ -1,455 +1,273 @@
-# Traceability Matrix — Pool A / FR-04, Pool B / FR-10, Pool C / FR-15 và Pool D / FR-04–FR-20
+# Traceability Matrix — bộ kiểm thử thao tác thủ công
 
-Ma trận **thiết kế**, không phải kết quả execution. Pool A dùng `TC-PROFILE-WEB-` cho hồ sơ storefront/API; Pool B dùng `TC-ORDER-STATE-` cho trạng thái đơn; Pool C dùng `TC-PRODUCT-CRUD-` cho quản lý sản phẩm; Pool D dùng `TC-PROFILE-MOBILE-` cho hồ sơ Mobile. Toàn bộ Result `Not Run`, Related Bugs `None`.
+Tổng **67 cases = 24 BVA + 43 EP**: Pool A 11, B 18, C 24, D 14. A/B/C chạy trên trang web; D chạy ứng dụng trên thiết bị di động. Mapping là thiết kế, không phải kết quả thực thi.
 
-Nguồn phân tích: [Requirement → Domain → Partition → Boundary](profile-web-analysis.md).
-Fixture và danh mục: [profile-web](../test-cases/profile-web/README.md).
+## Pool A — Hồ sơ cá nhân
 
-Pool A đã tinh gọn **28 → 19 cases** (6 BVA + 13 EP), ID giữ nguyên. Tradeoffs: [quyết định tinh gọn](profile-web-analysis.md#quyết-định-tinh-gọn-theo-yêu-cầu-người-dùng).
+[Phân tích](profile-web-analysis.md) · [Cases](../test-cases/profile-web/README.md) · [Test run](../test-runs/pool-a-test-run.md)
 
-## Requirement → Test Case
+### Test Case → Requirement / Partition / Technique
 
-| Requirement / Quy tắc nội bộ | Case | Mức bao phủ thiết kế |
-|---|---|---|
-| FR-04 R1: name, phone, address của chính mình | [001](../test-cases/profile-web/TC-PROFILE-WEB-001.md), [002](../test-cases/profile-web/TC-PROFILE-WEB-002.md), [028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | Phone-only và full update UI → GET/reload; isolated name/address và direct API full update giảm ưu tiên |
-| FR-04 R2: phone | [001](../test-cases/profile-web/TC-PROFILE-WEB-001.md), [002](../test-cases/profile-web/TC-PROFILE-WEB-002.md), [003](../test-cases/profile-web/TC-PROFILE-WEB-003.md), [004](../test-cases/profile-web/TC-PROFILE-WEB-004.md), [007](../test-cases/profile-web/TC-PROFILE-WEB-007.md), [008](../test-cases/profile-web/TC-PROFILE-WEB-008.md), [010](../test-cases/profile-web/TC-PROFILE-WEB-010.md), [012](../test-cases/profile-web/TC-PROFILE-WEB-012.md) | UI BVA 9/10/11/12; API rejection 9/12/prefix/letter; không còn mọi biến thể UI/API |
-| FR-04 R3: email UI không sửa | [015](../test-cases/profile-web/TC-PROFILE-WEB-015.md) | Giữ email readonly; API email chờ oracle |
-| FR-04 R4: ownership | [001](../test-cases/profile-web/TC-PROFILE-WEB-001.md), [002](../test-cases/profile-web/TC-PROFILE-WEB-002.md), [016](../test-cases/profile-web/TC-PROFILE-WEB-016.md), [021](../test-cases/profile-web/TC-PROFILE-WEB-021.md), [024](../test-cases/profile-web/TC-PROFILE-WEB-024.md), [028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | Snapshot A/B, anonymous UI, body selector/JWT; query selector giảm ưu tiên |
-| FR-04 R5 / SEC-06: role | [023](../test-cases/profile-web/TC-PROFILE-WEB-023.md) | Role được đọc lại và login mới |
-| SEC-02 R6: JWT | [016](../test-cases/profile-web/TC-PROFILE-WEB-016.md), [017](../test-cases/profile-web/TC-PROFILE-WEB-017.md), [018](../test-cases/profile-web/TC-PROFILE-WEB-018.md), [020](../test-cases/profile-web/TC-PROFILE-WEB-020.md), [021](../test-cases/profile-web/TC-PROFILE-WEB-021.md), [023](../test-cases/profile-web/TC-PROFILE-WEB-023.md), [024](../test-cases/profile-web/TC-PROFILE-WEB-024.md) | Thiếu token GET/PUT, malformed PUT, valid/tampered JWT; malformed GET giảm ưu tiên |
-| SEC-04 R7: render an toàn | [025](../test-cases/profile-web/TC-PROFILE-WEB-025.md), [026](../test-cases/profile-web/TC-PROFILE-WEB-026.md) | Giữ hai surfaces có điều kiện dữ liệu tới renderer (AM-07) |
-| FR-22 R8: email type và vị trí lỗi | [003](../test-cases/profile-web/TC-PROFILE-WEB-003.md), [015](../test-cases/profile-web/TC-PROFILE-WEB-015.md) | Chỉ hai GUI rules liên quan; không toàn bộ FR-22 |
-
-## Partition → Test Case
-
-| Partition | Cases | Giới hạn |
-|---|---|---|
-| EP-PW-01 | [001](../test-cases/profile-web/TC-PROFILE-WEB-001.md), [002](../test-cases/profile-web/TC-PROFILE-WEB-002.md), [028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-02 | [003](../test-cases/profile-web/TC-PROFILE-WEB-003.md), [007](../test-cases/profile-web/TC-PROFILE-WEB-007.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-03 | [004](../test-cases/profile-web/TC-PROFILE-WEB-004.md), [008](../test-cases/profile-web/TC-PROFILE-WEB-008.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-04 | [010](../test-cases/profile-web/TC-PROFILE-WEB-010.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-05 | [012](../test-cases/profile-web/TC-PROFILE-WEB-012.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-06 | [028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-07 | [028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-08 | [015](../test-cases/profile-web/TC-PROFILE-WEB-015.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-09 | [015](../test-cases/profile-web/TC-PROFILE-WEB-015.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-10 | [001](../test-cases/profile-web/TC-PROFILE-WEB-001.md), [002](../test-cases/profile-web/TC-PROFILE-WEB-002.md), [003](../test-cases/profile-web/TC-PROFILE-WEB-003.md), [004](../test-cases/profile-web/TC-PROFILE-WEB-004.md), [007](../test-cases/profile-web/TC-PROFILE-WEB-007.md), [008](../test-cases/profile-web/TC-PROFILE-WEB-008.md), [010](../test-cases/profile-web/TC-PROFILE-WEB-010.md), [012](../test-cases/profile-web/TC-PROFILE-WEB-012.md), [015](../test-cases/profile-web/TC-PROFILE-WEB-015.md), [021](../test-cases/profile-web/TC-PROFILE-WEB-021.md), [023](../test-cases/profile-web/TC-PROFILE-WEB-023.md), [025](../test-cases/profile-web/TC-PROFILE-WEB-025.md), [026](../test-cases/profile-web/TC-PROFILE-WEB-026.md), [028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-11 | [016](../test-cases/profile-web/TC-PROFILE-WEB-016.md), [017](../test-cases/profile-web/TC-PROFILE-WEB-017.md), [018](../test-cases/profile-web/TC-PROFILE-WEB-018.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-12 | [020](../test-cases/profile-web/TC-PROFILE-WEB-020.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-13 | [024](../test-cases/profile-web/TC-PROFILE-WEB-024.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-14 | [001](../test-cases/profile-web/TC-PROFILE-WEB-001.md), [002](../test-cases/profile-web/TC-PROFILE-WEB-002.md), [003](../test-cases/profile-web/TC-PROFILE-WEB-003.md), [004](../test-cases/profile-web/TC-PROFILE-WEB-004.md), [007](../test-cases/profile-web/TC-PROFILE-WEB-007.md), [008](../test-cases/profile-web/TC-PROFILE-WEB-008.md), [010](../test-cases/profile-web/TC-PROFILE-WEB-010.md), [012](../test-cases/profile-web/TC-PROFILE-WEB-012.md), [025](../test-cases/profile-web/TC-PROFILE-WEB-025.md), [026](../test-cases/profile-web/TC-PROFILE-WEB-026.md), [028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-15 | [021](../test-cases/profile-web/TC-PROFILE-WEB-021.md), [024](../test-cases/profile-web/TC-PROFILE-WEB-024.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-16 | [001](../test-cases/profile-web/TC-PROFILE-WEB-001.md), [002](../test-cases/profile-web/TC-PROFILE-WEB-002.md), [003](../test-cases/profile-web/TC-PROFILE-WEB-003.md), [004](../test-cases/profile-web/TC-PROFILE-WEB-004.md), [007](../test-cases/profile-web/TC-PROFILE-WEB-007.md), [008](../test-cases/profile-web/TC-PROFILE-WEB-008.md), [010](../test-cases/profile-web/TC-PROFILE-WEB-010.md), [012](../test-cases/profile-web/TC-PROFILE-WEB-012.md), [021](../test-cases/profile-web/TC-PROFILE-WEB-021.md), [028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-17 | [023](../test-cases/profile-web/TC-PROFILE-WEB-023.md) | Đại diện giữ lại; không suy coverage mọi kênh/tổ hợp |
-| EP-PW-18 | [025](../test-cases/profile-web/TC-PROFILE-WEB-025.md) | Có điều kiện dữ liệu đến renderer (AM-07) |
-| EP-PW-19 | [026](../test-cases/profile-web/TC-PROFILE-WEB-026.md) | Có điều kiện dữ liệu đến renderer (AM-07) |
-
-## Boundary → Test Case
-
-| Boundary | Vị trí | Giá trị | UI | API trực tiếp |
+| Test Case | Mục tiêu | Requirement | Partitions | Technique |
 |---|---|---|---|---|
-| B-PW-L = 10 | min−1 | 9 / `091234567` | [003](../test-cases/profile-web/TC-PROFILE-WEB-003.md) | [007](../test-cases/profile-web/TC-PROFILE-WEB-007.md) |
-| B-PW-L = 10 | min | 10 / `0912345678` | [001](../test-cases/profile-web/TC-PROFILE-WEB-001.md) | — (giảm ưu tiên) |
-| B-PW-L = 10 | min+1 | 11 / `09123456789` | [002](../test-cases/profile-web/TC-PROFILE-WEB-002.md) | — (giảm ưu tiên) |
-| B-PW-U = 11 | max−1 | 10 / `0912345678` | [001](../test-cases/profile-web/TC-PROFILE-WEB-001.md) | — (giảm ưu tiên) |
-| B-PW-U = 11 | max | 11 / `09123456789` | [002](../test-cases/profile-web/TC-PROFILE-WEB-002.md) | — (giảm ưu tiên) |
-| B-PW-U = 11 | max+1 | 12 / `091234567890` | [004](../test-cases/profile-web/TC-PROFILE-WEB-004.md) | [008](../test-cases/profile-web/TC-PROFILE-WEB-008.md) |
+| [TC-PROFILE-WEB-001](../test-cases/profile-web/TC-PROFILE-WEB-001.md) | Chấp nhận số điện thoại 10 chữ số | FR-04 | EP-PW-01, EP-PW-14 | BVA |
+| [TC-PROFILE-WEB-002](../test-cases/profile-web/TC-PROFILE-WEB-002.md) | Chấp nhận số điện thoại 11 chữ số | FR-04 | EP-PW-01, EP-PW-14 | BVA |
+| [TC-PROFILE-WEB-003](../test-cases/profile-web/TC-PROFILE-WEB-003.md) | Từ chối số điện thoại 9 chữ số | FR-04 | EP-PW-02 | BVA |
+| [TC-PROFILE-WEB-004](../test-cases/profile-web/TC-PROFILE-WEB-004.md) | Từ chối số điện thoại 12 chữ số | FR-04 | EP-PW-03 | BVA |
+| [TC-PROFILE-WEB-010](../test-cases/profile-web/TC-PROFILE-WEB-010.md) | Từ chối số điện thoại không bắt đầu bằng 0 | FR-04 | EP-PW-04 | Equivalence Partitioning |
+| [TC-PROFILE-WEB-012](../test-cases/profile-web/TC-PROFILE-WEB-012.md) | Từ chối số điện thoại chứa chữ cái | FR-04 | EP-PW-05 | Equivalence Partitioning |
+| [TC-PROFILE-WEB-015](../test-cases/profile-web/TC-PROFILE-WEB-015.md) | Email không được phép thay đổi | FR-04 | EP-PW-08, EP-PW-09 | Equivalence Partitioning |
+| [TC-PROFILE-WEB-016](../test-cases/profile-web/TC-PROFILE-WEB-016.md) | Chưa đăng nhập không thể sửa hồ sơ | FR-04 | EP-PW-20 | Equivalence Partitioning |
+| [TC-PROFILE-WEB-025](../test-cases/profile-web/TC-PROFILE-WEB-025.md) | Hiển thị an toàn nội dung giống thẻ định dạng trong Họ Tên | FR-04; SEC-04 | EP-PW-18 | Equivalence Partitioning |
+| [TC-PROFILE-WEB-026](../test-cases/profile-web/TC-PROFILE-WEB-026.md) | Hiển thị an toàn nội dung giống thẻ định dạng trong Địa chỉ giao hàng | FR-04; SEC-04 | EP-PW-19 | Equivalence Partitioning |
+| [TC-PROFILE-WEB-028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | Cập nhật đồng thời Họ Tên, Số điện thoại và Địa chỉ | FR-04 | EP-PW-01, EP-PW-06, EP-PW-07, EP-PW-14 | Equivalence Partitioning |
 
-4 values/2 boundaries giữ đầy đủ BVA UI; API trực tiếp giữ 9/12 negative. UI positive có server readback nhưng nếu bị chặn trước request thì chưa kiểm chứng server acceptance.
+### Partition → Test Case
 
-## Test Case → Requirement / Partition / Boundary / Result
-
-| Test Case | Requirement | Partition | Boundary | Result | Related Bugs |
-|---|---|---|---|---|---|
-| [TC-PROFILE-WEB-001](../test-cases/profile-web/TC-PROFILE-WEB-001.md) | FR-04 | EP-PW-01, EP-PW-10, EP-PW-14, EP-PW-16 | B-PW-L min; B-PW-U max−1 | Not Run | None |
-| [TC-PROFILE-WEB-002](../test-cases/profile-web/TC-PROFILE-WEB-002.md) | FR-04 | EP-PW-01, EP-PW-10, EP-PW-14, EP-PW-16 | B-PW-L min+1; B-PW-U max | Not Run | None |
-| [TC-PROFILE-WEB-003](../test-cases/profile-web/TC-PROFILE-WEB-003.md) | FR-04; FR-22 | EP-PW-02, EP-PW-10, EP-PW-14, EP-PW-16 | B-PW-L min−1 | Not Run | None |
-| [TC-PROFILE-WEB-004](../test-cases/profile-web/TC-PROFILE-WEB-004.md) | FR-04 | EP-PW-03, EP-PW-10, EP-PW-14, EP-PW-16 | B-PW-U max+1 | Not Run | None |
-| [TC-PROFILE-WEB-007](../test-cases/profile-web/TC-PROFILE-WEB-007.md) | FR-04 | EP-PW-02, EP-PW-10, EP-PW-14, EP-PW-16 | B-PW-L min−1 | Not Run | None |
-| [TC-PROFILE-WEB-008](../test-cases/profile-web/TC-PROFILE-WEB-008.md) | FR-04 | EP-PW-03, EP-PW-10, EP-PW-14, EP-PW-16 | B-PW-U max+1 | Not Run | None |
-| [TC-PROFILE-WEB-010](../test-cases/profile-web/TC-PROFILE-WEB-010.md) | FR-04 | EP-PW-04, EP-PW-10, EP-PW-14, EP-PW-16 | — | Not Run | None |
-| [TC-PROFILE-WEB-012](../test-cases/profile-web/TC-PROFILE-WEB-012.md) | FR-04 | EP-PW-05, EP-PW-10, EP-PW-14, EP-PW-16 | — | Not Run | None |
-| [TC-PROFILE-WEB-015](../test-cases/profile-web/TC-PROFILE-WEB-015.md) | FR-04; FR-22 | EP-PW-08, EP-PW-09, EP-PW-10 | — | Not Run | None |
-| [TC-PROFILE-WEB-016](../test-cases/profile-web/TC-PROFILE-WEB-016.md) | FR-04 | EP-PW-11 | — | Not Run | None |
-| [TC-PROFILE-WEB-017](../test-cases/profile-web/TC-PROFILE-WEB-017.md) | FR-04; SEC-02 | EP-PW-11 | — | Not Run | None |
-| [TC-PROFILE-WEB-018](../test-cases/profile-web/TC-PROFILE-WEB-018.md) | FR-04; SEC-02 | EP-PW-11 | — | Not Run | None |
-| [TC-PROFILE-WEB-020](../test-cases/profile-web/TC-PROFILE-WEB-020.md) | FR-04; SEC-02 | EP-PW-12 | — | Not Run | None |
-| [TC-PROFILE-WEB-021](../test-cases/profile-web/TC-PROFILE-WEB-021.md) | FR-04; SEC-02 | EP-PW-10, EP-PW-15, EP-PW-16 | — | Not Run | None |
-| [TC-PROFILE-WEB-023](../test-cases/profile-web/TC-PROFILE-WEB-023.md) | FR-04; SEC-06 | EP-PW-10, EP-PW-17 | — | Not Run | None |
-| [TC-PROFILE-WEB-024](../test-cases/profile-web/TC-PROFILE-WEB-024.md) | FR-04; SEC-02 | EP-PW-13, EP-PW-15 | — | Not Run | None |
-| [TC-PROFILE-WEB-025](../test-cases/profile-web/TC-PROFILE-WEB-025.md) | FR-04; SEC-04 | EP-PW-18, EP-PW-10, EP-PW-14 | — | Not Run | None |
-| [TC-PROFILE-WEB-026](../test-cases/profile-web/TC-PROFILE-WEB-026.md) | FR-04; SEC-04 | EP-PW-19, EP-PW-10, EP-PW-14 | — | Not Run | None |
-| [TC-PROFILE-WEB-028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | FR-04 | EP-PW-01, EP-PW-06, EP-PW-07, EP-PW-10, EP-PW-14, EP-PW-16 | — | Not Run | None |
-
-19/19 partitions có mapping thiết kế: 17 không phụ thuộc lưu HTML và 2 có điều kiện AM-07. 19 active cases; file đã loại không còn mapping. Không phải coverage execution hoặc mọi variation UI/API.
-
-## Pool B — FR-10: Order State Machine
-
-Nguồn: [phân tích Pool B](order-state-analysis.md), [fixture/danh mục](../test-cases/order-state/README.md). Đã giảm **52 → 32 EP cases**, 0 BVA. Giữ IDs/nội dung; mọi case Not Run / None. Tradeoffs: [quyết định tinh gọn](order-state-analysis.md#quyết-định-tinh-gọn-theo-yêu-cầu-người-dùng).
-
-### Requirement → Test Case (Pool B)
-
-| Requirement / Quy tắc nội bộ | Cases | Giới hạn |
+| Partition | Cases | Phạm vi |
 |---|---|---|
-| FR-10 R-OS-01: 5 states/target domain | [001](../test-cases/order-state/TC-ORDER-STATE-001.md), [002](../test-cases/order-state/TC-ORDER-STATE-002.md), [003](../test-cases/order-state/TC-ORDER-STATE-003.md), [004](../test-cases/order-state/TC-ORDER-STATE-004.md), [005](../test-cases/order-state/TC-ORDER-STATE-005.md), [034](../test-cases/order-state/TC-ORDER-STATE-034.md), [035](../test-cases/order-state/TC-ORDER-STATE-035.md), [038](../test-cases/order-state/TC-ORDER-STATE-038.md) | Enum và outside-enum/missing/wrong-type; null/empty deferred |
-| FR-10 R-OS-02: 3 admin forward edges | [001](../test-cases/order-state/TC-ORDER-STATE-001.md), [002](../test-cases/order-state/TC-ORDER-STATE-002.md), [003](../test-cases/order-state/TC-ORDER-STATE-003.md), [041](../test-cases/order-state/TC-ORDER-STATE-041.md) | API từng edge + UI chuỗi; không ghép mới cases |
-| FR-10 R-OS-03: pending/confirmed cancel | [004](../test-cases/order-state/TC-ORDER-STATE-004.md), [005](../test-cases/order-state/TC-ORDER-STATE-005.md), [020](../test-cases/order-state/TC-ORDER-STATE-020.md), [021](../test-cases/order-state/TC-ORDER-STATE-021.md), [046](../test-cases/order-state/TC-ORDER-STATE-046.md) | Hai nguồn tại API Admin/User; UI chỉ User pending |
-| FR-10 R-OS-04: User không hủy shipping | [022](../test-cases/order-state/TC-ORDER-STATE-022.md), [051](../test-cases/order-state/TC-ORDER-STATE-051.md) | API trực tiếp + stale User UI; fresh shipping UI giảm ưu tiên |
-| FR-10 R-OS-05: final states | [012](../test-cases/order-state/TC-ORDER-STATE-012.md), [015](../test-cases/order-state/TC-ORDER-STATE-015.md), [016](../test-cases/order-state/TC-ORDER-STATE-016.md), [019](../test-cases/order-state/TC-ORDER-STATE-019.md), [023](../test-cases/order-state/TC-ORDER-STATE-023.md), [052](../test-cases/order-state/TC-ORDER-STATE-052.md) | Final→earlier/final→final representatives và stale canceled→shipping có điều kiện; retry canceled deferred |
-| FR-10 R-OS-06: illegal transition/error | [006](../test-cases/order-state/TC-ORDER-STATE-006.md), [008](../test-cases/order-state/TC-ORDER-STATE-008.md), [009](../test-cases/order-state/TC-ORDER-STATE-009.md), [011](../test-cases/order-state/TC-ORDER-STATE-011.md), [012](../test-cases/order-state/TC-ORDER-STATE-012.md), [015](../test-cases/order-state/TC-ORDER-STATE-015.md), [016](../test-cases/order-state/TC-ORDER-STATE-016.md), [019](../test-cases/order-state/TC-ORDER-STATE-019.md), [022](../test-cases/order-state/TC-ORDER-STATE-022.md), [023](../test-cases/order-state/TC-ORDER-STATE-023.md), [034](../test-cases/order-state/TC-ORDER-STATE-034.md), [035](../test-cases/order-state/TC-ORDER-STATE-035.md), [038](../test-cases/order-state/TC-ORDER-STATE-038.md), [039](../test-cases/order-state/TC-ORDER-STATE-039.md), [040](../test-cases/order-state/TC-ORDER-STATE-040.md), [051](../test-cases/order-state/TC-ORDER-STATE-051.md), [052](../test-cases/order-state/TC-ORDER-STATE-052.md) | Giữ 8 forbidden standalone Admin pairs; không tiếp tục exhaustive 14 forbidden pairs |
-| FR-12 / SEC-03 R-OS-07: role Admin | [025](../test-cases/order-state/TC-ORDER-STATE-025.md), [033](../test-cases/order-state/TC-ORDER-STATE-033.md), [041](../test-cases/order-state/TC-ORDER-STATE-041.md) | Own-order user trên Admin endpoint; JWT sửa role; Admin thao tác đơn B |
-| SEC-02 R-OS-07/08: JWT | [029](../test-cases/order-state/TC-ORDER-STATE-029.md), [030](../test-cases/order-state/TC-ORDER-STATE-030.md), [032](../test-cases/order-state/TC-ORDER-STATE-032.md), [033](../test-cases/order-state/TC-ORDER-STATE-033.md) | Hai endpoint thiếu token; malformed/signature trên Admin; malformed cancel deferred |
-| FR-18 liên quan: admin transition FR-10 | [001](../test-cases/order-state/TC-ORDER-STATE-001.md), [002](../test-cases/order-state/TC-ORDER-STATE-002.md), [003](../test-cases/order-state/TC-ORDER-STATE-003.md), [004](../test-cases/order-state/TC-ORDER-STATE-004.md), [005](../test-cases/order-state/TC-ORDER-STATE-005.md), [041](../test-cases/order-state/TC-ORDER-STATE-041.md), [052](../test-cases/order-state/TC-ORDER-STATE-052.md) | API allowed/chuỗi UI/stale; UI Admin cancel-controls giảm ưu tiên |
-| FR-11 liên quan / AS-OS-03: ownership | [027](../test-cases/order-state/TC-ORDER-STATE-027.md) | Foreign pending proposal; foreign confirmed giảm ưu tiên, oracle cần review |
+| EP-PW-01 | [001](../test-cases/profile-web/TC-PROFILE-WEB-001.md), [002](../test-cases/profile-web/TC-PROFILE-WEB-002.md), [028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | Có đại diện thiết kế |
+| EP-PW-02 | [003](../test-cases/profile-web/TC-PROFILE-WEB-003.md) | Có đại diện thiết kế |
+| EP-PW-03 | [004](../test-cases/profile-web/TC-PROFILE-WEB-004.md) | Có đại diện thiết kế |
+| EP-PW-04 | [010](../test-cases/profile-web/TC-PROFILE-WEB-010.md) | Có đại diện thiết kế |
+| EP-PW-05 | [012](../test-cases/profile-web/TC-PROFILE-WEB-012.md) | Có đại diện thiết kế |
+| EP-PW-06 | [028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | Có đại diện thiết kế |
+| EP-PW-07 | [028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | Có đại diện thiết kế |
+| EP-PW-08 | [015](../test-cases/profile-web/TC-PROFILE-WEB-015.md) | Có đại diện thiết kế |
+| EP-PW-09 | [015](../test-cases/profile-web/TC-PROFILE-WEB-015.md) | Có đại diện thiết kế |
+| EP-PW-10 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PW-11 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PW-12 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PW-13 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PW-14 | [001](../test-cases/profile-web/TC-PROFILE-WEB-001.md), [002](../test-cases/profile-web/TC-PROFILE-WEB-002.md), [028](../test-cases/profile-web/TC-PROFILE-WEB-028.md) | Có đại diện thiết kế |
+| EP-PW-15 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PW-16 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PW-17 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PW-18 | [025](../test-cases/profile-web/TC-PROFILE-WEB-025.md) | Có đại diện thiết kế |
+| EP-PW-19 | [026](../test-cases/profile-web/TC-PROFILE-WEB-026.md) | Có đại diện thiết kế |
+| EP-PW-20 | [016](../test-cases/profile-web/TC-PROFILE-WEB-016.md) | Có đại diện thiết kế |
 
-### Partition → Test Case (Pool B)
+### Boundary → Test Case
 
-| Partition | Cases | Giới hạn |
-|---|---|---|
-| EP-OS-01 | [001](../test-cases/order-state/TC-ORDER-STATE-001.md), [041](../test-cases/order-state/TC-ORDER-STATE-041.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-02 | [002](../test-cases/order-state/TC-ORDER-STATE-002.md), [041](../test-cases/order-state/TC-ORDER-STATE-041.md), [051](../test-cases/order-state/TC-ORDER-STATE-051.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-03 | [003](../test-cases/order-state/TC-ORDER-STATE-003.md), [041](../test-cases/order-state/TC-ORDER-STATE-041.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-04 | [004](../test-cases/order-state/TC-ORDER-STATE-004.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-05 | [005](../test-cases/order-state/TC-ORDER-STATE-005.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-06 | [006](../test-cases/order-state/TC-ORDER-STATE-006.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-07 | [008](../test-cases/order-state/TC-ORDER-STATE-008.md), [009](../test-cases/order-state/TC-ORDER-STATE-009.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-08 | [011](../test-cases/order-state/TC-ORDER-STATE-011.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-09 | [012](../test-cases/order-state/TC-ORDER-STATE-012.md), [015](../test-cases/order-state/TC-ORDER-STATE-015.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-10 | [016](../test-cases/order-state/TC-ORDER-STATE-016.md), [019](../test-cases/order-state/TC-ORDER-STATE-019.md), [052](../test-cases/order-state/TC-ORDER-STATE-052.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-11 | [020](../test-cases/order-state/TC-ORDER-STATE-020.md), [046](../test-cases/order-state/TC-ORDER-STATE-046.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-12 | [021](../test-cases/order-state/TC-ORDER-STATE-021.md), [052](../test-cases/order-state/TC-ORDER-STATE-052.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-13 | [022](../test-cases/order-state/TC-ORDER-STATE-022.md), [051](../test-cases/order-state/TC-ORDER-STATE-051.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-14 | [023](../test-cases/order-state/TC-ORDER-STATE-023.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-15 | — (deferred) | Deferred có chủ đích: canceled retry / null / empty; không nhận covered |
-| EP-OS-16 | [001](../test-cases/order-state/TC-ORDER-STATE-001.md), [002](../test-cases/order-state/TC-ORDER-STATE-002.md), [003](../test-cases/order-state/TC-ORDER-STATE-003.md), [004](../test-cases/order-state/TC-ORDER-STATE-004.md), [005](../test-cases/order-state/TC-ORDER-STATE-005.md), [006](../test-cases/order-state/TC-ORDER-STATE-006.md), [008](../test-cases/order-state/TC-ORDER-STATE-008.md), [009](../test-cases/order-state/TC-ORDER-STATE-009.md), [011](../test-cases/order-state/TC-ORDER-STATE-011.md), [012](../test-cases/order-state/TC-ORDER-STATE-012.md), [015](../test-cases/order-state/TC-ORDER-STATE-015.md), [016](../test-cases/order-state/TC-ORDER-STATE-016.md), [019](../test-cases/order-state/TC-ORDER-STATE-019.md), [034](../test-cases/order-state/TC-ORDER-STATE-034.md), [035](../test-cases/order-state/TC-ORDER-STATE-035.md), [038](../test-cases/order-state/TC-ORDER-STATE-038.md), [039](../test-cases/order-state/TC-ORDER-STATE-039.md), [041](../test-cases/order-state/TC-ORDER-STATE-041.md), [051](../test-cases/order-state/TC-ORDER-STATE-051.md), [052](../test-cases/order-state/TC-ORDER-STATE-052.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-17 | [025](../test-cases/order-state/TC-ORDER-STATE-025.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-18 | [001](../test-cases/order-state/TC-ORDER-STATE-001.md), [002](../test-cases/order-state/TC-ORDER-STATE-002.md), [003](../test-cases/order-state/TC-ORDER-STATE-003.md), [004](../test-cases/order-state/TC-ORDER-STATE-004.md), [005](../test-cases/order-state/TC-ORDER-STATE-005.md), [006](../test-cases/order-state/TC-ORDER-STATE-006.md), [008](../test-cases/order-state/TC-ORDER-STATE-008.md), [009](../test-cases/order-state/TC-ORDER-STATE-009.md), [011](../test-cases/order-state/TC-ORDER-STATE-011.md), [012](../test-cases/order-state/TC-ORDER-STATE-012.md), [015](../test-cases/order-state/TC-ORDER-STATE-015.md), [016](../test-cases/order-state/TC-ORDER-STATE-016.md), [019](../test-cases/order-state/TC-ORDER-STATE-019.md), [020](../test-cases/order-state/TC-ORDER-STATE-020.md), [021](../test-cases/order-state/TC-ORDER-STATE-021.md), [022](../test-cases/order-state/TC-ORDER-STATE-022.md), [023](../test-cases/order-state/TC-ORDER-STATE-023.md), [025](../test-cases/order-state/TC-ORDER-STATE-025.md), [027](../test-cases/order-state/TC-ORDER-STATE-027.md), [034](../test-cases/order-state/TC-ORDER-STATE-034.md), [035](../test-cases/order-state/TC-ORDER-STATE-035.md), [038](../test-cases/order-state/TC-ORDER-STATE-038.md), [039](../test-cases/order-state/TC-ORDER-STATE-039.md), [040](../test-cases/order-state/TC-ORDER-STATE-040.md), [041](../test-cases/order-state/TC-ORDER-STATE-041.md), [046](../test-cases/order-state/TC-ORDER-STATE-046.md), [051](../test-cases/order-state/TC-ORDER-STATE-051.md), [052](../test-cases/order-state/TC-ORDER-STATE-052.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-19 | [029](../test-cases/order-state/TC-ORDER-STATE-029.md), [030](../test-cases/order-state/TC-ORDER-STATE-030.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-20 | [032](../test-cases/order-state/TC-ORDER-STATE-032.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-21 | [033](../test-cases/order-state/TC-ORDER-STATE-033.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-22 | [020](../test-cases/order-state/TC-ORDER-STATE-020.md), [021](../test-cases/order-state/TC-ORDER-STATE-021.md), [022](../test-cases/order-state/TC-ORDER-STATE-022.md), [023](../test-cases/order-state/TC-ORDER-STATE-023.md), [046](../test-cases/order-state/TC-ORDER-STATE-046.md), [051](../test-cases/order-state/TC-ORDER-STATE-051.md), [052](../test-cases/order-state/TC-ORDER-STATE-052.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-23 | [027](../test-cases/order-state/TC-ORDER-STATE-027.md) | Có điều kiện AS-OS-03 về user ownership; foreign confirmed giảm ưu tiên |
-| EP-OS-24 | [001](../test-cases/order-state/TC-ORDER-STATE-001.md), [002](../test-cases/order-state/TC-ORDER-STATE-002.md), [003](../test-cases/order-state/TC-ORDER-STATE-003.md), [004](../test-cases/order-state/TC-ORDER-STATE-004.md), [005](../test-cases/order-state/TC-ORDER-STATE-005.md), [006](../test-cases/order-state/TC-ORDER-STATE-006.md), [008](../test-cases/order-state/TC-ORDER-STATE-008.md), [009](../test-cases/order-state/TC-ORDER-STATE-009.md), [011](../test-cases/order-state/TC-ORDER-STATE-011.md), [012](../test-cases/order-state/TC-ORDER-STATE-012.md), [015](../test-cases/order-state/TC-ORDER-STATE-015.md), [016](../test-cases/order-state/TC-ORDER-STATE-016.md), [019](../test-cases/order-state/TC-ORDER-STATE-019.md), [020](../test-cases/order-state/TC-ORDER-STATE-020.md), [021](../test-cases/order-state/TC-ORDER-STATE-021.md), [022](../test-cases/order-state/TC-ORDER-STATE-022.md), [023](../test-cases/order-state/TC-ORDER-STATE-023.md), [025](../test-cases/order-state/TC-ORDER-STATE-025.md), [027](../test-cases/order-state/TC-ORDER-STATE-027.md), [029](../test-cases/order-state/TC-ORDER-STATE-029.md), [030](../test-cases/order-state/TC-ORDER-STATE-030.md), [032](../test-cases/order-state/TC-ORDER-STATE-032.md), [033](../test-cases/order-state/TC-ORDER-STATE-033.md), [034](../test-cases/order-state/TC-ORDER-STATE-034.md), [035](../test-cases/order-state/TC-ORDER-STATE-035.md), [038](../test-cases/order-state/TC-ORDER-STATE-038.md), [041](../test-cases/order-state/TC-ORDER-STATE-041.md), [046](../test-cases/order-state/TC-ORDER-STATE-046.md), [051](../test-cases/order-state/TC-ORDER-STATE-051.md), [052](../test-cases/order-state/TC-ORDER-STATE-052.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-25 | [039](../test-cases/order-state/TC-ORDER-STATE-039.md), [040](../test-cases/order-state/TC-ORDER-STATE-040.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-26 | [034](../test-cases/order-state/TC-ORDER-STATE-034.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-27 | [035](../test-cases/order-state/TC-ORDER-STATE-035.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
-| EP-OS-28 | — (deferred) | Deferred có chủ đích: canceled retry / null / empty; không nhận covered |
-| EP-OS-29 | — (deferred) | Deferred có chủ đích: canceled retry / null / empty; không nhận covered |
-| EP-OS-30 | [038](../test-cases/order-state/TC-ORDER-STATE-038.md) | Đại diện giữ lại; không suy mọi cặp/kênh trong partition covered |
+| Biến / giá trị | Cases |
+|---|---|
+| Chấp nhận số điện thoại 10 chữ số | [001](../test-cases/profile-web/TC-PROFILE-WEB-001.md) |
+| Chấp nhận số điện thoại 11 chữ số | [002](../test-cases/profile-web/TC-PROFILE-WEB-002.md) |
+| Từ chối số điện thoại 9 chữ số | [003](../test-cases/profile-web/TC-PROFILE-WEB-003.md) |
+| Từ chối số điện thoại 12 chữ số | [004](../test-cases/profile-web/TC-PROFILE-WEB-004.md) |
 
-27/30 partitions có active cases; EP-OS-15/28/29 deferred. Không xóa partition hoặc tái gán coverage cho điều kiện khác để đạt 30/30.
+## Pool B — Trạng thái đơn hàng
 
-### Admin transition pair → Test Case
+[Phân tích](order-state-analysis.md) · [Cases](../test-cases/order-state/README.md) · [Test run](../test-runs/pool-b-test-run.md)
 
-| Current | Target | Class | API case |
-| pending | confirmed | VALID | [001](../test-cases/order-state/TC-ORDER-STATE-001.md) |
-| confirmed | shipping | VALID | [002](../test-cases/order-state/TC-ORDER-STATE-002.md) |
-| shipping | delivered | VALID | [003](../test-cases/order-state/TC-ORDER-STATE-003.md) |
-| pending | canceled | VALID | [004](../test-cases/order-state/TC-ORDER-STATE-004.md) |
-| confirmed | canceled | VALID | [005](../test-cases/order-state/TC-ORDER-STATE-005.md) |
-| pending | shipping | INVALID | [006](../test-cases/order-state/TC-ORDER-STATE-006.md) |
-| pending | delivered | INVALID | — (deferred) |
-| confirmed | pending | INVALID | [008](../test-cases/order-state/TC-ORDER-STATE-008.md) |
-| confirmed | delivered | INVALID | [009](../test-cases/order-state/TC-ORDER-STATE-009.md) |
-| shipping | pending | INVALID | — (deferred) |
-| shipping | confirmed | INVALID | [011](../test-cases/order-state/TC-ORDER-STATE-011.md) |
-| delivered | pending | INVALID | [012](../test-cases/order-state/TC-ORDER-STATE-012.md) |
-| delivered | confirmed | INVALID | — (deferred) |
-| delivered | shipping | INVALID | — (deferred) |
-| delivered | canceled | INVALID | [015](../test-cases/order-state/TC-ORDER-STATE-015.md) |
-| canceled | pending | INVALID | [016](../test-cases/order-state/TC-ORDER-STATE-016.md) |
-| canceled | confirmed | INVALID | — (deferred) |
-| canceled | shipping | INVALID | [052](../test-cases/order-state/TC-ORDER-STATE-052.md) (stale; có điều kiện request tới server) |
-| canceled | delivered | INVALID | [019](../test-cases/order-state/TC-ORDER-STATE-019.md) |
-| shipping | canceled | Chờ AM-OS-01 | Chưa tạo case gán Expected Result |
-| pending / confirmed / shipping / delivered / canceled | Chính current_status | Chờ AM-OS-02 | Không áp oracle error/no-op cho admin self-transition |
+### Test Case → Requirement / Partition / Technique
 
-13/19 known pairs có **standalone API** case (5 VALID + 8 INVALID). Trong 6 không còn standalone case, 5 hoàn toàn deferred; canceled→shipping còn 052 có điều kiện. 6 unknown pairs (5 self + shipping→canceled) vẫn AM-OS-01/02, không trộn unknown với deferred. Không tuyên bố 19/19 hoặc 25/25 covered.
-
-### User cancel state → Test Case
-
-| Current | Target | Oracle | API | UI |
+| Test Case | Mục tiêu | Requirement | Partitions | Technique |
 |---|---|---|---|---|
-| pending | canceled | Thành công | [020](../test-cases/order-state/TC-ORDER-STATE-020.md) | [046](../test-cases/order-state/TC-ORDER-STATE-046.md) |
-| confirmed | canceled | Thành công | [021](../test-cases/order-state/TC-ORDER-STATE-021.md) | — (positive UI deferred; 052 chỉ dùng API setup) |
-| shipping | canceled | Từ chối, giữ shipping | [022](../test-cases/order-state/TC-ORDER-STATE-022.md) | [051](../test-cases/order-state/TC-ORDER-STATE-051.md) (stale, có điều kiện) |
-| delivered | canceled | Từ chối, giữ delivered | [023](../test-cases/order-state/TC-ORDER-STATE-023.md) | — (deferred) |
-| canceled | canceled | Giữ canceled; response chưa xác định | — (deferred) | — (deferred) |
+| [TC-ORDER-STATE-004](../test-cases/order-state/TC-ORDER-STATE-004.md) | Quản trị viên hủy đơn Chờ xác nhận | FR-10; FR-18 | EP-OS-04 | Equivalence Partitioning |
+| [TC-ORDER-STATE-005](../test-cases/order-state/TC-ORDER-STATE-005.md) | Quản trị viên hủy đơn Đã xác nhận | FR-10; FR-18 | EP-OS-05 | Equivalence Partitioning |
+| [TC-ORDER-STATE-006](../test-cases/order-state/TC-ORDER-STATE-006.md) | Không cho chuyển đơn Chờ xác nhận sang Đang giao | FR-10; FR-18 | EP-OS-06 | Equivalence Partitioning |
+| [TC-ORDER-STATE-008](../test-cases/order-state/TC-ORDER-STATE-008.md) | Không cho chuyển đơn Đã xác nhận sang Chờ xác nhận | FR-10; FR-18 | EP-OS-07 | Equivalence Partitioning |
+| [TC-ORDER-STATE-009](../test-cases/order-state/TC-ORDER-STATE-009.md) | Không cho chuyển đơn Đã xác nhận sang Đã giao | FR-10; FR-18 | EP-OS-07 | Equivalence Partitioning |
+| [TC-ORDER-STATE-011](../test-cases/order-state/TC-ORDER-STATE-011.md) | Không cho chuyển đơn Đang giao sang Đã xác nhận | FR-10; FR-18 | EP-OS-08 | Equivalence Partitioning |
+| [TC-ORDER-STATE-012](../test-cases/order-state/TC-ORDER-STATE-012.md) | Không cho chuyển đơn Đã giao sang Chờ xác nhận | FR-10; FR-18 | EP-OS-09 | Equivalence Partitioning |
+| [TC-ORDER-STATE-015](../test-cases/order-state/TC-ORDER-STATE-015.md) | Không cho chuyển đơn Đã giao sang Đã hủy | FR-10; FR-18 | EP-OS-09 | Equivalence Partitioning |
+| [TC-ORDER-STATE-016](../test-cases/order-state/TC-ORDER-STATE-016.md) | Không cho chuyển đơn Đã hủy sang Chờ xác nhận | FR-10; FR-18 | EP-OS-10 | Equivalence Partitioning |
+| [TC-ORDER-STATE-019](../test-cases/order-state/TC-ORDER-STATE-019.md) | Không cho chuyển đơn Đã hủy sang Đã giao | FR-10; FR-18 | EP-OS-10 | Equivalence Partitioning |
+| [TC-ORDER-STATE-021](../test-cases/order-state/TC-ORDER-STATE-021.md) | Khách hàng hủy đơn Đã xác nhận | FR-10; FR-18 | EP-OS-12, EP-OS-22 | Equivalence Partitioning |
+| [TC-ORDER-STATE-022](../test-cases/order-state/TC-ORDER-STATE-022.md) | Khách hàng không được hủy đơn Đang giao | FR-10; FR-18 | EP-OS-13, EP-OS-22 | Equivalence Partitioning |
+| [TC-ORDER-STATE-023](../test-cases/order-state/TC-ORDER-STATE-023.md) | Khách hàng không được hủy đơn Đã giao | FR-10; FR-18 | EP-OS-14, EP-OS-22 | Equivalence Partitioning |
+| [TC-ORDER-STATE-025](../test-cases/order-state/TC-ORDER-STATE-025.md) | Khách hàng không được quản lý trạng thái đơn hàng | FR-12; FR-18; SEC-03 | EP-OS-31 | Equivalence Partitioning |
+| [TC-ORDER-STATE-041](../test-cases/order-state/TC-ORDER-STATE-041.md) | Xác nhận, giao hàng và hoàn thành một đơn | FR-10; FR-18 | EP-OS-01, EP-OS-02, EP-OS-03 | Equivalence Partitioning |
+| [TC-ORDER-STATE-046](../test-cases/order-state/TC-ORDER-STATE-046.md) | Khách hàng hủy đơn Chờ xác nhận | FR-10; FR-18 | EP-OS-11, EP-OS-22 | Equivalence Partitioning |
+| [TC-ORDER-STATE-051](../test-cases/order-state/TC-ORDER-STATE-051.md) | Không hủy được đơn đã giao đi từ trang chưa tải lại | FR-10; FR-18 | EP-OS-13 | Equivalence Partitioning |
+| [TC-ORDER-STATE-052](../test-cases/order-state/TC-ORDER-STATE-052.md) | Không chuyển đơn đã hủy sang Đang giao từ trang chưa tải lại | FR-10; FR-18 | EP-OS-10 | Equivalence Partitioning |
 
-4/5 User source states có active standalone API case; canceled retry deferred. UI đại diện không thay exhaustive UI state coverage.
+### Partition → Test Case
 
-### Boundary → Test Case (Pool B)
-
-| Variable | Kết quả đánh giá | BVA case |
+| Partition | Cases | Phạm vi |
 |---|---|---|
-| State/role/ownership/existence | Categorical; không có min/max | N/A |
-| Order ID/time/counter | Không có requirement về ordered threshold | Chưa sinh BVA values |
+| EP-OS-01 | [041](../test-cases/order-state/TC-ORDER-STATE-041.md) | Có đại diện thiết kế |
+| EP-OS-02 | [041](../test-cases/order-state/TC-ORDER-STATE-041.md) | Có đại diện thiết kế |
+| EP-OS-03 | [041](../test-cases/order-state/TC-ORDER-STATE-041.md) | Có đại diện thiết kế |
+| EP-OS-04 | [004](../test-cases/order-state/TC-ORDER-STATE-004.md) | Có đại diện thiết kế |
+| EP-OS-05 | [005](../test-cases/order-state/TC-ORDER-STATE-005.md) | Có đại diện thiết kế |
+| EP-OS-06 | [006](../test-cases/order-state/TC-ORDER-STATE-006.md) | Có đại diện thiết kế |
+| EP-OS-07 | [008](../test-cases/order-state/TC-ORDER-STATE-008.md), [009](../test-cases/order-state/TC-ORDER-STATE-009.md) | Có đại diện thiết kế |
+| EP-OS-08 | [011](../test-cases/order-state/TC-ORDER-STATE-011.md) | Có đại diện thiết kế |
+| EP-OS-09 | [012](../test-cases/order-state/TC-ORDER-STATE-012.md), [015](../test-cases/order-state/TC-ORDER-STATE-015.md) | Có đại diện thiết kế |
+| EP-OS-10 | [016](../test-cases/order-state/TC-ORDER-STATE-016.md), [019](../test-cases/order-state/TC-ORDER-STATE-019.md), [052](../test-cases/order-state/TC-ORDER-STATE-052.md) | Có đại diện thiết kế |
+| EP-OS-11 | [046](../test-cases/order-state/TC-ORDER-STATE-046.md) | Có đại diện thiết kế |
+| EP-OS-12 | [021](../test-cases/order-state/TC-ORDER-STATE-021.md) | Có đại diện thiết kế |
+| EP-OS-13 | [022](../test-cases/order-state/TC-ORDER-STATE-022.md), [051](../test-cases/order-state/TC-ORDER-STATE-051.md) | Có đại diện thiết kế |
+| EP-OS-14 | [023](../test-cases/order-state/TC-ORDER-STATE-023.md) | Có đại diện thiết kế |
+| EP-OS-15 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-16 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-17 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-18 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-19 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-20 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-21 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-22 | [021](../test-cases/order-state/TC-ORDER-STATE-021.md), [022](../test-cases/order-state/TC-ORDER-STATE-022.md), [023](../test-cases/order-state/TC-ORDER-STATE-023.md), [046](../test-cases/order-state/TC-ORDER-STATE-046.md) | Có đại diện thiết kế |
+| EP-OS-23 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-24 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-25 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-26 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-27 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-28 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-29 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-30 | — | Chưa kiểm tra trong phạm vi này |
+| EP-OS-31 | [025](../test-cases/order-state/TC-ORDER-STATE-025.md) | Có đại diện thiết kế |
 
-0 boundary được requirement cung cấp, 0 BVA case. Đây là kết quả applicability, không tuyên bố đã kiểm chứng numeric boundaries.
+### Boundary → Test Case
 
-### Test Case → Requirement / Partition / Result (Pool B)
+| Biến / giá trị | Cases |
+|---|---|
+| Không có miền có thứ tự để áp dụng BVA | — |
 
-| Test Case | Requirement | Partitions | Technique | Result | Related Bugs |
-|---|---|---|---|---|---|
-| [TC-ORDER-STATE-001](../test-cases/order-state/TC-ORDER-STATE-001.md) | FR-10; FR-12; FR-18; SEC-02; SEC-03 | EP-OS-01, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-002](../test-cases/order-state/TC-ORDER-STATE-002.md) | FR-10; FR-12; FR-18; SEC-02; SEC-03 | EP-OS-02, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-003](../test-cases/order-state/TC-ORDER-STATE-003.md) | FR-10; FR-12; FR-18; SEC-02; SEC-03 | EP-OS-03, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-004](../test-cases/order-state/TC-ORDER-STATE-004.md) | FR-10; FR-12; FR-18; SEC-02; SEC-03 | EP-OS-04, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-005](../test-cases/order-state/TC-ORDER-STATE-005.md) | FR-10; FR-12; FR-18; SEC-02; SEC-03 | EP-OS-05, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-006](../test-cases/order-state/TC-ORDER-STATE-006.md) | FR-10; FR-12; FR-18; SEC-02; SEC-03 | EP-OS-06, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-008](../test-cases/order-state/TC-ORDER-STATE-008.md) | FR-10; FR-12; FR-18; SEC-02; SEC-03 | EP-OS-07, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-009](../test-cases/order-state/TC-ORDER-STATE-009.md) | FR-10; FR-12; FR-18; SEC-02; SEC-03 | EP-OS-07, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-011](../test-cases/order-state/TC-ORDER-STATE-011.md) | FR-10; FR-12; FR-18; SEC-02; SEC-03 | EP-OS-08, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-012](../test-cases/order-state/TC-ORDER-STATE-012.md) | FR-10; FR-12; FR-18; SEC-02; SEC-03 | EP-OS-09, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-015](../test-cases/order-state/TC-ORDER-STATE-015.md) | FR-10; FR-12; FR-18; SEC-02; SEC-03 | EP-OS-09, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-016](../test-cases/order-state/TC-ORDER-STATE-016.md) | FR-10; FR-12; FR-18; SEC-02; SEC-03 | EP-OS-10, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-019](../test-cases/order-state/TC-ORDER-STATE-019.md) | FR-10; FR-12; FR-18; SEC-02; SEC-03 | EP-OS-10, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-020](../test-cases/order-state/TC-ORDER-STATE-020.md) | FR-10; SEC-02 | EP-OS-11, EP-OS-18, EP-OS-22, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-021](../test-cases/order-state/TC-ORDER-STATE-021.md) | FR-10; SEC-02 | EP-OS-12, EP-OS-18, EP-OS-22, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-022](../test-cases/order-state/TC-ORDER-STATE-022.md) | FR-10; SEC-02 | EP-OS-13, EP-OS-18, EP-OS-22, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-023](../test-cases/order-state/TC-ORDER-STATE-023.md) | FR-10; SEC-02 | EP-OS-14, EP-OS-18, EP-OS-22, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-025](../test-cases/order-state/TC-ORDER-STATE-025.md) | FR-10; FR-12; SEC-02; SEC-03 | EP-OS-17, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-027](../test-cases/order-state/TC-ORDER-STATE-027.md) | FR-10; FR-11 (liên quan); SEC-02; AS-OS-03 cần review | EP-OS-23, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-029](../test-cases/order-state/TC-ORDER-STATE-029.md) | FR-10; SEC-02 | EP-OS-19, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-030](../test-cases/order-state/TC-ORDER-STATE-030.md) | FR-10; FR-12; SEC-02 | EP-OS-19, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-032](../test-cases/order-state/TC-ORDER-STATE-032.md) | FR-10; FR-12; SEC-02 | EP-OS-20, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-033](../test-cases/order-state/TC-ORDER-STATE-033.md) | FR-10; FR-12; SEC-02; SEC-03 | EP-OS-21, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-034](../test-cases/order-state/TC-ORDER-STATE-034.md) | FR-10; FR-12; SEC-02; SEC-03 | EP-OS-26, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-035](../test-cases/order-state/TC-ORDER-STATE-035.md) | FR-10; FR-12; SEC-02; SEC-03 | EP-OS-27, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-038](../test-cases/order-state/TC-ORDER-STATE-038.md) | FR-10; FR-12; SEC-02; SEC-03 | EP-OS-30, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-039](../test-cases/order-state/TC-ORDER-STATE-039.md) | FR-10; FR-12; SEC-02 | EP-OS-25, EP-OS-18, EP-OS-16 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-040](../test-cases/order-state/TC-ORDER-STATE-040.md) | FR-10; SEC-02 | EP-OS-25, EP-OS-18 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-041](../test-cases/order-state/TC-ORDER-STATE-041.md) | FR-10; FR-18; FR-12 | EP-OS-01, EP-OS-02, EP-OS-03, EP-OS-16, EP-OS-18, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-046](../test-cases/order-state/TC-ORDER-STATE-046.md) | FR-10 | EP-OS-11, EP-OS-18, EP-OS-22, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-051](../test-cases/order-state/TC-ORDER-STATE-051.md) | FR-10; FR-18; AS-OS-04 | EP-OS-02, EP-OS-13, EP-OS-16, EP-OS-18, EP-OS-22, EP-OS-24 | Equivalence Partitioning | Not Run | None |
-| [TC-ORDER-STATE-052](../test-cases/order-state/TC-ORDER-STATE-052.md) | FR-10; FR-18; AS-OS-04 | EP-OS-12, EP-OS-10, EP-OS-16, EP-OS-18, EP-OS-22, EP-OS-24 | Equivalence Partitioning | Not Run | None |
+## Pool C — Quản lý sản phẩm
 
-32 active cases = 28 API + 4 UI/sequence/stale; 27 active partitions, 3 deferred. 2 stale sequences chỉ exercise backend nếu request tới server sau thay đổi state; không chứng minh concurrency, execution coverage hoặc confirmed bug.
+[Phân tích](product-crud-analysis.md) · [Cases](../test-cases/product-crud/README.md) · [Test run](../test-runs/pool-c-test-run.md)
 
-### Tổng số thiết kế hiện tại
+### Test Case → Requirement / Partition / Technique
 
-| Pool | Feature | EP cases | BVA cases | Not Run |
-|---|---|---:|---:|---:|
-| A | FR-04 | 13 | 6 | 19 |
-| B | FR-10 | 32 | 0 | 32 |
-| C | FR-15 | 25 | 23 | 48 |
-| D | FR-04 / FR-20 Mobile | 16 | 4 | 20 |
-| Tổng | 4 features | 86 | 33 | 119 |
+| Test Case | Mục tiêu | Requirement | Partitions | Technique |
+|---|---|---|---|---|
+| [TC-PRODUCT-CRUD-001](../test-cases/product-crud/TC-PRODUCT-CRUD-001.md) | Thêm sản phẩm với tên 0 ký tự | FR-15; FR-12 | EP-PC-02, EP-PC-22 | BVA |
+| [TC-PRODUCT-CRUD-002](../test-cases/product-crud/TC-PRODUCT-CRUD-002.md) | Thêm sản phẩm với tên 1 ký tự | FR-15; FR-12 | EP-PC-01, EP-PC-22 | BVA |
+| [TC-PRODUCT-CRUD-003](../test-cases/product-crud/TC-PRODUCT-CRUD-003.md) | Thêm sản phẩm với tên 2 ký tự | FR-15; FR-12 | EP-PC-01, EP-PC-22 | BVA |
+| [TC-PRODUCT-CRUD-004](../test-cases/product-crud/TC-PRODUCT-CRUD-004.md) | Thêm sản phẩm với tên 254 ký tự | FR-15; FR-12 | EP-PC-01, EP-PC-22 | BVA |
+| [TC-PRODUCT-CRUD-005](../test-cases/product-crud/TC-PRODUCT-CRUD-005.md) | Thêm sản phẩm với tên 255 ký tự | FR-15; FR-12 | EP-PC-01, EP-PC-22 | BVA |
+| [TC-PRODUCT-CRUD-006](../test-cases/product-crud/TC-PRODUCT-CRUD-006.md) | Thêm sản phẩm với tên 256 ký tự | FR-15; FR-12 | EP-PC-03, EP-PC-22 | BVA |
+| [TC-PRODUCT-CRUD-013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md) | Sửa sản phẩm với tên 0 ký tự | FR-15; FR-12 | EP-PC-02, EP-PC-23 | BVA |
+| [TC-PRODUCT-CRUD-014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md) | Sửa sản phẩm với tên 1 ký tự | FR-15; FR-12 | EP-PC-01, EP-PC-23 | BVA |
+| [TC-PRODUCT-CRUD-017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md) | Sửa sản phẩm với tên 255 ký tự | FR-15; FR-12 | EP-PC-01, EP-PC-23 | BVA |
+| [TC-PRODUCT-CRUD-018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md) | Sửa sản phẩm với tên 256 ký tự | FR-15; FR-12 | EP-PC-03, EP-PC-23 | BVA |
+| [TC-PRODUCT-CRUD-025](../test-cases/product-crud/TC-PRODUCT-CRUD-025.md) | Thêm sản phẩm với giá -1 | FR-15; FR-12 | EP-PC-08, EP-PC-22 | BVA |
+| [TC-PRODUCT-CRUD-026](../test-cases/product-crud/TC-PRODUCT-CRUD-026.md) | Thêm sản phẩm với giá 0 | FR-15; FR-12 | EP-PC-07, EP-PC-22 | BVA |
+| [TC-PRODUCT-CRUD-027](../test-cases/product-crud/TC-PRODUCT-CRUD-027.md) | Thêm sản phẩm với giá 1 | FR-15; FR-12 | EP-PC-06, EP-PC-22 | BVA |
+| [TC-PRODUCT-CRUD-032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md) | Sửa sản phẩm với giá 0 | FR-15; FR-12 | EP-PC-07, EP-PC-23 | BVA |
+| [TC-PRODUCT-CRUD-033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md) | Sửa sản phẩm với giá 1 | FR-15; FR-12 | EP-PC-06, EP-PC-23 | BVA |
+| [TC-PRODUCT-CRUD-034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md) | Sửa sản phẩm với giá -1 | FR-15; FR-12 | EP-PC-08, EP-PC-23 | BVA |
+| [TC-PRODUCT-CRUD-037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md) | Thêm mới sản phẩm hợp lệ | FR-15; FR-12 | EP-PC-01, EP-PC-06, EP-PC-12, EP-PC-22, EP-PC-26, EP-PC-27 | Equivalence Partitioning |
+| [TC-PRODUCT-CRUD-039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md) | Sửa đầy đủ các trường của một sản phẩm | FR-15; FR-12 | EP-PC-01, EP-PC-06, EP-PC-12, EP-PC-23, EP-PC-26, EP-PC-27 | Equivalence Partitioning |
+| [TC-PRODUCT-CRUD-041](../test-cases/product-crud/TC-PRODUCT-CRUD-041.md) | Xem sản phẩm và mở form sửa không làm thay đổi dữ liệu | FR-15; FR-12 | EP-PC-21, EP-PC-24 | Equivalence Partitioning |
+| [TC-PRODUCT-CRUD-043](../test-cases/product-crud/TC-PRODUCT-CRUD-043.md) | Xóa đúng sản phẩm thử | FR-15; FR-12 | EP-PC-21, EP-PC-25 | Equivalence Partitioning |
+| [TC-PRODUCT-CRUD-051](../test-cases/product-crud/TC-PRODUCT-CRUD-051.md) | Thêm sản phẩm với giá abc | FR-15; FR-12 | EP-PC-11, EP-PC-22 | Equivalence Partitioning |
+| [TC-PRODUCT-CRUD-054](../test-cases/product-crud/TC-PRODUCT-CRUD-054.md) | Sửa sản phẩm với giá abc | FR-15; FR-12 | EP-PC-11, EP-PC-23 | Equivalence Partitioning |
+| [TC-PRODUCT-CRUD-073](../test-cases/product-crud/TC-PRODUCT-CRUD-073.md) | Khách hàng không được quản lý sản phẩm | FR-12; SEC-03 | EP-PC-17 | Equivalence Partitioning |
+| [TC-PRODUCT-CRUD-075](../test-cases/product-crud/TC-PRODUCT-CRUD-075.md) | Chuyển lựa chọn từ sản phẩm P sang Q rồi chỉ lưu Q | FR-15; FR-12 | EP-PC-23, EP-PC-29 | Equivalence Partitioning |
 
-Số đếm trên chỉ là thiết kế; không tự xác nhận review/phê duyệt của Pool A/B/C/D.
+### Partition → Test Case
 
-## Pool C — FR-15: Product CRUD
-
-Nguồn: [phân tích Pool C](product-crud-analysis.md), [fixture/danh mục](../test-cases/product-crud/README.md). **78 → 48 cases: 23 BVA + 25 EP; 21 UI + 27 API**; module `PRODUCT-CRUD`. ID/nội dung cases giữ nguyên, không ghép requests. Tất cả Not Run / None. Tradeoffs: [quyết định tinh gọn](product-crud-analysis.md#quyết-định-tinh-gọn-theo-yêu-cầu-người-dùng).
-
-### Requirement → Test Case (Pool C)
-
-| Requirement / Quy tắc nội bộ | Cases | Giới hạn |
+| Partition | Cases | Phạm vi |
 |---|---|---|
-| FR-15 R-PC-01: Add/View/Edit/Delete | [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md), [041](../test-cases/product-crud/TC-PRODUCT-CRUD-041.md), [043](../test-cases/product-crud/TC-PRODUCT-CRUD-043.md) | Nominal UI 037/039/041/043 với GET/snapshot/readback; direct API nominal giảm ưu tiên; delete fixture không liên kết order/cart |
-| FR-15 R-PC-02: required name, max 255 | [001](../test-cases/product-crud/TC-PRODUCT-CRUD-001.md), [002](../test-cases/product-crud/TC-PRODUCT-CRUD-002.md), [003](../test-cases/product-crud/TC-PRODUCT-CRUD-003.md), [004](../test-cases/product-crud/TC-PRODUCT-CRUD-004.md), [005](../test-cases/product-crud/TC-PRODUCT-CRUD-005.md), [006](../test-cases/product-crud/TC-PRODUCT-CRUD-006.md), [007](../test-cases/product-crud/TC-PRODUCT-CRUD-007.md), [012](../test-cases/product-crud/TC-PRODUCT-CRUD-012.md), [013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md), [014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md), [017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md), [018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md), [019](../test-cases/product-crud/TC-PRODUCT-CRUD-019.md), [024](../test-cases/product-crud/TC-PRODUCT-CRUD-024.md), [045](../test-cases/product-crud/TC-PRODUCT-CRUD-045.md), [047](../test-cases/product-crud/TC-PRODUCT-CRUD-047.md) | Name BVA theo đường; missing POST/PUT còn, null deferred; không suy Unicode/trim |
-| FR-15 R-PC-03: price required, >0 | [025](../test-cases/product-crud/TC-PRODUCT-CRUD-025.md), [026](../test-cases/product-crud/TC-PRODUCT-CRUD-026.md), [027](../test-cases/product-crud/TC-PRODUCT-CRUD-027.md), [028](../test-cases/product-crud/TC-PRODUCT-CRUD-028.md), [029](../test-cases/product-crud/TC-PRODUCT-CRUD-029.md), [032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md), [033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md), [034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md), [035](../test-cases/product-crud/TC-PRODUCT-CRUD-035.md), [049](../test-cases/product-crud/TC-PRODUCT-CRUD-049.md), [051](../test-cases/product-crud/TC-PRODUCT-CRUD-051.md), [052](../test-cases/product-crud/TC-PRODUCT-CRUD-052.md), [054](../test-cases/product-crud/TC-PRODUCT-CRUD-054.md) | Integer slice quanh 0, API missing/abc còn; null và UI blank deferred; không đặt integer-only/max |
-| FR-15 R-PC-04: existing category required | [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md), [055](../test-cases/product-crud/TC-PRODUCT-CRUD-055.md), [057](../test-cases/product-crud/TC-PRODUCT-CRUD-057.md), [058](../test-cases/product-crud/TC-PRODUCT-CRUD-058.md), [060](../test-cases/product-crud/TC-PRODUCT-CRUD-060.md) | Existing/missing/non-existing category còn; null và stale deferred; membership không có BVA số học |
-| FR-15 R-PC-05: edit isolation | [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md), [075](../test-cases/product-crud/TC-PRODUCT-CRUD-075.md), [076](../test-cases/product-crud/TC-PRODUCT-CRUD-076.md), [013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md), [014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md), [017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md), [018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md), [019](../test-cases/product-crud/TC-PRODUCT-CRUD-019.md), [024](../test-cases/product-crud/TC-PRODUCT-CRUD-024.md), [032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md), [033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md), [034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md), [035](../test-cases/product-crud/TC-PRODUCT-CRUD-035.md) | Q/R trong UI trước/sau reload và API; target switch và extra body id riêng; direct API nominal edit giảm ưu tiên |
-| FR-12 / SEC-02 / SEC-03 R-PC-06: mutation access | [061](../test-cases/product-crud/TC-PRODUCT-CRUD-061.md), [062](../test-cases/product-crud/TC-PRODUCT-CRUD-062.md), [063](../test-cases/product-crud/TC-PRODUCT-CRUD-063.md), [064](../test-cases/product-crud/TC-PRODUCT-CRUD-064.md), [067](../test-cases/product-crud/TC-PRODUCT-CRUD-067.md), [068](../test-cases/product-crud/TC-PRODUCT-CRUD-068.md), [069](../test-cases/product-crud/TC-PRODUCT-CRUD-069.md), [071](../test-cases/product-crud/TC-PRODUCT-CRUD-071.md) | Thiếu JWT/user role đủ POST/PUT/DELETE; malformed chỉ POST, tampered chỉ PUT; không áp gate lên GET public |
-| FR-12 R-PC-06: UI Admin role | [073](../test-cases/product-crud/TC-PRODUCT-CRUD-073.md) | User thường không vào Product CRUD Admin; không bao phủ toàn bộ Admin |
+| EP-PC-01 | [002](../test-cases/product-crud/TC-PRODUCT-CRUD-002.md), [003](../test-cases/product-crud/TC-PRODUCT-CRUD-003.md), [004](../test-cases/product-crud/TC-PRODUCT-CRUD-004.md), [005](../test-cases/product-crud/TC-PRODUCT-CRUD-005.md), [014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md), [017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md), [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md) | Có đại diện thiết kế |
+| EP-PC-02 | [001](../test-cases/product-crud/TC-PRODUCT-CRUD-001.md), [013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md) | Có đại diện thiết kế |
+| EP-PC-03 | [006](../test-cases/product-crud/TC-PRODUCT-CRUD-006.md), [018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md) | Có đại diện thiết kế |
+| EP-PC-04 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PC-05 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PC-06 | [027](../test-cases/product-crud/TC-PRODUCT-CRUD-027.md), [033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md), [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md) | Có đại diện thiết kế |
+| EP-PC-07 | [026](../test-cases/product-crud/TC-PRODUCT-CRUD-026.md), [032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md) | Có đại diện thiết kế |
+| EP-PC-08 | [025](../test-cases/product-crud/TC-PRODUCT-CRUD-025.md), [034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md) | Có đại diện thiết kế |
+| EP-PC-09 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PC-10 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PC-11 | [051](../test-cases/product-crud/TC-PRODUCT-CRUD-051.md), [054](../test-cases/product-crud/TC-PRODUCT-CRUD-054.md) | Có đại diện thiết kế |
+| EP-PC-12 | [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md) | Có đại diện thiết kế |
+| EP-PC-13 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PC-14 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PC-15 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PC-16 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PC-17 | [073](../test-cases/product-crud/TC-PRODUCT-CRUD-073.md) | Có đại diện thiết kế |
+| EP-PC-18 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PC-19 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PC-20 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PC-21 | [041](../test-cases/product-crud/TC-PRODUCT-CRUD-041.md), [043](../test-cases/product-crud/TC-PRODUCT-CRUD-043.md) | Có đại diện thiết kế |
+| EP-PC-22 | [001](../test-cases/product-crud/TC-PRODUCT-CRUD-001.md), [002](../test-cases/product-crud/TC-PRODUCT-CRUD-002.md), [003](../test-cases/product-crud/TC-PRODUCT-CRUD-003.md), [004](../test-cases/product-crud/TC-PRODUCT-CRUD-004.md), [005](../test-cases/product-crud/TC-PRODUCT-CRUD-005.md), [006](../test-cases/product-crud/TC-PRODUCT-CRUD-006.md), [025](../test-cases/product-crud/TC-PRODUCT-CRUD-025.md), [026](../test-cases/product-crud/TC-PRODUCT-CRUD-026.md), [027](../test-cases/product-crud/TC-PRODUCT-CRUD-027.md), [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [051](../test-cases/product-crud/TC-PRODUCT-CRUD-051.md) | Có đại diện thiết kế |
+| EP-PC-23 | [013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md), [014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md), [017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md), [018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md), [032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md), [033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md), [034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md), [054](../test-cases/product-crud/TC-PRODUCT-CRUD-054.md), [075](../test-cases/product-crud/TC-PRODUCT-CRUD-075.md) | Có đại diện thiết kế |
+| EP-PC-24 | [041](../test-cases/product-crud/TC-PRODUCT-CRUD-041.md) | Có đại diện thiết kế |
+| EP-PC-25 | [043](../test-cases/product-crud/TC-PRODUCT-CRUD-043.md) | Có đại diện thiết kế |
+| EP-PC-26 | [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md) | Có đại diện thiết kế |
+| EP-PC-27 | [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md) | Có đại diện thiết kế |
+| EP-PC-28 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PC-29 | [075](../test-cases/product-crud/TC-PRODUCT-CRUD-075.md) | Có đại diện thiết kế |
+| EP-PC-30 | — | Chưa kiểm tra trong phạm vi này |
 
-### Partition → Test Case (Pool C)
+### Boundary → Test Case
 
-Giữ đủ 30 partitions: **26 active, 4 deferred (05/10/14/30)**. Có đại diện không đồng nghĩa coverage mọi UI/API/method hoặc đã execute.
+| Biến / giá trị | Cases |
+|---|---|
+| Thêm sản phẩm với tên 0 ký tự | [001](../test-cases/product-crud/TC-PRODUCT-CRUD-001.md) |
+| Thêm sản phẩm với tên 1 ký tự | [002](../test-cases/product-crud/TC-PRODUCT-CRUD-002.md) |
+| Thêm sản phẩm với tên 2 ký tự | [003](../test-cases/product-crud/TC-PRODUCT-CRUD-003.md) |
+| Thêm sản phẩm với tên 254 ký tự | [004](../test-cases/product-crud/TC-PRODUCT-CRUD-004.md) |
+| Thêm sản phẩm với tên 255 ký tự | [005](../test-cases/product-crud/TC-PRODUCT-CRUD-005.md) |
+| Thêm sản phẩm với tên 256 ký tự | [006](../test-cases/product-crud/TC-PRODUCT-CRUD-006.md) |
+| Sửa sản phẩm với tên 0 ký tự | [013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md) |
+| Sửa sản phẩm với tên 1 ký tự | [014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md) |
+| Sửa sản phẩm với tên 255 ký tự | [017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md) |
+| Sửa sản phẩm với tên 256 ký tự | [018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md) |
+| Thêm sản phẩm với giá -1 | [025](../test-cases/product-crud/TC-PRODUCT-CRUD-025.md) |
+| Thêm sản phẩm với giá 0 | [026](../test-cases/product-crud/TC-PRODUCT-CRUD-026.md) |
+| Thêm sản phẩm với giá 1 | [027](../test-cases/product-crud/TC-PRODUCT-CRUD-027.md) |
+| Sửa sản phẩm với giá 0 | [032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md) |
+| Sửa sản phẩm với giá 1 | [033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md) |
+| Sửa sản phẩm với giá -1 | [034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md) |
 
-| Partition | Cases | Giới hạn |
+## Pool D — Hồ sơ trên thiết bị di động
+
+[Phân tích](profile-mobile-analysis.md) · [Cases](../test-cases/profile-mobile/README.md) · [Test run](../test-runs/pool-d-test-run.md)
+
+### Test Case → Requirement / Partition / Technique
+
+| Test Case | Mục tiêu | Requirement | Partitions | Technique |
+|---|---|---|---|---|
+| [TC-PROFILE-MOBILE-001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md) | Từ chối số điện thoại 9 chữ số | FR-04; FR-20 | EP-PM-02 | BVA |
+| [TC-PROFILE-MOBILE-002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md) | Chấp nhận số điện thoại 10 chữ số | FR-04; FR-20 | EP-PM-01, EP-PM-15 | BVA |
+| [TC-PROFILE-MOBILE-003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md) | Chấp nhận số điện thoại 11 chữ số | FR-04; FR-20 | EP-PM-01, EP-PM-15 | BVA |
+| [TC-PROFILE-MOBILE-004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md) | Từ chối số điện thoại 12 chữ số | FR-04; FR-20 | EP-PM-03 | BVA |
+| [TC-PROFILE-MOBILE-005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md) | Từ chối số điện thoại không bắt đầu bằng 0 | FR-04; FR-20 | EP-PM-04 | Equivalence Partitioning |
+| [TC-PROFILE-MOBILE-006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md) | Từ chối số điện thoại chứa chữ cái khi dán | FR-04; FR-20 | EP-PM-05 | Equivalence Partitioning |
+| [TC-PROFILE-MOBILE-013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md) | Lưu đồng thời Họ Tên, Số điện thoại và Địa chỉ | FR-04; FR-20 | EP-PM-01, EP-PM-06, EP-PM-07, EP-PM-15 | Equivalence Partitioning |
+| [TC-PROFILE-MOBILE-014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md) | Email không sửa được bằng gõ hoặc dán | FR-04; FR-20 | EP-PM-08 | Equivalence Partitioning |
+| [TC-PROFILE-MOBILE-016](../test-cases/profile-mobile/TC-PROFILE-MOBILE-016.md) | Chưa đăng nhập không thể sửa hồ sơ | FR-04; FR-20 | EP-PM-17 | Equivalence Partitioning |
+| [TC-PROFILE-MOBILE-017](../test-cases/profile-mobile/TC-PROFILE-MOBILE-017.md) | Đăng xuất không giữ quyền sửa hồ sơ trước đó | FR-04; FR-20 | EP-PM-18 | Equivalence Partitioning |
+| [TC-PROFILE-MOBILE-018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md) | Đổi tài khoản rồi lưu đúng hồ sơ của người vừa đăng nhập | FR-04; FR-20 | EP-PM-01, EP-PM-06, EP-PM-07, EP-PM-15, EP-PM-19 | Equivalence Partitioning |
+| [TC-PROFILE-MOBILE-028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md) | Hiển thị an toàn nội dung giống thẻ định dạng trong Họ Tên | FR-04; SEC-04; FR-20 | EP-PM-20 | Equivalence Partitioning |
+| [TC-PROFILE-MOBILE-029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md) | Hiển thị an toàn nội dung giống thẻ định dạng trong Địa chỉ giao hàng | FR-04; SEC-04; FR-20 | EP-PM-21 | Equivalence Partitioning |
+| [TC-PROFILE-MOBILE-030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Đăng nhập lại trên điện thoại tải hồ sơ vừa đổi trên trang web | FR-04; FR-20 | EP-PM-01, EP-PM-06, EP-PM-07, EP-PM-15 | Equivalence Partitioning |
+
+### Partition → Test Case
+
+| Partition | Cases | Phạm vi |
 |---|---|---|
-| EP-PC-01 | [002](../test-cases/product-crud/TC-PRODUCT-CRUD-002.md), [003](../test-cases/product-crud/TC-PRODUCT-CRUD-003.md), [004](../test-cases/product-crud/TC-PRODUCT-CRUD-004.md), [005](../test-cases/product-crud/TC-PRODUCT-CRUD-005.md), [014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md), [017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md), [025](../test-cases/product-crud/TC-PRODUCT-CRUD-025.md), [026](../test-cases/product-crud/TC-PRODUCT-CRUD-026.md), [027](../test-cases/product-crud/TC-PRODUCT-CRUD-027.md), [028](../test-cases/product-crud/TC-PRODUCT-CRUD-028.md), [029](../test-cases/product-crud/TC-PRODUCT-CRUD-029.md), [032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md), [033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md), [034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md), [035](../test-cases/product-crud/TC-PRODUCT-CRUD-035.md), [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md), [075](../test-cases/product-crud/TC-PRODUCT-CRUD-075.md) | Positive name trên UI; không còn direct API positive quanh biên |
-| EP-PC-02 | [001](../test-cases/product-crud/TC-PRODUCT-CRUD-001.md), [007](../test-cases/product-crud/TC-PRODUCT-CRUD-007.md), [013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md), [019](../test-cases/product-crud/TC-PRODUCT-CRUD-019.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-03 | [006](../test-cases/product-crud/TC-PRODUCT-CRUD-006.md), [012](../test-cases/product-crud/TC-PRODUCT-CRUD-012.md), [018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md), [024](../test-cases/product-crud/TC-PRODUCT-CRUD-024.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-04 | [045](../test-cases/product-crud/TC-PRODUCT-CRUD-045.md), [047](../test-cases/product-crud/TC-PRODUCT-CRUD-047.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-05 | — (deferred) | Deferred: null name khác missing; đã loại 046/048 |
-| EP-PC-06 | [001](../test-cases/product-crud/TC-PRODUCT-CRUD-001.md), [002](../test-cases/product-crud/TC-PRODUCT-CRUD-002.md), [003](../test-cases/product-crud/TC-PRODUCT-CRUD-003.md), [004](../test-cases/product-crud/TC-PRODUCT-CRUD-004.md), [005](../test-cases/product-crud/TC-PRODUCT-CRUD-005.md), [006](../test-cases/product-crud/TC-PRODUCT-CRUD-006.md), [007](../test-cases/product-crud/TC-PRODUCT-CRUD-007.md), [012](../test-cases/product-crud/TC-PRODUCT-CRUD-012.md), [013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md), [014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md), [017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md), [018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md), [019](../test-cases/product-crud/TC-PRODUCT-CRUD-019.md), [024](../test-cases/product-crud/TC-PRODUCT-CRUD-024.md), [027](../test-cases/product-crud/TC-PRODUCT-CRUD-027.md), [033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md), [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md), [075](../test-cases/product-crud/TC-PRODUCT-CRUD-075.md) | Positive price trên UI; integer slice, không có integer-only rule |
-| EP-PC-07 | [026](../test-cases/product-crud/TC-PRODUCT-CRUD-026.md), [029](../test-cases/product-crud/TC-PRODUCT-CRUD-029.md), [032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md), [035](../test-cases/product-crud/TC-PRODUCT-CRUD-035.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-08 | [025](../test-cases/product-crud/TC-PRODUCT-CRUD-025.md), [028](../test-cases/product-crud/TC-PRODUCT-CRUD-028.md), [034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-09 | [049](../test-cases/product-crud/TC-PRODUCT-CRUD-049.md), [052](../test-cases/product-crud/TC-PRODUCT-CRUD-052.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-10 | — (deferred) | Deferred: null price khác missing; đã loại 050/053 |
-| EP-PC-11 | [051](../test-cases/product-crud/TC-PRODUCT-CRUD-051.md), [054](../test-cases/product-crud/TC-PRODUCT-CRUD-054.md) | API abc POST/PUT; UI blank 077/078 giảm ưu tiên |
-| EP-PC-12 | [001](../test-cases/product-crud/TC-PRODUCT-CRUD-001.md), [002](../test-cases/product-crud/TC-PRODUCT-CRUD-002.md), [003](../test-cases/product-crud/TC-PRODUCT-CRUD-003.md), [004](../test-cases/product-crud/TC-PRODUCT-CRUD-004.md), [005](../test-cases/product-crud/TC-PRODUCT-CRUD-005.md), [006](../test-cases/product-crud/TC-PRODUCT-CRUD-006.md), [007](../test-cases/product-crud/TC-PRODUCT-CRUD-007.md), [012](../test-cases/product-crud/TC-PRODUCT-CRUD-012.md), [013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md), [014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md), [017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md), [018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md), [019](../test-cases/product-crud/TC-PRODUCT-CRUD-019.md), [024](../test-cases/product-crud/TC-PRODUCT-CRUD-024.md), [025](../test-cases/product-crud/TC-PRODUCT-CRUD-025.md), [026](../test-cases/product-crud/TC-PRODUCT-CRUD-026.md), [027](../test-cases/product-crud/TC-PRODUCT-CRUD-027.md), [028](../test-cases/product-crud/TC-PRODUCT-CRUD-028.md), [029](../test-cases/product-crud/TC-PRODUCT-CRUD-029.md), [032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md), [033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md), [034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md), [035](../test-cases/product-crud/TC-PRODUCT-CRUD-035.md), [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md), [075](../test-cases/product-crud/TC-PRODUCT-CRUD-075.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-13 | [055](../test-cases/product-crud/TC-PRODUCT-CRUD-055.md), [058](../test-cases/product-crud/TC-PRODUCT-CRUD-058.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-14 | — (deferred) | Deferred: null category khác missing; đã loại 056/059 |
-| EP-PC-15 | [057](../test-cases/product-crud/TC-PRODUCT-CRUD-057.md), [060](../test-cases/product-crud/TC-PRODUCT-CRUD-060.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-16 | [001](../test-cases/product-crud/TC-PRODUCT-CRUD-001.md), [002](../test-cases/product-crud/TC-PRODUCT-CRUD-002.md), [003](../test-cases/product-crud/TC-PRODUCT-CRUD-003.md), [004](../test-cases/product-crud/TC-PRODUCT-CRUD-004.md), [005](../test-cases/product-crud/TC-PRODUCT-CRUD-005.md), [006](../test-cases/product-crud/TC-PRODUCT-CRUD-006.md), [007](../test-cases/product-crud/TC-PRODUCT-CRUD-007.md), [012](../test-cases/product-crud/TC-PRODUCT-CRUD-012.md), [013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md), [014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md), [017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md), [018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md), [019](../test-cases/product-crud/TC-PRODUCT-CRUD-019.md), [024](../test-cases/product-crud/TC-PRODUCT-CRUD-024.md), [025](../test-cases/product-crud/TC-PRODUCT-CRUD-025.md), [026](../test-cases/product-crud/TC-PRODUCT-CRUD-026.md), [027](../test-cases/product-crud/TC-PRODUCT-CRUD-027.md), [028](../test-cases/product-crud/TC-PRODUCT-CRUD-028.md), [029](../test-cases/product-crud/TC-PRODUCT-CRUD-029.md), [032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md), [033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md), [034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md), [035](../test-cases/product-crud/TC-PRODUCT-CRUD-035.md), [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md), [041](../test-cases/product-crud/TC-PRODUCT-CRUD-041.md), [043](../test-cases/product-crud/TC-PRODUCT-CRUD-043.md), [045](../test-cases/product-crud/TC-PRODUCT-CRUD-045.md), [047](../test-cases/product-crud/TC-PRODUCT-CRUD-047.md), [049](../test-cases/product-crud/TC-PRODUCT-CRUD-049.md), [051](../test-cases/product-crud/TC-PRODUCT-CRUD-051.md), [052](../test-cases/product-crud/TC-PRODUCT-CRUD-052.md), [054](../test-cases/product-crud/TC-PRODUCT-CRUD-054.md), [055](../test-cases/product-crud/TC-PRODUCT-CRUD-055.md), [057](../test-cases/product-crud/TC-PRODUCT-CRUD-057.md), [058](../test-cases/product-crud/TC-PRODUCT-CRUD-058.md), [060](../test-cases/product-crud/TC-PRODUCT-CRUD-060.md), [075](../test-cases/product-crud/TC-PRODUCT-CRUD-075.md), [076](../test-cases/product-crud/TC-PRODUCT-CRUD-076.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-17 | [067](../test-cases/product-crud/TC-PRODUCT-CRUD-067.md), [068](../test-cases/product-crud/TC-PRODUCT-CRUD-068.md), [069](../test-cases/product-crud/TC-PRODUCT-CRUD-069.md), [073](../test-cases/product-crud/TC-PRODUCT-CRUD-073.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-18 | [061](../test-cases/product-crud/TC-PRODUCT-CRUD-061.md), [062](../test-cases/product-crud/TC-PRODUCT-CRUD-062.md), [063](../test-cases/product-crud/TC-PRODUCT-CRUD-063.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-19 | [064](../test-cases/product-crud/TC-PRODUCT-CRUD-064.md) | Malformed POST 064; PUT/DELETE giảm ưu tiên |
-| EP-PC-20 | [071](../test-cases/product-crud/TC-PRODUCT-CRUD-071.md) | Tampered PUT 071; POST/DELETE giảm ưu tiên |
-| EP-PC-21 | [013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md), [014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md), [017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md), [018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md), [019](../test-cases/product-crud/TC-PRODUCT-CRUD-019.md), [024](../test-cases/product-crud/TC-PRODUCT-CRUD-024.md), [032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md), [033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md), [034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md), [035](../test-cases/product-crud/TC-PRODUCT-CRUD-035.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md), [041](../test-cases/product-crud/TC-PRODUCT-CRUD-041.md), [043](../test-cases/product-crud/TC-PRODUCT-CRUD-043.md), [047](../test-cases/product-crud/TC-PRODUCT-CRUD-047.md), [052](../test-cases/product-crud/TC-PRODUCT-CRUD-052.md), [054](../test-cases/product-crud/TC-PRODUCT-CRUD-054.md), [058](../test-cases/product-crud/TC-PRODUCT-CRUD-058.md), [060](../test-cases/product-crud/TC-PRODUCT-CRUD-060.md), [062](../test-cases/product-crud/TC-PRODUCT-CRUD-062.md), [063](../test-cases/product-crud/TC-PRODUCT-CRUD-063.md), [068](../test-cases/product-crud/TC-PRODUCT-CRUD-068.md), [069](../test-cases/product-crud/TC-PRODUCT-CRUD-069.md), [071](../test-cases/product-crud/TC-PRODUCT-CRUD-071.md), [075](../test-cases/product-crud/TC-PRODUCT-CRUD-075.md), [076](../test-cases/product-crud/TC-PRODUCT-CRUD-076.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-22 | [001](../test-cases/product-crud/TC-PRODUCT-CRUD-001.md), [002](../test-cases/product-crud/TC-PRODUCT-CRUD-002.md), [003](../test-cases/product-crud/TC-PRODUCT-CRUD-003.md), [004](../test-cases/product-crud/TC-PRODUCT-CRUD-004.md), [005](../test-cases/product-crud/TC-PRODUCT-CRUD-005.md), [006](../test-cases/product-crud/TC-PRODUCT-CRUD-006.md), [007](../test-cases/product-crud/TC-PRODUCT-CRUD-007.md), [012](../test-cases/product-crud/TC-PRODUCT-CRUD-012.md), [025](../test-cases/product-crud/TC-PRODUCT-CRUD-025.md), [026](../test-cases/product-crud/TC-PRODUCT-CRUD-026.md), [027](../test-cases/product-crud/TC-PRODUCT-CRUD-027.md), [028](../test-cases/product-crud/TC-PRODUCT-CRUD-028.md), [029](../test-cases/product-crud/TC-PRODUCT-CRUD-029.md), [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [045](../test-cases/product-crud/TC-PRODUCT-CRUD-045.md), [049](../test-cases/product-crud/TC-PRODUCT-CRUD-049.md), [051](../test-cases/product-crud/TC-PRODUCT-CRUD-051.md), [055](../test-cases/product-crud/TC-PRODUCT-CRUD-055.md), [057](../test-cases/product-crud/TC-PRODUCT-CRUD-057.md), [061](../test-cases/product-crud/TC-PRODUCT-CRUD-061.md), [064](../test-cases/product-crud/TC-PRODUCT-CRUD-064.md), [067](../test-cases/product-crud/TC-PRODUCT-CRUD-067.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-23 | [013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md), [014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md), [017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md), [018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md), [019](../test-cases/product-crud/TC-PRODUCT-CRUD-019.md), [024](../test-cases/product-crud/TC-PRODUCT-CRUD-024.md), [032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md), [033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md), [034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md), [035](../test-cases/product-crud/TC-PRODUCT-CRUD-035.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md), [047](../test-cases/product-crud/TC-PRODUCT-CRUD-047.md), [052](../test-cases/product-crud/TC-PRODUCT-CRUD-052.md), [054](../test-cases/product-crud/TC-PRODUCT-CRUD-054.md), [058](../test-cases/product-crud/TC-PRODUCT-CRUD-058.md), [060](../test-cases/product-crud/TC-PRODUCT-CRUD-060.md), [062](../test-cases/product-crud/TC-PRODUCT-CRUD-062.md), [068](../test-cases/product-crud/TC-PRODUCT-CRUD-068.md), [071](../test-cases/product-crud/TC-PRODUCT-CRUD-071.md), [075](../test-cases/product-crud/TC-PRODUCT-CRUD-075.md), [076](../test-cases/product-crud/TC-PRODUCT-CRUD-076.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-24 | [041](../test-cases/product-crud/TC-PRODUCT-CRUD-041.md) | UI view/form 041 có readback; standalone API view 042 giảm ưu tiên |
-| EP-PC-25 | [043](../test-cases/product-crud/TC-PRODUCT-CRUD-043.md), [063](../test-cases/product-crud/TC-PRODUCT-CRUD-063.md), [069](../test-cases/product-crud/TC-PRODUCT-CRUD-069.md) | UI delete 043; direct API positive delete 044 giảm ưu tiên |
-| EP-PC-26 | [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md), [041](../test-cases/product-crud/TC-PRODUCT-CRUD-041.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-27 | [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md), [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md), [041](../test-cases/product-crud/TC-PRODUCT-CRUD-041.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-28 | [076](../test-cases/product-crud/TC-PRODUCT-CRUD-076.md) | Reject/ignore extra body id đều giữ target đúng theo AM-PC-05 |
-| EP-PC-29 | [075](../test-cases/product-crud/TC-PRODUCT-CRUD-075.md) | Đại diện giữ lại; chưa execute, không suy mọi kênh/tổ hợp |
-| EP-PC-30 | — (deferred) | Deferred: stale category 074 đã loại; AS-PC-05/AM-PC-07 vẫn mở |
+| EP-PM-01 | [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Có đại diện thiết kế |
+| EP-PM-02 | [001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md) | Có đại diện thiết kế |
+| EP-PM-03 | [004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md) | Có đại diện thiết kế |
+| EP-PM-04 | [005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md) | Có đại diện thiết kế |
+| EP-PM-05 | [006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md) | Có đại diện thiết kế |
+| EP-PM-06 | [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Có đại diện thiết kế |
+| EP-PM-07 | [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Có đại diện thiết kế |
+| EP-PM-08 | [014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md) | Có đại diện thiết kế |
+| EP-PM-09 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PM-10 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PM-11 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PM-12 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PM-13 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PM-14 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PM-15 | [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Có đại diện thiết kế |
+| EP-PM-16 | — | Chưa kiểm tra trong phạm vi này |
+| EP-PM-17 | [016](../test-cases/profile-mobile/TC-PROFILE-MOBILE-016.md) | Có đại diện thiết kế |
+| EP-PM-18 | [017](../test-cases/profile-mobile/TC-PROFILE-MOBILE-017.md) | Có đại diện thiết kế |
+| EP-PM-19 | [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md) | Có đại diện thiết kế |
+| EP-PM-20 | [028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md) | Có đại diện thiết kế |
+| EP-PM-21 | [029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md) | Có đại diện thiết kế |
 
-### Boundary → Test Case (Pool C)
+### Boundary → Test Case
 
-Cả 3 boundaries/9 giá trị có đại diện toàn suite, **23 BVA cases**. Ô giảm ưu tiên là đường không còn case riêng; không gọi covered bởi đường khác. Giá -1/0/1 chỉ integer slice bước test 1, không phải min price/integer-only rule.
-
-| Variable / Boundary | Value / Class | UI create | API create | UI edit | API edit |
-|---|---|---|---|---|---|
-| name / B-PC-NL min−1 | 0 / INVALID | [001](../test-cases/product-crud/TC-PRODUCT-CRUD-001.md) | [007](../test-cases/product-crud/TC-PRODUCT-CRUD-007.md) | [013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md) | [019](../test-cases/product-crud/TC-PRODUCT-CRUD-019.md) |
-| name / B-PC-NL min | 1 / VALID | [002](../test-cases/product-crud/TC-PRODUCT-CRUD-002.md) | — (giảm ưu tiên) | [014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md) | — (giảm ưu tiên) |
-| name / B-PC-NL min+1 | 2 / VALID | [003](../test-cases/product-crud/TC-PRODUCT-CRUD-003.md) | — (giảm ưu tiên) | — (giảm ưu tiên) | — (giảm ưu tiên) |
-| name / B-PC-NU max−1 | 254 / VALID | [004](../test-cases/product-crud/TC-PRODUCT-CRUD-004.md) | — (giảm ưu tiên) | — (giảm ưu tiên) | — (giảm ưu tiên) |
-| name / B-PC-NU max | 255 / VALID | [005](../test-cases/product-crud/TC-PRODUCT-CRUD-005.md) | — (giảm ưu tiên) | [017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md) | — (giảm ưu tiên) |
-| name / B-PC-NU max+1 | 256 / INVALID | [006](../test-cases/product-crud/TC-PRODUCT-CRUD-006.md) | [012](../test-cases/product-crud/TC-PRODUCT-CRUD-012.md) | [018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md) | [024](../test-cases/product-crud/TC-PRODUCT-CRUD-024.md) |
-| price / B-PC-P0 threshold−1 | -1 / INVALID | [025](../test-cases/product-crud/TC-PRODUCT-CRUD-025.md) | [028](../test-cases/product-crud/TC-PRODUCT-CRUD-028.md) | — (giảm ưu tiên) | [034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md) |
-| price / B-PC-P0 threshold | 0 / INVALID | [026](../test-cases/product-crud/TC-PRODUCT-CRUD-026.md) | [029](../test-cases/product-crud/TC-PRODUCT-CRUD-029.md) | [032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md) | [035](../test-cases/product-crud/TC-PRODUCT-CRUD-035.md) |
-| price / B-PC-P0 threshold+1 | 1 / VALID | [027](../test-cases/product-crud/TC-PRODUCT-CRUD-027.md) | — (giảm ưu tiên) | [033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md) | — (giảm ưu tiên) |
-
-### Operation × Auth → Test Case
-
-Admin nominal qua UI có readback; direct API nominal POST/PUT/DELETE đã giảm ưu tiên. Nếu UI chặn trước request, server acceptance chưa được exercise. Missing JWT/user role giữ đủ methods; malformed/tampered không còn đủ methods.
-
-| Token/role | POST | PUT | DELETE |
-|---|---|---|---|
-| Admin nominal qua UI | UI → POST [037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md) | UI → PUT [039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md) | UI → DELETE [043](../test-cases/product-crud/TC-PRODUCT-CRUD-043.md) |
-| Không có token | [061](../test-cases/product-crud/TC-PRODUCT-CRUD-061.md) | [062](../test-cases/product-crud/TC-PRODUCT-CRUD-062.md) | [063](../test-cases/product-crud/TC-PRODUCT-CRUD-063.md) |
-| Malformed | [064](../test-cases/product-crud/TC-PRODUCT-CRUD-064.md) | — (giảm ưu tiên) | — (giảm ưu tiên) |
-| User thường JWT hợp lệ | [067](../test-cases/product-crud/TC-PRODUCT-CRUD-067.md) | [068](../test-cases/product-crud/TC-PRODUCT-CRUD-068.md) | [069](../test-cases/product-crud/TC-PRODUCT-CRUD-069.md) |
-| User JWT sửa role/chữ ký cũ | — (giảm ưu tiên) | [071](../test-cases/product-crud/TC-PRODUCT-CRUD-071.md) | — (giảm ưu tiên) |
-
-### Test Case → Requirement / Partition / Boundary / Result (Pool C)
-
-| Test Case | Requirement | Partition | Boundary | Technique | Result | Related Bugs |
-|---|---|---|---|---|---|---|
-| [TC-PRODUCT-CRUD-001](../test-cases/product-crud/TC-PRODUCT-CRUD-001.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-02, EP-PC-16, EP-PC-12, EP-PC-22, EP-PC-06 | B-PC-NL min−1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-002](../test-cases/product-crud/TC-PRODUCT-CRUD-002.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-01, EP-PC-16, EP-PC-12, EP-PC-22, EP-PC-06 | B-PC-NL min | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-003](../test-cases/product-crud/TC-PRODUCT-CRUD-003.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-01, EP-PC-16, EP-PC-12, EP-PC-22, EP-PC-06 | B-PC-NL min+1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-004](../test-cases/product-crud/TC-PRODUCT-CRUD-004.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-01, EP-PC-16, EP-PC-12, EP-PC-22, EP-PC-06 | B-PC-NU max−1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-005](../test-cases/product-crud/TC-PRODUCT-CRUD-005.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-01, EP-PC-16, EP-PC-12, EP-PC-22, EP-PC-06 | B-PC-NU max | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-006](../test-cases/product-crud/TC-PRODUCT-CRUD-006.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-03, EP-PC-16, EP-PC-12, EP-PC-22, EP-PC-06 | B-PC-NU max+1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-007](../test-cases/product-crud/TC-PRODUCT-CRUD-007.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-02, EP-PC-16, EP-PC-12, EP-PC-22, EP-PC-06 | B-PC-NL min−1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-012](../test-cases/product-crud/TC-PRODUCT-CRUD-012.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-03, EP-PC-16, EP-PC-12, EP-PC-22, EP-PC-06 | B-PC-NU max+1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-013](../test-cases/product-crud/TC-PRODUCT-CRUD-013.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-02, EP-PC-16, EP-PC-12, EP-PC-23, EP-PC-21, EP-PC-06 | B-PC-NL min−1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-014](../test-cases/product-crud/TC-PRODUCT-CRUD-014.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-01, EP-PC-16, EP-PC-12, EP-PC-23, EP-PC-21, EP-PC-06 | B-PC-NL min | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-017](../test-cases/product-crud/TC-PRODUCT-CRUD-017.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-01, EP-PC-16, EP-PC-12, EP-PC-23, EP-PC-21, EP-PC-06 | B-PC-NU max | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-018](../test-cases/product-crud/TC-PRODUCT-CRUD-018.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-03, EP-PC-16, EP-PC-12, EP-PC-23, EP-PC-21, EP-PC-06 | B-PC-NU max+1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-019](../test-cases/product-crud/TC-PRODUCT-CRUD-019.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-02, EP-PC-16, EP-PC-12, EP-PC-23, EP-PC-21, EP-PC-06 | B-PC-NL min−1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-024](../test-cases/product-crud/TC-PRODUCT-CRUD-024.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-03, EP-PC-16, EP-PC-12, EP-PC-23, EP-PC-21, EP-PC-06 | B-PC-NU max+1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-025](../test-cases/product-crud/TC-PRODUCT-CRUD-025.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-08, EP-PC-16, EP-PC-12, EP-PC-22, EP-PC-01 | B-PC-P0 threshold−1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-026](../test-cases/product-crud/TC-PRODUCT-CRUD-026.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-07, EP-PC-16, EP-PC-12, EP-PC-22, EP-PC-01 | B-PC-P0 threshold | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-027](../test-cases/product-crud/TC-PRODUCT-CRUD-027.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-06, EP-PC-16, EP-PC-12, EP-PC-22, EP-PC-01 | B-PC-P0 threshold+1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-028](../test-cases/product-crud/TC-PRODUCT-CRUD-028.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-08, EP-PC-16, EP-PC-12, EP-PC-22, EP-PC-01 | B-PC-P0 threshold−1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-029](../test-cases/product-crud/TC-PRODUCT-CRUD-029.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-07, EP-PC-16, EP-PC-12, EP-PC-22, EP-PC-01 | B-PC-P0 threshold | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-032](../test-cases/product-crud/TC-PRODUCT-CRUD-032.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-07, EP-PC-16, EP-PC-12, EP-PC-23, EP-PC-21, EP-PC-01 | B-PC-P0 threshold | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-033](../test-cases/product-crud/TC-PRODUCT-CRUD-033.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-06, EP-PC-16, EP-PC-12, EP-PC-23, EP-PC-21, EP-PC-01 | B-PC-P0 threshold+1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-034](../test-cases/product-crud/TC-PRODUCT-CRUD-034.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-08, EP-PC-16, EP-PC-12, EP-PC-23, EP-PC-21, EP-PC-01 | B-PC-P0 threshold−1 | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-035](../test-cases/product-crud/TC-PRODUCT-CRUD-035.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-07, EP-PC-16, EP-PC-12, EP-PC-23, EP-PC-21, EP-PC-01 | B-PC-P0 threshold | BVA | Not Run | None |
-| [TC-PRODUCT-CRUD-037](../test-cases/product-crud/TC-PRODUCT-CRUD-037.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-01, EP-PC-06, EP-PC-12, EP-PC-16, EP-PC-22, EP-PC-26, EP-PC-27 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-039](../test-cases/product-crud/TC-PRODUCT-CRUD-039.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-01, EP-PC-06, EP-PC-12, EP-PC-16, EP-PC-23, EP-PC-26, EP-PC-27, EP-PC-21 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-041](../test-cases/product-crud/TC-PRODUCT-CRUD-041.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-21, EP-PC-24, EP-PC-16, EP-PC-26, EP-PC-27 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-043](../test-cases/product-crud/TC-PRODUCT-CRUD-043.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-21, EP-PC-25, EP-PC-16 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-045](../test-cases/product-crud/TC-PRODUCT-CRUD-045.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-04, EP-PC-16, EP-PC-22 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-047](../test-cases/product-crud/TC-PRODUCT-CRUD-047.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-04, EP-PC-16, EP-PC-23, EP-PC-21 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-049](../test-cases/product-crud/TC-PRODUCT-CRUD-049.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-09, EP-PC-16, EP-PC-22 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-051](../test-cases/product-crud/TC-PRODUCT-CRUD-051.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-11, EP-PC-16, EP-PC-22 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-052](../test-cases/product-crud/TC-PRODUCT-CRUD-052.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-09, EP-PC-16, EP-PC-23, EP-PC-21 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-054](../test-cases/product-crud/TC-PRODUCT-CRUD-054.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-11, EP-PC-16, EP-PC-23, EP-PC-21 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-055](../test-cases/product-crud/TC-PRODUCT-CRUD-055.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-13, EP-PC-16, EP-PC-22 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-057](../test-cases/product-crud/TC-PRODUCT-CRUD-057.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-15, EP-PC-16, EP-PC-22 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-058](../test-cases/product-crud/TC-PRODUCT-CRUD-058.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-13, EP-PC-16, EP-PC-23, EP-PC-21 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-060](../test-cases/product-crud/TC-PRODUCT-CRUD-060.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-15, EP-PC-16, EP-PC-23, EP-PC-21 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-061](../test-cases/product-crud/TC-PRODUCT-CRUD-061.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-18, EP-PC-22 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-062](../test-cases/product-crud/TC-PRODUCT-CRUD-062.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-18, EP-PC-23, EP-PC-21 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-063](../test-cases/product-crud/TC-PRODUCT-CRUD-063.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-18, EP-PC-25, EP-PC-21 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-064](../test-cases/product-crud/TC-PRODUCT-CRUD-064.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-19, EP-PC-22 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-067](../test-cases/product-crud/TC-PRODUCT-CRUD-067.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-17, EP-PC-22 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-068](../test-cases/product-crud/TC-PRODUCT-CRUD-068.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-17, EP-PC-23, EP-PC-21 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-069](../test-cases/product-crud/TC-PRODUCT-CRUD-069.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-17, EP-PC-25, EP-PC-21 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-071](../test-cases/product-crud/TC-PRODUCT-CRUD-071.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-20, EP-PC-23, EP-PC-21 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-073](../test-cases/product-crud/TC-PRODUCT-CRUD-073.md) | FR-15; FR-12 | EP-PC-17 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-075](../test-cases/product-crud/TC-PRODUCT-CRUD-075.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-29, EP-PC-21, EP-PC-23, EP-PC-16, EP-PC-01, EP-PC-06, EP-PC-12 | — | Equivalence Partitioning | Not Run | None |
-| [TC-PRODUCT-CRUD-076](../test-cases/product-crud/TC-PRODUCT-CRUD-076.md) | FR-15; FR-12; SEC-02; SEC-03 | EP-PC-28, EP-PC-21, EP-PC-23, EP-PC-16 | — | Equivalence Partitioning | Not Run | None |
-
-26/30 partitions có case active; null name/price/category và stale category deferred. Direct API positive BVA/nominal CRUD/view/delete, UI-edit name 2/254/price -1, UI blank và những auth method variations đã loại không được gọi covered. Những ambiguity về Unicode/precision/schema/cascade/timing vẫn mở. Không có coverage execution hay confirmed bug.
-
-## Pool D — FR-04 / FR-20: Hồ sơ Mobile
-
-Nguồn: [phân tích Pool D](profile-mobile-analysis.md), [fixture/danh mục](../test-cases/profile-mobile/README.md). **30 → 20 cases: 4 BVA + 16 EP**; 21 partitions giữ nguyên (**20 active / 1 deferred**), 2 boundaries/4 giá trị. Module `PROFILE-MOBILE`, tất cả Not Run / None. IDs/nội dung cases giữ nguyên; API companions không thay native form coverage. Tradeoffs: [quyết định tinh gọn](profile-mobile-analysis.md#quyết-định-tinh-gọn-theo-yêu-cầu-người-dùng).
-
-### Requirement → Test Case (Pool D)
-
-| Requirement / Quy tắc nội bộ | Cases | Giới hạn |
-|---|---|---|
-| FR-04; FR-20 / R-PM-01: tải và sửa ba trường | [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Native full update 013 và switch-account 018 có GET/fresh login; API → Mobile 030 khác native save; isolated updates/standalone initial load giảm ưu tiên |
-| FR-04; FR-20 / R-PM-02: phone | [001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md), [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md), [005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md), [006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md) | Native gõ 9/10/11/12, prefix 005 và negative paste letter 006; empty/space/hyphen/positive paste giảm ưu tiên; ASCII |
-| FR-04; FR-20 / R-PM-03: email UI | [014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md) | Native gõ/dán email; không HTML type hoặc email API rule |
-| FR-04; FR-20 / R-PM-04: chính chủ/session | [016](../test-cases/profile-mobile/TC-PROFILE-MOBILE-016.md), [017](../test-cases/profile-mobile/TC-PROFILE-MOBILE-017.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [025](../test-cases/profile-mobile/TC-PROFILE-MOBILE-025.md), [027](../test-cases/profile-mobile/TC-PROFILE-MOBILE-027.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Anonymous/logout/account-switch, body selector và tampered JWT; query selector giảm ưu tiên, A/B snapshot giữ |
-| FR-04; SEC-06 / R-PM-05: role | [024](../test-cases/profile-mobile/TC-PROFILE-MOBILE-024.md) | API role mutation và GET/fresh login 024; role-control UI 015/EP-PM-09 deferred, không coi covered bởi backend |
-| SEC-02 / R-PM-06: JWT | [020](../test-cases/profile-mobile/TC-PROFILE-MOBILE-020.md), [021](../test-cases/profile-mobile/TC-PROFILE-MOBILE-021.md), [023](../test-cases/profile-mobile/TC-PROFILE-MOBILE-023.md), [024](../test-cases/profile-mobile/TC-PROFILE-MOBILE-024.md), [025](../test-cases/profile-mobile/TC-PROFILE-MOBILE-025.md), [027](../test-cases/profile-mobile/TC-PROFILE-MOBILE-027.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Missing JWT GET/PUT, malformed PUT, valid/tampered signature; malformed GET giảm ưu tiên; không expiry/BVA |
-| SEC-04; FR-20 / R-PM-07: native safe display | [028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md), [029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md) | Hai fixture surfaces phải tới form/header native; benign markup smoke, không mọi payload/platform |
-
-### Partition → Test Case (Pool D)
-
-Giữ đủ 21 partitions (9 VALID/12 INVALID); **EP-PM-09 deferred**, 20 partitions còn case active. Representative không chứng minh mọi input/kênh/tổ hợp hoặc đã execute. Safe-display chỉ có coverage khi fixture tới renderer.
-
-| Partition | Class | Cases | Điều kiện / phạm vi |
-|---|---|---|---|
-| EP-PM-01 | VALID | [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Bắt đầu 0, 10–11 ASCII digits |
-| EP-PM-02 | INVALID | [001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md) | Representative length 9 ở 001; empty 009 giảm ưu tiên, không chứng minh nhánh required |
-| EP-PM-03 | INVALID | [004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md) | >11; giữ prefix 0/all-digits |
-| EP-PM-04 | INVALID | [005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md) | Dài 10–11/all-digits nhưng không bắt đầu 0 |
-| EP-PM-05 | INVALID | [006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md) | Representative letter 006; space/hyphen 007/008 giảm ưu tiên, không suy normalization behavior |
-| EP-PM-06 | VALID | [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Name trong native full update/switch và server → native; isolated name 011 giảm ưu tiên |
-| EP-PM-07 | VALID | [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Address trong native 013/018 và server → native 030; isolated address 012 giảm ưu tiên |
-| EP-PM-08 | INVALID | [014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md) | Thử thay email qua native UI |
-| EP-PM-09 | VALID | — (deferred) | Deferred: không còn role-control UI case 015; API role 024 thuộc EP-PM-10 |
-| EP-PM-10 | INVALID | [024](../test-cases/profile-mobile/TC-PROFILE-MOBILE-024.md) | Gửi role khác từ client để nâng quyền |
-| EP-PM-11 | VALID | [001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md), [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md), [005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md), [006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md), [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [024](../test-cases/profile-mobile/TC-PROFILE-MOBILE-024.md), [025](../test-cases/profile-mobile/TC-PROFILE-MOBILE-025.md), [028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md), [029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Token thật, hợp lệ của tài khoản hiện tại |
-| EP-PM-12 | INVALID | [020](../test-cases/profile-mobile/TC-PROFILE-MOBILE-020.md), [021](../test-cases/profile-mobile/TC-PROFILE-MOBILE-021.md) | Không có Authorization |
-| EP-PM-13 | INVALID | [023](../test-cases/profile-mobile/TC-PROFILE-MOBILE-023.md) | Malformed PUT 023; malformed GET 022 giảm ưu tiên |
-| EP-PM-14 | INVALID | [027](../test-cases/profile-mobile/TC-PROFILE-MOBILE-027.md) | Payload ID đổi nhưng chữ ký cũ |
-| EP-PM-15 | VALID | [001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md), [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md), [005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md), [006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md), [013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md), [014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md), [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md), [024](../test-cases/profile-mobile/TC-PROFILE-MOBILE-024.md), [028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md), [029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md), [030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | Chỉ đọc/sửa profile chính chủ |
-| EP-PM-16 | INVALID | [025](../test-cases/profile-mobile/TC-PROFILE-MOBILE-025.md) | Body selector 025 còn; query selector 026 giảm ưu tiên; reject/ignore nếu B không đổi |
-| EP-PM-17 | INVALID | [016](../test-cases/profile-mobile/TC-PROFILE-MOBILE-016.md) | Chưa login mà yêu cầu profile update |
-| EP-PM-18 | INVALID | [017](../test-cases/profile-mobile/TC-PROFILE-MOBILE-017.md) | Đã logout A nhưng còn quyền/dữ liệu sửa A trong app; AS-PM-04 về native logout, không JWT revocation |
-| EP-PM-19 | VALID | [018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md) | Login B sau logout A; form/save chỉ tác động B |
-| EP-PM-20 | VALID | [028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md) | Markup-like string đã đến native renderer, phải an toàn; có điều kiện fixture tới renderer, không khẳng định acceptance |
-| EP-PM-21 | VALID | [029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md) | Markup-like address đã đến native renderer, phải an toàn; có điều kiện fixture tới renderer, không khẳng định acceptance |
-
-### Boundary → Test Case (Pool D)
-
-| Boundary | Giá trị / lớp | Native case | Kênh |
-|---|---|---|---|
-| B-PM-01 lower=10 | 9 INVALID / 10 VALID / 11 VALID | [001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md), [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md) | Native gõ; prefix 0/all ASCII digits |
-| B-PM-02 upper=11 | 10 VALID / 11 VALID / 12 INVALID | [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md), [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md), [004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md) | Native gõ; 10/11 dùng chung, không nhân số đếm |
-
-BVA chỉ dùng length phone; sau tinh gọn Pool A, chỉ API-negative BVA 007–008 còn active để reuse tùy regression. Positive phone 10/11 dùng UI 001–002 với readback; không còn direct-positive API BVA, không đếm lại trong Pool D.
-
-### Test Case → Requirement / Partition / Boundary (Pool D)
-
-| Test Case | Requirement | Partitions | Boundary | Technique | Kênh | Result | Related Bugs |
-|---|---|---|---|---|---|---|---|
-| [TC-PROFILE-MOBILE-001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md) | FR-04; FR-20 | EP-PM-02, EP-PM-11, EP-PM-15 | B-PM-01 | BVA | Native UI | Not Run | None |
-| [TC-PROFILE-MOBILE-002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md) | FR-04; FR-20 | EP-PM-01, EP-PM-11, EP-PM-15 | B-PM-01, B-PM-02 | BVA | Native UI | Not Run | None |
-| [TC-PROFILE-MOBILE-003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md) | FR-04; FR-20 | EP-PM-01, EP-PM-11, EP-PM-15 | B-PM-01, B-PM-02 | BVA | Native UI | Not Run | None |
-| [TC-PROFILE-MOBILE-004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md) | FR-04; FR-20 | EP-PM-03, EP-PM-11, EP-PM-15 | B-PM-02 | BVA | Native UI | Not Run | None |
-| [TC-PROFILE-MOBILE-005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md) | FR-04; FR-20 | EP-PM-04, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
-| [TC-PROFILE-MOBILE-006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md) | FR-04; FR-20 | EP-PM-05, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
-| [TC-PROFILE-MOBILE-013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md) | FR-04; FR-20 | EP-PM-06, EP-PM-07, EP-PM-01, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
-| [TC-PROFILE-MOBILE-014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md) | FR-04; FR-20 | EP-PM-08, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Native UI | Not Run | None |
-| [TC-PROFILE-MOBILE-016](../test-cases/profile-mobile/TC-PROFILE-MOBILE-016.md) | FR-04; FR-20 | EP-PM-17 | — | Equivalence Partitioning | Native UI | Not Run | None |
-| [TC-PROFILE-MOBILE-017](../test-cases/profile-mobile/TC-PROFILE-MOBILE-017.md) | FR-04; FR-20 | EP-PM-18 | — | Equivalence Partitioning | Native UI | Not Run | None |
-| [TC-PROFILE-MOBILE-018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md) | FR-04; FR-20 | EP-PM-19, EP-PM-11, EP-PM-15, EP-PM-06, EP-PM-07, EP-PM-01 | — | Equivalence Partitioning | Native UI | Not Run | None |
-| [TC-PROFILE-MOBILE-020](../test-cases/profile-mobile/TC-PROFILE-MOBILE-020.md) | SEC-02; FR-04 | EP-PM-12 | — | Equivalence Partitioning | API companion | Not Run | None |
-| [TC-PROFILE-MOBILE-021](../test-cases/profile-mobile/TC-PROFILE-MOBILE-021.md) | SEC-02; FR-04 | EP-PM-12 | — | Equivalence Partitioning | API companion | Not Run | None |
-| [TC-PROFILE-MOBILE-023](../test-cases/profile-mobile/TC-PROFILE-MOBILE-023.md) | SEC-02; FR-04 | EP-PM-13 | — | Equivalence Partitioning | API companion | Not Run | None |
-| [TC-PROFILE-MOBILE-024](../test-cases/profile-mobile/TC-PROFILE-MOBILE-024.md) | FR-04; SEC-06; SEC-02 | EP-PM-10, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | API companion | Not Run | None |
-| [TC-PROFILE-MOBILE-025](../test-cases/profile-mobile/TC-PROFILE-MOBILE-025.md) | FR-04; SEC-02 | EP-PM-16, EP-PM-11 | — | Equivalence Partitioning | API companion | Not Run | None |
-| [TC-PROFILE-MOBILE-027](../test-cases/profile-mobile/TC-PROFILE-MOBILE-027.md) | SEC-02; FR-04 | EP-PM-14 | — | Equivalence Partitioning | API companion | Not Run | None |
-| [TC-PROFILE-MOBILE-028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md) | SEC-04; FR-20 | EP-PM-20, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Fixture → Native UI | Not Run | None |
-| [TC-PROFILE-MOBILE-029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md) | SEC-04; FR-20 | EP-PM-21, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | Fixture → Native UI | Not Run | None |
-| [TC-PROFILE-MOBILE-030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | FR-04; FR-20; SEC-02 | EP-PM-01, EP-PM-06, EP-PM-07, EP-PM-11, EP-PM-15 | — | Equivalence Partitioning | API → Native UI | Not Run | None |
-
-**11 Native UI + 6 API companion + 2 Fixture → Native UI + 1 API → Native UI = 20 cases**. Một case có nhiều checkpoints vẫn là một case; không ghép requests để giảm số đếm. 20/21 partitions active; role-control UI, empty/space/hyphen/positive-paste phone, isolated name/address, standalone initial load, malformed GET và query selector đã giảm ưu tiên. Các đại diện khác không chứng minh những đường này. Chưa có Actual Result, tỷ lệ Pass/Fail hoặc confirmed bugs.
+| Biến / giá trị | Cases |
+|---|---|
+| Từ chối số điện thoại 9 chữ số | [001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md) |
+| Chấp nhận số điện thoại 10 chữ số | [002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md) |
+| Chấp nhận số điện thoại 11 chữ số | [003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md) |
+| Từ chối số điện thoại 12 chữ số | [004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md) |

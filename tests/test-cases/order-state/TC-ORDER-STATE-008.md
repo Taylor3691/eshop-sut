@@ -1,8 +1,8 @@
-# TC-ORDER-STATE-008: API Admin — từ chối confirmed → pending
+# TC-ORDER-STATE-008: Không cho chuyển đơn Đã xác nhận sang Chờ xác nhận
 
 ## Requirement ID
 
-FR-10; FR-12; FR-18; SEC-02; SEC-03
+FR-10; FR-18
 
 ## Module / Test Type / Technique
 
@@ -10,35 +10,31 @@ ORDER-STATE / Functional / Equivalence Partitioning
 
 ## Preconditions
 
-- Tester đã chuẩn bị fixture theo [README](README.md), với admin M, user A/B và đơn ở đúng trạng thái; ghi snapshot trước case.
-- ID/JWT là runtime values: lấy TOKEN_M có role admin, TOKEN_A/TOKEN_B có role user và ID thật tương ứng; không dùng ID cố định.
-- Mỗi case độc lập. Không restart backend giữa thao tác và readback; không dựa vào case trước để tạo trạng thái nguồn.
-- Tester dùng API client tại `http://localhost:3000`; JSON gửi `Content-Type: application/json`. Kiểm tra header auth kế thừa khi thử thiếu/sai token.
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Mở trang khách hàng `http://localhost:5173/profile` và trang quản trị `http://localhost:5174` trong hai cửa sổ riêng. Dùng A ở trang khách hàng và M ở trang quản trị.
+- Chuẩn bị một đơn thử ở trạng thái được ghi trong Test Data; ghi mã đơn, người đặt, tổng tiền và các thông tin đang hiển thị. Ghi thêm một đơn khác để đối chiếu.
 
 ## Test Data
 
 | Field | Value |
 |---|---|
-| Method | `PUT` |
-| Endpoint | `http://localhost:3000/api/admin/orders/A_CONFIRMED_ID/status` |
-| Authorization | `Bearer TOKEN_M` |
-| Body JSON | `{"status":"pending"}` |
-| current_status | `confirmed` |
-| Chủ đơn | `A` |
+| Trạng thái ban đầu | `Đã xác nhận` |
+| Trạng thái muốn chuyển | `Chờ xác nhận` |
+| Người thao tác | `M — quản trị viên` |
 
 ## Test Steps
 
-1. Đọc GET `/api/orders/my-orders` với token A, tìm đúng `A_CONFIRMED_ID`; đọc GET `/api/admin/orders` với TOKEN_M để đối chiếu trạng thái và các đơn đối chứng.
-2. Xác nhận đúng đơn `A_CONFIRMED_ID` thuộc A và có current_status `confirmed`; ghi snapshot.
-3. Gửi PUT đúng endpoint/header/body trong Test Data, chỉ một request chuyển trạng thái.
-4. Ghi nhận response/error/message thực tế.
-5. Đọc GET `/api/orders/my-orders` với token A, tìm đúng `A_CONFIRMED_ID`; đọc GET `/api/admin/orders` với TOKEN_M để đối chiếu trạng thái và các đơn đối chứng.
+1. Mở mục Đơn hàng trên trang quản trị, tìm đúng mã đơn thử và xác nhận trạng thái ban đầu.
+2. Tìm thao tác chuyển sang Chờ xác nhận (nút chuyển về Chờ xác nhận (nếu có)). Nếu không có hoặc bị vô hiệu hóa, ghi nhận không thể thực hiện; không tìm cách sửa trang để hiện nút. Nếu nút hoạt động, bấm và ghi phản hồi.
+3. Tải lại cả trang quản trị và trang khách hàng. Tìm đúng mã đơn đã ghi và đối chiếu trạng thái.
+4. Kiểm tra người đặt, tổng tiền và thông tin đơn còn hiển thị như trước; đơn đối chiếu không đổi.
 
 ## Expected Result
 
-- API trả lỗi với thông báo phù hợp; đơn `A_CONFIRMED_ID` giữ `confirmed`, không chuyển thành `pending`.
-- Owner, total_amount, shipping_address, created_at của đơn mục tiêu giữ snapshot; A_CONTROL_ID và B_CONTROL_ID không đổi.
-- Không ấn định mã HTTP/wording lỗi; response và dữ liệu đọc lại phải nhất quán.
+- Không thể chuyển sang Chờ xác nhận; đơn vẫn Đã xác nhận.
+- Có thể không có nút, nút không bấm được hoặc hệ thống báo lỗi khi bấm. Chỉ kết luận cho thao tác qua trang đang thử.
+- Thông tin khác và đơn đối chiếu không đổi.
 
 ## Status / Related Bugs
 

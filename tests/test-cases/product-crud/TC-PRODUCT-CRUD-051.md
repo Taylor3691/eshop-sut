@@ -1,8 +1,8 @@
-# TC-PRODUCT-CRUD-051: API thêm — từ chối price không phải số
+# TC-PRODUCT-CRUD-051: Thêm sản phẩm với giá abc
 
 ## Requirement ID
 
-FR-15; FR-12; SEC-02; SEC-03
+FR-15; FR-12
 
 ## Module / Test Type / Technique
 
@@ -10,33 +10,36 @@ PRODUCT-CRUD / Functional / Equivalence Partitioning
 
 ## Preconditions
 
-- Tester chuẩn bị fixture theo [README](README.md), admin M/user A, CAT_A_ID/CAT_B_ID tồn tại và P/Q/R có snapshot.
-- ID/JWT lấy từ môi trường thật; TOKEN_M hợp lệ có role admin. Không giả định ID cố định hoặc category_id>=1 là hợp lệ.
-- Case bắt đầu độc lập, baseline P: name PC-P Bàn phím, price 100000, description Mô tả kiểm tra sản phẩm, imageUrl http://localhost:5174/favicon.svg, category CAT_A_ID.
-- Không restart backend giữa thao tác và đọc lại; nếu đường setup bị lỗi dùng fixture có kiểm soát do tester chuẩn bị.
-- Tester dùng API client tại http://localhost:3000, Content-Type application/json. Tắt auth/cookie kế thừa khi thử thiếu/sai token.
+- Chuẩn bị tài khoản và dữ liệu theo [hướng dẫn của pool](README.md).
+- Ghi lại hoặc chụp màn hình dữ liệu trước khi thử. Mỗi case bắt đầu từ dữ liệu đã kiểm tra; không khởi động lại hệ thống giữa lúc thử và kiểm tra kết quả.
+- Đăng nhập M tại `http://localhost:5174`, mở mục Sản phẩm; có ba sản phẩm thử P/Q/R theo README.
 
 ## Test Data
 
 | Field | Value |
 |---|---|
-| Method | `POST` |
-| Endpoint | `http://localhost:3000/api/products` |
-| Authorization | `Bearer TOKEN_M` |
-| Body JSON | `{"name":"PC sản phẩm mới","price":"abc","description":"Mô tả kiểm tra sản phẩm","imageUrl":"http://localhost:5174/favicon.svg","category_id":CAT_A_ID}` |
+| Tên sản phẩm | `PC sản phẩm mới` |
+| Giá tiền | `abc` |
+| Mô tả | `Mô tả kiểm tra sản phẩm` |
+| URL Ảnh | `http://localhost:5174/favicon.svg` |
+| Danh mục | `Phụ kiện` |
 
 ## Test Steps
 
-1. Đọc GET http://localhost:3000/api/products (không search); đối chiếu snapshot theo ID, không theo vị trí hàng. Nếu P còn tồn tại, đọc GET /api/products/P_ID; so price theo giá trị số.
-2. Xác nhận token admin hợp lệ, P tồn tại nếu PUT và chỉ trường đang thử sai requirement.
-3. Gửi request đúng body trong Test Data; không tự thêm field bị thiếu hoặc đổi null để server chấp nhận.
-4. Ghi response/error; đọc lại catalog và categories.
+1. Ghi tên/giá của P/Q/R đang hiển thị. Khi cần đối chiếu đủ năm ô, bấm Sửa từng sản phẩm để đọc, rồi bấm Hủy sửa mà không lưu.
+2. Đưa form về Thêm sản phẩm mới; bấm Hủy sửa nếu cần.
+3. Điền các ô theo Test Data. Xóa ô Giá tiền và thử gõ hoặc dán `abc`.
+4. Ghi nhận giá trị thực tế trong ô. Nếu chữ bị chặn hoặc ô trở thành rỗng, ghi điều đó; không thay bằng một giá trị hợp lệ rồi coi là đã thử dữ liệu sai.
+5. Bấm Lưu sản phẩm nếu có thể và ghi phản hồi.
+6. Quan sát danh sách ngay sau thao tác; ghi lại tên/giá của sản phẩm thử và P/Q/R trước khi tải lại.
+7. Tải lại trang, mở lại mục Sản phẩm; bấm Sửa đúng sản phẩm cần kiểm tra để đọc đủ Tên, Giá, Mô tả, URL Ảnh và Danh mục. Không bấm Lưu trong bước đọc.
+8. Đối chiếu P/Q/R với ghi chép trước khi thử; chỉ thao tác với dữ liệu thử của mình.
 
 ## Expected Result
 
-- Không tạo sản phẩm invalid; catalog không tăng và không xuất hiện bản ghi với field sai/thiếu.
-- Request không thành công về nghiệp vụ; không ấn định mã HTTP/wording lỗi hoặc numeric-string coercion.
-- Q/R, các sản phẩm khác và danh sách category giữ snapshot; không có mutation ngoài mục tiêu.
+- Không lưu sản phẩm với giá không hợp lệ; chấp nhận việc ngăn nhập, chặn lưu hoặc báo lỗi.
+- Không thêm sản phẩm mới.
+- Các sản phẩm khác giữ nguyên trước và sau tải lại.
 
 ## Status / Related Bugs
 
