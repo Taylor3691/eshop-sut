@@ -1,6 +1,6 @@
 # Pool C — FR-15: Quản lý sản phẩm (Product CRUD)
 
-Trạng thái: đang xây dựng thiết kế; chưa execute. Áp dụng skill `domain-testing-bva`, cùng 9 bước/template đã dùng ở Pool A/B. Người dùng đã yêu cầu bắt đầu Pool C; không tự xác nhận review/phê duyệt các pool trước.
+Trạng thái: đã hoàn thành bản thiết kế để người dùng review; chưa phê duyệt, chưa execute. Áp dụng skill `domain-testing-bva`, cùng 9 bước/template đã dùng ở Pool A/B. Người dùng đã yêu cầu bắt đầu Pool C; không tự xác nhận review/phê duyệt các pool trước.
 
 ## Requirement Analysis
 
@@ -211,6 +211,8 @@ Nominal name `PC sản phẩm mới`, nominal price 100000 được dùng khi th
 - [ ] Human review assumption/ambiguity và thiết kế, chưa phê duyệt.
 - [ ] Execute/evidence/test run thuộc người dùng, chưa có kết quả.
 
+Kiểm tra tài liệu đã thực hiện: 78 ID/tên file liên tục, đúng 7 headings/template, trạng thái Not Run / None, technique totals 36 BVA + 42 EP; liên kết file local tồn tại; 30 partitions và toàn bộ cases trong ma trận; literal name BVA dài đúng 0/1/2/254/255/256, price đúng -1/0/1 trên bốn đường; body JSON parse được sau thay runtime ID, field missing thật sự bị bỏ. Tổng cases A/B/C = 158. Đây là kiểm tra cấu trúc thiết kế, không phải execute SUT hay xác nhận business correctness.
+
 ### Potential Coverage Gaps
 
 - Fractional price/precision/delta nhỏ hơn 1, max price, Unicode grapheme length, whitespace-only/trim chưa đủ oracle để nhận xét đầy đủ (AM-PC-01/02).
@@ -248,3 +250,37 @@ Trạng thái: **chờ người dùng review**. Skill yêu cầu “Require huma
 12. Review Expected Result, khả năng tái lập, assumptions/ambiguities và rủi ro còn thiếu; xác định phần nào cần giảng viên/nguồn yêu cầu làm rõ trước execution. Không coi generated output mặc nhiên đúng.
 
 Sau review, cập nhật domain/partition/boundary/case theo quy tắc có nguồn và commit riêng. Người dùng execute, ghi Actual Result/evidence trong test run. Pool D chưa bắt đầu.
+
+## AI Gap Candidates
+
+Các ứng viên này dựa trên ambiguity/coverage hiện có, chưa phải gap AI được người dùng xác nhận. Không phải AI Audit Report hoặc nhật ký tương tác.
+
+### Candidate 1 — Unicode/trim và độ dài tên
+
+- Possible missed case: Emoji, combining marks, whitespace-only hoặc server trim làm độ dài khác dữ liệu UI.
+- Why it may have been missed: FR-15 nói “255 ký tự” nhưng chưa định nghĩa cách đếm/chuẩn hóa; BVA hiện cố ý dùng ASCII, không đại diện mọi Unicode (AM-PC-01).
+- Human action required: xác nhận length metric/normalization; thêm domain và BVA có căn cứ nếu được cung cấp, không suy từ HTML maxlength/SQL storage.
+
+### Candidate 2 — Fractional price và coercion
+
+- Possible missed case: Giá positive nhỏ hơn 1 ₫, rounding/precision, numeric string, very large price hoặc field sai kiểu khác.
+- Why it may have been missed: Requirement chỉ nói >0, chưa định nghĩa tiền có phải integer hay delta/minor unit/max/schema. BVA -1/0/1 chỉ là integer slice.
+- Human action required: làm rõ precision/coercion và nguồn; không reject 0.5 vì integer-only tự đặt, không coi kiểm tra price 1 là đầy đủ fractional boundary coverage.
+
+### Candidate 3 — Category stale và các dependencies
+
+- Possible missed case: Toàn bộ category list rỗng, category mất đồng thời với update, hoặc UI tự cập nhật trước submit nên server stale path chưa được thử.
+- Why it may have been missed: Timing/isolation/cache behavior không được quy định; case 074 chỉ tuần tự, có assumption AS-PC-05.
+- Human action required: ghi điểm đã exercise khi execution; nếu cần thêm scenario, xác nhận semantics rồi bổ sung partition/case. Không dùng kết quả một stale case để kết luận concurrency safety.
+
+### Candidate 4 — Edit isolation chỉ kiểm tra sau reload
+
+- Possible missed case: Danh sách UI tạm thời đổi các sản phẩm khác dù API/database đúng; switch edit target có thể giữ ID cũ.
+- Why it may have been missed: Chỉ readback API hoặc reload ngay sau thao tác sẽ bỏ mất state UI trước reload; multi-product interactions dễ bị che.
+- Human action required: review checkpoints trong 039/075 và BVA edit, ghi UI trước reload riêng với API. Các checkpoints đã được thêm vào thiết kế; chỉ coi là actual AI gap nếu reviewer xác nhận trước đó còn bỏ sót.
+
+### Candidate 5 — Contracts ngoài fields bắt buộc
+
+- Possible missed case: Image/description validation, duplicate names, partial PUT, missing product, delete liên quan order/cart hoặc retry.
+- Why it may have been missed: FR-15/API mẫu chưa quy định đủ các chính sách này; nếu tự tạo Expected Result có thể biến hành vi hợp lệ thành bug giả.
+- Human action required: lấy nguồn yêu cầu bổ sung hoặc ghi exploratory scope riêng theo chỉ dẫn người dùng; không tự mở rộng sang cleanup/security hardening hoặc confirmed bug report.
