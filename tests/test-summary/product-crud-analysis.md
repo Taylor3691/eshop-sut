@@ -148,3 +148,16 @@ IDs `EP-PC-*` ổn định. INVALID của target/auth là thao tác bị cấm, 
 | EP-PC-30 | `category current membership` | `INVALID (theo AS-PC-05)` | `UI đã chọn category nhưng category bị xóa trước submit` | `CAT_B_ID không còn tồn tại` | `FR-15 R-PC-04; AS-PC-05` |
 
 EP-PC-30 phụ thuộc timing AS-PC-05; chưa chứng minh mọi concurrency case. UI blank price khác thao tác API bỏ field, nhưng cùng không có giá trị số bắt buộc hợp lệ; case riêng theo đường vào. Price numeric string hợp lệ không thuộc EP-PC-11 chỉ vì là string.
+
+## Boundary Analysis
+
+| Variable | Lower Boundary | Upper Boundary | Inclusiveness | Requirement | Notes |
+|---|---|---|---|---|---|
+| name.length (ASCII) | 1 | 255 | Inclusive cả hai đầu | FR-15 R-PC-02 | B-PC-NL / B-PC-NU; min 1 từ required không rỗng, AS-PC-01 |
+| price | 0 | Không quy định | 0 exclusive; >0 valid | FR-15 R-PC-03 | B-PC-P0; dùng integer slice bước test 1 theo AS-PC-03 |
+| category/product ID, operation, role | Không áp dụng | Không áp dụng | Không áp dụng | FR-15, FR-12 | Identity/set membership/categorical, không ép BVA |
+| description/image length, price max/precision, TTL | Chưa quy định | Chưa quy định | Chưa rõ | Không có giới hạn trong FR-15 | AM-PC-02/04/08; không tự đặt bound |
+
+3 boundary đã xác định: name lower/upper và price threshold 0. Chọn 0/1/2 và 254/255/256 ký tự cho name; -1/0/1 cho price trong lát cắt số nguyên. Không gọi giá 1 là min price toàn miền; không coi đây là đầy đủ BVA cho precision nhỏ hơn 1 ₫.
+
+AMBIGUITY: Đặc tả chưa có đơn vị precision/delta nhỏ nhất của giá, upper price hoặc length limits cho description/image. Chưa thể sinh “nearest” fractional boundary hoặc max values đáng tin cậy cho những phần đó. Không lấy SQLite INTEGER/HTML step làm requirement nghiệp vụ.
