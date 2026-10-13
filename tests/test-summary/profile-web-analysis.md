@@ -145,3 +145,14 @@ EP-PW-18/19 là phân hoạch dữ liệu cho oracle an toàn đầu ra, không 
 AMBIGUITY: Đặc tả chưa định nghĩa boundary chính xác cho name/address. Chưa thể hoàn thành BVA đáng tin cậy cho hai trường này trước khi làm rõ. Đây không phải kết luận các trường không có giới hạn trong implementation.
 
 Phương pháp: giữ token hợp lệ, name/address baseline và chữ số đầu `0`; thay duy nhất độ dài phone. Chọn `min-1`, `min`, `min+1`, `max-1`, `max`, `max+1`, rồi loại giá trị trùng. Dùng 10 làm nominal; nominal trùng boundary là điều bình thường với miền chỉ có hai độ dài hợp lệ.
+
+## BVA Values
+
+| Variable | Boundary | Test Value | Classification | Reason |
+|---|---|---|---|---|
+| phone.length | B-PW-L: min−1 | 9: `091234567` | INVALID, EP-PW-02 | Ngay dưới 10 |
+| phone.length | B-PW-L: min; B-PW-U: max−1 | 10: `0912345678` | VALID, EP-PW-01 | Tại biên dưới; ngay dưới biên trên; nominal |
+| phone.length | B-PW-L: min+1; B-PW-U: max | 11: `09123456789` | VALID, EP-PW-01 | Ngay trên biên dưới; tại biên trên |
+| phone.length | B-PW-U: max+1 | 12: `091234567890` | INVALID, EP-PW-03 | Ngay trên 11 |
+
+Tổng: 2 boundary, 6 vị trí BVA được đại diện bằng 4 giá trị duy nhất. Mỗi giá trị có một case UI và một case API, tổng 8 case BVA. Baseline phone `0987654321` khác cả hai giá trị valid để nhận biết cập nhật có thực sự xảy ra.
