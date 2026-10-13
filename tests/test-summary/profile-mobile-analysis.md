@@ -1,0 +1,91 @@
+# Pool D — FR-04 / FR-20: Hồ sơ cá nhân trên Mobile
+
+Trạng thái: đang thiết kế theo 9 bước của skill `domain-testing-bva`; chưa execute, chưa phê duyệt. Người dùng yêu cầu bắt đầu Pool D; chỉ dẫn này không xác nhận review/phê duyệt Pool A/B/C.
+
+## Requirement Analysis
+
+### Requirement
+
+- ID: FR-04; FR-20 (phần Hồ sơ), SEC-02, SEC-04, SEC-06 liên quan trực tiếp.
+- Feature: Quản lý hồ sơ cá nhân trên Mobile; tái sử dụng FR-04 theo lựa chọn đã ghi trong context.
+- Module: PROFILE-MOBILE; giao diện React Native và API hồ sơ dùng chung.
+- Oracle: [README FR-04](../../README.md#fr-04-quản-lý-hồ-sơ-cá-nhân), FR-20 và SEC trong README; [API mục 2](../../api_specification.md) cho endpoint/body.
+- Template: `ref/03 - github_testcase_management.pptx.pdf`, trang 5–7; HW02 yêu cầu phân tích Domain/BVA và commit từng bước. Context và ref giữ local, không commit.
+- Ngoài phạm vi: validation đăng ký/đăng nhập, giỏ hàng/checkout, lịch sử/hủy đơn dù cùng màn hình, toàn bộ GUI/security, Web/Admin và sửa code. Login/logout chỉ là điều kiện hoặc chuyển trạng thái cần cho hồ sơ.
+- Pool D là lựa chọn feature Mobile đã được cho phép, không phải “mục thứ tư” trong danh sách Mobile của PDF.
+
+### Functional Rules
+
+R-PM-* là nhãn truy vết nội bộ, không tạo requirement mới.
+
+| Nhãn | Quy tắc | Nguồn |
+|---|---|---|
+| R-PM-01 | Người đã đăng nhập sửa name, phone, địa chỉ mặc định của chính mình; dữ liệu lưu phải đọc lại được | FR-04; FR-20 |
+| R-PM-02 | Phone bắt đầu bằng 0 và gồm 10–11 chữ số | FR-04 |
+| R-PM-03 | Email không thể sửa qua UI Mobile | FR-04; FR-20 |
+| R-PM-04 | Chỉ sửa hồ sơ của chủ thể đã xác thực; đổi tài khoản không được sửa nhầm người | FR-04 |
+| R-PM-05 | Client không được tự đổi role | FR-04; SEC-06 |
+| R-PM-06 | API hồ sơ bảo mật yêu cầu JWT hợp lệ | SEC-02 |
+| R-PM-07 | Dữ liệu user đến điểm hiển thị được hiển thị an toàn | SEC-04 |
+
+### Preconditions
+
+- Tester chuẩn bị backend local, app Expo Go/emulator/thiết bị và API client đọc lại. Agent không khởi động SUT hoặc execute.
+- Hai tài khoản user A/B khác nhau, baseline name/phone/address/email/role và ID thực đã xác minh; token runtime hợp lệ.
+- Mobile và API client truy cập cùng backend/database. `API_URL` trong `frontend-mobile/App.js` hiện là địa chỉ LAN; tester kiểm tra cấu hình thực tế, không giả định localhost của điện thoại là máy backend.
+- Fixture có kiểm soát độc lập với form đang kiểm thử; không dùng phone sai FR-04 để vượt validation.
+- Không restart backend giữa thao tác/readback vì startup reset/reseed database; mỗi case khôi phục baseline độc lập.
+
+### Inputs
+
+| Variable | Type | Description | Constraint |
+|---|---|---|---|
+| name | Chuỗi native TextInput / JSON | Họ Tên | Cho phép sửa; chưa có giới hạn length/required/trim |
+| phone | Chuỗi native TextInput / JSON | Số điện thoại | Prefix 0, 10–11 chữ số; không chuyển thành number làm mất 0 |
+| shipping_address / ô Địa chỉ | Chuỗi | Địa chỉ giao hàng mặc định | Cho phép sửa; API chính thức dùng `shipping_address` |
+| email UI | Chuỗi từ user hiện tại | Email chỉ đọc | Không sửa qua giao diện |
+| role / extra selectors | Thuộc tính hoặc ID do client gửi thêm | Thử đổi quyền/chọn người khác | Không được đổi role hoặc ghi hồ sơ B bằng token A |
+| Authorization | Header JWT | Chủ thể thao tác | Token hợp lệ cho API bảo mật |
+| session / active account | Trạng thái | Chưa login, A, logout A, login B | Dữ liệu/ghi cập nhật phải thuộc đúng người đang login |
+| entry / display surface | Native UI hoặc API companion | Gõ/dán, form/header | Keyboard không thay thế validation; không áp HTML DOM assertions |
+
+### Expected Outputs / Behaviors
+
+- Phone hợp lệ được chấp nhận; leading zero được giữ. Phone sai prefix/length/chứa ký tự khác chữ số không được lưu thành phone hợp lệ.
+- Sửa từng trường hoặc ba trường lưu đúng profile; các trường không sửa, email/role và profile đối chứng giữ nguyên.
+- Dùng GET có token hợp lệ và logout/login lại Mobile để phân biệt dữ liệu server với state cục bộ; chỉ thấy thông báo thành công hoặc rời/quay lại màn hình chưa đủ chứng minh persistence.
+- Email không sửa bằng gõ/dán native; không yêu cầu `type=email`, `h1`, DOM/innerHTML hoặc vị trí lỗi browser.
+- Thiếu/sai JWT không trả hồ sơ bảo mật hoặc sửa dữ liệu. Body/query không được ghi B bằng token A; server có thể từ chối hoặc bỏ qua selector nhưng không đổi sai chủ thể.
+- Role không thể được nâng thành admin; được kiểm tra qua server và login mới.
+- Chuỗi giống markup, nếu tới điểm hiển thị, là văn bản an toàn trên native UI; không thực thi/diễn giải markup thành nội dung hoạt động.
+- Không ấn định mã HTTP, nguyên văn Alert/toast, maxLength, timeout, layout/keyboard height hoặc lưu token qua app restart.
+
+### Assumptions
+
+- AS-PM-01: Dùng chữ số ASCII để có oracle rõ cho phone; độ dài là độ dài chuỗi giữ nguyên leading zero. Không tự kết luận Unicode digits.
+- AS-PM-02: Các tên/địa chỉ tiếng Việt thông thường trong fixture là dữ liệu được hỗ trợ; không suy ra mọi chuỗi/blank/null đều hợp lệ.
+- AS-PM-03: “Cập nhật” nghĩa dữ liệu được lưu và phản ánh qua GET/login mới; không yêu cầu app tự refresh realtime khi server đổi trong phiên.
+- AS-PM-04: Logout làm mất quyền sửa hồ sơ trong phiên Mobile; không yêu cầu thu hồi ngay JWT cũ trên server hoặc persistence token qua cold restart.
+- AS-PM-05: Đối chiếu cùng ID, snapshot API và Mobile; các field không sửa giữ nguyên theo cập nhật hồ sơ, không yêu cầu partial PUT.
+- AS-PM-06: Safe-render cases dùng fixture được chuẩn bị có kiểm soát nếu API không chấp nhận markup; kết quả display chỉ đánh giá khi dữ liệu thật sự đến điểm hiển thị.
+
+### Ambiguities
+
+| ID | Nội dung chưa rõ | Xử lý |
+|---|---|---|
+| AM-PM-01 | Name/address required, min/max length, blank/null, trim và xuống dòng | Chỉ nominal tiếng Việt; không invent BVA hoặc verdict cho multiline/blank |
+| AM-PM-02 | Unicode digits; normalization/trim phone, định dạng quốc tế | BVA ASCII; negative nội bộ có letter/space/hyphen để không phụ thuộc trim đầu/cuối |
+| AM-PM-03 | Exact response/schema/error placement; invalid form có atomic rollback mọi field không | Không đặt mã HTTP/wording hay thêm atomicity/concurrency case |
+| AM-PM-04 | Email qua API, partial PUT, extra-field rejection | Email chỉ có UI oracle; body/query/role chỉ bảo vệ invariant, cho phép reject hoặc ignore |
+| AM-PM-05 | Token expiry, lưu token khi restart, offline/retry, background refresh | Không dựng timeout/BVA hoặc kỳ vọng auto-login/realtime/revocation |
+| AM-PM-06 | Danh sách OS/thiết bị được hỗ trợ, khác biệt clipboard/keyboard | Tester ghi OS/Expo/device; các native cases cần lặp trên nền tảng reviewer chọn, chưa tuyên bố cross-platform coverage |
+| AM-PM-07 | API contract và Mobile implementation không khớp khi gửi địa chỉ; local UI state có thể che dữ liệu không lưu | Oracle là `shipping_address` và persistence; static observation chỉ định hướng checkpoint, chưa phải confirmed bug |
+| AM-PM-08 | Markup có được chấp nhận làm name/address; chuẩn escape trên native | Chỉ đánh giá an toàn điểm hiển thị khi fixture tới nơi; không kết luận validation reject là Pass render |
+
+### Static Review — điểm thiết kế riêng cho Mobile
+
+- [App.js](../../frontend-mobile/App.js): `renderProfile` dùng native TextInput; email `editable={false}`, phone `keyboardType="phone-pad"`, địa chỉ multiline. Dán từ clipboard vẫn phải được kiểm tra bằng test dữ liệu; không suy ra keyboard chặn toàn bộ ký tự.
+- `handleUpdateProfile` có regex phone khác FR-04; gửi `shippingAddress` trong body trong khi API specification dùng `shipping_address`; sau response cập nhật `user` cục bộ. Cases giữ Expected Result theo README/API.
+- Login lấy user từ server và khởi tạo form; logout xóa user/token/các field. Persistence kiểm bằng login lại, không dựa app restart hoặc giả định AsyncStorage.
+- API companions trực tiếp kiểm JWT/ownership/role; kết quả của chúng không thay kết quả validation/transport của native form, cũng không tự tính là Mobile UI coverage.
+
