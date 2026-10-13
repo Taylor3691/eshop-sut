@@ -149,5 +149,18 @@ R-PM-* là nhãn truy vết nội bộ, không tạo requirement mới.
 - EP-PM-16 có body và query representatives; reject/ignore được phép nếu không ghi B. Không áp “mọi extra field phải bị từ chối”.
 - Entry method gõ/dán, việc thay từng field và đọc server/login mới là variation/interaction trong partitions sẵn có, không tạo lớp chỉ để tăng số đếm.
 
+## Boundary Analysis
+
+| Variable | Lower Boundary | Upper Boundary | Inclusiveness | Requirement | Notes |
+|---|---:|---:|---|---|---|
+| B-PM-01: phone.length | 10 | — | Inclusive | FR-04; FR-20 | ASCII string, bắt đầu 0, toàn digits; 9 ngay dưới; 11 ngay trên |
+| B-PM-02: phone.length | — | 11 | Inclusive | FR-04; FR-20 | Cùng điều kiện; 10 ngay dưới; 12 ngay trên |
+
+- Có 2 biên cho cùng miền integer length [10,11]. Prefix/digit validity là categorical; không làm BVA với giá trị số điện thoại hoặc số hóa ký tự 0/1.
+- Name/address chưa có giới hạn. **AMBIGUITY:** Đặc tả không định nghĩa exact boundary; chưa thể hoàn tất BVA đáng tin cho các biến này (AM-PM-01).
+- Email/role/JWT/owner/session/display/entry method không có ordered threshold trong phạm vi. Token expiry chưa có mốc thời gian nên không tạo BVA (AM-PM-05).
+- Không đặt min/max ID, kích thước màn hình, keyboard height, thời gian network hoặc số retry. Platform differences ghi fixture/review, không tự biến thành boundary requirement.
+
+
 
 
