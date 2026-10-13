@@ -130,3 +130,43 @@ Case cho user canceled kiểm tra bất biến final state và ghi response th�
 4. Ownership: dùng pending/confirmed, là trạng thái cho hủy, để tập trung vào AS-OS-03. Admin chuyển đơn B trong positive sequence để xác minh quyền toàn hệ thống FR-18.
 5. Bad payload và missing resource dùng admin/token hợp lệ, tách case theo lớp điều kiện. Không suy ra code lỗi HTTP chính xác từ implementation.
 6. Stale cases: một tác nhân đọc confirmed, tác nhân khác đổi state thành shipping/canceled và xác minh xong; sau đó mới gửi thao tác cũ. Không có sleep/timeout giả định.
+
+## Equivalence Partitions
+
+ID `EP-OS-*` ổn định. VALID/INVALID gắn với điều kiện đầy đủ về state/role/auth/resource; không phải mọi input cùng target đều tương đương. Với nhóm nhiều cặp invalid, vẫn viết case riêng cho từng cặp để không bỏ sót nhánh state machine.
+
+| Partition ID | Variable | Class | Condition | Representative Value | Requirement |
+|---|---|---|---|---|---|
+| EP-OS-01 | `Admin: state pair` | `VALID` | `pending → confirmed` | `pending / confirmed` | `FR-10 R-OS-02` |
+| EP-OS-02 | `Admin: state pair` | `VALID` | `confirmed → shipping` | `confirmed / shipping` | `FR-10 R-OS-02` |
+| EP-OS-03 | `Admin: state pair` | `VALID` | `shipping → delivered` | `shipping / delivered` | `FR-10 R-OS-02` |
+| EP-OS-04 | `Admin: state pair` | `VALID` | `pending → canceled` | `pending / canceled` | `FR-10 R-OS-03` |
+| EP-OS-05 | `Admin: state pair` | `VALID` | `confirmed → canceled` | `confirmed / canceled` | `FR-10 R-OS-03` |
+| EP-OS-06 | `Admin: state pair` | `INVALID` | `pending → shipping hoặc delivered` | `pending / shipping` | `FR-10 R-OS-06` |
+| EP-OS-07 | `Admin: state pair` | `INVALID` | `confirmed → pending hoặc delivered` | `confirmed / pending` | `FR-10 R-OS-06` |
+| EP-OS-08 | `Admin: state pair` | `INVALID` | `shipping → pending hoặc confirmed` | `shipping / pending` | `FR-10 R-OS-06` |
+| EP-OS-09 | `Admin: final state` | `INVALID` | `delivered → một trong 4 trạng thái khác` | `delivered / canceled` | `FR-10 R-OS-05` |
+| EP-OS-10 | `Admin: final state` | `INVALID` | `canceled → một trong 4 trạng thái khác` | `canceled / delivered` | `FR-10 R-OS-05` |
+| EP-OS-11 | `User cancel` | `VALID` | `Own pending → canceled` | `A hủy own pending` | `FR-10 R-OS-03` |
+| EP-OS-12 | `User cancel` | `VALID` | `Own confirmed → canceled` | `A hủy own confirmed` | `FR-10 R-OS-03` |
+| EP-OS-13 | `User cancel` | `INVALID` | `Own shipping → canceled` | `A hủy own shipping` | `FR-10 R-OS-04` |
+| EP-OS-14 | `User cancel` | `INVALID` | `Own delivered → canceled` | `A hủy own delivered` | `FR-10 R-OS-05` |
+| EP-OS-15 | `Final-state preservation` | `VALID` | `Own canceled giữ canceled khi retry; response chưa phân loại` | `A gửi lại cancel own canceled` | `FR-10 R-OS-05; AM-OS-02` |
+| EP-OS-16 | `Role trên admin API` | `VALID` | `Admin thao tác status của user A/B` | `TOKEN_M với role admin` | `FR-12; FR-18; SEC-03` |
+| EP-OS-17 | `Role trên admin API` | `INVALID` | `User thường dùng endpoint admin` | `TOKEN_A, pending → confirmed` | `FR-12; SEC-03` |
+| EP-OS-18 | `Authorization` | `VALID` | `JWT hợp lệ` | `TOKEN_A / TOKEN_M` | `SEC-02` |
+| EP-OS-19 | `Authorization` | `INVALID` | `Không có token` | `Bỏ Authorization` | `SEC-02` |
+| EP-OS-20 | `Authorization` | `INVALID` | `Token sai định dạng` | `Bearer not-a-jwt` | `SEC-02` |
+| EP-OS-21 | `Authorization` | `INVALID` | `Payload sửa role thành admin, chữ ký không tương ứng` | `TOKEN_A_TAMPERED` | `SEC-02; SEC-03` |
+| EP-OS-22 | `User ownership` | `VALID` | `User A thao tác đơn A` | `A / A_PENDING_ID` | `FR-10; AS-OS-03` |
+| EP-OS-23 | `User ownership` | `INVALID (theo AS-OS-03)` | `User A cố hủy đơn B đang pending/confirmed` | `TOKEN_A / B_PENDING_ID` | `FR-10; FR-11 liên quan; AM-OS-03` |
+| EP-OS-24 | `Resource existence` | `VALID` | `Đơn đã được xác minh tồn tại` | `A_PENDING_ID` | `FR-10; API mục 4/6` |
+| EP-OS-25 | `Resource existence` | `INVALID` | `ID đã xác nhận không có đơn` | `MISSING_ORDER_ID` | `FR-10; AM-OS-05` |
+| EP-OS-26 | `Target string` | `INVALID` | `Chuỗi trạng thái không thuộc 5 giá trị` | `returned` | `FR-10 R-OS-01/06` |
+| EP-OS-27 | `Target field` | `INVALID` | `Body không có trường status` | `{}` | `FR-10 R-OS-01/06; AM-OS-05` |
+| EP-OS-28 | `Target value` | `INVALID` | `status là null` | `{"status":null}` | `FR-10 R-OS-01/06; AM-OS-05` |
+| EP-OS-29 | `Target string` | `INVALID` | `status chuỗi rỗng` | `{"status":""}` | `FR-10 R-OS-01/06; AM-OS-05` |
+| EP-OS-30 | `Target type` | `INVALID` | `status không phải chuỗi trạng thái` | `{"status":3}` | `FR-10 R-OS-01/06; AM-OS-05` |
+
+EP-OS-15 phân loại **bất biến đầu ra**, không quyết định retry canceled phải thành công hay báo lỗi. EP-OS-23 phụ thuộc assumption và chưa là kết luận nghiệp vụ đã xác nhận. 6 ô `?` của ma trận admin không bị giấu trong INVALID partitions; chúng được lưu riêng dưới AM-OS-01/02.
+
