@@ -109,3 +109,42 @@ R-PC-* chỉ là nhãn truy vết nội bộ, không phải requirement mới.
 5. Sửa P phải giữ Q/R cả trong UI ngay sau lưu và API; reload chỉ là một checkpoint khác, không che lỗi state UI tạm thời.
 6. Category membership được xét bằng danh sách thực, không suy `category_id>=1` là hợp lệ. Negative ID là ID không tồn tại đã được xác minh, không phải boundary max+1.
 7. Chuyển form edit P sang Q kiểm tra selected target mới; PUT body ID lạ kiểm tra URL-selected product không làm Q bị đổi ngoài ý muốn, reject/ignore trường lạ đều có thể phù hợp AM-PC-05.
+
+## Equivalence Partitions
+
+IDs `EP-PC-*` ổn định. INVALID của target/auth là thao tác bị cấm, không tuyên bố body extra field luôn phải reject. Domain chưa đủ oracle được ghi trong Ambiguities, không phân loại tùy ý.
+
+| Partition ID | Variable | Class | Condition | Representative Value | Requirement |
+|---|---|---|---|---|---|
+| EP-PC-01 | `name` | `VALID` | `ASCII length 1–255; tên nominal thông thường` | `A; tên dài 255; Bàn phím kiểm tra` | `FR-15 R-PC-02` |
+| EP-PC-02 | `name` | `INVALID` | `Chuỗi rỗng` | `""` | `FR-15 R-PC-02` |
+| EP-PC-03 | `name` | `INVALID` | `ASCII length >=256` | `A lặp 256 lần` | `FR-15 R-PC-02` |
+| EP-PC-04 | `name` | `INVALID` | `Không có field name` | `Body bỏ name` | `FR-15 R-PC-02` |
+| EP-PC-05 | `name` | `INVALID` | `name=null` | `null` | `FR-15 R-PC-02` |
+| EP-PC-06 | `price` | `VALID` | `>0` | `1; 100000` | `FR-15 R-PC-03` |
+| EP-PC-07 | `price` | `INVALID` | `=0` | `0` | `FR-15 R-PC-03` |
+| EP-PC-08 | `price` | `INVALID` | `<0` | `-1` | `FR-15 R-PC-03` |
+| EP-PC-09 | `price` | `INVALID` | `Không có field price` | `Body bỏ price` | `FR-15 R-PC-03` |
+| EP-PC-10 | `price` | `INVALID` | `price=null` | `null` | `FR-15 R-PC-03` |
+| EP-PC-11 | `price` | `INVALID` | `Không có giá trị số hợp lệ` | `"abc"; UI blank` | `FR-15 R-PC-03` |
+| EP-PC-12 | `category_id` | `VALID` | `ID thuộc danh sách có sẵn` | `CAT_A_ID / CAT_B_ID` | `FR-15 R-PC-04` |
+| EP-PC-13 | `category_id` | `INVALID` | `Không có field category_id` | `Body bỏ category_id` | `FR-15 R-PC-04` |
+| EP-PC-14 | `category_id` | `INVALID` | `category_id=null` | `null` | `FR-15 R-PC-04` |
+| EP-PC-15 | `category_id` | `INVALID` | `ID không nằm trong tập category tồn tại` | `CAT_MISSING_ID` | `FR-15 R-PC-04` |
+| EP-PC-16 | `auth/role mutation` | `VALID` | `JWT hợp lệ, role admin` | `TOKEN_M` | `FR-12; SEC-02/03` |
+| EP-PC-17 | `auth/role mutation hoặc UI Admin` | `INVALID` | `User thường không có quyền admin` | `TOKEN_A / đăng nhập A` | `FR-12; SEC-03` |
+| EP-PC-18 | `Authorization mutation` | `INVALID` | `Thiếu token` | `Không gửi Authorization` | `FR-12; SEC-02` |
+| EP-PC-19 | `Authorization mutation` | `INVALID` | `Malformed token` | `Bearer not-a-jwt` | `FR-12; SEC-02` |
+| EP-PC-20 | `Authorization mutation` | `INVALID` | `JWT role sửa nhưng chữ ký cũ` | `TOKEN_A_TAMPERED` | `FR-12; SEC-02/03` |
+| EP-PC-21 | `product resource` | `VALID` | `Sản phẩm mục tiêu tồn tại` | `P_ID / Q_ID` | `FR-15 R-PC-01/05` |
+| EP-PC-22 | `operation/mode` | `VALID` | `Create đúng mode` | `Thêm mới` | `FR-15 R-PC-01` |
+| EP-PC-23 | `operation/mode` | `VALID` | `Edit đúng selected ID` | `Sửa P` | `FR-15 R-PC-01/05` |
+| EP-PC-24 | `operation/mode` | `VALID` | `View sản phẩm tồn tại` | `Danh sách và GET P_ID` | `FR-15 R-PC-01` |
+| EP-PC-25 | `operation/mode` | `VALID` | `Delete sản phẩm không có liên kết order/cart` | `Xóa P_ID` | `FR-15 R-PC-01; AM-PC-06` |
+| EP-PC-26 | `description` | `VALID` | `Mô tả nominal` | `Mô tả kiểm tra sản phẩm` | `FR-15 R-PC-01; AS-PC-07` |
+| EP-PC-27 | `imageUrl` | `VALID` | `URL fixture nominal` | `http://localhost:5174/favicon.svg` | `FR-15 R-PC-01; AS-PC-07` |
+| EP-PC-28 | `target selection` | `INVALID (hành động)` | `Body id=Q nhưng URL chọn P; không được sửa Q` | `PUT /products/P_ID, body id=Q_ID` | `FR-15 R-PC-05; AM-PC-05` |
+| EP-PC-29 | `target selection` | `VALID` | `Đổi edit P sang Q trước khi lưu; Q là target cuối` | `Sửa P → Sửa Q → Lưu Q` | `FR-15 R-PC-05` |
+| EP-PC-30 | `category current membership` | `INVALID (theo AS-PC-05)` | `UI đã chọn category nhưng category bị xóa trước submit` | `CAT_B_ID không còn tồn tại` | `FR-15 R-PC-04; AS-PC-05` |
+
+EP-PC-30 phụ thuộc timing AS-PC-05; chưa chứng minh mọi concurrency case. UI blank price khác thao tác API bỏ field, nhưng cùng không có giá trị số bắt buộc hợp lệ; case riêng theo đường vào. Price numeric string hợp lệ không thuộc EP-PC-11 chỉ vì là string.
