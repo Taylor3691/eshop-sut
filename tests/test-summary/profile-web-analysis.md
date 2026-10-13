@@ -1,6 +1,6 @@
 # Pool A — FR-04: Quản lý hồ sơ cá nhân trên Web/API
 
-Trạng thái: thiết kế đang xây dựng; chưa execute. Tài liệu áp dụng skill `domain-testing-bva`. Expected Result lấy từ [README](../../README.md), không lấy từ hành vi code hiện tại.
+Trạng thái: đã hoàn thành bản thiết kế để người dùng review; chưa phê duyệt, chưa execute. Tài liệu áp dụng skill `domain-testing-bva`. Expected Result lấy từ [README](../../README.md), không lấy từ hành vi code hiện tại.
 
 ## Requirement Analysis
 
@@ -186,6 +186,8 @@ Tổng: 2 boundary, 6 vị trí BVA được đại diện bằng 4 giá trị d
 - [ ] Người dùng review thiết kế và các assumption/ambiguity.
 - [ ] Execution và evidence: thuộc phần người dùng, chưa thực hiện.
 
+Kiểm tra cấu trúc tài liệu đã thực hiện: 28 ID/tên file liên tục và duy nhất; đủ heading template; toàn bộ trạng thái Not Run / None; đích liên kết file local tồn tại; 28 case và 19 partition có trong ma trận; độ dài bốn chuỗi BVA đúng 9/10/11/12; `git diff --check` không có lỗi whitespace. Đây là kiểm tra tài liệu, không phải chạy test trên SUT hoặc chứng minh business correctness.
+
 ### Potential Coverage Gaps
 
 - Chưa có oracle rõ cho rỗng/null/thiếu trường, kiểu JSON khác, Unicode digits và chuẩn hóa phone. Không tuyên bố bao phủ toàn bộ miền dữ liệu tùy ý.
@@ -219,3 +221,25 @@ Trạng thái: **chờ người dùng review**, chưa coi thiết kế là đã 
 10. Kiểm tra Expected Result và traceability của từng case; xác định case trùng lặp hoặc rủi ro nghiệp vụ còn thiếu. Đánh giá độc lập, không xem output AI là mặc nhiên đúng.
 
 Sau review: sửa các giả định/partition/case có bằng chứng yêu cầu bổ sung và commit thay đổi thiết kế. Việc execute, ghi Actual Result và liên kết bug chỉ thực hiện khi người dùng cung cấp evidence hoặc thay đổi phạm vi. Pool B/C/D chưa bắt đầu.
+
+## AI Gap Candidates
+
+Đây là các điểm cần kiểm tra lại trong thiết kế theo bước 9 của skill; chưa phải lỗi AI đã được người dùng xác nhận, không phải AI Audit Report hoặc nhật ký tương tác.
+
+### Candidate 1 — Phone không có giá trị hoặc được chuẩn hóa
+
+- Possible missed case: blank/null, bỏ trường, chữ số Unicode, phone có whitespace hoặc `+84`.
+- Why it may have been missed: requirement chỉ mô tả dạng hợp lệ, không nói tính bắt buộc hoặc chuẩn hóa; phân loại chắc chắn sẽ cần suy diễn (AM-02/03).
+- Human action required: tìm nguồn quy tắc hoặc xác nhận với giảng viên; khi đủ oracle, mở rộng domain/partition trước khi thêm case và Expected Result.
+
+### Candidate 2 — Giới hạn name/address và semantics cập nhật
+
+- Possible missed case: chuỗi rỗng/quá dài, thiếu trường PUT, đồng thời một trường valid và một trường invalid; chính sách đổi email qua API.
+- Why it may have been missed: FR-04/API thiếu giới hạn và quy tắc partial update/atomicity; không được sao chép giới hạn sản phẩm sang hồ sơ (AM-01/04/05).
+- Human action required: làm rõ từng quy tắc và nguồn; chỉ thiết kế BVA khi thực sự có giới hạn có thứ tự.
+
+### Candidate 3 — Điểm hiển thị không được tiếp cận hoặc chưa xét
+
+- Possible missed case: case HTML bị chặn ở validation, hoặc dữ liệu profile được hiển thị tại màn hình khác ngoài `/profile`/header.
+- Why it may have been missed: an toàn nhập liệu và an toàn hiển thị là hai lớp khác nhau; bộ case chỉ bao phủ các điểm trong scope, không thể suy rộng từ việc reject input.
+- Human action required: khi execute, ghi rõ điểm nào đã được tiếp cận; nếu cần mở rộng scope, thêm partition theo điểm hiển thị và dữ liệu test độc lập. Không tạo bug hoặc nhận lỗi AI khi chưa có evidence/review.
