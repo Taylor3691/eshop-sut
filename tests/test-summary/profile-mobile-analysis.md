@@ -161,6 +161,23 @@ R-PM-* là nhãn truy vết nội bộ, không tạo requirement mới.
 - Email/role/JWT/owner/session/display/entry method không có ordered threshold trong phạm vi. Token expiry chưa có mốc thời gian nên không tạo BVA (AM-PM-05).
 - Không đặt min/max ID, kích thước màn hình, keyboard height, thời gian network hoặc số retry. Platform differences ghi fixture/review, không tự biến thành boundary requirement.
 
+## BVA Values
+
+| Variable | Boundary | Test Value | Classification | Reason |
+|---|---|---|---|---|
+| phone.length | B-PM-01: min−1 | `091234567` (9) | INVALID / EP-PM-02 | Ngay dưới min=10 |
+| phone.length | B-PM-01: min; B-PM-02: max−1 | `0912345678` (10) | VALID / EP-PM-01 | Tại min, ngay dưới max |
+| phone.length | B-PM-01: min+1; B-PM-02: max | `09123456789` (11) | VALID / EP-PM-01 | Ngay trên min, tại max |
+| phone.length | B-PM-02: max+1 | `091234567890` (12) | INVALID / EP-PM-03 | Ngay trên max=11 |
+
+Robust BVA cho khoảng ngắn [10,11] rút thành **4 giá trị riêng biệt**, không tạo case trùng min+1/max hoặc max−1/min. Nominal dùng 10 trong cases EP; không có integer length nằm giữa 10 và 11.
+
+- 4 cases BVA trên native form bằng gõ; đều giữ name/address baseline và phone ASCII bắt đầu 0. Leading zero phải tồn tại trong GET và login mới đối với positive cases.
+- Dán phone hợp lệ dùng 11 chữ số là variation EP của native entry, không đếm thêm boundary.
+- Empty phone là EP dưới min, không gọi là “biên mới”; letter/internal-space/hyphen có độ dài 10 và prefix đúng để cô lập format.
+- API phone BVA đã có Pool A 005–008; có thể reuse khi regression backend, không sao chép/đếm lại là Pool D native coverage. Pool D trực tiếp kiểm native validation/persistence và API companions về auth/ownership/role.
+
+
 
 
 
