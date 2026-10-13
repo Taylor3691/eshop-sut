@@ -195,7 +195,7 @@ Nominal name `PC sản phẩm mới`, nominal price 100000 được dùng khi th
 - Variables identified: 9 nhóm domain D-PC-NAME, PRICE, CATEGORY, ACCESS, TARGET, MODE, DESC, IMAGE, FRESHNESS.
 - Equivalence partitions: 30; partitions có case thiết kế 30/30, EP-PC-30 có timing assumption AS-PC-05.
 - Boundaries identified: 3 (name lower/upper, price 0 exclusive); cả 3 có mapping dưới/tại/trên. Name ASCII; price integer slice, không bao phủ toàn bộ precision chưa rõ.
-- Test cases generated: 78 = 36 BVA + 42 EP; 29 UI + 49 API. Tất cả Not Run / None.
+- Test cases generated: 78 = 36 BVA + 42 EP; 27 UI + 51 API. Tất cả Not Run / None.
 - [Traceability Matrix chung](traceability-matrix.md) giữ mapping A/B và bổ sung C; tổng thiết kế 158 cases, không phải số đã execute.
 
 ### Kiểm tra coverage của thiết kế
@@ -229,3 +229,22 @@ AS-PC-01–07 cần reviewer xem lại; đặc biệt name required suy min 1 tr
 ### Ambiguities Requiring Clarification
 
 AM-PC-01/02/03 ưu tiên: length counting/trim, price precision/max và JSON coercion. AM-PC-04–08: description/image, uniqueness/partial PUT, delete/cascade, category timing/concurrency và response/UI semantics chưa rõ.
+
+## Human Review Required
+
+Trạng thái: **chờ người dùng review**. Skill yêu cầu “Require human review before treating the analysis as final.” Yêu cầu tiếp tục Pool C không tự xác nhận các pool trước đã được phê duyệt.
+
+1. Xác nhận R-PC-01–06 diễn giải đúng FR-15/FR-12: required name/price/category, max name 255, giá >0, edit isolation và đủ role/token cho từng mutation.
+2. Xác nhận AS-PC-01/02: name required không rỗng suy min length 1, BVA dùng ASCII để tránh Unicode counting. Có quy tắc trim/whitespace/grapheme khác cần trích nguồn không?
+3. Xác nhận price boundary 0 exclusive; -1/0/1 là integer slice bước dữ liệu test 1 ₫. Không nhận min price=1 hoặc integer-only từ bộ case này. Làm rõ AM-PC-02 trước khi thêm fractional “nearest”/max BVA.
+4. Kiểm tra 30 partitions; missing/null/nonnumeric và invalid category được xét riêng theo input, không gộp mọi field trống thành một request nhiều lỗi.
+5. Kiểm tra 36 BVA cases trên cả 4 đường UI/API create/edit, chuỗi ASCII thật dài đúng 0/1/2/254/255/256 và giá -1/0/1. Có case duplicate không tăng coverage cần bỏ không?
+6. Xác nhận AS-PC-04/06 về request đủ field và so giá trị số readback; numeric string UI hoặc GET response chưa được schema mô tả không tự thành bug kiểu dữ liệu.
+7. Kiểm tra CRUD nominal 037–044 và edit isolation 039/040/075/076: Q/R giữ nguyên tại UI ngay sau lưu, sau reload và API. Chỉ đọc sau reload có thể bỏ sót lỗi UI state.
+8. Xác nhận fixture độc lập: M/A roles, 2 categories, P/Q/R khác ID, không order/cart link, CAT_B chưa dùng. Category IDs không có BVA số học.
+9. Xác nhận AS-PC-05 cho case 074: validation danh mục theo current server list; nếu UI chặn trước request, ghi hạn chế backend coverage. Đây không phải simultaneous race test.
+10. Kiểm tra case 076 có thể reject/ignore body id lạ, nhưng không được sửa Q khi URL chọn P. Không tự áp partial PUT/extra-field schema chưa có nguồn.
+11. Kiểm tra negative auth matrix có đủ 3 mutation methods và 4 loại token/role; API đọc public không bị nới scope thành private admin read.
+12. Review Expected Result, khả năng tái lập, assumptions/ambiguities và rủi ro còn thiếu; xác định phần nào cần giảng viên/nguồn yêu cầu làm rõ trước execution. Không coi generated output mặc nhiên đúng.
+
+Sau review, cập nhật domain/partition/boundary/case theo quy tắc có nguồn và commit riêng. Người dùng execute, ghi Actual Result/evidence trong test run. Pool D chưa bắt đầu.
