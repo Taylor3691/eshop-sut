@@ -208,6 +208,23 @@ Robust BVA cho khoảng ngắn [10,11] rút thành **4 giá trị riêng biệt*
 - [x] API companions và fixture/display flows có kênh riêng; không kết luận native server contract đúng từ API body được gửi thủ công.
 - [x] Status thiết kế không dùng Actual Result/Pass-Fail; chưa có execution/bug evidence.
 
+### Kế hoạch tinh gọn theo yêu cầu người dùng
+
+Mục tiêu: **30 → 20 cases**, loại 10 EP, dự kiến giữ **4 BVA + 16 EP; 11 Native UI + 6 API companion + 2 Fixture → Native UI + 1 API → Native UI**. Giữ nguyên ID/nội dung cases còn lại; không renumber hoặc ghép các request độc lập để giảm số file. Giữ định nghĩa 21 partitions/2 boundaries; dự kiến 20 partitions active, EP-PM-09 deferred. Các IDs bên dưới là lịch sử lựa chọn, không phải case active sau khi xóa.
+
+| Nhóm giảm ưu tiên | IDs dự kiến loại (TC-PROFILE-MOBILE-) | Đại diện giữ lại / tradeoff |
+|---|---|---|
+| Phone non-digit variations | 007/008 | Giữ dán letter 006 trong EP-PM-05; internal-space/hyphen khác dữ liệu letter, không chứng minh chúng bị chặn bằng kết quả 006 |
+| Phone rỗng | 009 | Giữ dưới min=9 ở 001 cho EP-PM-02; blank có thể đi nhánh required riêng, không còn case blank active |
+| Positive paste | 010 | Giữ positive gõ 10/11 ở 002/003 và negative paste 006; positive paste không được gọi covered bởi hai đường này |
+| Isolated name/address update | 011/012 | Giữ native ba field 013 và account-switch update B 018, đều có GET/login mới và shipping_address checkpoints. Sửa từng field có mục tiêu riêng đã giảm ưu tiên; không suy full update chứng minh isolated paths |
+| Role-control UI | 015 | Giữ API role mutation 024 với GET/login mới; EP-PM-09 deferred, role UI controls khác backend enforcement |
+| Standalone initial load | 019 | Giữ 030 server update → fresh native login và load B trước save ở 018. 019 còn invariant xem/login không mutation trên baseline nominal; bỏ case riêng là tradeoff, không đồng nhất với update flow |
+| Malformed JWT GET | 022 | Missing JWT GET/PUT 020/021 và malformed PUT 023 còn; malformed GET không được chứng minh bởi PUT |
+| Query owner selector | 026 | Giữ body selector 025 và signature tampering 027; query và body là đường khác nhau, query không còn active case |
+
+Giữ 001–006 cho native length/prefix/digits, 013/014 cho full update và email readonly, 016/017/018 cho anonymous/logout/account-switch, 020/021/023/024/025/027 cho API access/ownership/role, 028/029 cho hai native display surfaces, 030 cho server → native loading. Không bỏ native update chỉ vì API companion gửi đúng body: app request và server readback phải được kiểm riêng. Nếu valid phone bị chặn trước network, không coi persistence/address đã được exercise; 030 vẫn chỉ chiều server → Mobile.
+
 ### Potential Coverage Gaps
 
 - Chưa có device/OS matrix, Unicode/blank/null/trim/length rules, expiry/retry/offline requirements hoặc acceptance markup; không thể khẳng định requirement coverage toàn bộ.
