@@ -1,6 +1,6 @@
 # Pool C — FR-15: Quản lý sản phẩm (Product CRUD)
 
-Trạng thái: đã hoàn thành bản thiết kế để người dùng review; chưa phê duyệt, chưa execute. Áp dụng skill `domain-testing-bva`, cùng 9 bước/template đã dùng ở Pool A/B. Người dùng đã yêu cầu bắt đầu Pool C; không tự xác nhận review/phê duyệt các pool trước.
+Trạng thái: đã tinh gọn bản thiết kế **78 → 48 cases** để người dùng review; chưa phê duyệt, chưa execute. Áp dụng skill `domain-testing-bva`, cùng 9 bước/template đã dùng ở Pool A/B. Người dùng đã yêu cầu bắt đầu Pool C; không tự xác nhận review/phê duyệt các pool trước.
 
 ## Requirement Analysis
 
@@ -63,7 +63,7 @@ R-PC-* chỉ là nhãn truy vết nội bộ, không phải requirement mới.
 - AS-PC-02: BVA dùng ASCII `A` lặp để code units/code points/bytes đều trùng độ dài. Tên tiếng Việt thông thường là dữ liệu nominal; emoji/combining marks cần oracle đếm riêng.
 - AS-PC-03: Price boundary tại 0 là exclusive; chọn -1/0/1 theo lát cắt số nguyên với bước dữ liệu test 1 ₫. Đây không phải requirement min price = 1 hoặc price chỉ là integer. Precision/delta nhỏ nhất chưa có, nên không tuyên bố BVA toàn miền số thực.
 - AS-PC-04: Request POST/PUT đầy đủ name/price/description/imageUrl/category_id. UI gửi numeric string không tự bị coi sai: testcase UI kiểm tra giá trị nghiệp vụ, API testcase dùng JSON number; coercion schema chưa rõ.
-- AS-PC-05: Category “có sẵn” được kiểm tra tại server khi submit; stale category case cần reviewer xác nhận timing này, không tự chứng minh transaction isolation.
+- AS-PC-05: Category “có sẵn” được kiểm tra tại server khi submit; stale category cần reviewer xác nhận timing này, không tự chứng minh transaction isolation. Case 074 đã giảm ưu tiên khi tinh gọn; assumption vẫn mở.
 - AS-PC-06: Snapshot theo ID, so giá trị price theo giá trị số; không đánh bug chỉ do GET detail trả price string thay number nếu chưa có schema rõ. Không thay đổi category table trong mutation product.
 - AS-PC-07: Mutation một sản phẩm chỉ tác động đúng ID; dữ liệu mô tả/ảnh thông thường được giữ theo JSON mẫu. Không suy ra mọi image/description string đều được chấp nhận.
 
@@ -77,7 +77,7 @@ R-PC-* chỉ là nhãn truy vết nội bộ, không phải requirement mới.
 | AM-PC-04 | Description/image required, URL format, length, HTML handling | Nominal values; không invent URL validator/limit hoặc XSS audit cho toàn bộ CRUD |
 | AM-PC-05 | Duplicate name, partial PUT, extra fields và body ID so với URL ID | Không tự đặt uniqueness/partial semantics; body-ID case chỉ kiểm tra không sửa Q khi URL chọn P |
 | AM-PC-06 | Xóa sản phẩm có order/cart; delete retry/missing product | Dùng fixture không được tham chiếu; chưa chốt cascade/idempotency/missing-resource response |
-| AM-PC-07 | Category rỗng toàn hệ thống, xóa category đồng thời, cache/transaction timing | Stale category theo AS-PC-05, thao tác tuần tự có xác minh; không đồng nhất với concurrency |
+| AM-PC-07 | Category rỗng toàn hệ thống, xóa category đồng thời, cache/transaction timing | Stale category theo AS-PC-05; case 074 deferred sau tinh gọn, không đồng nhất với concurrency |
 | AM-PC-08 | Thông báo/mã lỗi/UI state và giới hạn ID/token expiry | Không tạo boundary ID/TTL, dialog bắt buộc, vị trí lỗi hay toàn bộ FR-21/22 chưa nằm scope |
 
 ### Dependencies và quan sát tĩnh
@@ -103,9 +103,9 @@ R-PC-* chỉ là nhãn truy vết nội bộ, không phải requirement mới.
 ### Quan hệ và cách cô lập
 
 1. Name/price/category đồng thời phải thỏa điều kiện để lưu. Mỗi negative case chỉ thay một field; không dùng nhiều lỗi che nhau.
-2. POST và PUT là hai đường mutation, đều áp FR-15; validation UI và server là hai lớp. BVA gồm 4 đường: UI-create, API-create, UI-edit, API-edit.
+2. POST và PUT là hai đường mutation, đều áp FR-15; validation UI và server là hai lớp. BVA được xét trên 4 đường: UI-create, API-create, UI-edit, API-edit; sau tinh gọn không còn đủ mọi giá trị trên từng đường.
 3. Với boundary name, giữ price=100000 và CAT_A_ID tồn tại. Với boundary price, giữ name nominal, category tồn tại.
-4. Với auth/role, dùng payload hoàn toàn hợp lệ và ID P tồn tại. Thử đủ POST/PUT/DELETE vì không suy một gate đại diện mọi endpoint.
+4. Với auth/role, dùng payload hoàn toàn hợp lệ và ID P tồn tại. Giữ thiếu JWT và token user trên đủ POST/PUT/DELETE; malformed chỉ POST, tampered chỉ PUT. Không suy một gate đại diện mọi token/method.
 5. Sửa P phải giữ Q/R cả trong UI ngay sau lưu và API; reload chỉ là một checkpoint khác, không che lỗi state UI tạm thời.
 6. Category membership được xét bằng danh sách thực, không suy `category_id>=1` là hợp lệ. Negative ID là ID không tồn tại đã được xác minh, không phải boundary max+1.
 7. Chuyển form edit P sang Q kiểm tra selected target mới; PUT body ID lạ kiểm tra URL-selected product không làm Q bị đổi ngoài ý muốn, reject/ignore trường lạ đều có thể phù hợp AM-PC-05.
@@ -147,7 +147,7 @@ IDs `EP-PC-*` ổn định. INVALID của target/auth là thao tác bị cấm, 
 | EP-PC-29 | `target selection` | `VALID` | `Đổi edit P sang Q trước khi lưu; Q là target cuối` | `Sửa P → Sửa Q → Lưu Q` | `FR-15 R-PC-05` |
 | EP-PC-30 | `category current membership` | `INVALID (theo AS-PC-05)` | `UI đã chọn category nhưng category bị xóa trước submit` | `CAT_B_ID không còn tồn tại` | `FR-15 R-PC-04; AS-PC-05` |
 
-EP-PC-30 phụ thuộc timing AS-PC-05; chưa chứng minh mọi concurrency case. UI blank price khác thao tác API bỏ field, nhưng cùng không có giá trị số bắt buộc hợp lệ; case riêng theo đường vào. Price numeric string hợp lệ không thuộc EP-PC-11 chỉ vì là string.
+EP-PC-30 phụ thuộc timing AS-PC-05; chưa chứng minh concurrency. Sau tinh gọn, **EP-PC-05/10/14/30 deferred**, không còn case active; vẫn giữ định nghĩa để ghi đúng coverage gap. UI blank price khác API bỏ field hoặc gửi abc; 077/078 đã giảm ưu tiên, EP-PC-11 chỉ có đại diện API abc. Price numeric string hợp lệ không thuộc EP-PC-11 chỉ vì là string.
 
 ## Boundary Analysis
 
@@ -176,48 +176,58 @@ AMBIGUITY: Đặc tả chưa có đơn vị precision/delta nhỏ nhất của g
 | price | B-PC-P0 threshold | 0 | INVALID, EP-PC-07 | 0 exclusive |
 | price | B-PC-P0 threshold+1 | 1 | VALID, EP-PC-06 | Trên 0, integer slice; không phải business min price |
 
-Nominal name `PC sản phẩm mới`, nominal price 100000 được dùng khi thử trường còn lại. Tổng 9 giá trị BVA theo biến, lặp ở 4 đường UI-create/API-create/UI-edit/API-edit = 36 case; không cross-product name và price thành 6×3×4 vì làm nhiều biến thay đổi che lỗi. Test Data trong từng file chứa chuỗi ASCII đầy đủ; không chỉ dùng nhãn “max+1” để tester phải đoán dữ liệu.
+Nominal name `PC sản phẩm mới`, nominal price 100000 được dùng khi thử trường còn lại. Tổng 9 giá trị BVA theo biến; thiết kế ban đầu lặp ở 4 đường = 36 case. Sau tinh gọn giữ **23 BVA**, coverage theo đường như bảng dưới; không cross-product name/price hoặc ghép các request độc lập thành một case.
+
+| Đường vào | Name lengths giữ lại | Price values giữ lại | BVA cases |
+|---|---|---|---:|
+| UI-create | 0/1/2/254/255/256 | -1/0/1 | 9 |
+| API-create | 0/256 | -1/0 | 4 |
+| UI-edit | 0/1/255/256 | 0/1 | 6 |
+| API-edit | 0/256 | -1/0 | 4 |
+
+Cả 3 boundaries/9 giá trị có đại diện toàn suite; không coi direct API positive, UI-edit name 2/254 hoặc price -1 đã được covered. UI positive bị chặn trước request thì acceptance tại server chưa được exercise. Test Data trong từng file chứa chuỗi ASCII đầy đủ; không chỉ dùng nhãn “max+1” để tester phải đoán dữ liệu.
 
 ## Generated Test Cases
 
-- [Danh mục và fixture](../test-cases/product-crud/README.md): 78 file `TC-PRODUCT-CRUD-001`–`078`, tất cả Not Run / None.
-- 001–024: name BVA 0/1/2/254/255/256 ở UI-create/API-create/UI-edit/API-edit.
-- 025–036: price BVA -1/0/1 ở cùng bốn đường; chỉ integer slice, không kết luận fractional precision.
-- 037–044: CRUD hợp lệ UI/API; sửa đủ năm trường, xem đúng dữ liệu, xóa fixture không có tham chiếu.
-- 045–048: name missing/null; 049–054: price missing/null/nonnumeric; 055–060: category missing/null/not-existing, mỗi dạng qua POST/PUT.
-- 061–069: POST/PUT/DELETE thiếu token, malformed token, token user thường; 070–072: token user sửa role nhưng giữ chữ ký cũ.
-- 073: quyền UI Admin; 074: stale category (AS-PC-05); 075: đổi target edit P→Q; 076: body id không ghi đè target URL; 077–078: UI price trống qua create/edit.
-- 36 BVA + 42 EP. Description/image chỉ nominal, không dựng thêm validation ngoài requirement; cases create/edit độc lập, negative chỉ một field sai.
+- [Danh mục và fixture](../test-cases/product-crud/README.md): **48 file**, ID gốc có khoảng trống, tất cả Not Run / None.
+- Name BVA: UI-create 001–006; API-create 007/012; UI-edit 013/014/017/018; API-edit 019/024.
+- Price BVA: UI-create 025–027; API-create 028/029; UI-edit 032/033; API-edit 034/035. Integer slice, không kết luận fractional precision.
+- CRUD nominal UI 037/039/041/043 với GET/snapshot/readback; không còn standalone positive API CRUD/view/delete 038/040/042/044.
+- API required fields: name missing 045/047; price missing/abc 049/051/052/054; category missing/non-existing 055/057/058/060. POST/PUT đều có đại diện; null đã deferred.
+- API access: missing JWT 061–063; malformed POST 064; user role 067–069; tampered PUT 071. UI Admin user access 073.
+- Target isolation 075 (đổi edit P→Q) và 076 (URL P/body id Q) giữ riêng; edit 039 kiểm tra UI Q/R trước/sau reload và API.
+- **23 BVA + 25 EP; 21 UI + 27 API**. Description/image chỉ nominal; create/edit độc lập, negative chỉ một field sai. Nội dung case giữ lại không đổi; không renumber/ghép requests.
 
 ## Coverage Summary
 
 - Requirements analyzed: FR-15 chính, FR-12 và SEC-02/03 cho access mutation/UI Admin.
 - Variables identified: 9 nhóm domain D-PC-NAME, PRICE, CATEGORY, ACCESS, TARGET, MODE, DESC, IMAGE, FRESHNESS.
-- Equivalence partitions: 30; partitions có case thiết kế 30/30, EP-PC-30 có timing assumption AS-PC-05.
+- Equivalence partitions: 30 giữ nguyên; **26 active / 4 deferred (EP-PC-05/10/14/30)**. Active là có case thiết kế, không phải Pass.
 - Boundaries identified: 3 (name lower/upper, price 0 exclusive); cả 3 có mapping dưới/tại/trên. Name ASCII; price integer slice, không bao phủ toàn bộ precision chưa rõ.
-- Test cases generated: 78 = 36 BVA + 42 EP; 27 UI + 51 API. Tất cả Not Run / None.
-- [Traceability Matrix chung](traceability-matrix.md) giữ mapping A/B và bổ sung C; sau tinh gọn Pool A/B, tổng A/B/C là 129 cases, không phải số đã execute.
+- Test cases retained: **48 = 23 BVA + 25 EP; 21 UI + 27 API**; giảm 30 từ 78. Tất cả Not Run / None.
+- [Traceability Matrix chung](traceability-matrix.md) giữ mapping A/B và bổ sung C; sau tinh gọn Pool A/B/C, tổng A/B/C là 99 cases, không phải số đã execute.
 
 ### Kiểm tra coverage của thiết kế
 
 - [x] Các input được nêu trong hợp đồng product và access/selected target đã phân tích.
-- [x] Mỗi partition đã định nghĩa có đại diện; domain chưa đủ oracle ghi riêng.
-- [x] Name min/max và price threshold có giá trị quanh biên ở UI/API create/edit độc lập.
-- [x] Required fields missing/null và membership category không bị gộp vào việc check ID số dương.
-- [x] Thử đủ POST/PUT/DELETE với thiếu/malformed/user/tampered token; không tự áp admin gate lên GET catalog.
+- [x] Giữ đủ 30 partition definitions và mapping ngược; 26 có đại diện active, 4 deferred ghi rõ.
+- [ ] Mọi valid/invalid partition có case active: chưa đạt vì EP-PC-05/10/14/30 deferred.
+- [x] Name min/max và price threshold có cả 9 giá trị toàn suite; bảng theo đường ghi đúng 23 BVA, không tuyên bố đủ bốn đường.
+- [x] Required fields missing và category ngoài tập giữ trên POST/PUT; null khác missing và được ghi deferred.
+- [x] Thiếu JWT/user role giữ POST/PUT/DELETE; malformed POST và tampered PUT còn, những methods khác ghi giảm ưu tiên. GET catalog vẫn public.
 - [x] Edit isolation kiểm tra Q/R ở API, UI ngay sau lưu và sau reload; target switch/body extra ID có case riêng.
 - [x] Negative cases chỉ một field sai; payload/token khác giữ hợp lệ để tránh masking.
 - [x] Tất cả cases có requirement, technique, data, steps, Expected Result, status.
 - [ ] Human review assumption/ambiguity và thiết kế, chưa phê duyệt.
 - [ ] Execute/evidence/test run thuộc người dùng, chưa có kết quả.
 
-Kiểm tra tài liệu đã thực hiện: 78 ID/tên file liên tục, đúng 7 headings/template, trạng thái Not Run / None, technique totals 36 BVA + 42 EP; liên kết file local tồn tại; 30 partitions và toàn bộ cases trong ma trận; literal name BVA dài đúng 0/1/2/254/255/256, price đúng -1/0/1 trên bốn đường; body JSON parse được sau thay runtime ID, field missing thật sự bị bỏ. Tổng cases A/B/C hiện tại = 129 sau tinh gọn Pool A/B (158 tại thời điểm thiết kế Pool C; 149 sau tinh gọn A). Đây là kiểm tra cấu trúc thiết kế, không phải execute SUT hay xác nhận business correctness.
+Kiểm tra tài liệu sau tinh gọn: sẽ đối chiếu 48 file/ID giữ lại, template/status/technique, literal BVA/JSON/missing fields, mapping 30 partitions, liên kết local và nội dung với Git trước tinh gọn. Đây là kiểm tra cấu trúc thiết kế, không phải execute SUT hay xác nhận business correctness.
 
-### Kế hoạch tinh gọn theo yêu cầu người dùng
+### Quyết định tinh gọn theo yêu cầu người dùng
 
-Mục tiêu: **78 → 48 cases**, loại 30 (13 BVA + 17 EP), dự kiến giữ **23 BVA + 25 EP; 21 UI + 27 API**. Giữ ID/nội dung cases còn lại, không renumber hoặc ghép các request độc lập để giảm số file. Tập domain/30 partitions và 3 boundaries vẫn giữ để thấy phần chưa được bao phủ. Các ID dưới đây là lịch sử lựa chọn, không phải case active sau khi xóa.
+Kết quả: **78 → 48 cases**, loại 30 (13 BVA + 17 EP), giữ **23 BVA + 25 EP; 21 UI + 27 API**. Giữ ID/nội dung cases còn lại, không renumber hoặc ghép các request độc lập để giảm số file. Tập domain/30 partitions và 3 boundaries vẫn giữ để thấy phần chưa được bao phủ. Các ID dưới đây là lịch sử lựa chọn, không phải case active sau khi xóa.
 
-| Nhóm giảm ưu tiên | IDs dự kiến loại (TC-PRODUCT-CRUD-) | Đại diện giữ lại / tradeoff |
+| Nhóm giảm ưu tiên | IDs đã loại (TC-PRODUCT-CRUD-) | Đại diện giữ lại / tradeoff |
 |---|---|---|
 | Positive BVA lặp giữa UI/API | 008/009/010/011/020/021/022/023/030/036 | UI-create giữ cả 9 giá trị; UI-edit giữ name 1/255 và price 1. Direct API positive quanh biên không còn case riêng; UI phải tới server mới exercise acceptance |
 | UI-edit BVA ít ưu tiên | 015/016/031 | UI-edit name 0/1/255/256 và price 0/1; API-edit giữ negative name 0/256, price -1/0. UI-edit name 2/254, price -1 không được gọi covered |
@@ -227,7 +237,7 @@ Mục tiêu: **78 → 48 cases**, loại 30 (13 BVA + 17 EP), dự kiến giữ 
 | Category stale theo timing assumption | 074 | Existing/missing/non-existing category còn cả create/edit; EP-PC-30 deferred. AS-PC-05/AM-PC-07 vẫn cần làm rõ, không suy coverage stale từ ID không tồn tại |
 | UI price blank | 077/078 | API missing/abc và UI price 0 còn; UI blank là đường riêng bị giảm ưu tiên, EP-PC-11 chỉ còn đại diện API abc |
 
-Giữ các case có rủi ro riêng: UI edit 039 kiểm tra Q/R trước reload và API; switch target 075; URL/body ID 076; UI Admin access 073. Không bỏ POST/PUT negative validation hoặc missing-field checks chỉ vì frontend chặn input: hai endpoint có thể xử lý khác nhau. Sau tinh gọn dự kiến **26/30 partitions active**, 4 deferred (05/10/14/30); cả 3 boundaries/9 giá trị có đại diện toàn suite, không còn 9 giá trị trên từng đường.
+Giữ các case có rủi ro riêng: UI edit 039 kiểm tra Q/R trước reload và API; switch target 075; URL/body ID 076; UI Admin access 073. Không bỏ POST/PUT negative validation hoặc missing-field checks chỉ vì frontend chặn input: hai endpoint có thể xử lý khác nhau. Sau tinh gọn **26/30 partitions active**, 4 deferred (05/10/14/30); cả 3 boundaries/9 giá trị có đại diện toàn suite, không còn 9 giá trị trên từng đường.
 
 ### Potential Coverage Gaps
 
@@ -236,7 +246,8 @@ Giữ các case có rủi ro riêng: UI edit 039 kiểm tra Q/R trước reload 
 - Description/image chỉ nominal; chưa có quy tắc length/format/HTML để thiết kế validation hoặc toàn bộ security payloads.
 - GET missing resource, update missing ID, delete retry và cascade khi sản phẩm có order/cart chưa có oracle chi tiết; fixture delete cố ý không có liên kết.
 - UI không thể gửi name 256 nếu có maxlength/truncation; cần ghi backend chưa exercise ở UI case, API case độc lập vẫn có giá trị 256.
-- Category empty toàn bộ hệ thống, simultaneous category/product deletion và isolation không được chứng minh bằng stale tuần tự 074.
+- Null name/price/category và stale category không còn active case (EP-PC-05/10/14/30). Category empty toàn hệ thống/concurrency vẫn chưa có oracle; không suy coverage stale từ non-existing category ID.
+- Direct API positive BVA/nominal CRUD/view/delete; UI-edit name 2/254, price -1; malformed PUT/DELETE, tampered POST/DELETE; UI price blank create/edit đã giảm ưu tiên. Các đường này khác đại diện giữ lại, không được gọi covered.
 - Nếu dependency setup/readback lỗi, ghi Blocked/giới hạn khi người dùng execute, không đổi Expected Result theo implementation.
 - Không đánh giá toàn bộ FR-21/22/24 hoặc storefront/search/import/mobile ngoài scope Product CRUD này.
 
@@ -255,17 +266,17 @@ Trạng thái: **chờ người dùng review**. Skill yêu cầu “Require huma
 1. Xác nhận R-PC-01–06 diễn giải đúng FR-15/FR-12: required name/price/category, max name 255, giá >0, edit isolation và đủ role/token cho từng mutation.
 2. Xác nhận AS-PC-01/02: name required không rỗng suy min length 1, BVA dùng ASCII để tránh Unicode counting. Có quy tắc trim/whitespace/grapheme khác cần trích nguồn không?
 3. Xác nhận price boundary 0 exclusive; -1/0/1 là integer slice bước dữ liệu test 1 ₫. Không nhận min price=1 hoặc integer-only từ bộ case này. Làm rõ AM-PC-02 trước khi thêm fractional “nearest”/max BVA.
-4. Kiểm tra 30 partitions; missing/null/nonnumeric và invalid category được xét riêng theo input, không gộp mọi field trống thành một request nhiều lỗi.
-5. Kiểm tra 36 BVA cases trên cả 4 đường UI/API create/edit, chuỗi ASCII thật dài đúng 0/1/2/254/255/256 và giá -1/0/1. Có case duplicate không tăng coverage cần bỏ không?
+4. Kiểm tra 30 partitions giữ nguyên: 26 active, null name/price/category và stale category (05/10/14/30) deferred. Missing/null/nonnumeric là điều kiện khác nhau, không gộp thành một request nhiều lỗi.
+5. Kiểm tra 23 BVA còn lại: cả 9 giá trị 0/1/2/254/255/256 và -1/0/1 có đại diện, coverage từng đường khác nhau. Chấp nhận bỏ positive API quanh biên và UI-edit neighbors 2/254/-1, hay có rủi ro cần khôi phục?
 6. Xác nhận AS-PC-04/06 về request đủ field và so giá trị số readback; numeric string UI hoặc GET response chưa được schema mô tả không tự thành bug kiểu dữ liệu.
-7. Kiểm tra CRUD nominal 037–044 và edit isolation 039/040/075/076: Q/R giữ nguyên tại UI ngay sau lưu, sau reload và API. Chỉ đọc sau reload có thể bỏ sót lỗi UI state.
-8. Xác nhận fixture độc lập: M/A roles, 2 categories, P/Q/R khác ID, không order/cart link, CAT_B chưa dùng. Category IDs không có BVA số học.
-9. Xác nhận AS-PC-05 cho case 074: validation danh mục theo current server list; nếu UI chặn trước request, ghi hạn chế backend coverage. Đây không phải simultaneous race test.
+7. Kiểm tra CRUD nominal UI 037/039/041/043 và edit isolation 039/075/076: Q/R giữ nguyên tại UI ngay sau lưu, sau reload và API. Chỉ đọc sau reload có thể bỏ sót lỗi UI state.
+8. Xác nhận fixture độc lập: M/A roles, 2 categories, P/Q/R khác ID, không order/cart link, CAT_B dùng cho đổi danh mục ở 039. Category IDs không có BVA số học.
+9. Xác nhận AS-PC-05 về timing category và chấp nhận deferred EP-PC-30/case 074. Non-existing ID 057/060 không chứng minh stale UI/category concurrency; chỉ khôi phục khi có ưu tiên/oracle.
 10. Kiểm tra case 076 có thể reject/ignore body id lạ, nhưng không được sửa Q khi URL chọn P. Không tự áp partial PUT/extra-field schema chưa có nguồn.
-11. Kiểm tra negative auth matrix có đủ 3 mutation methods và 4 loại token/role; API đọc public không bị nới scope thành private admin read.
+11. Kiểm tra missing JWT/user role trên cả POST/PUT/DELETE, malformed chỉ POST 064, tampered chỉ PUT 071. Chấp nhận những token/method variations còn thiếu; API đọc public không thành private admin read.
 12. Review Expected Result, khả năng tái lập, assumptions/ambiguities và rủi ro còn thiếu; xác định phần nào cần giảng viên/nguồn yêu cầu làm rõ trước execution. Không coi generated output mặc nhiên đúng.
 
-Sau review, cập nhật domain/partition/boundary/case theo quy tắc có nguồn và commit riêng. Người dùng execute, ghi Actual Result/evidence trong test run. Pool D chưa bắt đầu.
+Sau review, cập nhật domain/partition/boundary/case theo quy tắc có nguồn và commit riêng. Người dùng execute, ghi Actual Result/evidence trong test run. Pool D đã thiết kế, chưa tinh gọn; chỉ tiếp tục khi người dùng yêu cầu.
 
 ## AI Gap Candidates
 
@@ -286,7 +297,7 @@ Các ứng viên này dựa trên ambiguity/coverage hiện có, chưa phải ga
 ### Candidate 3 — Category stale và các dependencies
 
 - Possible missed case: Toàn bộ category list rỗng, category mất đồng thời với update, hoặc UI tự cập nhật trước submit nên server stale path chưa được thử.
-- Why it may have been missed: Timing/isolation/cache behavior không được quy định; case 074 chỉ tuần tự, có assumption AS-PC-05.
+- Why it may have been missed: Timing/isolation/cache behavior không được quy định; case 074 theo AS-PC-05 đã deferred khi tinh gọn. Chưa có active stale case, không phải concurrency coverage.
 - Human action required: ghi điểm đã exercise khi execution; nếu cần thêm scenario, xác nhận semantics rồi bổ sung partition/case. Không dùng kết quả một stale case để kết luận concurrency safety.
 
 ### Candidate 4 — Edit isolation chỉ kiểm tra sau reload

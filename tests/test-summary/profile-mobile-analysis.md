@@ -196,7 +196,7 @@ Robust BVA cho khoảng ngắn [10,11] rút thành **4 giá trị riêng biệt*
 - Partitions covered: 21/21 có thiết kế; EP-PM-06/07 dùng AS-PM-02, EP-PM-18 dùng AS-PM-04; EP-PM-20/21 có điều kiện dữ liệu đến renderer.
 - Boundaries identified / covered: 2/2 phone-length; 4/4 giá trị riêng 9/10/11/12 trên native form.
 - Test cases generated: 30 (4 BVA + 26 EP); 19 Native UI + 8 API companion + 2 Fixture → Native UI + 1 API → Native UI.
-- Traceability: [ma trận chung](traceability-matrix.md#pool-d--fr-04--fr-20-hồ-sơ-mobile), mapping rule/partition/boundary/case và kênh. Sau tinh gọn Pool A/B, A/B/C/D có tổng 159 cases (113 EP + 46 BVA), tất cả Not Run / None.
+- Traceability: [ma trận chung](traceability-matrix.md#pool-d--fr-04--fr-20-hồ-sơ-mobile), mapping rule/partition/boundary/case và kênh. Sau tinh gọn Pool A/B/C, A/B/C/D có tổng 129 cases (96 EP + 33 BVA), tất cả Not Run / None.
 
 ### Checklist thiết kế
 
