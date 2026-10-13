@@ -42,4 +42,4 @@ PROFILE-WEB / Functional / BVA
 
 ## Status / Related Bugs
 
-Not Run / None
+Pass / None — xem [test run và clarification của người dùng về vị trí lỗi](../../test-runs/pool-a-test-run.md).
