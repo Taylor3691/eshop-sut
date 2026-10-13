@@ -13,6 +13,7 @@
 - Backend/storefront dependencies được cài bằng `npm ci` theo lockfiles; SQLite driver load thành công. Backend và storefront đã khởi động.
 - Browser automation: browser-harness/CDP; screenshot của browser alert bằng computer-use khi cần.
 - GitHub bug Issues: `Taylor3691/eshop-sut`. Markdown bug reports và screenshots thuộc `tests/bug-reports/`. Người dùng không yêu cầu bundle evidence riêng cho test run.
+- Clarification của người dùng trước khi tiếp tục: vị trí thông báo lỗi **ở bất kỳ đâu đều chấp nhận**, bao gồm native browser alert. Với case 003, không đánh Fail chỉ vì lỗi không nằm inline phía trên nút submit; giữ các kiểm tra từ chối dữ liệu sai và persistence/isolation.
 - Database gốc được backup trước startup vì backend drop/reseed: SHA256 `C63F00544180BA1FBB1427A9B9DD3F1784842698809972F33CE90482E7420BA6`. Backup local không đưa vào commit; database gốc sẽ được khôi phục sau batch.
 
 ## Fixture đã xác minh
@@ -30,7 +31,7 @@ Storefront đã login A và hiển thị baseline. Mỗi case bắt đầu với
 
 | Test Case ID | Module | Tester | Result | Related Bug | Note |
 |---|---|---|---|---|---|
-| [TC-PROFILE-WEB-001](../test-cases/profile-web/TC-PROFILE-WEB-001.md) | PROFILE-WEB | vt-toan | Not Run | None | UI, phone 10 chữ số: 0912345678 |
+| [TC-PROFILE-WEB-001](../test-cases/profile-web/TC-PROFILE-WEB-001.md) | PROFILE-WEB | vt-toan | Fail | [BUG-PROFILE-WEB-001](../bug-reports/BUG-PROFILE-WEB-001.md) — Issue pending | 15:39 UTC+07; 0912345678 bị alert từ chối, không có PUT; GET/reload vẫn 0987654321; các trường khác A và B giữ snapshot |
 | [TC-PROFILE-WEB-002](../test-cases/profile-web/TC-PROFILE-WEB-002.md) | PROFILE-WEB | vt-toan | Not Run | None | UI, phone 11 chữ số: 09123456789 |
 | [TC-PROFILE-WEB-003](../test-cases/profile-web/TC-PROFILE-WEB-003.md) | PROFILE-WEB | vt-toan | Not Run | None | UI, phone 9 chữ số: 091234567; kiểm FR-22 |
 | [TC-PROFILE-WEB-004](../test-cases/profile-web/TC-PROFILE-WEB-004.md) | PROFILE-WEB | vt-toan | Not Run | None | UI, phone 12 chữ số: 091234567890 |
@@ -39,5 +40,5 @@ Storefront đã login A và hiển thị baseline. Mỗi case bắt đầu với
 
 ## Tổng hợp batch
 
-- Được chỉ định: 6; executed: 0; Pass: 0; Fail: 0; Blocked: 0; Not Run: 6.
-- Chưa có bug được xác nhận trong batch này.
+- Được chỉ định: 6; executed: 1; Pass: 0; Fail: 1; Blocked: 0; Not Run: 5.
+- Bugs được xác nhận: 1 UI; chưa publish Issue.
