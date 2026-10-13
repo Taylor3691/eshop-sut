@@ -245,3 +245,22 @@ AS-OS-01–05 cần review; đặc biệt ownership của user, dữ liệu đơ
 
 AM-OS-01/02/03 ưu tiên: admin có được hủy khi shipping không; cùng-state/retry trả lỗi hay no-op; user mutation ownership có được xác nhận không. AM-OS-04–08 ghi khác biệt API prose, response schema, thiếu threshold, điều khiển UI và concurrency ngoài coverage.
 
+## Human Review Required
+
+Trạng thái: **chờ người dùng review**, chưa tự phê duyệt. Skill yêu cầu “Require human review before treating the analysis as final.” Người dùng đã chỉ dẫn bắt đầu Pool B; không suy rằng các ambiguity Pool A đã được giải quyết.
+
+1. Xác nhận R-OS-01–08 và việc dùng README làm oracle; API “chưa giao” không làm user được hủy khi shipping.
+2. Làm rõ AM-OS-01: “chỉ Admin mới có thể thao tác” có cho admin shipping→canceled không? Ma trận và cases hiện chưa gán kết quả cho cặp này.
+3. Làm rõ AM-OS-02: các self-transition/retry, đặc biệt canceled→canceled, phải lỗi hay no-op? Cases 024/050 chỉ kiểm tra giữ final state.
+4. Xác nhận hoặc sửa AS-OS-03: user chỉ hủy đơn của mình. Cases 027/028 chưa có oracle mutation ownership trực tiếp trong requirement.
+5. Kiểm tra 30 partitions, 19 cặp admin có oracle và 5 user source states: có tổ hợp state/role/owner quan trọng bị bỏ sót không?
+6. Xác nhận không tạo BVA giả từ số thứ tự state, ID hoặc timeout. Nếu có requirement ordered threshold bổ sung, trích nguồn rồi cập nhật Boundary/BVA trước khi thêm case.
+7. Kiểm tra fixture A/B/M, 12 đơn tồn tại, MISSING_ORDER_ID, token roles và cách khôi phục baseline độc lập. Không dùng việc endpoint lỗi làm Expected Result của setup.
+8. Kiểm tra từng case dùng target/current_status/owner đúng, đọc lại đúng ID, và error message ở invalid request có thể quan sát; không dựa vào message thành công.
+9. Kiểm tra stale cases 051/052 theo thứ tự có xác minh server-state; phân biệt UI chặn trước request và backend từ chối request stale. Không coi tuần tự là kiểm thử concurrency.
+10. Kiểm tra duplicate: 001–019 API một cặp/case, 041 UI chuỗi có mục tiêu integration; UI/API không gộp kết quả dù chung cặp. Các partitions rộng vẫn có case cho mọi cặp xác định.
+11. Xem AS-OS-02/04: bất biến dữ liệu ngoài status và server-current-state đã được requirement bảo đảm đủ rõ chưa? Ghi nguồn nếu reviewer bổ sung.
+12. Review Expected Result/coverage gaps; sửa domain/partition trước khi sửa case nếu có rule mới. Không ghi confirmed bug, Pass/Fail hay đã được phê duyệt khi chưa có review/evidence.
+
+Sau review, lưu sửa đổi thiết kế trong commit riêng. Người dùng execute và cung cấp evidence/test run theo scope đã thống nhất. Pool C/D chưa bắt đầu.
+
