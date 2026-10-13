@@ -85,3 +85,27 @@ R-PC-* chỉ là nhãn truy vết nội bộ, không phải requirement mới.
 - Admin `App.jsx` có form sản phẩm, danh sách, nút Sửa/Xóa; create và edit dùng POST/PUT riêng, category lấy GET categories.
 - Backend `server.js`: GET list/detail, POST/PUT/DELETE products. GET readback đối chiếu theo ID; frontend không chứng minh backend validation.
 - Code giúp định vị thao tác và điểm kiểm tra UI trước/sau reload. Không có Actual Result, evidence hoặc confirmed bug từ đọc code.
+
+## Domain Analysis
+
+| Variable | Data Type | Valid Domain | Invalid Domain(s) | Constraints / Notes |
+|---|---|---|---|---|
+| name | Chuỗi | ASCII không rỗng dài 1–255; tên Việt nominal | Rỗng, ASCII >=256, thiếu field, null | D-PC-NAME; whitespace/Unicode counting còn AM-PC-01 |
+| price | Số theo giá trị nghiệp vụ | >0 | <=0, thiếu, null, chuỗi không phải số `abc` | D-PC-PRICE; JSON numeric string chuẩn hóa chưa rõ; không đặt max/integer-only |
+| category_id / category list | Quan hệ ID với tập category | ID thuộc tập tồn tại | Thiếu/null hoặc ID xác nhận không có trong tập | D-PC-CATEGORY; ID có giá trị số không biến thành BVA |
+| Authorization / role | Header và claim | JWT hợp lệ có role admin cho mutation | Thiếu token, malformed, tampered signature, token user thường | D-PC-ACCESS; read API công khai không bị áp gate mutation |
+| product ID / selected target | ID tài nguyên | P/Q tồn tại; thao tác đúng ID chọn | Sửa một sản phẩm khác với ID chọn | D-PC-TARGET; missing-resource/cascade chưa có oracle đầy đủ |
+| operation/mode | Categorical | Create/View/Edit/Delete với đúng mode | Edit vô tình tác động hàng khác | D-PC-MODE; không áp BVA |
+| description | Chuỗi | Mô tả tiếng Việt thông thường | Chưa có validation domain INVALID rõ | D-PC-DESC; không tự đặt required/length/HTML rule |
+| imageUrl | Chuỗi | URL fixture local | Chưa có validation domain INVALID rõ | D-PC-IMAGE; không tự reject empty hoặc URL chưa kiểm định |
+| category snapshot và current list | Cặp tập ID | Category còn tồn tại khi submit | Đã bị bỏ khỏi tập hiện tại (AS-PC-05) | D-PC-FRESHNESS; test tuần tự, không chứng minh concurrency |
+
+### Quan hệ và cách cô lập
+
+1. Name/price/category đồng thời phải thỏa điều kiện để lưu. Mỗi negative case chỉ thay một field; không dùng nhiều lỗi che nhau.
+2. POST và PUT là hai đường mutation, đều áp FR-15; validation UI và server là hai lớp. BVA gồm 4 đường: UI-create, API-create, UI-edit, API-edit.
+3. Với boundary name, giữ price=100000 và CAT_A_ID tồn tại. Với boundary price, giữ name nominal, category tồn tại.
+4. Với auth/role, dùng payload hoàn toàn hợp lệ và ID P tồn tại. Thử đủ POST/PUT/DELETE vì không suy một gate đại diện mọi endpoint.
+5. Sửa P phải giữ Q/R cả trong UI ngay sau lưu và API; reload chỉ là một checkpoint khác, không che lỗi state UI tạm thời.
+6. Category membership được xét bằng danh sách thực, không suy `category_id>=1` là hợp lệ. Negative ID là ID không tồn tại đã được xác minh, không phải boundary max+1.
+7. Chuyển form edit P sang Q kiểm tra selected target mới; PUT body ID lạ kiểm tra URL-selected product không làm Q bị đổi ngoài ý muốn, reject/ignore trường lạ đều có thể phù hợp AM-PC-05.
