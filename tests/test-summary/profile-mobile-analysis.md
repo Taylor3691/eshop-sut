@@ -115,4 +115,39 @@ R-PM-* là nhãn truy vết nội bộ, không tạo requirement mới.
 - API companions dùng body chính thức `name/phone/shipping_address`; case native không tự sửa payload do app gửi. Nếu valid phone bị chặn trước network, ghi điểm dừng và hạn chế downstream coverage.
 - Safe-display fixture cần đến renderer; nếu không tới, không nhận là đã kiểm chứng SEC-04. Không xét “hiển thị an toàn” là một quy tắc chấp nhận mọi markup.
 
+## Equivalence Partitions
+
+| Partition ID | Variable | Class | Condition | Representative Value | Requirement |
+|---|---|---|---|---|---|
+| EP-PM-01 | phone | VALID | Bắt đầu 0, 10–11 ASCII digits | 0912345678 / 09123456789 | FR-04; FR-20 |
+| EP-PM-02 | phone.length | INVALID | Rỗng hoặc <10; giá trị không rỗng vẫn giữ prefix 0/all-digits | 091234567 (9); chuỗi rỗng | FR-04; FR-20 |
+| EP-PM-03 | phone.length | INVALID | >11; giữ prefix 0/all-digits | 091234567890 (12) | FR-04; FR-20 |
+| EP-PM-04 | phone.prefix | INVALID | Dài 10–11/all-digits nhưng không bắt đầu 0 | 1912345678 | FR-04; FR-20 |
+| EP-PM-05 | phone.characters | INVALID | Dài 10, bắt đầu 0, có non-digit | 0A12345678; 09123 5678; 09123-5678 | FR-04; FR-20 |
+| EP-PM-06 | name | VALID | Tên thông thường theo AS-PM-02 | Lê Thị Mai | FR-04; FR-20 |
+| EP-PM-07 | shipping_address | VALID | Địa chỉ thông thường theo AS-PM-02 | 35 Nguyễn Huệ, Phường Bến Nghé, TP.HCM | FR-04; FR-20 |
+| EP-PM-08 | email UI | INVALID | Thử thay email qua native UI | mobile.changed@example.com | FR-04; FR-20 |
+| EP-PM-09 | role UI | VALID | Chủ thể user không có thao tác tự đổi role | role=user | FR-04; FR-20; SEC-06 |
+| EP-PM-10 | role client | INVALID | Gửi role khác từ client để nâng quyền | role=admin | FR-04; SEC-06 |
+| EP-PM-11 | JWT | VALID | Token thật, hợp lệ của tài khoản hiện tại | TOKEN_A / TOKEN_B runtime | SEC-02 |
+| EP-PM-12 | JWT | INVALID | Không có Authorization | Header vắng mặt | SEC-02 |
+| EP-PM-13 | JWT | INVALID | Chuỗi không phải JWT hợp lệ | Bearer not-a-jwt | SEC-02 |
+| EP-PM-14 | JWT | INVALID | Payload ID đổi nhưng chữ ký cũ | TOKEN_A_TAMPERED: id=B_ID | SEC-02; FR-04 |
+| EP-PM-15 | owner | VALID | Chỉ đọc/sửa profile chính chủ | TOKEN_A → A_ID; TOKEN_B → B_ID | FR-04; FR-20 |
+| EP-PM-16 | owner selector | INVALID | Token A nhưng selector body/query trỏ B | id=B_ID / user_id=B_ID | FR-04 |
+| EP-PM-17 | session | INVALID | Chưa login mà yêu cầu profile update | Phiên app không user/token | FR-04; FR-20 |
+| EP-PM-18 | session | INVALID | Đã logout A nhưng còn quyền/dữ liệu sửa A trong app | Logout → Hồ sơ | FR-04; FR-20; AS-PM-04 |
+| EP-PM-19 | session / owner | VALID | Login B sau logout A; form/save chỉ tác động B | A → logout → B | FR-04; FR-20 |
+| EP-PM-20 | name tại display | VALID | Markup-like string đã đến native renderer, phải an toàn | <b>Tên thử</b> | SEC-04; FR-20 |
+| EP-PM-21 | address tại display | VALID | Markup-like address đã đến native renderer, phải an toàn | <b>Địa chỉ thử</b> | SEC-04; FR-20 |
+
+21 partitions cho miền đã có oracle hoặc assumption ghi rõ. EP-PM-20/21 là VALID **tại domain hiển thị an toàn**, không khẳng định API/UI phải chấp nhận chuỗi markup. Name/address chưa có invalid input partitions với oracle đáng tin; AM-PM-01 giữ phần đó chưa xác định.
+
+- EP-PM-08 phân loại **thao tác đổi email** INVALID; email hiện tại vẫn là dữ liệu hợp lệ và được quan sát trong các own-profile cases.
+- EP-PM-09 thể hiện cấu hình quyền UI hợp lệ; negative client change nằm EP-PM-10. Không yêu cầu native app có TextInput role để thực hiện negative.
+- EP-PM-12/13 mỗi lớp có GET và PUT để không dùng kết quả read thay update.
+- EP-PM-16 có body và query representatives; reject/ignore được phép nếu không ghi B. Không áp “mọi extra field phải bị từ chối”.
+- Entry method gõ/dán, việc thay từng field và đọc server/login mới là variation/interaction trong partitions sẵn có, không tạo lớp chỉ để tăng số đếm.
+
+
 
