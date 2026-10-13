@@ -170,3 +170,16 @@ ID `EP-OS-*` ổn định. VALID/INVALID gắn với điều kiện đầy đủ
 
 EP-OS-15 phân loại **bất biến đầu ra**, không quyết định retry canceled phải thành công hay báo lỗi. EP-OS-23 phụ thuộc assumption và chưa là kết luận nghiệp vụ đã xác nhận. 6 ô `?` của ma trận admin không bị giấu trong INVALID partitions; chúng được lưu riêng dưới AM-OS-01/02.
 
+## Boundary Analysis
+
+| Variable | Lower Boundary | Upper Boundary | Inclusiveness | Requirement | Notes |
+|---|---|---|---|---|---|
+| current_status / target_status | Không áp dụng | Không áp dụng | Không áp dụng | FR-10 | Categorical graph, không phải khoảng số; pending=1…canceled=5 là phép gán tùy tiện |
+| actor_role / ownership / existence | Không áp dụng | Không áp dụng | Không áp dụng | FR-10/12/18, SEC-03 | Quan hệ/category; dùng EP |
+| order_id | Chưa có | Chưa có | Chưa xác định | API dùng `:id` | Không lấy SQLite AUTOINCREMENT làm boundary nghiệp vụ |
+| thời gian chờ, số lần đổi status, TTL | Chưa có | Chưa có | Chưa xác định | FR-10 không quy định | AM-OS-06; không tự đặt threshold |
+
+**Kết luận BVA:** Không có ordered domain/threshold được requirement cung cấp trong scope FR-10. Có 0 numeric/time boundary và không tạo test case gắn Technique BVA. Các final states là ràng buộc của graph; thao tác ngay trước/sau một chuyển đổi có thể kiểm tra state-transition nhưng không phải BVA số học.
+
+AMBIGUITY: Đặc tả không định nghĩa boundary chính xác cho order_id, thời gian hoặc số lần chuyển trạng thái. BVA cho các biến này chưa thể thiết kế đáng tin cậy nếu không có nguồn requirement bổ sung. BVA không áp dụng cho enum state không phải do thiếu giá trị min/max, mà do bản chất categorical của domain.
+
