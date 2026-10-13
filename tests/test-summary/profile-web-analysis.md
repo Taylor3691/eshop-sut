@@ -104,3 +104,31 @@ Các mã R dưới đây chỉ là nhãn truy vết nội bộ; không thay th�
 4. Quyền cập nhật name/phone/address không bao gồm quyền cập nhật role. Case role dùng phone hợp lệ để cô lập lỗi quyền.
 5. Name/address cần an toàn ở các điểm hiển thị dù được nhập qua API; reload trang để không nhầm React state cũ với dữ liệu lưu.
 6. Tách case UI và API dù dùng cùng boundary: chúng kiểm tra hai lớp validation khác nhau. Một case UI bị chặn không được đổi dữ liệu để cố đi tới backend.
+
+## Equivalence Partitions
+
+ID `EP-PW-*` ổn định trong Pool A. VALID/INVALID của auth, ownership, email và role mô tả thao tác/quyền, không áp đặt loại JSON ngoài đặc tả. Các miền AM-01–AM-07 chưa đủ oracle không được gán nhãn tùy ý.
+
+| Partition ID | Variable | Class | Condition | Representative Value | Requirement |
+|---|---|---|---|---|---|
+| EP-PW-01 | phone | VALID | Bắt đầu `0`, toàn chữ số, dài 10–11 | `0912345678`, `09123456789` | FR-04 R2 |
+| EP-PW-02 | phone | INVALID | Bắt đầu `0`, toàn chữ số, không rỗng, dài <10 | `091234567` | FR-04 R2 |
+| EP-PW-03 | phone | INVALID | Bắt đầu `0`, toàn chữ số, dài >11 | `091234567890` | FR-04 R2 |
+| EP-PW-04 | phone | INVALID | Dài 10–11, toàn chữ số, ký tự đầu khác `0` | `1912345678` | FR-04 R2 |
+| EP-PW-05 | phone | INVALID | Dài 10–11, bắt đầu `0`, chứa chữ cái | `09123A5678` | FR-04 R2 |
+| EP-PW-06 | name | VALID | Tên người thông thường, không có restriction bổ sung | `Nguyễn O'Neil` | FR-04 R1; AS-03 |
+| EP-PW-07 | shipping_address | VALID | Địa chỉ thông thường | `45 Nguyễn Huệ, Phường Bến Nghé, TP.HCM` | FR-04 R1; AS-03 |
+| EP-PW-08 | email UI | VALID | Xem email hiện tại | `profile.a@example.com` | FR-04 R3 |
+| EP-PW-09 | email UI | INVALID | Thử chỉnh email qua UI | Nhập `changed.a@example.com` vào email của A | FR-04 R3 |
+| EP-PW-10 | Authorization | VALID | Token còn hợp lệ do môi trường cấp cho A | `TOKEN_A` lấy sau đăng nhập | SEC-02 R6 |
+| EP-PW-11 | Authorization | INVALID | Không có header Authorization | Bỏ hẳn header | SEC-02 R6 |
+| EP-PW-12 | Authorization | INVALID | Chuỗi không phải JWT hợp lệ | `Bearer not-a-jwt` | SEC-02 R6 |
+| EP-PW-13 | Authorization | INVALID | Payload JWT bị sửa, chữ ký không tương ứng | Token A đổi claim `id` thành B_ID, giữ chữ ký cũ | SEC-02 R6 |
+| EP-PW-14 | ownership | VALID | Người gọi A cập nhật chính A | Token A, `/api/users/me`, body ba trường | FR-04 R4 |
+| EP-PW-15 | ownership | INVALID | Người gọi A cố chọn B | Body `id=B_ID`; hoặc query `user_id=B_ID` | FR-04 R4 |
+| EP-PW-16 | role | VALID | Giữ role hiện tại khi cập nhật trường được phép | A vẫn là `user` | FR-04 R5, SEC-06 |
+| EP-PW-17 | role | INVALID | A tự nâng quyền | Body thêm `"role":"admin"` | FR-04 R5, SEC-06 |
+| EP-PW-18 | name tại điểm hiển thị | VALID | Chuỗi giống HTML được hiển thị dưới dạng text nếu được lưu | `<b data-profile-probe="name">Tên kiểm tra</b>` | SEC-04 R7; AM-07 |
+| EP-PW-19 | address tại điểm hiển thị | VALID | Chuỗi giống HTML được hiển thị dưới dạng text nếu được lưu | `<b data-profile-probe="address">Địa chỉ kiểm tra</b>` | SEC-04 R7; AM-07 |
+
+EP-PW-18/19 là phân hoạch dữ liệu cho oracle an toàn đầu ra, không khẳng định backend bắt buộc nhận HTML. Name và address có điểm hiển thị khác nhau nên cần hai case riêng. Các case ownership/role cho phép request bị reject hoặc trường cấm bị ignore; điều kiện quyết định là không vi phạm quyền và dữ liệu bảo vệ.
