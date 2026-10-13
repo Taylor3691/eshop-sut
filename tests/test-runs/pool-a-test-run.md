@@ -32,7 +32,7 @@ Storefront đã login A và hiển thị baseline. Mỗi case bắt đầu với
 | Test Case ID | Module | Tester | Result | Related Bug | Note |
 |---|---|---|---|---|---|
 | [TC-PROFILE-WEB-001](../test-cases/profile-web/TC-PROFILE-WEB-001.md) | PROFILE-WEB | vt-toan | Fail | [BUG-PROFILE-WEB-001](../bug-reports/BUG-PROFILE-WEB-001.md) — Issue pending | 15:39 UTC+07; 0912345678 bị alert từ chối, không có PUT; GET/reload vẫn 0987654321; các trường khác A và B giữ snapshot |
-| [TC-PROFILE-WEB-002](../test-cases/profile-web/TC-PROFILE-WEB-002.md) | PROFILE-WEB | vt-toan | Not Run | None | UI, phone 11 chữ số: 09123456789 |
+| [TC-PROFILE-WEB-002](../test-cases/profile-web/TC-PROFILE-WEB-002.md) | PROFILE-WEB | vt-toan | Fail | [BUG-PROFILE-WEB-001](../bug-reports/BUG-PROFILE-WEB-001.md) — Issue pending | 15:48 UTC+07; input 09123456789 bị alert từ chối; GET/reload vẫn 0987654321; các trường khác A và B giữ snapshot |
 | [TC-PROFILE-WEB-003](../test-cases/profile-web/TC-PROFILE-WEB-003.md) | PROFILE-WEB | vt-toan | Not Run | None | UI, phone 9 chữ số: 091234567; kiểm FR-22 |
 | [TC-PROFILE-WEB-004](../test-cases/profile-web/TC-PROFILE-WEB-004.md) | PROFILE-WEB | vt-toan | Not Run | None | UI, phone 12 chữ số: 091234567890 |
 | [TC-PROFILE-WEB-007](../test-cases/profile-web/TC-PROFILE-WEB-007.md) | PROFILE-WEB | vt-toan | Not Run | None | API PUT, phone 9 chữ số: 091234567 |
@@ -40,5 +40,5 @@ Storefront đã login A và hiển thị baseline. Mỗi case bắt đầu với
 
 ## Tổng hợp batch
 
-- Được chỉ định: 6; executed: 1; Pass: 0; Fail: 1; Blocked: 0; Not Run: 5.
+- Được chỉ định: 6; executed: 2; Pass: 0; Fail: 2; Blocked: 0; Not Run: 4.
 - Bugs được xác nhận: 1 UI; chưa publish Issue.

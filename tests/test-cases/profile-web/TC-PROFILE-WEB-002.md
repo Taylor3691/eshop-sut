@@ -41,4 +41,4 @@ PROFILE-WEB / Functional / BVA
 
 ## Status / Related Bugs
 
-Not Run / None
+Fail / [BUG-PROFILE-WEB-001](../../bug-reports/BUG-PROFILE-WEB-001.md) — xem [test run](../../test-runs/pool-a-test-run.md); Issue pending.
