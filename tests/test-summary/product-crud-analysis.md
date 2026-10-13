@@ -213,6 +213,22 @@ Nominal name `PC sản phẩm mới`, nominal price 100000 được dùng khi th
 
 Kiểm tra tài liệu đã thực hiện: 78 ID/tên file liên tục, đúng 7 headings/template, trạng thái Not Run / None, technique totals 36 BVA + 42 EP; liên kết file local tồn tại; 30 partitions và toàn bộ cases trong ma trận; literal name BVA dài đúng 0/1/2/254/255/256, price đúng -1/0/1 trên bốn đường; body JSON parse được sau thay runtime ID, field missing thật sự bị bỏ. Tổng cases A/B/C hiện tại = 129 sau tinh gọn Pool A/B (158 tại thời điểm thiết kế Pool C; 149 sau tinh gọn A). Đây là kiểm tra cấu trúc thiết kế, không phải execute SUT hay xác nhận business correctness.
 
+### Kế hoạch tinh gọn theo yêu cầu người dùng
+
+Mục tiêu: **78 → 48 cases**, loại 30 (13 BVA + 17 EP), dự kiến giữ **23 BVA + 25 EP; 21 UI + 27 API**. Giữ ID/nội dung cases còn lại, không renumber hoặc ghép các request độc lập để giảm số file. Tập domain/30 partitions và 3 boundaries vẫn giữ để thấy phần chưa được bao phủ. Các ID dưới đây là lịch sử lựa chọn, không phải case active sau khi xóa.
+
+| Nhóm giảm ưu tiên | IDs dự kiến loại (TC-PRODUCT-CRUD-) | Đại diện giữ lại / tradeoff |
+|---|---|---|
+| Positive BVA lặp giữa UI/API | 008/009/010/011/020/021/022/023/030/036 | UI-create giữ cả 9 giá trị; UI-edit giữ name 1/255 và price 1. Direct API positive quanh biên không còn case riêng; UI phải tới server mới exercise acceptance |
+| UI-edit BVA ít ưu tiên | 015/016/031 | UI-edit name 0/1/255/256 và price 0/1; API-edit giữ negative name 0/256, price -1/0. UI-edit name 2/254, price -1 không được gọi covered |
+| Nominal API CRUD lặp mục tiêu nghiệp vụ | 038/040/042/044 | Giữ UI 037/039/041/043 với GET/snapshot/readback; UI và API là đường vào khác nhau, direct API positive CRUD/view/delete giảm ưu tiên |
+| Null của required fields | 046/048/050/053/056/059 | Giữ missing name/price/category trên cả POST/PUT; null khác missing, EP-PC-05/10/14 deferred, không coi là covered |
+| Auth variations theo method | 065/066/070/072 | Missing JWT và token user đủ POST/PUT/DELETE; malformed chỉ POST 064, tampered chỉ PUT 071. Không còn matrix 4 loại × 3 methods |
+| Category stale theo timing assumption | 074 | Existing/missing/non-existing category còn cả create/edit; EP-PC-30 deferred. AS-PC-05/AM-PC-07 vẫn cần làm rõ, không suy coverage stale từ ID không tồn tại |
+| UI price blank | 077/078 | API missing/abc và UI price 0 còn; UI blank là đường riêng bị giảm ưu tiên, EP-PC-11 chỉ còn đại diện API abc |
+
+Giữ các case có rủi ro riêng: UI edit 039 kiểm tra Q/R trước reload và API; switch target 075; URL/body ID 076; UI Admin access 073. Không bỏ POST/PUT negative validation hoặc missing-field checks chỉ vì frontend chặn input: hai endpoint có thể xử lý khác nhau. Sau tinh gọn dự kiến **26/30 partitions active**, 4 deferred (05/10/14/30); cả 3 boundaries/9 giá trị có đại diện toàn suite, không còn 9 giá trị trên từng đường.
+
 ### Potential Coverage Gaps
 
 - Fractional price/precision/delta nhỏ hơn 1, max price, Unicode grapheme length, whitespace-only/trim chưa đủ oracle để nhận xét đầy đủ (AM-PC-01/02).
