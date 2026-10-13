@@ -416,15 +416,14 @@ nếu requirement không cung cấp chính xác nội dung message đó.
 
 ### Format Test Case
 
-| TC-ID | Requirement ID | Module / TestType / Technique | Preconditions | Test data | Test steps | Expectect result |
-
+| TC-ID | Requirement ID | Module / TestType / Technique | Preconditions | Test data | Test steps | Expectect result | Status/ Relate bugs |
 ---
 
 Ví dụ mẫu cho một TestCase:
 
-| TC-ID | Requirement ID | Module / TestType / Technique | Preconditions | Test data | Test steps | Expected result |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **TC-LOGIN-001** | FR-LOGIN-01 | Login / Functional / Equivalence Partitioning | - User đã có tài khoản hợp lệ<br>- User đang ở trang Login | **Email:** user01@gmail.com<br>**Password:** Abc@123456 | 1. Mở trang Login<br>2. Nhập email và password hợp lệ<br>3. Bấm Login | Đăng nhập thành công và chuyển về Home. |
+| TC-ID | Requirement ID | Module / TestType / Technique | Preconditions | Test data | Test steps | Expected result | Status/Relate bugs |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **TC-LOGIN-001** | FR-LOGIN-01 | Login / Functional / Equivalence Partitioning | - User đã có tài khoản hợp lệ<br>- User đang ở trang Login | **Email:** user01@gmail.com<br>**Password:** Abc@123456 | 1. Mở trang Login<br>2. Nhập email và password hợp lệ<br>3. Bấm Login | Đăng nhập thành công và chuyển về Home. | Not run/None |
 
 ---
 
@@ -554,8 +553,8 @@ Output:
 
 ## 5. Test Cases
 
-| TC-ID | Requirement ID | Module / TestType / Technique | Preconditions | Test data | Test steps | Expected result |
-| --- | :-- | --- | --- | --- | --- | --- |
+| TC-ID | Requirement ID | Module / TestType / Technique | Preconditions | Test data | Test steps | Expected result | Status/ Relate bugs |
+| --- | :-- | --- | --- | --- | --- | --- | --- |
 ---
 
 ## 7. EC Coverage Matrix

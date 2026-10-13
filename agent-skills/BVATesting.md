@@ -729,14 +729,14 @@ Các biến khác = Valid Representative Value
 
 ### Format Test Case
 
-| TC-ID | Requirement ID | Module / TestType / Technique | Preconditions | Test data | Test steps | Expected result |
-|---|---|---|---|---|---|---|
+| TC-ID | Requirement ID | Module / TestType / Technique | Preconditions | Test data | Test steps | Expected result | Status/ Related bugs |
+|---|---|---|---|---|---|---|---|
 
 ### Ví dụ
 
-| TC-ID | Requirement ID | Module / TestType / Technique | Preconditions | Test data | Test steps | Expected result |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **TC-BVA-001** | FR-XX | Feature / Functional / Boundary Value Analysis | User ở màn hình cần kiểm thử | **Số người:** 1 | 1. Nhập số người = 1<br>2. Submit | Hệ thống từ chối vì giá trị nhỏ hơn giới hạn tối thiểu. |
+| TC-ID | Requirement ID | Module / TestType / Technique | Preconditions | Test data | Test steps | Expected result | Status/ Related bugs |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **TC-BVA-001** | FR-XX | Feature / Functional / Boundary Value Analysis | User ở màn hình cần kiểm thử | **Số người:** 1 | 1. Nhập số người = 1<br>2. Submit | Hệ thống từ chối vì giá trị nhỏ hơn giới hạn tối thiểu. | Not run/ None |
 
 ---
 
@@ -1068,8 +1068,8 @@ Không có Input khác cần giữ ở giá trị hợp lệ.
 
 ## 5. Test Cases
 
-| TC-ID | Requirement ID | Module / TestType / Technique | Preconditions | Test data | Test steps | Expected result |
-|---|---|---|---|---|---|---|
+| TC-ID | Requirement ID | Module / TestType / Technique | Preconditions | Test data | Test steps | Expected result | Status/ Relate bugs |
+|---|---|---|---|---|---|---|---|
 
 ---
 
