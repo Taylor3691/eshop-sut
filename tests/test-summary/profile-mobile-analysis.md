@@ -1,6 +1,6 @@
 # Pool D — FR-04 / FR-20: Hồ sơ cá nhân trên Mobile
 
-Trạng thái: đang thiết kế theo 9 bước của skill `domain-testing-bva`; chưa execute, chưa phê duyệt. Người dùng yêu cầu bắt đầu Pool D; chỉ dẫn này không xác nhận review/phê duyệt Pool A/B/C.
+Trạng thái: đã hoàn thành bản thiết kế theo 9 bước của skill `domain-testing-bva`, sẵn cho human review; chưa execute, chưa phê duyệt. Người dùng yêu cầu bắt đầu Pool D; chỉ dẫn này không xác nhận review/phê duyệt Pool A/B/C.
 
 ## Requirement Analysis
 
@@ -239,8 +239,42 @@ Thiết kế sẵn để reviewer kiểm tra, **chưa được phê duyệt**. C
 9. Kiểm redundancy giữa native initial-load 019 và server-update → fresh-login 030: chúng có precondition/data-flow khác nhau; 030 không thay native save 011–013.
 10. Reviewer quyết định chấp nhận/sửa từng ambiguity và test; chỉ ghi phê duyệt hoặc execution khi có review/evidence thật. Agent không tạo Actual Result/bug report hoặc AI Audit Report trong nhiệm vụ này.
 
+## AI Gap Candidates
 
+Các mục sau là **ứng viên thiếu coverage/thiếu oracle**, chưa phải AI gap được con người xác nhận hoặc bug SUT. Không phải AI Audit Report/log.
 
+### Candidate 1 — Miền chuỗi và normalization chưa có oracle
 
+- Possible missed case: Name/address blank/null/multiline/Unicode length; phone Unicode digits hoặc chuẩn hóa input đầu/cuối.
+- Why it may have been missed: AM-PM-01/02 không định nghĩa required/length/trim/Unicode; current design chỉ ASCII phone và nominal text, không thể gán valid/invalid đáng tin.
+- Human action required: Bổ sung rule rồi phân miền/cases; chỉ tạo BVA khi có exact boundary, không lấy giới hạn implementation làm requirement.
 
+### Candidate 2 — Native validation che downstream persistence/transport
 
+- Possible missed case: Quan sát request địa chỉ và dữ liệu server sau native update hợp lệ khi validation chặn trước network.
+- Why it may have been missed: Static review cho thấy phone regex/payload khác oracle và user state đổi cục bộ. 011–013 đã thiết kế readback nhưng execution có thể dừng trước transport; 030 chỉ chiều server → Mobile.
+- Human action required: Execute giữ phone hợp lệ, ghi checkpoint và hạn chế. Nếu native request chưa được gửi, không kết luận field mapping Pass; reviewer lên lịch kiểm lại khi đường update hợp lệ hoạt động, không bypass bằng phone sai hoặc sửa body để đánh Pass.
+
+### Candidate 3 — Platform/clipboard matrix chưa được xác định
+
+- Possible missed case: Khác biệt gõ/dán phone, email readonly và native markup display giữa các OS/device được hỗ trợ.
+- Why it may have been missed: AM-PM-06 thiếu danh sách platform; thiết kế 006–010/014/028–029 chưa có execution trên thiết bị nào.
+- Human action required: Chọn supported OS/device/Expo versions và lặp cases phù hợp, ghi evidence theo môi trường. Không tuyên bố cross-platform coverage từ nguồn React Native chung.
+
+### Candidate 4 — Session lifecycle và failure recovery chưa có rule
+
+- Possible missed case: Profile khi token hết hạn, app resume/cold restart, network mất trong save, retry hoặc refresh background.
+- Why it may have been missed: AM-PM-05 không có expiry/timeout/storage/offline semantics; 017/018 chỉ kiểm logout và switch user bình thường.
+- Human action required: Làm rõ desired behavior rồi thêm state/interaction cases; không tự đặt token TTL, auto-login, request retries hoặc rollback policy.
+
+### Candidate 5 — Acceptance và phạm vi safe display
+
+- Possible missed case: Đường native input → server → renderer với markup khác hoặc surface mới trong phạm vi hồ sơ.
+- Why it may have been missed: AM-PM-08 chưa rõ acceptance; 028/029 dùng fixture/probe vô hại và chỉ form/header. Không chứng minh toàn bộ SEC-04 từ hai smoke cases.
+- Human action required: Xác định rule acceptance và surfaces/platforms được hỗ trợ; bổ sung probes nếu có lý do. Chỉ xác nhận display coverage khi dữ liệu đã tới renderer, không dùng rejection trước đó làm bằng chứng.
+
+### Kết quả bàn giao thiết kế
+
+- Đã hoàn thành 9 bước của skill, 30 cases và ma trận; sẵn cho human review, chưa phê duyệt.
+- Kiểm tra tài liệu: IDs/headings/status/technique/steps/data, literal BVA, JSON templates, 21 partition mappings, 2 boundary mappings, local links và số đếm A/B/C/D.
+- Không khởi động backend/Expo, gọi API, thao tác app, execute test cases hoặc tạo evidence/confirmed bug. Không sửa mã ứng dụng, push hoặc tạo GitHub Issues.
