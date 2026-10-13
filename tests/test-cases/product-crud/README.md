@@ -14,7 +14,7 @@ M là seed nếu chưa đổi; A do tester tạo. Ghi ID/token thật `M_ID`, `A
 | Ký hiệu category | Tên fixture | Điều kiện |
 |---|---|---|
 | CAT_A_ID | PC Danh mục A | Tồn tại |
-| CAT_B_ID | PC Danh mục B | Tồn tại, ban đầu chưa được sản phẩm fixture tham chiếu |
+| CAT_B_ID | PC Danh mục B | Tồn tại, dùng để đổi danh mục ở case 039 |
 | CAT_MISSING_ID | Không có | ID xác nhận không tồn tại, không phải boundary số |
 
 Dùng GET `/api/categories` và nguồn fixture độc lập để xác nhận. ID category không được coi là hợp lệ chỉ vì là số dương.

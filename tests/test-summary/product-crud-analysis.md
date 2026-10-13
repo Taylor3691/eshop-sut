@@ -221,7 +221,7 @@ Cả 3 boundaries/9 giá trị có đại diện toàn suite; không coi direct 
 - [ ] Human review assumption/ambiguity và thiết kế, chưa phê duyệt.
 - [ ] Execute/evidence/test run thuộc người dùng, chưa có kết quả.
 
-Kiểm tra tài liệu sau tinh gọn: sẽ đối chiếu 48 file/ID giữ lại, template/status/technique, literal BVA/JSON/missing fields, mapping 30 partitions, liên kết local và nội dung với Git trước tinh gọn. Đây là kiểm tra cấu trúc thiết kế, không phải execute SUT hay xác nhận business correctness.
+Kiểm tra tài liệu sau tinh gọn đã Passed: 48 ID/tên file giữ nguyên, đúng 7 headings/template và steps liên tục, trạng thái Not Run / None; 23 BVA + 25 EP, 21 UI + 27 API; 25 JSON bodies parse sau thay runtime ID, missing fields thật sự bị bỏ. Đối chiếu nội dung 48 cases giữ lại với Git trước tinh gọn (`54361b9`) không có thay đổi. Ma trận có 30 inverse partition mappings (26 active/4 deferred), 23 BVA cells/literals và đủ 9 giá trị; 1162 liên kết file/anchor local toàn tests hợp lệ. Tổng A/B/C=99, A/B/C/D=129 (96 EP + 33 BVA); cases/mapping A/B/D không đổi. `git diff --check` sạch. Đây là kiểm tra cấu trúc thiết kế, không phải execute SUT hay xác nhận business correctness.
 
 ### Quyết định tinh gọn theo yêu cầu người dùng
 
@@ -275,6 +275,7 @@ Trạng thái: **chờ người dùng review**. Skill yêu cầu “Require huma
 10. Kiểm tra case 076 có thể reject/ignore body id lạ, nhưng không được sửa Q khi URL chọn P. Không tự áp partial PUT/extra-field schema chưa có nguồn.
 11. Kiểm tra missing JWT/user role trên cả POST/PUT/DELETE, malformed chỉ POST 064, tampered chỉ PUT 071. Chấp nhận những token/method variations còn thiếu; API đọc public không thành private admin read.
 12. Review Expected Result, khả năng tái lập, assumptions/ambiguities và rủi ro còn thiếu; xác định phần nào cần giảng viên/nguồn yêu cầu làm rõ trước execution. Không coi generated output mặc nhiên đúng.
+13. Review quyết định 78→48: giữ core CRUD, selected-target isolation, required-field/negative API validation, boundaries và role/missing JWT. Chấp nhận 4 partitions deferred và các đường vào giảm ưu tiên trong bảng quyết định, hoặc chỉ rõ rủi ro cần khôi phục trước execution; không coi việc tiếp tục pool khác là human approval.
 
 Sau review, cập nhật domain/partition/boundary/case theo quy tắc có nguồn và commit riêng. Người dùng execute, ghi Actual Result/evidence trong test run. Pool D đã thiết kế, chưa tinh gọn; chỉ tiếp tục khi người dùng yêu cầu.
 
