@@ -259,6 +259,7 @@ Thiết kế sẵn để reviewer kiểm tra, **chưa được phê duyệt**. C
 8. Kiểm 028/029 chỉ là safe-display probes có điều kiện; chuẩn bị fixture/khôi phục được và không dùng rejection trước render làm Pass. Đánh giá các risk chưa covered: supported OS, offline/retry, partial PUT, concurrency, token lifecycle.
 9. Review bỏ standalone initial-load 019, giữ 030 server update → fresh native login và load B trước save 018. 019 có invariant no-mutation trên nominal baseline đã giảm ưu tiên. 030 không thay native save 013/018; nhắc 011–013 trong nguyên bản case 030 là IDs lịch sử, chỉ 013 còn active.
 10. Reviewer quyết định chấp nhận/sửa từng ambiguity và test; chỉ ghi phê duyệt hoặc execution khi có review/evidence thật. Agent không tạo Actual Result/bug report hoặc AI Audit Report trong nhiệm vụ này.
+11. Review quyết định 30→20: chấp nhận EP-PM-09 deferred và các variation/path đã loại trong bảng quyết định, hoặc chỉ rõ rủi ro cần khôi phục. Giữ native 013/018, server → native 030, session, boundary và security probes có mục tiêu riêng; không suy coverage đầy đủ từ case đại diện hoặc từ chỉ dẫn tiếp tục pool khác.
 
 ## AI Gap Candidates
 
@@ -297,5 +298,5 @@ Các mục sau là **ứng viên thiếu coverage/thiếu oracle**, chưa phải
 ### Kết quả bàn giao thiết kế
 
 - Đã giữ đủ 9 bước của skill và tinh gọn 30→20 cases; ma trận ghi rõ 20 active/1 deferred partitions, sẵn cho human review, chưa phê duyệt.
-- Kiểm tra tài liệu sau tinh gọn: sẽ đối chiếu 20 IDs/headings/status/technique/steps/data, retained contents với Git trước tinh gọn, literal BVA/JSON, 21 inverse partition mappings, 2 boundaries, local links và số đếm A/B/C/D.
+- Kiểm tra tài liệu sau tinh gọn đã Passed: 20 IDs/title/7 headings cấp 2/status/technique/steps/data; 4 BVA + 16 EP, đúng kênh 11/6/2/1; nội dung 20 cases giữ nguyên so với Git trước tinh gọn (`8840f90`). 6 JSON templates parse sau thay runtime ID; phone vẫn là chuỗi có 0 đầu; literal BVA đúng 9/10/11/12, 21 inverse partition mappings (20 active/EP-PM-09 deferred), 2 boundary mappings và 1090 links/anchors local toàn tests hợp lệ. A/B/C cases và mapping không đổi; tổng hiện tại 119 (86 EP + 33 BVA). `git diff --check` sạch. Đây là kiểm tra thiết kế tài liệu, không phải execution/business correctness.
 - Không khởi động backend/Expo, gọi API, thao tác app, execute test cases hoặc tạo evidence/confirmed bug. Không sửa mã ứng dụng, push hoặc tạo GitHub Issues.
