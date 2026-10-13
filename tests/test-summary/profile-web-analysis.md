@@ -82,3 +82,25 @@ Các mã R dưới đây chỉ là nhãn truy vết nội bộ; không thay th�
 - `frontend-web/src/pages/Profile.jsx` cung cấp form và request cập nhật; `AuthContext.jsx` khôi phục user từ GET `/me`; `App.jsx` có phần chào tên người dùng.
 - `backend/server.js` xử lý GET/PUT hồ sơ. UI và API là hai đường vào cần được kiểm tra độc lập: UI chặn một giá trị không chứng minh backend chặn giá trị đó.
 - Code giúp xác định thao tác và điểm đọc lại; các nhận xét tĩnh không được dùng làm Actual Result, Pass/Fail hay confirmed bug.
+
+## Domain Analysis
+
+| Variable | Data Type | Valid Domain | Invalid Domain(s) | Constraints / Notes |
+|---|---|---|---|---|
+| phone | Chuỗi ASCII không rỗng trong miền đã xác định | `0` + 9 hoặc 10 chữ số ASCII | Chuỗi toàn chữ số bắt đầu `0` dài 1–9 hoặc >=12; chuỗi 10–11 chữ số bắt đầu 1–9; chuỗi dài 10–11 bắt đầu `0` chứa chữ cái | D-PHONE; độ dài tính bằng ký tự, không chuyển thành số; blank/null/chuẩn hóa chưa phân loại |
+| name | Chuỗi | Tên thông thường có dấu, ví dụ `Nguyễn Thị An`; một tên có dấu nháy làm đại diện bổ sung | Chưa có domain validation INVALID được quy định | D-NAME; không mặc định name dài 256 hay rỗng là sai |
+| shipping_address | Chuỗi | Địa chỉ tiếng Việt thông thường | Chưa có domain validation INVALID được quy định | D-ADDRESS; không áp format địa chỉ, độ dài hay quy tắc bắt buộc tự đặt |
+| email ở UI | Giá trị hiển thị | Giữ email hiện có; thao tác xem | Hành động đổi email qua form | D-EMAIL; INVALID ở đây là thao tác bị cấm, không phải email sai định dạng |
+| Authorization | Header/token | JWT hợp lệ của A hoặc B | Không có token; token không phải JWT; JWT sửa payload nhưng giữ chữ ký cũ | D-AUTH; thiếu token khác token sai; không giả định TTL |
+| chủ thể và đích cập nhật | Quan hệ danh tính | Token A → hồ sơ A | Token A → hồ sơ B | D-OWNER; ID tự chèn trong body/query không thay chủ thể xác thực |
+| role | Thuộc tính được bảo vệ | Giữ role `user` của A | Thao tác A đổi thành `admin` | D-ROLE; token hợp lệ không có nghĩa được phép sửa mọi thuộc tính |
+| dữ liệu tại điểm hiển thị | Chuỗi thông thường/chuỗi giống HTML | Render text an toàn | Hành vi tạo HTML từ dữ liệu người dùng | D-RENDER; chuỗi giống HTML không tự động là input invalid; phân loại hành vi đầu ra |
+
+### Quan hệ giữa các biến
+
+1. Phone hợp lệ khi **đồng thời** đúng độ dài, đúng ký tự, đúng ký tự đầu; kiểm tra một điều kiện trong khi giữ các điều kiện còn lại hợp lệ.
+2. JWT hợp lệ là precondition của domain cập nhật. Negative phone cases dùng token hợp lệ để lỗi auth không che lỗi validation.
+3. Quyền sở hữu phụ thuộc token đã xác thực, không phụ thuộc `id`/`user_id` do client thêm. Snapshot B giúp phân biệt cập nhật A và sửa nhầm B.
+4. Quyền cập nhật name/phone/address không bao gồm quyền cập nhật role. Case role dùng phone hợp lệ để cô lập lỗi quyền.
+5. Name/address cần an toàn ở các điểm hiển thị dù được nhập qua API; reload trang để không nhầm React state cũ với dữ liệu lưu.
+6. Tách case UI và API dù dùng cùng boundary: chúng kiểm tra hai lớp validation khác nhau. Một case UI bị chặn không được đổi dữ liệu để cố đi tới backend.
