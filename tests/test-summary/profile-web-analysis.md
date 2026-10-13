@@ -156,3 +156,12 @@ Phương pháp: giữ token hợp lệ, name/address baseline và chữ số đ�
 | phone.length | B-PW-U: max+1 | 12: `091234567890` | INVALID, EP-PW-03 | Ngay trên 11 |
 
 Tổng: 2 boundary, 6 vị trí BVA được đại diện bằng 4 giá trị duy nhất. Mỗi giá trị có một case UI và một case API, tổng 8 case BVA. Baseline phone `0987654321` khác cả hai giá trị valid để nhận biết cập nhật có thực sự xảy ra.
+
+## Generated Test Cases
+
+- [Danh mục và fixture](../test-cases/profile-web/README.md): 28 test cases Markdown riêng biệt, ID `TC-PROFILE-WEB-001` đến `TC-PROFILE-WEB-028`.
+- 001–008: BVA phone ở UI và API; 009–012: sai tiền tố/ký tự với độ dài hợp lệ.
+- 013–016: sửa name/address độc lập, email chỉ đọc và phiên chưa đăng nhập.
+- 017–020: GET/PUT thiếu token hoặc token sai định dạng; 021–024: ownership, role và token sửa payload.
+- 025–026: dữ liệu giống HTML tại các điểm hiển thị của name/address; 027–028: cập nhật đồng thời cả ba trường hợp lệ qua API/UI.
+- Tất cả `Not Run / None`; không có Actual Result hoặc confirmed bug. Cases 027–028 bổ sung kiểm tra tương tác/ánh xạ nhiều trường, khác với cases BVA chỉ thay phone.
