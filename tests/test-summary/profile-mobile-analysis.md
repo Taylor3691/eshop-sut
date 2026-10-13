@@ -89,3 +89,30 @@ R-PM-* là nhãn truy vết nội bộ, không tạo requirement mới.
 - Login lấy user từ server và khởi tạo form; logout xóa user/token/các field. Persistence kiểm bằng login lại, không dựa app restart hoặc giả định AsyncStorage.
 - API companions trực tiếp kiểm JWT/ownership/role; kết quả của chúng không thay kết quả validation/transport của native form, cũng không tự tính là Mobile UI coverage.
 
+## Domain Analysis
+
+| Variable | Data Type | Valid Domain | Invalid Domain(s) | Constraints / Notes |
+|---|---|---|---|---|
+| phone | Chuỗi ASCII | `0[0-9]{9,10}` theo requirement | Dưới 10 / trên 11 ký tự với prefix 0 và toàn chữ số; dài 10–11 nhưng prefix khác 0; chứa non-digit | Các lớp sai được cô lập bằng điều kiện phụ; rỗng thuộc dưới 10 |
+| name | Chuỗi | Tên tiếng Việt thông thường, AS-PM-02 | Chưa xác định required/min/max/blank/trim | Chuỗi markup chỉ phân miền **hiển thị**, không mặc định valid input |
+| shipping_address | Chuỗi | Địa chỉ tiếng Việt thông thường, AS-PM-02 | Chưa xác định length/blank/null/multiline | Form native phải lưu đúng trường API; không ép client state là server truth |
+| email UI | Chuỗi chỉ đọc | Email hiện tại của user đăng nhập | Thao tác gõ/dán không được làm email đổi | Không suy ra email API immutable hoặc HTML type |
+| role / quyền sửa | Thuộc tính enum | User giữ role `user`; không có UI tự đổi quyền | Client cố gửi `role=admin` | Không tạo BVA cho enum hoặc số hóa role |
+| JWT | Header/claims | Token thật của A/B còn hợp lệ | Thiếu, sai định dạng, payload sửa ID nhưng giữ signature cũ | Không đặt expiry; API GET và PUT là các thao tác riêng |
+| owner / selector | ID/chủ thể | Token A sửa A; token B sửa B | Token A yêu cầu chọn B qua body/query | ID runtime là identity, không phải numeric boundary |
+| session | Trạng thái enum | Đã login A/B; B sau logout A | Chưa login hoặc đã logout mà còn được cập nhật profile | Không yêu cầu server revoke token cũ; chỉ native session |
+| user content tại display | Chuỗi đã tới renderer | Plain text an toàn, kể cả giống markup | Diễn giải/thực thi dữ liệu user thành nội dung hoạt động | SEC-04 áp tại form/header native, không DOM; acceptance chưa rõ |
+| entry method | Native gõ/dán; API companion | Cùng rule phone cho gõ/dán | Bypass validation vì paste hoặc phone-pad | Là kênh thực thi của các phone partitions, không tạo business partition mới |
+| server data → form / after save | Snapshot theo ID | Form/login mới phản ánh profile hiện tại cùng backend | Chỉ local state đổi hoặc profile của chủ thể cũ lẫn sang user mới | Flow dependency, bao phủ bằng owner/session/name/address, không giả tạo length limit |
+
+### Dependencies và miền kết hợp
+
+- Prefix, digits và length phải đồng thời đúng. BVA length luôn giữ prefix 0 và ASCII digits; format-negative dài 10 để chỉ làm sai format.
+- Mọi positive update giữ phone hợp lệ; không thay bằng phone sai để đi qua regex implementation.
+- Name-only/address-only giữ các field khác baseline; three-field case dùng cả ba hợp lệ và đối chiếu A/B. Không giả định atomic rollback cho request đa lỗi.
+- JWT, owner, role và session phụ thuộc nhau: token A chỉ cho sửa A, đổi sang B phải tải B và dùng token B.
+- Persistence: GET là readback độc lập; login mới là native checkpoint. Đi ra/vào profile trong cùng phiên có thể chỉ đọc React state.
+- API companions dùng body chính thức `name/phone/shipping_address`; case native không tự sửa payload do app gửi. Nếu valid phone bị chặn trước network, ghi điểm dừng và hạn chế downstream coverage.
+- Safe-display fixture cần đến renderer; nếu không tới, không nhận là đã kiểm chứng SEC-04. Không xét “hiển thị an toàn” là một quy tắc chấp nhận mọi markup.
+
+
