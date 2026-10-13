@@ -12,31 +12,31 @@
 ## Cách điền
 
 1. Mở case qua liên kết, làm theo Preconditions và Test Steps.
-2. Điền Tester, ngày/giờ, dữ liệu thử thực tế và Actual Result trong Note.
+2. Điền Tester và thông tin execution thực tế. Với Result = Pass, ghi Note là `None`; với Fail hoặc Blocked, ghi Actual Result hoặc lý do trong Note.
 3. Result dùng `Not Run`, `Pass`, `Fail` hoặc `Blocked`. Chưa chạy giữ Not Run. Không chuẩn bị được dữ liệu/không đến được bước cần thử thì ghi Blocked kèm lý do.
 4. Nếu Fail, liên kết bug report ở Related Bug; giữ ảnh màn hình và mô tả điều mong đợi/điều thực tế.
 5. Cập nhật tổng hợp bằng tay sau mỗi đợt. Kết quả cũ không tự xác nhận phiên bản bước mới đã chạy.
 
 ## Kết quả execution
 
-| Test Case ID | Module | Tester | Result | Related Bug | Note |
-|---|---|---|---|---|---|
-| [TC-PROFILE-MOBILE-001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Từ chối số điện thoại 9 chữ số; Actual Result/ngày chạy: ... |
-| [TC-PROFILE-MOBILE-002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Chấp nhận số điện thoại 10 chữ số; Actual Result/ngày chạy: ... |
-| [TC-PROFILE-MOBILE-003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Chấp nhận số điện thoại 11 chữ số; Actual Result/ngày chạy: ... |
-| [TC-PROFILE-MOBILE-004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Từ chối số điện thoại 12 chữ số; Actual Result/ngày chạy: ... |
-| [TC-PROFILE-MOBILE-005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Từ chối số điện thoại không bắt đầu bằng 0; Actual Result/ngày chạy: ... |
-| [TC-PROFILE-MOBILE-006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Từ chối số điện thoại chứa chữ cái khi dán; Actual Result/ngày chạy: ... |
-| [TC-PROFILE-MOBILE-013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Lưu đồng thời Họ Tên, Số điện thoại và Địa chỉ; Actual Result/ngày chạy: ... |
-| [TC-PROFILE-MOBILE-014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Email không sửa được bằng gõ hoặc dán; Actual Result/ngày chạy: ... |
-| [TC-PROFILE-MOBILE-016](../test-cases/profile-mobile/TC-PROFILE-MOBILE-016.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Chưa đăng nhập không thể sửa hồ sơ; Actual Result/ngày chạy: ... |
-| [TC-PROFILE-MOBILE-017](../test-cases/profile-mobile/TC-PROFILE-MOBILE-017.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Đăng xuất không giữ quyền sửa hồ sơ trước đó; Actual Result/ngày chạy: ... |
-| [TC-PROFILE-MOBILE-018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Đổi tài khoản rồi lưu đúng hồ sơ của người vừa đăng nhập; Actual Result/ngày chạy: ... |
-| [TC-PROFILE-MOBILE-028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Hiển thị an toàn nội dung giống thẻ định dạng trong Họ Tên; Actual Result/ngày chạy: ... |
-| [TC-PROFILE-MOBILE-029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Hiển thị an toàn nội dung giống thẻ định dạng trong Địa chỉ giao hàng; Actual Result/ngày chạy: ... |
-| [TC-PROFILE-MOBILE-030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | PROFILE-MOBILE | vt-toan | Not Run | None | Đăng nhập lại trên điện thoại tải hồ sơ vừa đổi trên trang web; Actual Result/ngày chạy: ... |
+| Test Case ID                                                                   | Module         | Tester  | Result | Related Bug | Note                                                                                                |
+| ------------------------------------------------------------------------------ | -------------- | ------- | ------ | ----------- | --------------------------------------------------------------------------------------------------- |
+| [TC-PROFILE-MOBILE-001](../test-cases/profile-mobile/TC-PROFILE-MOBILE-001.md) | PROFILE-MOBILE | vt-toan | Pass   | None        | None                                                                                                |
+| [TC-PROFILE-MOBILE-002](../test-cases/profile-mobile/TC-PROFILE-MOBILE-002.md) | PROFILE-MOBILE | vt-toan | Fail   | None        | Hiện thông báo từ chối sô điện thoại 10 chữ số                                                      |
+| [TC-PROFILE-MOBILE-003](../test-cases/profile-mobile/TC-PROFILE-MOBILE-003.md) | PROFILE-MOBILE | vt-toan | Fail   | None        | Hiện thông báo không cho phép số điện thoại 11 chữ số                                               |
+| [TC-PROFILE-MOBILE-004](../test-cases/profile-mobile/TC-PROFILE-MOBILE-004.md) | PROFILE-MOBILE | vt-toan | Pass   | None        | None                                                                                                |
+| [TC-PROFILE-MOBILE-005](../test-cases/profile-mobile/TC-PROFILE-MOBILE-005.md) | PROFILE-MOBILE | vt-toan | Fail   | None        | Cho phép số điện thoại bắt đầu bằng 0                                                               |
+| [TC-PROFILE-MOBILE-006](../test-cases/profile-mobile/TC-PROFILE-MOBILE-006.md) | PROFILE-MOBILE | vt-toan | Pass   | None        | None                                                                                                |
+| [TC-PROFILE-MOBILE-013](../test-cases/profile-mobile/TC-PROFILE-MOBILE-013.md) | PROFILE-MOBILE | vt-toan | Pass   | None        | None                                                                                                |
+| [TC-PROFILE-MOBILE-014](../test-cases/profile-mobile/TC-PROFILE-MOBILE-014.md) | PROFILE-MOBILE | vt-toan | Pass   | None        | None                                                                                                |
+| [TC-PROFILE-MOBILE-016](../test-cases/profile-mobile/TC-PROFILE-MOBILE-016.md) | PROFILE-MOBILE | vt-toan | Pass   | None        | None                                                                                                |
+| [TC-PROFILE-MOBILE-017](../test-cases/profile-mobile/TC-PROFILE-MOBILE-017.md) | PROFILE-MOBILE | vt-toan | Pass   | None        | None                                                                                                |
+| [TC-PROFILE-MOBILE-018](../test-cases/profile-mobile/TC-PROFILE-MOBILE-018.md) | PROFILE-MOBILE | vt-toan | Pass   | None        | None                                                                                                |
+| [TC-PROFILE-MOBILE-028](../test-cases/profile-mobile/TC-PROFILE-MOBILE-028.md) | PROFILE-MOBILE | vt-toan | Pass   | None        | None                                                                                                |
+| [TC-PROFILE-MOBILE-029](../test-cases/profile-mobile/TC-PROFILE-MOBILE-029.md) | PROFILE-MOBILE | vt-toan | Pass   | None        | None                                                                                                |
+| [TC-PROFILE-MOBILE-030](../test-cases/profile-mobile/TC-PROFILE-MOBILE-030.md) | PROFILE-MOBILE | vt-toan | Pass   | None        | None                                                                                                |
 
 ## Tổng hợp pool
 
-- Tổng số test cases: 14; đã ghi Pass/Fail: 0; Pass: 0; Fail: 0; Blocked: 0; Not Run: 14.
-- Ghi chú/ngày cập nhật: [Điền].
+- Tổng số test cases: 14; đã ghi Pass/Fail: 14; Pass: 11; Fail: 3; Blocked: 0; Not Run: 0.
+- Ghi chú/ngày cập nhật: 2026-10-13 — cập nhật theo Result do tester cung cấp; tester xác nhận đã execute toàn bộ test cases.
