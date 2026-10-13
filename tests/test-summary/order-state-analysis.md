@@ -203,3 +203,45 @@ Thay cho việc ép BVA: dùng 19 cặp admin có oracle xác định (5 valid, 
 - 041–050: UI admin/user với các chuyển hợp lệ và bảo vệ final/shipping; 051–052: stale page theo trình tự tuần tự có readback giữa các thao tác.
 - Tổng 52 EP, 0 BVA. Việc có 0 BVA là kết quả đánh giá applicability của requirement, không phải bỏ qua bước Boundary/BVA.
 
+## Coverage Summary
+
+- Requirements analyzed: FR-10 chính; một phần FR-11/12/18, SEC-02/03 liên quan.
+- Variables identified: 8 domain groups D-OS-STATE, CANCEL, ROLE, AUTH, RESOURCE, OWNER, PAYLOAD, FRESHNESS.
+- Equivalence partitions: 30; Partitions covered trong thiết kế: 30/30, trong đó EP-OS-23 có điều kiện AS-OS-03.
+- Admin transition pairs: 19/19 có oracle đã có case (5 valid, 14 invalid); tổng 25 cặp còn 6 chưa rõ. Không tuyên bố 25/25 đã giải quyết.
+- User cancel source states: 5/5 có case; 4 thao tác có oracle response, 1 kiểm tra bất biến canceled với retry response chưa rõ.
+- Boundaries identified: 0; Boundaries covered: N/A. Không có ordered threshold trong requirement.
+- Test cases generated: 52 EP, 0 BVA; 40 API cases + 12 UI/sequence/stale cases. Tất cả Not Run / None.
+- [Traceability Matrix chung](traceability-matrix.md) giữ phần Pool A và bổ sung mapping riêng cho Pool B.
+
+### Kiểm tra coverage của thiết kế
+
+- [x] Phân tích các input/state/role/ownership/auth/resource trong scope.
+- [x] Tất cả partitions được định nghĩa có case đại diện, ghi rõ partition phụ thuộc assumption.
+- [x] 19 cặp admin có oracle được kiểm tra riêng; final-state transitions không bị gộp thành một case đại diện duy nhất.
+- [x] Phân biệt thiếu token, sai token và token user hợp lệ nhưng thiếu role.
+- [x] Tương tác current/target/role, owner và dữ liệu UI cũ được xét; readback giữa các thao tác sequence.
+- [x] Boundary/BVA applicability được phân tích và ghi không áp dụng, không tự tạo numeric state/order_id/time boundary.
+- [x] Mỗi case có requirement, technique, data, Preconditions, steps, Expected Result và trạng thái.
+- [ ] Human review: đang chờ; các assumption và ambiguity chưa được tự xác nhận.
+- [ ] Execution/evidence: do người dùng thực hiện, chưa có kết quả.
+
+### Potential Coverage Gaps
+
+- Admin shipping→canceled và 5 self-transition response policies chưa có oracle đủ rõ. Không lấy code/UI làm hành vi đúng.
+- Ownership mutation của user chưa ghi trực tiếp trong FR-10/API: 027/028 là đề xuất theo AS-OS-03.
+- Bad payload có năm dạng đại diện, không phải fuzzing toàn bộ JSON/string; whitespace/case normalization chưa được xác định.
+- Không kiểm thử current_status bị database corrupt, ID serialization khác, TTL/revocation, JWT algorithm attacks hoặc toàn bộ security ngoài scope.
+- Stale cases tuần tự không bao phủ hai request thực sự đồng thời, locking, transaction isolation, retry auto hoặc response ordering.
+- UI có thể tự cập nhật trước thao tác và chặn request stale; phải ghi giới hạn, không suy backend stale đã được exercise.
+- Fixture/readback là dependencies; nếu không chuẩn bị/đọc được thì ghi Blocked/giới hạn rõ ràng khi người dùng execute.
+- Không đánh giá refund/payment/coupon/inventory hoặc toàn bộ FR-11/FR-18 GUI; chỉ xem status và bất biến snapshot theo AS-OS-02.
+
+### Assumptions
+
+AS-OS-01–05 cần review; đặc biệt ownership của user, dữ liệu đơn ngoài status và việc dùng server-current-state làm oracle stale sequence.
+
+### Ambiguities Requiring Clarification
+
+AM-OS-01/02/03 ưu tiên: admin có được hủy khi shipping không; cùng-state/retry trả lỗi hay no-op; user mutation ownership có được xác nhận không. AM-OS-04–08 ghi khác biệt API prose, response schema, thiếu threshold, điều khiển UI và concurrency ngoài coverage.
+
