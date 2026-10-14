@@ -60,3 +60,26 @@ I use AI tools for the following tasks,
 > Biến trạng thái: `products.name` (kể cả dấu tiếng Việt) và số dòng trong bảng có làm đổi kết quả. `description`, `category_id`, giá và ảnh không được dùng để lọc. `is_active` và tồn kho không có trong spec FR-05 và không có cột trong `products`, nên không thể ảnh hưởng kết quả.
 >
 > Bảng ràng buộc spec so với code nằm trong file trên. Điểm code chính: `LIKE '%từ khóa%'` nối thẳng vào SQL; `LIKE` không bỏ dấu tiếng Việt; chuỗi rỗng trả mọi sản phẩm.
+
+## Interaction 5
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 00:00 (UTC+7)
+- **Your prompt:**
+
+> Từ bảng biến bước 1 đã được review, hãy thực hiện bước 2: Phân hoạch tương đương (Equivalence Partitioning) cho FR-05.
+> Yêu cầu phân chia rõ Valid (VEC) và Invalid (IEC) cho từng nhóm:
+> - Từ khóa (Keyword): Khớp toàn phần, khớp một phần, không phân biệt hoa thường, có dấu/không dấu tiếng Việt, chỉ chứa khoảng trắng, chứa ký tự đặc biệt/SQL/HTML (`%`, `_`, `'`, `<script>`), chuỗi rỗng.
+> - Khoảng giá (Price Range): Miền hợp lệ, miền âm, chữ cái/ký tự đặc biệt, và miền quan hệ giữa 2 biến (`min_price < max_price`, `min_price == max_price`, `min_price > max_price`).
+> - Danh mục & Sắp xếp (Category & Sort): ID hợp lệ, ID không tồn tại, chọn nhiều danh mục (nếu có), giá trị enum sort hợp lệ và sai lệch qua query string.
+> Xuất bảng phân hoạch kèm Mã phân hoạch (ID) và Giá trị đại diện.
+
+- **The AI output:**
+
+> Bước 2 ghi tại `docs/fr-05/02-equivalence-partitioning.md`. VEC là giá trị spec mô tả cách xử lý; IEC là giá trị ngoài miền đó. Chưa viết test case.
+>
+> Từ khóa: KW-VEC-01 `iPhone 15 Pro Max` (khớp toàn phần), KW-VEC-02 `iPhone` (khớp một phần), KW-VEC-03 `zzzz-khong-co` (không khớp), KW-VEC-04 `iPhone` (cùng hoa thường), KW-VEC-05 `iphone` (khác hoa thường ASCII), KW-VEC-06 `CƠ` (khác hoa thường chữ có dấu), KW-VEC-07 `Bàn phím` (đúng dấu), KW-VEC-08 `Ban phim` (bỏ dấu), KW-VEC-09 `""` (chuỗi rỗng, liệt kê tất cả), KW-VEC-10 `<script>` (hiển thị an toàn nên là VEC). IEC: KW-IEC-01 ba dấu cách, KW-IEC-02 `%`, KW-IEC-03 `_`, KW-IEC-04 `'`.
+>
+> Khoảng giá không có trong FR-05. Miền một biến theo FR-15 (giá > 0): PR-VEC-01 `100000`, PR-IEC-01 `-100`, PR-IEC-02 `0`, PR-IEC-03 `abc`, PR-IEC-04 `100@`. Quan hệ: PR-VEC-02 `100000 < 500000`, PR-VEC-03 `6000000 == 6000000`, PR-IEC-05 `500000 > 100000`.
+>
+> Danh mục: CAT-VEC-01 `1`, CAT-IEC-01 `999`, CAT-IEC-02 `category=1&category=2`. Sort không có enum trong spec nên không có VEC; SORT-IEC-01 đại diện `price_asc`, mọi chuỗi sort khác cùng lớp.
