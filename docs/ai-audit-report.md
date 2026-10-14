@@ -83,3 +83,25 @@ I use AI tools for the following tasks,
 > Khoảng giá không có trong FR-05. Miền một biến theo FR-15 (giá > 0): PR-VEC-01 `100000`, PR-IEC-01 `-100`, PR-IEC-02 `0`, PR-IEC-03 `abc`, PR-IEC-04 `100@`. Quan hệ: PR-VEC-02 `100000 < 500000`, PR-VEC-03 `6000000 == 6000000`, PR-IEC-05 `500000 > 100000`.
 >
 > Danh mục: CAT-VEC-01 `1`, CAT-IEC-01 `999`, CAT-IEC-02 `category=1&category=2`. Sort không có enum trong spec nên không có VEC; SORT-IEC-01 đại diện `price_asc`, mọi chuỗi sort khác cùng lớp.
+
+## Interaction 6
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 00:11 (UTC+7)
+- **Your prompt:**
+
+> Áp dụng kỹ thuật 3-value BVA (Min-1, Min, Min+1, Max-1, Max, Max+1) cho FR-05 dựa trên các miền ở bước 2.
+> Hãy tính toán giá trị biên cụ thể cho:
+> 1. Độ dài chuỗi tìm kiếm (0, 1, 2 ký tự và MaxLength-1, MaxLength, MaxLength+1).
+> 2. Giá sản phẩm (`min_price`, `max_price` tại mốc 0 VNĐ, -1 VNĐ, 1 VNĐ, giá sản phẩm thấp nhất/cao nhất đang có trong DB, và biên đảo ngược khi `min_price = max_price + 1`).
+> 3. Phân trang (Pagination): Tổng số sản phẩm khớp điều kiện là `0`, `1`, `Limit - 1`, `Limit`, `Limit + 1` (trang 2 có đúng 1 sản phẩm), và truy cập `page = 0`, `page = -1`, `page = MaxPage + 1`.
+
+- **The AI output:**
+
+> Bước BVA ghi tại `docs/fr-05/03-boundary-value-analysis.md`. Chưa viết test case.
+>
+> Độ dài: Min = 1, MaxLength = 255 lấy từ FR-15 vì FR-05 và ô tìm không có maxLength. Các mốc: 0 (`""`), 1 (`a`), 2 (`aa`), 254, 255, 256 (chữ `a` lặp lại).
+>
+> Giá: -1, 0, 1 cho cả min_price và max_price. DB thấp nhất 4000000 (Bàn phím cơ Keychron Q1) nên 3999999, 4000000, 4000001. DB cao nhất 45000000 (MacBook Pro M3) nên 44999999, 45000000, 45000001. Biên đảo: max_price = 45000000, min_price = 45000001.
+>
+> Phân trang: spec và API không có Limit. N = 0, 1, L-1, L, L+1. Khi N = L+1 thì MaxPage = 2, trang 2 có 1 sản phẩm, MaxPage+1 = 3. page = -1 và page = 0 là số cụ thể. Không gán Limit giả.
