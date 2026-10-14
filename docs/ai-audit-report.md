@@ -105,3 +105,25 @@ I use AI tools for the following tasks,
 > Giá: -1, 0, 1 cho cả min_price và max_price. DB thấp nhất 4000000 (Bàn phím cơ Keychron Q1) nên 3999999, 4000000, 4000001. DB cao nhất 45000000 (MacBook Pro M3) nên 44999999, 45000000, 45000001. Biên đảo: max_price = 45000000, min_price = 45000001.
 >
 > Phân trang: spec và API không có Limit. N = 0, 1, L-1, L, L+1. Khi N = L+1 thì MaxPage = 2, trang 2 có 1 sản phẩm, MaxPage+1 = 3. page = -1 và page = 0 là số cụ thể. Không gán Limit giả.
+
+## Interaction 7
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 00:29 (UTC+7)
+- **Your prompt:**
+
+> Dựa vào các miền ở Bước 2 và điểm biên ở Bước 3, hãy lập bảng Test Cases hoàn chỉnh (gồm TC ID, Miền/Biên được phủ, Precondition, Test Data, Steps, Expected Result). Lưu ý:
+>
+> Với các miền/biên Hợp lệ: hãy kết hợp khéo léo (dùng Base Choice hoặc Pairwise) để giảm số lượng test case nhưng vẫn phủ hết các miền.
+>
+> Với các miền/biên Không hợp lệ: mỗi test case chỉ kiểm tra đúng 1 dữ liệu sai, các trường còn lại giữ hợp lệ chuẩn để không bị che khuất lỗi (fault masking).
+
+- **The AI output:**
+
+> Bảng 46 test case ghi tại `docs/fr-05/04-test-cases.md`: 26 hợp lệ, 20 không hợp lệ. Expected result bám FR-05 trong README.
+>
+> Hợp lệ dùng base choice. Mức chuẩn từ khóa là `iPhone`. Khi test đụng giá thì mức chuẩn là `min_price=4000000`, `max_price=45000000`. Mỗi lớp hợp lệ khác chỉ đổi một yếu tố. `15 Pro` và `Max` không có test riêng vì cùng lớp với `iPhone`.
+>
+> Không hợp lệ: một trường sai mỗi test. Khi `max_price` là -1 hoặc 0 thì không gửi `min_price`, để không thêm lỗi đảo khoảng. Biên đảo `min_price=45000001`, `max_price=45000000` là TC-40.
+>
+> `min_price`, `category`, `sort`, `page` không thuộc FR-05, nên expected là tập sản phẩm không đổi so với cùng từ khóa và không lỗi. `L` giữ ký hiệu, không gán số giả.
