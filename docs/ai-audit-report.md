@@ -127,3 +127,21 @@ I use AI tools for the following tasks,
 > Không hợp lệ: một trường sai mỗi test. Khi `max_price` là -1 hoặc 0 thì không gửi `min_price`, để không thêm lỗi đảo khoảng. Biên đảo `min_price=45000001`, `max_price=45000000` là TC-40.
 >
 > `min_price`, `category`, `sort`, `page` không thuộc FR-05, nên expected là tập sản phẩm không đổi so với cùng từ khóa và không lỗi. `L` giữ ký hiệu, không gán số giả.
+
+## Interaction 8
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 00:40 (UTC+7)
+- **Your prompt:**
+
+> hãy chạy thực tế bộ Test Cases này trên local của eshop-sut. Hãy viết script để tự động bắn bộ Test Data ở Bước 4 vào API/UI và in ra kết quả thực tế (Actual Result) so với Expected Result nhé.
+
+- **The AI output:**
+
+> Đã viết `scripts/fr05-execute.mjs` và chạy trên API `localhost:3000` cùng UI `localhost:5173`. Kết quả ghi ở `docs/fr-05/05-execution-results.md`.
+>
+> 46 test: PASS 25, FAIL 16, BLOCKED 5. Năm test phân trang không chạy vì `L` chưa có số.
+>
+> Lệch chính: giá hiện `VND` thay vì `₫`; `alt` rỗng; hai `h1`; không có loading; không có empty state; `iphone` vẫn ra iPhone; `<script>` bị nuốt; 3 dấu cách, `%` và `_` trả đủ 5 sản phẩm; dấu `'` gây `Database Error SQLITE_ERROR: unrecognized token: "'"`.
+>
+> TC-14 đến TC-22 và TC-32 đến TC-45 PASS: tham số giá, category, sort, page không đổi tập iPhone và không lỗi.
