@@ -4,7 +4,7 @@ Các bug dưới đây đã chạy trên Web `http://localhost:5173` và API `ht
 
 TC-04 (`iphone` vẫn trả `iPhone 15 Pro Max`) không lập bug. FR-05 không cấm tìm không phân biệt hoa thường với chữ ASCII.
 
-Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi chưa gắn lên issue vì cần push thì URL ảnh mới hiện. Trang issue chưa chụp được vì trình duyệt không đăng nhập GitHub.
+Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chèn vào issue #44–#52 bằng liên kết file trên nhánh `hw02/toanhuynh-fr05/11/16/19`. Ảnh hiện với tài khoản đã đăng nhập và có quyền đọc repo. Trang issue chưa chụp được vì trình duyệt tự động không đăng nhập GitHub.
 
 ## BUG-01 — Giá hiển thị VND thay vì ₫
 

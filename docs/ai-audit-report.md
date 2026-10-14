@@ -169,3 +169,29 @@ I use AI tools for the following tasks,
 - **The AI output:**
 
 > Trước câu này chưa có bug report. Đã tạo `docs/bug-report.md` với 9 bug FR-05 và ảnh trong `docs/bugs/`. Issue trên `Taylor3691/eshop-sut`: #44 đến #52. TC-04 không lập bug vì spec không cấm tìm không phân biệt hoa thường ASCII. Ảnh chưa gắn lên issue và chưa chụp trang issue vì repo private.
+
+## Interaction 11
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 00:51 (UTC+7)
+- **Your prompt:**
+
+> tại sao trong issue không hiển thị ảnh
+>
+> Ảnh đính kèm: nội dung issue BUG-09, dòng "Ảnh: docs/bugs/BUG-09-actual.png" hiện thành chữ, không có hình.
+
+- **The AI output:**
+
+> Issue chỉ ghi đường dẫn chữ `docs/bugs/BUG-09-actual.png`. GitHub không lấy file từ máy local và không render đường dẫn tương đối trong issue thành ảnh. File PNG đang nằm trong commit local, chưa được đẩy lên GitHub và chưa được chèn bằng cú pháp ảnh.
+
+## Interaction 12
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 00:55 (UTC+7)
+- **Your prompt:**
+
+> có
+
+- **The AI output:**
+
+> Đã push nhánh `hw02/toanhuynh-fr05/11/16/19`. Issue #44 đến #52 đã đổi dòng đường dẫn chữ thành ảnh Markdown trỏ tới `docs/bugs/BUG-0N-actual.png` trên nhánh đó. Mở lại issue khi đang đăng nhập GitHub thì ảnh hiện. Repo private nên khách chưa đăng nhập không thấy. Chưa chụp trang issue vì trình duyệt tự động không có phiên GitHub.
