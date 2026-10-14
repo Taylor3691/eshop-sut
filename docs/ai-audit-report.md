@@ -145,3 +145,27 @@ I use AI tools for the following tasks,
 > Lệch chính: giá hiện `VND` thay vì `₫`; `alt` rỗng; hai `h1`; không có loading; không có empty state; `iphone` vẫn ra iPhone; `<script>` bị nuốt; 3 dấu cách, `%` và `_` trả đủ 5 sản phẩm; dấu `'` gây `Database Error SQLITE_ERROR: unrecognized token: "'"`.
 >
 > TC-14 đến TC-22 và TC-32 đến TC-45 PASS: tham số giá, category, sort, page không đổi tập iPhone và không lỗi.
+
+## Interaction 9
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 00:41 (UTC+7)
+- **Your prompt:**
+
+> Briefly inform the user about the task result and perform any follow-up actions (if needed).
+
+- **The AI output:**
+
+> Cài thư viện frontend-web đã xong (226 gói). Bộ test FR-05 đã dùng bản cài này để mở UI tại localhost:5173.
+
+## Interaction 10
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 00:47 (UTC+7)
+- **Your prompt:**
+
+> tạo bug report chưa
+
+- **The AI output:**
+
+> Trước câu này chưa có bug report. Đã tạo `docs/bug-report.md` với 9 bug FR-05 và ảnh trong `docs/bugs/`. Issue trên `Taylor3691/eshop-sut`: #44 đến #52. TC-04 không lập bug vì spec không cấm tìm không phân biệt hoa thường ASCII. Ảnh chưa gắn lên issue và chưa chụp trang issue vì repo private.
