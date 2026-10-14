@@ -1,3 +1,5 @@
+f928985 2026-10-15 00:55 FR-05: bug report — record that issue screenshots now link to the pushed images
+6e6153f 2026-10-15 00:48 FR-05: bug report — save git commit log
 6a9e97b 2026-10-15 00:48 FR-05: bug report — record defects found on the homepage search
 993e9f6 2026-10-15 00:40 FR-05: domain testing — save git commit log
 5e1276e 2026-10-15 00:40 FR-05: domain testing — execute test cases
