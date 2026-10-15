@@ -1,3 +1,5 @@
+a868bb2 2026-10-15 10:23 FR-11: domain testing — partition input domains
+24c9748 2026-10-15 10:18 FR-11: domain testing — save git commit log
 8e74811 2026-10-15 10:18 FR-11: domain testing — identify input variables
 40ac901 2026-10-15 00:55 FR-05: bug report — save git commit log
 f928985 2026-10-15 00:55 FR-05: bug report — record that issue screenshots now link to the pushed images
