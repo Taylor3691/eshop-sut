@@ -1,3 +1,5 @@
+5f21e4e 2026-10-15 10:35 FR-11: domain testing — execute test cases
+828e4a6 2026-10-15 10:29 FR-11: domain testing — save git commit log
 db44f98 2026-10-15 10:29 FR-11: domain testing — write test cases
 6ce30af 2026-10-15 10:26 FR-11: boundary analysis — save git commit log
 8d344b3 2026-10-15 10:26 FR-11: boundary analysis — calculate 3-value boundaries
