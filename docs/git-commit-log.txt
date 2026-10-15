@@ -1,3 +1,5 @@
+3b5e96d 2026-10-15 11:09 FR-16: bug report — record observed defects
+17f3bae 2026-10-15 11:01 FR-16: domain testing — save git commit log
 7ad0d6f 2026-10-15 11:01 FR-16: domain testing — execute test cases
 1c4ee89 2026-10-15 10:55 FR-16: domain testing — save git commit log
 c4edf10 2026-10-15 10:55 FR-16: domain testing — write test cases
