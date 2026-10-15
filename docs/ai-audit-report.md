@@ -596,6 +596,19 @@ I use AI tools for the following tasks,
 >
 > Độ dài từ khóa: 0, 1, 2, 254, 255, 256 ký tự. Mốc 255 lấy từ FR-15. Dấu cách: 0, 1, 2. Không lập biên giá, danh mục, sắp xếp, phân trang, và không bịa `Limit`. Chưa viết test case.
 
+## Interaction 43
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:37 (UTC+7)
+- **Your prompt:**
+
+> tiếp tục bước 4
+
+- **The AI output:**
+
+> Đã viết 23 test case FR-05 trên mobile trong `docs/fr-05-mobile/04-test-cases.md`. Mức chuẩn là `iPhone`. 14 case hợp lệ, 9 case sai, mỗi case sai chỉ một dữ liệu. Chưa chạy.
+
+
 
 
 
