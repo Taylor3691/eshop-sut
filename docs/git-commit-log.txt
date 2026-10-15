@@ -1,3 +1,5 @@
+d94b7df 2026-10-15 14:18 FR-05: AI gap analysis — record missed cases
+f2f9eaa 2026-10-15 13:56 bug report: update screenshots in bug report documentation
 01ab00a 2026-10-15 13:48 bug report: save git commit log
 a25a323 2026-10-15 13:48 bug report: add GitHub issue page screenshots
 2784271 2026-10-15 13:20 FR-05: domain testing — save git commit log
