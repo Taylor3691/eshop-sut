@@ -1,3 +1,5 @@
+0b75edf 2026-10-15 14:18 HW02: AI critique
+06bc935 2026-10-15 14:18 FR-05: AI gap analysis — save git commit log
 6ce9cd3 2026-10-15 14:18 FR-05: AI gap analysis — record missed mobile cases
 4972ee0 2026-10-15 14:18 FR-16: AI gap analysis — save git commit log
 f976f17 2026-10-15 14:18 FR-16: AI gap analysis — record missed cases
