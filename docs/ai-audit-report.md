@@ -291,3 +291,15 @@ I use AI tools for the following tasks,
 - **The AI output:**
 
 > Đã chạy 27 test case FR-11 bằng `scripts/fr11-execute.mjs`. Kết quả trong `docs/fr-11/05-execution-results.md`: 23 PASS, 4 FAIL. Lệch: trang không có h1, empty state không có icon, ngày null thành 1/1/1970, tiền null thành 0 ₫. Chưa lập bug report.
+
+## Interaction 21
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 10:39 (UTC+7)
+- **Your prompt:**
+
+> tiếp tục
+
+- **The AI output:**
+
+> Đã lập 4 bug FR-11 trong `docs/bug-report.md`: BUG-10 đến BUG-13, ảnh trong `docs/bugs/`. Issue trên `Taylor3691/eshop-sut`: #53 đến #56. TC-23 không lập bug. Ảnh trong issue trỏ tới file trên nhánh; cần push thì ảnh mới hiện. Chưa push.

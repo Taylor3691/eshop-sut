@@ -153,3 +153,78 @@ Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chè
 - **Screenshot:** `docs/bugs/BUG-09-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/52
 - **Issue page screenshot:** chưa chụp được vì repo private
+
+## FR-11
+
+Các bug dưới đây đã chạy trên Web `http://localhost:5173/profile` ngày 2026-10-15, user `test@eshop.com`. Ảnh lỗi nằm trong `docs/bugs/`.
+
+TC-23 (`status=returned` hiện `RETURNED`) không lập bug. FR-11 không chốt nhãn cho trạng thái ngoài năm trạng thái của FR-10, và trang không lỗi.
+
+## BUG-10 — Trang hồ sơ không có thẻ h1
+
+- **Feature:** FR-11
+- **Test case:** TC-01
+- **Severity:** Major
+- **Environment:** Web `http://localhost:5173/profile`, Chrome, user `test@eshop.com`
+- **Spec:** README FR-21 — Mỗi trang có đúng 1 thẻ `<h1>` mô tả nội dung trang.
+- **Steps:**
+  1. Đăng nhập `test@eshop.com`.
+  2. Tạo một đơn của user này.
+  3. Mở `/profile`.
+  4. Đếm thẻ `h1`.
+- **Expected:** Trang có đúng một `h1`.
+- **Actual:** Không có `h1`. Hai tiêu đề nhìn thấy là "Hồ sơ của bạn" và "Lịch sử đơn hàng".
+- **Screenshot:** `docs/bugs/BUG-10-actual.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/53
+- **Issue page screenshot:** chưa chụp được vì repo private
+
+## BUG-11 — Lịch sử trống không có icon
+
+- **Feature:** FR-11
+- **Test case:** TC-02
+- **Severity:** Major
+- **Environment:** Web `http://localhost:5173/profile`, Chrome, user `test@eshop.com`, không có đơn
+- **Spec:** README FR-24 — Trang trống (Empty State) phải có icon/hình minh họa và message thân thiện.
+- **Steps:**
+  1. Đăng nhập `test@eshop.com`.
+  2. Xóa hết đơn của user này.
+  3. Mở `/profile`.
+- **Expected:** Empty state có icon và message thân thiện. Không có bảng đơn.
+- **Actual:** Có câu "Bạn chưa có đơn hàng nào." Không có icon hay hình minh họa.
+- **Screenshot:** `docs/bugs/BUG-11-actual.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/54
+- **Issue page screenshot:** chưa chụp được vì repo private
+
+## BUG-12 — Ngày đặt null hiện thành 1/1/1970
+
+- **Feature:** FR-11
+- **Test case:** TC-21
+- **Severity:** Major
+- **Environment:** Web `http://localhost:5173/profile`, Chrome, user `test@eshop.com`
+- **Spec:** README FR-11 — Hiển thị ngày đặt của đơn.
+- **Steps:**
+  1. Đăng nhập `test@eshop.com`.
+  2. Tạo một đơn của user này với `created_at` là NULL, tổng `30000000`, trạng thái `pending`.
+  3. Mở `/profile`.
+- **Expected:** Ô ngày không hiện một ngày được bịa ra. Trang không lỗi.
+- **Actual:** Ô ngày hiện `1/1/1970`. Mã `#1` và tiền `30.000.000 ₫` vẫn hiện.
+- **Screenshot:** `docs/bugs/BUG-12-actual.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/55
+- **Issue page screenshot:** chưa chụp được vì repo private
+
+## BUG-13 — Tổng tiền null hiện thành 0 ₫
+
+- **Feature:** FR-11
+- **Test case:** TC-22
+- **Severity:** Major
+- **Environment:** Web `http://localhost:5173/profile`, Chrome, user `test@eshop.com`
+- **Spec:** README FR-11 — Hiển thị tổng tiền của đơn. README FR-21 — tiền dùng ký hiệu `₫`.
+- **Steps:**
+  1. Đăng nhập `test@eshop.com`.
+  2. Tạo một đơn của user này với `total_amount` là NULL, ngày `2026-10-15 10:00:00`, trạng thái `pending`.
+  3. Mở `/profile`.
+- **Expected:** Ô tiền không hiện `0 ₫` khi đơn không có tổng tiền. Trang không lỗi.
+- **Actual:** Ô tiền hiện `0 ₫`. Mã `#1` và ngày `15/10/2026` vẫn hiện.
+- **Screenshot:** `docs/bugs/BUG-13-actual.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/56
+- **Issue page screenshot:** chưa chụp được vì repo private
