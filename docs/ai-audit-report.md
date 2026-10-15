@@ -339,3 +339,15 @@ I use AI tools for the following tasks,
 - **The AI output:**
 
 > Đã làm bước 1 của FR-16, file `docs/fr-16/01-input-space-partitioning.md`. Input là file trên tab Sản phẩm của admin, được tách thành JSON rồi POST `/api/admin/import-products`. Spec yêu cầu đuôi `.csv`, header đúng, RFC 4180, tên không rỗng, giá dương, và rollback cả file. Code không lọc đuôi, không xử lý nháy kép, không kiểm tra giá, không có transaction. Chưa chia miền.
+
+## Interaction 25
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 10:51 (UTC+7)
+- **Your prompt:**
+
+> tiếp tục
+
+- **The AI output:**
+
+> Đã làm bước 2 của FR-16, file `docs/fr-16/02-equivalence-partitioning.md`. VEC/IEC cho phiên admin, JWT và role, đuôi file, header, dấu phẩy trong nháy kép, tên, giá, mô tả, ảnh, danh mục, số dòng và rollback. Chưa viết test case.
