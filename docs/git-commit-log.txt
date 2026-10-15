@@ -1,3 +1,5 @@
+01c3b3b 2026-10-15 11:58 FR-05: domain testing — re-execute mobile test cases
+3d7cf06 2026-10-15 11:51 FR-05: domain testing — save git commit log
 64509a7 2026-10-15 11:51 FR-05: domain testing — execute mobile test cases
 91d31f8 2026-10-15 11:38 FR-05: domain testing — save git commit log
 53fb7fd 2026-10-15 11:38 FR-05: domain testing — write mobile test cases
