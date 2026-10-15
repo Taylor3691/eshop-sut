@@ -1,3 +1,5 @@
+9c20145 2026-10-15 10:52 FR-16: domain testing — partition input domains
+4bfdd67 2026-10-15 10:50 FR-16: domain testing — save git commit log
 1613c44 2026-10-15 10:50 FR-16: domain testing — identify input variables
 285b35a 2026-10-15 10:39 FR-11: bug report — save git commit log
 6f15817 2026-10-15 10:39 FR-11: bug report — record defects found on the order history
