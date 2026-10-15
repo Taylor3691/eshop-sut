@@ -502,6 +502,21 @@ I use AI tools for the following tasks,
 >
 > Bước 1 không có biến đầu vào, nên không có đặc tính để chia VEC hay IEC. Không có mã lớp và không có giá trị đại diện. Chưa chọn biên, chưa viết test case.
 
+## Interaction 36
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:23 (UTC+7)
+- **Your prompt:**
+
+> tiếp tục
+
+- **The AI output:**
+
+> Đã làm bước 3 của FR-19 trên app mobile, file `docs/fr-19/03-boundary-value-analysis.md`.
+>
+> Bước 2 không có lớp và không có khoảng `[Min, Max]`, nên không có biên. Không bịa số người dùng tối đa, độ dài mật khẩu, id tài khoản, hay `Limit`. Chưa viết test case.
+
+
 
 
 
