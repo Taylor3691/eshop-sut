@@ -1,3 +1,5 @@
+5685696 2026-10-15 11:34 FR-05: boundary analysis — calculate mobile 3-value boundaries
+cdf8590 2026-10-15 11:33 FR-05: domain testing — save git commit log
 a3c3e28 2026-10-15 11:33 FR-05: domain testing — partition mobile equivalence classes
 fb91b43 2026-10-15 11:31 FR-05: domain testing — save git commit log
 82aa5c3 2026-10-15 11:31 FR-05: domain testing — identify mobile input variables
