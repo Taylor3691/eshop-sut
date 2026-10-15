@@ -243,3 +243,15 @@ I use AI tools for the following tasks,
 - **The AI output:**
 
 > Đã làm bước 1 của FR-11, file `docs/fr-11/01-input-space-partitioning.md`. Trang `/profile` không có ô lọc và không có query. API `GET /api/orders/my-orders` chỉ lọc theo `user_id` trong JWT. Biến trạng thái là chủ đơn, số đơn, và `status`. Form hồ sơ thuộc FR-04, nút hủy thuộc FR-10. Chưa chia miền hay viết test case.
+
+## Interaction 17
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 10:23 (UTC+7)
+- **Your prompt:**
+
+> tiếp tục
+
+- **The AI output:**
+
+> Đã làm bước 2 của FR-11, file `docs/fr-11/02-equivalence-partitioning.md`. VEC/IEC cho phiên đăng nhập, JWT, chủ đơn, số đơn, năm trạng thái FR-10, mã đơn, ngày, tổng tiền, và query thừa. Seed không có đơn. Chưa viết test case.
