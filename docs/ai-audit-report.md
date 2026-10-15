@@ -255,3 +255,15 @@ I use AI tools for the following tasks,
 - **The AI output:**
 
 > Đã làm bước 2 của FR-11, file `docs/fr-11/02-equivalence-partitioning.md`. VEC/IEC cho phiên đăng nhập, JWT, chủ đơn, số đơn, năm trạng thái FR-10, mã đơn, ngày, tổng tiền, và query thừa. Seed không có đơn. Chưa viết test case.
+
+## Interaction 18
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 10:26 (UTC+7)
+- **Your prompt:**
+
+> tiếp tục
+
+- **The AI output:**
+
+> Đã làm bước 3 của FR-11, file `docs/fr-11/03-boundary-value-analysis.md`. Biên số đơn 0, 1, 2. Chủ đơn quanh id 2 là 1, 2, 3. Mã đơn 0, 1, 2. Tổng tiền quanh 0, 1000 và 1000000. Không bịa Max số đơn, Max mã đơn, hay Limit phân trang. Chưa viết test case.
