@@ -530,6 +530,47 @@ I use AI tools for the following tasks,
 >
 > Không có lớp và không có biên, nên không có test case. Không bịa case cho id, mật khẩu, hay role. Chưa chạy.
 
+## Interaction 38
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:26 (UTC+7)
+- **Your prompt:**
+
+> vì đây là admin nên không có trên mobile đúng không
+
+- **The AI output:**
+
+> Đúng. FR-19 là quản lý người dùng của admin. README đặt nó ở phân hệ Admin. App mobile, FR-20, có xem sản phẩm, đăng nhập, đăng xuất, đăng ký, giỏ hàng, thanh toán, hồ sơ và lịch sử đơn. Không có danh sách người dùng và không gọi API admin users. Màn FR-19 nằm ở Admin, tab Người dùng.
+
+## Interaction 39
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:28 (UTC+7)
+- **Your prompt:**
+
+> fr05 có trên mobile không
+
+- **The AI output:**
+
+> Có. Màn trang chủ của app mobile có danh sách sản phẩm, ảnh, tên, giá và ô tìm kiếm. Bấm Tìm thì gọi `GET /api/products?search=`. FR-20 ghi xem sản phẩm là một chức năng mobile. Câu trong FR-05 về đúng một thẻ `h1` là cho trang web. App mobile dùng chữ "Danh sách sản phẩm", không có thẻ `h1`.
+
+## Interaction 40
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:30 (UTC+7)
+- **Your prompt:**
+
+> vậy hãy chuyển từ fr19 sang test fr05
+
+- **The AI output:**
+
+> Đã chuyển sang FR-05 trên app mobile, bước 1, file `docs/fr-05-mobile/01-input-space-partitioning.md`. Bộ web ở `docs/fr-05/` giữ nguyên.
+>
+> Biến đầu vào của màn trang chủ là `search`. Gửi khi bấm Tìm, và lần mở màn gửi chuỗi rỗng. API chỉ đọc query `search`. Không có lọc giá, danh mục, sắp xếp, phân trang. Chưa chia miền.
+
+
+
+
 
 
 
