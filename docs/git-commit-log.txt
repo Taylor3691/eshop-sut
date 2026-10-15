@@ -1,3 +1,5 @@
+cbd9a54 2026-10-15 11:22 FR-19: domain testing — partition equivalence classes
+cbeeb7e 2026-10-15 11:19 FR-19: domain testing — save git commit log
 38cbbcb 2026-10-15 11:19 FR-19: domain testing — identify input variables
 5c1a153 2026-10-15 11:09 FR-16: bug report — save git commit log
 3b5e96d 2026-10-15 11:09 FR-16: bug report — record observed defects
