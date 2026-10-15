@@ -1,3 +1,5 @@
+a25a323 2026-10-15 13:48 bug report: add GitHub issue page screenshots
+2784271 2026-10-15 13:20 FR-05: domain testing — save git commit log
 f9bde69 2026-10-15 13:20 FR-19: remove mobile domain-testing docs
 879e736 2026-10-15 12:37 FR-05: domain testing — save git commit log
 4b252bb 2026-10-15 12:37 FR-05: domain testing — report mobile bugs
