@@ -228,3 +228,129 @@ TC-23 (`status=returned` hiện `RETURNED`) không lập bug. FR-11 không chố
 - **Screenshot:** `docs/bugs/BUG-13-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/56
 - **Issue page screenshot:** chưa chụp được vì repo private
+
+## FR-16
+
+Các bug dưới đây đã chạy trên Admin `http://localhost:5174` và API `http://localhost:3000` ngày 2026-10-15. Ảnh lỗi nằm trong `docs/bugs/`.
+
+TC-16 (tên trống bị từ chối và có báo lỗi) không lập bug. Hệ thống đã từ chối đúng đặc tả.
+
+## BUG-14 — Import CSV không đọc trường bọc nháy kép
+
+- **Feature:** FR-16
+- **Test case:** TC-03, TC-15
+- **Severity:** Major
+- **Environment:** Admin `http://localhost:5174`, Chrome, `admin@eshop.com`
+- **Spec:** README FR-16 — Hỗ trợ các trường có chứa dấu phẩy nếu được bọc trong dấu nháy kép (RFC 4180).
+- **Steps:**
+  1. Đăng nhập `admin@eshop.com` trên Admin.
+  2. Mở tab Sản phẩm.
+  3. Chọn `hang.csv` có mô tả `"Mo ta, co phay"`.
+  4. Xem bảng xem trước.
+- **Expected:** Mô tả là `Mo ta, co phay`.
+- **Actual:** Bảng xem trước cắt mô tả thành `"Mo ta` và đẩy `co phay"` sang cột imageUrl. File không bọc nháy kép (TC-15) vẫn thêm sản phẩm với mô tả `Mo ta` và báo thành công, không có lỗi.
+- **Screenshot:** `docs/bugs/BUG-14-actual.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/57
+- **Issue page screenshot:** chưa chụp được vì repo private
+
+## BUG-15 — API import không kiểm tra role admin
+
+- **Feature:** FR-16
+- **Test case:** TC-12
+- **Severity:** Major
+- **Environment:** API `http://localhost:3000`, token của `test@eshop.com`
+- **Spec:** README FR-12 — Mọi API `/api/admin/*` phải có token hợp lệ và `role = 'admin'`. README SEC-03 — API Admin phải kiểm tra `role = 'admin'` trong Token, không chỉ kiểm tra sự tồn tại của Token.
+- **Steps:**
+  1. Đăng nhập `test@eshop.com` / `Test1234!` để lấy token.
+  2. `POST /api/admin/import-products` với Bearer token đó và một sản phẩm `SP Import`, giá 100000.
+- **Expected:** Bị từ chối vì không phải admin. Không thêm `SP Import`.
+- **Actual:** HTTP 200. `{"message":"Import hoàn tất: 1/1 sản phẩm được thêm","inserted":1,"errors":[]}`. Sản phẩm `SP Import` được thêm.
+- **Screenshot:** `docs/bugs/BUG-15-actual.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/58
+- **Issue page screenshot:** chưa chụp được vì repo private
+
+## BUG-16 — File không phải .csv vẫn được import
+
+- **Feature:** FR-16
+- **Test case:** TC-13
+- **Severity:** Major
+- **Environment:** Admin `http://localhost:5174`, Chrome, `admin@eshop.com`
+- **Spec:** README FR-16 — Đuôi file phải là `.csv`.
+- **Steps:**
+  1. Đăng nhập `admin@eshop.com` trên Admin.
+  2. Mở tab Sản phẩm.
+  3. Chọn file `hang.txt` có nội dung CSV chuẩn một dòng `SP Import`.
+  4. Bấm Import.
+- **Expected:** Từ chối vì đuôi không phải `.csv`. Không thêm sản phẩm.
+- **Actual:** Báo `Import hoàn tất: 1/1 sản phẩm được thêm`. Bảng có `SP Import`, giá 100000.
+- **Screenshot:** `docs/bugs/BUG-16-actual.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/59
+- **Issue page screenshot:** chưa chụp được vì repo private
+
+## BUG-17 — Header sai vẫn được import
+
+- **Feature:** FR-16
+- **Test case:** TC-14
+- **Severity:** Major
+- **Environment:** Admin `http://localhost:5174`, Chrome, `admin@eshop.com`
+- **Spec:** README FR-16 — Dòng đầu tiên là header: `name,price,description,imageUrl,category_id`.
+- **Steps:**
+  1. Đăng nhập `admin@eshop.com` trên Admin.
+  2. Mở tab Sản phẩm.
+  3. Chọn `hang.csv` có header `ten,gia,mo_ta,image,danh_muc` và một dòng `SP Import`.
+- **Expected:** Từ chối vì header sai. Không thêm sản phẩm.
+- **Actual:** Bảng xem trước nhận header `ten,gia,mo_ta,image,danh_muc` và bật nút Import. Khi import, sản phẩm `SP Import` được thêm và báo thành công.
+- **Screenshot:** `docs/bugs/BUG-17-actual.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/60
+- **Issue page screenshot:** chưa chụp được vì repo private
+
+## BUG-18 — Giá không dương vẫn được import
+
+- **Feature:** FR-16
+- **Test case:** TC-17, TC-18, TC-19, TC-20
+- **Severity:** Major
+- **Environment:** Admin `http://localhost:5174`, Chrome, `admin@eshop.com`
+- **Spec:** README FR-16 — `price` phải là số dương.
+- **Steps:**
+  1. Đăng nhập `admin@eshop.com` trên Admin.
+  2. Mở tab Sản phẩm.
+  3. Import `hang.csv` một dòng, giá `-1`. Các lần khác dùng giá `0`, `abc`, `100@`.
+- **Expected:** Không thêm sản phẩm. Báo lỗi giá.
+- **Actual:** Giá `-1` được thêm. Báo `Import hoàn tất: 1/1 sản phẩm được thêm`. Bảng hiện `SP Import` giá `-1 ₫`. Giá `0`, `abc` và `100@` cũng được thêm và báo thành công.
+- **Screenshot:** `docs/bugs/BUG-18-actual.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/61
+- **Issue page screenshot:** chưa chụp được vì repo private
+
+## BUG-19 — Tên dài hơn 255 ký tự vẫn được import
+
+- **Feature:** FR-16
+- **Test case:** TC-21
+- **Severity:** Major
+- **Environment:** Admin `http://localhost:5174`, Chrome, `admin@eshop.com`
+- **Spec:** README FR-15 — Tên sản phẩm bắt buộc, tối đa 255 ký tự. Dòng import trở thành sản phẩm nên cùng ràng buộc này.
+- **Steps:**
+  1. Đăng nhập `admin@eshop.com` trên Admin.
+  2. Mở tab Sản phẩm.
+  3. Import `hang.csv` một dòng, tên gồm 256 ký tự `a`, giá 100000.
+- **Expected:** Từ chối vì tên dài hơn 255. Không thêm sản phẩm.
+- **Actual:** Báo `Import hoàn tất: 1/1 sản phẩm được thêm`. Bảng có sản phẩm tên 256 ký tự `a`.
+- **Screenshot:** `docs/bugs/BUG-19-actual.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/62
+- **Issue page screenshot:** chưa chụp được vì repo private
+
+## BUG-20 — Dòng lỗi không rollback cả file
+
+- **Feature:** FR-16
+- **Test case:** TC-23
+- **Severity:** Major
+- **Environment:** Admin `http://localhost:5174`, Chrome, `admin@eshop.com`
+- **Spec:** README FR-16 — Nếu có lỗi ở bất kỳ dòng nào, toàn bộ import phải được rollback (giao dịch nguyên tử — all-or-nothing).
+- **Steps:**
+  1. Đăng nhập `admin@eshop.com` trên Admin.
+  2. Mở tab Sản phẩm.
+  3. Import `hang.csv` hai dòng: dòng 1 là `SP Import` giá 100000, dòng 2 để trống tên.
+- **Expected:** Rollback cả file. Không có `SP Import`. Báo lỗi tên ở dòng 2.
+- **Actual:** `SP Import` giá 100000 vẫn nằm trong bảng. Báo `Import hoàn tất: 1/2 sản phẩm được thêm` và `Hàng 3: Thiếu tên sản phẩm`.
+- **Screenshot:** `docs/bugs/BUG-20-actual.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/63
+- **Issue page screenshot:** chưa chụp được vì repo private

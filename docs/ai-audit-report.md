@@ -393,3 +393,37 @@ I use AI tools for the following tasks,
 > Các lệch: TC-03 mô tả trong ngoặc kép bị cắt thành `"Mo ta`. TC-12 token user thường import được. TC-13 file `.txt` vẫn import. TC-14 header alias vẫn import. TC-15 dấu phẩy không ngoặc kép cắt mô tả thành `Mo ta`. TC-17 đến TC-20 giá `-1`, `0`, `abc`, `100@` đều được thêm. TC-21 tên 256 ký tự được thêm. TC-23 không rollback, dòng đúng vẫn còn, báo `1/2`.
 >
 > Chưa lập bug report.
+
+## Interaction 29
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:01 (UTC+7)
+- **Your prompt:**
+
+> Briefly inform the user about the task result. Task "Start the admin app on port 5174" finished with exit code 127.
+
+- **The AI output:**
+
+> Lần khởi động admin đầu tiên thất bại vì chưa có Vite (`vite: command not found`). Sau khi cài dependency, admin đã chạy ở `http://127.0.0.1:5174` và bộ test FR-16 đã dùng server đó.
+
+## Interaction 30
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:08 (UTC+7)
+- **Your prompt:**
+
+> lập bug report
+
+- **The AI output:**
+
+> Đã lập 7 bug FR-16 trong `docs/bug-report.md` và trên GitHub `Taylor3691/eshop-sut`.
+>
+> - BUG-14, issue #57: CSV không đọc trường bọc nháy kép.
+> - BUG-15, issue #58: API import không kiểm tra role admin.
+> - BUG-16, issue #59: file `.txt` vẫn được import.
+> - BUG-17, issue #60: header alias vẫn được import.
+> - BUG-18, issue #61: giá `-1`, `0`, `abc`, `100@` được thêm.
+> - BUG-19, issue #62: tên 256 ký tự được thêm.
+> - BUG-20, issue #63: dòng lỗi không rollback cả file.
+>
+> Ảnh ở `docs/bugs/BUG-14-actual.png` đến `BUG-20-actual.png`. Ảnh trên issue chưa hiện vì file chưa có trên remote. TC-16 không lập bug vì tên trống đã bị từ chối đúng đặc tả.
