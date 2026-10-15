@@ -279,3 +279,15 @@ I use AI tools for the following tasks,
 - **The AI output:**
 
 > Đã viết 27 test case FR-11 trong `docs/fr-11/04-test-cases.md`. Mức chuẩn là một đơn của user id 2: mã 1, pending, ngày 2026-10-15, tổng 30000000. Case hợp lệ chỉ đổi một yếu tố. Case sai chỉ một dữ liệu sai. Chưa chạy.
+
+## Interaction 20
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 10:35 (UTC+7)
+- **Your prompt:**
+
+> tiếp tục
+
+- **The AI output:**
+
+> Đã chạy 27 test case FR-11 bằng `scripts/fr11-execute.mjs`. Kết quả trong `docs/fr-11/05-execution-results.md`: 23 PASS, 4 FAIL. Lệch: trang không có h1, empty state không có icon, ngày null thành 1/1/1970, tiền null thành 0 ₫. Chưa lập bug report.
