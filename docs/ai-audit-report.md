@@ -771,3 +771,33 @@ I use AI tools for the following tasks,
 - **The AI output:**
 
 > Đã bỏ 22 thẻ ảnh đuôi `-actual` trong `docs/bug-report.md`. Mục Screenshot chỉ còn đường dẫn chữ. Mỗi bug hiện một ảnh `bugs/BUG-XX-github.png`.
+
+## Interaction 55
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 14:03 (UTC+7)
+- **Your prompt:**
+
+> hãy viết file main report như yêu cầu trong file @2026.HW02.Domain Testing_En.pdf dựa trên các nội dung đã viết trong file docs của từng fr. Trước tiên chỉ viết file md để review trước sau đó mới export ra pdf
+
+- **The AI output:**
+
+> Đã viết `docs/main-report.md`, 291 dòng, chưa xuất PDF. Báo cáo gồm Domain Testing và Boundary Value Analysis cho FR-05 web, FR-11, FR-16 và FR-05 mobile. Số liệu lấy từ file trong `docs/`. Bảng test case đầy đủ không chép lại.
+>
+> Tổng đã viết: 120 test case. PASS 67, FAIL 46, BLOCKED 7. Bug mới: 22. Chưa có trong docs nên chưa viết: AI gap analysis, AI Critique, MSSV và điểm tự chấm.
+
+## Interaction 56
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 14:27 (UTC+7)
+- **Your prompt:**
+
+> hãy tạo file readme riêng theo như yêu cầu trong đây
+>
+> Ảnh đính kèm: mục nộp bài yêu cầu một README.md có bảng tự chấm và test summary report (số chức năng, số test case thiết kế, đã chạy, passed, failed, chưa chạy, số bug, và demo videos).
+
+- **The AI output:**
+
+> Đã tạo `docs/HW02-README.md`. Không sửa `README.md` gốc vì đó là đặc tả EShop.
+>
+> Bảng tự chấm để trống cột Self-Assessed Grade. Test summary: 4 chức năng, 120 test case thiết kế, 113 đã chạy, 67 passed, 46 failed, 7 chưa chạy. Bug: 22. Demo video: chưa có.
