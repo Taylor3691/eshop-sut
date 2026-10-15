@@ -1,3 +1,5 @@
+db2c11d 2026-10-15 14:18 FR-11: AI gap analysis — record missed cases
+34b4a78 2026-10-15 14:18 FR-05: AI gap analysis — save git commit log
 d94b7df 2026-10-15 14:18 FR-05: AI gap analysis — record missed cases
 f2f9eaa 2026-10-15 13:56 bug report: update screenshots in bug report documentation
 01ab00a 2026-10-15 13:48 bug report: save git commit log
