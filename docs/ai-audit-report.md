@@ -375,3 +375,21 @@ I use AI tools for the following tasks,
 - **The AI output:**
 
 > Đã viết 24 test case FR-16 trong `docs/fr-16/04-test-cases.md`. Mức chuẩn là file `hang.csv` một dòng `SP Import`, giá 100000. Case hợp lệ chỉ đổi một yếu tố. Case sai chỉ một dữ liệu sai. Chưa chạy.
+
+## Interaction 28
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:00 (UTC+7)
+- **Your prompt:**
+
+> tiếp tục 
+
+- **The AI output:**
+
+> Đã chạy 24 test case FR-16 trên Admin `http://localhost:5174` và API `http://localhost:3000`. Kết quả ghi ở `docs/fr-16/05-execution-results.md`, script `scripts/fr16-execute.mjs`.
+>
+> Tổng: 24. PASS: 13. FAIL: 11. BLOCKED: 0.
+>
+> Các lệch: TC-03 mô tả trong ngoặc kép bị cắt thành `"Mo ta`. TC-12 token user thường import được. TC-13 file `.txt` vẫn import. TC-14 header alias vẫn import. TC-15 dấu phẩy không ngoặc kép cắt mô tả thành `Mo ta`. TC-17 đến TC-20 giá `-1`, `0`, `abc`, `100@` đều được thêm. TC-21 tên 256 ký tự được thêm. TC-23 không rollback, dòng đúng vẫn còn, báo `1/2`.
+>
+> Chưa lập bug report.
