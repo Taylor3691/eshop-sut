@@ -427,3 +427,67 @@ I use AI tools for the following tasks,
 > - BUG-20, issue #63: dòng lỗi không rollback cả file.
 >
 > Ảnh ở `docs/bugs/BUG-14-actual.png` đến `BUG-20-actual.png`. Ảnh trên issue chưa hiện vì file chưa có trên remote. TC-16 không lập bug vì tên trống đã bị từ chối đúng đặc tả.
+
+## Interaction 31
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:12 (UTC+7)
+- **Your prompt:**
+
+> tôi cần làm quy trình như thế với fr19 nhưng trên mobile thì sao
+
+- **The AI output:**
+
+> FR-19 không có màn trên app mobile. Đặc tả là admin xem danh sách người dùng, không lộ mật khẩu, và xóa được người dùng trừ chính tài khoản đang đăng nhập. Màn hình đó nằm ở Admin, tab Người dùng. App Expo không gọi API này.
+>
+> Sáu bước giữ nguyên. Chỗ chạy là Admin `http://localhost:5174` và API `http://localhost:3000`, giống FR-16. Không cần điện thoại.
+>
+> Nếu FR nằm trên mobile, tài liệu vẫn viết như cũ. Bước chạy đổi sang app Expo: mở simulator, thao tác trên màn đó, đối chiếu README. Playwright trên trình duyệt không mở được màn React Native.
+
+## Interaction 32
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:15 (UTC+7)
+- **Your prompt:**
+
+> không mở đc simulator thì làm sao
+
+- **The AI output:**
+
+> FR-19 không cần simulator. Chạy trên Admin `http://localhost:5174`.
+>
+> Nếu FR nằm trên mobile mà simulator không mở, chạy `npm run web` trong `frontend-mobile`. Expo có script web và `app.json` đã có mục web, nên màn React Native mở trong trình duyệt và Playwright bắn được.
+>
+> Nếu web cũng không chạy, test cần nhìn màn hình ghi BLOCKED. Không chấm PASS/FAIL bằng cách đọc code. Test chỉ gọi API mà màn đó dùng vẫn chạy trên `http://localhost:3000`, và kết quả đó chỉ là API.
+
+## Interaction 33
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:16 (UTC+7)
+- **Your prompt:**
+
+> vậy react native vẫn mơ đc trên web để test đúng không
+
+- **The AI output:**
+
+> Đúng khi `npm run web` mở được trang. Repo này chưa cài `react-native-web` và `react-dom`, nên hiện chưa mở trên trình duyệt. Lệnh đó trong `frontend-mobile` là bước để Expo cài hai gói rồi mở cùng các màn React Native. Khi trang lên, Playwright test được như web. App đang gọi API ở `http://192.168.10.13:3000/api`, nên máy phải tới được địa chỉ đó.
+
+## Interaction 34
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:18 (UTC+7)
+- **Your prompt:**
+
+> vậy hãy tiếp tục quy trình test đó với fr19 nhưng trên mobile
+
+- **The AI output:**
+
+> Đã làm bước 1 của FR-19 trên app mobile, file `docs/fr-19/01-input-space-partitioning.md`.
+>
+> App mobile không có ô nhập, không có query, và không gọi API quản lý người dùng. Các màn hiện có là trang chủ, chi tiết sản phẩm, giỏ, thanh toán, đăng nhập, đăng ký, quên mật khẩu và hồ sơ. Những màn đó không thuộc FR-19.
+>
+> Chưa chia miền.
+
+
+
+
