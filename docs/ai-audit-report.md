@@ -516,6 +516,21 @@ I use AI tools for the following tasks,
 >
 > Bước 2 không có lớp và không có khoảng `[Min, Max]`, nên không có biên. Không bịa số người dùng tối đa, độ dài mật khẩu, id tài khoản, hay `Limit`. Chưa viết test case.
 
+## Interaction 37
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:24 (UTC+7)
+- **Your prompt:**
+
+> tiếp tục
+
+- **The AI output:**
+
+> Đã viết bước 4 của FR-19 trên app mobile, file `docs/fr-19/04-test-cases.md`.
+>
+> Không có lớp và không có biên, nên không có test case. Không bịa case cho id, mật khẩu, hay role. Chưa chạy.
+
+
 
 
 
