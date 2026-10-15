@@ -1,3 +1,5 @@
+6f15817 2026-10-15 10:39 FR-11: bug report — record defects found on the order history
+0d1b787 2026-10-15 10:35 FR-11: domain testing — save git commit log
 5f21e4e 2026-10-15 10:35 FR-11: domain testing — execute test cases
 828e4a6 2026-10-15 10:29 FR-11: domain testing — save git commit log
 db44f98 2026-10-15 10:29 FR-11: domain testing — write test cases
