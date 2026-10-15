@@ -568,6 +568,21 @@ I use AI tools for the following tasks,
 >
 > Biến đầu vào của màn trang chủ là `search`. Gửi khi bấm Tìm, và lần mở màn gửi chuỗi rỗng. API chỉ đọc query `search`. Không có lọc giá, danh mục, sắp xếp, phân trang. Chưa chia miền.
 
+## Interaction 41
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:32 (UTC+7)
+- **Your prompt:**
+
+> tiếp tục
+
+- **The AI output:**
+
+> Đã làm bước 2 của FR-05 trên mobile, file `docs/fr-05-mobile/02-equivalence-partitioning.md`.
+>
+> Từ khóa có 10 lớp VEC và 7 lớp IEC: khớp tên, hoa thường, dấu tiếng Việt, chuỗi rỗng, khoảng trắng, `%`, `_`, `'`, `&`, `#`, `?`, và HTML. Không lập lớp cho giá, danh mục, sắp xếp. Chưa chọn biên, chưa viết test case.
+
+
 
 
 
