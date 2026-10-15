@@ -1,3 +1,5 @@
+82aa5c3 2026-10-15 11:31 FR-05: domain testing — identify mobile input variables
+6f7280f 2026-10-15 11:24 FR-19: domain testing — save git commit log
 b94e31f 2026-10-15 11:24 FR-19: domain testing — write test cases
 bde17c1 2026-10-15 11:23 FR-19: boundary analysis — save git commit log
 28f9242 2026-10-15 11:23 FR-19: boundary analysis — calculate 3-value boundaries
