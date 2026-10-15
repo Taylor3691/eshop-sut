@@ -1,3 +1,5 @@
+d99ab28 2026-10-15 10:53 FR-16: boundary analysis — calculate 3-value boundaries
+ff41154 2026-10-15 10:52 FR-16: domain testing — save git commit log
 9c20145 2026-10-15 10:52 FR-16: domain testing — partition input domains
 4bfdd67 2026-10-15 10:50 FR-16: domain testing — save git commit log
 1613c44 2026-10-15 10:50 FR-16: domain testing — identify input variables
