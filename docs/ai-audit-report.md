@@ -733,3 +733,41 @@ I use AI tools for the following tasks,
 > Đã chụp 22 trang issue #44–#65 bằng Chrome đã đăng nhập. Ảnh nằm ở `docs/bugs/BUG-01-github.png` đến `docs/bugs/BUG-22-github.png`. Mỗi ảnh thấy tiêu đề issue và ảnh lỗi bên trong.
 >
 > `docs/bug-report.md` đã trỏ mỗi bug tới ảnh trang issue của nó. Đã commit.
+
+## Interaction 52
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 13:51 (UTC+7)
+- **Your prompt:**
+
+> tại sao tôi bấm preview md tnos không hiện ảnh chỉ hiện đường link ảnh
+
+- **The AI output:**
+
+> Preview chỉ hiện chữ đường dẫn vì trong `docs/bug-report.md` ảnh đang nằm trong dấu backtick, ví dụ `` `docs/bugs/BUG-01-actual.png` ``. Đó là chữ, không phải thẻ ảnh. Markdown chỉ vẽ ảnh khi viết `![mô tả](đường-dẫn)`.
+>
+> File báo cáo nằm trong `docs/`, nên đường dẫn tương đối đúng là `bugs/BUG-01-actual.png`, không phải `docs/bugs/...`. Mẫu bài nộp đang giữ đường dẫn dạng chữ. Chưa sửa file.
+
+## Interaction 53
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 13:52 (UTC+7)
+- **Your prompt:**
+
+> chỉnh lại cho hiện ảnh
+
+- **The AI output:**
+
+> Đã sửa 44 chỗ trong `docs/bug-report.md`. Mỗi mục Screenshot và Issue page screenshot giữ đường dẫn `docs/bugs/...` và thêm thẻ ảnh `![...](bugs/...)`. Preview tính đường dẫn từ file báo cáo, nên dùng `bugs/` chứ không dùng `docs/bugs/`. Mở lại preview của `docs/bug-report.md` sẽ thấy ảnh.
+
+## Interaction 54
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 13:54 (UTC+7)
+- **Your prompt:**
+
+> trong file bug là hiện ảnh với đuôi là -github
+
+- **The AI output:**
+
+> Đã bỏ 22 thẻ ảnh đuôi `-actual` trong `docs/bug-report.md`. Mục Screenshot chỉ còn đường dẫn chữ. Mỗi bug hiện một ảnh `bugs/BUG-XX-github.png`.
