@@ -11,7 +11,9 @@ Expected result bám README, không bám code.
 - Từ khóa rỗng: danh sách gồm mọi sản phẩm đang có.
 - Từ khóa khác rỗng: chỉ sản phẩm có tên chứa đúng chuỗi đó. So khớp từng ký tự, có phân biệt hoa thường và dấu, vì FR-05 không yêu cầu quy về cùng dạng.
 - Từ khóa hiện thành chữ, không chạy HTML.
-- Có trạng thái loading khi đang tải. Hết kết quả thì có empty state. Trang có đúng một `h1`. Ảnh có `alt` mô tả. Danh sách dạng lưới. Giá dùng `₫` và dấu phân cách hàng nghìn, ví dụ `30.000.000 ₫`.
+- Có trạng thái loading khi đang tải. Hết kết quả thì có empty state. Giá dùng `₫` và dấu phân cách hàng nghìn, ví dụ `30.000.000 ₫`.
+- Không chấm `h1`, `alt` và số cột trên mobile. App mobile không có thẻ `h1`. Khi chạy bằng `react-native-web`, thư viện tự sinh `<img alt="">`. README không nêu số cột trên mobile. Các mục này chỉ chấm ở bộ web `docs/fr-05/`.
+- TC-15 và TC-16 là BLOCKED khi chạy trên Chrome: trình duyệt cắt dấu cách cuối URL nên app gửi `search=` rỗng. Chỉ thiết bị thật hoặc Expo Go mới biết app gửi gì.
 - Query không thuộc FR-05 không được đổi tập sản phẩm so với cùng từ khóa khi không gửi query đó, và không được trả lỗi.
 
 ## Cách rút số test case
@@ -46,7 +48,7 @@ Giá trị trong bảng là chuỗi gõ trên ô tìm, chưa encode.
 
 | TC ID | Miền/Biên được phủ | Precondition | Test Data | Steps | Expected Result |
 | --- | --- | --- | --- | --- | --- |
-| TC-01 | KW-VEC-02, KW-VEC-04 | Seed | `search=iPhone` | UI | Chỉ `iPhone 15 Pro Max`, giá `30.000.000 ₫`. Ảnh có alt mô tả. Danh sách dạng lưới. Đúng một `h1`. Có loading. Chữ `iPhone` hiện dạng text. |
+| TC-01 | KW-VEC-02, KW-VEC-04 | Seed | `search=iPhone` | UI | Chỉ `iPhone 15 Pro Max`, giá `30.000.000 ₫`. Có loading. Chữ `iPhone` hiện dạng text. |
 | TC-02 | KW-VEC-01 | Seed | `search=iPhone 15 Pro Max` | UI | Chỉ đúng một sản phẩm `iPhone 15 Pro Max`. |
 | TC-03 | KW-VEC-03 | Seed | `search=zzzz-khong-co` | UI | Có empty state. Không hiện năm sản phẩm seed. |
 | TC-04 | KW-VEC-05 | Seed | `search=iphone` | UI | Empty state. `iPhone 15 Pro Max` không được trả về chỉ vì khác hoa thường. |

@@ -628,16 +628,32 @@ I use AI tools for the following tasks,
 >
 > TC-10 được sửa vì chữ `a` nằm trong `Max`. Chưa lập bug report.
 
+## Interaction 45
 
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:51 (UTC+7)
+- **Your prompt:**
 
+> Briefly inform the user about the task result. Tasks: install Expo web packages succeeded; wait for Expo web on port 8081 succeeded; the first run of the 23 mobile FR-05 tests was aborted.
 
+- **The AI output:**
 
+> Gói web của Expo đã cài xong và app mobile đã mở ở `http://127.0.0.1:8081`. Lần chạy đầu bị dừng vì script đọc kết quả trước khi nút Tìm gửi xong. Lần chạy lại đã ghi ở `docs/fr-05-mobile/05-execution-results.md`: 5 PASS, 18 FAIL.
 
+## Interaction 46
 
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:58 (UTC+7)
+- **Your prompt:**
 
+> hãy kiểm tra lại phần test của mobile vừa test, tại sao lại có quá nhiều test fail, có thể nguyên nhân là do không chạy đúng mobile không
 
+- **The AI output:**
 
-
-
-
-
+> Một phần do chạy không đúng mobile, một phần do tôi chấm sai, và phần còn lại là lỗi thật của app. Đã sửa script và tài liệu, chạy lại: 6 PASS, 15 FAIL, 2 BLOCKED (trước đó 5 PASS, 18 FAIL).
+>
+> Test chạy trên Expo web, tức `react-native-web` trong Chrome, không phải iOS hay Android. Hệ quả: `alt=""` do thư viện tự sinh, app mobile không có `h1`, và Chrome cắt dấu cách cuối URL. Ba mục `h1`, `alt`, một cột bị bỏ khỏi Expected của TC-01 (TC-01 thành PASS). TC-15 và TC-16 thành BLOCKED.
+>
+> 15 FAIL còn lại gom thành 5 nhóm: không có empty state (9 test, một lỗi duy nhất), `%` và `_` (TC-17, 18), dấu nháy gây lỗi SQL (TC-19), `&` và `#` làm cụt từ khóa (TC-20, 21), và TC-04 (`iphone` ra iPhone, README không cấm nên không lập bug).
+>
+> Đã sửa `scripts/fr05-mobile-execute.mjs`, `docs/fr-05-mobile/04-test-cases.md`, `docs/fr-05-mobile/05-execution-results.md`. Chưa chạy trên thiết bị thật.
