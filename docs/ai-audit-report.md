@@ -303,3 +303,39 @@ I use AI tools for the following tasks,
 - **The AI output:**
 
 > Đã lập 4 bug FR-11 trong `docs/bug-report.md`: BUG-10 đến BUG-13, ảnh trong `docs/bugs/`. Issue trên `Taylor3691/eshop-sut`: #53 đến #56. TC-23 không lập bug. Ảnh trong issue trỏ tới file trên nhánh; cần push thì ảnh mới hiện. Chưa push.
+
+## Interaction 22
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 10:43 (UTC+7)
+- **Your prompt:**
+
+> đổi tên bug trên issue theo format là frxx: bug gì
+
+- **The AI output:**
+
+> Chưa đổi hết. Người dùng nói tiếp chỉ đổi 4 issue mới.
+
+## Interaction 23
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 10:43 (UTC+7)
+- **Your prompt:**
+
+> chỉ đổi tên 4 issue mới vừa tọa
+
+- **The AI output:**
+
+> Đã đổi tiêu đề 4 issue FR-11: #53 FR-11: trang hồ sơ không có thẻ h1, #54 FR-11: lịch sử trống không có icon, #55 FR-11: ngày đặt null hiện thành 1/1/1970, #56 FR-11: tổng tiền null hiện thành 0 ₫. Các issue khác giữ nguyên.
+
+## Interaction 24
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 10:49 (UTC+7)
+- **Your prompt:**
+
+> tiếp tục quy trình đó với fr16
+
+- **The AI output:**
+
+> Đã làm bước 1 của FR-16, file `docs/fr-16/01-input-space-partitioning.md`. Input là file trên tab Sản phẩm của admin, được tách thành JSON rồi POST `/api/admin/import-products`. Spec yêu cầu đuôi `.csv`, header đúng, RFC 4180, tên không rỗng, giá dương, và rollback cả file. Code không lọc đuôi, không xử lý nháy kép, không kiểm tra giá, không có transaction. Chưa chia miền.
