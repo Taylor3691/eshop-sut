@@ -363,3 +363,15 @@ I use AI tools for the following tasks,
 - **The AI output:**
 
 > Đã làm bước 3 của FR-16, file `docs/fr-16/03-boundary-value-analysis.md`. Tên dài 0, 1, 2, 254, 255, 256 ký tự, mốc 255 lấy từ FR-15. Giá -1, 0, 1. Số dòng 0, 1, 2. Không bịa giá tối đa hay số dòng tối đa. Chưa viết test case.
+
+## Interaction 27
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 10:55 (UTC+7)
+- **Your prompt:**
+
+> tiếp tục
+
+- **The AI output:**
+
+> Đã viết 24 test case FR-16 trong `docs/fr-16/04-test-cases.md`. Mức chuẩn là file `hang.csv` một dòng `SP Import`, giá 100000. Case hợp lệ chỉ đổi một yếu tố. Case sai chỉ một dữ liệu sai. Chưa chạy.
