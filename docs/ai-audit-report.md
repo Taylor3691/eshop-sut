@@ -195,3 +195,51 @@ I use AI tools for the following tasks,
 - **The AI output:**
 
 > Đã push nhánh `hw02/toanhuynh-fr05/11/16/19`. Issue #44 đến #52 đã đổi dòng đường dẫn chữ thành ảnh Markdown trỏ tới `docs/bugs/BUG-0N-actual.png` trên nhánh đó. Mở lại issue khi đang đăng nhập GitHub thì ảnh hiện. Repo private nên khách chưa đăng nhập không thấy. Chưa chụp trang issue vì trình duyệt tự động không có phiên GitHub.
+
+## Interaction 13
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 09:57 (UTC+7)
+- **Your prompt:**
+
+> tạo file gitignore
+
+- **The AI output:**
+
+> Đã tạo `.gitignore` ở thư mục gốc. File bỏ qua `node_modules/`, file `.env`, log, thư mục build, `.cursor/`, file PDF, và `backend/database.sqlite` mới. `backend/database.sqlite` vẫn đang được Git theo dõi từ trước, nên `.gitignore` chưa gỡ nó khỏi repo.
+
+## Interaction 14
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 10:02 (UTC+7)
+- **Your prompt:**
+
+> hãy tóm tắt lại quy trình mà tôi đã làm để test một fr
+
+- **The AI output:**
+
+> Với FR-05, quy trình đã đi theo Domain Testing. Kết quả mong đợi lấy từ README, rồi đối chiếu với hệ thống đang chạy. Các bước: đọc spec và code; xác định biến đầu vào (`01-input-space-partitioning.md`); phân hoạch tương đương VEC/IEC (`02-equivalence-partitioning.md`); BVA 3 giá trị (`03-boundary-value-analysis.md`); viết 46 test case bằng Base Choice, mỗi case sai chỉ một dữ liệu sai (`04-test-cases.md`); chạy `scripts/fr05-execute.mjs` trên local (`05-execution-results.md`: 25 PASS, 16 FAIL, 5 BLOCKED); báo 9 bug trong `docs/bug-report.md`, ảnh `docs/bugs/`, issue #44–#52. Mỗi bước một commit trên nhánh `hw02/toanhuynh-fr05/11/16/19`, kèm audit log. AI gap analysis chưa làm.
+
+## Interaction 15
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 10:04 (UTC+7)
+- **Your prompt:**
+
+> hãy tạo agent skill về quy trình đó
+
+- **The AI output:**
+
+> Đã tạo skill `fr-domain-testing` tại `.cursor/skills/fr-domain-testing/SKILL.md`. Skill chạy Domain Testing cho một FR: biến đầu vào, VEC/IEC, BVA 3 giá trị, test case base choice, chạy thật, bug report. Mỗi lần chỉ làm bước được yêu cầu. Oracle là README. Đã sửa `.gitignore` để Git thấy skill, vẫn bỏ qua rule trong `.cursor/rules/`. Chưa commit.
+
+## Interaction 16
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 10:18 (UTC+7)
+- **Your prompt:**
+
+> hãy sử dụng skill test vừa tạo với fr11
+
+- **The AI output:**
+
+> Đã làm bước 1 của FR-11, file `docs/fr-11/01-input-space-partitioning.md`. Trang `/profile` không có ô lọc và không có query. API `GET /api/orders/my-orders` chỉ lọc theo `user_id` trong JWT. Biến trạng thái là chủ đơn, số đơn, và `status`. Form hồ sơ thuộc FR-04, nút hủy thuộc FR-10. Chưa chia miền hay viết test case.
