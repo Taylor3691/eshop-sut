@@ -354,3 +354,48 @@ TC-16 (tên trống bị từ chối và có báo lỗi) không lập bug. Hệ 
 - **Screenshot:** `docs/bugs/BUG-20-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/63
 - **Issue page screenshot:** chưa chụp được vì repo private
+
+## FR-05 mobile
+
+Các bug dưới đây đã chạy trên app mobile qua Expo web `http://127.0.0.1:8081` ngày 2026-10-15. API là `http://127.0.0.1:3000`. Đây là React Native chạy bằng `react-native-web` trong Chrome, không phải điện thoại thật.
+
+Không lập bug mới cho:
+
+- TC-04 (`iphone` vẫn ra iPhone). README không cấm tìm không phân biệt hoa thường.
+- TC-15 và TC-16. BLOCKED: Chrome cắt dấu cách cuối URL, request thành `search=` rỗng.
+- TC-17 và TC-18 (`%`, `_` trả đủ 5 sản phẩm). Cùng lỗi API đã ghi ở BUG-08, issue #51.
+- TC-19 (dấu nháy trả `SQLITE_ERROR`). Cùng lỗi API đã ghi ở BUG-09, issue #52. App mobile hiện nguyên HTML lỗi trong khung lỗi.
+
+## BUG-21 — App mobile không có empty state khi tìm không ra kết quả
+
+- **Feature:** FR-05
+- **Test case:** TC-03, TC-05, TC-07, TC-09, TC-11, TC-12, TC-13, TC-22, TC-23
+- **Severity:** Major
+- **Environment:** App mobile qua Expo web `http://127.0.0.1:8081`, Chrome, API `http://127.0.0.1:3000`, seed mặc định
+- **Spec:** README FR-05 — Khi không có kết quả tìm kiếm phải hiển thị thông báo empty state phù hợp.
+- **Steps:**
+  1. Mở app mobile.
+  2. Nhập `zzzz-khong-co` vào ô Tìm kiếm.
+  3. Bấm Tìm.
+- **Expected:** Có thông báo empty state.
+- **Actual:** Không có sản phẩm và không có thông báo. Chỉ còn dòng "Kết quả tìm kiếm cho: zzzz-khong-co".
+- **Screenshot:** `docs/bugs/BUG-21-actual.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/64
+- **Issue page screenshot:** chưa chụp được vì repo private
+
+## BUG-22 — Từ khóa có & hoặc # bị cắt khi tìm trên app mobile
+
+- **Feature:** FR-05
+- **Test case:** TC-20, TC-21
+- **Severity:** Major
+- **Environment:** App mobile qua Expo web `http://127.0.0.1:8081`, Chrome, API `http://127.0.0.1:3000`, seed 5 sản phẩm
+- **Spec:** README FR-05 — Thanh tìm kiếm tìm theo tên sản phẩm.
+- **Steps:**
+  1. Mở app mobile.
+  2. Tìm `a&b`.
+  3. Tìm `a#b`.
+- **Expected:** Tìm đúng chuỗi đã gõ. Không tên seed nào chứa `a&b` hay `a#b`, nên không được trả sản phẩm chỉ vì tên chứa chữ `a`.
+- **Actual:** `a&b` gửi `search=a&b` và trả 4 sản phẩm có chữ a: iPhone 15 Pro Max, Samsung Galaxy S24 Ultra, MacBook Pro M3, Tai nghe AirPods Pro 2. Dòng kết quả vẫn hiện `a&b`. `a#b` gửi `search=a` và trả cùng 4 sản phẩm đó.
+- **Screenshot:** `docs/bugs/BUG-22-actual.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/65
+- **Issue page screenshot:** chưa chụp được vì repo private

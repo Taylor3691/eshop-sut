@@ -657,3 +657,39 @@ I use AI tools for the following tasks,
 > 15 FAIL còn lại gom thành 5 nhóm: không có empty state (9 test, một lỗi duy nhất), `%` và `_` (TC-17, 18), dấu nháy gây lỗi SQL (TC-19), `&` và `#` làm cụt từ khóa (TC-20, 21), và TC-04 (`iphone` ra iPhone, README không cấm nên không lập bug).
 >
 > Đã sửa `scripts/fr05-mobile-execute.mjs`, `docs/fr-05-mobile/04-test-cases.md`, `docs/fr-05-mobile/05-execution-results.md`. Chưa chạy trên thiết bị thật.
+
+## Interaction 47
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 12:31 (UTC+7)
+- **Your prompt:**
+
+> tôi chạy expo trên điện thoại thì có test đc không
+
+- **The AI output:**
+
+> Có. Expo Go trên điện thoại test được FR-05 trên app mobile thật, bằng cách gõ từng test case. Script `scripts/fr05-mobile-execute.mjs` không dùng được vì nó chỉ điều khiển Chrome ở `http://127.0.0.1:8081`.
+>
+> Điện thoại và Mac phải cùng Wi-Fi. Backend đang nghe mọi interface ở cổng 3000. `API_URL` trong `frontend-mobile/App.js` đang là `http://192.168.10.13:3000/api`, còn máy này hiện có IP `10.0.89.196` và `172.16.0.2`. Cần đổi `API_URL` sang IP điện thoại tới được, rồi `npx expo start` và quét QR.
+>
+> Cách này chấm được TC-15, TC-16 (dấu cách) và `#` ở TC-21. Empty state, `%`, `_`, dấu nháy và `&` vẫn lệch vì nằm trong app và API. Chưa đổi IP, chưa chạy Expo.
+
+## Interaction 48
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 12:37 (UTC+7)
+- **Your prompt:**
+
+> hãy tiến hành lập bug report dựa trên test case đã test
+
+- **The AI output:**
+
+> Đã lập bug report cho FR-05 mobile. Hai bug mới trên `Taylor3691/eshop-sut`.
+>
+> BUG-21 — App mobile không có empty state. TC-03, 05, 07, 09, 11, 12, 13, 22, 23. Ảnh `docs/bugs/BUG-21-actual.png`. Issue https://github.com/Taylor3691/eshop-sut/issues/64
+>
+> BUG-22 — Từ khóa `a&b` và `a#b` bị cắt thành `a`. TC-20, TC-21. Ảnh `docs/bugs/BUG-22-actual.png`. Issue https://github.com/Taylor3691/eshop-sut/issues/65
+>
+> Không lập bug cho TC-04 (README không cấm hoa thường), TC-15 và TC-16 (BLOCKED), TC-17 và TC-18 (đã là BUG-08, issue #51), TC-19 (đã là BUG-09, issue #52).
+>
+> Ảnh trên issue trỏ tới file trên nhánh, hiện sau khi push. Chưa push. Trang issue chưa chụp được vì repo private. Đã commit bước bug report.
