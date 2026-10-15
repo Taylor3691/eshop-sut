@@ -608,6 +608,27 @@ I use AI tools for the following tasks,
 
 > Đã viết 23 test case FR-05 trên mobile trong `docs/fr-05-mobile/04-test-cases.md`. Mức chuẩn là `iPhone`. 14 case hợp lệ, 9 case sai, mỗi case sai chỉ một dữ liệu. Chưa chạy.
 
+## Interaction 44
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 11:50 (UTC+7)
+- **Your prompt:**
+
+> tiếp tục
+
+- **The AI output:**
+
+> Đã chạy 23 test case FR-05 trên app mobile web `http://127.0.0.1:8081`. Kết quả ở `docs/fr-05-mobile/05-execution-results.md`, script `scripts/fr05-mobile-execute.mjs`.
+>
+> Tổng: 23. PASS: 5. FAIL: 18. BLOCKED: 0. PASS là TC-02, TC-06, TC-08, TC-10, TC-14.
+>
+> App gọi `192.168.10.13`, máy này không tới được. Script chuyển host sang API local và giữ query do app tạo.
+>
+> Lệch: `alt` rỗng, không có `h1`, thẻ xếp một cột. Không có empty state khi hết sản phẩm. `iphone` vẫn ra `iPhone`. Dấu cách bị bỏ nên hiện cả danh sách. `%` và `_` trả cả danh sách. Dấu `'` gây `SQLITE_ERROR`. `a&b` và `a#b` bị cắt.
+>
+> TC-10 được sửa vì chữ `a` nằm trong `Max`. Chưa lập bug report.
+
+
 
 
 

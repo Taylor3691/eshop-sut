@@ -55,7 +55,7 @@ Giá trị trong bảng là chuỗi gõ trên ô tìm, chưa encode.
 | TC-07 | KW-VEC-08 | Seed | `search=Ban phim` | UI | Empty state. Không trả sản phẩm chỉ vì đã bỏ dấu. |
 | TC-08 | KW-VEC-09, LEN-B-01, SP-B-01 | Seed | `search=""` | UI | Đủ 5 sản phẩm seed. Giá lần lượt `30.000.000 ₫`, `28.000.000 ₫`, `45.000.000 ₫`, `6.000.000 ₫`, `4.000.000 ₫`. |
 | TC-09 | KW-VEC-10 | Seed | `search=<script>` | UI | Empty state. Trang hiện đúng các ký tự `<script>`, không chạy script. |
-| TC-10 | LEN-B-02 | Seed | `search=a` (1 ký tự) | UI | Có `Samsung Galaxy S24 Ultra`, `MacBook Pro M3`, `Tai nghe AirPods Pro 2`. Không có `iPhone 15 Pro Max`. Không có `Bàn phím cơ Keychron Q1`. |
+| TC-10 | LEN-B-02 | Seed | `search=a` (1 ký tự) | UI | Có `iPhone 15 Pro Max`, `Samsung Galaxy S24 Ultra`, `MacBook Pro M3`, `Tai nghe AirPods Pro 2`, vì các tên này chứa chữ `a`. Không có `Bàn phím cơ Keychron Q1`. |
 | TC-11 | LEN-B-03 | Seed | `search=aa` (2 ký tự) | UI | Empty state. Không tên seed nào chứa `aa`. |
 | TC-12 | LEN-B-04 | Seed | `search=` chữ `a` lặp 254 lần | UI | Empty state. Không lỗi. |
 | TC-13 | LEN-B-05 | Seed | `search=` chữ `a` lặp 255 lần | UI | Empty state. Không lỗi. |
