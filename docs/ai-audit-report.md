@@ -693,3 +693,17 @@ I use AI tools for the following tasks,
 > Không lập bug cho TC-04 (README không cấm hoa thường), TC-15 và TC-16 (BLOCKED), TC-17 và TC-18 (đã là BUG-08, issue #51), TC-19 (đã là BUG-09, issue #52).
 >
 > Ảnh trên issue trỏ tới file trên nhánh, hiện sau khi push. Chưa push. Trang issue chưa chụp được vì repo private. Đã commit bước bug report.
+
+## Interaction 49
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 13:19 (UTC+7)
+- **Your prompt:**
+
+> hãy xóa fr19 và đổi tên nhánh hiện tại từ /19 thành 05(mobile)
+
+- **The AI output:**
+
+> Đã xóa bốn file `docs/fr-19/`. Mục FR-19 trong README giữ nguyên vì đó là đặc tả.
+>
+> Nhánh local đổi từ `hw02/toanhuynh-fr05/11/16/19` thành `hw02/toanhuynh-fr05/11/16/05(mobile)`. Nhánh trên GitHub vẫn tên cũ vì chưa push. Ảnh trong issue đang trỏ vào tên nhánh cũ.
