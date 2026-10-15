@@ -4,7 +4,7 @@ Các bug dưới đây đã chạy trên Web `http://localhost:5173` và API `ht
 
 TC-04 (`iphone` vẫn trả `iPhone 15 Pro Max`) không lập bug. FR-05 không cấm tìm không phân biệt hoa thường với chữ ASCII.
 
-Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chèn vào issue #44–#52 bằng liên kết file trên nhánh `hw02/toanhuynh-fr05/11/16/19`. Ảnh hiện với tài khoản đã đăng nhập và có quyền đọc repo. Trang issue chưa chụp được vì trình duyệt tự động không đăng nhập GitHub.
+Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chèn vào issue #44–#65 bằng liên kết file trên nhánh `hw02/toanhuynh-fr05/11/16/19`. Ảnh trang issue chụp từ Chrome đã đăng nhập, lưu tại `docs/bugs/BUG-01-github.png` đến `docs/bugs/BUG-22-github.png`.
 
 ## BUG-01 — Giá hiển thị VND thay vì ₫
 
@@ -20,7 +20,7 @@ Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chè
 - **Actual:** Giá hiện `30.000.000 VND`.
 - **Screenshot:** `docs/bugs/BUG-01-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/44
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-01-github.png`
 
 ## BUG-02 — Ảnh sản phẩm có alt rỗng
 
@@ -37,7 +37,7 @@ Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chè
 - **Actual:** `alt=""`.
 - **Screenshot:** `docs/bugs/BUG-02-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/45
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-02-github.png`
 
 ## BUG-03 — Trang danh sách có hai thẻ h1
 
@@ -54,7 +54,7 @@ Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chè
 - **Actual:** Hai `h1`: `Danh sách sản phẩm` và `Hiển thị 1 sản phẩm`.
 - **Screenshot:** `docs/bugs/BUG-03-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/46
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-03-github.png`
 
 ## BUG-04 — Không có trạng thái loading khi tải sản phẩm
 
@@ -70,7 +70,7 @@ Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chè
 - **Actual:** Trang trống, không có thông báo loading.
 - **Screenshot:** `docs/bugs/BUG-04-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/47
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-04-github.png`
 
 ## BUG-05 — Không có empty state khi tìm không ra kết quả
 
@@ -86,7 +86,7 @@ Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chè
 - **Actual:** Không có sản phẩm và không có thông báo. Chỉ còn dòng "Kết quả tìm kiếm cho: zzzz-khong-co".
 - **Screenshot:** `docs/bugs/BUG-05-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/48
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-05-github.png`
 
 ## BUG-06 — Từ khóa HTML không được hiện dạng chữ
 
@@ -102,7 +102,7 @@ Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chè
 - **Actual:** Dòng kết quả chỉ còn "Kết quả tìm kiếm cho:" rồi trống. Thẻ script bị đưa vào HTML nên chữ biến mất. Script không chạy.
 - **Screenshot:** `docs/bugs/BUG-06-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/49
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-06-github.png`
 
 ## BUG-07 — Từ khóa chỉ gồm dấu cách vẫn trả cả danh sách
 
@@ -119,7 +119,7 @@ Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chè
 - **Actual:** Trang vẫn hiện đủ 5 sản phẩm.
 - **Screenshot:** `docs/bugs/BUG-07-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/50
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-07-github.png`
 
 ## BUG-08 — Ký tự % và _ được coi là ký tự đại diện khi tìm
 
@@ -136,7 +136,7 @@ Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chè
 - **Actual:** Cả hai từ khóa đều trả đủ 5 sản phẩm.
 - **Screenshot:** `docs/bugs/BUG-08-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/51
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-08-github.png`
 
 ## BUG-09 — Dấu nháy đơn trong từ khóa gây lỗi SQL
 
@@ -152,7 +152,7 @@ Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chè
 - **Actual:** Khối đỏ `Database Error` và `SQLITE_ERROR: unrecognized token: "'"`. Lỗi được render thành HTML. Dòng "Hiển thị 5 sản phẩm" vẫn còn.
 - **Screenshot:** `docs/bugs/BUG-09-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/52
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-09-github.png`
 
 ## FR-11
 
@@ -176,7 +176,7 @@ TC-23 (`status=returned` hiện `RETURNED`) không lập bug. FR-11 không chố
 - **Actual:** Không có `h1`. Hai tiêu đề nhìn thấy là "Hồ sơ của bạn" và "Lịch sử đơn hàng".
 - **Screenshot:** `docs/bugs/BUG-10-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/53
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-10-github.png`
 
 ## BUG-11 — Lịch sử trống không có icon
 
@@ -193,7 +193,7 @@ TC-23 (`status=returned` hiện `RETURNED`) không lập bug. FR-11 không chố
 - **Actual:** Có câu "Bạn chưa có đơn hàng nào." Không có icon hay hình minh họa.
 - **Screenshot:** `docs/bugs/BUG-11-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/54
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-11-github.png`
 
 ## BUG-12 — Ngày đặt null hiện thành 1/1/1970
 
@@ -210,7 +210,7 @@ TC-23 (`status=returned` hiện `RETURNED`) không lập bug. FR-11 không chố
 - **Actual:** Ô ngày hiện `1/1/1970`. Mã `#1` và tiền `30.000.000 ₫` vẫn hiện.
 - **Screenshot:** `docs/bugs/BUG-12-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/55
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-12-github.png`
 
 ## BUG-13 — Tổng tiền null hiện thành 0 ₫
 
@@ -227,7 +227,7 @@ TC-23 (`status=returned` hiện `RETURNED`) không lập bug. FR-11 không chố
 - **Actual:** Ô tiền hiện `0 ₫`. Mã `#1` và ngày `15/10/2026` vẫn hiện.
 - **Screenshot:** `docs/bugs/BUG-13-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/56
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-13-github.png`
 
 ## FR-16
 
@@ -251,7 +251,7 @@ TC-16 (tên trống bị từ chối và có báo lỗi) không lập bug. Hệ 
 - **Actual:** Bảng xem trước cắt mô tả thành `"Mo ta` và đẩy `co phay"` sang cột imageUrl. File không bọc nháy kép (TC-15) vẫn thêm sản phẩm với mô tả `Mo ta` và báo thành công, không có lỗi.
 - **Screenshot:** `docs/bugs/BUG-14-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/57
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-14-github.png`
 
 ## BUG-15 — API import không kiểm tra role admin
 
@@ -267,7 +267,7 @@ TC-16 (tên trống bị từ chối và có báo lỗi) không lập bug. Hệ 
 - **Actual:** HTTP 200. `{"message":"Import hoàn tất: 1/1 sản phẩm được thêm","inserted":1,"errors":[]}`. Sản phẩm `SP Import` được thêm.
 - **Screenshot:** `docs/bugs/BUG-15-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/58
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-15-github.png`
 
 ## BUG-16 — File không phải .csv vẫn được import
 
@@ -285,7 +285,7 @@ TC-16 (tên trống bị từ chối và có báo lỗi) không lập bug. Hệ 
 - **Actual:** Báo `Import hoàn tất: 1/1 sản phẩm được thêm`. Bảng có `SP Import`, giá 100000.
 - **Screenshot:** `docs/bugs/BUG-16-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/59
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-16-github.png`
 
 ## BUG-17 — Header sai vẫn được import
 
@@ -302,7 +302,7 @@ TC-16 (tên trống bị từ chối và có báo lỗi) không lập bug. Hệ 
 - **Actual:** Bảng xem trước nhận header `ten,gia,mo_ta,image,danh_muc` và bật nút Import. Khi import, sản phẩm `SP Import` được thêm và báo thành công.
 - **Screenshot:** `docs/bugs/BUG-17-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/60
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-17-github.png`
 
 ## BUG-18 — Giá không dương vẫn được import
 
@@ -319,7 +319,7 @@ TC-16 (tên trống bị từ chối và có báo lỗi) không lập bug. Hệ 
 - **Actual:** Giá `-1` được thêm. Báo `Import hoàn tất: 1/1 sản phẩm được thêm`. Bảng hiện `SP Import` giá `-1 ₫`. Giá `0`, `abc` và `100@` cũng được thêm và báo thành công.
 - **Screenshot:** `docs/bugs/BUG-18-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/61
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-18-github.png`
 
 ## BUG-19 — Tên dài hơn 255 ký tự vẫn được import
 
@@ -336,7 +336,7 @@ TC-16 (tên trống bị từ chối và có báo lỗi) không lập bug. Hệ 
 - **Actual:** Báo `Import hoàn tất: 1/1 sản phẩm được thêm`. Bảng có sản phẩm tên 256 ký tự `a`.
 - **Screenshot:** `docs/bugs/BUG-19-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/62
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-19-github.png`
 
 ## BUG-20 — Dòng lỗi không rollback cả file
 
@@ -353,7 +353,7 @@ TC-16 (tên trống bị từ chối và có báo lỗi) không lập bug. Hệ 
 - **Actual:** `SP Import` giá 100000 vẫn nằm trong bảng. Báo `Import hoàn tất: 1/2 sản phẩm được thêm` và `Hàng 3: Thiếu tên sản phẩm`.
 - **Screenshot:** `docs/bugs/BUG-20-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/63
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-20-github.png`
 
 ## FR-05 mobile
 
@@ -381,7 +381,7 @@ Không lập bug mới cho:
 - **Actual:** Không có sản phẩm và không có thông báo. Chỉ còn dòng "Kết quả tìm kiếm cho: zzzz-khong-co".
 - **Screenshot:** `docs/bugs/BUG-21-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/64
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-21-github.png`
 
 ## BUG-22 — Từ khóa có & hoặc # bị cắt khi tìm trên app mobile
 
@@ -398,4 +398,4 @@ Không lập bug mới cho:
 - **Actual:** `a&b` gửi `search=a&b` và trả 4 sản phẩm có chữ a: iPhone 15 Pro Max, Samsung Galaxy S24 Ultra, MacBook Pro M3, Tai nghe AirPods Pro 2. Dòng kết quả vẫn hiện `a&b`. `a#b` gửi `search=a` và trả cùng 4 sản phẩm đó.
 - **Screenshot:** `docs/bugs/BUG-22-actual.png`
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/65
-- **Issue page screenshot:** chưa chụp được vì repo private
+- **Issue page screenshot:** `docs/bugs/BUG-22-github.png`

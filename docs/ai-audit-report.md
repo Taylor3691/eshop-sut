@@ -707,3 +707,29 @@ I use AI tools for the following tasks,
 > Đã xóa bốn file `docs/fr-19/`. Mục FR-19 trong README giữ nguyên vì đó là đặc tả.
 >
 > Nhánh local đổi từ `hw02/toanhuynh-fr05/11/16/19` thành `hw02/toanhuynh-fr05/11/16/05(mobile)`. Nhánh trên GitHub vẫn tên cũ vì chưa push. Ảnh trong issue đang trỏ vào tên nhánh cũ.
+
+## Interaction 50
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 13:22 (UTC+7)
+- **Your prompt:**
+
+> vậy vẫn giữ tên nhánh cũ đi
+
+- **The AI output:**
+
+> Đã đổi nhánh local về `hw02/toanhuynh-fr05/11/16/19`. Nhánh này trùng với nhánh trên GitHub. Bốn file `docs/fr-19/` vẫn đã xóa.
+
+## Interaction 51
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 13:48 (UTC+7)
+- **Your prompt:**
+
+> sử dụng browser external để chụp issue page vì đã đăng nhập github rồi, và cập nhật vào bug-report.md
+
+- **The AI output:**
+
+> Đã chụp 22 trang issue #44–#65 bằng Chrome đã đăng nhập. Ảnh nằm ở `docs/bugs/BUG-01-github.png` đến `docs/bugs/BUG-22-github.png`. Mỗi ảnh thấy tiêu đề issue và ảnh lỗi bên trong.
+>
+> `docs/bug-report.md` đã trỏ mỗi bug tới ảnh trang issue của nó. Đã commit.
