@@ -4,7 +4,7 @@ Domain Testing và Boundary Value Analysis trên EShop.
 
 Đây là bản Markdown để review. Chưa xuất PDF. Số liệu lấy từ file đã viết trong `docs/fr-05/`, `docs/fr-11/`, `docs/fr-16/` và `docs/fr-05-mobile/`. Bảng test case đầy đủ và kết quả từng dòng nằm ở các file đó, không chép lại hết vào đây.
 
-MSSV và điểm tự chấm chưa có trong tài liệu đã viết. Điền trước khi nộp.
+Sinh viên: Huỳnh Thái Toàn. MSSV: 23120175. Điểm tự chấm nằm ở `docs/HW02-README.md`.
 
 ## 1. Chức năng đã chọn
 
@@ -299,8 +299,8 @@ Một số expected không phải bug: TC-04 bắt phân biệt hoa thường d�
 
 Đoạn 200–300 từ nằm ở `docs/ai-critique.md`.
 
-## 10. Phần đề còn chưa điền
+## 10. Thông tin nộp bài
 
-Điểm tự chấm trong bảng mục 15 của đề. Chưa điền. MSSV chưa có trong tài liệu đã viết.
+Điểm tự chấm đã điền trong `docs/HW02-README.md`. Sinh viên: Huỳnh Thái Toàn. MSSV: 23120175.
 
 Bug report, ảnh, và AI Audit Report đã có file riêng: `docs/bug-report.md`, `docs/bugs/`, `docs/ai-audit-report.md`. Git commit log ở `docs/git-commit-log.txt`.

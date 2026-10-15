@@ -801,3 +801,27 @@ I use AI tools for the following tasks,
 > Đã tạo `docs/HW02-README.md`. Không sửa `README.md` gốc vì đó là đặc tả EShop.
 >
 > Bảng tự chấm để trống cột Self-Assessed Grade. Test summary: 4 chức năng, 120 test case thiết kế, 113 đã chạy, 67 passed, 46 failed, 7 chưa chạy. Bug: 22. Demo video: chưa có.
+
+## Interaction 57
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 14:52 (UTC+7)
+- **Your prompt:**
+
+> thêm link ytb vào https://youtu.be/b0SKlX8yYJU
+
+- **The AI output:**
+
+> Đã ghi demo video vào `docs/HW02-README.md`: https://youtu.be/b0SKlX8yYJU
+
+## Interaction 58
+
+- **Name of the AI tool:** Cursor (Grok 4.7)
+- **Date and time:** 2026-10-15 14:53 (UTC+7)
+- **Your prompt:**
+
+> mssv 23120175 tên Huỳnh Thái Toàn
+
+- **The AI output:**
+
+> Đã ghi Huỳnh Thái Toàn, MSSV 23120175 vào `docs/HW02-README.md` và `docs/main-report.md`.

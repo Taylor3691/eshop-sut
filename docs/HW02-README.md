@@ -2,7 +2,7 @@
 
 File này là README nộp bài, tách khỏi `README.md` ở gốc repo. File gốc là đặc tả EShop, không phải báo cáo bài tập.
 
-MSSV và cột điểm tự chấm để trống. Chưa có link video demo.
+Sinh viên: Huỳnh Thái Toàn. MSSV: 23120175.
 
 ## Self-assessment
 
@@ -44,4 +44,4 @@ Not yet executed là các test BLOCKED:
 
 Số bug đã ghi trong `docs/bug-report.md`: 22 (BUG-01 đến BUG-22, GitHub issue #44–#65).
 
-Demo videos: chưa có. Skill nằm ở `.cursor/skills/fr-domain-testing/SKILL.md`. Đề yêu cầu link YouTube cho skill. Chưa ghi link nào.
+Demo video của skill `.cursor/skills/fr-domain-testing/SKILL.md`: https://youtu.be/b0SKlX8yYJU
