@@ -1,0 +1,48 @@
+﻿a6b60b26c4ee439ebf3bd84002d12fae9a46b555
+2026-10-16T16:56:22+07:00
+test: update domain testing reports
+
+00bf20714e667512e6aebf1ed0216c77b4559c7f
+2026-10-13T20:52:01+07:00
+test(FR-03): execute mobile forgot password test cases
+
+a5b9dce10a5ebf6210607f3f858295dc558a8f76
+2026-10-13T17:13:26+07:00
+test(FR-03): add mobile forgot password domain testing, BVA, and gap analysis
+
+e1185abbcd08a6c8209062ff16ab64b68d910180
+2026-10-11T22:28:02+07:00
+test(FR-14): execute category management test cases
+
+a945e06c9c198a54b1dfaa3f07e637dc43fb4223
+2026-10-11T16:07:05+07:00
+test(FR-09): execute discount coupon test cases
+
+81175949ede4be1a5adf9998d9c84348faff52e5
+2026-10-11T15:53:35+07:00
+test(FR-03): execute forgot password test cases
+
+16789ffa02340c6169469c6acdfd0b9b9b3ca4e5
+2026-10-11T11:36:32+07:00
+test(FR-14): add domain testing, BVA, and AI gap analysis
+
+a771b5be950b0b8639cfc08309639be69caa281b
+2026-10-11T11:22:13+07:00
+test(FR-09): add domain testing, BVA, and AI gap analysis
+
+db20cf539b743ecde3cc7fea1dea87571c302af6
+2026-10-11T10:59:19+07:00
+test(FR-03): add domain testing, BVA, and AI gap analysis
+
+13e4a5c9d79992b38d73db99f3388a39f5a5fec2
+2026-10-06T12:44:26+07:00
+docs: add agent specs and skills
+
+85af3ba875c88283615e22cb108f13e2fccaf0e9
+2026-05-15T08:30:35+07:00
+first upload
+
+2f9bf2bab45855abf211377a5d5eba10031649e3
+2026-05-15T08:27:44+07:00
+Initial commit
+
