@@ -67,27 +67,36 @@
 - **Vị trí**: `backend/server.js:249-267`
 - **Mô tả**: Endpoint `POST /api/categories` và `PUT /api/categories/:id` không kiểm tra tính hợp lệ của trường `name` (không kiểm tra `!name || name.trim() === ''`). Cơ sở dữ liệu SQLite bảng `categories` cũng không có ràng buộc `NOT NULL`, dẫn đến việc hệ thống chấp nhận chuỗi rỗng `""`, chuỗi khoảng trắng `"   "`, `null` hoặc payload rỗng `{}` và trả về HTTP 200 OK, vi phạm yêu cầu nghiệp vụ *"Tên danh mục là bắt buộc, không được để trống"*.
 
+- **GitHub Issue:** [#23](https://github.com/Taylor3691/eshop-sut/issues/23).
+- **Manual review:** Whitespace-only names (TC-CAT-006, TC-BVA-CAT-004) require confirmation whether trimming is required.
+
 ### DEF-FR14-02: Lỗ hổng kiểm soát truy cập (Broken Access Control) trên các endpoint Category CRUD
 - **Mức độ Nghiêm trọng**: Nghiêm trọng (Security Defect / Access Control)
 - **Vị trí**: `backend/server.js:249-278`
 - **Mô tả**: Các API `POST /api/categories`, `PUT /api/categories/:id`, và `DELETE /api/categories/:id` chỉ áp dụng middleware `authenticateToken` để kiểm tra JWT hợp lệ, mà hoàn toàn không kiểm tra phân quyền `req.user.role === 'admin'`. Người dùng thông thường sở hữu token hợp lệ (`role = 'user'`) có thể tự do tạo mới, chỉnh sửa, và xóa danh mục hệ thống, vi phạm yêu cầu FR-12 và FR-14.
 
+- **GitHub Issue:** [#24](https://github.com/Taylor3691/eshop-sut/issues/24).
 ### DEF-FR14-03: API Cập nhật và Xóa danh mục trả về HTTP 200 khi ID không tồn tại hoặc ID âm/bằng 0
 - **Mức độ Nghiêm trọng**: Trung bình (REST API Standard Defect)
 - **Vị trí**: `backend/server.js:257-278`
 - **Mô tả**: Khi thực hiện `PUT /api/categories/:id` hoặc `DELETE /api/categories/:id` với `id` không tồn tại trong hệ thống (như `id = 9999`, `id = 0`, `id = -1`), server không kiểm tra số dòng bị ảnh hưởng (`this.changes === 0`) mà vẫn trả về phản hồi thành công `HTTP 200 OK` với thông báo `"Category updated"` hoặc `"Category deleted"` thay vì trả về `HTTP 404 Not Found` hoặc `HTTP 400 Bad Request`.
 
+- **Manual review:** Requirements do not specify the response for nonexistent category IDs; review TC-CAT-017, TC-CAT-021, and related BVA cases.
 ### DEF-FR14-04: Biểu mẫu Thêm danh mục trên Web Admin thiếu xác thực đầu vào phía Client (Client-side Validation)
 - **Mức độ Nghiêm trọng**: Trung bình (UI/Form Validation Defect)
 - **Vị trí**: `frontend-admin/src/App.jsx:298-308`
 - **Mô tả**: Ô input "Tên danh mục mới" không có thuộc tính HTML5 `required`, hàm `handleCategorySubmit` không kiểm tra `if (!categoryName.trim()) return;`. Khi người dùng click nút "Thêm mới" với ô nhập trống, form vẫn gửi request rỗng lên server và bổ sung dòng trống vào bảng danh mục trên giao diện.
 
+- **GitHub Issue:** [#23](https://github.com/Taylor3691/eshop-sut/issues/23).
 ### DEF-FR14-05: Vi phạm ràng buộc toàn vẹn dữ liệu quan hệ (Referential Integrity) khi xóa danh mục có sản phẩm liên kết
 - **Mức độ Nghiêm trọng**: Cao (Data Integrity Defect)
 - **Vị trí**: `backend/server.js:269-278`, `backend/database.js:23-26`
 - **Mô tả**: Bảng `products` liên kết với bảng `categories` qua `category_id`, nhưng cơ sở dữ liệu không kích hoạt ràng buộc khóa ngoại (`PRAGMA foreign_keys = ON;`), và API `DELETE /api/categories/:id` không kiểm tra xem danh mục có đang chứa sản phẩm hay không. Khi Admin xóa danh mục, danh mục bị xóa thành công khiến các sản phẩm liên kết trở thành bản ghi mồ côi (`orphaned foreign key`), làm sai lệch hiển thị danh mục và lọc sản phẩm.
 
+- **Manual review:** No requirement defines deletion behavior for a category referenced by products; review TC-CAT-020 and TC-BVA-CAT-016.
 ### DEF-FR14-06: Không kiểm tra tính duy nhất (Uniqueness), cho phép tạo nhiều danh mục trùng tên
 - **Mức độ Nghiêm trọng**: Trung bình (Business Logic Defect)
 - **Vị trí**: `backend/server.js:249-254`, `backend/database.js:23-26`
 - **Mô tả**: Cột `name` trong bảng `categories` không có ràng buộc `UNIQUE` và API `POST /api/categories` không kiểm tra sự tồn tại của tên danh mục trước khi `INSERT`. Hệ thống cho phép tạo nhiều danh mục trùng tên hoàn toàn (ví dụ trùng "Điện thoại"), gây nhiễu và trùng lặp dữ liệu danh mục phân loại sản phẩm.
+
+- **Manual review:** Requirements do not state that category names must be unique; review TC-CAT-009.

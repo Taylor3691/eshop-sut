@@ -60,27 +60,38 @@
 - **Vị trí**: `backend/server.js:72`, `frontend-web/src/pages/ForgotPassword.jsx:69`
 - **Mô tả**: Hàm `Math.floor(1000 + Math.random() * 9000)` chỉ sinh mã 4 chữ số. Nhãn UI hiển thị `Mã OTP (4 số)`.
 
+- **GitHub Issue:** [#7](https://github.com/Taylor3691/eshop-sut/issues/7).
 ### DEF-FR03-02: Trường email Bước 1 không có validate HTML5
 - **Mức độ Nghiêm trọng**: Trung bình (UI/Form Validation)
 - **Vị trí**: `frontend-web/src/pages/ForgotPassword.jsx:50`
 - **Mô tả**: Ô nhập email sử dụng `type="text"` thay vì `type="email"`, cho phép gửi email sai cú pháp lên server.
 
+- **Manual review:** The requirement does not explicitly require HTML5 input validation/type=email; review TC-FORGOT-003 before treating it as a defect.
 ### DEF-FR03-03: Thiếu nút "Quay lại đăng nhập" tại Bước 1
 - **Mức độ Nghiêm trọng**: Trung bình (Navigation Defect)
 - **Vị trí**: `frontend-web/src/pages/ForgotPassword.jsx:45-60`
 - **Mô tả**: Biểu mẫu Bước 1 hoàn toàn không có nút điều hướng quay về `/login`.
 
+- **GitHub Issue:** [#14](https://github.com/Taylor3691/eshop-sut/issues/14).
 ### DEF-FR03-04: Thiếu Chỉ báo bước (Step Indicator)
 - **Mức độ Nghiêm trọng**: Thấp (GUI Specification Defect)
 - **Vị trí**: `frontend-web/src/pages/ForgotPassword.jsx`
 - **Mô tả**: Cả Bước 1 và Bước 2 không hiển thị chỉ báo bước ("Bước 1 / 2", "Bước 2 / 2").
 
+- **GitHub Issue:** [#13](https://github.com/Taylor3691/eshop-sut/issues/13).
 ### DEF-FR03-05: Biểu thức chính quy (Regex) mật khẩu phía Client bị lỗi logic đảo ngược
 - **Mức độ Nghiêm trọng**: Khẩn cấp (Critical / Blocker)
 - **Vị trí**: `frontend-web/src/pages/ForgotPassword.jsx:26`
 - **Mô tả**: Regex `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\s)[A-Za-z\d\s]{8,}$/` bắt buộc phải có khoảng trắng `\s` và từ chối toàn bộ ký tự đặc biệt (`@$!%*?&`). Mật khẩu hợp lệ theo đặc tả đều bị chặn.
 
+- **GitHub Issue:** [#15](https://github.com/Taylor3691/eshop-sut/issues/15).
 ### DEF-FR03-07: Thiếu trường "Xác nhận mật khẩu mới" tại Bước 2
 - **Mức độ Nghiêm trọng**: Cao (Specification Defect)
 - **Vị trí**: `frontend-web/src/pages/ForgotPassword.jsx:63-97`, `backend/server.js:88-98`
 - **Mô tả**: Giao diện và API đều không có trường `confirmPassword`, bỏ qua việc xác nhận khớp mật khẩu.
+
+- **GitHub Issue:** [#16](https://github.com/Taylor3691/eshop-sut/issues/16).
+
+## Additional AI-gap cases requiring manual review
+
+- TC-GAP-API-PW: backend accepted a weak password in a reported API probe, but no matching screenshot evidence was found.

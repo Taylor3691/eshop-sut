@@ -62,18 +62,23 @@
 - **Vị trí**: `backend/server.js:399-401`, `backend/server.js:419-421`
 - **Mô tả**: Biểu thức `discount_amount = Math.floor(total_amount * (1 - coupon.discount_value))` khiến mã giảm giá 10% tính ra số âm `-4,500,000 ₫`, dẫn đến tổng tiền thanh toán bị đội lên gấp 10 lần (`5,000,000 ₫`) thay vì giảm xuống `450,000 ₫`.
 
+- **GitHub Issue:** [#20](https://github.com/Taylor3691/eshop-sut/issues/20).
 ### DEF-FR09-02: Lỗi Biên Lệch Một Đơn vị khi Kiểm tra Ngưỡng Đơn hàng Tối thiểu (Off-by-One Boundary Condition C3)
 - **Mức độ Nghiêm trọng**: Cao (Major - Boundary Value Defect)
 - **Vị trí**: `backend/server.js:379`
 - **Mô tả**: Sử dụng toán tử lớn hơn nghiêm ngặt `if (total_amount > coupon.min_order_amount)` thay vì lớn hơn hoặc bằng (`>=`). Khi đơn hàng có giá trị chính xác bằng ngưỡng tối thiểu (ví dụ `300,000 ₫` cho SAVE10, `500,000 ₫` cho BIGBUY), hệ thống từ chối áp dụng mã và báo lỗi thiếu điều kiện.
 
+- **GitHub Issue:** [#21](https://github.com/Taylor3691/eshop-sut/issues/21).
 ### DEF-FR09-03: Thiếu Middleware Xác thực JWT ở API Áp dụng Mã Giảm giá (Condition C4 Violation)
 - **Mức độ Nghiêm trọng**: Cao (High - Security & Access Control)
 - **Vị trí**: `backend/server.js:363`, `frontend-web/src/pages/Checkout.jsx`
 - **Mô tả**: API `/api/apply-coupon` không yêu cầu token đăng nhập. Khách vãng lai chưa đăng nhập vẫn truy cập được `/checkout` và áp dụng mã giảm giá thành công, vi phạm trực tiếp Điều kiện C4 trong đặc tả.
 
+- **GitHub Issue:** [#22](https://github.com/Taylor3691/eshop-sut/issues/22).
 ### DEF-FR09-05: Tách rời Xử lý Giảm giá giữa Checkout và Ghi nhận Lượt dùng Coupon
 - **Mức độ Nghiêm trọng**: Cao (High - Transaction Integrity & Security)
 - **Vị trí**: `backend/server.js:297-309`, `frontend-web/src/pages/Checkout.jsx:53-59`
 - **Mô tả**: API `/api/checkout` chấp nhận trực tiếp giá trị `total_amount` gửi từ client mà không tự tính toán lại dựa trên giỏ hàng và mã giảm giá, cho phép người mua có thể can thiệp số tiền thanh toán bất kỳ.
 
+- **GitHub Issue:** [#34](https://github.com/Taylor3691/eshop-sut/issues/34).
+- **Manual review:** AI-gap TC-GAP-COUPON-007, TC-GAP-COUPON-008, and TC-GAP-COUPON-014 need review; matching screenshot evidence was not found for these distinct user-id and usage-recording scenarios.

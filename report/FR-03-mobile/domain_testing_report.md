@@ -76,38 +76,51 @@
 - **Phạm vi**: TC-MOB-FORGOT-002, TC-MOB-FORGOT-012
 - **Mô tả**: UI không hiển thị Bước 1 / 2 hoặc Bước 2 / 2 theo yêu cầu FR-03.
 
+- **GitHub Issue:** [#25](https://github.com/Taylor3691/eshop-sut/issues/25).
 ### D-FR03-MOB-002: Thiếu nút quay lại đăng nhập tại Bước 1
 
 - **Mức độ**: Major
 - **Phạm vi**: TC-MOB-FORGOT-003
 - **Mô tả**: Người dùng không có điều khiển hủy/quay lại Login ở Bước 1.
 
+- **GitHub Issue:** [#26](https://github.com/Taylor3691/eshop-sut/issues/26).
 ### D-FR03-MOB-003: OTP 4 số và không hiển thị trong demo
 
 - **Mức độ**: Critical
 - **Phạm vi**: TC-MOB-FORGOT-005, TC-MOB-FORGOT-014
 - **Mô tả**: Backend/UI dùng 4 số và UI không hiển thị OTP, trái yêu cầu OTP 6 số và hiển thị trực tiếp trong môi trường demo.
 
+- **GitHub Issue:** [#7](https://github.com/Taylor3691/eshop-sut/issues/7), [#27](https://github.com/Taylor3691/eshop-sut/issues/27).
 ### D-FR03-MOB-004: Thiếu trường xác nhận mật khẩu
 
 - **Mức độ**: Major
 - **Phạm vi**: TC-MOB-FORGOT-013
 - **Mô tả**: Bước 2 chỉ có trường mật khẩu mới, không có trường xác nhận và không kiểm tra hai giá trị khớp nhau.
 
+- **GitHub Issue:** [#28](https://github.com/Taylor3691/eshop-sut/issues/28).
 ### D-FR03-MOB-005: Email phân biệt hoa thường
 
 - **Mức độ**: Major
 - **Phạm vi**: TC-MOB-FORGOT-010
 - **Mô tả**: `TEST@ESHOP.COM` không được đối chiếu với tài khoản `test@eshop.com`.
 
+- **Manual review:** Requirements do not specify case-insensitive email matching; review TC-MOB-FORGOT-010.
 ### D-FR03-MOB-006: Chấp nhận ký tự đặc biệt ngoài danh sách FR-01
 
 - **Mức độ**: Major
 - **Phạm vi**: TC-MOB-FORGOT-028
 - **Mô tả**: Mật khẩu chứa `#` được reset dù FR-01 chỉ cho phép `@`, `$`, `!`, `%`, `*`, `?`, `&`.
 
+- **GitHub Issue:** [#33](https://github.com/Taylor3691/eshop-sut/issues/33).
+
 ---
 
 ## 5. Ghi chú Phạm vi
 
 Category CRUD không được thực thi trong report này vì thuộc FR-14, không thuộc FR-03 Mobile.
+
+
+## Additional AI-gap cases requiring manual review
+
+- TC-GAP-MOB-005: weak password accepted through the backend API; the AI-gap report records a live probe but no matching screenshot was found.
+- TC-GAP-MOB-009 and TC-GAP-MOB-010: loading/double-submit and network-error messaging; no matching screenshots were found and the expected UI details need specification review.
