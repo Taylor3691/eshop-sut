@@ -9,7 +9,7 @@ Expected result bám README, không bám code.
 - Chỉ admin import được. API admin cần JWT hợp lệ và `role = admin`.
 - File phải có đuôi `.csv`. Dòng đầu phải là `name,price,description,imageUrl,category_id`.
 - Trường có dấu phẩy phải nằm trong nháy kép và được đọc thành một trường.
-- `name` không rỗng và không dài hơn 255 ký tự. `price` là số nguyên dương.
+- `name` không rỗng. `price` là số dương, có thể có phần thập phân. Giới hạn 255 của FR-15 chưa xác nhận áp dụng cho FR-16.
 - Mọi dòng hợp lệ thì được thêm. Một dòng lỗi thì rollback cả file: không thêm dòng nào của file đó. Năm sản phẩm seed giữ nguyên.
 - Báo cáo ghi số dòng thành công, số dòng lỗi và lý do.
 - Query không thuộc API. Gửi thêm query không được đổi kết quả so với cùng body khi không gửi, và không được trả lỗi.
@@ -74,7 +74,6 @@ Nội dung file dưới đây là nội dung logic. Test UI chọn đúng file �
 | TC-18 | PR-IEC-02, PR-B-02 | Seed | Một dòng chuẩn, `price` là `0` | UI | Không thêm sản phẩm. Báo lỗi giá. Seed còn nguyên. |
 | TC-19 | PR-IEC-03 | Seed | Một dòng chuẩn, `price` là `abc` | UI | Không thêm sản phẩm. Báo lỗi giá. Seed còn nguyên. |
 | TC-20 | PR-IEC-04 | Seed | Một dòng chuẩn, `price` là `100@` | UI | Không thêm sản phẩm. Báo lỗi giá. Seed còn nguyên. |
-| TC-21 | NM-B-06 | Seed | Một dòng chuẩn, `name` là `a` lặp 256 lần | UI | Từ chối vì tên dài hơn 255. Không thêm sản phẩm. Seed còn nguyên. |
 | TC-22 | N-IEC-01, N-B-01 | Seed | File chỉ có dòng header | UI | Không thêm sản phẩm. Seed còn nguyên. |
 | TC-23 | ATOM-IEC-01 | Seed | Dòng 1 chuẩn `SP Import`. Dòng 2 tên rỗng, giá `100000` | UI | Rollback cả file. Không có `SP Import`. Seed còn nguyên. Báo lỗi tên ở dòng 2. |
 | TC-24 | Q-IEC-01 | Seed | Body một sản phẩm chuẩn. Token admin. Query `foo=1` | API | HTTP không phải lỗi. Thêm đúng `SP Import`, giống lúc không gửi query. Seed còn nguyên. |
@@ -103,7 +102,28 @@ Nội dung file dưới đây là nội dung logic. Test UI chọn đúng file �
 | PR-IEC-02, PR-B-02 | TC-18 |
 | PR-IEC-03 | TC-19 |
 | PR-IEC-04 | TC-20 |
-| NM-B-06 | TC-21 |
 | N-IEC-01, N-B-01 | TC-22 |
 | ATOM-IEC-01 | TC-23 |
 | Q-IEC-01 | TC-24 |
+
+## Bổ sung sau review ngày 18/10/2026
+
+| TC ID | Miền/biên | Precondition | Dữ liệu | Steps | Expected |
+| --- | --- | --- | --- | --- | --- |
+| TC-25 | CSV-VEC-02 | Seed, admin | Mô tả CSV `"Mo ta ""dep"""` | UI chọn file và Import | Một sản phẩm, mô tả `Mo ta "dep"` |
+| TC-26 | CSV-VEC-03 | Seed, admin | Mô tả trong nháy kép gồm Dong 1, LF, Dong 2 | UI | Một sản phẩm, giữ newline trong mô tả |
+| TC-27 | CSV-VEC-04 | Seed, admin | Header và dòng chuẩn dùng CRLF | UI | Một sản phẩm, dữ liệu đúng, category 1 |
+| TC-28 | NM-SPACE | Seed, admin | Tên ba dấu cách | UI | Giả định cần xác nhận: từ chối tên không có nội dung |
+| TC-29 | PR-VEC-02 | Seed, admin | Giá 1.5 | UI | Import được, giá 1.5 |
+| TC-30 | PR-SAMPLE-POS | Seed, admin | Giá 0.01 | UI | Import được, giá 0.01 |
+| TC-31 | PR-SAMPLE-NEG | Seed, admin | Giá -0.01 | UI | Từ chối, không thêm dòng, có lỗi giá |
+
+Phủ điểm on/off/in/out (bước 3, phần A):
+
+| Biên | On | Off | In | Out |
+| --- | --- | --- | --- | --- |
+| A.1 `len(name) ≥ 1` | TC-04 | TC-16 | TC-01 | TC-16 |
+| A.2 `price > 0` | TC-18 | TC-30 | TC-01 | TC-17 |
+| A.3 `N ≥ 1` | TC-01 | TC-22 | TC-02 | TC-22 |
+
+30 test hiện hành: 24 cũ trừ TC-21 chưa chốt oracle, cộng 7 test mới. TC-06/07 là kiểm thử chuỗi dài bổ sung, không phải biên trên FR-16. BOM và giá có dấu phân cách địa phương chưa có oracle thống nhất nên chưa chấm PASS/FAIL; không tự tuyên bố chúng phải hợp lệ.
