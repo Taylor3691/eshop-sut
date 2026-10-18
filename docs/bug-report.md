@@ -1,3 +1,7 @@
+# Trạng thái sau review 18/10/2026
+
+Có 23 mã. **19 bug theo đặc tả** và **4 phát hiện cần làm rõ oracle**: BUG-07 (trim khoảng trắng), BUG-12 (ngày NULL), BUG-13 (tiền NULL), BUG-19 (MaxLength import). BUG-23 là bug mới của bộ web, chưa có issue GitHub. Phát hiện thứ tự Tab ở FR-11 (TC-28) chưa lập bug vì FR-21 chưa rõ cách đọc bố cục hai cột. Kết quả mới nằm ở `05-execution-results.md` của từng chức năng.
+
 # Bug report — FR-05
 
 Các bug dưới đây đã chạy trên Web `http://localhost:5173` và API `http://localhost:3000` ngày 2026-10-15. Ảnh lỗi nằm trong `docs/bugs/`.
@@ -87,7 +91,7 @@ Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chè
 ## BUG-05 — Không có empty state khi tìm không ra kết quả
 
 - **Feature:** FR-05
-- **Test case:** TC-03, TC-05, TC-07, TC-11, TC-12, TC-13, TC-31
+- **Test case:** TC-03, TC-05, TC-07, TC-11, TC-12, TC-13, TC-31, TC-49, TC-52 (bổ sung 18/10)
 - **Severity:** Major
 - **Environment:** Web `http://localhost:5173`, Chrome, seed mặc định
 - **Spec:** README FR-05 và FR-24 — không có kết quả thì phải có thông báo empty state.
@@ -123,6 +127,8 @@ Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chè
 ![BUG-06-github](bugs/BUG-06-github.png)
 
 ## BUG-07 — Từ khóa chỉ gồm dấu cách vẫn trả cả danh sách
+
+**Trạng thái: CẦN XÁC NHẬN, không tính bug theo đặc tả.** Spec chưa chốt có trim khoảng trắng; trả cả danh sách sau trim chưa đủ kết luận là bug. Nội dung Expected/Actual bên dưới được giữ làm bằng chứng lịch sử.
 
 - **Feature:** FR-05
 - **Test case:** TC-27
@@ -230,6 +236,8 @@ TC-23 (`status=returned` hiện `RETURNED`) không lập bug. FR-11 không chố
 
 ## BUG-12 — Ngày đặt null hiện thành 1/1/1970
 
+**Trạng thái: CẦN XÁC NHẬN, không tính bug theo đặc tả.** Spec yêu cầu hiện ngày đặt nhưng chưa chốt cách hiển thị dữ liệu NULL được chèn trực tiếp. Nội dung Expected/Actual bên dưới được giữ làm bằng chứng lịch sử.
+
 - **Feature:** FR-11
 - **Test case:** TC-21
 - **Severity:** Major
@@ -249,6 +257,8 @@ TC-23 (`status=returned` hiện `RETURNED`) không lập bug. FR-11 không chố
 ![BUG-12-github](bugs/BUG-12-github.png)
 
 ## BUG-13 — Tổng tiền null hiện thành 0 ₫
+
+**Trạng thái: CẦN XÁC NHẬN, không tính bug theo đặc tả.** Spec chưa chốt cách hiển thị total_amount NULL; tiêu chí không chuyển NULL thành 0 là đề xuất. Nội dung Expected/Actual bên dưới được giữ làm bằng chứng lịch sử.
 
 - **Feature:** FR-11
 - **Test case:** TC-22
@@ -377,6 +387,8 @@ TC-16 (tên trống bị từ chối và có báo lỗi) không lập bug. Hệ 
 
 ## BUG-19 — Tên dài hơn 255 ký tự vẫn được import
 
+**Trạng thái: CẦN XÁC NHẬN, không tính bug theo đặc tả.** Giới hạn 255 thuộc FR-15; chưa xác nhận áp dụng cho đường import FR-16. TC-21 đã rút khỏi bộ hiện hành. Nội dung Expected/Actual bên dưới được giữ làm bằng chứng lịch sử.
+
 - **Feature:** FR-16
 - **Test case:** TC-21
 - **Severity:** Major
@@ -429,7 +441,7 @@ Không lập bug mới cho:
 ## BUG-21 — App mobile không có empty state khi tìm không ra kết quả
 
 - **Feature:** FR-05
-- **Test case:** TC-03, TC-05, TC-07, TC-09, TC-11, TC-12, TC-13, TC-22, TC-23
+- **Test case:** TC-03, TC-05, TC-07, TC-09, TC-11, TC-12, TC-13, TC-22, TC-23, TC-24 (bổ sung 18/10)
 - **Severity:** Major
 - **Environment:** App mobile qua Expo web `http://127.0.0.1:8081`, Chrome, API `http://127.0.0.1:3000`, seed mặc định
 - **Spec:** README FR-05 — Khi không có kết quả tìm kiếm phải hiển thị thông báo empty state phù hợp.
@@ -465,3 +477,36 @@ Không lập bug mới cho:
 - **Issue page screenshot:** `docs/bugs/BUG-22-github.png`
 
 ![BUG-22-github](bugs/BUG-22-github.png)
+
+## BUG-23 — Từ khóa có & hoặc # bị cắt khi tìm trên Web
+
+- **Feature:** FR-05
+- **Test case:** TC-47, TC-48 (bộ web)
+- **Severity:** Major
+- **Environment:** Web `http://localhost:5173`, Chrome, API `http://localhost:3000`, seed 5 sản phẩm
+- **Spec:** README FR-05 — Thanh tìm kiếm tìm theo tên sản phẩm.
+- **Steps:**
+  1. Mở trang chủ.
+  2. Tìm `a&b`.
+  3. Tìm `a#b`.
+- **Expected:** Tìm đúng chuỗi đã gõ. Không tên seed nào chứa `a&b` hay `a#b`, nên không có kết quả và có empty state.
+- **Actual:** `a&b` gửi `GET /api/products?search=a&b`; server chỉ nhận `search=a` và trả 4 sản phẩm có chữ `a` (iPhone 15 Pro Max, Samsung Galaxy S24 Ultra, MacBook Pro M3, Tai nghe AirPods Pro 2). `a#b` trả cùng 4 sản phẩm.
+- **Screenshot:** `docs/bugs/BUG-23-actual.png` (khung vàng là chú thích do script chèn, ghi URL request thực tế)
+- **GitHub issue:** chưa tạo. Ảnh trên issue cần đường dẫn tới file đã push lên nhánh remote; theo rule bug report, phải hỏi người dùng trước khi push.
+- **Issue page screenshot:** chưa có, chụp sau khi tạo issue.
+
+Bug này tách khỏi BUG-22 vì nằm ở component khác (`frontend-web/src/pages/Home.jsx` so với `frontend-mobile/App.js`), phải sửa ở hai nơi. Bản ghi ngày 18/10 trước đây gộp TC-47/48 vào BUG-22; đã đính chính.
+
+## Bằng chứng bổ sung ngày 18/10/2026
+
+Ảnh `BUG-xx-actual.png` cũ được giữ vì đã gắn trên issue. Ảnh dưới đây chụp lại để thấy đúng chỗ lỗi; khung vàng và viền đỏ là chú thích do script kiểm thử chèn (`scripts/evidence-fr05.mjs`, `scripts/fr16-execute.mjs`), không đổi dữ liệu trang.
+
+- BUG-01: [BUG-01-evidence](bugs/BUG-01-evidence.png) — giá `30.000.000 VND`. Ảnh cũ của BUG-01/02/03 là cùng một file, không cho thấy `alt` hay `h1`.
+- BUG-02: [BUG-02-evidence](bugs/BUG-02-evidence.png) — DOM của ảnh sản phẩm có `alt=""`.
+- BUG-03: [BUG-03-evidence](bugs/BUG-03-evidence.png) — hai thẻ `h1` được viền đỏ: "Danh sách sản phẩm" và "Hiển thị 1 sản phẩm".
+- BUG-05: TC-52, CSDL không có sản phẩm, trang chủ cũng không có trang trống. Ảnh: [fr05-TC-52](bugs/fr05-TC-52.png).
+- BUG-14: TC-03 và TC-25, trang chi tiết sản phẩm sau import thấy mô tả bị cắt (`"Mo ta`) và còn nháy thừa (`"Mo ta ""dep"""`). TC-26, bảng admin có hai dòng mới (`SP Import` và `Dong 2"`) từ một dòng CSV. Ảnh: [TC-03](bugs/review-fr16-TC-03.png), [TC-25](bugs/review-fr16-TC-25.png), [TC-26](bugs/review-fr16-TC-26.png).
+- BUG-18: TC-31, bảng admin có dòng `SP Import` giá `-0.01 ₫`. Ảnh: [TC-31](bugs/review-fr16-TC-31.png).
+- BUG-21: TC-24, CSDL không có sản phẩm, màn `home` mobile không có trang trống. Ảnh: [fr05-mobile-TC-24](bugs/fr05-mobile-TC-24.png).
+
+Bằng chứng bổ sung mới có ở local, chưa đính kèm lên các issue #44–#65.
