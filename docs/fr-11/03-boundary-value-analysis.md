@@ -1,6 +1,41 @@
-# FR-11 — Boundary Value Analysis, 3-value
+# FR-11 — Chọn điểm on/off/in/out và Boundary Value Analysis, 3-value
 
 Chức năng: **FR-11 Xem lịch sử đơn hàng (User)**.
+
+## A. Domain testing — chọn điểm on/off/in/out
+
+On point nằm đúng trên biên. Off point là giá trị gần biên nhất ở phía bên kia (biên đóng `≥` thì off point nằm ngoài miền). In point và out point là giá trị điển hình trong và ngoài miền, không sát biên. Chỉ áp dụng cho biến có thứ tự. Phiên, JWT, chủ đơn (bằng/khác người gọi) và năm trạng thái là miền liệt kê, không có on/off.
+
+### A.1 Số đơn của người gọi — biên `N ≥ 1`
+
+| Điểm | N | Thuộc miền | Test case |
+| --- | --- | --- | --- |
+| On | 1 | Có bảng đơn (CNT-VEC-02) | TC-01 |
+| Off | 0 | Empty state (CNT-VEC-01) | TC-02 |
+| In | 2 | Có bảng đơn | TC-03 |
+| Out | 0 | Empty state | TC-02 |
+
+Số đơn không âm nên out point trùng off point. Không có Max nên in point lấy 2, giá trị nhỏ nhất bên trong miền khác on point.
+
+### A.2 Tổng tiền — biên định dạng `amount ≥ 1000` (bắt đầu có dấu phân cách hàng nghìn)
+
+| Điểm | amount | Dạng phải hiện | Test case |
+| --- | --- | --- | --- |
+| On | 1000 | `1.000 ₫` | TC-16 |
+| Off | 999 | `999 ₫` | TC-15 |
+| In | 30000000 | `30.000.000 ₫` | TC-01 |
+| Out | 1 | `1 ₫` | TC-14 |
+
+### A.3 Tổng tiền — biên `amount ≥ 1000000` (dấu phân cách thứ hai)
+
+| Điểm | amount | Dạng phải hiện | Test case |
+| --- | --- | --- | --- |
+| On | 1000000 | `1.000.000 ₫` | TC-19 |
+| Off | 999999 | `999.999 ₫` | TC-18 |
+| In | 30000000 | `30.000.000 ₫` | TC-01 |
+| Out | 1000 | `1.000 ₫` | TC-16 |
+
+## B. Boundary value analysis
 
 Kỹ thuật: với biên đóng `[Min, Max]`, lấy `Min-1`, `Min`, `Min+1`, `Max-1`, `Max`, `Max+1`. Giá trị `Min` và `Max` nằm trên biên. `Min+1` và `Max-1` nằm trong miền. `Min-1` và `Max+1` nằm sát ngoài miền.
 
@@ -22,27 +57,11 @@ FR-11 không khai báo số đơn tối đa. Không bịa Max. Không có bộ `
 | CNT-B-02 | Min | 1 | Trên biên dưới. Đủ để hiện bảng một dòng |
 | CNT-B-03 | Min+1 | 2 | Trong miền. Đúng giá trị đại diện CNT-VEC-02 |
 
-## 2. Chủ đơn là một điểm
+## 2. Quan hệ sở hữu và mã đơn — kiểm tra bổ sung
 
-Miền "đơn của mình" là điểm `user_id = 2`, không phải một khoảng. `Min = Max = 2`, nên bộ biên trên trùng bộ biên dưới: `1`, `2`, `3`.
+ID là định danh, không phải đại lượng liên tục. Người gọi id 2 và chủ đơn id 1/2/3 kiểm tra hai lớp bằng/khác, không phải Min-1/Min/Min+1. Mã OWN-B-01..03 cũ chỉ giữ để truy vết TC-04, TC-01, TC-05.
 
-`1` là admin trong seed. `3` không có tài khoản seed; dòng đơn vẫn có thể mang `user_id = 3`. Cả `1` và `3` đều là OWN-VEC-02.
-
-| ID | Vị trí | user_id của đơn | Người gọi | Lớp bước 2 |
-| --- | --- | --- | --- | --- |
-| OWN-B-01 | Min-1 | 1 | 2 | OWN-VEC-02. Đơn không được xuất hiện |
-| OWN-B-02 | Min = Max | 2 | 2 | OWN-VEC-01. Đơn được xuất hiện |
-| OWN-B-03 | Min+1 | 3 | 2 | OWN-VEC-02. Đơn không được xuất hiện |
-
-## 3. Mã đơn
-
-Mã hợp lệ là số nguyên dương (ID-VEC-01). `Min = 1`. Không có Max trong FR-11.
-
-| ID | Vị trí | id | Cách hiện |
-| --- | --- | --- | --- |
-| ID-B-01 | Min-1 | 0 | Sát dưới Min. Không phải mã tự tăng thông thường |
-| ID-B-02 | Min | 1 | Trên biên dưới. Hiện kèm mã `1` |
-| ID-B-03 | Min+1 | 2 | Trong miền. Hiện kèm mã `2` |
+FR-11 không quy định biên mã đơn. ID-B-01..03 (0,1,2; TC-06, TC-01, TC-07) là kiểm tra hiển thị dữ liệu fixture, không khẳng định id 0 là mã đơn hợp lệ trong nghiệp vụ.
 
 ## 4. Tổng tiền
 
@@ -80,7 +99,7 @@ Chuỗi tiền dưới đây là dạng `vi-VN` kèm `₫`.
 
 ## 5. Ngày đặt
 
-FR-11 không có khoảng đóng cho ngày. Không lấy năm nhỏ nhất hay năm lớn nhất. Điểm sát ngoài miền "có ngày đặt" là `created_at = NULL` (DT-IEC-01).
+FR-11 không có khoảng đóng cho ngày. Không lấy năm nhỏ nhất hay năm lớn nhất. Trường hợp thiếu dữ liệu (không phải điểm liền kề theo thứ tự ngày) là `created_at = NULL` (DT-IEC-01).
 
 ## Việc cố ý chưa làm ở bước này
 
