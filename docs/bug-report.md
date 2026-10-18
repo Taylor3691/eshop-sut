@@ -8,7 +8,7 @@ Các bug dưới đây đã chạy trên Web `http://localhost:5173` và API `ht
 
 TC-04 (`iphone` vẫn trả `iPhone 15 Pro Max`) không lập bug. FR-05 không cấm tìm không phân biệt hoa thường với chữ ASCII.
 
-Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chèn vào issue #44–#66 bằng liên kết file trên nhánh `hw02/toanhuynh-fr05/11/16/19`. Ảnh trang issue chụp từ Chrome đã đăng nhập, lưu tại `docs/bugs/BUG-01-github.png` đến `docs/bugs/BUG-22-github.png`; ảnh trang issue #66 chưa chụp.
+Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chèn vào issue #44–#66 bằng liên kết file trên nhánh `hw02/toanhuynh-fr05/11/16/19`. Ảnh trang issue chụp từ Chrome đã đăng nhập, lưu tại `docs/bugs/BUG-01-github.png` đến `docs/bugs/BUG-23-github.png`.
 
 ## BUG-01 — Giá hiển thị VND thay vì ₫
 
@@ -493,7 +493,9 @@ Không lập bug mới cho:
 - **Actual:** `a&b` gửi `GET /api/products?search=a&b`; server chỉ nhận `search=a` và trả 4 sản phẩm có chữ `a` (iPhone 15 Pro Max, Samsung Galaxy S24 Ultra, MacBook Pro M3, Tai nghe AirPods Pro 2). `a#b` trả cùng 4 sản phẩm.
 - **Screenshot:** `docs/bugs/BUG-23-actual.png` (khung vàng là chú thích do script chèn, ghi URL request thực tế)
 - **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/66
-- **Issue page screenshot:** chưa có. Repo private; Chrome đã đăng nhập mở được issue nhưng máy chưa cấp quyền chụp màn hình cho công cụ tự động.
+- **Issue page screenshot:** `docs/bugs/BUG-23-github.png`
+
+![BUG-23-github](bugs/BUG-23-github.png)
 
 Bug này tách khỏi BUG-22 vì nằm ở component khác (`frontend-web/src/pages/Home.jsx` so với `frontend-mobile/App.js`), phải sửa ở hai nơi. Bản ghi ngày 18/10 trước đây gộp TC-47/48 vào BUG-22; đã đính chính.
 

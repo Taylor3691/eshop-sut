@@ -13,7 +13,7 @@ Sinh viên: Huỳnh Thái Toàn — MSSV: 23120175.
 | 5 | Agent Skills | 10 | 7 |
 | | Total | 100 | 83 |
 
-Điểm trừ còn lại: mobile chỉ chạy trên Expo web, chưa chạy Android/iOS; video demo có trước bản skill hiện tại; chưa có ảnh chụp trang issue #66 (BUG-23).
+Điểm trừ còn lại: mobile chỉ chạy trên Expo web, chưa chạy Android/iOS; video demo có trước bản skill hiện tại.
 
 ## Test summary
 

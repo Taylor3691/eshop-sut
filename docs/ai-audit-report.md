@@ -899,3 +899,17 @@ I use AI tools for the following tasks,
 > Đã push nhánh `hw02/toanhuynh-fr05/11/16/19` lên `Taylor3691/eshop-sut`, tạo issue #66 cho BUG-23 kèm ảnh `BUG-23-actual.png`, và comment ảnh bằng chứng mới lên issue #44, #45, #46, #48, #57, #61, #64. Cập nhật `bug-report.md`, `README.md`, `HW02-README.md`, `main-report.md` theo trạng thái mới.
 >
 > Chưa chụp được ảnh trang issue #66: repo private, Chrome đã đăng nhập mở được issue nhưng app Orca không chạy và terminal chưa có quyền Screen Recording, nên công cụ tự động không lưu được ảnh. Cần người dùng chụp tay và lưu `docs/bugs/BUG-23-github.png`, hoặc mở Orca để chụp lại.
+
+## Interaction 63
+
+- **Name of the AI tool:** Cursor (Claude Opus 5.5)
+- **Date and time:** 2026-10-18 11:18 (UTC+7)
+- **Your prompt:**
+
+> đã cấp quyền screenshot, hãy thử lại
+
+- **The AI output:**
+
+> Đã chụp trang issue #66 trên Chrome đã đăng nhập, lưu `docs/bugs/BUG-23-github.png`. Ảnh thấy tiêu đề issue, nội dung bug và ảnh lỗi gắn trong issue (chú thích request `search=a&b` và ô tìm kiếm `a&b`). Vùng Dock của macOS được bỏ khỏi ảnh.
+>
+> Đã cập nhật `bug-report.md` (mục Issue page screenshot của BUG-23), `README.md` và `HW02-README.md` (bỏ điểm trừ về ảnh trang issue). Đã commit, ghi lại commit log, xuất lại PDF và đóng gói lại zip 083.
