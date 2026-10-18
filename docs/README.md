@@ -13,7 +13,7 @@ Sinh viên: Huỳnh Thái Toàn — MSSV: 23120175.
 | 5 | Agent Skills | 10 | 7 |
 | | Total | 100 | 83 |
 
-Điểm trừ còn lại: mobile chỉ chạy trên Expo web, chưa chạy Android/iOS; video demo có trước bản skill hiện tại; BUG-23 chưa có issue GitHub và bằng chứng mới chưa gắn lên các issue cũ.
+Điểm trừ còn lại: mobile chỉ chạy trên Expo web, chưa chạy Android/iOS; video demo có trước bản skill hiện tại; chưa có ảnh chụp trang issue #66 (BUG-23).
 
 ## Test summary
 
@@ -40,7 +40,7 @@ Tổng cả hai nhóm: 135 thiết kế, 133 đã chạy, 81 PASS, 52 FAIL, 2 BL
 
 ### Bug
 
-23 mã bug: 19 bug theo đặc tả, 4 phát hiện chờ làm rõ oracle (BUG-07/12/13/19). BUG-01..22 có issue #44–#65 kèm ảnh. BUG-23 (web cắt từ khóa có `&`/`#`) đã ghi trong `bug-report.md`, chưa tạo issue vì cần push ảnh. Thứ tự Tab ở FR-11 (TC-28) là phát hiện chờ làm rõ, chưa lập bug.
+23 mã bug: 19 bug theo đặc tả, 4 phát hiện chờ làm rõ oracle (BUG-07/12/13/19). BUG-01..22 có issue #44–#65 kèm ảnh. BUG-23 (web cắt từ khóa có `&`/`#`) có issue #66; ảnh bổ sung đã gắn bằng comment lên #44, #45, #46, #48, #57, #61, #64. Thứ tự Tab ở FR-11 (TC-28) là phát hiện chờ làm rõ, chưa lập bug.
 
 ### Demo và skill
 

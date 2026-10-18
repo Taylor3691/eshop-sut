@@ -71,7 +71,7 @@ Kiểm tra bổ sung query thừa: 23 (web) + 1 (mobile), đều PASS, không t�
 
 ## 7. Bug report và AI gap analysis
 
-23 mã bug: 19 bug theo đặc tả, 4 phát hiện chờ xác nhận (BUG-07/12/13/19). BUG-01..22 có issue #44–#65 kèm ảnh. BUG-23 (web cắt từ khóa có `&`/`#`, tách khỏi BUG-22 của mobile vì khác component) chưa có issue. BUG-01/02/03 trước đây dùng chung một ảnh, nay có ảnh riêng thấy đúng giá `VND`, `alt=""` và hai thẻ `h1`.
+23 mã bug: 19 bug theo đặc tả, 4 phát hiện chờ xác nhận (BUG-07/12/13/19). BUG-01..22 có issue #44–#65 kèm ảnh. BUG-23 (web cắt từ khóa có `&`/`#`, tách khỏi BUG-22 của mobile vì khác component) có issue #66. Ảnh bổ sung đã gắn bằng comment lên các issue cũ liên quan. BUG-01/02/03 trước đây dùng chung một ảnh, nay có ảnh riêng thấy đúng giá `VND`, `alt=""` và hai thẻ `h1`.
 
 Mỗi thư mục có `06-ai-gap-analysis.md`: nguyên nhân (prompt hẹp, giới hạn công cụ, độ phức tạp chức năng), cách khắc phục và gap còn lại. Lần cập nhật này ghi thêm: AI coi BVA thay được bước on/off/in/out; biến số sản phẩm có ở bước 1 nhưng bị bỏ ở bước 2; bộ mobile chép bộ web; ảnh bằng chứng FR-16 trùng nhau mà AI không mở ra kiểm tra.
 

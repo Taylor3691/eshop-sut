@@ -1,6 +1,6 @@
 # Trạng thái sau review 18/10/2026
 
-Có 23 mã. **19 bug theo đặc tả** và **4 phát hiện cần làm rõ oracle**: BUG-07 (trim khoảng trắng), BUG-12 (ngày NULL), BUG-13 (tiền NULL), BUG-19 (MaxLength import). BUG-23 là bug mới của bộ web, chưa có issue GitHub. Phát hiện thứ tự Tab ở FR-11 (TC-28) chưa lập bug vì FR-21 chưa rõ cách đọc bố cục hai cột. Kết quả mới nằm ở `05-execution-results.md` của từng chức năng.
+Có 23 mã. **19 bug theo đặc tả** và **4 phát hiện cần làm rõ oracle**: BUG-07 (trim khoảng trắng), BUG-12 (ngày NULL), BUG-13 (tiền NULL), BUG-19 (MaxLength import). BUG-23 là bug mới của bộ web, issue #66. Phát hiện thứ tự Tab ở FR-11 (TC-28) chưa lập bug vì FR-21 chưa rõ cách đọc bố cục hai cột. Kết quả mới nằm ở `05-execution-results.md` của từng chức năng.
 
 # Bug report — FR-05
 
@@ -8,7 +8,7 @@ Các bug dưới đây đã chạy trên Web `http://localhost:5173` và API `ht
 
 TC-04 (`iphone` vẫn trả `iPhone 15 Pro Max`) không lập bug. FR-05 không cấm tìm không phân biệt hoa thường với chữ ASCII.
 
-Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chèn vào issue #44–#65 bằng liên kết file trên nhánh `hw02/toanhuynh-fr05/11/16/19`. Ảnh trang issue chụp từ Chrome đã đăng nhập, lưu tại `docs/bugs/BUG-01-github.png` đến `docs/bugs/BUG-22-github.png`.
+Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chèn vào issue #44–#66 bằng liên kết file trên nhánh `hw02/toanhuynh-fr05/11/16/19`. Ảnh trang issue chụp từ Chrome đã đăng nhập, lưu tại `docs/bugs/BUG-01-github.png` đến `docs/bugs/BUG-22-github.png`; ảnh trang issue #66 chưa chụp.
 
 ## BUG-01 — Giá hiển thị VND thay vì ₫
 
@@ -492,8 +492,8 @@ Không lập bug mới cho:
 - **Expected:** Tìm đúng chuỗi đã gõ. Không tên seed nào chứa `a&b` hay `a#b`, nên không có kết quả và có empty state.
 - **Actual:** `a&b` gửi `GET /api/products?search=a&b`; server chỉ nhận `search=a` và trả 4 sản phẩm có chữ `a` (iPhone 15 Pro Max, Samsung Galaxy S24 Ultra, MacBook Pro M3, Tai nghe AirPods Pro 2). `a#b` trả cùng 4 sản phẩm.
 - **Screenshot:** `docs/bugs/BUG-23-actual.png` (khung vàng là chú thích do script chèn, ghi URL request thực tế)
-- **GitHub issue:** chưa tạo. Ảnh trên issue cần đường dẫn tới file đã push lên nhánh remote; theo rule bug report, phải hỏi người dùng trước khi push.
-- **Issue page screenshot:** chưa có, chụp sau khi tạo issue.
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/66
+- **Issue page screenshot:** chưa có. Repo private; Chrome đã đăng nhập mở được issue nhưng máy chưa cấp quyền chụp màn hình cho công cụ tự động.
 
 Bug này tách khỏi BUG-22 vì nằm ở component khác (`frontend-web/src/pages/Home.jsx` so với `frontend-mobile/App.js`), phải sửa ở hai nơi. Bản ghi ngày 18/10 trước đây gộp TC-47/48 vào BUG-22; đã đính chính.
 
@@ -509,4 +509,4 @@ Bug này tách khỏi BUG-22 vì nằm ở component khác (`frontend-web/src/pa
 - BUG-18: TC-31, bảng admin có dòng `SP Import` giá `-0.01 ₫`. Ảnh: [TC-31](bugs/review-fr16-TC-31.png).
 - BUG-21: TC-24, CSDL không có sản phẩm, màn `home` mobile không có trang trống. Ảnh: [fr05-mobile-TC-24](bugs/fr05-mobile-TC-24.png).
 
-Bằng chứng bổ sung mới có ở local, chưa đính kèm lên các issue #44–#65.
+Ảnh bổ sung đã gắn bằng comment trên issue [#44](https://github.com/Taylor3691/eshop-sut/issues/44), [#45](https://github.com/Taylor3691/eshop-sut/issues/45), [#46](https://github.com/Taylor3691/eshop-sut/issues/46), [#48](https://github.com/Taylor3691/eshop-sut/issues/48), [#57](https://github.com/Taylor3691/eshop-sut/issues/57), [#61](https://github.com/Taylor3691/eshop-sut/issues/61) và [#64](https://github.com/Taylor3691/eshop-sut/issues/64).

@@ -885,3 +885,17 @@ I use AI tools for the following tasks,
 > Kết quả chạy: test chức năng 111 thiết kế, 109 chạy, 57 PASS, 52 FAIL, 2 BLOCKED; cộng 24 kiểm tra bổ sung đều PASS.
 >
 > Còn lại cần người dùng quyết: tạo issue BUG-23 và gắn ảnh mới lên issue cũ (cần push), quay lại video demo, chạy mobile trên thiết bị native. Không sửa Interaction 59 vì rule cấm sửa mục cũ.
+
+## Interaction 62
+
+- **Name of the AI tool:** Cursor (Claude Opus 5.5)
+- **Date and time:** 2026-10-18 11:13 (UTC+7)
+- **Your prompt:**
+
+> (Trả lời câu hỏi chọn của AI về việc push) Push, tạo issue BUG-23, gắn ảnh mới vào các issue cũ, chụp trang issue.
+
+- **The AI output:**
+
+> Đã push nhánh `hw02/toanhuynh-fr05/11/16/19` lên `Taylor3691/eshop-sut`, tạo issue #66 cho BUG-23 kèm ảnh `BUG-23-actual.png`, và comment ảnh bằng chứng mới lên issue #44, #45, #46, #48, #57, #61, #64. Cập nhật `bug-report.md`, `README.md`, `HW02-README.md`, `main-report.md` theo trạng thái mới.
+>
+> Chưa chụp được ảnh trang issue #66: repo private, Chrome đã đăng nhập mở được issue nhưng app Orca không chạy và terminal chưa có quyền Screen Recording, nên công cụ tự động không lưu được ảnh. Cần người dùng chụp tay và lưu `docs/bugs/BUG-23-github.png`, hoặc mở Orca để chụp lại.
