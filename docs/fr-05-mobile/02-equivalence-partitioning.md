@@ -61,11 +61,32 @@ Không gộp ASCII với chữ có dấu. Spec không yêu cầu bỏ phân bi�
 | ID | Loại | Phân hoạch | Giá trị đại diện | Cơ sở spec |
 | --- | --- | --- | --- | --- |
 | KW-VEC-09 | VEC | Chuỗi rỗng | `""` | Trang chủ hiển thị tất cả sản phẩm. Lần mở màn cũng gửi chuỗi rỗng |
-| KW-IEC-01 | IEC | Chỉ khoảng trắng | `"   "` (3 dấu cách) | Không phải từ khóa tên. Spec không bảo liệt kê tất cả cho chuỗi này |
-| KW-IEC-02 | IEC | Chứa `%` | `%` | Ngoài miền tìm đúng theo tên. Spec không định nghĩa ký tự đại diện |
-| KW-IEC-03 | IEC | Chứa `_` | `_` | Ngoài miền tìm đúng theo tên. `_` trong `LIKE` là một ký tự bất kỳ, khác `%` |
-| KW-IEC-04 | IEC | Chứa `'` | `'` | Ngoài miền từ khóa tên được mô tả. Spec không định nghĩa việc đưa nháy đơn vào câu SQL |
-| KW-IEC-05 | IEC | Chứa `&` | `a&b` | Ngoài miền từ khóa tên. `&` thêm query key |
-| KW-IEC-06 | IEC | Chứa `#` | `a#b` | Ngoài miền từ khóa tên. `#` mở fragment, khác `&` |
-| KW-IEC-07 | IEC | Chứa `?` | `a?b` | Ngoài miền từ khóa tên. `?` mở query, khác `&` và `#` |
+| KW-IEC-01 | VEC | Chỉ khoảng trắng | `"   "` (3 dấu cách) | Người dùng nhập được. README không nói trim hay không, nên chấp nhận cả hai cách; chỉ yêu cầu không lỗi. |
+| KW-IEC-02 | VEC | Chứa `%` | `%` | Ký tự thường trong từ khóa, không phải ký tự đại diện. SEC-05 cấm nối chuỗi vào SQL. |
+| KW-IEC-03 | VEC | Chứa `_` | `_` | Như `%`: `_` là dữ liệu, không được khớp một ký tự bất kỳ. |
+| KW-IEC-04 | VEC | Chứa `'` | `'` | Ký tự thường trong từ khóa. Không được làm vỡ câu SQL (SEC-05). |
+| KW-IEC-05 | VEC | Chứa `&` | `a&b` | Phải tìm cả chuỗi `a&b`; `&` không được tách thành tham số URL mới. |
+| KW-IEC-06 | VEC | Chứa `#` | `a#b` | Phải tìm cả chuỗi `a#b`; `#` không được cắt phần sau thành fragment. |
+| KW-IEC-07 | VEC | Chứa `?` | `a?b` | Phải tìm cả chuỗi `a?b`. |
 | KW-VEC-10 | VEC | Chứa HTML | `<script>` | Từ khóa phải được hiển thị an toàn, không render HTML |
+
+Mã `KW-IEC-01..07` là mã lịch sử, giữ để không đổi liên kết tới TC-15..22 và bug report. Cả bảy lớp đều là VEC: README không cấm các ký tự này.
+
+## 5. Số sản phẩm trong CSDL
+
+README: trang chủ hiển thị tất cả sản phẩm; FR-24: trang trống phải có icon/hình minh họa và message thân thiện. Màn `home` mobile gọi cùng `GET /api/products` khi mở màn, nên số dòng của bảng `products` quyết định danh sách.
+
+| ID | Loại | Phân hoạch | Giá trị đại diện | Cơ sở spec |
+| --- | --- | --- | --- | --- |
+| CAT-VEC-01 | VEC | Không có sản phẩm | Bảng `products` rỗng | Trang trống có icon/hình và message (FR-24) |
+| CAT-VEC-02 | VEC | Có ít nhất một sản phẩm | 5 sản phẩm seed | Hiển thị tất cả sản phẩm |
+
+## 6. Độ rộng màn hình thiết bị
+
+Đây là đặc tính riêng của Pool D: cùng một app chạy trên nhiều cỡ màn. README không nêu breakpoint hay số cột trên mobile, nên chỉ lấy oracle chung: đủ sản phẩm, không tràn ngang, tên và giá không bị đẩy ra ngoài màn. Ba lớp theo nhóm thiết bị phổ biến; ranh giới 360 và 600 px là giả định của người kiểm thử, không phải biên của spec.
+
+| ID | Loại | Phân hoạch | Giá trị đại diện | Cơ sở |
+| --- | --- | --- | --- | --- |
+| VIEW-VEC-01 | VEC | Điện thoại nhỏ, dưới 360 px | 320 px | FR-05 yêu cầu hiện ảnh, tên, giá; không được mất nội dung |
+| VIEW-VEC-02 | VEC | Điện thoại thường, 360–599 px | 390 px (dùng cho mọi test khác) | Như trên |
+| VIEW-VEC-03 | VEC | Tablet, từ 600 px | 768 px | Như trên |
