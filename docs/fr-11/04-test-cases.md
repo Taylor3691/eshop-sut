@@ -101,3 +101,15 @@ Seed không có đơn. Dòng trong bảng là dữ liệu phải tạo trước 
 | AUTH-IEC-01 | TC-25 |
 | AUTH-IEC-02 | TC-26 |
 | Q-IEC-01 | TC-27 |
+
+Phủ điểm on/off/in/out (bước 3, phần A):
+
+| Biên | On | Off | In | Out |
+| --- | --- | --- | --- | --- |
+| A.1 `N ≥ 1` | TC-01 | TC-02 | TC-03 | TC-02 |
+| A.2 `amount ≥ 1000` | TC-16 | TC-15 | TC-01 | TC-14 |
+| A.3 `amount ≥ 1000000` | TC-19 | TC-18 | TC-01 | TC-16 |
+
+## Phạm vi oracle cần xác nhận
+
+TC-21/TC-22 chèn NULL trực tiếp vào DB là kiểm thử độ bền với dữ liệu thiếu. Expected không bịa ngày/tiền là tiêu chí đề xuất của người kiểm thử; README chưa quy định cách hiển thị NULL. FAIL ở hai case này là lệch tiêu chí đề xuất, chưa đủ xác nhận vi phạm đặc tả. Không tính hai phát hiện tương ứng là bug đã xác nhận.
