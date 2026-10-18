@@ -1,3 +1,6 @@
+dd1c021 2026-10-18 11:03 FR-16: domain testing — partition escaped quotes, embedded newline, CRLF and decimal price
+fc694cc 2026-10-18 11:03 FR-11: domain testing — mark NULL-display classes as pending oracle
+a4ca243 2026-10-18 11:03 HW02: save git commit log
 78d912d 2026-10-18 11:03 HW02: update main report, README summary, AI critique, AI audit and PDFs
 af30347 2026-10-18 11:02 HW02: agent skill — add on/off/in/out step, evidence and mobile-domain rules
 6e87a9f 2026-10-18 11:01 bug report: add BUG-23 and per-bug evidence screenshots
