@@ -45,7 +45,7 @@ Người gọi ở các mốc dưới đây là user id 2 (`test@eshop.com`). Se
 
 Phiên đăng nhập, JWT, năm trạng thái FR-10 và query thừa là miền liệt kê, không có `[Min, Max]`. Không gán số cho chúng. FR-11 không có phân trang, nên không đặt `Limit` và không lập biên `page`.
 
-## 1. Số đơn của người gọi
+### B.1 Số đơn của người gọi
 
 Lớp có đơn bắt đầu tại `N = 1` (CNT-VEC-02). `N = 0` là lớp trang trống kế bên (CNT-VEC-01), không phải lỗi.
 
@@ -57,13 +57,13 @@ FR-11 không khai báo số đơn tối đa. Không bịa Max. Không có bộ `
 | CNT-B-02 | Min | 1 | Trên biên dưới. Đủ để hiện bảng một dòng |
 | CNT-B-03 | Min+1 | 2 | Trong miền. Đúng giá trị đại diện CNT-VEC-02 |
 
-## 2. Quan hệ sở hữu và mã đơn — kiểm tra bổ sung
+### B.2 Quan hệ sở hữu và mã đơn — kiểm tra bổ sung
 
 ID là định danh, không phải đại lượng liên tục. Người gọi id 2 và chủ đơn id 1/2/3 kiểm tra hai lớp bằng/khác, không phải Min-1/Min/Min+1. Mã OWN-B-01..03 cũ chỉ giữ để truy vết TC-04, TC-01, TC-05.
 
 FR-11 không quy định biên mã đơn. ID-B-01..03 (0,1,2; TC-06, TC-01, TC-07) là kiểm tra hiển thị dữ liệu fixture, không khẳng định id 0 là mã đơn hợp lệ trong nghiệp vụ.
 
-## 4. Tổng tiền
+### B.3 Tổng tiền
 
 `0` và số âm vẫn thuộc AMT-VEC-01. Ba giá trị quanh `0` là các điểm trong cùng một lớp, không phải IEC.
 
@@ -73,7 +73,7 @@ Mốc phân cách lấy từ FR-21: định dạng hàng nghìn. Ngưỡng đầ
 
 Chuỗi tiền dưới đây là dạng `vi-VN` kèm `₫`.
 
-### 4.1 Mốc 0
+#### B.3.1 Mốc 0
 
 | ID | Vị trí | total_amount | Dạng phải hiện | Lớp |
 | --- | --- | --- | --- | --- |
@@ -81,7 +81,7 @@ Chuỗi tiền dưới đây là dạng `vi-VN` kèm `₫`.
 | AMT-B-02 | Đúng mốc | 0 | `0 ₫` | AMT-VEC-01 |
 | AMT-B-03 | Trên mốc | 1 | `1 ₫` | AMT-VEC-01 |
 
-### 4.2 Mốc 1 000
+#### B.3.2 Mốc 1 000
 
 | ID | Vị trí | total_amount | Dạng phải hiện |
 | --- | --- | --- | --- |
@@ -89,7 +89,7 @@ Chuỗi tiền dưới đây là dạng `vi-VN` kèm `₫`.
 | AMT-B-05 | Min | 1000 | `1.000 ₫` |
 | AMT-B-06 | Min+1 | 1001 | `1.001 ₫` |
 
-### 4.3 Mốc 1 000 000
+#### B.3.3 Mốc 1 000 000
 
 | ID | Vị trí | total_amount | Dạng phải hiện |
 | --- | --- | --- | --- |
@@ -97,7 +97,7 @@ Chuỗi tiền dưới đây là dạng `vi-VN` kèm `₫`.
 | AMT-B-08 | Min | 1000000 | `1.000.000 ₫` |
 | AMT-B-09 | Min+1 | 1000001 | `1.000.001 ₫` |
 
-## 5. Ngày đặt
+### B.4 Ngày đặt
 
 FR-11 không có khoảng đóng cho ngày. Không lấy năm nhỏ nhất hay năm lớn nhất. Trường hợp thiếu dữ liệu (không phải điểm liền kề theo thứ tự ngày) là `created_at = NULL` (DT-IEC-01).
 
