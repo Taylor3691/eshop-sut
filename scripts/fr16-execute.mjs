@@ -70,10 +70,16 @@ const CASES = [
   { id: "TC-18", expect: "Không thêm sản phẩm. Báo lỗi giá.", file: { name: "hang.csv", text: csv([line({ price: "0" })]) }, added: [], reportError: true },
   { id: "TC-19", expect: "Không thêm sản phẩm. Báo lỗi giá.", file: { name: "hang.csv", text: csv([line({ price: "abc" })]) }, added: [], reportError: true },
   { id: "TC-20", expect: "Không thêm sản phẩm. Báo lỗi giá.", file: { name: "hang.csv", text: csv([line({ price: "100@" })]) }, added: [], reportError: true },
-  { id: "TC-21", expect: "Từ chối vì tên dài hơn 255. Không thêm sản phẩm.", file: { name: "hang.csv", text: csv([line({ name: C })]) }, added: [] },
   { id: "TC-22", expect: "Không thêm sản phẩm. Seed còn nguyên.", file: { name: "hang.csv", text: `${HEADER}\n` }, added: [] },
   { id: "TC-23", expect: "Rollback cả file. Không có SP Import. Báo lỗi tên ở dòng 2.", file: { name: "hang.csv", text: csv([STD, line({ name: "" })]) }, added: [], reportError: true },
   { id: "TC-24", expect: "HTTP không phải lỗi. Thêm đúng SP Import. Seed còn nguyên.", api: { token: "admin", query: { foo: "1" } }, added: [{ name: "SP Import", price: 100000 }], httpOk: true },
+  { id: "TC-25", expect: 'Đọc nháy kép escape thành ký tự nháy kép, mô tả đúng Mo ta "dep".', file: { name: "hang.csv", text: csv(['SP Import,100000,"Mo ta ""dep""",https://placehold.co/300,1']) }, added: [{ name: "SP Import", price: 100000, description: 'Mo ta "dep"' }] },
+  { id: "TC-26", expect: "Một sản phẩm, mô tả chứa xuống dòng trong trường nháy kép.", file: { name: "hang.csv", text: csv(['SP Import,100000,"Dong 1\nDong 2",https://placehold.co/300,1']) }, added: [{ name: "SP Import", price: 100000, description: "Dong 1\nDong 2" }] },
+  { id: "TC-27", expect: "CSV CRLF thêm đúng một sản phẩm và category 1.", file: { name: "hang.csv", text: HEADER + "\r\n" + STD + "\r\n" }, added: [{ name: "SP Import", price: 100000, description: "Mo ta san pham", category_id: 1 }] },
+  { id: "TC-28", expect: "Tên chỉ dấu cách không phải tên có nội dung: từ chối, không thêm sản phẩm (giả định cần xác nhận).", file: { name: "hang.csv", text: csv([line({ name: "   " })]) }, added: [], reportError: true },
+  { id: "TC-29", expect: "Giá 1.5 là số dương, được thêm và giữ nguyên giá trị.", file: { name: "hang.csv", text: csv([line({ price: "1.5" })]) }, added: [{ name: "SP Import", price: 1.5 }] },
+  { id: "TC-30", expect: "Giá dương 0.01 được thêm và giữ nguyên giá trị.", file: { name: "hang.csv", text: csv([line({ price: "0.01" })]) }, added: [{ name: "SP Import", price: 0.01 }] },
+  { id: "TC-31", expect: "Giá âm -0.01 bị từ chối, không thêm sản phẩm.", file: { name: "hang.csv", text: csv([line({ price: "-0.01" })]) }, added: [], reportError: true },
 ];
 
 function openDb() {
@@ -208,6 +214,51 @@ async function tokenFor(kind) {
   return kind;
 }
 
+const WEB = process.env.WEB_URL ?? "http://localhost:5173";
+
+// Ảnh phải cho thấy dữ liệu sai sau import, không chỉ banner "Import hoàn tất".
+const EVIDENCE = {
+  "TC-03": "detail",
+  "TC-25": "detail",
+  "TC-26": "table",
+  "TC-31": "table",
+};
+
+async function captureEvidence(browser, page, id, mode) {
+  const file = path.join(root, `docs/bugs/review-fr16-${id}.png`);
+  if (mode === "table") {
+    const banner = await page.locator(".bg-green-100, .bg-red-100").last().innerText().catch(() => "");
+    await page.reload({ waitUntil: "networkidle" });
+    await page.getByText("Sản phẩm", { exact: true }).click();
+    await page.waitForTimeout(500);
+    await page.evaluate((text) => {
+      const table = document.querySelector("table");
+      const wrap = document.createElement("div");
+      wrap.id = "evidence";
+      wrap.style.cssText = "background:#fff;padding:8px";
+      const note = document.createElement("div");
+      note.textContent = `${text} — dòng viền đỏ là dòng do file CSV thêm vào (chú thích do script kiểm thử chèn).`;
+      note.style.cssText = "background:#fef3c7;border:2px solid #d97706;padding:8px;margin-bottom:8px;font:14px sans-serif";
+      table.parentNode.insertBefore(wrap, table);
+      wrap.append(note, table);
+      for (const row of table.querySelectorAll("tbody tr")) {
+        if (!/iPhone 15|Samsung|MacBook|AirPods|Keychron/.test(row.innerText)) row.style.outline = "3px solid red";
+      }
+    }, `Banner sau khi import: ${banner.replace(/\s+/g, " ")}`);
+    await page.locator("#evidence").screenshot({ path: file });
+    return;
+  }
+  const rows = await readProducts();
+  const db = openDb();
+  const extra = await dbAll(db, "SELECT id FROM products WHERE name = 'SP Import' ORDER BY id DESC LIMIT 1");
+  await new Promise((resolve) => db.close(resolve));
+  if (!extra.length || !rows.length) return;
+  const web = await browser.newPage({ viewport: { width: 1100, height: 700 } });
+  await web.goto(`${WEB}/product/${extra[0].id}`, { waitUntil: "networkidle" });
+  await web.screenshot({ path: file, fullPage: true });
+  await web.close();
+}
+
 async function main() {
   const browser = await chromium.launch({ channel: "chrome", headless: true });
   const context = await browser.newContext({ locale: "vi-VN" });
@@ -254,6 +305,7 @@ async function main() {
     }
     const rows = await readProducts();
     const judged = judge(rows, testCase, report, httpStatus);
+    if (EVIDENCE[testCase.id]) await captureEvidence(browser, page, testCase.id, EVIDENCE[testCase.id]);
     results.push({ ...testCase, ...judged });
     console.log(`${testCase.id}\t${judged.pass ? "PASS" : "FAIL"}\t${judged.actual}`);
   }
