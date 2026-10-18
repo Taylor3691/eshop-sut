@@ -1,0 +1,438 @@
+﻿Branch checked out: feature/login+account-lockout
+
+Command: git log --graph --all --stat
+
+* commit 39a5095a1540e709fc86f0995ed6f090a580b050
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Mon Oct 19 02:57:38 2026 +0700
+| 
+|     docs: update main report and bug report
+| 
+|  report/bug-report.md   | 295 +++++++++++++++++++++++++++++++++++++++++++++++
+|  report/bug-report.pdf  | Bin 0 -> 1172739 bytes
+|  report/images/1.png    | Bin 0 -> 117727 bytes
+|  report/images/10.png   | Bin 0 -> 110546 bytes
+|  report/images/11.png   | Bin 0 -> 100628 bytes
+|  report/images/12.png   | Bin 0 -> 100916 bytes
+|  report/images/13.png   | Bin 0 -> 122788 bytes
+|  report/images/14.png   | Bin 0 -> 97380 bytes
+|  report/images/2.png    | Bin 0 -> 113637 bytes
+|  report/images/3.png    | Bin 0 -> 122596 bytes
+|  report/images/4.png    | Bin 0 -> 111158 bytes
+|  report/images/5.png    | Bin 0 -> 95710 bytes
+|  report/images/6.png    | Bin 0 -> 96377 bytes
+|  report/images/7.png    | Bin 0 -> 113440 bytes
+|  report/images/8.png    | Bin 0 -> 99694 bytes
+|  report/images/9.png    | Bin 0 -> 101243 bytes
+|  report/main-report.md  | 207 +++++++++++++++++++++++++++++++++
+|  report/main-report.pdf | Bin 0 -> 218146 bytes
+|  18 files changed, 502 insertions(+)
+| 
+* commit 2a26968d2bf8994392c64573622b2341b90fb466
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Mon Oct 19 01:11:21 2026 +0700
+| 
+|     test: update bug issue report
+| 
+|  .../bug-reports/BUG-issues-FR02-FR08-FR13-FR15.md | 343 ++++++++++++++++++++
+|  tests/bug-reports/BUG-issues-FR13-FR15.md         | 154 +++++++++
+|  .../FR-13/FR13-dashboard-test-run-001.md          |   3 -
+|  3 files changed, 497 insertions(+), 3 deletions(-)
+| 
+* commit f7e80efe1a57a7dc38caed7fadb8d0448fb6da6f
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Mon Oct 19 00:33:25 2026 +0700
+| 
+|     test: add test run and test summary
+| 
+|  backend/database.sqlite                           | Bin 36864 -> 36864 bytes
+|  tests/test-runs/FR-02/FR02-test-run-001.md        |  77 ++++++----
+|  .../test-runs/FR-08/FR08-checkout-test-run-001.md |  58 +++----
+|  .../FR-13/FR13-dashboard-test-run-001.md          |  34 +++++
+|  .../FR-15-mobile/FR15-mobile-test-run-001.md      |  32 ++++
+|  .../FR-08/FR08-checkout-test-summary-001.md       | 159 ++++++++++++++++----
+|  tests/test-summary/order-state-analysis.md        | 137 +++++++++++++++++
+|  7 files changed, 409 insertions(+), 88 deletions(-)
+| 
+* commit 0fecd8866f865ffcc2194ae0bdef5ff57fdbb9b7
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Sun Oct 18 23:50:50 2026 +0700
+| 
+|     test: add TC domain testing
+| 
+|  tests/test-cases/FR-08/FR08-domain-testing.md     | 37 ++++++++++++++++
+|  tests/test-cases/FR-08/README.md                  |  4 +-
+|  tests/test-cases/FR-08/TC-FR-08-CHECKOUT-009.md   | 40 ++++++++++++++++++
+|  .../FR-13/dashboard/FR13-domain-testing.md        | 41 ++++++++++++++++++
+|  tests/test-cases/FR-13/dashboard/README.md        |  6 ++-
+|  .../FR-13/dashboard/TC-FR-13-DASHBOARD-006.md     | 43 +++++++++++++++++++
+|  .../FR-13/dashboard/TC-FR-13-DASHBOARD-007.md     | 38 +++++++++++++++++
+|  .../FR-15-mobile/FR15-mobile-domain-testing.md    | 47 +++++++++++++++++++++
+|  tests/test-cases/FR-15-mobile/README.md           | 14 ++++--
+|  .../FR-15-mobile/TC-FR-15-PRODUCT-MOBILE-005.md   | 39 +++++++++++++++++
+|  .../FR-15-mobile/TC-FR-15-PRODUCT-MOBILE-006.md   | 38 +++++++++++++++++
+|  .../FR-15-mobile/TC-FR-15-PRODUCT-MOBILE-007.md   | 37 ++++++++++++++++
+|  .../FR-15-mobile/TC-FR-15-PRODUCT-MOBILE-008.md   | 38 +++++++++++++++++
+|  .../FR-15-mobile/TC-FR-15-PRODUCT-MOBILE-009.md   | 37 ++++++++++++++++
+|  .../FR-15-mobile/TC-FR-15-PRODUCT-MOBILE-010.md   | 37 ++++++++++++++++
+|  15 files changed, 491 insertions(+), 5 deletions(-)
+| 
+* commit ff9cc1a318c8648768797c07fdb3eb60e41d9caf
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Sun Oct 18 23:25:16 2026 +0700
+| 
+|     test: add test generate in FR-02, FR-08, FR-13, FR-15-mobile
+| 
+|  tests/bug-reports/FR-02/BUG-FR02-all.md           | 12 +--
+|  .../FR-02/BUG-FR02-login-attempt-counter.md       |  2 +-
+|  tests/test-cases/FR-02/FR02-skill-analysis.md     | 26 +++---
+|  tests/test-cases/FR-02/FR02_test_cases.md         | 90 ++++++++++-----------
+|  tests/test-cases/FR-02/README.md                  | 61 ++++++++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-001.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-002.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-003.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-004.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-005.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-006.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-007.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-009.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-010.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-011.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-012.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-013.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-014.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-015.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-016.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-017.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-021.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-022.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-023.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-025.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-026.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-027.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-028.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-029.md      | 33 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-030.md      | 33 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-031.md      | 33 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-032.md      | 33 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-034.md      | 33 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-035.md      | 33 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-036.md      | 33 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-037.md      | 33 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-038.md      | 33 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-039.md      | 33 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-040.md      | 33 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-041.md      | 33 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-042.md      | 33 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-043.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-044.md      | 34 ++++++++
+|  tests/test-cases/FR-02/TC-FR-02-LOGIN-045.md      | 34 ++++++++
+|  .../test-cases/FR-08/FR08-checkout-test-cases.md  | 16 ++--
+|  tests/test-cases/FR-08/README.md                  | 90 ++++++++-------------
+|  ...C-CHECKOUT-001.md => TC-FR-08-CHECKOUT-001.md} |  2 +-
+|  ...C-CHECKOUT-002.md => TC-FR-08-CHECKOUT-002.md} |  2 +-
+|  ...C-CHECKOUT-003.md => TC-FR-08-CHECKOUT-003.md} |  2 +-
+|  ...C-CHECKOUT-004.md => TC-FR-08-CHECKOUT-004.md} |  2 +-
+|  ...C-CHECKOUT-005.md => TC-FR-08-CHECKOUT-005.md} |  2 +-
+|  ...C-CHECKOUT-006.md => TC-FR-08-CHECKOUT-006.md} |  2 +-
+|  ...C-CHECKOUT-007.md => TC-FR-08-CHECKOUT-007.md} |  2 +-
+|  ...C-CHECKOUT-008.md => TC-FR-08-CHECKOUT-008.md} |  2 +-
+|  tests/test-cases/FR-08/TC-ORDER-STATE-004.md      | 40 ---------
+|  tests/test-cases/FR-08/checkout/README.md         | 45 -----------
+|  tests/test-cases/FR-13/dashboard/README.md        | 38 +++++++++
+|  .../FR-13/dashboard/TC-FR-13-DASHBOARD-001.md     | 39 +++++++++
+|  .../FR-13/dashboard/TC-FR-13-DASHBOARD-002.md     | 39 +++++++++
+|  .../FR-13/dashboard/TC-FR-13-DASHBOARD-003.md     | 37 +++++++++
+|  .../FR-13/dashboard/TC-FR-13-DASHBOARD-004.md     | 38 +++++++++
+|  .../FR-13/dashboard/TC-FR-13-DASHBOARD-005.md     | 36 +++++++++
+|  tests/test-cases/FR-15-mobile/README.md           | 35 ++++++++
+|  .../FR-15-mobile/TC-FR-15-PRODUCT-MOBILE-001.md   | 39 +++++++++
+|  .../FR-15-mobile/TC-FR-15-PRODUCT-MOBILE-002.md   | 38 +++++++++
+|  .../FR-15-mobile/TC-FR-15-PRODUCT-MOBILE-003.md   | 39 +++++++++
+|  .../FR-15-mobile/TC-FR-15-PRODUCT-MOBILE-004.md   | 40 +++++++++
+|  tests/test-runs/FR-02/FR02-test-run-001.md        | 12 +--
+|  .../test-runs/FR-08/FR08-checkout-test-run-001.md | 18 ++---
+|  tests/test-summary/FR-02/FR02-test-report.md      | 80 +++++++++---------
+|  .../FR-08/FR08-checkout-test-summary-001.md       | 10 +--
+|  71 files changed, 1966 insertions(+), 283 deletions(-)
+| 
+* commit 3cb03e8485da4059c2c16079aa3dd6de2285c323
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Sun Oct 18 22:54:19 2026 +0700
+| 
+|     test: add TC FR-08 checkout
+| 
+|  tests/test-cases/FR-02/FR02-skill-analysis.md     | 155 ++++++++++++++++++++
+|  tests/test-cases/FR-08/README.md                  |  69 +++++++++
+|  tests/test-cases/FR-08/TC-ORDER-STATE-004.md      |  40 +++++
+|  tests/test-cases/FR-08/checkout/README.md         |  45 ++++++
+|  .../test-cases/FR-08/checkout/TC-CHECKOUT-001.md  |  41 ++++++
+|  .../test-cases/FR-08/checkout/TC-CHECKOUT-002.md  |  37 +++++
+|  .../test-cases/FR-08/checkout/TC-CHECKOUT-003.md  |  38 +++++
+|  .../test-cases/FR-08/checkout/TC-CHECKOUT-004.md  |  38 +++++
+|  .../test-cases/FR-08/checkout/TC-CHECKOUT-005.md  |  36 +++++
+|  .../test-cases/FR-08/checkout/TC-CHECKOUT-006.md  |  37 +++++
+|  .../test-cases/FR-08/checkout/TC-CHECKOUT-007.md  |  37 +++++
+|  .../test-cases/FR-08/checkout/TC-CHECKOUT-008.md  |  36 +++++
+|  tests/test-runs/FR-02/FR02-test-run-001.md        |  32 ++++
+|  13 files changed, 641 insertions(+)
+| 
+* commit 129ad5b02ccca5c7b4593001582fdbdf8ca398f5
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Sun Oct 18 22:30:10 2026 +0700
+| 
+|     chore: format folder
+| 
+|  backend/database.sqlite                           | Bin 36864 -> 36864 bytes
+|  .../FR-02}/BUG-FR02-all.md                        |   0
+|  .../FR-02}/BUG-FR02-login-attempt-counter.md      |   0
+|  .../evidence}/FR02-002-1.png                      | Bin
+|  .../evidence}/FR02-002-2.png                      | Bin
+|  .../evidence}/FR02-005-1.png                      | Bin
+|  .../evidence}/FR02-006-1.png                      | Bin
+|  .../evidence}/FR02-012-1.png                      | Bin
+|  .../evidence}/FR02-017-1.png                      | Bin
+|  .../evidence}/FR02-017-2.png                      | Bin
+|  .../evidence}/FR02-022-1.png                      | Bin
+|  .../evidence}/FR02-022-2.png                      | Bin
+|  .../evidence}/FR02-023-1.png                      | Bin
+|  .../evidence}/FR02-025-1.png                      | Bin
+|  .../evidence}/FR02-027-1.png                      | Bin
+|  .../evidence}/FR02-029-1.png                      | Bin
+|  .../evidence}/FR02-036-1.png                      | Bin
+|  .../evidence}/FR02-037-1.png                      | Bin
+|  .../evidence}/FR02-041-1.png                      | Bin
+|  .../evidence}/FR02-043-1.png                      | Bin
+|  tests/{ => test-cases/FR-02}/FR-02-test-plan.md   |   0
+|  .../FR-02}/FR02_domain_input_output.md            |   0
+|  .../FR-02}/FR02_domain_value_presentation.md      |   0
+|  .../FR-02}/FR02_test_cases.md                     |   0
+|  .../test-cases/FR-08/FR08-checkout-test-cases.md  | 189 ++++++++++++++++++++
+|  .../test-runs/FR-08/FR08-checkout-test-run-001.md |  31 ++++
+|  .../FR-02}/FR02-test-report.md                    |   0
+|  .../FR-08/FR08-checkout-test-summary-001.md       |  32 ++++
+|  28 files changed, 252 insertions(+)
+| 
+* commit 7287652568a9778469369db23cc8a6771a11469e
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Mon Oct 12 00:54:51 2026 +0700
+| 
+|     test: genertating bug report following tempalte
+| 
+|  tests/domain-testing/BUG-FR02-all.md              | 333 ++++++++++++++++++++
+|  .../BUG-FR02-login-attempt-counter.md             |  80 +++++
+|  2 files changed, 413 insertions(+)
+| 
+* commit 6abf99c03e478146142298106eb38a533352bc59
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Mon Oct 12 00:24:59 2026 +0700
+| 
+|     test: add images evidence for test report
+| 
+|  tests/images/FR02-002-1.png | Bin 0 -> 45105 bytes
+|  tests/images/FR02-002-2.png | Bin 0 -> 8338 bytes
+|  tests/images/FR02-005-1.png | Bin 0 -> 48024 bytes
+|  tests/images/FR02-006-1.png | Bin 0 -> 25797 bytes
+|  tests/images/FR02-012-1.png | Bin 0 -> 73888 bytes
+|  tests/images/FR02-017-1.png | Bin 0 -> 73888 bytes
+|  tests/images/FR02-017-2.png | Bin 0 -> 61616 bytes
+|  tests/images/FR02-022-1.png | Bin 0 -> 69606 bytes
+|  tests/images/FR02-022-2.png | Bin 0 -> 135447 bytes
+|  tests/images/FR02-023-1.png | Bin 0 -> 116986 bytes
+|  tests/images/FR02-025-1.png | Bin 0 -> 116986 bytes
+|  tests/images/FR02-027-1.png | Bin 0 -> 77261 bytes
+|  tests/images/FR02-029-1.png | Bin 0 -> 24014 bytes
+|  tests/images/FR02-036-1.png | Bin 0 -> 84469 bytes
+|  tests/images/FR02-037-1.png | Bin 0 -> 22151 bytes
+|  tests/images/FR02-041-1.png | Bin 0 -> 94492 bytes
+|  tests/images/FR02-043-1.png | Bin 0 -> 126939 bytes
+|  17 files changed, 0 insertions(+), 0 deletions(-)
+| 
+* commit 2c9dd6541ad76722ecc8abaca4906c560d79c86c
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Mon Oct 12 00:24:29 2026 +0700
+| 
+|     test:excute test and  add test report for FR02
+| 
+|  tests/domain-testing/FR02-test-report.md | 77 ++++++++++++++++++++++++++++++
+|  1 file changed, 77 insertions(+)
+| 
+* commit 86e805037f5d8b0cfb41957ef5ad9a95aa99f2e5
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Sun Oct 11 21:55:27 2026 +0700
+| 
+|     tests: add test case file producing by domain value presentation
+| 
+|  tests/domain-testing/FR02_test_cases.md | 65 +++++++++++++++++++++++++++++++
+|  1 file changed, 65 insertions(+)
+| 
+* commit f3beed82b3a2a4de7c106264fa4b0351c2e34124
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Sun Oct 11 21:34:20 2026 +0700
+| 
+|     test: add output domain and output representation value
+| 
+|  ...omain_input.md => FR02_domain_input_output.md} |  16 ++-
+|  .../FR02_domain_value_presentation.md             | 117 ++++++++++++++++++++
+|  2 files changed, 131 insertions(+), 2 deletions(-)
+| 
+* commit 214084d9d100681c4734dff0579c0f38215e6664
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Sun Oct 11 20:51:10 2026 +0700
+| 
+|     chore: change file name
+| 
+|  tests/domain-testing/{domain_input.md => FR02_domain_input.md} | 0
+|  1 file changed, 0 insertions(+), 0 deletions(-)
+| 
+* commit dfe94e15658e7f16f3d274902094861a1cc72906
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Sun Oct 11 20:49:14 2026 +0700
+| 
+|     test: add test plan and domain input for FR-02
+| 
+|  tests/FR-02-test-plan.md             | 33 +++++++++++++
+|  tests/domain-testing/domain_input.md | 87 ++++++++++++++++++++++++++++++++++
+|  2 files changed, 120 insertions(+)
+| 
+* commit e0d1f18fe659118e94b9c7af6147ee60ff853639
+| Author: Hoang Ngoc <hoangngoc3691@gmail.com>
+| Date:   Sun Oct 11 20:19:58 2026 +0700
+| 
+|     setup: add gitignore and run service following guidance
+| 
+|  .gitignore                     |   5 +
+|  backend/database.sqlite        | Bin 36864 -> 36864 bytes
+|  backend/package-lock.json      |  97 +++---
+|  frontend-web/package-lock.json | 681 ++++++++++++++++++---------------------
+|  4 files changed, 367 insertions(+), 416 deletions(-)
+|   
+| * commit 522a49d2d07a1645f09848338596215c3cfaa550
+| | Author: Danh Vo <vhdanh.fit.hcmus@gmail.com>
+| | Date:   Thu Oct 8 00:46:42 2026 +0700
+| | 
+| |     Create skills BVA Testing
+| | 
+| |  agent-skills/BVATesting.md | 1288 ++++++++++++++++++++++++++++++++++++++++
+| |  1 file changed, 1288 insertions(+)
+| | 
+| * commit 8080169ae72da261e3ac5887de3ce4e25d286e4b
+| | Author: Danh Vo <vhdanh.fit.hcmus@gmail.com>
+| | Date:   Thu Oct 8 00:15:54 2026 +0700
+| | 
+| |     Update skills DomainTesting
+| | 
+| |  agent-skills/DomainTesting.md | 6 +++---
+| |  1 file changed, 3 insertions(+), 3 deletions(-)
+| | 
+| * commit de7147db9bb9921bf3660aad4757f054fdf70128
+| | Author: Danh Vo <vhdanh.fit.hcmus@gmail.com>
+| | Date:   Wed Oct 7 21:10:43 2026 +0700
+| | 
+| |     Create Skills DomainTesting
+| | 
+| |  agent-skills/DomainTesting.md | 649 ++++++++++++++++++++++++++++++++++++++
+| |  1 file changed, 649 insertions(+)
+| | 
+| * commit 468cd31a12c96c81ca92fdf42e1e0bd091200d75
+|/  Author: Danh Vo <vhdanh.fit.hcmus@gmail.com>
+|   Date:   Wed Oct 7 14:54:42 2026 +0700
+|   
+|       Create feature DANH/HW2 and sync code base to base EShop
+|   
+|    .agents/skills/domain-testing-bva/SKILL.md | 486 -------------------------
+|    AGENTS.md                                  |  61 ----
+|    2 files changed, 547 deletions(-)
+| 
+* commit 13e4a5c9d79992b38d73db99f3388a39f5a5fec2
+| Author: Toan <toan09833@gmail.com>
+| Date:   Tue Oct 6 12:44:26 2026 +0700
+| 
+|     docs: add agent specs and skills
+| 
+|  .agents/skills/domain-testing-bva/SKILL.md | 486 +++++++++++++++++++++++++++
+|  AGENTS.md                                  |  61 ++++
+|  2 files changed, 547 insertions(+)
+| 
+* commit 85af3ba875c88283615e22cb108f13e2fccaf0e9
+| Author: ttbhanh-hcmus <ttbhanh@hcmus.edu.vn>
+| Date:   Fri May 15 08:30:35 2026 +0700
+| 
+|     first upload
+| 
+|  README.md                                 |  290 +-
+|  api_specification.md                      |  214 +
+|  backend/database.js                       |  119 +
+|  backend/database.sqlite                   |  Bin 0 -> 36864 bytes
+|  backend/package-lock.json                 | 1663 +++++
+|  backend/package.json                      |   20 +
+|  backend/server.js                         |  572 ++
+|  backend/test_profile.js                   |    8 +
+|  frontend-admin/.gitignore                 |   24 +
+|  frontend-admin/README.md                  |   16 +
+|  frontend-admin/eslint.config.js           |   21 +
+|  frontend-admin/index.html                 |   13 +
+|  frontend-admin/package-lock.json          | 3681 +++++++++++
+|  frontend-admin/package.json               |   32 +
+|  frontend-admin/postcss.config.js          |    6 +
+|  frontend-admin/public/favicon.svg         |    1 +
+|  frontend-admin/public/icons.svg           |   24 +
+|  frontend-admin/src/App.css                |  184 +
+|  frontend-admin/src/App.jsx                |  922 +++
+|  frontend-admin/src/assets/hero.png        |  Bin 0 -> 13057 bytes
+|  frontend-admin/src/assets/react.svg       |    1 +
+|  frontend-admin/src/assets/vite.svg        |    1 +
+|  frontend-admin/src/index.css              |    8 +
+|  frontend-admin/src/main.jsx               |   10 +
+|  frontend-admin/tailwind.config.js         |   11 +
+|  frontend-admin/vite.config.js             |   11 +
+|  frontend-mobile/.gitignore                |   41 +
+|  frontend-mobile/App.js                    | 1300 ++++
+|  frontend-mobile/app.json                  |   29 +
+|  frontend-mobile/assets/adaptive-icon.png  |  Bin 0 -> 17547 bytes
+|  frontend-mobile/assets/favicon.png        |  Bin 0 -> 1466 bytes
+|  frontend-mobile/assets/icon.png           |  Bin 0 -> 22380 bytes
+|  frontend-mobile/assets/splash-icon.png    |  Bin 0 -> 17547 bytes
+|  frontend-mobile/index.js                  |    8 +
+|  frontend-mobile/package-lock.json         | 8773 +++++++++++++++++++++++++++
+|  frontend-mobile/package.json              |   18 +
+|  frontend-web/.gitignore                   |   24 +
+|  frontend-web/README.md                    |   16 +
+|  frontend-web/eslint.config.js             |   21 +
+|  frontend-web/index.html                   |   13 +
+|  frontend-web/package-lock.json            | 3681 +++++++++++
+|  frontend-web/package.json                 |   32 +
+|  frontend-web/postcss.config.js            |    6 +
+|  frontend-web/public/favicon.svg           |    1 +
+|  frontend-web/public/icons.svg             |   24 +
+|  frontend-web/src/App.css                  |  184 +
+|  frontend-web/src/App.jsx                  |   71 +
+|  frontend-web/src/assets/hero.png          |  Bin 0 -> 13057 bytes
+|  frontend-web/src/assets/react.svg         |    1 +
+|  frontend-web/src/assets/vite.svg          |    1 +
+|  frontend-web/src/context/AuthContext.jsx  |   50 +
+|  frontend-web/src/context/CartContext.jsx  |   36 +
+|  frontend-web/src/index.css                |   14 +
+|  frontend-web/src/main.jsx                 |   10 +
+|  frontend-web/src/pages/Cart.jsx           |   79 +
+|  frontend-web/src/pages/Checkout.jsx       |  151 +
+|  frontend-web/src/pages/ForgotPassword.jsx |  100 +
+|  frontend-web/src/pages/Home.jsx           |  116 +
+|  frontend-web/src/pages/Login.jsx          |   69 +
+|  frontend-web/src/pages/ProductDetail.jsx  |   73 +
+|  frontend-web/src/pages/Profile.jsx        |  217 +
+|  frontend-web/src/pages/Register.jsx       |   83 +
+|  frontend-web/tailwind.config.js           |   11 +
+|  frontend-web/vite.config.js               |    7 +
+|  run_servers.sh                            |    5 +
+|  setup_guide.md                            |  117 +
+|  66 files changed, 23232 insertions(+), 2 deletions(-)
+| 
+* commit 2f9bf2bab45855abf211377a5d5eba10031649e3
+  Author: Hanh Tran <ttbhanh@fit.hcmus.edu.vn>
+  Date:   Fri May 15 08:27:44 2026 +0700
+  
+      Initial commit
+  
+   README.md | 2 ++
+   1 file changed, 2 insertions(+)
