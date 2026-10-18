@@ -53,4 +53,14 @@ Các mã LEN-04, LEN-05, LEN-06 giữ các chuỗi 254, 255, 256 ký tự làm k
 
 Khoảng trắng: 0, 1, 2 dấu cách kiểm tra chuyển từ rỗng sang chuỗi chỉ dấu cách; chính sách trim chưa được spec chốt. `%`, `_`, nháy đơn, `&`, `#`, `?` là các lớp ký tự, không phải biên số.
 
+### B.2 Số sản phẩm trong CSDL
+
+Miền CAT-VEC-02 là `N ≥ 1`, nên `Min = 1`. Không có Max, nên không có bộ `Max-1/Max/Max+1`.
+
+| ID | Vị trí | N | Lớp bước 2 | Expected |
+| --- | --- | --- | --- | --- |
+| CAT-B-01 | Min-1 | 0 | CAT-VEC-01 | Trang trống có icon/hình và message |
+| CAT-B-02 | Min | 1 | CAT-VEC-02 | Lưới đúng 1 sản phẩm |
+| CAT-B-03 | Min+1 | 2 | CAT-VEC-02 | Lưới đúng 2 sản phẩm |
+
 Không lập BVA giá, sort, danh mục hoặc phân trang cho FR-05. Không dùng ký hiệu L và không tạo test blocked cho chức năng không được yêu cầu.
