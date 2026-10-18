@@ -6,7 +6,7 @@ Tài liệu này gom các TC FAILED theo nguyên nhân gốc. Mỗi mục có th
 
 ## BUG-FR02-001: Bộ đếm đăng nhập sai tăng 2 thay vì 1
 
-**Các TC liên quan:** `TC-FR02-007`, `TC-FR02-009`, `TC-FR02-011`, `TC-FR02-012`, `TC-FR02-013`
+**Các TC liên quan:** `TC-FR-02-LOGIN-007`, `TC-FR-02-LOGIN-009`, `TC-FR-02-LOGIN-011`, `TC-FR-02-LOGIN-012`, `TC-FR-02-LOGIN-013`
 
 **Mức độ:** Major - Nghiêm trọng
 
@@ -52,7 +52,7 @@ const newAttempts = user.login_attempts + 1;
 
 ## BUG-FR02-002: Thời gian khóa tài khoản là 180 giây thay vì 30 giây
 
-**Các TC liên quan:** `TC-FR02-016`, `TC-FR02-017`
+**Các TC liên quan:** `TC-FR-02-LOGIN-016`, `TC-FR-02-LOGIN-017`
 
 **Mức độ:** Major - Nghiêm trọng
 
@@ -94,7 +94,7 @@ lockedUntil = new Date(Date.now() + 30000).toISOString();
 
 ## BUG-FR02-003: Trường email không dùng HTML5 `type="email"`
 
-**Các TC liên quan:** `TC-FR02-029`, `TC-FR02-031`
+**Các TC liên quan:** `TC-FR-02-LOGIN-029`, `TC-FR-02-LOGIN-031`
 
 **Mức độ:** Medium - Trung bình
 
@@ -150,7 +150,7 @@ Trong `frontend-web/src/pages/Login.jsx`:
 
 ## BUG-FR02-004: Client chấp nhận response đăng nhập không có token hoặc token rỗng
 
-**Các TC liên quan:** `TC-FR02-034`, `TC-FR02-035`
+**Các TC liên quan:** `TC-FR-02-LOGIN-034`, `TC-FR-02-LOGIN-035`
 
 **Mức độ:** Major - Nghiêm trọng
 
@@ -219,7 +219,7 @@ setUser(res.data.user);
 
 ## BUG-FR02-005: Response đăng nhập làm lộ mật khẩu dạng plaintext
 
-**TC liên quan:** `TC-FR02-036`
+**TC liên quan:** `TC-FR-02-LOGIN-036`
 
 **Mức độ:** Critical - Nghiêm trọng về bảo mật
 
@@ -278,7 +278,7 @@ res.json({ message: "Login successful", token, user: safeUser });
 
 ## BUG-FR02-006: Giao diện không hiển thị thông báo tài khoản bị khóa
 
-**TC liên quan:** `TC-FR02-038`
+**TC liên quan:** `TC-FR-02-LOGIN-038`
 
 **Mức độ:** Medium - Trung bình
 

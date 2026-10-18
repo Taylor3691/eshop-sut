@@ -1,4 +1,4 @@
-# TC-CHECKOUT-007: Giỏ hàng được xóa sau checkout thành công
+# TC-FR-08-CHECKOUT-007: Giỏ hàng được xóa sau checkout thành công
 
 ## Requirement ID
 

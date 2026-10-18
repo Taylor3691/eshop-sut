@@ -1,4 +1,4 @@
-# TC-CHECKOUT-006: Hiển thị đầy đủ sản phẩm trong checkout
+# TC-FR-08-CHECKOUT-006: Hiển thị đầy đủ sản phẩm trong checkout
 
 ## Requirement ID
 

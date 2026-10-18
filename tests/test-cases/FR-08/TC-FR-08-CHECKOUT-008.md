@@ -1,4 +1,4 @@
-# TC-CHECKOUT-008: Thăm dò checkout với giỏ hàng rỗng
+# TC-FR-08-CHECKOUT-008: Thăm dò checkout với giỏ hàng rỗng
 
 ## Requirement ID
 

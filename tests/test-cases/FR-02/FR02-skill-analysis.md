@@ -1,6 +1,6 @@
 # FR-02 — Domain Testing & BVA Analysis
 
-> Oracle: `README.md`, FR-02. This document applies the `domain-testing-bva` workflow. Existing executed cases and results remain in [FR02_test_cases.md](FR02_test_cases.md) and [FR02-test-report.md](../../test-summary/FR-02/FR02-test-report.md).
+> Oracle: `README.md`, FR-02. This document applies the `domain-testing-bva` workflow. The individual case files are indexed in [README.md](README.md); the source case table remains in [FR02_test_cases.md](FR02_test_cases.md), and previous execution results remain in [FR02-test-report.md](../../test-summary/FR-02/FR02-test-report.md).
 
 ## 1. Requirement Analysis
 
@@ -65,7 +65,7 @@
 
 | Partition ID | Variable | Class | Condition | Representative | Requirement / Existing Cases |
 |---|---|---|---|---|---|
-| EP-01 | Email | VALID | Đúng định dạng và đã đăng ký | `test@eshop.com` | FR-02 / TC-FR02-005 |
+| EP-01 | Email | VALID | Đúng định dạng và đã đăng ký | `test@eshop.com` | FR-02 / TC-FR-02-LOGIN-005 |
 | EP-02 | Email | INVALID | Rỗng | `""` | FR-02 / 001, 030 |
 | EP-03 | Email | INVALID | Sai định dạng/thiếu domain | `test`, `user@` | FR-02 / 002, 003, 031 |
 | EP-04 | Email | INVALID | Đúng định dạng nhưng chưa đăng ký | `unknown@example.com` | FR-02 / 004 |
@@ -97,19 +97,19 @@
 
 | Variable | Boundary | Test Value | Classification | Existing Case |
 |---|---:|---:|---|---|
-| Failure count | 3 | 2 | Hợp lệ: chưa khóa | TC-FR02-012 |
-| Failure count | 3 | 3 | Ngưỡng: phải khóa | TC-FR02-013 |
-| Failure count | 3 | 4 | Phải vẫn khóa | TC-FR02-014 |
-| Attempt delta | +1 | +0 | Không hợp lệ | TC-FR02-010 |
-| Attempt delta | +1 | +1 | Hợp lệ | TC-FR02-009 |
-| Attempt delta | +1 | +2 | Không hợp lệ | TC-FR02-011 |
-| Lock time | 30s | 29s | Còn bị khóa | TC-FR02-015 |
-| Lock time | 30s | 30s | Chưa phân loại: yêu cầu mơ hồ | TC-FR02-016 |
-| Lock time | 30s | 31s | Được thử lại | TC-FR02-017 |
+| Failure count | 3 | 2 | Hợp lệ: chưa khóa | TC-FR-02-LOGIN-012 |
+| Failure count | 3 | 3 | Ngưỡng: phải khóa | TC-FR-02-LOGIN-013 |
+| Failure count | 3 | 4 | Phải vẫn khóa | TC-FR-02-LOGIN-014 |
+| Attempt delta | +1 | +0 | Không hợp lệ | TC-FR-02-LOGIN-010 |
+| Attempt delta | +1 | +1 | Hợp lệ | TC-FR-02-LOGIN-009 |
+| Attempt delta | +1 | +2 | Không hợp lệ | TC-FR-02-LOGIN-011 |
+| Lock time | 30s | 29s | Còn bị khóa | TC-FR-02-LOGIN-015 |
+| Lock time | 30s | 30s | Chưa phân loại: yêu cầu mơ hồ | TC-FR-02-LOGIN-016 |
+| Lock time | 30s | 31s | Được thử lại | TC-FR-02-LOGIN-017 |
 
 ## 6. Generated Test Cases / Traceability
 
-The existing [FR02_test_cases.md](FR02_test_cases.md) is the generated and executed case set; it contains 39 unique cases and the recorded actual results. Case IDs are mapped to requirements/partitions above, avoiding duplicate IDs. Before rerunning, reset each test account to the stated starting counter/lock state. The existing case table records input, expected, actual, and status; it should be reviewed for explicit step-by-step reproduction where a case is repeated.
+The [README index](README.md) links to 39 individual case files generated from [FR02_test_cases.md](FR02_test_cases.md), after removing the duplicate IDs documented in the report. These newly separated cases are Not Run. Previous actual results remain in [FR02-test-report.md](../../test-summary/FR-02/FR02-test-report.md) and are not copied as results of this set. Before running, reset each test account to the stated starting counter/lock state.
 
 | Case Group | Existing Case IDs | Technique | Requirement |
 |---|---|---|---|
@@ -147,7 +147,7 @@ The existing [FR02_test_cases.md](FR02_test_cases.md) is the generated and execu
 ### Candidate 2 — Exact lock expiry
 - Possible missed case: behavior at exactly 30 seconds can differ from 29/31 seconds.
 - Why it may have been missed: boundary inclusiveness is unspecified.
-- Human action required: Decide and update TC-FR02-016 expected result.
+- Human action required: Decide and update TC-FR-02-LOGIN-016 expected result.
 
 ### Candidate 3 — Token expiration
 - Possible missed case: expired JWT and additional malformed token variants.

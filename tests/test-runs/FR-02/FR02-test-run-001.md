@@ -18,12 +18,12 @@
 | Not Run / Blocked | 0 | FR02-test-report.md |
 
 ## Failed Cases / Bug Links
-- Counter/threshold: TC-FR02-007, 009, 011, 012, 013.
-- Lock duration/recovery: TC-FR02-016, 017.
-- HTML5 email validation: TC-FR02-029, 031.
-- Missing/empty JWT accepted by client: TC-FR02-034, 035.
-- Plaintext password returned: TC-FR02-036.
-- Missing locked-account message: TC-FR02-038.
+- Counter/threshold: TC-FR-02-LOGIN-007, 009, 011, 012, 013.
+- Lock duration/recovery: TC-FR-02-LOGIN-016, 017.
+- HTML5 email validation: TC-FR-02-LOGIN-029, 031.
+- Missing/empty JWT accepted by client: TC-FR-02-LOGIN-034, 035.
+- Plaintext password returned: TC-FR-02-LOGIN-036.
+- Missing locked-account message: TC-FR-02-LOGIN-038.
 - Consolidated details: `../../bug-reports/FR-02/BUG-FR02-all.md`.
 
 ## Limitations

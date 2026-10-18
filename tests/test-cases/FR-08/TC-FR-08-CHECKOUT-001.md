@@ -1,4 +1,4 @@
-# TC-CHECKOUT-001: Checkout thành công và tính tổng từ giỏ hàng
+# TC-FR-08-CHECKOUT-001: Checkout thành công và tính tổng từ giỏ hàng
 
 ## Requirement ID
 

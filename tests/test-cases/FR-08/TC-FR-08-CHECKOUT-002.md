@@ -1,4 +1,4 @@
-# TC-CHECKOUT-002: Chặn checkout khi chưa đăng nhập
+# TC-FR-08-CHECKOUT-002: Chặn checkout khi chưa đăng nhập
 
 ## Requirement ID
 

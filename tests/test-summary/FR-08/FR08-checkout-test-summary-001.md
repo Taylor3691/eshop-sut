@@ -12,11 +12,11 @@
 
 | Requirement | Coverage | Test Cases |
 |---|---|---|
-| FR-08.1 Chỉ user đăng nhập checkout | Planned | TC-CHECKOUT-001, TC-CHECKOUT-002 |
-| FR-08.2 Tổng tự tính, không chỉnh trực tiếp | Planned | TC-CHECKOUT-001, TC-CHECKOUT-005 |
-| FR-08.3 Hiển thị đủ sản phẩm | Planned | TC-CHECKOUT-006 |
-| FR-08.4 Backend tự tính, bỏ qua client total | Planned | TC-CHECKOUT-001, TC-CHECKOUT-003, TC-CHECKOUT-004 |
-| FR-08.5 Xóa cart sau thành công | Planned | TC-CHECKOUT-001, TC-CHECKOUT-007 |
+| FR-08.1 Chỉ user đăng nhập checkout | Planned | TC-FR-08-CHECKOUT-001, TC-FR-08-CHECKOUT-002 |
+| FR-08.2 Tổng tự tính, không chỉnh trực tiếp | Planned | TC-FR-08-CHECKOUT-001, TC-FR-08-CHECKOUT-005 |
+| FR-08.3 Hiển thị đủ sản phẩm | Planned | TC-FR-08-CHECKOUT-006 |
+| FR-08.4 Backend tự tính, bỏ qua client total | Planned | TC-FR-08-CHECKOUT-001, TC-FR-08-CHECKOUT-003, TC-FR-08-CHECKOUT-004 |
+| FR-08.5 Xóa cart sau thành công | Planned | TC-FR-08-CHECKOUT-001, TC-FR-08-CHECKOUT-007 |
 
 ## Findings / Risks
 - Chưa có kết quả chạy thực tế.

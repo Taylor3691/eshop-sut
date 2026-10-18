@@ -52,7 +52,7 @@ const newAttempts = user.login_attempts + 2;
 
 - Người dùng có thể bị khóa sau hai lần đăng nhập sai thay vì ba lần.
 - Cơ chế khóa đăng nhập không tuân thủ FR-02.
-- Các test case bị ảnh hưởng: `TC-FR02-007`, `TC-FR02-009`, `TC-FR02-011`, `TC-FR02-012`, `TC-FR02-013`.
+- Các test case bị ảnh hưởng: `TC-FR-02-LOGIN-007`, `TC-FR-02-LOGIN-009`, `TC-FR-02-LOGIN-011`, `TC-FR-02-LOGIN-012`, `TC-FR-02-LOGIN-013`.
 
 ## Mức độ nghiêm trọng
 

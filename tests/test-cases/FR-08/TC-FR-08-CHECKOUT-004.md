@@ -1,4 +1,4 @@
-# TC-CHECKOUT-003: Bỏ qua client total nhỏ hơn tổng giỏ hàng
+# TC-FR-08-CHECKOUT-004: Bỏ qua client total lớn hơn tổng giỏ hàng
 
 ## Requirement ID
 
@@ -19,18 +19,18 @@ CHECKOUT API / Functional / Equivalence Partitioning
 | Field | Value |
 |---|---|
 | Tổng tính từ giỏ hàng | 200000 |
-| Client `total_amount` | 1 |
+| Client `total_amount` | 9999999 |
 | Authorization | Bearer token hợp lệ |
 
 ## Test Steps
 
-1. Gửi `POST /api/checkout` với token hợp lệ và `total_amount=1`.
+1. Gửi `POST /api/checkout` với token hợp lệ và `total_amount=9999999`.
 2. Kiểm tra response và đơn mới trong lịch sử/chi tiết đơn.
 3. So sánh tổng đơn với tổng tính từ giỏ hàng.
 
 ## Expected Result
 
-- Backend không dùng giá trị `total_amount=1` do client gửi.
+- Backend không dùng giá trị `total_amount=9999999` do client gửi.
 - Nếu checkout thành công, tổng đơn phải là 200000 ₫ theo giỏ hàng; nếu request bị từ chối thì không có đơn với tổng giả mạo.
 
 ## Status / Related Bugs

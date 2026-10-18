@@ -1,4 +1,4 @@
-# TC-CHECKOUT-005: Tổng tiền không thể chỉnh trực tiếp trên giao diện
+# TC-FR-08-CHECKOUT-005: Tổng tiền không thể chỉnh trực tiếp trên giao diện
 
 ## Requirement ID
 

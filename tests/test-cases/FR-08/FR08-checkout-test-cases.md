@@ -71,7 +71,7 @@ FR-08 không nêu giới hạn số lượng, khoảng giá, ngưỡng tổng ti
 
 ## Generated Test Cases
 
-### TC-CHECKOUT-001: Checkout thành công với cart hợp lệ
+### TC-FR-08-CHECKOUT-001: Checkout thành công với cart hợp lệ
 - Requirement ID: FR-08.1, FR-08.2, FR-08.4, FR-08.5
 - Module / Test Type / Technique: Checkout / Functional / Equivalence Partitioning
 - Preconditions: User đăng nhập; cart có sản phẩm P1 giá 100000 số lượng 1 và P2 giá 50000 số lượng 3.
@@ -83,7 +83,7 @@ FR-08 không nêu giới hạn số lượng, khoảng giá, ngưỡng tổng ti
 - Expected Result: Đơn được tạo; tổng là 250000 tính từ cart; cart rỗng sau thành công.
 - Status / Related Bugs: Not Run / None
 
-### TC-CHECKOUT-002: Chặn checkout khi chưa đăng nhập
+### TC-FR-08-CHECKOUT-002: Chặn checkout khi chưa đăng nhập
 - Requirement ID: FR-08.1
 - Module / Test Type / Technique: Checkout / Functional / Equivalence Partitioning
 - Preconditions: Có cart hoặc request checkout hợp lệ nhưng không có phiên đăng nhập.
@@ -94,7 +94,7 @@ FR-08 không nêu giới hạn số lượng, khoảng giá, ngưỡng tổng ti
 - Expected Result: Checkout bị từ chối; không tạo đơn.
 - Status / Related Bugs: Not Run / None
 
-### TC-CHECKOUT-003: Backend bỏ qua tổng tiền client giả mạo thấp hơn
+### TC-FR-08-CHECKOUT-003: Backend bỏ qua tổng tiền client giả mạo thấp hơn
 - Requirement ID: FR-08.4
 - Module / Test Type / Technique: Checkout / Functional / Equivalence Partitioning
 - Preconditions: Đăng nhập; cart có P1 giá 100000 × 2.
@@ -105,7 +105,7 @@ FR-08 không nêu giới hạn số lượng, khoảng giá, ngưỡng tổng ti
 - Expected Result: Giá trị client không được dùng; tổng đơn là 200000 theo cart.
 - Status / Related Bugs: Not Run / None
 
-### TC-CHECKOUT-004: Backend bỏ qua tổng tiền client giả mạo cao hơn
+### TC-FR-08-CHECKOUT-004: Backend bỏ qua tổng tiền client giả mạo cao hơn
 - Requirement ID: FR-08.4
 - Module / Test Type / Technique: Checkout / Functional / Equivalence Partitioning
 - Preconditions: Đăng nhập; cart có P1 giá 100000 × 2.
@@ -116,7 +116,7 @@ FR-08 không nêu giới hạn số lượng, khoảng giá, ngưỡng tổng ti
 - Expected Result: Giá trị client không được dùng; tổng đơn là 200000 theo cart.
 - Status / Related Bugs: Not Run / None
 
-### TC-CHECKOUT-005: Không cho chỉnh trực tiếp tổng tiền trên giao diện
+### TC-FR-08-CHECKOUT-005: Không cho chỉnh trực tiếp tổng tiền trên giao diện
 - Requirement ID: FR-08.2
 - Module / Test Type / Technique: Checkout UI / Functional / Equivalence Partitioning
 - Preconditions: Đăng nhập; cart có ít nhất một sản phẩm.
@@ -127,7 +127,7 @@ FR-08 không nêu giới hạn số lượng, khoảng giá, ngưỡng tổng ti
 - Expected Result: Tổng tiền được tính tự động và không có cách chỉnh sửa trực tiếp qua giao diện.
 - Status / Related Bugs: Not Run / None
 
-### TC-CHECKOUT-006: Hiển thị đủ sản phẩm và số lượng trong checkout
+### TC-FR-08-CHECKOUT-006: Hiển thị đủ sản phẩm và số lượng trong checkout
 - Requirement ID: FR-08.3
 - Module / Test Type / Technique: Checkout UI / Functional / Equivalence Partitioning
 - Preconditions: Đăng nhập; cart có P1 × 1 và P2 × 3.
@@ -138,7 +138,7 @@ FR-08 không nêu giới hạn số lượng, khoảng giá, ngưỡng tổng ti
 - Expected Result: Tất cả sản phẩm đặt mua được hiển thị đủ và thông tin khớp cart.
 - Status / Related Bugs: Not Run / None
 
-### TC-CHECKOUT-007: Cart rỗng sau checkout thành công
+### TC-FR-08-CHECKOUT-007: Cart rỗng sau checkout thành công
 - Requirement ID: FR-08.5
 - Module / Test Type / Technique: Checkout / Functional / State transition
 - Preconditions: Đăng nhập; cart có sản phẩm; checkout có thể hoàn tất thành công.
@@ -149,7 +149,7 @@ FR-08 không nêu giới hạn số lượng, khoảng giá, ngưỡng tổng ti
 - Expected Result: Không còn sản phẩm trong cart.
 - Status / Related Bugs: Not Run / None
 
-### TC-CHECKOUT-008: Thăm dò checkout với cart rỗng
+### TC-FR-08-CHECKOUT-008: Thăm dò checkout với cart rỗng
 - Requirement ID: FR-08 (ambiguity)
 - Module / Test Type / Technique: Checkout / Exploratory / State partition
 - Preconditions: Đăng nhập; cart rỗng.
