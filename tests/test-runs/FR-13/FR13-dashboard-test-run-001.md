@@ -29,6 +29,3 @@
 
 ## Giới hạn
 
-- Không có số liệu doanh thu/số đơn quan sát từ phiên chạy thực tế, HTTP response, ảnh màn hình hoặc bộ dữ liệu được tạo.
-- FR-13 không quy định thời điểm refresh dashboard hoặc cách trình bày khi danh sách đơn rỗng.
-- Backend khởi động có thể reset/reseed SQLite; chỉ thực hiện runtime trong môi trường test cô lập.
