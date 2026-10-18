@@ -59,3 +59,14 @@ Review 18/10/2026: TC-23..26 và TC-46 không áp dụng, đã loại khỏi b�
 | TC-52 | FAIL | CSDL 0 sản phẩm. Trang chủ không có thẻ sản phẩm và có empty state (icon/hình minh họa và message). | Sản phẩm: (không có sản phẩm). h1 (1): Danh sách sản phẩm. Loading: không thấy. Echo text: (không có). Không có khối lỗi SQL/HTML. Không có thông báo empty state. |
 | TC-53 | FAIL | CSDL 1 sản phẩm. Lưới có đúng iPhone 15 Pro Max, giá 30.000.000 ₫. | Sản phẩm: iPhone 15 Pro Max. Giá: iPhone 15 Pro Max = 30.000.000 VND. alt: "". h1 (2): Danh sách sản phẩm \| Hiển thị 1 sản phẩm. Loading: không thấy. Echo text: (không có). Không có khối lỗi SQL/HTML. Không có thông báo empty state. |
 | TC-54 | PASS | CSDL 2 sản phẩm. Lưới có đúng iPhone 15 Pro Max và Samsung Galaxy S24 Ultra. | Sản phẩm: iPhone 15 Pro Max; Samsung Galaxy S24 Ultra. Giá: iPhone 15 Pro Max = 30.000.000 VND; Samsung Galaxy S24 Ultra = 28.000.000 VND. alt: "", "". h1 (2): Danh sách sản phẩm \| Hiển thị 2 sản phẩm. Loading: không thấy. Echo text: (không có). Không có khối lỗi SQL/HTML. Không có thông báo empty state. |
+## Tóm tắt lệch
+
+- Giá hiện `VND` thay vì `₫` (BUG-01): TC-01, 06, 08, 53.
+- `alt` rỗng, hai thẻ `h1`, không có loading (BUG-02, 03, 04): TC-01.
+- Thiếu empty state (BUG-05): TC-03, 05, 07, 11, 12, 13, 31, 49 khi tìm không ra, và TC-52 khi CSDL không có sản phẩm nào (ảnh `docs/bugs/fr05-TC-52.png`).
+- `<script>` bị nuốt thay vì hiện thành chữ (BUG-06): TC-09.
+- `%`, `_` khớp mọi sản phẩm (BUG-08): TC-28, 29. `'` gây lỗi SQL (BUG-09): TC-30.
+- `&`, `#` cắt từ khóa: TC-47, 48 (cùng nguyên nhân BUG-22 ở bộ mobile). `?` không cắt; TC-49 fail vì thiếu empty state.
+- 23 kiểm tra query thừa đều PASS và không tính vào coverage chức năng.
+
+Lượt chạy ngày 18/10/2026 (UTC+7).
