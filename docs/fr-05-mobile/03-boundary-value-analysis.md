@@ -1,40 +1,45 @@
-# FR-05 — Boundary Value Analysis, 3-value (mobile)
+# FR-05 mobile — Chọn điểm on/off/in/out và phân tích biên
 
-Chức năng: **FR-05 Xem danh sách và tìm kiếm sản phẩm**, màn `home` của app mobile.
+## A. Domain testing — chọn điểm on/off/in/out
 
-Kỹ thuật: với biên đóng `[Min, Max]`, lấy `Min-1`, `Min`, `Min+1`, `Max-1`, `Max`, `Max+1`. Giá trị `Min` và `Max` nằm trên biên. `Min+1` và `Max-1` nằm trong miền. `Min-1` và `Max+1` nằm sát ngoài miền.
+On point nằm đúng trên biên. Off point là giá trị gần biên nhất ở phía bên kia (biên đóng `≥` thì off point nằm ngoài miền). In point và out point là giá trị điển hình trong và ngoài miền. Các lớp ký tự (`%`, `_`, `'`, `&`, `#`, `?`, HTML), hoa thường và dấu là miền liệt kê, không có on/off.
 
-Miền lấy từ bước 2 (`docs/fr-05-mobile/02-equivalence-partitioning.md`). Bước này chỉ tính số. Chưa viết test case. Bộ web ở `docs/fr-05/` không bị sửa.
+### A.1 Độ dài từ khóa — biên `len(search) ≥ 1`
 
-`%`, `_`, `'`, `&`, `#`, `?` và `<script>` là từng điểm, không phải khoảng `[Min, Max]`. Không gán số cho chúng.
+| Điểm | Giá trị | Thuộc miền | Test case |
+| --- | --- | --- | --- |
+| On | `a` (1) | Có lọc | TC-10 |
+| Off | `""` (0) | Hiện tất cả | TC-08 |
+| In | `iPhone` (6) | Có lọc | TC-01 |
+| Out | `""` (0) | Hiện tất cả | TC-08 |
 
-Không lập biên cho giá, danh mục, sắp xếp, phân trang. Bước 2 không có các lớp đó. FR-05 không có `Limit`. Không bịa số trang.
+### A.2 Số sản phẩm trong CSDL — biên `N ≥ 1`
 
-## 1. Độ dài từ khóa
+| Điểm | N | Thuộc miền | Test case |
+| --- | --- | --- | --- |
+| On | 1 | Có danh sách | TC-25 |
+| Off | 0 | Trang trống | TC-24 |
+| In | 5 (seed) | Có danh sách | TC-08 |
+| Out | 0 | Trang trống | TC-24 |
 
-FR-05 không khai báo độ dài tối đa của ô tìm. `TextInput` không có `maxLength`.
+Độ dài và số dòng không âm, nên out point trùng off point.
 
-Mốc biên trên là **FR-15: tên sản phẩm tối đa 255 ký tự**. Đó là độ dài tên hợp lệ dài nhất có thể lưu, nên một từ khóa dài hơn 255 không thể khớp toàn phần một tên đúng spec. `Max = 255`.
+Độ rộng màn hình (VIEW-VEC-01..03) không có on/off: ranh giới 360 và 600 px là giả định chia nhóm thiết bị, README không đặt breakpoint nào để kiểm tra hai phía.
 
-Biên dưới của từ khóa không rỗng là 1 ký tự. Chuỗi dài 0 là lớp kế bên (KW-VEC-09), không phải lỗi bị từ chối.
+## B. Boundary value analysis
 
-Đếm theo số ký tự. Chuỗi biên là chữ `a` lặp lại.
+FR-05 không quy định độ dài tối đa của từ khóa. Giới hạn tên sản phẩm ở FR-15 không phải giới hạn ô tìm kiếm. Không áp dụng Max = 255 cho từ khóa.
 
-| ID | Vị trí | Số ký tự | Giá trị | So với miền 1..255 |
-| --- | --- | --- | --- | --- |
-| LEN-B-01 | Min-1 | 0 | `""` | Sát dưới Min. Lớp KW-VEC-09 |
-| LEN-B-02 | Min | 1 | `a` | Trên biên dưới |
-| LEN-B-03 | Min+1 | 2 | `aa` | Trong miền |
-| LEN-B-04 | Max-1 | 254 | `a` lặp 254 lần | Trong miền |
-| LEN-B-05 | Max | 255 | `a` lặp 255 lần | Trên biên trên của FR-15 |
-| LEN-B-06 | Max+1 | 256 | `a` lặp 256 lần | Sát ngoài FR-15. Ô tìm không chặn độ dài này |
+### B.1 Biên chuyển trạng thái rỗng / không rỗng
 
-## 2. Chuỗi chỉ gồm dấu cách
+| ID | Độ dài | Giá trị | Ý nghĩa |
+| --- | --- | --- | --- |
+| LEN-B-01 | 0 | Chuỗi rỗng | Liệt kê tất cả sản phẩm |
+| LEN-B-02 | 1 | a | Đầu lớp chuỗi không rỗng |
+| LEN-B-03 | 2 | aa | Bên trong lớp chuỗi không rỗng |
 
-Lớp KW-IEC-01 bắt đầu tại 1 dấu cách. Chuỗi 0 dấu cách là KW-VEC-09. Spec không có số dấu cách tối đa, nên không có `Max-1`, `Max`, `Max+1`.
+Các mã LEN-B-04, LEN-B-05, LEN-B-06 giữ các chuỗi 254, 255, 256 ký tự làm kiểm thử độ bền bổ sung, không phải Max-1/Max/Max+1 của search. Không được mong đợi lỗi độ dài vì spec không nêu giới hạn.
 
-| ID | Vị trí | Số dấu cách | Giá trị | Lớp bước 2 |
-| --- | --- | --- | --- | --- |
-| SP-B-01 | Min-1 | 0 | `""` | KW-VEC-09 |
-| SP-B-02 | Min | 1 | `" "` | KW-IEC-01. Điểm đầu của chuỗi chỉ dấu cách |
-| SP-B-03 | Min+1 | 2 | `"  "` | KW-IEC-01. Trong lớp. Đại diện 3 dấu cách ở bước 2 vẫn cùng lớp |
+Khoảng trắng: 0, 1, 2 dấu cách kiểm tra chuyển từ rỗng sang chuỗi chỉ dấu cách; chính sách trim chưa được spec chốt. `%`, `_`, nháy đơn, `&`, `#`, `?` là các lớp ký tự, không phải biên số.
+
+Không lập BVA giá, sort, danh mục hoặc phân trang cho FR-05. Không dùng ký hiệu L và không tạo test blocked cho chức năng không được yêu cầu.
