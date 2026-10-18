@@ -2,15 +2,7 @@
 
 Chạy trên API `http://localhost:3000` và UI `http://localhost:5173`. Script: `scripts/fr11-execute.mjs`.
 
-Tổng: 27. PASS: 23. FAIL: 4. BLOCKED: 0.
-
-## Các lệch đã thấy
-
-- TC-01: đơn, ngày, tiền `30.000.000 ₫` và nhãn `Chờ xác nhận` đúng. Trang không có `h1`.
-- TC-02: có câu "Bạn chưa có đơn hàng nào." Không có icon.
-- TC-21: `created_at` null hiện thành `1/1/1970`.
-- TC-22: `total_amount` null hiện thành `0 ₫`.
-- TC-03 đến TC-20 và TC-23 đến TC-27: PASS. Đơn của người khác không hiện. Năm trạng thái có nhãn tiếng Việt và màu khác nhau. Mốc tiền đúng dấu `₫`. Khách chưa đăng nhập không thấy đơn. API thiếu token trả 401, token sai trả 403. Query `user_id=1` không đổi tập đơn.
+Tổng: 28. PASS: 23. FAIL: 5. BLOCKED: 0.
 
 | TC | Kết quả | Expected Result | Actual Result |
 | --- | --- | --- | --- |
@@ -41,3 +33,13 @@ Tổng: 27. PASS: 23. FAIL: 4. BLOCKED: 0.
 | TC-25 | PASS | Bị từ chối. Thân response không phải danh sách chứa đơn id=1. | HTTP 401. {"error":"Unauthorized"} |
 | TC-26 | PASS | Bị từ chối. Thân response không phải danh sách chứa đơn id=1. | HTTP 403. {"error":"Forbidden"} |
 | TC-27 | PASS | HTTP không phải lỗi. JSON chỉ có đơn id=1 của user 2, giống lúc không gửi query. | HTTP 200. Đơn: #1 user 2. |
+| TC-28 | FAIL | Nhấn Tab từ đầu trang: mỗi phần tử nhận focus tiếp theo không nằm phía trên phần tử trước; cùng hàng thì nằm bên phải (FR-21). | Thứ tự focus: EShop(16,16) → Giỏ hàng(986,20) → Chào, Test User(1067,20) → Thoát(1198,16) → Test User(169,267) → INPUT(169,353) → TEXTAREA(169,439) → Cập nhật(169,557) → Hủy đơn(1015,204) → Hủy đơn(1015,247). Lệch: "Cập nhật"(169,557) → "Hủy đơn"(1015,204). |
+## Tóm tắt lệch
+
+- TC-01: đơn, ngày, tiền `30.000.000 ₫` và nhãn `Chờ xác nhận` đúng. Trang không có `h1` (BUG-10).
+- TC-02: có câu "Bạn chưa có đơn hàng nào." nhưng không có icon (BUG-11).
+- TC-21: `created_at` NULL hiện thành `1/1/1970`; TC-22: `total_amount` NULL hiện thành `0 ₫`. Hai case dùng tiêu chí đề xuất, BUG-12/13 chờ xác nhận.
+- TC-28: focus đi hết cột trái (form hồ sơ) rồi mới lên nút "Hủy đơn" ở cột phải. Lệch nếu đọc FR-21 theo dòng; đúng nếu đọc theo cột. Ghi là phát hiện cần làm rõ, chưa lập bug.
+- Các test còn lại PASS: đơn của người khác không hiện, năm trạng thái có nhãn tiếng Việt và màu khác nhau, mốc tiền đúng `₫`, khách chưa đăng nhập không thấy đơn, API thiếu token trả 401, token sai trả 403, query `user_id=1` không đổi tập đơn.
+
+Lượt chạy ngày 18/10/2026 (UTC+7). Ảnh thứ tự Tab: `docs/bugs/fr11-TC-28.png`.

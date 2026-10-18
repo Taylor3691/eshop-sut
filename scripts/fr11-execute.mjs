@@ -200,7 +200,49 @@ const CASES = [
     expect: "HTTP không phải lỗi. JSON chỉ có đơn id=1 của user 2, giống lúc không gửi query.",
     check: { apiIds: [1], apiUsers: [2] },
   },
+  {
+    id: "TC-28",
+    ui: true,
+    login: true,
+    tab: true,
+    rows: [order(), order({ id: 2 })],
+    expect: "Nhấn Tab từ đầu trang: mỗi phần tử nhận focus tiếp theo không nằm phía trên phần tử trước; cùng hàng thì nằm bên phải (FR-21).",
+    check: {},
+  },
 ];
+
+async function tabOrder(page) {
+  await page.evaluate(() => document.activeElement?.blur());
+  await page.locator("body").click({ position: { x: 1, y: 1 } });
+  const stops = [];
+  for (let i = 0; i < 40; i += 1) {
+    await page.keyboard.press("Tab");
+    const stop = await page.evaluate(() => {
+      const node = document.activeElement;
+      if (!node || node === document.body) return null;
+      const box = node.getBoundingClientRect();
+      return {
+        label: (node.innerText || node.value || node.getAttribute("aria-label") || node.tagName).trim().slice(0, 30),
+        x: Math.round(box.left + scrollX),
+        y: Math.round(box.top + scrollY),
+      };
+    });
+    if (!stop) break;
+    if (stops.length && stops[0].label === stop.label && stops[0].x === stop.x && stops[0].y === stop.y) break;
+    stops.push(stop);
+  }
+  const wrong = [];
+  for (let i = 1; i < stops.length; i += 1) {
+    const prev = stops[i - 1];
+    const cur = stops[i];
+    const sameRow = Math.abs(cur.y - prev.y) <= 8;
+    if ((!sameRow && cur.y < prev.y) || (sameRow && cur.x < prev.x)) {
+      wrong.push(`"${prev.label}"(${prev.x},${prev.y}) → "${cur.label}"(${cur.x},${cur.y})`);
+    }
+  }
+  const actual = `Thứ tự focus: ${stops.map((s) => `${s.label}(${s.x},${s.y})`).join(" → ") || "(không có)"}.`;
+  return { pass: stops.length > 0 && !wrong.length, actual: wrong.length ? `${actual} Lệch: ${wrong.join("; ")}.` : actual };
+}
 
 function openDb() {
   return new sqlite3.Database(dbFile);
@@ -438,7 +480,12 @@ async function main() {
 
   for (const testCase of CASES) {
     const stored = await replaceOrders(testCase.rows);
-    if (testCase.ui && testCase.login) {
+    if (testCase.tab) {
+      await openProfile(page);
+      const judged = await tabOrder(page);
+      await page.screenshot({ path: path.join(root, `docs/bugs/fr11-${testCase.id}.png`), fullPage: true });
+      results.push({ ...testCase, ...judged, stored });
+    } else if (testCase.ui && testCase.login) {
       const dom = await openProfile(page).then(() => readHistory(page));
       const judged = judgeUi(dom, testCase, fiveLabels);
       if (testCase.check.status && dom.rows[0]) {
