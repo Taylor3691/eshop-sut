@@ -1,6 +1,8 @@
 # FR-13 — Dashboard Test Cases
 
-**5 cases: 0 BVA + 5 Equivalence Partitioning.** Oracle: `README.md` FR-13; dashboard access is also covered by FR-12. Các case được thiết kế để thực hiện thủ công theo mẫu [TC-FR-08-CHECKOUT-001](../../FR-08/TC-FR-08-CHECKOUT-001.md).
+**7 cases: 0 BVA + 7 Equivalence Partitioning/state checks.** Oracle: `README.md` FR-13; dashboard access is also covered by FR-12. Các case được thiết kế để thực hiện thủ công theo mẫu [TC-FR-08-CHECKOUT-001](../../FR-08/TC-FR-08-CHECKOUT-001.md).
+
+Phân tích domain và traceability: [FR13-domain-testing.md](FR13-domain-testing.md).
 
 ## Requirement Scope
 
@@ -25,6 +27,8 @@
 | [TC-FR-13-DASHBOARD-003](TC-FR-13-DASHBOARD-003.md) | Doanh thu bằng 0 khi không có đơn đã giao | Equivalence Partitioning | FR-13 |
 | [TC-FR-13-DASHBOARD-004](TC-FR-13-DASHBOARD-004.md) | Chỉ admin truy cập phân hệ Dashboard | Equivalence Partitioning | FR-12, FR-13 |
 | [TC-FR-13-DASHBOARD-005](TC-FR-13-DASHBOARD-005.md) | Từ chối truy cập Dashboard khi chưa đăng nhập | Equivalence Partitioning | FR-12, FR-13 |
+| [TC-FR-13-DASHBOARD-006](TC-FR-13-DASHBOARD-006.md) | Chỉ cộng delivered, loại trừ từng trạng thái đơn còn lại | Equivalence Partitioning | FR-13 |
+| [TC-FR-13-DASHBOARD-007](TC-FR-13-DASHBOARD-007.md) | Hiển thị 0 doanh thu và 0 đơn khi chưa có đơn | Equivalence Partitioning | FR-13 |
 
 ## Cách ghi kết quả
 

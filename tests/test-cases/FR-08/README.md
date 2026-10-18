@@ -1,10 +1,11 @@
 # FR-08 — Pool Checkout
 
-**8 cases: 0 BVA + 7 EP/state checks, including 1 exploratory ambiguity.** Test theo từng file TC; nguồn yêu cầu là `README.md` ở thư mục gốc dự án, mục FR-08. FR-09 coupon không thuộc pool này.
+**9 cases: 0 BVA + 8 EP/state checks, including 1 exploratory ambiguity.** Test theo từng file TC; nguồn yêu cầu là `README.md` ở thư mục gốc dự án, mục FR-08. FR-09 coupon không thuộc pool này.
 
 ## Tham chiếu
 
 - [Phân tích requirement, domain, equivalence partitions và coverage](FR08-checkout-test-cases.md)
+- [Domain Testing bổ sung và traceability](FR08-domain-testing.md)
 - [Test run 001](../../test-runs/FR-08/FR08-checkout-test-run-001.md)
 - [Test summary 001](../../test-summary/FR-08/FR08-checkout-test-summary-001.md)
 - Mẫu trình bày: [TC-FR-08-CHECKOUT-001](TC-FR-08-CHECKOUT-001.md)
@@ -29,6 +30,7 @@
 | [TC-FR-08-CHECKOUT-006](TC-FR-08-CHECKOUT-006.md) | Hiển thị đầy đủ sản phẩm trong checkout | Equivalence Partitioning | FR-08.3 |
 | [TC-FR-08-CHECKOUT-007](TC-FR-08-CHECKOUT-007.md) | Giỏ hàng được xóa sau checkout thành công | State transition | FR-08.5 |
 | [TC-FR-08-CHECKOUT-008](TC-FR-08-CHECKOUT-008.md) | Thăm dò checkout với giỏ hàng rỗng | Exploratory / State partition | Ambiguity in FR-08 |
+| [TC-FR-08-CHECKOUT-009](TC-FR-08-CHECKOUT-009.md) | Backend tính lại tổng sau khi giỏ hàng thay đổi | EP / Cross-variable interaction | FR-08.2, FR-08.4 |
 
 ## Cách thực hiện và ghi kết quả
 
