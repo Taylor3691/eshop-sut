@@ -71,7 +71,7 @@ Dấu phẩy trong trường là đặc tính riêng. Có nháy kép là cách s
 
 ## 5. Tên và giá
 
-Chuỗi chỉ gồm dấu cách và tên có dấu tiếng Việt cùng lớp tên không rỗng. `0` khác số âm: cả hai đều không phải số dương, nhưng spec nói "dương", không gộp với âm.
+Tên chỉ dấu cách được tách riêng trong phần bổ sung, cần làm rõ nghĩa không rỗng sau trim. `0` khác số âm: cả hai đều không phải số dương, nhưng spec nói "dương", không gộp với âm.
 
 Giá trị dưới đây nằm trong lớp, không lấy sát biên.
 
@@ -117,3 +117,7 @@ Mục 6.3 không khai báo query. Không có VEC.
 ## Việc cố ý chưa làm ở bước này
 
 Chưa ghép các lớp thành test case. Chưa chọn giá trị sát biên (giá `1` so với `0`, tên dài 255 so với 256, một dòng so với hai dòng). Đó là bước phân tích giá trị biên.
+
+## Phân hoạch bổ sung sau review
+
+CSV-VEC-02: nháy kép escape (TC-25); CSV-VEC-03: newline trong trường nháy kép (TC-26); CSV-VEC-04: kết thúc dòng CRLF (TC-27). Giá dương có phần thập phân là PR-VEC-02 (TC-29), vẫn hợp lệ theo điều kiện > 0. TC-30/31 lấy mẫu sát 0 với bước 0.01; không gọi 0.01 là số dương nhỏ nhất. Tên chỉ dấu cách tách thành NM-SPACE (TC-28), expected là giả định cần xác nhận. BOM và dấu phân cách địa phương nằm trong danh sách cần làm rõ yêu cầu.
