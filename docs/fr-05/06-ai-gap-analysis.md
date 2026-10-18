@@ -1,24 +1,16 @@
-# FR-05 web — AI gap analysis
+# FR-05 web — AI gap analysis sau review
 
-Mục 6 của đề: nếu AI bỏ sót test case hoặc bug thì phải ghi lại, và giải thích lý do. Lý do được xếp vào ba nhóm mà đề nêu: chất lượng prompt, giới hạn của công cụ, độ phức tạp của chức năng.
+Prompt cũ yêu cầu giá, danh mục và phân trang nên AI sinh miền ngoài FR-05. Đã bỏ mô hình đó; TC-23..26/46 không áp dụng, không còn BLOCKED. Các query thừa còn lại chỉ là kiểm tra độ bền bổ sung.
 
-Oracle vẫn là câu trong README. Các case dưới đây chưa được thêm vào `04-test-cases.md` và chưa chạy, nên chưa có mã BUG mới.
+AI tự suy ra phải phân biệt hoa thường/dấu dù spec im lặng. Đã sửa TC-04/05/07: chấp nhận rỗng hoặc sản phẩm tương ứng, yêu cầu empty state khi rỗng; không áp đặt chính sách chuẩn hóa. TC-27 cho phép trim hoặc giữ khoảng trắng vì spec chưa chốt.
 
-## Test case bị bỏ sót
-
-| ID | Chỗ bỏ sót | Bằng chứng | Lý do |
-| --- | --- | --- | --- |
-| GAP-05-01 | Từ khóa có `&`, `#`, `?` | `frontend-web/src/pages/Home.jsx` ghép `` `.../api/products?search=${query}` ``, không `encodeURIComponent`. Cùng cách ghép trên mobile đã làm `a&b` và `a#b` thành tìm chữ `a` (BUG-22, TC-20 và TC-21 của `docs/fr-05-mobile/`). Bộ web không có lớp nào cho ba ký tự này. | Chất lượng prompt. Prompt phân hoạch liệt kê `%`, `_`, `'`, `<script>` và dừng ở danh sách đó. Công cụ không tự suy ra các ký tự có nghĩa trong URL. |
-| GAP-05-02 | Ảnh có tỷ lệ chuẩn | FR-05 yêu cầu ảnh tỷ lệ chuẩn. `Home.jsx` dùng `h-48 object-cover`. Không có lớp hay test case cho tỷ lệ khung. | Chất lượng prompt. Prompt bước 1 và bước 2 tập trung vào từ khóa, giá, danh mục, sort. Câu về ảnh trong FR-05 không được đưa vào miền. |
-| GAP-05-03 | Danh sách dạng lưới | FR-05 yêu cầu lưới. `Home.jsx` có `grid-cols-1 sm:grid-cols-2 md:grid-cols-3`. Không có test nào kiểm số cột theo bề rộng màn hình. | Cùng lý do với GAP-05-02. |
-
-GAP-05-01 là chỗ có khả năng thành bug cao nhất, vì mobile đã chạy cùng kiểu ghép URL và đã lệch. Trên web case này chưa chạy, nên chưa lập bug.
-
-## Kết quả AI tạo ra nhưng không phải bug
-
-| Chỗ | Việc đã xảy ra | Lý do |
+| Gap gốc | Nguyên nhân | Khắc phục hiện hành |
 | --- | --- | --- |
-| TC-04 | Expected bắt `iphone` không được ra `iPhone 15 Pro Max`. Chạy thì ra sản phẩm đó. Không lập bug. | README không bắt tìm phân biệt hoa thường. Expected là diễn giải thêm, không phải câu trong spec. |
-| TC-23, TC-24, TC-25, TC-26, TC-46 | BLOCKED. Precondition dùng ký hiệu `L`. | Prompt BVA đòi phân trang và `Limit`. FR-05 không có page size. Công cụ giữ `L` thay vì bỏ miền này. |
+| &, #, ? trong từ khóa | Prompt chỉ liệt kê SQL/HTML | URL-01..03, TC-47..49; đã chạy, xem kết quả |
+| Ảnh giữ tỷ lệ | Prompt tập trung dữ liệu tìm kiếm | TC-50/51 kiểm tra CSS giữ tỷ lệ; chưa đánh giá mọi nguồn ảnh |
+| Grid và viewport | Chưa đưa điều kiện UI vào mô hình | TC-50/51 kiểm tra desktop và màn hẹp; không bịa số cột |
+| Điểm on/off/in/out | Prompt và skill chỉ mô tả BVA 3 giá trị; AI coi BVA là đủ cho domain testing và chỉ ghi "chưa chọn điểm on/off" | Thêm phần A ở bước 3 cho hai biên có thứ tự (độ dài từ khóa, số sản phẩm). Skill được bổ sung bước này |
+| Số sản phẩm trong CSDL 0/1/2 | Bước 1 đã liệt kê biến nhưng AI không đưa sang bước 2/3, vì prompt tập trung vào từ khóa | CAT-VEC-01/02, CAT-B-01..03, TC-52..54. TC-52 FAIL: CSDL rỗng không có trang trống (mở rộng BUG-05) |
+| Test query thừa bị tính vào tổng | AI giữ test cũ để "không mất truy vết" và cộng thẳng vào summary | Summary tách 26 test chức năng và 23 kiểm tra bổ sung |
 
-Giá, danh mục và sort cũng không có trong FR-05. Chúng có mặt vì prompt yêu cầu. Khi chạy, các tham số đó không đổi tập sản phẩm. Đó không phải bug của FR-05.
+254/255/256 ký tự giữ làm mẫu chuỗi dài, không gọi là biên trên search. Bản chạy cũ được lưu trong docs/history/2026-10-15/ để truy vết sự sửa oracle.
