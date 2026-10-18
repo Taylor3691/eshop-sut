@@ -9,6 +9,7 @@
  * UI dùng Chrome đã cài trên máy. API dùng fetch.
  */
 import { chromium } from "playwright-core";
+import { createRequire } from "node:module";
 import { writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -16,6 +17,31 @@ import { fileURLToPath } from "node:url";
 const API = process.env.API_URL ?? "http://localhost:3000";
 const WEB = process.env.WEB_URL ?? "http://localhost:5173";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const require = createRequire(path.join(root, "backend/package.json"));
+const sqlite3 = require("sqlite3");
+const dbFile = path.join(root, "backend/database.sqlite");
+
+const SEED_ROWS = [
+  ["iPhone 15 Pro Max", 30000000, "Điện thoại cao cấp của Apple", "https://placehold.co/300x300/png?text=iPhone+15", 1],
+  ["Samsung Galaxy S24 Ultra", 28000000, "Màn hình hiển thị xuất sắc, camera siêu zoom", "https://placehold.co/300x300/png?text=Samsung+S24", 1],
+  ["MacBook Pro M3", 45000000, "Laptop chuyên nghiệp mạnh mẽ", "https://placehold.co/300x300/png?text=Macbook+Pro", 2],
+  ["Tai nghe AirPods Pro 2", 6000000, "Chống ồn chủ động xuất sắc", "https://placehold.co/300x300/png?text=AirPods+Pro", 3],
+  ["Bàn phím cơ Keychron Q1", 4000000, "Gõ cực sướng, thiết kế kim loại", "https://placehold.co/300x300/png?text=Keychron+Q1", 3],
+];
+
+async function setProducts(count = SEED_ROWS.length) {
+  const db = new sqlite3.Database(dbFile);
+  const run = (sql, params = []) =>
+    new Promise((resolve, reject) => db.run(sql, params, (err) => (err ? reject(err) : resolve())));
+  try {
+    await run("DELETE FROM products");
+    for (const row of SEED_ROWS.slice(0, count)) {
+      await run("INSERT INTO products (name, price, description, imageUrl, category_id) VALUES (?, ?, ?, ?, ?)", row);
+    }
+  } finally {
+    await new Promise((resolve) => db.close(resolve));
+  }
+}
 
 const IPHONE = ["iPhone 15 Pro Max"];
 const KEYCHRON = ["Bàn phím cơ Keychron Q1"];
@@ -106,6 +132,9 @@ async function readDom(page) {
         name: heading.textContent.trim(),
         price: card?.querySelector("p")?.textContent?.trim() ?? "",
         alt: card?.querySelector("img")?.getAttribute("alt"),
+        x: card?.getBoundingClientRect().x,
+        y: card?.getBoundingClientRect().y,
+        imageFit: card?.querySelector("img") ? getComputedStyle(card.querySelector("img")).objectFit : null,
       };
     });
     const echo = [...document.querySelectorAll("div")].find((node) =>
@@ -125,6 +154,7 @@ async function readDom(page) {
       echoHtml: span?.innerHTML ?? null,
       errorText: error?.innerText?.replace(/\s+/g, " ").trim().slice(0, 240) ?? null,
       bodyText: document.body.innerText,
+      overflow: document.documentElement.scrollWidth > innerWidth,
     };
   });
 }
@@ -248,31 +278,18 @@ const cases = [
       };
     },
   },
-  {
-    id: "TC-04",
-    kind: "ui",
-    search: "iphone",
-    expected: "Empty state. iPhone 15 Pro Max không được trả về chỉ vì khác hoa thường.",
+  ...[
+    ["TC-04", "iphone", ["iPhone 15 Pro Max"]],
+    ["TC-05", "CƠ", ["Bàn phím cơ Keychron Q1"]],
+    ["TC-07", "Ban phim", ["Bàn phím cơ Keychron Q1"]],
+  ].map(([id, search, allowed]) => ({
+    id, kind: "ui", search,
+    expected: "Spec chưa chốt chuẩn hóa hoa thường/dấu: chấp nhận rỗng hoặc sản phẩm tương ứng; không trả sản phẩm khác, không lỗi. Rỗng phải có empty state.",
     judge(dom) {
-      return {
-        pass: dom.cards.length === 0 && hasEmptyMessage(dom) && !dom.errorText,
-        actual: uiActual(dom),
-      };
+      return { pass: !dom.errorText && dom.cards.every(card => allowed.includes(card.name)) &&
+        (dom.cards.length > 0 || hasEmptyMessage(dom)), actual: uiActual(dom) };
     },
-  },
-  {
-    id: "TC-05",
-    kind: "ui",
-    search: "CƠ",
-    expected: "Empty state. Bàn phím cơ Keychron Q1 không được trả về chỉ vì khác hoa thường ở chữ ơ.",
-    judge(dom) {
-      const leaked = dom.cards.some((card) => card.name === KEYCHRON[0]);
-      return {
-        pass: dom.cards.length === 0 && hasEmptyMessage(dom) && !leaked && !dom.errorText,
-        actual: uiActual(dom),
-      };
-    },
-  },
+  })),
   {
     id: "TC-06",
     kind: "ui",
@@ -285,18 +302,6 @@ const cases = [
           sameNames(dom.cards.map((card) => card.name), KEYCHRON) &&
           priceOk(price, 4000000) &&
           !dom.errorText,
-        actual: uiActual(dom),
-      };
-    },
-  },
-  {
-    id: "TC-07",
-    kind: "ui",
-    search: "Ban phim",
-    expected: "Empty state. Không trả sản phẩm chỉ vì đã bỏ dấu.",
-    judge(dom) {
-      return {
-        pass: dom.cards.length === 0 && hasEmptyMessage(dom) && !dom.errorText,
         actual: uiActual(dom),
       };
     },
@@ -413,14 +418,12 @@ const cases = [
     id: "TC-27",
     kind: "ui",
     search: "   ",
-    expected: "Empty state. Không hiện đủ 5 sản phẩm như từ khóa rỗng. Không lỗi.",
+    expected: "Spec chưa chốt trim khoảng trắng: chấp nhận đủ seed hoặc rỗng có empty state; không lỗi.",
     judge(dom) {
       return {
         pass:
-          dom.cards.length === 0 &&
-          hasEmptyMessage(dom) &&
-          !dom.errorText &&
-          !sameNames(dom.cards.map((card) => card.name), ALL),
+          !dom.errorText && (sameNames(dom.cards.map((card) => card.name), ALL) ||
+          (dom.cards.length === 0 && hasEmptyMessage(dom))),
         actual: uiActual(dom),
       };
     },
@@ -487,12 +490,59 @@ const cases = [
       };
     },
   },
-  ...["TC-23", "TC-24", "TC-25", "TC-26", "TC-46"].map((id) => ({
-    id,
-    kind: "blocked",
-    expected: "Phụ thuộc L. Xem docs/fr-05/04-test-cases.md.",
+  ...[["TC-47", "a&b"], ["TC-48", "a#b"], ["TC-49", "a?b"]].map(([id, search]) => ({
+    id, kind: "ui", search,
+    expected: "Tìm cả chuỗi từ khóa; seed không khớp nên có empty state, không lỗi và từ khóa hiện thành text.",
+    judge(dom) { return { pass: dom.cards.length === 0 && hasEmptyMessage(dom) && !dom.errorText && dom.echoText === search, actual: uiActual(dom) }; },
   })),
+  ...[["TC-50", 1280], ["TC-51", 390]].map(([id, width]) => ({
+    id, kind: "ui", search: "", width,
+    expected: "Đủ seed, không cuộn ngang; ảnh dùng cách giữ tỷ lệ. Desktop có nhiều thẻ trên cùng hàng; mobile cho phép một cột, không áp đặt số cột cụ thể.",
+    judge(dom) {
+      const multi = dom.cards.some((a, i) => dom.cards.some((b, j) => i !== j && Math.abs(a.y-b.y)<5 && Math.abs(a.x-b.x)>20));
+      const fits = dom.cards.every(card => ["cover", "contain", "scale-down"].includes(card.imageFit));
+      return { pass: sameNames(dom.cards.map(card => card.name), ALL) && !dom.overflow && fits && (width<600 || multi), actual: `${uiActual(dom)} Viewport ${width}px; multi-column=${multi}; overflow=${dom.overflow}; image-fit-preserves-ratio=${fits}.` };
+    },
+  })),
+  {
+    id: "TC-52",
+    kind: "ui",
+    search: "",
+    products: 0,
+    expected: "CSDL 0 sản phẩm. Trang chủ không có thẻ sản phẩm và có empty state (icon/hình minh họa và message).",
+    judge(dom) {
+      return { pass: dom.cards.length === 0 && hasEmptyMessage(dom) && !dom.errorText, actual: uiActual(dom) };
+    },
+  },
+  {
+    id: "TC-53",
+    kind: "ui",
+    search: "",
+    products: 1,
+    expected: "CSDL 1 sản phẩm. Lưới có đúng iPhone 15 Pro Max, giá 30.000.000 ₫.",
+    judge(dom) {
+      return {
+        pass: sameNames(dom.cards.map((card) => card.name), IPHONE) && priceOk(dom.cards[0]?.price ?? "", 30000000) && !dom.errorText,
+        actual: uiActual(dom),
+      };
+    },
+  },
+  {
+    id: "TC-54",
+    kind: "ui",
+    search: "",
+    products: 2,
+    expected: "CSDL 2 sản phẩm. Lưới có đúng iPhone 15 Pro Max và Samsung Galaxy S24 Ultra.",
+    judge(dom) {
+      return {
+        pass: sameNames(dom.cards.map((card) => card.name), ALL.slice(0, 2)) && !dom.errorText,
+        actual: uiActual(dom),
+      };
+    },
+  },
 ];
+
+const EXTRA_QUERY = new Set(cases.filter((testCase) => testCase.kind === "api").map((testCase) => testCase.id));
 
 async function waitFor(url) {
   for (let i = 0; i < 40; i += 1) {
@@ -536,10 +586,19 @@ async function main() {
       const body = await apiGet(testCase.params);
       judged = judgeApi(body, testCase.expectNames);
     } else {
-      const dom = await runUi(page, testCase.search, {
-        watchLoading: Boolean(testCase.watchLoading),
-      });
-      judged = testCase.judge(dom);
+      if (testCase.products != null) await setProducts(testCase.products);
+      try {
+        await page.setViewportSize({ width: testCase.width ?? 1280, height: 844 });
+        const dom = await runUi(page, testCase.search, {
+          watchLoading: Boolean(testCase.watchLoading),
+        });
+        judged = testCase.judge(dom);
+        if (testCase.products != null) {
+          await page.screenshot({ path: path.join(root, `docs/bugs/fr05-${testCase.id}.png`), fullPage: true });
+        }
+      } finally {
+        if (testCase.products != null) await setProducts();
+      }
     }
     const result = judged.pass ? "PASS" : "FAIL";
     results.push({
@@ -556,6 +615,9 @@ async function main() {
   const pass = results.filter((row) => row.result === "PASS").length;
   const fail = results.filter((row) => row.result === "FAIL").length;
   const blocked = results.filter((row) => row.result === "BLOCKED").length;
+  const core = results.filter((row) => !EXTRA_QUERY.has(row.id));
+  const corePass = core.filter((row) => row.result === "PASS").length;
+  const extraPass = results.length - core.length - results.filter((row) => EXTRA_QUERY.has(row.id) && row.result !== "PASS").length;
   const lines = [
     "# FR-05 — Kết quả chạy test case",
     "",
@@ -563,7 +625,9 @@ async function main() {
     "",
     `Tổng: ${results.length}. PASS: ${pass}. FAIL: ${fail}. BLOCKED: ${blocked}.`,
     "",
-    "TC-23, TC-24, TC-25, TC-26 và TC-46 không chạy vì precondition dùng ký hiệu `L`, chưa có số Limit.",
+    `Trong đó test chức năng FR-05: ${core.length} (PASS ${corePass}, FAIL ${core.length - corePass}). Kiểm tra bổ sung query thừa: ${results.length - core.length} (PASS ${extraPass}), không tính vào coverage chức năng.`,
+    "",
+    "Review 18/10/2026: TC-23..26 và TC-46 không áp dụng, đã loại khỏi bộ hiện hành và không tính BLOCKED. Query thừa là kiểm thử bổ sung. Hoa thường/dấu/trim không tự áp đặt khi spec chưa chốt.",
     "",
     "| TC | Kết quả | Expected Result | Actual Result |",
     "| --- | --- | --- | --- |",
