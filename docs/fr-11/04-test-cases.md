@@ -77,6 +77,14 @@ Seed không có đơn. Dòng trong bảng là dữ liệu phải tạo trước 
 | TC-26 | AUTH-IEC-02 | Đơn chuẩn của user id 2 đang có | Header `Authorization: Bearer not-a-jwt` | API | Bị từ chối. Thân response không phải danh sách chứa đơn `id=1`. |
 | TC-27 | Q-IEC-01 | Đơn chuẩn của user id 2 đang có | Token hợp lệ của id 2. Query `user_id=1` | API | HTTP không phải lỗi. JSON chỉ có đơn `id=1` của user 2, giống lúc không gửi query. |
 
+## Kiểm tra giao diện bổ sung từ AI gap analysis
+
+| TC ID | Miền/Biên được phủ | Precondition | Test Data | Steps | Expected Result |
+| --- | --- | --- | --- | --- | --- |
+| TC-28 | UI-TAB (GAP-11-02, FR-21) | User id 2 đăng nhập | Hai đơn chuẩn `id` 1 và 2 (có nút Hủy đơn để nhận focus) | UI: mở `/profile`, nhấn Tab liên tục từ đầu trang | Mỗi phần tử nhận focus tiếp theo không nằm phía trên phần tử trước; cùng hàng thì nằm bên phải. Oracle đọc FR-21 theo thứ tự dòng (row-major). |
+
+Trang `/profile` có hai cột. Nếu FR-21 được hiểu theo cột (hết cột trái rồi sang cột phải) thì oracle khác. Kết quả TC-28 vì vậy là phát hiện cần làm rõ, không tự động là bug.
+
 ## Phủ
 
 | Mã | Test |
