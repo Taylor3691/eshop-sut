@@ -1,3 +1,5 @@
+cd0de40 2026-10-18 11:14 FR-05: bug report — link BUG-23 issue #66 and new evidence comments
+6243df0 2026-10-18 11:03 HW02: save git commit log
 dd1c021 2026-10-18 11:03 FR-16: domain testing — partition escaped quotes, embedded newline, CRLF and decimal price
 fc694cc 2026-10-18 11:03 FR-11: domain testing — mark NULL-display classes as pending oracle
 a4ca243 2026-10-18 11:03 HW02: save git commit log
