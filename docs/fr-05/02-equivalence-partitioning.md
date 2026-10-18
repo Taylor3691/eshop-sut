@@ -4,16 +4,16 @@ Chức năng: **FR-05 Xem danh sách và tìm kiếm sản phẩm**.
 
 Bước này chia miền giá trị. Mỗi lớp có một mã và một giá trị đại diện nằm trong lớp. Chưa tổ hợp thành test case, chưa chọn điểm biên on/off.
 
-Nguồn biến: bảng bước 1 trong `docs/fr-05/01-input-space-partitioning.md`, cộng ba nhóm được yêu cầu sau khi review: từ khóa, khoảng giá, danh mục và sắp xếp.
+Nguồn biến: bảng bước 1. Chỉ search và trạng thái dữ liệu thuộc miền chức năng.
 
 ## Cách chia VEC và IEC
 
 - **VEC:** spec mô tả cách xử lý bình thường của giá trị đó.
-- **IEC:** giá trị nằm ngoài miền spec đã mô tả. Hệ thống không có nghĩa vụ xử lý nó như một thao tác hợp lệ của FR-05.
+- **IEC:** giá trị vi phạm ràng buộc đã nêu. Input chưa được spec quy định phải ghi là chưa xác định, không tự coi là invalid.
 
 Các lớp trong cùng một đặc tính thì rời nhau. Một giá trị có thể thuộc nhiều đặc tính khác nhau (ví dụ vừa khớp một phần vừa khác hoa thường). Vì vậy bảng chia theo đặc tính, không dồn mọi tính chất của từ khóa vào một danh sách phẳng.
 
-`min_price`, `max_price`, `category` và `sort` không có trên UI FR-05 và `GET /api/products` không đọc chúng. Phân hoạch của bốn biến này vẫn được lập, để thấy miền nào sẽ là VEC nếu chức năng lọc tồn tại, và để ghi rằng hiện không có VEC nào được FR-05 công nhận cho `sort`.
+Query ngoài đặc tả chỉ được kiểm tra bổ sung, không lập miền chức năng giả định.
 
 Dữ liệu seed dùng làm mốc cho giá trị đại diện:
 
@@ -63,58 +63,35 @@ Ba lớp này giữ nguyên dấu và phần còn lại của từ. Không gộp
 | ID | Loại | Phân hoạch | Giá trị đại diện | Cơ sở spec |
 | --- | --- | --- | --- | --- |
 | KW-VEC-09 | VEC | Chuỗi rỗng | `""` | Trang chủ hiển thị tất cả sản phẩm. Lần mở trang cũng gửi chuỗi rỗng |
-| KW-IEC-01 | IEC | Chỉ khoảng trắng | `"   "` (3 dấu cách) | Không phải từ khóa tên. Spec không bảo liệt kê tất cả cho chuỗi này |
-| KW-IEC-02 | IEC | Chứa `%` | `%` | Ngoài miền tìm đúng theo tên. Spec không định nghĩa ký tự đại diện |
-| KW-IEC-03 | IEC | Chứa `_` | `_` | Ngoài miền tìm đúng theo tên. Khác `%` vì `_` trong `LIKE` là một ký tự bất kỳ |
-| KW-IEC-04 | IEC | Chứa `'` | `'` | Ngoài miền từ khóa tên được mô tả. Spec không định nghĩa việc đưa nháy đơn vào câu SQL |
+| KW-IEC-01 | VEC | Chỉ khoảng trắng | `"   "` (3 dấu cách) | Người dùng nhập được. README không nói trim hay không, nên chấp nhận cả hai cách xử lý; chỉ yêu cầu không lỗi. |
+| KW-IEC-02 | VEC | Chứa `%` | `%` | Ký tự thường trong từ khóa. Tìm theo tên nghĩa là tìm đúng ký tự `%`, không phải ký tự đại diện. SEC-05 cấm nối chuỗi vào SQL. |
+| KW-IEC-03 | VEC | Chứa `_` | `_` | Như `%`: `_` là dữ liệu, không được khớp một ký tự bất kỳ. |
+| KW-IEC-04 | VEC | Chứa `'` | `'` | Ký tự thường trong từ khóa. Không được làm vỡ câu SQL (SEC-05). |
+
+Mã `KW-IEC-01..04` là mã lịch sử, giữ lại để không đổi liên kết tới TC-27..30 và bug report. Cả bốn lớp đều là VEC: README không cấm các ký tự này.
 | KW-VEC-10 | VEC | Chứa HTML | `<script>` | Từ khóa phải được hiển thị an toàn, không render HTML |
 
-## 2. Khoảng giá (`min_price`, `max_price`)
+## 2. Tham số không hỗ trợ — kiểm thử bổ sung
 
-FR-05 không có hai biến này. Miền một biến lấy từ ràng buộc giá sản phẩm ở FR-15: số dương, lớn hơn 0. Giá trị đại diện số lấy bên trong miền, không lấy sát biên.
+`min_price`, `max_price`, `category`, `sort`, `page` không thuộc input space FR-05. Không lập VEC/IEC hoặc BVA của bộ lọc chưa tồn tại. Các TC-14..22, TC-32..45 được giữ để truy vết lượt chạy cũ, nhưng chỉ là kiểm thử độ bền khi nhận query thừa, không tính là coverage miền giá/danh mục/phân trang. Việc bỏ qua query là giả định của bộ kiểm thử, không phải yêu cầu phải mở rộng API.
 
-### 2.1 Miền của từng biên
+## 3. Ký tự có ý nghĩa trong URL
 
-Cùng một cách chia cho `min_price` và cho `max_price`.
+| ID | Lớp chuỗi | Đại diện | Oracle |
+| --- | --- | --- | --- |
+| URL-01 | Có dấu & | a&b | Tìm cả chuỗi người dùng nhập |
+| URL-02 | Có dấu # | a#b | Tìm cả chuỗi người dùng nhập |
+| URL-03 | Có dấu ? | a?b | Tìm cả chuỗi người dùng nhập |
 
-| ID | Loại | Phân hoạch | Giá trị đại diện | Cơ sở spec |
-| --- | --- | --- | --- | --- |
-| PR-VEC-01 | VEC | Số dương | `100000` | FR-15: giá > 0. FR-05 không có ô lọc giá |
-| PR-IEC-01 | IEC | Số âm | `-100` | Ngoài miền giá dương |
-| PR-IEC-02 | IEC | Bằng 0 | `0` | FR-15 loại 0 vì giá phải lớn hơn 0. Lớp này khác số âm |
-| PR-IEC-03 | IEC | Chữ cái | `abc` | Không phải số |
-| PR-IEC-04 | IEC | Ký tự đặc biệt | `100@` | Không phải số. Khác `abc` vì có phần trông giống số |
+Không coi `%`, `_`, dấu nháy hoặc ký tự URL là invalid chỉ vì có ý nghĩa trong SQL/URL: chúng là dữ liệu tìm kiếm; các mã KW-IEC cũ được giữ để truy vết, không có nghĩa người dùng nhập sai.
 
-### 2.2 Quan hệ giữa hai biến
+## 4. Số sản phẩm trong CSDL (`products`)
 
-| ID | Loại | Phân hoạch | Giá trị đại diện | Cơ sở spec |
-| --- | --- | --- | --- | --- |
-| PR-VEC-02 | VEC | `min_price < max_price` | `min_price=100000`, `max_price=500000` | Khoảng không rỗng, hai đầu đều dương |
-| PR-VEC-03 | VEC | `min_price == max_price` | `min_price=6000000`, `max_price=6000000` | Một mức giá đúng một điểm vẫn là khoảng hợp lệ |
-| PR-IEC-05 | IEC | `min_price > max_price` | `min_price=500000`, `max_price=100000` | Khoảng đảo. Không có cách xử lý trong spec |
-
-## 3. Danh mục và sắp xếp
-
-### 3.1 `category`
-
-UI không có chọn danh mục, không có chọn nhiều. ID hợp lệ dưới đây là id đang có trong bảng `categories`, dùng khi giá trị đi qua query string.
+Bước 1 đã ghi biến này làm đổi tập kết quả. README: "Trang chủ hiển thị danh sách tất cả sản phẩm" và FR-24 "Trang trống phải có icon/hình minh họa và message thân thiện". Hai lớp có hành vi khác nhau nên tách riêng.
 
 | ID | Loại | Phân hoạch | Giá trị đại diện | Cơ sở spec |
 | --- | --- | --- | --- | --- |
-| CAT-VEC-01 | VEC | Một ID có trong `categories` | `1` | Seed còn `2`, `3`, cùng lớp. FR-05 không có lọc danh mục trên trang chủ |
-| CAT-IEC-01 | IEC | Một ID số nhưng không có bản ghi | `999` | Ngoài tập id đang tồn tại |
-| CAT-IEC-02 | IEC | Nhiều danh mục | `category=1&category=2` | FR-05 không có chọn nhiều. `category=1,2` cùng lớp này cho đến khi spec tách cách viết |
+| CAT-VEC-01 | VEC | Không có sản phẩm nào | Bảng `products` rỗng | Trang trống: icon/hình minh họa và message (FR-24) |
+| CAT-VEC-02 | VEC | Có ít nhất một sản phẩm | 5 sản phẩm seed | Hiển thị tất cả sản phẩm dạng lưới |
 
-### 3.2 `sort`
-
-Spec và code không có enum sắp xếp. Không lập VEC, vì gán `price_asc` hay `name_desc` là hợp lệ sẽ bịa yêu cầu.
-
-Mọi chuỗi `sort` trên query string là một lớp. `price_asc`, `name_desc`, `foo` và `<script>` cùng lớp: FR-05 không công nhận giá trị nào, API không đọc `sort`.
-
-| ID | Loại | Phân hoạch | Giá trị đại diện | Cơ sở spec |
-| --- | --- | --- | --- | --- |
-| SORT-IEC-01 | IEC | Mọi giá trị `sort` | `price_asc` | Không có enum hợp lệ trong FR-05 |
-
-## Việc cố ý chưa làm ở bước này
-
-Chưa ghép các lớp thành test case. Chưa chọn giá trị sát biên (0 so với 1, độ dài, khoảng trắng một ký tự so với rỗng). Đó là bước phân tích giá trị biên.
+README không đặt số sản phẩm tối đa, nên không có lớp "quá nhiều sản phẩm".
