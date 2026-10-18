@@ -825,3 +825,63 @@ I use AI tools for the following tasks,
 - **The AI output:**
 
 > Đã ghi Huỳnh Thái Toàn, MSSV 23120175 vào `docs/HW02-README.md` và `docs/main-report.md`.
+
+
+## Interaction 59 — Hiệu chỉnh bài theo review
+
+- **Name of the AI tool:** Codex (phiên hiện tại; model ID cụ thể chưa được xác minh).
+- **Date and time:** 2026-10-18T01:10+07:00 (UTC+7).
+- **Your prompt:**
+
+> bạn hãy sửa lại các phần bạn cho là chưa ổn
+
+- **The AI output (tóm tắt công việc thực hiện, không phải transcript đầy đủ):**
+
+> Đã sửa oracle hoa thường/dấu/trim, bỏ năm test phân trang không áp dụng, tách query thừa khỏi coverage, bỏ MaxLength search mượn từ tên và rút TC-21 import chưa chốt oracle. Sửa BVA trên định danh và giá số thực. Bổ sung ba test ký tự URL, hai test layout và bảy test CSV/giá; sửa skill để không lặp lại lỗi mô hình.
+> Chạy lại bốn bộ: 126 test thiết kế, 124 đã chạy, 76 PASS, 48 FAIL, 2 BLOCKED; các FAIL có tiêu chí đề xuất được đánh dấu, không đồng nhất với bug đặc tả. Giữ lịch sử 22 mã phát hiện, phân loại 18 bug và 4 chờ làm rõ. Đính chính nhận xét cũ về palette vì script FR-11 đã kiểm tra màu trùng.
+> Bổ sung PDF bắt buộc, README gói nộp và script xuất PDF/đóng gói. AI Critique đã được Codex viết lại theo kết quả sửa; sinh viên cần tự đọc và xác nhận trước khi nộp. Không tự nhận đã kiểm tra video, chạy native hay cập nhật GitHub Issues.
+
+- **Phạm vi bằng chứng:** chạy local web/admin/Expo web ngày 18/10/2026. Không có Android SDK hoặc iOS Simulator trên máy. Không sửa mã nghiệp vụ SUT. Các thay đổi tài liệu/script đang ở working tree, chưa có commit mới của phiên hiệu chỉnh.
+
+## Interaction 60
+
+- **Name of the AI tool:** Cursor (Claude Opus 5.5)
+- **Date and time:** 2026-10-18 10:39 (UTC+7)
+- **Your prompt:**
+
+> dựa vào yêu cầu trong file pdf @2026.HW02.Domain Testing_En.pdf , bạn hãy chấm điểm bài làm của tôi trong thư mục @docs/
+
+- **The AI output:**
+
+> Điểm ước lượng: khoảng 76/100 (dao động 72–80), thấp hơn mức tự chấm 85. Hồ sơ nộp đủ mục bắt buộc (bản PDF của AI Critique/AI Audit và thư mục history có trong file zip, không có trong `docs/`).
+>
+> Điểm theo mục: FR-05 web 18/25, FR-11 21/25, FR-16 21/25, FR-05 mobile 9/15, Agent Skills 7/10.
+>
+> Lý do trừ điểm chính: (1) chưa làm bước chọn điểm on/off/in/out của domain testing, chỉ ghi "chưa chọn"; (2) 23/46 test FR-05 web là query thừa ngoài phạm vi nhưng vẫn cộng vào tổng PASS; (3) ảnh `review-fr16-TC-25/27/29/30/31.png` là cùng một ảnh, chỉ hiện "1/1 sản phẩm được thêm", không chứng minh BUG-14/BUG-18; ảnh BUG-01/02/03 cũng là cùng một ảnh; (4) FR-05 mobile gần như chép bộ web, chạy trên Expo web, thiếu miền riêng của mobile, và `04-test-cases.md` vẫn ghi "Chưa chạy"; (5) phiên hiệu chỉnh 18/10 chưa commit, Interaction 59 sai định dạng và ghi tên công cụ khác; (6) video demo có trước bản skill đã sửa, chưa xác minh.
+>
+> Đề xuất sửa theo thứ tự ưu tiên: chụp lại ảnh FR-16 đúng dữ liệu lỗi, commit theo từng bước của phiên hiệu chỉnh, thêm bảng on/off/in/out cho mỗi biên, tách query thừa khỏi summary, bổ sung miền riêng cho mobile, sửa các chỗ không nhất quán nhỏ.
+
+## Interaction 61
+
+- **Name of the AI tool:** Cursor (Claude Opus 5.5)
+- **Date and time:** 2026-10-18 11:02 (UTC+7)
+- **Your prompt:**
+
+> bạn hãy sửa lại các điểm bạn thấy thiếu sót, nhớ phải tuân thủ yêu cầu trong @2026.HW02.Domain Testing_En.pdf
+
+- **The AI output (tóm tắt; câu trả lời đầy đủ ở cuối lượt chat):**
+
+> Đã sửa các thiếu sót đã chấm ở lượt trước, chạy lại cả bốn bộ test trên server local và commit riêng từng bước.
+>
+> - Thêm phần A "chọn điểm on/off/in/out" vào `03-boundary-value-analysis.md` của cả bốn chức năng, kèm bảng ánh xạ điểm → TC trong `04-test-cases.md`. FR-16 ghi rõ giá `> 0` là biên mở (on 0 ngoài miền, off 0.01 trong miền).
+> - FR-05 web: thêm miền số sản phẩm trong CSDL (CAT-VEC-01/02, BVA 0/1/2, TC-52..54), bỏ đoạn hướng dẫn `min_price` còn sót, sửa ghi chú bị chép lặp ở các lớp `%`, `_`, `'`; summary tách 26 test chức năng khỏi 23 kiểm tra query thừa.
+> - FR-11: sửa số mục BVA; thêm và chạy TC-28 thứ tự Tab (FAIL theo oracle đọc FR-21 theo dòng, ghi là phát hiện chờ làm rõ, chưa lập bug).
+> - FR-16: script chụp ảnh sau khi tải lại bảng sản phẩm hoặc mở trang chi tiết; ảnh TC-03/25/26/31 nay thấy dữ liệu sai; xoá ảnh trùng của TC-27/29/30.
+> - FR-05 mobile: thêm miền số sản phẩm và độ rộng màn (320/390/768), TC-24..28; sửa dòng "Chưa chạy".
+> - Bug report: ảnh riêng cho BUG-01/02/03; thêm BUG-23 (web cắt từ khóa có `&`/`#`) nhưng chưa tạo issue vì cần push ảnh; ghi bằng chứng mới cho BUG-05/14/18/21.
+> - Skill: thêm bước on/off/in/out, quy tắc ảnh bằng chứng, miền riêng cho mobile, tách kiểm tra bổ sung khỏi summary. AI Critique cập nhật đoạn về bằng chứng (280 từ).
+> - README, main report, PDF và zip cập nhật; tự đánh giá đổi thành 83.
+>
+> Kết quả chạy: test chức năng 111 thiết kế, 109 chạy, 57 PASS, 52 FAIL, 2 BLOCKED; cộng 24 kiểm tra bổ sung đều PASS.
+>
+> Còn lại cần người dùng quyết: tạo issue BUG-23 và gắn ảnh mới lên issue cũ (cần push), quay lại video demo, chạy mobile trên thiết bị native. Không sửa Interaction 59 vì rule cấm sửa mục cũ.
