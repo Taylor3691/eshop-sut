@@ -11,6 +11,7 @@
  * Chạy: node scripts/fr05-mobile-execute.mjs
  */
 import { chromium } from "playwright-core";
+import { createRequire } from "node:module";
 import { writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -19,6 +20,31 @@ const API = process.env.API_URL ?? "http://127.0.0.1:3000";
 const WEB = process.env.MOBILE_WEB_URL ?? "http://127.0.0.1:8081";
 const APP_HOST = "http://192.168.10.13:3000";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const require = createRequire(path.join(root, "backend/package.json"));
+const sqlite3 = require("sqlite3");
+const dbFile = path.join(root, "backend/database.sqlite");
+
+const SEED_ROWS = [
+  ["iPhone 15 Pro Max", 30000000, "Điện thoại cao cấp của Apple", "https://placehold.co/300x300/png?text=iPhone+15", 1],
+  ["Samsung Galaxy S24 Ultra", 28000000, "Màn hình hiển thị xuất sắc, camera siêu zoom", "https://placehold.co/300x300/png?text=Samsung+S24", 1],
+  ["MacBook Pro M3", 45000000, "Laptop chuyên nghiệp mạnh mẽ", "https://placehold.co/300x300/png?text=Macbook+Pro", 2],
+  ["Tai nghe AirPods Pro 2", 6000000, "Chống ồn chủ động xuất sắc", "https://placehold.co/300x300/png?text=AirPods+Pro", 3],
+  ["Bàn phím cơ Keychron Q1", 4000000, "Gõ cực sướng, thiết kế kim loại", "https://placehold.co/300x300/png?text=Keychron+Q1", 3],
+];
+
+async function setProducts(count = SEED_ROWS.length) {
+  const db = new sqlite3.Database(dbFile);
+  const run = (sql, params = []) =>
+    new Promise((resolve, reject) => db.run(sql, params, (err) => (err ? reject(err) : resolve())));
+  try {
+    await run("DELETE FROM products");
+    for (const row of SEED_ROWS.slice(0, count)) {
+      await run("INSERT INTO products (name, price, description, imageUrl, category_id) VALUES (?, ?, ?, ?, ?)", row);
+    }
+  } finally {
+    await new Promise((resolve) => db.close(resolve));
+  }
+}
 
 const ALL = [
   "iPhone 15 Pro Max",
@@ -52,10 +78,10 @@ const CASES = [
   { id: "TC-01", expect: "Chỉ iPhone 15 Pro Max, giá 30.000.000 ₫. Có loading. Chữ iPhone hiện dạng text.", search: "iPhone", names: ["iPhone 15 Pro Max"], ui: true, loading: true, show: "iPhone" },
   { id: "TC-02", expect: "Chỉ đúng một sản phẩm iPhone 15 Pro Max.", search: "iPhone 15 Pro Max", names: ["iPhone 15 Pro Max"] },
   { id: "TC-03", expect: "Có empty state. Không hiện năm sản phẩm seed.", search: "zzzz-khong-co", names: [], empty: true },
-  { id: "TC-04", expect: "Empty state. iPhone 15 Pro Max không được trả về chỉ vì khác hoa thường.", search: "iphone", names: [], empty: true, absent: ["iPhone 15 Pro Max"] },
-  { id: "TC-05", expect: "Empty state. Bàn phím cơ Keychron Q1 không được trả về chỉ vì khác hoa thường ở chữ ơ.", search: "CƠ", names: [], empty: true, absent: ["Bàn phím cơ Keychron Q1"] },
+  { id: "TC-04", expect: "Chấp nhận rỗng hoặc sản phẩm tương ứng vì spec chưa chốt hoa thường/dấu; rỗng phải có empty state, không lỗi.", search: "iphone", allowed: ["iPhone 15 Pro Max"] },
+  { id: "TC-05", expect: "Chấp nhận rỗng hoặc sản phẩm tương ứng vì spec chưa chốt hoa thường/dấu; rỗng phải có empty state, không lỗi.", search: "CƠ", allowed: ["Bàn phím cơ Keychron Q1"] },
   { id: "TC-06", expect: "Chỉ Bàn phím cơ Keychron Q1, giá 4.000.000 ₫.", search: "Bàn phím", names: ["Bàn phím cơ Keychron Q1"] },
-  { id: "TC-07", expect: "Empty state. Không trả sản phẩm chỉ vì đã bỏ dấu.", search: "Ban phim", names: [], empty: true, absent: ["Bàn phím cơ Keychron Q1"] },
+  { id: "TC-07", expect: "Chấp nhận rỗng hoặc sản phẩm tương ứng vì spec chưa chốt hoa thường/dấu; rỗng phải có empty state, không lỗi.", search: "Ban phim", allowed: ["Bàn phím cơ Keychron Q1"] },
   { id: "TC-08", expect: "Đủ 5 sản phẩm seed. Giá đúng ₫ và phân cách hàng nghìn.", search: "", names: ALL, mount: true },
   { id: "TC-09", expect: "Empty state. Trang hiện đúng các ký tự <script>, không chạy script.", search: "<script>", names: [], empty: true, show: "<script>" },
   { id: "TC-10", expect: "Có iPhone 15 Pro Max, Samsung, MacBook, AirPods vì tên có chữ a. Không có Keychron.", search: "a", names: WITH_A, absent: ["Bàn phím cơ Keychron Q1"] },
@@ -72,6 +98,11 @@ const CASES = [
   { id: "TC-21", expect: "Empty state. Tìm cả chuỗi a#b. Không lỗi.", search: "a#b", names: [], empty: true, show: "a#b" },
   { id: "TC-22", expect: "Empty state. Tìm cả chuỗi a?b. Không lỗi.", search: "a?b", names: [], empty: true, show: "a?b" },
   { id: "TC-23", expect: "Empty state. FR-05 không báo lỗi độ dài. Chuỗi hiện dạng text.", search: A256, names: [], empty: true, show: A256 },
+  { id: "TC-24", expect: "CSDL 0 sản phẩm. Màn home không có sản phẩm và có empty state (icon/hình minh họa và message).", search: "", mount: true, products: 0, names: [], empty: true },
+  { id: "TC-25", expect: "CSDL 1 sản phẩm. Danh sách có đúng iPhone 15 Pro Max, giá 30.000.000 ₫.", search: "", mount: true, products: 1, names: ["iPhone 15 Pro Max"], priceCheck: true },
+  { id: "TC-26", expect: "CSDL 2 sản phẩm. Danh sách có đúng iPhone 15 Pro Max và Samsung Galaxy S24 Ultra.", search: "", mount: true, products: 2, names: ALL.slice(0, 2) },
+  { id: "TC-27", expect: "Màn 320px (điện thoại nhỏ). Đủ 5 sản phẩm, không tràn ngang, tên và giá không bị cắt khỏi màn.", search: "", mount: true, width: 320, names: ALL, layout: true },
+  { id: "TC-28", expect: "Màn 768px (tablet). Đủ 5 sản phẩm, không tràn ngang, tên và giá không bị cắt khỏi màn.", search: "", mount: true, width: 768, names: ALL, layout: true },
 ];
 
 function sameNames(actual, expected) {
@@ -110,12 +141,17 @@ function judge(testCase, dom, extra) {
   if (testCase.names && !sameNames(names, testCase.names)) {
     reasons.push(`sản phẩm: ${names.join("; ") || "(không có)"}`);
   }
+  if (testCase.allowed) {
+    if (names.some(name => !testCase.allowed.includes(name))) reasons.push("sản phẩm ngoài lớp tương ứng");
+    if (!names.length && !/không có|không tìm thấy|trống/i.test(text)) reasons.push("thiếu empty state");
+    if (looksSql(text)) reasons.push("lỗi SQL");
+  }
   for (const name of testCase.absent ?? []) {
     if (text.includes(name)) reasons.push(`vẫn thấy ${name}`);
   }
   if (testCase.names?.length) {
     for (const name of testCase.names) {
-      if (text.includes(name) && !hasMoney(text, name) && ["TC-01", "TC-06", "TC-08"].includes(testCase.id)) {
+      if (text.includes(name) && !hasMoney(text, name) && (testCase.priceCheck || ["TC-01", "TC-06", "TC-08"].includes(testCase.id))) {
         reasons.push(`giá ${name} không đúng ₫`);
       }
     }
@@ -137,11 +173,16 @@ function judge(testCase, dom, extra) {
   if (testCase.show && !text.includes(testCase.show.length > 80 ? testCase.show.slice(0, 40) : testCase.show)) {
     reasons.push(`không thấy chữ từ khóa`);
   }
+  if (testCase.layout && extra.layout) {
+    if (extra.layout.overflow) reasons.push(`tràn ngang (scrollWidth ${extra.layout.scrollWidth} > ${extra.layout.width})`);
+    if (extra.layout.clipped.length) reasons.push(`bị cắt khỏi màn: ${extra.layout.clipped.join("; ")}`);
+  }
   if (testCase.noSql && looksSql(text)) reasons.push("trang lỗi SQL");
   if (looksSql(text) && testCase.names) reasons.push("thân là lỗi SQL");
   if (extra.httpStatus != null && extra.httpStatus >= 400) reasons.push(`HTTP ${extra.httpStatus}`);
   const actual = [
     names.length ? names.join("; ") : "(không có sản phẩm)",
+    extra.layout ? `Viewport ${extra.layout.width}px, scrollWidth ${extra.layout.scrollWidth}.` : null,
     extra.requestUrl ? `Request: ${extra.requestUrl.slice(extra.requestUrl.indexOf("search=")).slice(0, 80)}.` : null,
     extra.httpStatus != null ? `HTTP ${extra.httpStatus}.` : null,
     looksSql(text) ? `Lỗi: ${text.replace(/\s+/g, " ").slice(0, 180)}.` : null,
@@ -154,7 +195,7 @@ function judge(testCase, dom, extra) {
   };
 }
 
-async function openHome(page) {
+async function openHome(page, firstName = "iPhone 15 Pro Max") {
   const first = page.waitForResponse(
     (response) => response.url().includes("/api/products") && response.request().method() === "GET",
     { timeout: 120000 },
@@ -162,7 +203,8 @@ async function openHome(page) {
   await page.goto(WEB, { waitUntil: "domcontentloaded", timeout: 120000 });
   await first;
   await page.getByText("Danh sách sản phẩm").waitFor({ timeout: 120000 });
-  await page.getByText("iPhone 15 Pro Max").waitFor();
+  if (firstName) await page.getByText(firstName).first().waitFor();
+  else await page.waitForTimeout(800);
 }
 
 async function searchUi(page, value, mount, testId) {
@@ -197,7 +239,20 @@ async function searchUi(page, value, mount, testId) {
       boxes.some((right, j) => i !== j && Math.abs(left.y - right.y) < 30 && Math.abs(left.x - right.x) > 40),
     );
   }
-  return { dom, loadingSeen, grid, requestUrl };
+  const layout = await page.evaluate((names) => {
+    const width = window.innerWidth;
+    const scrollWidth = document.documentElement.scrollWidth;
+    const clipped = [];
+    for (const node of document.querySelectorAll("div, span")) {
+      if (node.children.length) continue;
+      const text = node.textContent.trim();
+      if (!names.some((name) => text.includes(name)) && !text.includes("₫")) continue;
+      const box = node.getBoundingClientRect();
+      if (box.width && (box.left < 0 || box.right > width + 1)) clipped.push(text.slice(0, 40));
+    }
+    return { width, scrollWidth, overflow: scrollWidth > width, clipped };
+  }, ALL);
+  return { dom, loadingSeen, grid, requestUrl, layout };
 }
 
 async function main() {
@@ -224,11 +279,20 @@ async function main() {
         actual: `HTTP ${response.status}. ${names.join("; ") || "(không có)"}${pass ? "" : ". Lệch: tập sản phẩm hoặc HTTP."}`,
       };
     } else {
-      await openHome(page);
-      const seen = await searchUi(page, testCase.search, testCase.mount, testCase.id);
-      judged = judge(testCase, seen.dom, seen);
-      if (testCase.blocked) {
-        judged = { pass: false, blocked: true, actual: `${judged.actual} ${testCase.blocked}` };
+      if (testCase.products != null) await setProducts(testCase.products);
+      try {
+        await page.setViewportSize({ width: testCase.width ?? 390, height: 844 });
+        await openHome(page, testCase.products === 0 ? null : (testCase.names?.[0] ?? ALL[0]));
+        const seen = await searchUi(page, testCase.search, testCase.mount, testCase.id);
+        judged = judge(testCase, seen.dom, seen);
+        if (testCase.blocked) {
+          judged = { pass: false, blocked: true, actual: `${judged.actual} ${testCase.blocked}` };
+        }
+        if (testCase.products != null || testCase.layout) {
+          await page.screenshot({ path: path.join(root, `docs/bugs/fr05-mobile-${testCase.id}.png`), fullPage: true });
+        }
+      } finally {
+        if (testCase.products != null) await setProducts();
       }
     }
     results.push({ ...testCase, ...judged });
@@ -250,6 +314,8 @@ async function main() {
     "Đây là app React Native chạy bằng `react-native-web` trong Chrome, không phải iOS hay Android thật. Vì vậy `h1`, `alt` và số cột không được chấm: app mobile không có thẻ `h1`, `react-native-web` tự sinh `<img alt=\"\">`, và README không nêu số cột trên mobile.",
     "",
     `Tổng: ${results.length}. PASS: ${pass}. FAIL: ${fail}. BLOCKED: ${blocked}.`,
+    "",
+    "Trong đó TC-14 là kiểm tra bổ sung query thừa, không tính vào coverage chức năng.",
     "",
     "| TC | Kết quả | Expected Result | Actual Result |",
     "| --- | --- | --- | --- |",
