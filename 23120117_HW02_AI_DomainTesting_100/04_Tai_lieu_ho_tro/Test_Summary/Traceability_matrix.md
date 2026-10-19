@@ -1,0 +1,62 @@
+# Traceability Matrix: Requirement - Test Case - Bug
+
+| Requirement | Testcase | Result | Bug Issue | Status |
+|---|---|---|---|---|
+| FR-01 | TC-BVA-FR01-001 | Pass | None | Done |
+| FR-01 | TC-BVA-FR01-002 | Fail | [BUG-FR01-REG-VALID-PASSWORD-REJECTED](../Bug-reports/Issue/BUG-FR01-REG-VALID-PASSWORD-REJECTED.md) | Open |
+| FR-01 | TC-BVA-FR01-003 | Fail | [BUG-FR01-REG-VALID-PASSWORD-REJECTED](../Bug-reports/Issue/BUG-FR01-REG-VALID-PASSWORD-REJECTED.md) | Open |
+| FR-01 | TC-BVA-FR01-004 | Pass | None | Done |
+| FR-01 | TC-BVA-FR01-005 | Fail | [BUG-FR01-REG-VALID-PASSWORD-REJECTED](../Bug-reports/Issue/BUG-FR01-REG-VALID-PASSWORD-REJECTED.md) | Open |
+| FR-01 | TC-BVA-FR01-006 | Fail | [BUG-FR01-REG-VALID-PASSWORD-REJECTED](../Bug-reports/Issue/BUG-FR01-REG-VALID-PASSWORD-REJECTED.md) | Open |
+| FR-01 | TC-BVA-FR01-007 | Pass | None | Done |
+| FR-01 | TC-BVA-FR01-008 | Fail | [BUG-FR01-REG-VALID-PASSWORD-REJECTED](../Bug-reports/Issue/BUG-FR01-REG-VALID-PASSWORD-REJECTED.md) | Open |
+| FR-01 | TC-BVA-FR01-009 | Fail | [BUG-FR01-REG-VALID-PASSWORD-REJECTED](../Bug-reports/Issue/BUG-FR01-REG-VALID-PASSWORD-REJECTED.md) | Open |
+| FR-01 | TC-BVA-FR01-010 | Pass | None | Done |
+| FR-01 | TC-BVA-FR01-011 | Fail | [BUG-FR01-REG-VALID-PASSWORD-REJECTED](../Bug-reports/Issue/BUG-FR01-REG-VALID-PASSWORD-REJECTED.md) | Open |
+| FR-01 | TC-BVA-FR01-012 | Fail | [BUG-FR01-REG-VALID-PASSWORD-REJECTED](../Bug-reports/Issue/BUG-FR01-REG-VALID-PASSWORD-REJECTED.md) | Open |
+| FR-01 | TC-BVA-FR01-013 | Pass | None | Done |
+| FR-01 | TC-BVA-FR01-014 | Fail | [BUG-FR01-REG-VALID-PASSWORD-REJECTED](../Bug-reports/Issue/BUG-FR01-REG-VALID-PASSWORD-REJECTED.md) | Open |
+| FR-01 | TC-BVA-FR01-015 | Fail | [BUG-FR01-REG-VALID-PASSWORD-REJECTED](../Bug-reports/Issue/BUG-FR01-REG-VALID-PASSWORD-REJECTED.md) | Open |
+| FR-01 | TC-REG-001 | Fail | [BUG-FR01-REG-VALID-PASSWORD-REJECTED](../Bug-reports/Issue/BUG-FR01-REG-VALID-PASSWORD-REJECTED.md) | Open |
+| FR-01 | TC-REG-002 | Pass | None | Done |
+| FR-01 | TC-REG-003 | Pass | None | Done |
+| FR-01 | TC-REG-004 | Pass | None | Done |
+| FR-01 | TC-REG-005 | Pass | None | Done |
+| FR-01 | TC-REG-006 | Pass | None | Done |
+| FR-01 | TC-REG-007 | Pass | None | Done |
+| FR-01 | TC-REG-008 | Pass | None | Done |
+| FR-01 | TC-REG-009 | Pass | None | Done |
+| FR-01 | TC-REG-010 | Pass | None | Done |
+| FR-01 | TC-REG-011 | Pass | None | Done |
+| FR-07 | TC-BVA-FR07-001 | Fail | [BUG-FR07-CART-EMPTY-STATE-MISSING-IMAGE](../Bug-reports/Issue/BUG-FR07-CART-EMPTY-STATE-MISSING-IMAGE.md) | Open |
+| FR-07 | TC-BVA-FR07-002 | Blocked | None | Blocked |
+| FR-07 | TC-BVA-FR07-003 | Blocked | None | Blocked |
+| FR-07 | TC-CART-001 | Blocked | None | Blocked |
+| FR-07 | TC-CART-002 | Fail | [BUG-FR07-CART-EMPTY-STATE-MISSING-IMAGE](../Bug-reports/Issue/BUG-FR07-CART-EMPTY-STATE-MISSING-IMAGE.md) | Open |
+| FR-07 | TC-CART-003 | Blocked | None | Blocked |
+| FR-07 | TC-CART-004 | Blocked | None | Blocked |
+| FR-07 | TC-CART-005 | Blocked | None | Blocked |
+| FR-07 | TC-CART-006 | Blocked | None | Blocked |
+| FR-07 | TC-CART-007 | Blocked | None | Blocked |
+| FR-07 | TC-CART-008 | Blocked | None | Blocked |
+| FR-07 | TC-CART-009 | Pass | None | Done |
+| FR-17 | TC-BVA-FR17-001 | Fail | [BUG-FR17-COUPON-NONPOSITIVE-DISCOUNT-ACCEPTED](../Bug-reports/Issue/BUG-FR17-COUPON-NONPOSITIVE-DISCOUNT-ACCEPTED.md) | Open |
+| FR-17 | TC-BVA-FR17-002 | Pass | None | Done |
+| FR-17 | TC-BVA-FR17-003 | Pass | None | Done |
+| FR-17 | TC-BVA-FR17-004 | Pass | None | Done |
+| FR-17 | TC-BVA-FR17-005 | Pass | None | Done |
+| FR-17 | TC-COUPON-001 | Pass | None | Done — retest single-spec trên Cypress Runner (headed): ✓, 1 passed. |
+| FR-17 | TC-COUPON-002 | Pass | None | Done |
+| FR-17 | TC-COUPON-003 | Pass | None | Done |
+| FR-17 | TC-COUPON-004 | Pass | None | Done |
+| FR-17 | TC-COUPON-005 | Fail | [BUG-FR17-COUPON-MISSING-TYPE-ACCEPTED](../Bug-reports/Issue/BUG-FR17-COUPON-MISSING-TYPE-ACCEPTED.md) | Open |
+| FR-17 | TC-COUPON-006 | Fail | [BUG-FR17-COUPON-INVALID-TYPE-ACCEPTED](../Bug-reports/Issue/BUG-FR17-COUPON-INVALID-TYPE-ACCEPTED.md) | Open |
+| FR-17 | TC-COUPON-007 | Pass | None | Done |
+| FR-17 | TC-COUPON-008 | Fail | [BUG-FR17-COUPON-NONPOSITIVE-DISCOUNT-ACCEPTED](../Bug-reports/Issue/BUG-FR17-COUPON-NONPOSITIVE-DISCOUNT-ACCEPTED.md) | Open |
+| FR-17 | TC-COUPON-009 | Pass | None | Done |
+| FR-17 | TC-COUPON-010 | Fail | [BUG-FR17-COUPON-MISSING-MIN-ORDER-AMOUNT-ACCEPTED](../Bug-reports/Issue/BUG-FR17-COUPON-MISSING-MIN-ORDER-AMOUNT-ACCEPTED.md) | Open |
+| FR-17 | TC-COUPON-011 | Fail | [BUG-FR17-COUPON-INVALID-MIN-ORDER-AMOUNT-ACCEPTED](../Bug-reports/Issue/BUG-FR17-COUPON-INVALID-MIN-ORDER-AMOUNT-ACCEPTED.md) | Open |
+| FR-17 | TC-COUPON-012 | Fail | [BUG-FR17-COUPON-MISSING-MAX-USES-ACCEPTED](../Bug-reports/Issue/BUG-FR17-COUPON-MISSING-MAX-USES-ACCEPTED.md) | Open |
+| FR-17 | TC-COUPON-013 | Pass | None | Done |
+| FR-17 | TC-COUPON-014 | Blocked | None | Blocked |
+| FR-17 | TC-COUPON-015 | Blocked | None | Blocked |
