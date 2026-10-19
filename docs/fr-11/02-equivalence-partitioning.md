@@ -110,4 +110,4 @@ Chưa ghép các lớp thành test case. Chưa chọn giá trị sát biên (0 �
 
 ## Phạm vi oracle cần xác nhận
 
-TC-21/TC-22 chèn NULL trực tiếp vào DB là kiểm thử độ bền với dữ liệu thiếu. Expected không bịa ngày/tiền là tiêu chí đề xuất của người kiểm thử; README chưa quy định cách hiển thị NULL. FAIL ở hai case này là lệch tiêu chí đề xuất, chưa đủ xác nhận vi phạm đặc tả. Không tính hai phát hiện tương ứng là bug đã xác nhận.
+TC-21/TC-22 chèn NULL trực tiếp vào DB là kiểm thử độ bền. README không quy định cách hiện NULL. Hai case không được tính là bug. BUG-12 và BUG-13 đã kết luận không vi phạm đặc tả.

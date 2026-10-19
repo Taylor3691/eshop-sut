@@ -51,7 +51,7 @@ Phiên đăng nhập, JWT, đuôi file, header, dấu phẩy trong nháy kép, m
 
 Tên không rỗng có biên dưới `Min = 1` ký tự. Chuỗi dài 0 là lớp NM-IEC-01, không phải một tên hợp lệ.
 
-FR-16 không chốt MaxLength. Không mặc nhiên áp giới hạn 255 của FR-15 cho import. NM-B-01..03 là biên dưới 0/1/2 ký tự. NM-B-04..06 (254/255/256) là thăm dò tính nhất quán giữa hai đường tạo sản phẩm. TC-21 được rút khỏi bộ chấm PASS/FAIL hiện hành, chờ xác nhận yêu cầu; không còn coi tên 256 là lỗi chắc chắn.
+FR-16 không chốt MaxLength. Không mặc nhiên áp giới hạn 255 của FR-15 cho import. NM-B-01..03 là biên dưới 0/1/2 ký tự. NM-B-04..06 (254/255/256) là thăm dò tính nhất quán giữa hai đường tạo sản phẩm. TC-21 được rút khỏi bộ chấm PASS/FAIL hiện hành. Tên 256 ký tự không bị coi là lỗi của FR-16. BUG-19 đã kết luận không vi phạm đặc tả.
 
 ### B.2 Giá
 

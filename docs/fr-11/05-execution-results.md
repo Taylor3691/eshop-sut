@@ -38,8 +38,8 @@ Tổng: 28. PASS: 23. FAIL: 5. BLOCKED: 0.
 
 - TC-01: đơn, ngày, tiền `30.000.000 ₫` và nhãn `Chờ xác nhận` đúng. Trang không có `h1` (BUG-10).
 - TC-02: có câu "Bạn chưa có đơn hàng nào." nhưng không có icon (BUG-11).
-- TC-21: `created_at` NULL hiện thành `1/1/1970`; TC-22: `total_amount` NULL hiện thành `0 ₫`. Hai case dùng tiêu chí đề xuất, BUG-12/13 chờ xác nhận.
-- TC-28: focus đi hết cột trái (form hồ sơ) rồi mới lên nút "Hủy đơn" ở cột phải. Lệch nếu đọc FR-21 theo dòng; đúng nếu đọc theo cột. Ghi là phát hiện cần làm rõ, chưa lập bug.
+- TC-21 và TC-22: NULL hiện thành `1/1/1970` và `0 ₫`. FR-11 không quy định dữ liệu NULL. BUG-12 và BUG-13 đã kết luận không phải bug.
+- TC-28: từ "Cập nhật" (y=557) focus nhảy lên "Hủy đơn" (y=204). FR-21 yêu cầu Tab đi từ trên xuống dưới, trái sang phải. Đây là BUG-24.
 - Các test còn lại PASS: đơn của người khác không hiện, năm trạng thái có nhãn tiếng Việt và màu khác nhau, mốc tiền đúng `₫`, khách chưa đăng nhập không thấy đơn, API thiếu token trả 401, token sai trả 403, query `user_id=1` không đổi tập đơn.
 
 Lượt chạy ngày 18/10/2026 (UTC+7). Ảnh thứ tự Tab: `docs/bugs/fr11-TC-28.png`.

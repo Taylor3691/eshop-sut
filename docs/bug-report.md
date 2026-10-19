@@ -1,6 +1,6 @@
 # Trạng thái sau review 18/10/2026
 
-Có 23 mã. **19 bug theo đặc tả** và **4 phát hiện cần làm rõ oracle**: BUG-07 (trim khoảng trắng), BUG-12 (ngày NULL), BUG-13 (tiền NULL), BUG-19 (MaxLength import). BUG-23 là bug mới của bộ web, issue #66. Phát hiện thứ tự Tab ở FR-11 (TC-28) chưa lập bug vì FR-21 chưa rõ cách đọc bố cục hai cột. Kết quả mới nằm ở `05-execution-results.md` của từng chức năng.
+Có 24 mã. **20 bug theo đặc tả**. **4 mã đã kết luận không vi phạm đặc tả**: BUG-07 (FR-05 không yêu cầu trim), BUG-12 và BUG-13 (FR-11 không quy định cách hiện NULL), BUG-19 (giới hạn 255 thuộc FR-15, không thuộc danh sách validation của FR-16). BUG-24 là thứ tự Tab trên trang hồ sơ, lệch FR-21.
 
 # Bug report — FR-05
 
@@ -128,7 +128,7 @@ Repo GitHub `Taylor3691/eshop-sut` đang private. Ảnh lỗi đã được chè
 
 ## BUG-07 — Từ khóa chỉ gồm dấu cách vẫn trả cả danh sách
 
-**Trạng thái: CẦN XÁC NHẬN, không tính bug theo đặc tả.** Spec chưa chốt có trim khoảng trắng; trả cả danh sách sau trim chưa đủ kết luận là bug. Nội dung Expected/Actual bên dưới được giữ làm bằng chứng lịch sử.
+**Trạng thái: ĐÃ KẾT LUẬN, không vi phạm đặc tả.** FR-05 không yêu cầu cắt khoảng trắng. Từ khóa toàn dấu cách trả đủ danh sách được chấp nhận. Nội dung Expected/Actual bên dưới giữ làm lịch sử.
 
 - **Feature:** FR-05
 - **Test case:** TC-27
@@ -236,7 +236,7 @@ TC-23 (`status=returned` hiện `RETURNED`) không lập bug. FR-11 không chố
 
 ## BUG-12 — Ngày đặt null hiện thành 1/1/1970
 
-**Trạng thái: CẦN XÁC NHẬN, không tính bug theo đặc tả.** Spec yêu cầu hiện ngày đặt nhưng chưa chốt cách hiển thị dữ liệu NULL được chèn trực tiếp. Nội dung Expected/Actual bên dưới được giữ làm bằng chứng lịch sử.
+**Trạng thái: ĐÃ KẾT LUẬN, không vi phạm đặc tả.** FR-11 yêu cầu hiện ngày đặt khi đơn có ngày. README không quy định đơn bị chèn `created_at` NULL. Đây là quan sát độ bền, không phải bug. Nội dung bên dưới giữ làm lịch sử.
 
 - **Feature:** FR-11
 - **Test case:** TC-21
@@ -258,7 +258,7 @@ TC-23 (`status=returned` hiện `RETURNED`) không lập bug. FR-11 không chố
 
 ## BUG-13 — Tổng tiền null hiện thành 0 ₫
 
-**Trạng thái: CẦN XÁC NHẬN, không tính bug theo đặc tả.** Spec chưa chốt cách hiển thị total_amount NULL; tiêu chí không chuyển NULL thành 0 là đề xuất. Nội dung Expected/Actual bên dưới được giữ làm bằng chứng lịch sử.
+**Trạng thái: ĐÃ KẾT LUẬN, không vi phạm đặc tả.** FR-11 không quy định `total_amount` NULL. Tiêu chí "không hiện 0 ₫" là đề xuất, không phải câu trong README. Đây là quan sát độ bền, không phải bug. Nội dung bên dưới giữ làm lịch sử.
 
 - **Feature:** FR-11
 - **Test case:** TC-22
@@ -387,7 +387,7 @@ TC-16 (tên trống bị từ chối và có báo lỗi) không lập bug. Hệ 
 
 ## BUG-19 — Tên dài hơn 255 ký tự vẫn được import
 
-**Trạng thái: CẦN XÁC NHẬN, không tính bug theo đặc tả.** Giới hạn 255 thuộc FR-15; chưa xác nhận áp dụng cho đường import FR-16. TC-21 đã rút khỏi bộ hiện hành. Nội dung Expected/Actual bên dưới được giữ làm bằng chứng lịch sử.
+**Trạng thái: ĐÃ KẾT LUẬN, không vi phạm đặc tả.** FR-16 chỉ yêu cầu tên không rỗng và giá dương. Giới hạn 255 ký tự nằm ở FR-15, không có trong mục validation của FR-16. TC-21 đã rút khỏi bộ hiện hành. Nội dung bên dưới giữ làm lịch sử.
 
 - **Feature:** FR-16
 - **Test case:** TC-21
@@ -429,13 +429,13 @@ TC-16 (tên trống bị từ chối và có báo lỗi) không lập bug. Hệ 
 
 ## FR-05 mobile
 
-Các bug dưới đây đã chạy trên app mobile qua Expo web `http://127.0.0.1:8081` ngày 2026-10-15. API là `http://127.0.0.1:3000`. Đây là React Native chạy bằng `react-native-web` trong Chrome, không phải điện thoại thật.
+BUG-21 và BUG-22 ghi từ lượt Expo web ngày 2026-10-15. Lượt Android emulator ngày 18/10 (AVD `Medium_Phone`, Expo Go 54, API `http://10.0.2.2:3000`) thấy lại cùng hai lỗi. Kết quả đầy đủ ở `docs/fr-05-mobile/05-execution-results.md`: 11 PASS, 17 FAIL, 0 BLOCKED.
 
 Không lập bug mới cho:
 
 - TC-04 (`iphone` vẫn ra iPhone). README không cấm tìm không phân biệt hoa thường.
-- TC-15 và TC-16. BLOCKED: Chrome cắt dấu cách cuối URL, request thành `search=` rỗng.
-- TC-17 và TC-18 (`%`, `_` trả đủ 5 sản phẩm). Cùng lỗi API đã ghi ở BUG-08, issue #51.
+- TC-15 và TC-16. FAIL trên emulator: ô tìm giữ dấu cách, request tới server là `search=` rỗng, danh sách trả đủ seed. Cùng cách ghép `search=${query}` không encode với BUG-22, khác triệu chứng (dấu cách bị bỏ, không phải cắt tại `&` hoặc `#`). Chưa tách mã mới.
+- TC-17 và TC-18 (`%`, `_` trả đủ 5 sản phẩm). Cùng lỗi API đã ghi ở BUG-08, issue #51. Emulator thấy lại đủ 5 sản phẩm.
 - TC-19 (dấu nháy trả `SQLITE_ERROR`). Cùng lỗi API đã ghi ở BUG-09, issue #52. App mobile hiện nguyên HTML lỗi trong khung lỗi.
 
 ## BUG-21 — App mobile không có empty state khi tìm không ra kết quả
@@ -443,7 +443,7 @@ Không lập bug mới cho:
 - **Feature:** FR-05
 - **Test case:** TC-03, TC-05, TC-07, TC-09, TC-11, TC-12, TC-13, TC-22, TC-23, TC-24 (bổ sung 18/10)
 - **Severity:** Major
-- **Environment:** App mobile qua Expo web `http://127.0.0.1:8081`, Chrome, API `http://127.0.0.1:3000`, seed mặc định
+- **Environment:** Lượt đầu: Expo web `http://127.0.0.1:8081`, Chrome. Lượt xác nhận 18/10: Android emulator, Expo Go 54, API `http://10.0.2.2:3000`. TC-24 trên emulator cũng không có trang trống (`docs/bugs/fr05-mobile-native-TC-24.png`).
 - **Spec:** README FR-05 — Khi không có kết quả tìm kiếm phải hiển thị thông báo empty state phù hợp.
 - **Steps:**
   1. Mở app mobile.
@@ -463,7 +463,7 @@ Không lập bug mới cho:
 - **Feature:** FR-05
 - **Test case:** TC-20, TC-21
 - **Severity:** Major
-- **Environment:** App mobile qua Expo web `http://127.0.0.1:8081`, Chrome, API `http://127.0.0.1:3000`, seed 5 sản phẩm
+- **Environment:** Lượt đầu: Expo web `http://127.0.0.1:8081`, Chrome. Lượt xác nhận 18/10: Android emulator, Expo Go 54. `a&b` vẫn gửi `search=a&b` và trả 4 sản phẩm có chữ `a`. `a#b` vẫn gửi `search=a`.
 - **Spec:** README FR-05 — Thanh tìm kiếm tìm theo tên sản phẩm.
 - **Steps:**
   1. Mở app mobile.
@@ -499,6 +499,23 @@ Không lập bug mới cho:
 
 Bug này tách khỏi BUG-22 vì nằm ở component khác (`frontend-web/src/pages/Home.jsx` so với `frontend-mobile/App.js`), phải sửa ở hai nơi. Bản ghi ngày 18/10 trước đây gộp TC-47/48 vào BUG-22; đã đính chính.
 
+## BUG-24 — Tab trên trang hồ sơ nhảy từ dưới lên trên
+
+- **Feature:** FR-11, FR-21
+- **Test case:** TC-28 (bộ FR-11)
+- **Severity:** Minor
+- **Environment:** Web `http://localhost:5173/profile`, Chrome, user `test@eshop.com`, hai đơn đang chờ hoặc đã xác nhận
+- **Spec:** README FR-21 — Thứ tự focus theo Tab phải đi từ trên xuống dưới, trái sang phải.
+- **Steps:**
+  1. Đăng nhập `test@eshop.com`.
+  2. Mở `/profile`.
+  3. Nhấn Tab từ đầu trang cho đến hết các control.
+- **Expected:** Phần tử nhận focus tiếp theo không nằm phía trên phần tử vừa rời. Cùng hàng thì nằm bên phải.
+- **Actual:** Sau nút "Cập nhật" (tọa độ y=557) focus nhảy lên nút "Hủy đơn" (y=204).
+- **Screenshot:** `docs/bugs/fr11-TC-28.png`
+- **GitHub issue:** https://github.com/Taylor3691/eshop-sut/issues/67
+- **Issue page screenshot:** chưa chụp.
+
 ## Bằng chứng bổ sung ngày 18/10/2026
 
 Ảnh `BUG-xx-actual.png` cũ được giữ vì đã gắn trên issue. Ảnh dưới đây chụp lại để thấy đúng chỗ lỗi; khung vàng và viền đỏ là chú thích do script kiểm thử chèn (`scripts/evidence-fr05.mjs`, `scripts/fr16-execute.mjs`), không đổi dữ liệu trang.
@@ -509,6 +526,6 @@ Bug này tách khỏi BUG-22 vì nằm ở component khác (`frontend-web/src/pa
 - BUG-05: TC-52, CSDL không có sản phẩm, trang chủ cũng không có trang trống. Ảnh: [fr05-TC-52](bugs/fr05-TC-52.png).
 - BUG-14: TC-03 và TC-25, trang chi tiết sản phẩm sau import thấy mô tả bị cắt (`"Mo ta`) và còn nháy thừa (`"Mo ta ""dep"""`). TC-26, bảng admin có hai dòng mới (`SP Import` và `Dong 2"`) từ một dòng CSV. Ảnh: [TC-03](bugs/review-fr16-TC-03.png), [TC-25](bugs/review-fr16-TC-25.png), [TC-26](bugs/review-fr16-TC-26.png).
 - BUG-18: TC-31, bảng admin có dòng `SP Import` giá `-0.01 ₫`. Ảnh: [TC-31](bugs/review-fr16-TC-31.png).
-- BUG-21: TC-24, CSDL không có sản phẩm, màn `home` mobile không có trang trống. Ảnh: [fr05-mobile-TC-24](bugs/fr05-mobile-TC-24.png).
+- BUG-21: TC-24, CSDL không có sản phẩm, màn `home` mobile không có trang trống. Ảnh Expo web: [fr05-mobile-TC-24](bugs/fr05-mobile-TC-24.png). Ảnh Android emulator: [fr05-mobile-native-TC-24](bugs/fr05-mobile-native-TC-24.png).
 
 Ảnh bổ sung đã gắn bằng comment trên issue [#44](https://github.com/Taylor3691/eshop-sut/issues/44), [#45](https://github.com/Taylor3691/eshop-sut/issues/45), [#46](https://github.com/Taylor3691/eshop-sut/issues/46), [#48](https://github.com/Taylor3691/eshop-sut/issues/48), [#57](https://github.com/Taylor3691/eshop-sut/issues/57), [#61](https://github.com/Taylor3691/eshop-sut/issues/61) và [#64](https://github.com/Taylor3691/eshop-sut/issues/64).

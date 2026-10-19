@@ -19,7 +19,7 @@ TC-23 (`status=returned` hiện `RETURNED`) được chấm PASS và không lậ
 
 ## Review 18/10/2026
 
-OWN-B/ID-B là mã lịch sử của kiểm tra định danh, không phải BVA số học. TC-21/22 kiểm tra độ bền theo tiêu chí đề xuất đối với NULL; BUG-12/13 chờ xác nhận yêu cầu. Script đã có kiểm tra palette sau vòng lặp để phát hiện màu trùng giữa năm trạng thái; nhận xét trước rằng script thiếu kiểm tra này đã được đính chính.
+OWN-B/ID-B là mã lịch sử của kiểm tra định danh, không phải BVA số học. TC-21/22 kiểm tra độ bền với NULL. BUG-12/13 đã kết luận không vi phạm đặc tả. TC-28 lệch FR-21 và được ghi là BUG-24. Script đã có kiểm tra palette sau vòng lặp để phát hiện màu trùng giữa năm trạng thái; nhận xét trước rằng script thiếu kiểm tra này đã được đính chính.
 
 ## Cập nhật lần hai
 

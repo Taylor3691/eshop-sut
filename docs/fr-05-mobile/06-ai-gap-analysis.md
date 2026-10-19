@@ -6,8 +6,8 @@ Mục 6 của đề: ghi test case hoặc bug mà AI bỏ sót, và lý do. Bộ
 
 | ID | Chỗ bỏ sót | Bằng chứng | Lý do |
 | --- | --- | --- | --- |
-| GAP-M-01 | Từ khóa chỉ gồm dấu cách, trên iOS hoặc Android | TC-15 và TC-16 BLOCKED. Trên Chrome, request thành `search=` rỗng vì trình duyệt cắt dấu cách cuối URL. Script `scripts/fr05-mobile-execute.mjs` chỉ điều khiển Expo web. | Giới hạn của công cụ. Script không gửi được request của app trên điện thoại, nên chưa biết app có lỗi hay không. |
-| GAP-M-02 | Ký tự `#` trên thiết bị thật | BUG-22 ghi `#` là rất có thể cùng lỗi với `&`, nhưng lần chạy là Chrome. `#` bắt đầu fragment của URL. Hành vi WebView trên điện thoại chưa được chạy. | Cùng giới hạn với GAP-M-01. |
+| GAP-M-01 | Từ khóa chỉ gồm dấu cách, trên iOS hoặc Android | Lượt Chrome để TC-15 và TC-16 BLOCKED vì trình duyệt cắt dấu cách cuối URL. | Giới hạn của công cụ lúc đó. Lượt Android emulator 18/10 đóng gap này cho Android: FAIL, request `search=` rỗng, trả đủ seed. iOS chưa chạy. |
+| GAP-M-02 | Ký tự `#` trên thiết bị thật | Lượt Chrome chưa chứng minh WebView. | Lượt Android emulator 18/10 đóng gap này cho Android: TC-21 gửi `search=a`. iOS chưa chạy. |
 
 GAP-05-01 ở bộ web là hệ quả của lần làm mobile: cùng cách ghép `` `search=${query}` `` có trong `Home.jsx`, nhưng bộ web không có ba lớp này. Prompt web không liệt kê chúng.
 
@@ -32,4 +32,6 @@ GAP-05-01 ở bộ web là hệ quả của lần làm mobile: cùng cách ghép
 
 Nhấn Enter trên bàn phím để tìm: `App.js` không có `onSubmitEditing`, nên chỉ nút "Tìm" gửi được từ khóa. README không yêu cầu Enter phải tìm, nên không lập test có PASS/FAIL và không lập bug. Ghi lại làm quan sát cho người đặt yêu cầu.
 
-TC-04/05/07 đã sửa oracle để không bắt buộc chính sách hoa thường/dấu. TC-04 không còn là FAIL do `iphone` khớp iPhone. Chuỗi dài 254/255/256 chỉ là kiểm tra bổ sung, không phải MaxLength search. TC-15/16 tiếp tục BLOCKED đối với hành vi native vì chỉ chạy Chrome. Chưa có Android SDK hoặc iOS Simulator trên máy; cần chạy thiết bị thật/Expo Go hoặc môi trường native trước khi kết luận đầy đủ Pool D.
+TC-04/05/07 đã sửa oracle để không bắt buộc chính sách hoa thường/dấu. TC-04 không còn là FAIL do `iphone` khớp iPhone. Chuỗi dài 254/255/256 chỉ là kiểm tra bổ sung, không phải MaxLength search.
+
+Lượt Android emulator (18/10/2026, Expo Go 54, AVD Medium_Phone) đóng GAP-M-01 và GAP-M-02 cho Android: TC-15/16 FAIL vì dấu cách không được encode, request thành `search=` rỗng và trả đủ seed; TC-21 vẫn cắt `#` thành `search=a`. Chưa chạy iOS.

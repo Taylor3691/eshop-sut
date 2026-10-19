@@ -13,7 +13,7 @@ AI bám danh sách ví dụ trong prompt (giá âm/0/chữ, dấu phẩy trong n
 
 TC-25/26 mở rộng bằng chứng cho BUG-14; TC-31 mở rộng BUG-18, không tăng số bug theo số test FAIL. Ảnh bằng chứng hiện hành: docs/bugs/review-fr16-TC-03.png, TC-25, TC-26, TC-31 (xem cập nhật lần hai).
 
-BOM và giá có dấu phân cách địa phương còn cần làm rõ yêu cầu. Không tự áp đặt phải chấp nhận BOM hay hiểu 100.000 thành một trăm nghìn. Giới hạn tên 255 chỉ xuất hiện ở FR-15: đã rút TC-21 khỏi bộ chấm và đổi BUG-19 thành phát hiện chờ xác nhận.
+BOM và giá có dấu phân cách địa phương còn cần làm rõ yêu cầu. Không tự áp đặt phải chấp nhận BOM hay hiểu 100.000 thành một trăm nghìn. Giới hạn tên 255 chỉ xuất hiện ở FR-15: đã rút TC-21 khỏi bộ chấm. BUG-19 đã kết luận không phải bug của FR-16.
 
 ## Cập nhật lần hai
 

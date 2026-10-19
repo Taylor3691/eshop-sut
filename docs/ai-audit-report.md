@@ -47,6 +47,7 @@ I use AI tools for the following tasks,
 - **Your prompt:**
 
 > Với vai trò là kỹ sư kiểm thử. Chúng ta đang làm bước 1 (Input Space Partitioning) của Domain Testing cho FR-05 (Product listing and search).
+>
 > 1. Hãy liệt kê tất cả các biến đầu vào tường minh trên UI VÀ các query parameters trên URL/API .
 > 2. Bổ sung các biến trạng thái dữ liệu (Data State Variables) ảnh hưởng đến kết quả trả về (ví dụ: sản phẩm đang bị ẩn/inactive, sản phẩm có tồn kho = 0, sản phẩm có tên chứa dấu tiếng Việt).
 > 3. Lập bảng gồm: Tên biến, Kiểu dữ liệu, Ràng buộc theo spec, và Ràng buộc thực tế trong code. Chưa sinh test case ở bước này.
@@ -69,6 +70,7 @@ I use AI tools for the following tasks,
 
 > Từ bảng biến bước 1 đã được review, hãy thực hiện bước 2: Phân hoạch tương đương (Equivalence Partitioning) cho FR-05.
 > Yêu cầu phân chia rõ Valid (VEC) và Invalid (IEC) cho từng nhóm:
+>
 > - Từ khóa (Keyword): Khớp toàn phần, khớp một phần, không phân biệt hoa thường, có dấu/không dấu tiếng Việt, chỉ chứa khoảng trắng, chứa ký tự đặc biệt/SQL/HTML (`%`, `_`, `'`, `<script>`), chuỗi rỗng.
 > - Khoảng giá (Price Range): Miền hợp lệ, miền âm, chữ cái/ký tự đặc biệt, và miền quan hệ giữa 2 biến (`min_price < max_price`, `min_price == max_price`, `min_price > max_price`).
 > - Danh mục & Sắp xếp (Category & Sort): ID hợp lệ, ID không tồn tại, chọn nhiều danh mục (nếu có), giá trị enum sort hợp lệ và sai lệch qua query string.
@@ -92,6 +94,7 @@ I use AI tools for the following tasks,
 
 > Áp dụng kỹ thuật 3-value BVA (Min-1, Min, Min+1, Max-1, Max, Max+1) cho FR-05 dựa trên các miền ở bước 2.
 > Hãy tính toán giá trị biên cụ thể cho:
+>
 > 1. Độ dài chuỗi tìm kiếm (0, 1, 2 ký tự và MaxLength-1, MaxLength, MaxLength+1).
 > 2. Giá sản phẩm (`min_price`, `max_price` tại mốc 0 VNĐ, -1 VNĐ, 1 VNĐ, giá sản phẩm thấp nhất/cao nhất đang có trong DB, và biên đảo ngược khi `min_price = max_price + 1`).
 > 3. Phân trang (Pagination): Tổng số sản phẩm khớp điều kiện là `0`, `1`, `Limit - 1`, `Limit`, `Limit + 1` (trang 2 có đúng 1 sản phẩm), và truy cập `page = 0`, `page = -1`, `page = MaxPage + 1`.
@@ -744,7 +747,7 @@ I use AI tools for the following tasks,
 
 - **The AI output:**
 
-> Preview chỉ hiện chữ đường dẫn vì trong `docs/bug-report.md` ảnh đang nằm trong dấu backtick, ví dụ `` `docs/bugs/BUG-01-actual.png` ``. Đó là chữ, không phải thẻ ảnh. Markdown chỉ vẽ ảnh khi viết `![mô tả](đường-dẫn)`.
+> Preview chỉ hiện chữ đường dẫn vì trong `docs/bug-report.md` ảnh đang nằm trong dấu backtick, ví dụ ``docs/bugs/BUG-01-actual.png``. Đó là chữ, không phải thẻ ảnh. Markdown chỉ vẽ ảnh khi viết `![mô tả](đường-dẫn)`.
 >
 > File báo cáo nằm trong `docs/`, nên đường dẫn tương đối đúng là `bugs/BUG-01-actual.png`, không phải `docs/bugs/...`. Mẫu bài nộp đang giữ đường dẫn dạng chữ. Chưa sửa file.
 
@@ -825,7 +828,6 @@ I use AI tools for the following tasks,
 - **The AI output:**
 
 > Đã ghi Huỳnh Thái Toàn, MSSV 23120175 vào `docs/HW02-README.md` và `docs/main-report.md`.
-
 
 ## Interaction 59 — Hiệu chỉnh bài theo review
 

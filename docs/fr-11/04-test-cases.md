@@ -83,7 +83,7 @@ Seed không có đơn. Dòng trong bảng là dữ liệu phải tạo trước 
 | --- | --- | --- | --- | --- | --- |
 | TC-28 | UI-TAB (GAP-11-02, FR-21) | User id 2 đăng nhập | Hai đơn chuẩn `id` 1 và 2 (có nút Hủy đơn để nhận focus) | UI: mở `/profile`, nhấn Tab liên tục từ đầu trang | Mỗi phần tử nhận focus tiếp theo không nằm phía trên phần tử trước; cùng hàng thì nằm bên phải. Oracle đọc FR-21 theo thứ tự dòng (row-major). |
 
-Trang `/profile` có hai cột. Nếu FR-21 được hiểu theo cột (hết cột trái rồi sang cột phải) thì oracle khác. Kết quả TC-28 vì vậy là phát hiện cần làm rõ, không tự động là bug.
+FR-21 chốt thứ tự từ trên xuống dưới, trái sang phải. Focus nhảy lên phía trên là lệch đặc tả, ghi ở BUG-24.
 
 ## Phủ
 
@@ -120,4 +120,4 @@ Phủ điểm on/off/in/out (bước 3, phần A):
 
 ## Phạm vi oracle cần xác nhận
 
-TC-21/TC-22 chèn NULL trực tiếp vào DB là kiểm thử độ bền với dữ liệu thiếu. Expected không bịa ngày/tiền là tiêu chí đề xuất của người kiểm thử; README chưa quy định cách hiển thị NULL. FAIL ở hai case này là lệch tiêu chí đề xuất, chưa đủ xác nhận vi phạm đặc tả. Không tính hai phát hiện tương ứng là bug đã xác nhận.
+TC-21/TC-22 chèn NULL trực tiếp vào DB là kiểm thử độ bền. README không quy định cách hiện NULL. Hai case không được tính là bug. BUG-12 và BUG-13 đã kết luận không vi phạm đặc tả.

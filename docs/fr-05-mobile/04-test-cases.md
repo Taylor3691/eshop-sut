@@ -13,7 +13,7 @@ Expected result bám README, không bám code.
 - Từ khóa hiện thành chữ, không chạy HTML.
 - Có trạng thái loading khi đang tải. Hết kết quả thì có empty state. Giá dùng `₫` và dấu phân cách hàng nghìn, ví dụ `30.000.000 ₫`.
 - Không chấm `h1`, `alt` và số cột trên mobile. App mobile không có thẻ `h1`. Khi chạy bằng `react-native-web`, thư viện tự sinh `<img alt="">`. README không nêu số cột trên mobile. Các mục này chỉ chấm ở bộ web `docs/fr-05/`.
-- TC-15 và TC-16 là BLOCKED khi chạy trên Chrome: trình duyệt cắt dấu cách cuối URL nên app gửi `search=` rỗng. Chỉ thiết bị thật hoặc Expo Go mới biết app gửi gì.
+- Trên Chrome, TC-15 và TC-16 từng BLOCKED vì trình duyệt cắt dấu cách cuối URL. Lượt Android emulator ngày 18/10 chấm FAIL: ô tìm giữ dấu cách, request tới server là `search=` rỗng và trả đủ seed. Chi tiết ở `05-execution-results.md`.
 - Query không thuộc FR-05 không được đổi tập sản phẩm so với cùng từ khóa khi không gửi query đó, và không được trả lỗi.
 
 ## Cách rút số test case
@@ -97,7 +97,7 @@ Phủ điểm on/off/in/out (bước 3, phần A): A.1 → TC-10 (on), TC-08 (of
 
 ## Test case riêng của mobile
 
-Precondition số sản phẩm đặt trực tiếp bảng `products` (giữ `N` dòng đầu của seed theo id) và khôi phục seed sau test. Độ rộng màn đặt bằng viewport của trình duyệt chạy Expo web.
+Precondition số sản phẩm đặt trực tiếp bảng `products` (giữ `N` dòng đầu của seed theo id) và khôi phục seed sau test. Lượt chấm đặt độ rộng bằng `wm size` trên Android emulator: 320×711 và 768×1024.
 
 | TC ID | Miền/Biên được phủ | Precondition | Test Data | Steps | Expected Result |
 | --- | --- | --- | --- | --- | --- |

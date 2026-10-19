@@ -28,6 +28,13 @@ for name,size in [('Heading1',18),('Heading2',13),('Heading3',11)]:
     styles[name].fontName='Arial-Bold'; styles[name].fontSize=size; styles[name].leading=size*1.3
     styles[name].spaceBefore=12; styles[name].spaceAfter=8
     styles[name].keepWithNext=True
+for level,size in [(4,10),(5,9.5),(6,9)]:
+    styles[f'Heading{level}'].fontName='Arial-Bold'
+    styles[f'Heading{level}'].fontSize=size
+    styles[f'Heading{level}'].leading=size*1.3
+    styles[f'Heading{level}'].spaceBefore=8
+    styles[f'Heading{level}'].spaceAfter=4
+    styles[f'Heading{level}'].keepWithNext=True
 
 def inline(s):
     # Escape all markup, then enable the limited Markdown emphasis used here.
@@ -69,7 +76,7 @@ def export(source):
                     ('TOPPADDING',(0,0),(-1,-1),5),('BOTTOMPADDING',(0,0),(-1,-1),5)]))
                 story.extend([table,Spacer(1,9)])
             continue
-        h=re.match(r'^(#{1,3})\s+(.*)',line)
+        h=re.match(r'^(#{1,6})\s+(.*)',line)
         if h:story.append(Paragraph(inline(h[2]),styles['Heading'+str(len(h[1]))]));continue
         quote=line.startswith('>')
         if quote:line=line.lstrip('> ')
