@@ -9,12 +9,10 @@ const {
   submitRegistration,
 } = require('../../support/registration')
 
-const hasWebBaseUrl = Boolean(Cypress.expose('WEB_BASE_URL'))
-const webIt = hasWebBaseUrl ? it : it.skip
 
 describe('Feature1 - Đăng ký tài khoản', () => {
   // Blocked when CYPRESS_WEB_BASE_URL is not supplied by the runner.
-  webIt('[TC-BVA-FR01-010] Từ chối mật khẩu không có chữ số', () => {
+  it('[TC-BVA-FR01-010] Từ chối mật khẩu không có chữ số', () => {
     const data = {
   "name": "Nguyễn Văn An",
   "email": "bva010@example.com",

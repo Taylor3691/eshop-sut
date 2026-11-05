@@ -106,6 +106,44 @@ Frontend Mobile cung cấp giao diện App trên điện thoại. (Lưu ý: Back
 
 ---
 
+## 5. Xử lý lỗi `Network request failed` trên Frontend Mobile
+
+Frontend Mobile đang gọi API qua địa chỉ LAN được khai báo ở đầu file `frontend-mobile/App.js`:
+
+```js
+const API_URL = "http://192.168.10.13:3000/api";
+```
+
+Địa chỉ `192.168.10.13` chỉ hoạt động khi đó vẫn là IPv4 của máy đang chạy Backend. Làm lần lượt như sau:
+
+1. Khởi chạy Backend và giữ cửa sổ Terminal này mở:
+   ```bash
+   cd backend
+   node server.js
+   ```
+2. Trên máy tính, mở `http://localhost:3000/api/products` trong trình duyệt. Nếu Backend hoạt động, trình duyệt sẽ trả về một mảng JSON sản phẩm.
+3. Chạy `ipconfig` và tìm dòng **IPv4 Address** của card Wi-Fi đang dùng, ví dụ `192.168.1.25`.
+4. Nếu chạy bằng **điện thoại thật**, sửa `API_URL` thành IP vừa tìm được:
+   ```js
+   const API_URL = "http://192.168.1.25:3000/api";
+   ```
+   Không dùng `localhost` vì trên điện thoại, `localhost` chính là điện thoại chứ không phải máy tính.
+5. Điện thoại và máy tính phải dùng cùng một mạng Wi-Fi. Không dùng mạng Guest có bật chế độ cô lập thiết bị.
+6. Dùng trình duyệt trên điện thoại mở `http://<IP-máy-tính>:3000/api/products`. Nếu không mở được, cho phép Node.js hoặc cổng TCP `3000` qua Windows Defender Firewall đối với mạng **Private** rồi thử lại.
+7. Nếu chạy bằng **Android Emulator**, dùng địa chỉ đặc biệt của máy chủ:
+   ```js
+   const API_URL = "http://10.0.2.2:3000/api";
+   ```
+8. Sau khi đổi địa chỉ API, khởi động lại Expo và xóa cache:
+   ```bash
+   cd frontend-mobile
+   npx expo start -c
+   ```
+
+Nếu URL API mở được trong trình duyệt điện thoại nhưng ứng dụng vẫn báo lỗi, kiểm tra Terminal của Backend và log của Expo để xem request có tới server hay không. Với bản Android build độc lập dùng HTTP nội bộ, có thể cần thêm `"usesCleartextTraffic": true` trong mục `expo.android` của `frontend-mobile/app.json`; Expo Go thông thường không cần bước này.
+
+---
+
 ## Hướng dẫn Kiểm thử
 
 - Hãy bám sát vào tài liệu **Đặc tả Yêu cầu Hệ thống (System Requirements Specification)** để đối chiếu.

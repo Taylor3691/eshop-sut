@@ -7,7 +7,8 @@ FR-07
 Giỏ hàng / Functional / Boundary Value Analysis
 
 ## Preconditions
-- Theo tiền điều kiện chung; giỏ hàng có Sản phẩm A và B phân biệt
+- Hệ thống có ít nhất hai sản phẩm phân biệt có thể dùng để thiết lập giỏ hàng; người dùng có thể mở trang Giỏ hàng. Mỗi test case độc lập và giỏ hàng phải được đưa về đúng số dòng nêu trong test data trước khi kiểm tra.
+- Giỏ hàng có Sản phẩm A và B phân biệt.
 
 ## Test data
 | Boundary | Số dòng sản phẩm phân biệt = 2 (LB+1) |

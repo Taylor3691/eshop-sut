@@ -1,0 +1,4 @@
+# Local Cypress overrides and generated evidence.
+/cypress.env.json
+/.env*
+/.testrun-artifacts/

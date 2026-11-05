@@ -1,34 +1,30 @@
 ---
 name: Bug Report
-title: "[BUG]: Hệ thống chấp nhận min_order_amount thiếu hoặc âm"
+title: "[BUG]: Coupon có min_order_amount âm vẫn được chấp nhận"
 labels: ["type: bug", "status: Open"]
 ---
 
 ## Mô tả lỗi
-Hệ thống chấp nhận min_order_amount thiếu hoặc âm
+Hệ thống chấp nhận tạo coupon với `min_order_amount` âm.
 
-Testcase phát hiện:
-- TC-COUPON-010
-- TC-COUPON-011
+Testcase phát hiện: `TC-COUPON-011`.
 
 ## Môi trường
-- Browser: Electron 146 (headless)
-- OS: Windows 11 Home Single Language (10.0.26200)
-- URL: http://localhost:5174 (API: http://localhost:3000)
-- Build/commit: 755359b (dirty worktree)
+- Browser: Electron 146.0.7680.216 (headless)
+- OS: Windows NT 10.0.26200
+- URL: http://127.0.0.1:5174
+- Build/commit: 9677c31
+- Run window (UTC): 2026-10-14T03:45:46.864Z to 2026-10-14T03:53:28.206Z
 
 ## Steps to reproduce
-1. Đăng nhập trang quản trị và mở Mã Giảm Giá.
-2. Nhập coupon hợp lệ ngoại trừ min_order_amount bị bỏ trống hoặc là số âm.
-3. Bấm Tạo mã và quan sát response.
+1. Nhập `-1000` vào `Đơn tối thiểu (₫)` và nhập đúng các field còn lại theo Test data.
+2. Bấm `Tạo mã`.
 
 ## Actual result
-POST tạo coupon trả HTTP 200 khi min_order_amount bị bỏ trống hoặc bằng -1000.
+Request tạo coupon trả HTTP 200 thay vì mã lỗi 4xx.
 
 ## Expected result
-min_order_amount là bắt buộc và phải lớn hơn hoặc bằng 0.
+Từ chối tạo vì `min_order_amount < 0`.
 
 ## Evidence
-![Evidence TC-COUPON-010](../Screenshot/TC-COUPON-010.png)
-
 ![Evidence TC-COUPON-011](../Screenshot/TC-COUPON-011.png)

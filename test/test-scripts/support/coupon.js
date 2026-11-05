@@ -14,7 +14,9 @@ function loginAsAdminApi({ email, password }) {
     },
     log: false,
   }).then(({ body }) => {
-    expect(body.token, 'admin token').to.be.a('string').and.not.be.empty
+    // Assert only derived values so Cypress does not expose the bearer token in its log.
+    expect(typeof body.token, 'admin token type').to.eq('string')
+    expect(Boolean(body.token), 'admin token presence').to.eq(true)
     return body.token
   })
 }

@@ -1,42 +1,30 @@
 ---
 name: Bug Report
-title: "[BUG]: Form đăng ký từ chối mật khẩu mạnh hợp lệ"
+title: "[BUG]: Các mật khẩu hợp lệ bị chặn trước khi gửi yêu cầu đăng ký"
 labels: ["type: bug", "status: Open"]
 ---
 
 ## Mô tả lỗi
-Form đăng ký từ chối mật khẩu mạnh hợp lệ
+Các testcase yêu cầu đăng ký thành công với mật khẩu hợp lệ không tạo request `register`; Cypress hết thời gian chờ request.
 
-Testcase phát hiện:
-- TC-BVA-FR01-002
-- TC-BVA-FR01-003
-- TC-BVA-FR01-005
-- TC-BVA-FR01-006
-- TC-BVA-FR01-008
-- TC-BVA-FR01-009
-- TC-BVA-FR01-011
-- TC-BVA-FR01-012
-- TC-BVA-FR01-014
-- TC-BVA-FR01-015
-- TC-REG-001
+Testcase phát hiện: `TC-BVA-FR01-002`, `TC-BVA-FR01-003`, `TC-BVA-FR01-005`, `TC-BVA-FR01-006`, `TC-BVA-FR01-008`, `TC-BVA-FR01-009`, `TC-BVA-FR01-011`, `TC-BVA-FR01-012`, `TC-BVA-FR01-014`, `TC-BVA-FR01-015`, `TC-REG-001`.
 
 ## Môi trường
-- Browser: Electron 146 (headless)
-- OS: Windows 11 Home Single Language (10.0.26200)
-- URL: http://localhost:5173
-- Build/commit: 755359b (dirty worktree)
+- Browser: Electron 146.0.7680.216 (headless)
+- OS: Windows NT 10.0.26200
+- URL: http://127.0.0.1:5173
+- Build/commit: 9677c31
+- Run window (UTC): 2026-10-14T03:45:46.864Z to 2026-10-14T03:53:28.206Z
 
 ## Steps to reproduce
-1. Mở trang Đăng ký.
-2. Nhập Họ Tên, Email chưa tồn tại và một mật khẩu hợp lệ từ testcase liên quan.
-3. Bấm Đăng Ký.
-4. Quan sát request đăng ký và trang đích.
+1. Nhập các giá trị như Test data.
+2. Gửi form đăng ký.
 
 ## Actual result
-Sau khi gửi form với mật khẩu đáp ứng FR-01, frontend không phát sinh POST /api/register; Cypress hết thời gian chờ request đăng ký.
+Không có request đăng ký được gửi trong 10 giây; Cypress timeout khi chờ alias `register`.
 
 ## Expected result
-Mật khẩu có tối thiểu 8 ký tự, chữ hoa, chữ thường, chữ số và ký tự đặc biệt hợp lệ phải được chấp nhận và đăng ký thành công.
+Đăng ký thành công và người dùng được chuyển tới trang Đăng nhập.
 
 ## Evidence
 ![Evidence TC-BVA-FR01-002](../Screenshot/TC-BVA-FR01-002.png)

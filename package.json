@@ -1,0 +1,28 @@
+{
+  "name": "eshop-sut",
+  "version": "1.0.0",
+  "description": "> **Phạm vi tài liệu**: Mô tả **yêu cầu nghiệp vụ đúng** của hệ thống EShop.\r > Sinh viên sử dụng tài liệu này làm cơ sở thiết kế test case, sau đó kiểm thử hệ thống thực để tìm ra các điểm triển khai không tuân thủ đặc tả.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Taylor3691/eshop-sut.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Taylor3691/eshop-sut/issues"
+  },
+  "homepage": "https://github.com/Taylor3691/eshop-sut#readme",
+  "devDependencies": {
+    "cypress": "^16.1.1",
+    "puppeteer": "^25.13.0"
+  }
+}

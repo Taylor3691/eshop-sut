@@ -1,4 +1,4 @@
-Title: [BLOCKED][Quản lý Mã Giảm Giá] Tạo mã với min_order_amount bằng 0
+Title: [PASS][Quản lý Mã Giảm Giá] Tạo mã với min_order_amount bằng 0
 
 ## Found by Test Case
 TC-BVA-FR17-002
@@ -10,10 +10,11 @@ FR-17
 N/A / N/A
 
 ## Environment
-- Browser: Electron 146 (headless)
-- OS: Windows 11 Home Single Language (10.0.26200)
-- URL: http://localhost:5174 (API: http://localhost:3000)
-- Build/commit: 755359b (dirty worktree)
+- Browser: Electron 146.0.7680.216 (headless)
+- OS: Windows NT 10.0.26200
+- URL: http://127.0.0.1:5174
+- Build/commit: 9677c31
+- Run window (UTC): 2026-10-14T03:45:46.864Z to 2026-10-14T03:53:28.206Z
 
 ## Steps to reproduce
 1. Trong form tạo coupon, nhập code vào `Mã coupon (VD: SAVE10)`, chọn `Số tiền cố định (₫)`, rồi nhập các giá trị Test data vào đúng field theo placeholder UI.
@@ -23,7 +24,7 @@ N/A / N/A
 Mã giảm giá được tạo thành công vì `min_order_amount = 0` thỏa `>= 0` và các input khác hợp lệ.
 
 ## Actual result
-Testcase không vượt cổng bất biến Test data. Test data yêu cầu min_order_amount = 0 trong Boundary nhưng spec bỏ trường min_order_amount; helper gửi giá trị rỗng.
+Cypress ghi nhận trạng thái cuối cùng passed.
 
 ## Evidence
-Không có screenshot vì testcase chưa được thực thi hợp lệ.
+![Evidence TC-BVA-FR17-002](../../Screenshot/TC-BVA-FR17-002.png)

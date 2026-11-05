@@ -10,10 +10,11 @@ FR-17
 N/A / N/A
 
 ## Environment
-- Browser: Electron 146 (headless)
-- OS: Windows 11 Home Single Language (10.0.26200)
-- URL: http://localhost:5174 (API: http://localhost:3000)
-- Build/commit: 755359b (dirty worktree)
+- Browser: Electron 146.0.7680.216 (headless)
+- OS: Windows NT 10.0.26200
+- URL: http://127.0.0.1:5174
+- Build/commit: 9677c31
+- Run window (UTC): 2026-10-14T03:45:46.864Z to 2026-10-14T03:53:28.206Z
 
 ## Steps to reproduce
 1. Nhập `0` vào `Số lần dùng tối đa/người` và nhập đúng các field còn lại theo Test data.
@@ -23,7 +24,7 @@ N/A / N/A
 Từ chối tạo vì `max_uses_per_user < 1`.
 
 ## Actual result
-Cypress thực thi testcase trong 2597 ms; tất cả assertion đạt và hành vi quan sát khớp Expected result.
+Cypress ghi nhận trạng thái cuối cùng passed.
 
 ## Evidence
 ![Evidence TC-COUPON-013](../../Screenshot/TC-COUPON-013.png)

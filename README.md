@@ -32,7 +32,6 @@ Hệ thống EShop là nền tảng thương mại điện tử bao gồm 4 thà
 - Người dùng phải cung cấp: **Họ Tên**, **Email**, **Mật khẩu**.
 - Email phải có định dạng hợp lệ (`user@domain.com`) và là duy nhất trong hệ thống.
 - **Yêu cầu mật khẩu mạnh**: Tối thiểu 8 ký tự, có ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt (`@`, `$`, `!`, `%`, `*`, `?`, `&`).
-- Phải có trường **Xác nhận mật khẩu** — hệ thống từ chối nếu hai trường không khớp.
 - Sau khi đăng ký thành công, người dùng được chuyển tới trang Đăng nhập.
 
 ### FR-02: Đăng nhập & Khóa tài khoản

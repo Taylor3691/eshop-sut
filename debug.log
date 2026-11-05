@@ -1,0 +1,23 @@
+[1013/122122.520:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1013/122122.667:ERROR:third_party\crashpad\crashpad\client\crashpad_client_win.cc:867] not connected
+[1013/122138.029:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1013/122138.147:ERROR:third_party\crashpad\crashpad\client\crashpad_client_win.cc:867] not connected
+[1013/122203.727:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1013/122203.832:ERROR:third_party\crashpad\crashpad\client\crashpad_client_win.cc:867] not connected
+[1013/122252.403:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1013/122252.503:ERROR:third_party\crashpad\crashpad\client\crashpad_client_win.cc:867] not connected
+[1013/122324.084:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1013/122338.892:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1013/122348.258:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1013/202416.394:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1013/202416.629:ERROR:third_party\crashpad\crashpad\client\crashpad_client_win.cc:867] not connected
+[1013/202433.593:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1013/202433.717:ERROR:third_party\crashpad\crashpad\client\crashpad_client_win.cc:867] not connected
+[1013/214224.978:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1013/214225.127:ERROR:third_party\crashpad\crashpad\client\crashpad_client_win.cc:867] not connected
+[1013/214242.450:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1013/214242.584:ERROR:third_party\crashpad\crashpad\client\crashpad_client_win.cc:867] not connected
+[1014/101457.303:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1014/101653.658:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1014/101741.906:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)
+[1014/101800.461:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Access is denied. (0x5)

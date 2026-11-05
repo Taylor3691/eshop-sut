@@ -34,6 +34,7 @@ describe('Feature17 - Quản lý Mã Giảm Giá', () => {
         const data = {
       "code": "BVA17DV0",
       "type": "fixed",
+      "discount_value": "0",
       "expired_at": "2099-12-31",
       "min_order_amount": "100000",
       "max_uses_per_user": "5"

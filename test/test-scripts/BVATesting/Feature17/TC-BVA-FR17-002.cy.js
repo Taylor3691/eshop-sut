@@ -36,6 +36,7 @@ describe('Feature17 - Quản lý Mã Giảm Giá', () => {
       "type": "fixed",
       "discount_value": "10",
       "expired_at": "2099-12-31",
+      "min_order_amount": "0",
       "max_uses_per_user": "5"
     }
     

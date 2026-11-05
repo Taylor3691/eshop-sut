@@ -36,7 +36,8 @@ describe('Feature17 - Quản lý Mã Giảm Giá', () => {
       "type": "fixed",
       "discount_value": "10",
       "expired_at": "2099-12-31",
-      "min_order_amount": "100000"
+      "min_order_amount": "100000",
+      "max_uses_per_user": "1"
     }
     
         cleanupCouponByCode("BVA17MAX1", credentials)

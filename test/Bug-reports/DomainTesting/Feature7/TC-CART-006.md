@@ -10,10 +10,11 @@ FR-07
 N/A / N/A
 
 ## Environment
-- Browser: Electron 146 (headless)
-- OS: Windows 11 Home Single Language (10.0.26200)
-- URL: http://localhost:5173
-- Build/commit: 755359b (dirty worktree)
+- Browser: Electron 146.0.7680.216 (headless)
+- OS: Windows NT 10.0.26200
+- URL: http://127.0.0.1:5173
+- Build/commit: 9677c31
+- Run window (UTC): 2026-10-14T03:45:46.864Z to 2026-10-14T03:53:28.206Z
 
 ## Steps to reproduce
 1. Nhấn Xóa A.
@@ -24,7 +25,7 @@ N/A / N/A
 Dialog xuất hiện trước khi xóa; A vẫn còn lúc chờ quyết định. Nội dung dialog chưa được quy định.
 
 ## Actual result
-Testcase chưa được thực thi. testcase không định danh mapping cho Sản phẩm A/B và trạng thái giỏ không thể được tái tạo an toàn từ source.
+Cypress ghi nhận testcase pending do it.skip(); precondition hoặc fixture được định danh chưa đủ để thực thi an toàn.
 
 ## Evidence
-Không có screenshot vì testcase chưa được thực thi hợp lệ.
+Không có screenshot vì testcase chưa được thực thi.

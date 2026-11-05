@@ -7,13 +7,14 @@ TC-REG-001
 FR-01
 
 ## Severity / Priority
-High / High
+TBD / TBD
 
 ## Environment
-- Browser: Electron 146 (headless)
-- OS: Windows 11 Home Single Language (10.0.26200)
-- URL: http://localhost:5173
-- Build/commit: 755359b (dirty worktree)
+- Browser: Electron 146.0.7680.216 (headless)
+- OS: Windows NT 10.0.26200
+- URL: http://127.0.0.1:5173
+- Build/commit: 9677c31
+- Run window (UTC): 2026-10-14T03:45:46.864Z to 2026-10-14T03:53:28.206Z
 
 ## Steps to reproduce
 1. Nhập toàn bộ dữ liệu hợp lệ.
@@ -24,7 +25,7 @@ High / High
 Tài khoản được đăng ký thành công và người dùng được chuyển tới trang Đăng nhập.
 
 ## Actual result
-Sau khi gửi form với mật khẩu đáp ứng FR-01, frontend không phát sinh POST /api/register; Cypress hết thời gian chờ request đăng ký.
+CypressError: Timed out retrying after 10000ms: `cy.wait()` timed out waiting `10000ms` for the 1st request to the route: `register`. No request ever occurred.
 
 ## Evidence
 ![Evidence TC-REG-001](../../Screenshot/TC-REG-001.png)

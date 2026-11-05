@@ -3,9 +3,11 @@ import {
   Alert,
   FlatList,
   Image,
+  Platform,
   SafeAreaView,
   ScrollView,
   StyleSheet,
+  StatusBar as NativeStatusBar,
   Text,
   TextInput,
   TouchableOpacity,
@@ -13,7 +15,9 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
-const API_URL = "http://192.168.10.13:3000/api"; // IP LAN để chạy được trên iOS/Android và thiết bị thật
+const API_URL = "http://192.168.1.14:3000/api"; // IP LAN để chạy được trên iOS/Android và thiết bị thật
+const ANDROID_STATUS_BAR_HEIGHT =
+  Platform.OS === "android" ? NativeStatusBar.currentHeight || 0 : 0;
 
 const formatMoney = (value) => `${Number(value).toLocaleString()} ₫`;
 
@@ -441,7 +445,8 @@ export default function App() {
 
   const renderScreen = (children) => (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
+      <View style={styles.statusBarSpacer} />
       {renderHeader()}
       {children}
       <View style={styles.footer}>
@@ -707,7 +712,7 @@ export default function App() {
                   style={[
                     styles.orangeButton,
                     (!couponCode.trim() || applyingCoupon) &&
-                      styles.disabledButton,
+                    styles.disabledButton,
                   ]}
                   disabled={applyingCoupon || !couponCode.trim()}
                   onPress={handleApplyCoupon}
@@ -987,6 +992,10 @@ export default function App() {
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: "#f5f5f5" },
+  statusBarSpacer: {
+    height: ANDROID_STATUS_BAR_HEIGHT,
+    backgroundColor: "#2563eb",
+  },
   container: { flex: 1, backgroundColor: "#f5f5f5" },
   padded: { flex: 1, padding: 20 },
   paddedFlex: { flex: 1, padding: 20 },

@@ -7,7 +7,7 @@ FR-01
 Đăng ký tài khoản / Functional / Boundary Value Analysis
 
 ## Preconditions
-- Theo tiền điều kiện chung
+- Người dùng đang ở trang Đăng ký; Email của test case chưa tồn tại trong hệ thống. Mỗi test case độc lập; dữ liệu do một test case thành công tạo ra phải được hoàn tác hoặc test case tiếp theo phải dùng email khác.
 
 ## Test data
 | Boundary | Số ký tự đặc biệt hợp lệ = 1 (LB) |
