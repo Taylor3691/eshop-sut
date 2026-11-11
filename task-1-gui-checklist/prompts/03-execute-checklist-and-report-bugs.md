@@ -1,0 +1,5 @@
+# Prompt 03 — Execute Checklist and Report Bugs
+
+Execute the approved checklist in `checklist/human-reviewed-checklist.md` against the running EShop web storefront. Before execution, follow `setup_guide.md` and record the actual backend URL, frontend URL, browser/version, operating system, viewport, device/platform, date, and tester in `docs/test-execution-report.md`.
+
+Exercise Login, Register, and both Forgot Password steps using normal, invalid, boundary, navigation, and feedback/state cases supported by FR-01, FR-02, FR-03 and IA-01–IA-04. Mark each item only `Passed` or `Failed` after observation; use temporary `Not Executed` only for items not yet run. For each failed item, record reproduction steps, expected versus actual behavior, and a screenshot under `evidence/failed-items/`. Report only verified defects using `bug-reports/BUG-REPORT-TEMPLATE.md`; create a GitHub issue only when the defect is verified and attach its evidence. Update `docs/test-execution-report.md`, `docs/test-summary.md`, the workbook, and the AI audit log. Never store credentials, tokens, or fabricated results.
