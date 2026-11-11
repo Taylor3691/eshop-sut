@@ -1,0 +1,137 @@
+name: Bug Report
+description: Report a verified defect with reproducible steps and evidence.
+title: "[BUG][Module] Short description"
+labels:
+  - "type: bug"
+  - "status: new"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Report only a verified defect. Do not include passwords, tokens, or other secrets.
+        Use the title format `[BUG][Module] Short description`.
+  - type: textarea
+    id: problem-summary
+    attributes:
+      label: Problem Summary
+      description: What was tested, what happened, and why the observed behavior is incorrect.
+      placeholder: Describe the test objective and the deviation from expected behavior.
+    validations:
+      required: true
+  - type: input
+    id: checklist-item
+    attributes:
+      label: Related Checklist Item ID
+      placeholder: GUI-001 or HR-001
+    validations:
+      required: true
+  - type: input
+    id: function-name
+    attributes:
+      label: Function Name
+      placeholder: pLogin, pRegister, or pForgotPassword
+    validations:
+      required: true
+  - type: dropdown
+    id: module
+    attributes:
+      label: Affected Screen / Module
+      options:
+        - Login
+        - Register
+        - Forgot Password
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include browser/version, OS, application URL, version/commit, viewport, and test account name if applicable. Never include secrets.
+      placeholder: |
+        Browser:
+        Operating system:
+        Application URL:
+        Version/commit:
+        Viewport:
+        Test account:
+    validations:
+      required: true
+  - type: textarea
+    id: preconditions
+    attributes:
+      label: Preconditions
+      description: Conditions, account state, data, or navigation state required before reproduction.
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Use numbered, specific user actions and input data.
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Result
+      description: Describe the correct behavior according to the requirement.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Result
+      description: Describe the observed incorrect behavior precisely.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Provide repository-relative screenshot, video, console, or network evidence paths/links.
+      placeholder: task-1-gui-checklist/evidence/failed-items/...
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: GitHub label taxonomy; do not confuse impact with urgency.
+      options:
+        - blocker
+        - critical
+        - major
+        - minor
+        - trivial
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: GitHub label taxonomy for fixing urgency.
+      options:
+        - P0
+        - P1
+        - P2
+        - P3
+    validations:
+      required: true
+  - type: input
+    id: reported-by
+    attributes:
+      label: Reported By
+    validations:
+      required: true
+  - type: input
+    id: assigned-to
+    attributes:
+      label: Assigned To
+      description: Optional. Leave blank unless assignment is established.
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: Additional Notes
+      description: Include retest information, related issue/PR links, or classification rationale.

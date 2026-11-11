@@ -6,4 +6,4 @@ Preserve the original AI-generated checklist as immutable evidence. Evaluate eve
 
 Add only valid, independently testable human-reviewed items. For every human-added item, record a specific explanation of why the initial checklist missed it, supported by the actual comparison. Do not invent AI omissions or claim that an item was missed if it already exists in the initial checklist. Preserve existing IDs where possible, assign stable unique `HR-*` IDs to additions, and ensure the final checklist covers all three screens and all four IA aspects with more than 40 meaningful items.
 
-Do not execute tests or fabricate execution results. Update `checklist/human-reviewed-checklist.md`, `docs/ai-gap-analysis.md`, and the AI Review sheet in `checklist/gui-checklist.xlsx`. Record this AI interaction in `docs/ai-audit-log.md`.
+Do not execute tests or fabricate execution results. Update `checklist/human-reviewed-checklist.md`, `docs/ai-gap-analysis.md`, the primary Markdown checklist `checklist/gui-checklist.md` when its source records are populated, and the AI Review sheet in the backup `checklist/gui-checklist.xlsx`. Record this AI interaction in `docs/ai-audit-log.md`.

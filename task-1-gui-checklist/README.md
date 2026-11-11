@@ -28,6 +28,7 @@ task-1-gui-checklist/
 ├── checklist/
 │   ├── ai-generated-checklist.md
 │   ├── human-reviewed-checklist.md
+│   ├── gui-checklist.md
 │   └── gui-checklist.xlsx
 ├── bug-reports/
 │   ├── README.md
@@ -48,12 +49,16 @@ task-1-gui-checklist/
 2. Generate an initial checklist using `prompts/01-generate-ai-checklist.md`.
 3. Record the AI interaction in `docs/ai-audit-log.md`.
 4. Review the initial checklist, add human items, and document omissions using `prompts/02-human-review-and-gap-analysis.md`.
-5. Transfer the approved items to `checklist/gui-checklist.xlsx` and the Markdown checklist.
-6. Run the application only during the later execution phase, then record results and evidence using `prompts/03-execute-checklist-and-report-bugs.md`.
+5. Use `checklist/gui-checklist.md` as the primary GitHub-readable checklist document. Keep `checklist/gui-checklist.xlsx` as the backup workbook and update both when execution begins.
+6. Run the application only during the later execution phase, then record results in Markdown and evidence using `prompts/03-execute-checklist-and-report-bugs.md`.
 
 ## Evidence conventions
 
 Store screenshots for failed checklist items only in `evidence/failed-items/`, using a stable name such as `CHK-001-login-invalid-email.png`. Store exported or copied GitHub issue evidence in `evidence/github-issues/`. Do not store credentials, tokens, or fabricated evidence.
+
+## Checklist source of truth
+
+`checklist/gui-checklist.md` is the primary document for GitHub review and execution reporting. `checklist/gui-checklist.xlsx` is retained as a backup and structured execution aid. The current workbook conversion found that its Checklist worksheet contains headers but no populated checklist rows; this limitation is recorded in `checklist/gui-checklist.md` rather than filled with values from another source.
 
 ## Source and limitation note
 
