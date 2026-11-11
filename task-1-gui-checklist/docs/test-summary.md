@@ -1,6 +1,6 @@
 # Test Summary
 
-Result fields remain blank until the approved checklist is executed.
+Các trường result để trống cho đến khi approved checklist được thực thi.
 
 - **Total checklist items:**
 - **Items designed:**

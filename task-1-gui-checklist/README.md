@@ -1,19 +1,19 @@
-# HW03 Task 1 — GUI Checklist Workspace
+# HW03 Task 1 — Workspace Checklist GUI
 
-## Overview
+## Tổng quan
 
-This workspace prepares the documentation and execution template for HW03 Task 1. It is intentionally limited to planning and artefact preparation. No GUI execution, screenshots, verified defects, or GitHub issues are recorded here.
+Workspace này chuẩn bị tài liệu và biểu mẫu thực thi cho HW03 Task 1. Phạm vi hiện tại chỉ gồm lập kế hoạch và chuẩn bị artefact; chưa thực hiện GUI, chưa tạo screenshot, chưa xác minh defect và chưa tạo GitHub Issue.
 
-## Testing scope
+## Phạm vi kiểm thử
 
 - **Primary screen:** Login
 - **Secondary screens:** Register; Forgot Password
 - **Functional requirements:** FR-01 Account registration; FR-02 Login and account lockout; FR-03 Forgot password and password reset (two steps)
 - **Interface aspects:** IA-01 General UI standards; IA-02 Forms; IA-03 Navigation; IA-04 Feedback / state
 
-The checklist is for the web storefront. The repository identifies it as a React + Vite + Tailwind CSS application in `frontend-web/`, with the entry point at `frontend-web/src/main.jsx` and routes in `frontend-web/src/App.jsx`.
+Checklist áp dụng cho web storefront. Repository xác định ứng dụng dùng React + Vite + Tailwind CSS trong `frontend-web/`, với entry point tại `frontend-web/src/main.jsx` và routes tại `frontend-web/src/App.jsx`.
 
-## Directory structure
+## Cấu trúc thư mục
 
 ```text
 task-1-gui-checklist/
@@ -43,23 +43,23 @@ task-1-gui-checklist/
     └── 03-execute-checklist-and-report-bugs.md
 ```
 
-## Execution workflow
+## Quy trình thực thi
 
-1. Confirm this workspace and source requirements.
-2. Generate an initial checklist using `prompts/01-generate-ai-checklist.md`.
-3. Record the AI interaction in `docs/ai-audit-log.md`.
-4. Review the initial checklist, add human items, and document omissions using `prompts/02-human-review-and-gap-analysis.md`.
-5. Use `checklist/gui-checklist.md` as the primary GitHub-readable checklist document. Keep `checklist/gui-checklist.xlsx` as the backup workbook and update both when execution begins.
-6. Run the application only during the later execution phase, then record results in Markdown and evidence using `prompts/03-execute-checklist-and-report-bugs.md`.
+1. Xác nhận workspace và các yêu cầu nguồn.
+2. Tạo checklist ban đầu bằng `prompts/01-generate-ai-checklist.md`.
+3. Ghi lại tương tác AI trong `docs/ai-audit-log.md`.
+4. Review checklist ban đầu, thêm các mục của người và ghi nhận thiếu sót bằng `prompts/02-human-review-and-gap-analysis.md`.
+5. Dùng `checklist/gui-checklist.md` làm tài liệu checklist chính để review trên GitHub. Giữ `checklist/gui-checklist.xlsx` làm workbook backup và cập nhật cả hai khi bắt đầu thực thi.
+6. Chỉ chạy ứng dụng ở giai đoạn Test Execution; ghi kết quả và Evidence theo `prompts/03-execute-checklist-and-report-bugs.md`.
 
-## Evidence conventions
+## Quy ước Evidence
 
-Store screenshots for failed checklist items only in `evidence/failed-items/`, using a stable name such as `CHK-001-login-invalid-email.png`. Store exported or copied GitHub issue evidence in `evidence/github-issues/`. Do not store credentials, tokens, or fabricated evidence.
+Chỉ lưu screenshot của checklist item Failed trong `evidence/failed-items/`, dùng tên ổn định như `CHK-001-login-invalid-email.png`. Lưu Evidence xuất hoặc sao chép từ GitHub Issue trong `evidence/github-issues/`. Không lưu credentials, token hoặc Evidence giả.
 
-## Checklist source of truth
+## Nguồn dữ liệu chính của Checklist
 
-`checklist/gui-checklist.md` is the primary document for GitHub review and execution reporting. `checklist/gui-checklist.xlsx` is retained as a backup and structured execution aid. The current workbook conversion found that its Checklist worksheet contains headers but no populated checklist rows; this limitation is recorded in `checklist/gui-checklist.md` rather than filled with values from another source.
+`checklist/gui-checklist.md` là tài liệu chính để review trên GitHub và ghi nhận Test Execution. `checklist/gui-checklist.xlsx` được giữ làm backup và công cụ thực thi có cấu trúc. Khi chuyển đổi, worksheet Checklist trong workbook chỉ có header, chưa có checklist row; giới hạn này được ghi trong `checklist/gui-checklist.md`, không tự điền dữ liệu từ nguồn khác.
 
-## Source and limitation note
+## Nguồn và giới hạn
 
-Primary sources are the repository [`README.md`](../README.md), [`setup_guide.md`](../setup_guide.md), the frontend source, and [`docs/2026.HW03.md`](../docs/2026.HW03.md). The referenced assignment PDF exists at `../docs/2026.HW03.GUI Usability_En.pdf`, but PDF text extraction was unavailable during preparation; it has not been represented as read.
+Nguồn chính gồm [`README.md`](../README.md), [`setup_guide.md`](../setup_guide.md), frontend source và [`docs/2026.HW03.md`](../docs/2026.HW03.md). Assignment PDF tại `../docs/2026.HW03.GUI Usability_En.pdf` có tồn tại; nội dung PDF đã được giữ nguyên theo nguồn và không được dùng để thay đổi checklist data trong workspace.

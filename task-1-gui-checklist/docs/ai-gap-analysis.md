@@ -1,6 +1,6 @@
 # AI Gap Analysis
 
-This analysis compares the immutable initial checklist with the repository requirements, requirements mapping, and actual scoped React components. It records only omissions demonstrated by that comparison. Existing coverage was not relabelled as an AI omission.
+Phân tích này so sánh immutable initial checklist với repository requirement, requirements mapping và React component thực tế trong scope. Chỉ ghi nhận omission được chứng minh qua comparison. Coverage đã tồn tại không bị gắn nhãn thành AI omission.
 
 | Gap ID | Checklist Item ID | Missing Aspect | Why AI Missed It | Human Reasoning | Evidence |
 |---|---|---|---|---|---|
@@ -21,8 +21,8 @@ This analysis compares the immutable initial checklist with the repository requi
 | GAP-15 | HR-015 | IA-03 Navigation | GUI-066/067 checked the requirement generically and the reset-state back action, but did not isolate availability from step 1. | The requirement names a return control, while the component conditionally renders different states; each applicable state needs explicit coverage. | README.md ?2 FR-03; frontend-web/src/App.jsx; frontend-web/src/pages/ForgotPassword.jsx |
 | GAP-16 | HR-016 | IA-04 Feedback / state | The initial checklist covered visible focus (GUI-007/029/050) and non-color feedback (GUI-074), but did not cover contrast as a separate visual accessibility characteristic. | Contrast is applicable to the actual color-based Tailwind UI and is labelled as a recommendation rather than an EShop requirement. | frontend-web/src/App.jsx; scoped page components; REC accessibility |
 
-## Items explicitly not added as gaps
+## Các item không được thêm thành gap
 
-- Keyboard order, visible focus, labels, 200% zoom, non-color feedback, error-state visibility, navigation links, step-2 reset feedback, and general desktop readability already have initial checklist coverage and were not duplicated.
-- Dark mode and RTL were not added because they are neither documented requirements nor applicable product capabilities in the selected React/Vite scope.
-- No backend-only checks, token checks, or unverified defects were added to the GUI checklist.
+- Keyboard order, visible focus, labels, 200% zoom, non-color feedback, error-state visibility, navigation links, step-2 reset feedback và general desktop readability đã có coverage trong initial checklist nên không duplicate.
+- Dark mode và RTL không được thêm vì không phải documented requirement và không phải product capability applicable trong React/Vite scope đã chọn.
+- Không thêm backend-only check, token check hoặc defect chưa verify vào GUI Checklist.

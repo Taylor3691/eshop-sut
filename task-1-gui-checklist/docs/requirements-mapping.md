@@ -1,6 +1,6 @@
 # Requirements Mapping
 
-The assignment defines IA-01–IA-04 as interface aspects, not functional requirement IDs. FR-01–FR-03 below are supported by the repository [`README.md`](../../README.md). IA definitions and GUI requirements are supported by [`docs/2026.HW03.md`](../../docs/2026.HW03.md) and the GUI sections of the README.
+Assignment định nghĩa IA-01–IA-04 là interface aspect, không phải functional requirement ID. FR-01–FR-03 dưới đây được hỗ trợ bởi repository [`README.md`](../../README.md). Định nghĩa IA và GUI requirement được hỗ trợ bởi [`docs/2026.HW03.md`](../../docs/2026.HW03.md) và các phần GUI trong README.
 
 ## Functional requirements
 
@@ -19,6 +19,6 @@ The assignment defines IA-01–IA-04 as interface aspects, not functional requir
 | IA-03 | Navigation: current-page highlight, cart badge, exact logout label, and breadcrumbs on specified child pages. For this scope, test applicable links and return-to-login navigation. | Login; Register; Forgot Password | IA-03 | `README.md` §8 FR-23; `docs/2026.HW03.md` §4 |
 | IA-04 | Feedback/state: visible add-to-cart feedback, delete confirmation, friendly empty state, and descriptive image alt text. For this scope, test applicable error, success, loading, and step-state feedback without inventing unsupported controls. | Login; Register; Forgot Password | IA-04 | `README.md` §8 FR-24; `docs/2026.HW03.md` §4 |
 
-## Additional usability/accessibility recommendations
+## Khuyến nghị usability/accessibility bổ sung
 
-No additional recommendation is treated as an application requirement in this mapping. Any human-added checklist item outside the source requirements must be labelled as a recommendation and explained in the AI gap analysis.
+Không có recommendation bổ sung nào được xem là application requirement trong mapping này. Mọi human-added checklist item nằm ngoài source requirement phải được đánh dấu là recommendation và giải thích trong AI Gap Analysis.

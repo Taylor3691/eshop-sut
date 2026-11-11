@@ -1,24 +1,24 @@
-# Scope and Test Strategy
+# Phạm vi và Test Strategy
 
-## Objective
+## Mục tiêu
 
-Prepare a traceable GUI checklist for the EShop web storefront login, registration, and forgot-password screens. The later execution must evaluate the four documented interface aspects against FR-01, FR-02, and FR-03 without changing application code.
+Chuẩn bị GUI Checklist có traceability cho các màn hình Login, Register và Forgot Password của EShop web storefront. Giai đoạn Test Execution sau đó phải đánh giá bốn interface aspect đã được tài liệu hóa theo FR-01, FR-02 và FR-03 mà không thay đổi application code.
 
-## In scope
+## Trong phạm vi
 
-- Login screen and successful, invalid, and repeated-failure interactions relevant to FR-02.
-- Register screen and validation/navigation relevant to FR-01.
-- Forgot Password step 1 (request OTP) and step 2 (reset password) relevant to FR-03.
-- IA-01 General UI standards, IA-02 Forms, IA-03 Navigation, and IA-04 Feedback / state.
+- Login screen và các interaction thành công, không hợp lệ, thất bại lặp lại liên quan FR-02.
+- Register screen và validation/navigation liên quan FR-01.
+- Forgot Password step 1 (request OTP) và step 2 (reset password) liên quan FR-03.
+- IA-01 General UI standards, IA-02 Forms, IA-03 Navigation và IA-04 Feedback / state.
 
-## Out of scope
+## Ngoài phạm vi
 
-- Product, cart, checkout, profile, admin, and mobile screens.
-- Backend/API-only testing except where a UI interaction requires an observable response.
-- Security testing beyond observable UI requirements.
-- GUI execution, screenshots, bug filing, and test results during this preparation phase.
+- Product, cart, checkout, profile, admin và mobile screens.
+- Backend/API-only testing, trừ khi UI interaction cần một observable response.
+- Security testing ngoài các observable UI requirement.
+- GUI execution, screenshot, bug filing và test result trong giai đoạn chuẩn bị này.
 
-## Selected screens and flows
+## Screen và flow được chọn
 
 | Screen | Route | Flow focus |
 |---|---|---|
@@ -26,27 +26,27 @@ Prepare a traceable GUI checklist for the EShop web storefront login, registrati
 | Register | `/register` | Enter name/email/password, submit, navigate to login |
 | Forgot Password | `/forgot-password` | Request OTP (step 1), enter reset information (step 2), return to login |
 
-Routes are defined in `frontend-web/src/App.jsx`.
+Routes được định nghĩa trong `frontend-web/src/App.jsx`.
 
 ## Test environment
 
-The repository documents a Node.js backend at `http://localhost:3000` and a Vite web frontend normally served at `http://localhost:5173`. Follow the repository setup instructions and record the actual URL and configuration used during execution; do not assume a running environment in this preparation document.
+Repository ghi nhận Node.js backend tại `http://localhost:3000` và Vite web frontend thường chạy tại `http://localhost:5173`. Tuân thủ setup instruction của repository và ghi lại URL/configuration thực tế khi Test Execution; không giả định environment đang chạy trong tài liệu chuẩn bị này.
 
-## Browser and viewport assumptions
+## Giả định Browser và viewport
 
-The execution record must name the browser, version, operating system, viewport, and device/cloud platform. No browser or viewport result is assumed here. The assignment requires coverage across at least three platforms for the later task.
+Execution record phải nêu browser, version, operating system, viewport và device/cloud platform. Chưa giả định browser hoặc viewport result nào ở đây. Assignment yêu cầu coverage trên ít nhất ba platform ở task sau.
 
-## Test data requirements
+## Yêu cầu Test Data
 
-- Use the documented demo user only when needed: `test@eshop.com` with its documented password. Do not copy passwords or tokens into evidence or reports.
-- Use a new, non-sensitive email address for registration if the environment permits.
-- Use an existing registered email for the forgot-password flow.
-- Generate invalid, boundary, mismatched, and repeated-failure inputs during execution without storing secrets.
+- Chỉ dùng demo user đã được tài liệu hóa khi cần: `test@eshop.com` với password đã được ghi trong repository. Không sao chép password hoặc token vào Evidence/report.
+- Dùng email mới, không nhạy cảm cho registration nếu environment cho phép.
+- Dùng email đã đăng ký cho Forgot Password flow.
+- Tạo input invalid, boundary, mismatched và repeated-failure trong khi Test Execution nhưng không lưu secret.
 
 ## Testing approach
 
-1. Trace every checklist item to an FR or IA source.
-2. Review AI-generated items against the source and add human items for omissions.
-3. Execute normal, invalid, boundary, navigation, and state/feedback scenarios.
-4. Record only observed results. Mark pre-execution items `Not Executed`; final statuses are `Passed` or `Failed`.
-5. Capture evidence only for failed items and report only verified bugs.
+1. Trace mỗi checklist item về một FR hoặc IA source.
+2. Review AI-generated item theo source và thêm human item cho các omission.
+3. Execute scenario normal, invalid, boundary, navigation và state/feedback.
+4. Chỉ ghi nhận result đã quan sát. Item trước Test Execution dùng `Not Executed`; final status là `Passed` hoặc `Failed`.
+5. Chỉ capture Evidence cho Failed item và chỉ report verified bug.

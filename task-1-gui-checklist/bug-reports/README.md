@@ -1,29 +1,29 @@
-# Bug Reports and GitHub Issue Conventions
+# Bug Reports và GitHub Issue Conventions
 
-Use [BUG-REPORT-TEMPLATE.md](./BUG-REPORT-TEMPLATE.md) only for defects verified during checklist execution. A bug ID must be unique and must not reuse the related checklist item ID. Do not create a report from source inspection or an assumption.
+Chỉ dùng [BUG-REPORT-TEMPLATE.md](./BUG-REPORT-TEMPLATE.md) cho defect đã được verify trong Test Execution. Bug ID phải unique và không được dùng lại related checklist item ID. Không tạo report từ source inspection hoặc assumption.
 
-## Required report quality
+## Chất lượng report bắt buộc
 
-Reports must be written, numbered, simple, understandable, reproducible, legible, and non-judgmental. Include actionable reproduction steps, input data where needed, expected and actual results, a sufficiently specific environment, and supporting evidence. Do not store passwords, tokens, or other secrets.
+Report phải rõ ràng, có đánh số, đơn giản, dễ hiểu, reproducible, dễ đọc và không mang tính phán xét. Bao gồm reproduction steps có thể thực hiện, input data khi cần, Expected Result và Actual Result, environment đủ cụ thể và Evidence hỗ trợ. Không lưu password, token hoặc secret khác.
 
-## Classification convention
+## Quy ước phân loại
 
-The two course references use different vocabularies. They are not silently merged:
+Hai tài liệu khóa học dùng vocabulary khác nhau. Không được tự ý trộn hai hệ thống:
 
-### Markdown bug report classification
+### Phân loại trong Markdown Bug Report
 
-Use the **Test Report** course scale in the local bug report:
+Dùng scale của **Test Report** trong bug report local:
 
 | Field | Allowed values | Meaning |
 |---|---|---|
 | Priority | Critical, High, Medium, Low | Fixing urgency: immediately/within 1 day; 2–4 days; 5–8 days; or later for minor impact. |
 | Severity | Fatal (10), Serious (5), Medium (3), Cosmetic (1) | Impact on the application: great damage/data loss or crash; main-feature impact; minimal requirement deviation; or very minor operational impact. |
 
-Priority is urgency. Severity is impact. They must be assessed separately.
+Priority là urgency. Severity là impact. Hai trường phải được đánh giá độc lập.
 
-### GitHub Issue classification
+### Phân loại GitHub Issue
 
-Use the **GitHub Bug Management** label vocabulary:
+Dùng label vocabulary của **GitHub Bug Management**:
 
 - Type: `type: bug`, `type: enhancement`, `type: test`
 - Severity: `severity: blocker`, `severity: critical`, `severity: major`, `severity: minor`, `severity: trivial`
@@ -31,11 +31,11 @@ Use the **GitHub Bug Management** label vocabulary:
 - Status: `status: new`, `status: triaged`, `status: in progress`, `status: ready for retest`, `status: verified`
 - Module: `module: login`, `module: register`, `module: forgot-password`
 
-These are operational GitHub labels, not exact equivalents of the Test Report scale. Do not automatically translate `Fatal` to `blocker` or `Critical` to `P0`; record the selected values and the triage rationale. If both systems are recorded, preserve both fields independently.
+Đây là GitHub label dùng cho vận hành, không phải equivalence chính xác của Test Report scale. Không tự động chuyển `Fatal` thành `blocker` hoặc `Critical` thành `P0`; ghi lại giá trị đã chọn và lý do triage. Nếu ghi cả hai hệ thống, giữ độc lập từng field.
 
-## GitHub title and lifecycle
+## GitHub title và lifecycle
 
-Use the title format:
+Dùng title format:
 
 ```text
 [BUG][Module] Short description
@@ -47,29 +47,29 @@ Example:
 [BUG][Login] Error message is not displayed after invalid credentials
 ```
 
-Proposed lifecycle:
+Lifecycle đề xuất:
 
 ```text
 New → Triaged → Assigned → In Progress → Ready for Retest → Verified / Closed
 ```
 
-Exception states:
+Exception state:
 
 - **Duplicate:** close or resolve only after linking the original issue.
 - **Cannot reproduce:** document the missing information or evidence and request it.
 - **Won't fix:** record the business or technical rationale.
 - **Reopened:** use when the defect remains after retest.
 
-Do not close a bug merely because a developer says it is fixed. The tester must retest and record the result. A remaining defect must be reopened. A bug must not move to **In Progress** while essential reproduction information is missing.
+Không đóng bug chỉ vì developer nói đã fix. Tester phải retest và ghi nhận result. Defect còn tồn tại phải được Reopened. Bug không được chuyển sang **In Progress** khi còn thiếu thông tin reproduction thiết yếu.
 
-## Evidence and links
+## Evidence và links
 
-Use repository-relative evidence paths such as `task-1-gui-checklist/evidence/failed-items/CHK-001-login.png`. Link the failed checklist item in the bug report and issue. A fix pull request should reference the issue using `Fixes #<number>`, `Closes #<number>`, or `Resolves #<number>`, followed by tester retest evidence before closure.
+Dùng repository-relative Evidence path như `task-1-gui-checklist/evidence/failed-items/CHK-001-login.png`. Link failed checklist item trong bug report và issue. Fix pull request nên reference issue bằng `Fixes #<number>`, `Closes #<number>` hoặc `Resolves #<number>`, sau đó phải có tester retest evidence trước khi đóng.
 
-## Applying labels
+## Cách áp dụng labels
 
-The repository does not receive labels from this preparation task. When creating a verified issue manually, apply exactly one relevant label from each applicable category: type, severity, priority, status, and module. Use the dedicated [GitHub Bug Report issue form](../../.github/ISSUE_TEMPLATE/bug_report.yml). Do not assign an individual developer automatically unless the repository establishes an assignment rule.
+Task chuẩn bị này không tạo label trên repository. Khi tạo verified issue thủ công, áp dụng đúng một label phù hợp từ mỗi category áp dụng được: type, severity, priority, status và module. Dùng [GitHub Bug Report issue form](../../.github/ISSUE_TEMPLATE/bug_report.yml). Không tự động assign developer nếu repository chưa có assignment rule.
 
-## Reference documents
+## Tài liệu tham chiếu
 
-The conventions above were derived from `docs/Test report.pdf` and `docs/03 - github_bug_management.pptx (1).pdf`.
+Các quy ước trên được xây dựng từ `docs/Test report.pdf` và `docs/03 - github_bug_management.pptx (1).pdf`.

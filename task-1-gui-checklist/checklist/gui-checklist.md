@@ -1,20 +1,20 @@
 # GUI Checklist (Markdown Conversion)
 
-> **Source of truth:** This file is the Markdown conversion of `checklist/gui-checklist.xlsx` for direct GitHub use. The Excel workbook is preserved as a backup.
+> **Source of truth:** File này là bản Markdown conversion của `checklist/gui-checklist.xlsx` để dùng trực tiếp trên GitHub. Excel workbook được giữ làm backup.
 >
-> **Conversion limitation:** The workbook Checklist worksheet contains its header row and no populated checklist records. Therefore this conversion preserves zero checklist records and does not import rows from `human-reviewed-checklist.md` or invent execution values. The workbook AI Review worksheet contains 92 records and is fully preserved below.
+> **Conversion limitation:** Worksheet Checklist trong workbook chỉ có header row và không có checklist record được populate. Vì vậy conversion này giữ nguyên zero checklist record, không import row từ `human-reviewed-checklist.md` và không invent execution value. Worksheet AI Review có 92 record và được giữ đầy đủ bên dưới.
 
 ## 1. Checklist
 
-No checklist item records were populated in the workbook Checklist worksheet at conversion time. The worksheet header was:
+Tại thời điểm conversion, worksheet Checklist trong workbook không có checklist item record được populate. Worksheet header là:
 
 `ID | IA Aspect | Screen | Checklist Item | Requirement Reference | Expected Result | Source | AI Gap Reason | Actual Result | Status | Notes | Evidence`
 
-All four required aspect sections are retained as empty because the source worksheet contains no checklist rows.
+Bốn aspect section bắt buộc được giữ ở trạng thái empty vì source worksheet không có checklist row.
 
 ### IA-01 - General UI Standards
 
-_No populated rows in the source workbook Checklist worksheet._
+_Source workbook Checklist worksheet không có row được populate._
 
 ### IA-02 - Forms
 
@@ -30,7 +30,7 @@ _No populated rows in the source workbook Checklist worksheet._
 
 ## 2. Test Summary
 
-The source workbook contains formula cells in `Test Summary`. Because its Checklist worksheet has no populated rows, the formulas evaluate to zero. No execution result was fabricated.
+Source workbook có formula cell trong `Test Summary`. Vì worksheet Checklist không có row được populate, formula evaluate thành zero. Không fabricate execution result.
 
 | Dimension | Total | Passed | Failed | Not Executed |
 |---|---:|---:|---:|---:|
@@ -42,17 +42,17 @@ The source workbook contains formula cells in `Test Summary`. Because its Checkl
 | Register | 0 | 0 | 0 | 0 |
 | Forgot Password | 0 | 0 | 0 | 0 |
 
-### Summary interpretation
+### Diễn giải Summary
 
-- Total checklist items: `0` in the workbook Checklist worksheet.
+- Total checklist item: `0` trong workbook Checklist worksheet.
 - Passed: `0`.
 - Failed: `0`.
 - Not Executed: `0`.
-- The formulas remain in the Excel backup; the numeric values above are the evaluated values for the current empty source range.
+- Formula vẫn được giữ trong Excel backup; numeric value ở trên là giá trị evaluate của source range hiện đang empty.
 
 ## 3. AI Review
 
-The source workbook contains 92 AI Review records. All records are preserved below.
+Source workbook có 92 AI Review record. Tất cả record được giữ nguyên bên dưới.
 
 | Checklist Item ID | AI-generated or Human-added | Review Decision | Reason for Addition/Modification | Related Interface Aspect |
 |---|---|---|---|---|
@@ -149,10 +149,10 @@ The source workbook contains 92 AI Review records. All records are preserved bel
 | HR-015 | Human-added | Add | GUI-066/067 checked the requirement generically and the reset-state back action, but did not isolate availability from step 1. | IA-03 Navigation |
 | HR-016 | Human-added | Add | The initial checklist covered visible focus (GUI-007/029/050) and non-color feedback (GUI-074), but did not cover contrast as a separate visual accessibility characteristic. | IA-04 Feedback / state |
 
-## 4. Source worksheets accounted for
+## 4. Các source worksheet đã được đối chiếu
 
-- **Checklist:** Header preserved; zero populated records.
-- **Test Summary:** Seven dimension rows preserved with evaluated zero values.
-- **AI Review:** 92 records preserved.
-- **Execution status:** No PASS/FAIL results were added during conversion.
-- **Evidence paths:** No populated evidence paths existed in the source workbook. Future evidence must use repository-relative paths under `task-1-gui-checklist/evidence/`.
+- **Checklist:** Giữ nguyên header; zero populated record.
+- **Test Summary:** Giữ nguyên seven dimension row với evaluated zero value.
+- **AI Review:** Giữ nguyên 92 record.
+- **Execution status:** Không thêm PASS/FAIL result trong quá trình conversion.
+- **Evidence paths:** Source workbook không có Evidence path được populate. Evidence sau này phải dùng repository-relative path dưới `task-1-gui-checklist/evidence/`.

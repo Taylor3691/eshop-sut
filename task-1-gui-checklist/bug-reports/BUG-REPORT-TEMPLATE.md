@@ -1,6 +1,6 @@
 # Bug Report
 
-> Copy this template for each **verified** defect. Do not fill it from assumptions or source inspection. The Bug ID must be unique and different from the related checklist item ID.
+> Copy template này cho mỗi defect đã **verified**. Không điền từ assumption hoặc source inspection. Bug ID phải unique và khác related checklist item ID.
 
 ## 1. Bug Identification
 
@@ -32,11 +32,11 @@
 
 ## 4. Preconditions
 
-Describe the account, application state, data, and navigation state required before reproduction.
+Mô tả account, application state, data và navigation state cần có trước khi reproduction.
 
 ## 5. Steps to Reproduce
 
-Use specific user actions and input data. Include keyboard or mouse actions where relevant.
+Dùng user action và input data cụ thể. Bao gồm keyboard hoặc mouse action khi liên quan.
 
 1. 
 2. 
@@ -44,15 +44,15 @@ Use specific user actions and input data. Include keyboard or mouse actions wher
 
 ## 6. Expected Result
 
-Describe the correct behavior according to the linked requirement or specification.
+Mô tả behavior đúng theo requirement hoặc specification được link.
 
 ## 7. Actual Result
 
-Describe the observed deviation precisely. Include observable text, state, timing, or response details where relevant.
+Mô tả chính xác deviation đã quan sát. Bao gồm text, state, timing hoặc response details khi liên quan.
 
 ## 8. Evidence
 
-Use repository-relative paths. Include only evidence that was actually captured.
+Dùng repository-relative path. Chỉ đưa Evidence đã thực sự capture.
 
 - **Screenshot path:** `task-1-gui-checklist/evidence/failed-items/`
 - **Video path, if available:** ``
@@ -60,7 +60,7 @@ Use repository-relative paths. Include only evidence that was actually captured.
 
 ## 9. Classification
 
-Keep Severity and Priority separate. Use the Test Report scale in this Markdown report; see [README.md](./README.md).
+Giữ Severity và Priority riêng biệt. Dùng scale của Test Report trong Markdown report này; xem [README.md](./README.md).
 
 - **Severity:** `Fatal (10) | Serious (5) | Medium (3) | Cosmetic (1)`
 - **Priority:** `Critical | High | Medium | Low`

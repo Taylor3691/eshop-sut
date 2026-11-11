@@ -23,8 +23,8 @@
 
 ## Failed item details
 
-No failed items have been verified during workspace preparation. Add one subsection per failed item after execution, including reproduction steps, expected result, actual result, and evidence path.
+Trong giai đoạn chuẩn bị workspace chưa xác minh Failed item nào. Sau Test Execution, thêm một subsection cho mỗi item Failed, gồm reproduction steps, Expected Result, Actual Result và Evidence path.
 
 ## Evidence references
 
-Add links to files under `../evidence/failed-items/` and verified GitHub issues under `../evidence/github-issues/` after execution.
+Sau Test Execution, thêm links đến file trong `../evidence/failed-items/` và verified GitHub Issue trong `../evidence/github-issues/`.

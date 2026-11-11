@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report a verified defect with reproducible steps and evidence.
+description: Report defect đã verify với reproduction step và Evidence đầy đủ.
 title: "[BUG][Module] Short description"
 labels:
   - "type: bug"
@@ -8,14 +8,14 @@ body:
   - type: markdown
     attributes:
       value: |
-        Report only a verified defect. Do not include passwords, tokens, or other secrets.
-        Use the title format `[BUG][Module] Short description`.
+        Chỉ report defect đã verify. Không đưa password, token hoặc secret khác vào issue.
+        Dùng title format `[BUG][Module] Short description`.
   - type: textarea
     id: problem-summary
     attributes:
       label: Problem Summary
-      description: What was tested, what happened, and why the observed behavior is incorrect.
-      placeholder: Describe the test objective and the deviation from expected behavior.
+      description: Mô tả đã test gì, chuyện gì xảy ra và vì sao behavior quan sát được là không đúng.
+      placeholder: Mô tả Test Objective và deviation so với Expected Result.
     validations:
       required: true
   - type: input
@@ -46,7 +46,7 @@ body:
     id: environment
     attributes:
       label: Environment
-      description: Include browser/version, OS, application URL, version/commit, viewport, and test account name if applicable. Never include secrets.
+      description: Ghi browser/version, OS, application URL, version/commit, viewport và test account name nếu cần. Không ghi secret.
       placeholder: |
         Browser:
         Operating system:
@@ -60,12 +60,12 @@ body:
     id: preconditions
     attributes:
       label: Preconditions
-      description: Conditions, account state, data, or navigation state required before reproduction.
+      description: Điều kiện, account state, data hoặc navigation state cần có trước reproduction.
   - type: textarea
     id: steps
     attributes:
       label: Steps to Reproduce
-      description: Use numbered, specific user actions and input data.
+      description: Dùng user action và input data cụ thể, có đánh số.
       placeholder: |
         1.
         2.
@@ -76,21 +76,21 @@ body:
     id: expected
     attributes:
       label: Expected Result
-      description: Describe the correct behavior according to the requirement.
+      description: Mô tả behavior đúng theo requirement.
     validations:
       required: true
   - type: textarea
     id: actual
     attributes:
       label: Actual Result
-      description: Describe the observed incorrect behavior precisely.
+      description: Mô tả chính xác behavior không đúng đã quan sát.
     validations:
       required: true
   - type: textarea
     id: evidence
     attributes:
       label: Evidence
-      description: Provide repository-relative screenshot, video, console, or network evidence paths/links.
+      description: Cung cấp path/link repository-relative đến screenshot, video, console hoặc network Evidence.
       placeholder: task-1-gui-checklist/evidence/failed-items/...
     validations:
       required: true
@@ -98,7 +98,7 @@ body:
     id: severity
     attributes:
       label: Severity
-      description: GitHub label taxonomy; do not confuse impact with urgency.
+      description: GitHub label taxonomy; không nhầm impact với urgency.
       options:
         - blocker
         - critical
@@ -111,7 +111,7 @@ body:
     id: priority
     attributes:
       label: Priority
-      description: GitHub label taxonomy for fixing urgency.
+      description: GitHub label taxonomy cho fixing urgency.
       options:
         - P0
         - P1
@@ -129,9 +129,9 @@ body:
     id: assigned-to
     attributes:
       label: Assigned To
-      description: Optional. Leave blank unless assignment is established.
+      description: Optional. Để trống nếu chưa có assignment rule.
   - type: textarea
     id: additional-notes
     attributes:
       label: Additional Notes
-      description: Include retest information, related issue/PR links, or classification rationale.
+      description: Ghi retest information, related issue/PR link hoặc classification rationale.
