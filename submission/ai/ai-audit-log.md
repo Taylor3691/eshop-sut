@@ -270,6 +270,46 @@
 
 ---
 
+## #15 — Điền kết quả kiểm chứng vào Excel, tách ảnh Failed
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-13 00:08
+- **Prompt:**
+  ```
+  Từ submission/task1-checklist/execution-observations.md (cột "Kết quả đã kiểm chứng"):
+  1. Điền Kết quả (Passed/Failed/N/A) và Notes vào sheet Checklist của checklist.xlsx cho 70 mục.
+  2. Copy ảnh của các mục Failed từ screenshots/run/ sang screenshots/failed/, điền tên ảnh vào cột Screenshot.
+  ```
+- **AI output:**
+  - Điền cột Kết quả cho 70 mục theo cột "Kết quả đã kiểm chứng" do tester điền: 44 Failed, 26 Passed, 0 N/A (IA-01 13/8, IA-02 19/6, IA-03 1/7, IA-04 11/5 Failed/Passed). Cột Notes lấy phần ghi chú sau dấu "—" (bỏ ký hiệu markdown); 4 mục Passed không có ghi chú để trống.
+  - Copy 77 ảnh của 44 mục Failed sang `screenshots/failed/` (GUI-02-03.png dùng chung cho GUI-01-04 và GUI-02-03); cột Screenshot ghi tên ảnh, cách nhau bằng dấu phẩy; mục Passed để trống.
+  - `submission/task1-checklist/checklist.xlsx`, `submission/task1-checklist/screenshots/failed/` (77 ảnh)
+
+---
+
+## #16 — Tính lại công thức trong checklist.xlsx
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-13 00:11
+- **Prompt:** tôi thấy phần cong thức trong file excel vẫn chưa cập nhật
+- **AI output:**
+  - Nguyên nhân: file được ghi bằng openpyxl nên chỉ có công thức, không có giá trị đã tính; trình xem không tự tính lại sẽ hiện ô trống.
+  - Mở file bằng Microsoft Excel qua AppleScript, chạy "calculate full" rồi lưu (bản sao lưu trước khi sửa để trong scratchpad). Sheet Test Summary hiện đúng: tổng 70 mục, 70 đã chạy, 26 Passed, 44 Failed, 0 N/A, pass rate 37,1%, 58 mục từ AI, 12 mục Human; Cross-Platform lấy đúng ID và mục kiểm tra. Công thức, dropdown và dữ liệu cột Kết quả/Notes/Screenshot giữ nguyên.
+  - `submission/task1-checklist/checklist.xlsx`
+
+---
+
+## #17 — Commit kết quả kiểm chứng và ảnh Failed
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-13 00:11
+- **Prompt:** commit
+- **AI output:**
+  - Commit checklist.xlsx (đã điền Kết quả/Notes/Screenshot, đã tính lại công thức), 77 ảnh trong `screenshots/failed/` (kèm việc xóa `.gitkeep` vì thư mục đã có file) và audit log lên nhánh `hw03/toanhuynh`; không commit `backend/database.sqlite`.
+  - `submission/task1-checklist/checklist.xlsx`, `submission/task1-checklist/screenshots/failed/`, `submission/ai/ai-audit-log.md`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
