@@ -24,3 +24,9 @@ Quy định:
 - Không ghi dữ liệu cá nhân của người tham gia (tên, số điện thoại) vào log; chỉ dùng mã P1–P7.
 - Nếu người dùng nói "không log" cho một tin nhắn cụ thể thì bỏ qua tin nhắn đó.
 - Sau khi ghi, nhắc người dùng một dòng ngắn: đã ghi mục #NN.
+
+## Git commit
+
+- **Không** thêm dòng `Co-Authored-By` (hay bất kỳ dòng ghi công AI nào) vào commit message.
+- Không commit `backend/database.sqlite`.
+- Message theo dạng `<type>(hw03): <mô tả>`, ví dụ `test(hw03): design GUI checklist`.
