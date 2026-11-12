@@ -2,7 +2,7 @@
 
 | Trường | Giá trị |
 |---|---|
-| GitHub Issue | Chưa tạo |
+| GitHub Issue | [#130](https://github.com/Taylor3691/eshop-sut/issues/130) |
 | Nguồn phát hiện | Checklist GUI-01-04, GUI-02-03, GUI-04-09 |
 | Màn hình | Quản lý Mã giảm giá, Quản lý Danh mục (và các form khác dùng `err.message`) |
 | Môi trường | macOS 27.2, Google Chrome 157.0.8103.51 (Playwright, headless), http://localhost:5174 |

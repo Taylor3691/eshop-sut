@@ -2,7 +2,7 @@
 
 | Trường | Giá trị |
 |---|---|
-| GitHub Issue | Chưa tạo |
+| GitHub Issue | Trùng issue có sẵn [#59](https://github.com/Taylor3691/eshop-sut/issues/59) (không tạo issue mới); quan sát bổ sung đã ghi bằng [comment](https://github.com/Taylor3691/eshop-sut/issues/59#issuecomment-6830791132) |
 | Nguồn phát hiện | Checklist GUI-02-17, GUI-02-18 |
 | Màn hình | Quản lý Sản phẩm (Import CSV) |
 | Môi trường | macOS 27.2, Google Chrome 157.0.8103.51 (Playwright, headless), http://localhost:5174 |

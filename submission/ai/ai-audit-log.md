@@ -340,6 +340,43 @@
 
 ---
 
+## #20 — Tạo GitHub Issue cho danh sách bug
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-13 00:18
+- **Prompt:**
+  ```
+  Tạo GitHub Issue cho các bug trong submission/bugs/ (BUG-xx.md) trên repo Taylor3691/eshop-sut, theo quy ước issue hiện có của repo:
+  - Tiêu đề: [HW03][BUG][Admin - <màn hình>] <mô tả ngắn>
+  - Label: hw03, type: bug, status: new, severity: <theo bug>, priority: <theo bug>, module: admin (tạo label hw03 và module: admin nếu chưa có)
+  - Nội dung: mô tả, môi trường, bước tái hiện, kết quả mong đợi (trích FR), kết quả thực tế, mục checklist liên quan,
+    ảnh chụp chèn bằng link ảnh trên branch hw03/toanhuynh (push ảnh trước).
+  Trước khi tạo, kiểm tra trùng với issue đã có (nhất là issue phía web user) và hỏi tôi nếu nghi trùng.
+  Tạo thử 1 issue trước để tôi xem, tôi đồng ý mới tạo các issue còn lại.
+  Sau khi tạo, ghi số issue và link vào từng BUG-xx.md, bảng bugs/README.md và cột Bug ID trong checklist.xlsx.
+  ```
+- **AI output:**
+  - Push nhánh `hw03/toanhuynh` lên origin (12 commit, gồm ảnh) để có link ảnh; kiểm tra link ảnh dạng `blob/...?raw=true` trả HTTP 200.
+  - Rà 111 issue hiện có (#1–#125): nghi trùng với 8 bug admin (BUG-01 ↔ #71; BUG-02 ↔ #61, #63; BUG-07 ↔ #29–#32, #72–#75; BUG-08 ↔ #23; BUG-09 ↔ #84, #89; BUG-10 ↔ #57; BUG-11 ↔ #60; BUG-12 ↔ #59). Các issue phía web user (#93, #94, #103, #110, #122, #123…) cùng loại lỗi nhưng khác màn hình/mã nguồn, không coi là trùng.
+  - Tạo label `hw03` và `module: admin`; tạo issue thử #126 cho BUG-03 (Major/P1). Quy ước priority: High → P1, Medium → P2, Low → P3; repo chưa có label `severity: trivial`.
+  - Người dùng duyệt #126, chọn không tạo issue mới cho 8 bug trùng (ghi số issue cũ) và tạo label `severity: trivial`. Đã tạo label này và 24 issue còn lại (#127–#150); tổng 25 issue mới mang nhãn `hw03` + `module: admin`.
+  - Bổ sung phần quan sát mới bằng comment trên issue cũ: #29 (BUG-07: giá trống, giá lẻ 1000.5, tên 256 ký tự), #89 (BUG-09: giá trị 0, % > 100, mã sai định dạng, ngày đã qua), #59 (BUG-12: file rỗng không báo lỗi).
+  - Ghi số issue và link vào trường GitHub Issue của 33 file BUG-xx.md và bảng `bugs/README.md` (bug trùng ghi "trùng" kèm link issue cũ); điền cột Bug ID cho 44 mục Failed trong `checklist.xlsx` dạng `BUG-xx (#nnn)`, rồi tính lại công thức bằng Excel.
+  - `submission/bugs/BUG-01.md` → `submission/bugs/BUG-33.md`, `submission/bugs/README.md`, `submission/task1-checklist/checklist.xlsx`
+
+---
+
+## #21 — Commit số issue vào bug và checklist
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-13 00:24
+- **Prompt:** commit
+- **AI output:**
+  - Commit 33 file BUG-xx.md, `bugs/README.md`, `checklist.xlsx` (cột Bug ID) và audit log lên nhánh `hw03/toanhuynh`; không commit `backend/database.sqlite`.
+  - `submission/bugs/`, `submission/task1-checklist/checklist.xlsx`, `submission/ai/ai-audit-log.md`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>

@@ -2,7 +2,7 @@
 
 | Trường | Giá trị |
 |---|---|
-| GitHub Issue | Chưa tạo |
+| GitHub Issue | Trùng issue có sẵn [#23](https://github.com/Taylor3691/eshop-sut/issues/23) (không tạo issue mới) |
 | Nguồn phát hiện | Checklist GUI-02-10, GUI-02-03 |
 | Màn hình | Quản lý Danh mục |
 | Môi trường | macOS 27.2, Google Chrome 157.0.8103.51 (Playwright, headless), http://localhost:5174 |
