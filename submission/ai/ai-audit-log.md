@@ -196,6 +196,80 @@
 
 ---
 
+## #10 — Chuyển 70 mục checklist vào Excel
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-12 23:20
+- **Prompt:**
+  ```
+  Chuyển 70 mục trong submission/task1-checklist/checklist-filtered.md vào sheet Checklist của
+  submission/task1-checklist/checklist.xlsx. Cột Nguồn: AI cho 58 mục đầu, <tùy bạn> cho 12 mục bổ sung,
+  kèm cột Lý do AI bỏ sót. Để trống cột Kết quả, Notes, Screenshot.
+  ```
+- **AI output:**
+  - Ghi 70 mục vào sheet Checklist (dòng 2–71) theo thứ tự trong file md: 58 mục Nguồn = "AI", 12 mục bổ sung Nguồn = "Human" (giá trị có sẵn trong dropdown và được sheet Test Summary đếm), kèm cột "Lý do AI bỏ sót".
+  - Cột IA và Màn hình dùng đúng giá trị dropdown của template; mục áp dụng cho sidebar hoặc từ 2 màn trở lên ghi "Nhiều màn hình", 5 mục Import ghi "Import CSV". Bỏ dấu markdown (backtick, in đậm) khỏi nội dung.
+  - Để trống Kết quả, Notes, Screenshot, Bug ID. Số mục theo nhóm: IA-01 21, IA-02 25, IA-03 8, IA-04 16.
+  - `submission/task1-checklist/checklist.xlsx`
+
+---
+
+## #11 — Chạy checklist bằng Playwright, ghi quan sát
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-12 23:39
+- **Prompt:**
+  ```
+  Dùng Playwright (scripts/node_modules/playwright-core, Chrome) chạy checklist
+  submission/task1-checklist/checklist-filtered.md trên http://localhost:5174 (admin@eshop.com / Admin123!).
+  Với mỗi mục: thực hiện đúng "Cách kiểm", chụp ảnh bằng chứng vào submission/task1-checklist/screenshots/run/<ID>.png,
+  ghi lại quan sát thực tế (không kết luận Pass/Fail). Kết quả xuất ra submission/task1-checklist/execution-observations.md
+  dạng bảng: ID | Quan sát | Ảnh | Gợi ý kết quả. Tôi sẽ tự review ảnh và quyết định Pass/Fail.
+  Chạy theo thứ tự: mục chỉ xem → form → môi trường đặc biệt → empty state và dừng backend cuối cùng.
+  Trước khi chạy: scripts/start-sut.sh và scripts/seed-hw03.sh 3.
+  ```
+- **AI output:**
+  - Viết script Playwright (Chrome 157 headless, 1366×768, vi-VN) chạy 70 mục theo 4 pha; chuyển đơn #1 sang delivered qua API để Dashboard có doanh thu; hộp thoại alert/confirm được ghi lại và hiện trong khung ghi chú chèn vào ảnh; mạng chậm giả lập qua CDP; dừng backend ở pha cuối rồi khởi động lại + seed để khôi phục dữ liệu.
+  - Lần chạy đầu lỗi 1 mục (GUI-02-11, selector) và 4 mục cần sửa cách đo (GUI-01-03 tách từ tiếng Anh, GUI-01-10 thêm đối chiếu doanh thu, GUI-01-12 Tab qua ô ngày, GUI-04-02 đếm bản ghi qua API); đã sửa script và chạy lại riêng 5 mục.
+  - Kết quả: 70/70 mục có quan sát, 115 ảnh; gợi ý của script: 42 "Có thể Failed", 18 "Có thể Passed", 10 cần xem ảnh/kiểm tay (GUI-04-16 cần tự kiểm bằng VoiceOver). Quan sát nổi bật: doanh thu Dashboard gấp đôi giá trị thực; sửa 1 sản phẩm làm cả bảng đổi tên; không có hộp thoại xác nhận khi xóa; bấm đôi tạo 2 bản ghi; thông báo lỗi "SQLITE_CONSTRAINT…" và "Network Error".
+  - `scripts/hw03-run-checklist.mjs`, `submission/task1-checklist/execution-observations.md`, `submission/task1-checklist/screenshots/run/` (115 ảnh)
+
+---
+
+## #12 — Thêm cột kết quả đã kiểm chứng
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-12 23:46
+- **Prompt:** thêm cột kết quả đã kiểm chứng để tôi điền pass hay fail
+- **AI output:**
+  - Thêm cột trống "Kết quả đã kiểm chứng" vào cuối bảng 70 mục và một dòng hướng dẫn điền `Passed` / `Failed` / `N/A`; cập nhật hàm xuất báo cáo trong script để lần chạy sau vẫn có cột này.
+  - `submission/task1-checklist/execution-observations.md`, `scripts/hw03-run-checklist.mjs`
+
+---
+
+## #13 — Hiển thị thẻ HTML dạng raw trong bảng quan sát
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-12 23:49
+- **Prompt:** chỉnh lại các thẻ <h1> hiện raw text vì nó detech và render ra trong md, tôi muốn xem raw
+- **AI output:**
+  - Bọc 18 thẻ HTML trong bảng (`<h1>`, `<h2>`, `<label>`, `<b>`, `<img …>`, `<html dir="rtl">`…) bằng backtick để markdown hiển thị nguyên văn; giữ nguyên `<br>` dùng xuống dòng trong ô. Bọc thêm các chuỗi `&lt;…&gt;` (innerHTML ở GUI-02-23) để không bị trình xem markdown đổi thành dấu `<`/`>`.
+  - Cập nhật hàm `esc` trong script để báo cáo sinh lại cũng được bọc như vậy. Cột "Kết quả đã kiểm chứng" giữ nguyên.
+  - `submission/task1-checklist/execution-observations.md`, `scripts/hw03-run-checklist.mjs`
+
+---
+
+## #14 — Commit kết quả chạy checklist
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-12 23:57
+- **Prompt:** commit
+- **AI output:**
+  - Commit checklist Excel (70 mục), script Playwright, bảng quan sát và 115 ảnh bằng chứng lên nhánh `hw03/toanhuynh`; không commit `backend/database.sqlite`.
+  - `submission/task1-checklist/checklist.xlsx`, `scripts/hw03-run-checklist.mjs`, `submission/task1-checklist/execution-observations.md`, `submission/task1-checklist/screenshots/run/`, `submission/ai/ai-audit-log.md`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
