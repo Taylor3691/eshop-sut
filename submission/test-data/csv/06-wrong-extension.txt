@@ -1,0 +1,2 @@
+name,price,description,imageUrl,category_id
+File đuôi txt,100000,Phải bị từ chối vì không phải .csv,,3

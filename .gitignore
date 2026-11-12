@@ -39,3 +39,7 @@ web-build/
 
 # generated submission archive
 submission/*.zip
+# HW03 submission: keep exported PDFs, skip large screen recordings (include them in the zip / link instead)
+!submission/**/*.pdf
+submission/task2-usability/recordings/*
+!submission/task2-usability/recordings/.gitkeep
