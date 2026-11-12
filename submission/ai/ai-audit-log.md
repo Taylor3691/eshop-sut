@@ -137,6 +137,65 @@
 
 ---
 
+## #06 — Viết checklist IA-01 (General UI standards)
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-12 22:59
+- **Prompt:**
+  ```
+  Dựa trên submission/task1-checklist/01-ui-inventory.md,
+  viết các mục checklist GUI cho nhóm IA-01: General UI standards.
+  Mỗi mục có tiêu chí Pass rõ ràng, ghi FR liên quan (hoặc BP nếu là best practice). Trả về dạng bảng.
+  Viết mục dưới dạng tiêu chí cần đạt, không viết thành lỗi.
+  ```
+- **AI output:**
+  - File `01-ui-inventory.md` không tồn tại; dùng `submission/task1-checklist/ui-inventory.md` (cùng nội dung đã commit).
+  - Viết 26 mục checklist IA-01 (GUI-01-01 → GUI-01-26), chia 6 nhóm: tiêu đề trang, ngôn ngữ & thuật ngữ, màu sắc, định dạng tiền/ngày, Tab order & focus, bố cục & hiển thị. Mỗi mục có tiêu chí cần đạt, cách kiểm/điều kiện Pass, căn cứ FR hoặc BP (Nielsen, WCAG) và tham chiếu mục inventory.
+  - Không tạo/sửa file nào ngoài log (kết quả trả trong chat).
+
+---
+
+## #07 — Viết checklist IA-02 (Forms)
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-12 23:04
+- **Prompt:** tiếp tục với IA-02: Forms
+- **AI output:**
+  - Viết 41 mục checklist IA-02 (GUI-02-01 → GUI-02-41), chia theo form: chung cho mọi form, Login, Danh mục, Sản phẩm (thêm/sửa), Import CSV, Mã giảm giá. Mỗi mục có tiêu chí cần đạt, dữ liệu thử và điều kiện Pass, căn cứ FR/GĐ hoặc BP, tham chiếu inventory.
+  - Ghi chú: Step Indicator (FR-22) N/A vì không có form nhiều bước; chống bấm submit hai lần và bảng xem trước CSV để sang IA-04.
+  - Không tạo/sửa file nào ngoài log (kết quả trả trong chat).
+
+---
+
+## #08 — Viết checklist IA-03 (Navigation) và IA-04 (Feedback / State)
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-12 23:06
+- **Prompt:**
+  ```
+  tiếp tục phần 
+  - IA-03: Navigation
+  - IA-04: Feedback / State
+  ```
+- **AI output:**
+  - Viết 15 mục IA-03 (GUI-03-01 → GUI-03-15): highlight sidebar, ngữ nghĩa menu, bố cục sidebar, điều hướng sau đăng nhập/đăng xuất, chặn truy cập khi chưa đăng nhập, URL/F5/Back theo tab, breadcrumb (N/A).
+  - Viết 27 mục IA-04 (GUI-04-01 → GUI-04-27): loading và khóa nút submit, kết quả hiện ngay sau thêm/sửa/xóa, dialog xác nhận xóa, empty state, thông báo lỗi hệ thống/không phải admin/hết phiên, xem trước và báo cáo Import CSV, ảnh và alt, trạng thái mã hết hạn, số liệu Dashboard.
+  - Tổng 4 nhóm: 109 mục. Không tạo/sửa file nào ngoài log (kết quả trả trong chat).
+
+---
+
+## #09 — Lưu checklist nháp và commit
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-12 23:08
+- **Prompt:** hãy lưu vào file draft để review trước, và hãy commit
+- **AI output:**
+  - Lưu 109 mục checklist của 4 nhóm IA-01 → IA-04 (từ mục #06–#08) vào một file nháp markdown, thêm phần đầu (nguồn, trạng thái nháp, bảng số mục) và mục ghi chú cho người review.
+  - Commit file nháp và audit log lên nhánh `hw03/toanhuynh`; không commit `backend/database.sqlite`.
+  - `submission/task1-checklist/checklist-draft.md`, `submission/ai/ai-audit-log.md`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
