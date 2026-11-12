@@ -310,6 +310,36 @@
 
 ---
 
+## #18 — Gộp mục Failed thành danh sách bug
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-13 00:15
+- **Prompt:**
+  ```
+  Gộp các mục Failed trong execution-observations.md thành danh sách bug (mỗi bug một nguyên nhân),
+  viết mỗi bug thành submission/bugs/BUG-xx.md theo BUG-TEMPLATE.md, kèm ảnh từ screenshots/failed/,
+  và cập nhật bảng submission/bugs/README.md.
+  ```
+- **AI output:**
+  - Gộp 44 mục Failed thành 33 bug theo nguyên nhân (15 Major, 14 Minor, 4 Trivial), xếp theo mức độ nghiêm trọng; mỗi bug có nguồn (ID checklist), màn hình, môi trường, severity/priority kèm lý do, tham chiếu FR hoặc giải đáp/BP, bước tái hiện thủ công, kết quả mong đợi trích spec, kết quả thực tế và ảnh từ `screenshots/failed/`. Đã kiểm: mọi mục Failed đều thuộc ít nhất một bug, mọi ảnh được tham chiếu đều tồn tại.
+  - Một số mục được tách hoặc gộp theo nguyên nhân: GUI-01-10 tách thành 2 bug (doanh thu gấp đôi; định dạng tiền theo ngôn ngữ trình duyệt); GUI-02-18 tách thành 2 bug (sai header vẫn import; file rỗng không báo); GUI-02-03 gộp vào các bug thiếu kiểm tra dữ liệu và bug thông báo kỹ thuật.
+  - Kiểm lại riêng giá `1000.5` (ghi chú ⚠ của tester ở GUI-02-13) bằng Playwright: form vẫn gửi và backend lưu 1000.5; ghi vào BUG-07. Sau đó khởi động lại SUT và seed lại dữ liệu.
+  - Trường GitHub Issue ghi "Chưa tạo".
+  - `submission/bugs/BUG-01.md` → `submission/bugs/BUG-33.md`, `submission/bugs/README.md`
+
+---
+
+## #19 — Commit danh sách bug
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-13 00:16
+- **Prompt:** commit
+- **AI output:**
+  - Commit 33 file bug, bảng `README.md` và audit log lên nhánh `hw03/toanhuynh`; không commit `backend/database.sqlite`.
+  - `submission/bugs/`, `submission/ai/ai-audit-log.md`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
