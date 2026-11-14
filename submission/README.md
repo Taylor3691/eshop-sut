@@ -12,13 +12,13 @@
 |---|---|
 | Số màn hình (Task 1) | 5 |
 | Số flow (Task 2) | 1 |
-| Checklist: designed / executed / passed / failed | _ / _ / _ / _ |
-| Số bug (GUI / usability / cross-platform) | _ / _ / _ |
+| Checklist: designed / executed / passed / failed | 70 / 70 / 26 / 44 (AI 58 + tự thêm 12) |
+| Số bug (GUI / usability / cross-platform) | 33 / _ / _ |
 | Số người tham gia | 7 (+1 pilot) |
 | Điểm SUS trung bình | _ |
 | Số nền tảng | 3 |
 | Demo video (Agent Skills) | <link YouTube> |
-| GitHub Issues | <link> |
+| GitHub Issues | [label:hw03](https://github.com/Taylor3691/eshop-sut/issues?q=label%3Ahw03) (25 issue mới) + 10 issue có sẵn bị trùng; bảng đầy đủ ở [bugs/README.md](bugs/README.md) |
 
 ## Self-Assessment
 | No. | Criteria | Grade | Self-Assessed |
@@ -33,11 +33,11 @@
 | Thư mục | Nội dung |
 |---|---|
 | `report/` | Main report (.md + .pdf) |
-| `task1-checklist/` | checklist.xlsx (Checklist, Test Summary, Cross-Platform), prompts, screenshots/failed |
+| `task1-checklist/` | checklist.xlsx (Checklist, Test Summary, Cross-Platform), ui-inventory, checklist-draft/filtered, execution-observations, screenshots/failed |
 | `task2-usability/` | plan, scenario, participants, pilot, sessions/P1–P7, sus-and-metrics.xlsx, analysis |
 | `task3-crossplatform/` | Ảnh chụp theo từng trình duyệt |
 | `bugs/` | Bug report (.md) + link GitHub Issues |
-| `ai/` | AI Audit Log, AI Critique (.md + .pdf), prompt library, raw sessions |
+| `ai/` | AI Audit Log, AI Critique (.md + .pdf) |
 | `skills/` | Agent Skills (SKILL.md) |
 | `test-data/` | Dữ liệu thử (CSV import) |
 | `git-log.txt` | Git commit log |
