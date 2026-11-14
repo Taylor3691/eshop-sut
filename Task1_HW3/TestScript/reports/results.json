@@ -1,0 +1,428 @@
+{
+  "startedAt": "2026-11-14T01:25:59+07:00",
+  "finishedAt": "2026-11-14T01:27:10+07:00",
+  "baseUrl": "http://localhost:5173",
+  "total": 56,
+  "passed": 15,
+  "failed": 41,
+  "results": [
+    {
+      "id": 1,
+      "title": "Nhất quán ngôn ngữ trên ba màn hình",
+      "status": "PASSED",
+      "durationMs": 3040
+    },
+    {
+      "id": 2,
+      "title": "Nút hành động tích cực dùng màu xanh dương",
+      "status": "FAILED",
+      "durationMs": 1983,
+      "error": "Nút Thêm vào giỏ hàng không có màu xanh dương\n\nfalse !== true\n",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-02.png"
+    },
+    {
+      "id": 3,
+      "title": "Nút nguy hiểm dùng màu đỏ",
+      "status": "FAILED",
+      "durationMs": 1245,
+      "error": "Không tìm thấy header button có nội dung “Đăng xuất”",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-03.png"
+    },
+    {
+      "id": 4,
+      "title": "Định dạng tiền tệ thống nhất",
+      "status": "FAILED",
+      "durationMs": 1133,
+      "error": "Không tìm thấy giá đúng định dạng tại /",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-04.png"
+    },
+    {
+      "id": 5,
+      "title": "Mỗi trang có đúng một h1",
+      "status": "FAILED",
+      "durationMs": 961,
+      "error": "Trang Danh sách không có đúng một h1\n\n2 !== 1\n",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-05.png"
+    },
+    {
+      "id": 6,
+      "title": "Các thẻ sản phẩm được căn đều",
+      "status": "PASSED",
+      "durationMs": 1072
+    },
+    {
+      "id": 7,
+      "title": "Ảnh sản phẩm không bị méo",
+      "status": "PASSED",
+      "durationMs": 2050
+    },
+    {
+      "id": 8,
+      "title": "Nội dung không chồng lấn hoặc tràn khung",
+      "status": "PASSED",
+      "durationMs": 2049
+    },
+    {
+      "id": 9,
+      "title": "Phân cấp chữ rõ ràng",
+      "status": "PASSED",
+      "durationMs": 711
+    },
+    {
+      "id": 10,
+      "title": "Khoảng cách và căn chỉnh trong lưới đồng đều",
+      "status": "PASSED",
+      "durationMs": 1065
+    },
+    {
+      "id": 11,
+      "title": "Bố cục responsive không tràn ngang",
+      "status": "PASSED",
+      "durationMs": 2628
+    },
+    {
+      "id": 12,
+      "title": "Độ tương phản chữ đạt yêu cầu",
+      "status": "FAILED",
+      "durationMs": 1164,
+      "error": "Độ tương phản 3.92:1 không đạt cho “Chào, Test User”",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-12.png"
+    },
+    {
+      "id": 13,
+      "title": "Trang Chi tiết có đủ thông tin sản phẩm",
+      "status": "PASSED",
+      "durationMs": 1102
+    },
+    {
+      "id": 14,
+      "title": "Ô tìm kiếm có tên rõ ràng",
+      "status": "FAILED",
+      "durationMs": 1009,
+      "error": "Ô tìm kiếm không có label hoặc aria-label",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-14.png"
+    },
+    {
+      "id": 15,
+      "title": "Nút Tìm và phím Enter gửi cùng một tìm kiếm",
+      "status": "PASSED",
+      "durationMs": 1422
+    },
+    {
+      "id": 16,
+      "title": "Từ khóa tìm kiếm được hiển thị an toàn",
+      "status": "FAILED",
+      "durationMs": 1045,
+      "error": "HTML từ từ khóa đã được render\n\n1 !== 0\n",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-16.png"
+    },
+    {
+      "id": 17,
+      "title": "Ô Số lượng chỉ nhận số nguyên dương",
+      "status": "FAILED",
+      "durationMs": 1186,
+      "error": "Ô số lượng phải có min=1\n\nnull !== '1'\n",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-17.png"
+    },
+    {
+      "id": 18,
+      "title": "Số lượng mặc định là 1",
+      "status": "PASSED",
+      "durationMs": 1059
+    },
+    {
+      "id": 19,
+      "title": "Số lượng không hợp lệ bị từ chối và có thông báo",
+      "status": "FAILED",
+      "durationMs": 1239,
+      "error": "Không có thông báo cho giá trị “”",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-19.png"
+    },
+    {
+      "id": 20,
+      "title": "Trường Số lượng bắt buộc có dấu sao",
+      "status": "FAILED",
+      "durationMs": 1182,
+      "error": "Ô Số lượng chưa có thuộc tính required\n\nfalse !== true\n",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-20.png"
+    },
+    {
+      "id": 21,
+      "title": "Thứ tự Tab ở trang Danh sách hợp lý",
+      "status": "PASSED",
+      "durationMs": 1058
+    },
+    {
+      "id": 22,
+      "title": "Thứ tự Tab ở trang Chi tiết hợp lý",
+      "status": "PASSED",
+      "durationMs": 1073
+    },
+    {
+      "id": 23,
+      "title": "Giỏ hàng có nút tăng giảm số lượng",
+      "status": "FAILED",
+      "durationMs": 1230,
+      "error": "Các nút hiện có: Xóa",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-23.png"
+    },
+    {
+      "id": 24,
+      "title": "Logo EShop đưa về Danh sách sản phẩm",
+      "status": "PASSED",
+      "durationMs": 826
+    },
+    {
+      "id": 25,
+      "title": "Thanh điều hướng làm nổi bật đúng trang",
+      "status": "FAILED",
+      "durationMs": 1123,
+      "error": "Phải có đúng một mục đang hoạt động tại /\n\n0 !== 1\n",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-25.png"
+    },
+    {
+      "id": 26,
+      "title": "Giỏ hàng có badge số lượng đúng",
+      "status": "FAILED",
+      "durationMs": 959,
+      "error": "Badge Giỏ hàng chưa hiển thị số lượng 1",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-26.png"
+    },
+    {
+      "id": 27,
+      "title": "Nút đăng xuất có đúng nhãn",
+      "status": "FAILED",
+      "durationMs": 1176,
+      "error": "Nhãn hiện tại: Thoát",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-27.png"
+    },
+    {
+      "id": 28,
+      "title": "Chi tiết sản phẩm có breadcrumb",
+      "status": "FAILED",
+      "durationMs": 1155,
+      "error": "Không có breadcrumb ở Chi tiết sản phẩm",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-28.png"
+    },
+    {
+      "id": 29,
+      "title": "Giỏ hàng có breadcrumb",
+      "status": "FAILED",
+      "durationMs": 1229,
+      "error": "Không có breadcrumb ở Giỏ hàng",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-29.png"
+    },
+    {
+      "id": 30,
+      "title": "Xem chi tiết mở đúng sản phẩm",
+      "status": "PASSED",
+      "durationMs": 1094
+    },
+    {
+      "id": 31,
+      "title": "Tiếp tục mua sắm giữ nguyên giỏ hàng",
+      "status": "FAILED",
+      "durationMs": 1024,
+      "error": "Không tìm thấy main a, main button có nội dung “Tiếp tục mua sắm”",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-31.png"
+    },
+    {
+      "id": 32,
+      "title": "Hiển thị trạng thái loading khi tải sản phẩm",
+      "status": "FAILED",
+      "durationMs": 301,
+      "error": "Không có trạng thái loading",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-32.png"
+    },
+    {
+      "id": 33,
+      "title": "Tìm kiếm không có kết quả hiển thị Empty State",
+      "status": "FAILED",
+      "durationMs": 1120,
+      "error": "The input did not match the regular expression /không (có|tìm thấy).*sản phẩm|chưa có sản phẩm/i. Input:\n\n'EShop Giỏ hàng Chào, Test User Thoát Danh sách sản phẩm Tìm © 2026 EShop SUT. Dành cho mục đích kiểm thử.'\n",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-33.png"
+    },
+    {
+      "id": 34,
+      "title": "Thêm từ thẻ sản phẩm có toast hoặc badge",
+      "status": "FAILED",
+      "durationMs": 1244,
+      "error": "Không có toast hoặc badge sau khi thêm giỏ",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-34.png"
+    },
+    {
+      "id": 35,
+      "title": "Thêm từ Chi tiết có phản hồi ngay lần đầu",
+      "status": "FAILED",
+      "durationMs": 1242,
+      "error": "Lần bấm đầu chưa có phản hồi",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-35.png"
+    },
+    {
+      "id": 36,
+      "title": "Thêm lại sản phẩm chỉ tăng số lượng",
+      "status": "FAILED",
+      "durationMs": 932,
+      "error": "Sản phẩm bị tạo thành hai dòng\n\n2 !== 1\n",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-36.png"
+    },
+    {
+      "id": 37,
+      "title": "Nút cộng trừ cập nhật số lượng và thành tiền",
+      "status": "FAILED",
+      "durationMs": 880,
+      "error": "Không tìm thấy main table button có nội dung “+”",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-37.png"
+    },
+    {
+      "id": 38,
+      "title": "Tổng tiền có đúng nhãn Tổng cộng",
+      "status": "FAILED",
+      "durationMs": 1244,
+      "error": "The input did not match the regular expression /Tổng cộng:\\s*30\\.000\\.000 ₫/. Input:\n\n'EShop Giỏ hàng Chào, Test User Thoát Giỏ Hàng Sản phẩm Giá Số lượng Thành tiền Thao tác iPhone 15 Pro Max 30.000.000 ₫ 1 30.000.000 ₫ Xóa Tổng tạm tính: 30.000.000 ₫ ← Mua tiếp Tiến hành thanh toán © 2026 EShop SUT. Dành cho mục đích kiểm thử.'\n",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-38.png"
+    },
+    {
+      "id": 39,
+      "title": "Xóa sản phẩm phải xác nhận trước",
+      "status": "FAILED",
+      "durationMs": 1369,
+      "error": "Không có hộp xác nhận xóa",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-39.png"
+    },
+    {
+      "id": 40,
+      "title": "Giỏ hàng rỗng có hình, thông báo và nút quay lại",
+      "status": "FAILED",
+      "durationMs": 1154,
+      "error": "Giỏ hàng rỗng chưa có hình minh họa",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-40.png"
+    },
+    {
+      "id": 41,
+      "title": "Ảnh sản phẩm có alt text phù hợp",
+      "status": "FAILED",
+      "durationMs": 1181,
+      "error": "Có ảnh trong danh sách thiếu alt text",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-41.png"
+    },
+    {
+      "id": 42,
+      "title": "Nội dung dùng được khi phóng to 200%",
+      "status": "FAILED",
+      "durationMs": 916,
+      "error": "Trang / tràn khi zoom 200%: 728px > 720px",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-42.png"
+    },
+    {
+      "id": 43,
+      "title": "Thông tin không chỉ được thể hiện bằng màu",
+      "status": "FAILED",
+      "durationMs": 1130,
+      "error": "Trang hiện tại chỉ dựa vào màu hoặc chưa có dấu hiệu ngoài màu",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-43.png"
+    },
+    {
+      "id": 44,
+      "title": "Ô tìm kiếm và Số lượng có nhãn cho trình đọc màn hình",
+      "status": "FAILED",
+      "durationMs": 1136,
+      "error": "Ô tìm kiếm thiếu tên truy cập",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-44.png"
+    },
+    {
+      "id": 45,
+      "title": "Lỗi số lượng được công nghệ hỗ trợ nhận biết",
+      "status": "FAILED",
+      "durationMs": 934,
+      "error": "Expected values to be strictly equal:\n\nnull !== 'true'\n",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-45.png"
+    },
+    {
+      "id": 46,
+      "title": "Toast hoặc badge nhất quán ở hai màn hình",
+      "status": "FAILED",
+      "durationMs": 1231,
+      "error": "Danh sách sản phẩm thiếu phản hồi",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-46.png"
+    },
+    {
+      "id": 47,
+      "title": "Dialog xóa có đủ thông tin và nút Hủy",
+      "status": "FAILED",
+      "durationMs": 1389,
+      "error": "Hộp xác nhận không nêu sản phẩm cần xóa",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-47.png"
+    },
+    {
+      "id": 48,
+      "title": "Các Empty State có hướng phục hồi",
+      "status": "FAILED",
+      "durationMs": 1266,
+      "error": "The input did not match the regular expression /không (có|tìm thấy)|trống/i. Input:\n\n'EShop Giỏ hàng Chào, Test User Thoát Danh sách sản phẩm Tìm Kết quả tìm kiếm cho: khong-co-san-pham © 2026 EShop SUT. Dành cho mục đích kiểm thử.'\n",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-48.png"
+    },
+    {
+      "id": 49,
+      "title": "Có thể điều hướng toàn bộ luồng bằng bàn phím",
+      "status": "FAILED",
+      "durationMs": 1982,
+      "error": "Có control không có tên",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-49.png"
+    },
+    {
+      "id": 50,
+      "title": "Trạng thái động được công bố cho công nghệ hỗ trợ",
+      "status": "FAILED",
+      "durationMs": 281,
+      "error": "Loading không có vùng thông báo trạng thái",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-50.png"
+    },
+    {
+      "id": 51,
+      "title": "Trang có landmark, heading và bảng ngữ nghĩa",
+      "status": "FAILED",
+      "durationMs": 1221,
+      "error": "Expected values to be strictly equal:\n\n2 !== 1\n",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-51.png"
+    },
+    {
+      "id": 52,
+      "title": "Bố cục không vỡ trong RTL",
+      "status": "PASSED",
+      "durationMs": 2786
+    },
+    {
+      "id": 53,
+      "title": "Thứ tự và ký hiệu điều hướng đúng trong RTL",
+      "status": "FAILED",
+      "durationMs": 1070,
+      "error": "Bảng vẫn căn trái trong RTL",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-53.png"
+    },
+    {
+      "id": 54,
+      "title": "Dark mode được áp dụng nhất quán",
+      "status": "FAILED",
+      "durationMs": 1166,
+      "error": "Nền chính chưa chuyển sang tối",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-54.png"
+    },
+    {
+      "id": 55,
+      "title": "Dark mode giữ độ tương phản và trạng thái rõ ràng",
+      "status": "FAILED",
+      "durationMs": 1138,
+      "error": "Ứng dụng chưa bật dark mode",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-55.png"
+    },
+    {
+      "id": 56,
+      "title": "Phản hồi hệ thống dễ nhìn trong dark mode",
+      "status": "FAILED",
+      "durationMs": 1122,
+      "error": "Ứng dụng chưa bật dark mode",
+      "screenshot": "D:\\HK7\\Tester\\eshop-sut\\Task1_HW3\\TestScript\\reports\\screenshots\\GUI-56.png"
+    }
+  ]
+}
