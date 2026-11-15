@@ -721,6 +721,18 @@ mssv 23120175
 
 ---
 
+## #47 — Đóng gói bài nộp
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-16 00:31
+- **Prompt:** zip lại đi
+- **AI output:**
+  - Ghi mục log này trước, xuất lại PDF của audit log, commit, rồi xuất lại `git-log.txt` để bài nộp có đủ các bước
+  - Nén thư mục `submission/` thành `23120175_HW03_AI_GUIUsability_096.zip` (theo định dạng tên ở mục 14 của đề, điểm tự chấm 96), bỏ `.DS_Store`; không gồm `demo/`, `.claude/`, `backend/database.sqlite`
+  - File: `submission/23120175_HW03_AI_GUIUsability_096.zip` (không commit, đã có trong `.gitignore`), `submission/ai/ai-audit-log.pdf`, `submission/git-log.txt`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
