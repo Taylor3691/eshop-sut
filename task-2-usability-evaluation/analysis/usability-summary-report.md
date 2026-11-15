@@ -1,6 +1,8 @@
 # Báo cáo tổng kết đánh giá usability - **SIMULATED DATA**
 
-> Hành vi và câu phỏng vấn được sáng tác, không phải quan sát thật. Tách riêng kết quả browser có thật với tình huống persona giả định.
+> Hành vi và câu phỏng vấn được sáng tác, không phải quan sát thật. Tách riêng
+> kết quả browser có thật với tình huống persona giả định. Bảy bộ hồ sơ được
+> dùng như một bộ dữ liệu mô phỏng hoàn chỉnh cho bài tập độc lập.
 
 ## Kết quả automation quan sát trực tiếp
 
@@ -36,7 +38,14 @@ Số persona trong bảng là số kịch bản do tác giả tạo, không ph�
 
 ## Điểm SUS
 
-Điểm trong `sus-scoring.md` được tính từ vector hư cấu. Không có trung bình thực nghiệm hoặc xếp loại usability hợp lệ.
+Các phiếu P01–P07 đều có đủ 10 câu trả lời. Điểm mô phỏng là 57,5; 75; 25;
+42,5; 82,5; 37,5 và 82,5; trung bình **57,50/100**. Điểm này được tính đúng
+theo công thức SUS nhưng chỉ đại diện cho vector persona giả định, không phải
+điểm đo từ người dùng thật.
 
 
-Đây là bảy lượt Playwright tự động, không phải phiên có điều phối viên/người dùng. Hồ sơ, phản ứng, phỏng vấn và điểm SUS đều là dữ liệu giả lập. Báo cáo chính: `main-report.md`.
+Đây là bảy lượt Playwright tự động, không phải phiên có điều phối viên/người
+dùng. Hồ sơ, phản ứng, phỏng vấn và điểm SUS đều là dữ liệu giả lập. Báo cáo
+chi tiết xem `session-results.md`, `usability-findings.md`,
+`pain-point-analysis.md`, `severity-prioritization.md` và
+`improvement-recommendations.md`.

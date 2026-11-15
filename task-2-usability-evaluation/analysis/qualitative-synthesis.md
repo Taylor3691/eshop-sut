@@ -1,12 +1,14 @@
 # Tổng hợp định tính - **SIMULATED DATA**
 
-> Hành vi và câu phỏng vấn được sáng tác, không phải quan sát thật. Tách riêng kết quả browser có thật với tình huống persona giả định.
+> Hành vi và câu phỏng vấn được sáng tác, không phải quan sát thật. Tách riêng
+> kết quả browser có thật với tình huống persona giả định. Báo cáo này xử lý
+> P01–P07 như bộ dữ liệu mô phỏng hoàn chỉnh của bài tập độc lập.
 
 ## Kết quả automation quan sát trực tiếp
 
 7/7 lượt Playwright vượt qua Đăng nhập, Giỏ hàng, Áp dụng mã, Thanh toán, Xác minh đơn và Đăng xuất. Kết quả chỉ thể hiện các thao tác được script hóa.
 
-## Điểm khó giả định trong kịch bản persona
+## Điểm khó trong kịch bản persona
 
 | Chủ đề | Persona | Mẫu tình huống hư cấu | Ưu tiên |
 |---|---|---|---|
@@ -16,7 +18,8 @@
 | Trạng thái điều hướng | P02, P05 | Tìm ô mã giảm giá và dấu hiệu số lượng trong giỏ | Trung bình |
 | Tự tin hoàn tất | P06, P07 | Cần xác nhận rõ và nhãn đăng xuất dễ hiểu | Trung bình |
 
-Số persona trong bảng là số kịch bản do tác giả tạo, không phải tần suất hoặc tỷ lệ người dùng.
+Các participant trong bảng là persona có dữ liệu mô phỏng; số lượng không phải
+tần suất hoặc tỷ lệ người dùng thật.
 
 ## Lỗi giao diện quan sát được
 
@@ -36,4 +39,7 @@ Số persona trong bảng là số kịch bản do tác giả tạo, không ph�
 
 ## Điểm SUS
 
-Điểm trong `sus-scoring.md` được tính từ vector hư cấu. Không có trung bình thực nghiệm hoặc xếp loại usability hợp lệ.
+Mỗi participant có đủ 10 đáp án và điểm được tính theo công thức SUS. Điểm
+mô phỏng lần lượt là 57,5; 75; 25; 42,5; 82,5; 37,5 và 82,5, với trung bình
+**57,50/100**. Đây là trung bình của dữ liệu mô phỏng, không phải trung bình
+thực nghiệm hay xếp loại người dùng thật.

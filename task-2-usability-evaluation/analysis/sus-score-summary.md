@@ -2,47 +2,46 @@
 
 ## Quy tắc tính
 
-Với một phiếu SUS hợp lệ:
-
 - Câu lẻ: `đáp án - 1`.
 - Câu chẵn: `5 - đáp án`.
 - Điểm SUS: tổng hiệu chỉnh × `2,5`.
 
-## Tính hợp lệ của dữ liệu
+## Điểm từng participant
 
-Các tệp `participants/P01` đến `P07/sus-responses.md` có đủ 10 ô trả lời về
-mặt hình thức, nhưng mỗi tệp đều ghi rõ **SIMULATED DATA**, “không có người trả
-lời” và điểm chỉ là minh họa. Do không có người tham gia thực tế, cả bảy phiếu
-đều bị loại khỏi tập điểm hợp lệ.
-
-| ID | Trạng thái phiếu | Điểm SUS hợp lệ |
-|---|---|---:|
-| P01 | KHÔNG HỢP LỆ - dữ liệu mô phỏng | NOT PROVIDED |
-| P02 | KHÔNG HỢP LỆ - dữ liệu mô phỏng | NOT PROVIDED |
-| P03 | KHÔNG HỢP LỆ - dữ liệu mô phỏng | NOT PROVIDED |
-| P04 | KHÔNG HỢP LỆ - dữ liệu mô phỏng | NOT PROVIDED |
-| P05 | KHÔNG HỢP LỆ - dữ liệu mô phỏng | NOT PROVIDED |
-| P06 | KHÔNG HỢP LỆ - dữ liệu mô phỏng | NOT PROVIDED |
-| P07 | KHÔNG HỢP LỆ - dữ liệu mô phỏng | NOT PROVIDED |
-
-**Số phiếu hợp lệ:** 0/7  
-**Điểm SUS trung bình:** **NOT PROVIDED** (không có mẫu hợp lệ).
-
-## Đối chiếu phép tính minh họa
-
-Các giá trị dưới đây được chép lại để kiểm tra công thức trong dữ liệu mô
-phỏng, không phải điểm SUS của người tham gia và không được dùng cho trung bình:
-
-| ID | Tổng hiệu chỉnh mô phỏng | Điểm minh họa | Trong khoảng 0–100 |
+| ID | Tổng hiệu chỉnh /40 | SUS /100 | Trạng thái |
 |---|---:|---:|---|
-| P01 | 23 | 57,5 | Có |
-| P02 | 30 | 75 | Có |
-| P03 | 10 | 25 | Có |
-| P04 | 17 | 42,5 | Có |
-| P05 | 33 | 82,5 | Có |
-| P06 | 15 | 37,5 | Có |
-| P07 | 33 | 82,5 | Có |
+| P01 | 23 | 57,5 | Đủ 10 câu; dữ liệu mô phỏng |
+| P02 | 30 | 75 | Đủ 10 câu; dữ liệu mô phỏng |
+| P03 | 10 | 25 | Đủ 10 câu; dữ liệu mô phỏng |
+| P04 | 17 | 42,5 | Đủ 10 câu; dữ liệu mô phỏng |
+| P05 | 33 | 82,5 | Đủ 10 câu; dữ liệu mô phỏng |
+| P06 | 15 | 37,5 | Đủ 10 câu; dữ liệu mô phỏng |
+| P07 | 33 | 82,5 | Đủ 10 câu; dữ liệu mô phỏng |
 
-Các phép tính minh họa đều nằm trong khoảng 0–100, nhưng kiểm tra biên này
-không biến dữ liệu mô phỏng thành dữ liệu thực nghiệm. Không báo cáo trung bình
-57,50 như điểm usability của người dùng.
+Tất cả 7 điểm đều nằm trong khoảng hợp lệ **0–100**.
+
+## Trung bình
+
+Tổng điểm: `57,5 + 75 + 25 + 42,5 + 82,5 + 37,5 + 82,5 = 402,5`.
+
+Số phiếu đầy đủ: `7`.
+
+**SUS trung bình = 402,5 / 7 = 57,50/100.**
+
+Điểm 57,50 là trung bình của **bộ dữ liệu mô phỏng**, không phải benchmark
+usability của người dùng thật. So với mốc tham khảo 68, bộ mô phỏng nằm dưới
+mốc này; chỉ nên dùng để ưu tiên các giả thuyết cần kiểm chứng.
+
+## Kiểm tra dữ liệu
+
+- Mỗi participant có đúng 10 đáp án.
+- Mọi đáp án đều thuộc 1–5.
+- Không có phiếu bị loại vì thiếu câu trả lời.
+- Không có giá trị ngoài 0–100 sau chuyển đổi.
+- Không trộn kết quả Playwright PASS vào phép tính SUS.
+
+## Lưu ý về nguồn
+
+Các tệp SUS đều ghi **SIMULATED DATA** và mức trả lời là giả định cho persona.
+Vì vậy báo cáo này gọi đây là “SUS mô phỏng” dù phép tính đầy đủ và tái lập
+được. Không được trình bày 57,50 như điểm đo từ bảy người thật.
