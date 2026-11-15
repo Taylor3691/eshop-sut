@@ -1,14 +1,15 @@
 # Danh sách người tham gia
 
-> Tất cả là người ngoài lớp HW03. Liên hệ đã che 4 số giữa. Đã đồng ý ghi hình/ghi âm.
+> Tất cả là người ngoài lớp HW03. Liên hệ đã che 4 số giữa. Một số đồng ý quay video (3 người), những người còn lại chỉ đồng ý ghi hình màn hình / ghi âm hoặc ghi chép trực tiếp.
 
-| Mã | Họ tên | Nghề nghiệp | Tuổi | Mức dùng máy tính | Kinh nghiệm quản trị (đã dùng / chưa dùng trang quản lý bán hàng) | Zalo / SĐT | Ngày giờ | Hình thức | Video |
-|---|---|---|---|---|---|---|---|---|---|
-| Pilot | | | | | | 09xx****xx | | | |
-| P1 | | | | | | | | | |
-| P2 | | | | | | | | | |
-| P3 | | | | | | | | | |
-| P4 | | | | | | | | | |
-| P5 | | | | | | | | | |
-| P6 | | | | | | | | | |
-| P7 | | | | | | | | | |
+
+| Mã    | Họ tên              | Nghề nghiệp                             | Tuổi | Mức dùng máy tính | Kinh nghiệm quản trị (đã dùng / chưa dùng trang quản lý bán hàng) | Zalo / SĐT     | Ngày giờ         | Hình thức             | Video                     |
+| ----- | ------------------- | --------------------------------------- | ---- | ----------------- | ----------------------------------------------------------------- | -------------- | ---------------- | --------------------- | ------------------------- |
+| Pilot | Nguyễn Minh Khôi    | Sinh viên năm 4 (Kinh tế)               | 21   | Cao               | Chưa dùng                                                         | 0908\*\*\*\*42 | 15/11/2026 13:00 | Online (Google Meet)  | Không quay (Chỉ ghi chép) |
+| P1    | Trần Thị Thanh Trúc | Sinh viên năm 4 (Kinh doanh quốc tế)    | 21   | Trung bình        | Đã dùng (từng bán hàng online qua Sapo)                           | 0934\*\*\*\*19 | 15/11/2026 14:30 | Online (Google Meet)  | `p1_truc.mp4`             |
+| P2    | Lê Hoàng Phúc       | Sinh viên năm 3 (Kế toán - Kiểm toán)   | 20   | Cao               | Chưa dùng (chỉ dùng Excel trong môn học)                          | 0972\*\*\*\*85 | 15/11/2026 15:30 | Offline (Quán cà phê) | Không quay (Chỉ ghi chép) |
+| P3    | Phạm Ngọc Lan Anh   | Sinh viên năm 4 (Ngôn ngữ Anh)          | 21   | Trung bình        | Chưa dùng                                                         | 0389\*\*\*\*63 | 15/11/2026 16:30 | Online (Google Meet)  | Không quay (Chỉ ghi chép) |
+| P4    | Đặng Quốc Bảo       | Sinh viên năm 4 (Hệ thống thông tin)    | 21   | Cao               | Đã dùng (làm đồ án quản lý bán hàng)                              | 0913\*\*\*\*07 | 15/11/2026 17:30 | Offline (Thủ Đức)     | `p4_bao.mp4`              |
+| P5    | Võ Thị Kim Ngân     | Sinh viên năm 4 (Marketing)             | 21   | Cao               | Đã dùng (hỗ trợ quản lý fanpage/Pancake)                          | 0865\*\*\*\*94 | 15/11/2026 18:30 | Online (Zalo Video)   | `p5_ngan.mp4`             |
+| P6    | Bùi Tấn Phát        | Sinh viên năm 3 (Quản trị kinh doanh)   | 20   | Trung bình        | Đã dùng (làm part-time thu ngân KiotViet)                         | 0946\*\*\*\*51 | 15/11/2026 19:30 | Offline (Thủ Đức)     | Không quay                |
+| P7    | Hoàng Thùy Dương    | Sinh viên năm 4 (Tài chính - Ngân hàng) | 21   | Trung bình        | Chưa dùng                                                         | 0703\*\*\*\*28 | 15/11/2026 20:30 | Online (Google Meet)  | Không quay (Chỉ ghi chép) |
