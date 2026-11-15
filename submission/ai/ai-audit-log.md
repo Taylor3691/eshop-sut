@@ -377,6 +377,16 @@
 
 ---
 
+## #22 — Viết kế hoạch đánh giá khả dụng (Task 2)
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-15 01:00
+- **Prompt:** Dựa trên yêu cầu Task 2 trong file HW03 và flow tôi đã chọn trong submission/README.md, hãy viết nội dung cho submission/task2-usability/plan.md: mục tiêu, tiêu chí hoàn thành từng bước, hồ sơ người tham gia, task scenario (dạng mục tiêu, không hướng dẫn từng bước, không dùng đúng tên nút trên giao diện), lý do chọn SUS, câu hỏi probe về clarity, error recovery, speed, trust, và moderator script.
+- **AI output:**
+  - Điền đủ 9 mục của `plan.md` theo khung có sẵn: 6 mục tiêu (O1–O6) gắn với cách đo; bảng tiêu chí hoàn thành, thời gian mục tiêu/tối đa cho 6 bước và quy tắc chấm Y / Assisted / N (gồm trường hợp lưu dữ liệu sai và lỗi do SUT); hồ sơ người tham gia (persona chủ shop, tiêu chí chọn, loại trừ sinh viên HW03); task scenario dạng mục tiêu theo vai chủ shop thời trang kèm thẻ thông tin, tránh mọi nhãn nút/mục trên giao diện; lý do chọn SUS (so với UEQ-S), 10 câu SUS tiếng Việt và chỉ số theo bước; 15 câu probe chia theo clarity, error recovery, speed, trust; moderator script (lời giới thiệu, tập nói to, câu nhắc trung lập, 3 mức can thiệp, SUS, probe, kết thúc, việc sau phiên); chuẩn bị môi trường; mục pilot để trống bảng chỉnh sửa (điền sau khi chạy pilot).
+  - Kiểm dữ liệu SUT sau reset để scenario khớp: 3 danh mục mặc định, 3 đơn pending của seed (đơn cần duyệt: 45 Lê Lợi, Q.1, TP.HCM); danh mục "Đồ mùa đông", sản phẩm "Áo khoác lông vũ", mã "WINTER15" chưa tồn tại.
+  - `submission/task2-usability/plan.md`
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
