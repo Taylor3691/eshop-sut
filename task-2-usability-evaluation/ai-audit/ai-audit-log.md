@@ -30,4 +30,8 @@
 
 *(Các tương tác tiếp theo khi tiến hành phân tích kết quả thực tế sẽ tiếp tục được bổ sung vào nhật ký này).*
 
-\n\n## 2026-11-15 addendum\n\nSee [simulated execution audit](simulated-execution-addendum.md) for the Codex prompt scope, output, observed run outcomes, corrections, and the database backup error.\n
+## 2026-11-15 addenda
+
+See [simulated execution audit](simulated-execution-addendum.md) for the Codex prompt scope, output, observed run outcomes, corrections, and database backup error.
+
+See [fictional response audit](synthetic-data-addendum.md) for the follow-up request and generated fictional profiles, interviews, think-aloud narratives, and non-empirical SUS scores.

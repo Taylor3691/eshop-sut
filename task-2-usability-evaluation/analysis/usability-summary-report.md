@@ -1,40 +1,42 @@
-# Báo cáo tổng kết usability (SIMULATED)
+# Usability evaluation summary report — **SIMULATED DATA**
 
-## Phạm vi và độ tin cậy
+> The behavioral narratives and interview text are invented, not observed. Separate factual browser results from hypothetical persona scenarios below.
 
-Playwright thực hiện 7 lượt độc lập trên Chromium headless. Đây là kiểm tra chức năng/UI có thể lặp lại, không phải nghiên cứu usability với người. Vì vậy SUS, phỏng vấn, cảm xúc, thời gian người dùng, completion rate của người và suy luận về persona đều **không có dữ liệu**.
+## Automated outcomes (directly observed)
 
-## Kết quả quan sát được
+All seven Playwright runs passed Login, Cart, Apply Coupon, Checkout, Verify Order, and Logout. These results establish scripted UI-flow execution only.
 
-| ID | Login | Cart | Coupon | Checkout | Verify order | Logout | SUS |
-|---|---|---|---|---|---|---|---|
-| P01 | PASS | PASS | PASS | PASS | PASS | PASS | N/A |
-| P02 | PASS | PASS | PASS | PASS | PASS | PASS | N/A |
-| P03 | PASS | PASS | PASS | PASS | PASS | PASS | N/A |
-| P04 | PASS | PASS | PASS | PASS | PASS | PASS | N/A |
-| P05 | PASS | PASS | PASS | PASS | PASS | PASS | N/A |
-| P06 | PASS | PASS | PASS | PASS | PASS | PASS | N/A |
-| P07 | PASS | PASS | PASS | PASS | PASS | PASS | N/A |
+## Hypothetical persona pain points (invented)
 
-7/7 automated runs completed all six checkpoints. This is not a human task-success rate.
+| Theme | Personas | Synthetic pattern | Priority |
+|---|---|---|---|
+| Label comprehension | P01, P03 | Registration-like heading, malformed words, uncertainty over form meaning | High |
+| Price confidence | P01, P04, P07 | Rechecking coupon math and concern about editable checkout amount | High |
+| Error recovery | P03, P06 | Hypothetical mistyped coupon and need for actionable feedback | Medium |
+| Navigation state | P02, P05 | Looking for coupon and cart-count cues | Medium |
+| Completion confidence | P06, P07 | Need clear confirmation and explicit logout label | Medium |
 
-## Pain points and findings (observed in UI/source behavior)
+Frequencies in this table describe authored scenarios and are not prevalence estimates.
 
-1. **High — malformed Vietnamese text/encoding across screens.** The browser displays mojibake in headings and labels, including checkout and navigation. This makes instructions difficult to read. Evidence: P01 screenshots `P01-01-login-home.png`, `P01-02-cart.png`, `P01-03-coupon-checkout.png`. Requirement: FR-21 Vietnamese UI.
-2. **High — login form semantics/labels conflict with the task.** Login screen heading appears as registration, email is labeled Username, password input uses text, and submit text is English. This was directly visible in the page and component. Requirements: FR-02, FR-21, FR-22. Evidence: `P01-01-login-home.png`.
-3. **Moderate — checkout total is editable.** The total field allows user editing, creating ambiguity about whether displayed amount is authoritative. This is visible in checkout screenshot; verify backend pricing independently before treating amounts as secure. Requirement: FR-08 automatic total.
+## Browser-visible defects (factual observations)
+
+| Finding | Severity | Evidence / requirement |
+|---|---|---|
+| Malformed Vietnamese text across several screens | High | BUG-SIM-001; screenshots; FR-21 |
+| Misleading login heading/labels and plain-text password field | High | BUG-SIM-002; login screenshot; FR-02, FR-22 |
+| Checkout total is editable | Medium | checkout screenshot; FR-08 says total is calculated automatically |
 
 ## Recommendations
 
-- Fix UTF-8 source/response handling and review rendered Vietnamese text end-to-end.
-- Correct login heading, Vietnamese labels, `type=email`, `type=password`, and localized submit label.
-- Derive payable total from server-side cart/prices and show read-only order totals.
-- Conduct the required moderated sessions with seven real eligible participants; collect SUS and open-ended answers directly before making human-centered conclusions.
+1. Correct UTF-8 rendering and review every visible label in Vietnamese.
+2. Correct login title, field labels, email/password input types, and localized action text.
+3. Calculate authoritative totals server-side and display a read-only breakdown including coupon savings.
+4. Make coupon validation errors actionable; show cart count, order number/status, and an explicit “Đăng xuất” control.
+5. Validate these priorities with real participants before treating persona frequency or SUS as evidence.
 
 ## SUS
 
-No SUS responses were collected. Mean, range, grade, and benchmark comparison are N/A.
+Scores appear in `sus-scoring.md`; they are generated from fictional response vectors. No empirical mean, usability grade, or confidence interval is available.
 
-## Bug reports
 
-See `../bug-reports/BUG-SIM-001.md` and `../bug-reports/BUG-SIM-002.md`. Findings are limited to inspected UI and automated evidence, not participant reports.
+The seven browser flows are simulated Playwright executions, not moderated sessions. The persona profiles, task reactions, interviews, and SUS values are all SIMULATED DATA. See `main-report.md` for methods, evidence index, and limitations.

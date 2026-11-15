@@ -1,6 +1,6 @@
-# Chỉ mục bằng chứng — P05 (SIMULATED)
+# Evidence index — P05 (**SIMULATED DATA**)
 
-Các tệp PNG là screenshot trực tiếp từ Playwright; WEBM được ghi bởi Playwright trong phiên chạy. Không chỉnh sửa bằng chứng.
+## Bằng chứng browser có thật từ Playwright
 
 - `../../evidence/session-recordings/P05-simulated.webm`
 - `../../evidence/screenshots/P05-01-login-home.png`
@@ -9,3 +9,7 @@ Các tệp PNG là screenshot trực tiếp từ Playwright; WEBM được ghi b
 - `../../evidence/screenshots/P05-04-checkout-success.png`
 - `../../evidence/screenshots/P05-05-order-history.png`
 - `../../evidence/screenshots/P05-06-logout.png`
+
+## Nội dung hư cấu
+
+Profile traits, verbalizations, hesitations, errors, interviews, and SUS responses are invented scenario data. The evidence above does not verify them.

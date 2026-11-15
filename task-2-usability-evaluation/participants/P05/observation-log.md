@@ -1,14 +1,21 @@
-# Nhật ký quan sát máy — P05
+# Observation log — P05 (**SIMULATED DATA**)
 
-> **SIMULATED — log sự kiện Playwright, không phải quan sát con người.**
+## A. Sự kiện được Playwright quan sát trực tiếp
 
-| Checkpoint | Kết quả tự động | Bằng chứng |
+| Checkpoint | Kết quả automation | Tệp screenshot |
 |---|---|---|
-| Login | PASS — form gửi và điều hướng về trang chủ | `P05-01-login-home.png` |
-| Cart | PASS — thêm sản phẩm và mở giỏ trong cùng SPA context | `P05-02-cart.png` |
-| Coupon | PASS — SAVE10 hiển thị phần tiết kiệm | `P05-03-coupon-checkout.png` |
-| Checkout | PASS — trang xác nhận thành công hiển thị | `P05-04-checkout-success.png` |
-| Verify order | PASS — lịch sử hiển thị mã đơn `#…` | `P05-05-order-history.png` |
-| Logout | PASS — token localStorage đã bị xóa | `P05-06-logout.png` |
+| Login | PASS | `P05-01-login-home.png` |
+| Cart | PASS | `P05-02-cart.png` |
+| Apply coupon | PASS | `P05-03-coupon-checkout.png` |
+| Checkout | PASS | `P05-04-checkout-success.png` |
+| Verify order | PASS | `P05-05-order-history.png` |
+| Logout | PASS — token localStorage bị xóa | `P05-06-logout.png` |
 
-Không có dữ liệu về hesitation, lỗi người dùng, yêu cầu trợ giúp, cảm xúc hoặc think-aloud.
+## B. Kịch bản hành vi tổng hợp (không phải quan sát thật)
+
+- Hesitation: Looks for a quantity badge in the header and scans the cart summary.
+- Error / recovery: No hypothetical error; notes that absent/unclear cart-count feedback could prompt a second check.
+- Think-aloud hư cấu: “I want an obvious cart count and a clear breakdown of savings.”
+- Hỗ trợ moderator / biểu hiện cảm xúc thật: Không có dữ liệu.
+
+Kịch bản B được tạo để minh họa một persona, không phải phân tích hành vi từ video ở phần A.

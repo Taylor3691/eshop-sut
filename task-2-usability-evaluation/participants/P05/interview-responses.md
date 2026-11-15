@@ -1,9 +1,9 @@
-# Phỏng vấn sau phiên — P05
+# Interview responses — P05 (**SIMULATED DATA**)
 
-> **SIMULATED run. Không có người được phỏng vấn.**
+> Các câu trả lời sau được sáng tác cho kịch bản persona; không phải phỏng vấn hoặc lời trích dẫn thật.
 
-- Clarity: NOT COLLECTED
-- Error recovery: NOT COLLECTED
-- Speed: NOT COLLECTED
-- Trust: NOT COLLECTED
-- Trích dẫn / câu trả lời: Không có.
+- **Clarity:** “I want an obvious cart count and a clear breakdown of savings.”
+- **Error recovery:** “I would return to the cart and check quantities if anything seemed off.”
+- **Speed:** “The simulated path is fast if navigation feedback is visible.”
+- **Trust:** “A clear order number and status would make me more comfortable.”
+- **Actual interview / recording / consent:** Không có.

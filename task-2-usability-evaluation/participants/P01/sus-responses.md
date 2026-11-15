@@ -1,7 +1,21 @@
-# SUS — P01
+# SUS responses — P01 (**SIMULATED DATA**)
 
-> **SIMULATED run. Không có người trả lời bảng hỏi.** Không điền phản hồi tổng hợp hoặc suy đoán từ kết quả automation.
+> Các mức 1–5 là phản hồi hư cấu để minh họa phép chấm SUS. Không có người trả lời thực.
 
-- Tình trạng: NOT COLLECTED
-- 10 câu trả lời (1–5): N/A
-- SUS score: N/A — không tính điểm từ dữ liệu không tồn tại.
+| # | SUS statement | Simulated response (1–5) |
+|---:|---|---:|
+| 1 | I think that I would like to use this system frequently. | 3 |
+| 2 | I found the system unnecessarily complex. | 3 |
+| 3 | I thought the system was easy to use. | 3 |
+| 4 | I think that I would need the support of a technical person to be able to use this system. | 2 |
+| 5 | I found the various functions in this system were well integrated. | 3 |
+| 6 | I thought there was too much inconsistency in this system. | 2 |
+| 7 | I would imagine that most people would learn to use this system very quickly. | 3 |
+| 8 | I found the system very cumbersome to use. | 2 |
+| 9 | I felt very confident using the system. | 3 |
+| 10 | I needed to learn a lot of things before I could get going with this system. | 3 |
+
+**Tính điểm:** câu lẻ trừ 1; câu chẵn tính 5 trừ đáp án; tổng hiệu chỉnh × 2.5.
+
+- Adjusted total: 23 / 40
+- **Illustrative SUS score: 57.5 / 100 (SIMULATED DATA; không phải kết quả nghiên cứu).**

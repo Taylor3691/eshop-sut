@@ -1,9 +1,9 @@
-# Phỏng vấn sau phiên — P02
+# Interview responses — P02 (**SIMULATED DATA**)
 
-> **SIMULATED run. Không có người được phỏng vấn.**
+> Các câu trả lời sau được sáng tác cho kịch bản persona; không phải phỏng vấn hoặc lời trích dẫn thật.
 
-- Clarity: NOT COLLECTED
-- Error recovery: NOT COLLECTED
-- Speed: NOT COLLECTED
-- Trust: NOT COLLECTED
-- Trích dẫn / câu trả lời: Không có.
+- **Clarity:** “The discount amount and final amount are the clearest feedback.”
+- **Error recovery:** “I would edit the code and apply it again if rejected.”
+- **Speed:** “The simulated task is quick once the cart is populated.”
+- **Trust:** “Seeing the order in history would reassure me, but I want the total to be read-only.”
+- **Actual interview / recording / consent:** Không có.

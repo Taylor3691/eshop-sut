@@ -1,14 +1,21 @@
-# Nhật ký quan sát máy — P06
+# Observation log — P06 (**SIMULATED DATA**)
 
-> **SIMULATED — log sự kiện Playwright, không phải quan sát con người.**
+## A. Sự kiện được Playwright quan sát trực tiếp
 
-| Checkpoint | Kết quả tự động | Bằng chứng |
+| Checkpoint | Kết quả automation | Tệp screenshot |
 |---|---|---|
-| Login | PASS — form gửi và điều hướng về trang chủ | `P06-01-login-home.png` |
-| Cart | PASS — thêm sản phẩm và mở giỏ trong cùng SPA context | `P06-02-cart.png` |
-| Coupon | PASS — SAVE10 hiển thị phần tiết kiệm | `P06-03-coupon-checkout.png` |
-| Checkout | PASS — trang xác nhận thành công hiển thị | `P06-04-checkout-success.png` |
-| Verify order | PASS — lịch sử hiển thị mã đơn `#…` | `P06-05-order-history.png` |
-| Logout | PASS — token localStorage đã bị xóa | `P06-06-logout.png` |
+| Login | PASS | `P06-01-login-home.png` |
+| Cart | PASS | `P06-02-cart.png` |
+| Apply coupon | PASS | `P06-03-coupon-checkout.png` |
+| Checkout | PASS | `P06-04-checkout-success.png` |
+| Verify order | PASS | `P06-05-order-history.png` |
+| Logout | PASS — token localStorage bị xóa | `P06-06-logout.png` |
 
-Không có dữ liệu về hesitation, lỗi người dùng, yêu cầu trợ giúp, cảm xúc hoặc think-aloud.
+## B. Kịch bản hành vi tổng hợp (không phải quan sát thật)
+
+- Hesitation: At coupon feedback and the final confirm-payment action.
+- Error / recovery: Hypothetically mistypes the coupon once, sees an error, re-enters it, and continues.
+- Think-aloud hư cấu: “I need the final amount and the words on the buttons to be easy to understand.”
+- Hỗ trợ moderator / biểu hiện cảm xúc thật: Không có dữ liệu.
+
+Kịch bản B được tạo để minh họa một persona, không phải phân tích hành vi từ video ở phần A.

@@ -1,9 +1,9 @@
-# Phỏng vấn sau phiên — P04
+# Interview responses — P04 (**SIMULATED DATA**)
 
-> **SIMULATED run. Không có người được phỏng vấn.**
+> Các câu trả lời sau được sáng tác cho kịch bản persona; không phải phỏng vấn hoặc lời trích dẫn thật.
 
-- Clarity: NOT COLLECTED
-- Error recovery: NOT COLLECTED
-- Speed: NOT COLLECTED
-- Trust: NOT COLLECTED
-- Trích dẫn / câu trả lời: Không có.
+- **Clarity:** “The item list is useful, but the editable total makes the calculation feel ambiguous.”
+- **Error recovery:** “I would go back to the cart to compare if the total looked wrong.”
+- **Speed:** “Most screens seem quick; checking price arithmetic adds time.”
+- **Trust:** “I would trust the order history more than an editable checkout amount.”
+- **Actual interview / recording / consent:** Không có.

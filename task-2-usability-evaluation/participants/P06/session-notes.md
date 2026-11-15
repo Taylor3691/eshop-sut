@@ -1,14 +1,13 @@
-# Ghi chú phiên automation — P06
+# Ghi chú phiên — P06 (**SIMULATED DATA**)
 
-> **SIMULATED Playwright run; không phải usability session có người.** Không có think-aloud, moderator, phản ứng cảm xúc hay hành vi người dùng được quan sát.
+> Nội dung think-aloud và hành vi dưới đây là kịch bản hư cấu. Chúng **không** được nghe, quan sát hay trích xuất từ video Playwright. Video chỉ ghi lại thao tác tự động.
 
-- Persona label: Nguyễn Minh Tú, 21 tuổi, sinh viên (theo yêu cầu)
-- Ngày chạy: 2026-11-15
-- Hình thức: Chromium headless, Playwright; viewport 1280×800
-- Consent / moderator: N/A
-- Trạng thái tổng quát: Tất cả checkpoint tự động báo PASS.
-- Kết quả checkpoint: login:PASS, cart:PASS, coupon:PASS, checkout:PASS, verify-order:PASS, logout:PASS
-- Thời gian usability / hesitation / hỗ trợ: Không đo; automation không đại diện cho tốc độ hay nỗ lực của người.
-- Phát biểu người tham gia: Không có.
-- Giới hạn: giỏ hàng được thêm bằng UI sau đăng nhập để giữ state; người dùng automation không suy nghĩ thành tiếng.
-- Bằng chứng: `../../evidence/screenshots/P06-*.png`; `../../evidence/session-recordings/P06-simulated.webm`.
+- **Persona:** Nguyễn Minh Tú, 21 tuổi, sinh viên; đặc điểm giả định trong hồ sơ.
+- **Run thực tế:** Playwright Chromium, 2026-11-15; kết quả kỹ thuật: login:PASS, cart:PASS, coupon:PASS, checkout:PASS, verify-order:PASS, logout:PASS.
+- **Kịch bản hành vi hư cấu:** She reads each page carefully, checks whether the coupon applied, then waits for a clear success signal before considering the task complete.
+- **Điểm ngập ngừng giả định:** At coupon feedback and the final confirm-payment action.
+- **Lỗi / phục hồi giả định:** Hypothetically mistypes the coupon once, sees an error, re-enters it, and continues.
+- **Lời nói mô phỏng:** “I need the final amount and the words on the buttons to be easy to understand.” (câu hư cấu, không phải verbatim thật).
+- **Consent / moderator / âm thanh:** N/A; không có participant.
+- **Thời lượng usability:** Không đo người thật. Thời gian chạy tự động không được diễn giải là thời gian người dùng.
+- **Evidence:** Playwright state capture tại `../../evidence/screenshots/P06-*.png`; video `../../evidence/session-recordings/P06-simulated.webm`. Không dùng chúng làm bằng chứng rằng persona đã nói/hành xử như trên.

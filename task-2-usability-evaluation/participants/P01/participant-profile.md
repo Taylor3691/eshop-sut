@@ -1,11 +1,11 @@
-# Hồ sơ persona mô phỏng — P01
+# Persona mô phỏng — P01
 
-> **SIMULATED — không phải người tham gia thật.** Tên được cung cấp trong yêu cầu chỉ dùng làm nhãn persona. Không tuyển dụng, liên hệ, xác minh danh tính hoặc thu thập dữ liệu cá nhân.
+> **SIMULATED DATA — hồ sơ hư cấu, không mô tả người thật.** Tên, tuổi 21 và bối cảnh sinh viên được cung cấp trong yêu cầu. Các đặc điểm dưới đây được sáng tác để tạo các kịch bản khác nhau.
 
 - **Tên nhãn:** Phạm Bảo Huy
-- **Tuổi theo chỉ định:** 21
-- **Bối cảnh theo chỉ định:** sinh viên
-- **Ngày chạy automation:** 2026-11-15
-- **Đặc điểm khác / kinh nghiệm mua sắm:** Không có dữ liệu; không suy đoán.
-- **Thông tin liên hệ:** Không có — đây không phải hồ sơ người thật.
-- **Consent:** Không áp dụng; automation không phải participant.
+- **Tuổi / bối cảnh:** 21 / sinh viên
+- **Hướng học tập hư cấu:** business studies
+- **Thói quen mua sắm giả định:** occasional online shopper
+- **Mức tự tin giả định:** low
+- **Đặc điểm hành vi giả định:** checks labels carefully
+- **Liên hệ / consent:** N/A — persona hư cấu; không có cá nhân được tuyển dụng hoặc liên hệ.
