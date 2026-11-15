@@ -1,0 +1,27 @@
+=== PHIÊN: P1 ===
+Ngày giờ: DD/MM/YYYY HH:MM
+Thiết bị/trình duyệt: <trình duyệt, kích thước cửa sổ, bấm trực tiếp / điều khiển từ xa qua ..., địa điểm>
+Bắt đầu: HH:MM:SS
+Kết thúc: HH:MM:SS
+=== BƯỚC ===
+B1 <Tên bước>: <Y|A|N> | <giây> | <số lỗi> | <số lần trợ giúp> | <ghi chú>
+B2 <Tên bước>: Y | 0 | 0 | 0 |
+=== QUAN SÁT ===
+mm:ss | B1 | <hành vi> | "<lời nói nguyên văn>" | <H|E|F> | <1|2|3>
+=== SUS ===
+q1, q2, q3, q4, q5, q6, q7, q8, q9, q10
+=== PROBE ===
+C1 | "<trả lời nguyên văn>"
+E1 | "<trả lời nguyên văn>"
+S1 | "<trả lời nguyên văn>"
+T1 | "<trả lời nguyên văn>"
+W1 | "<trả lời nguyên văn>"
+
+# Ghi chú cách điền phiếu (xóa khi dùng):
+# - Mỗi phiên bắt đầu bằng "=== PHIÊN: <mã> ===". Dùng "Pilot" cho phiên thử.
+# - Có thể thêm dòng "Hoàn thành task: Có / Có trợ giúp / Không" ở phần đầu.
+# - Tổng giây các bước phải bằng Kết thúc − Bắt đầu (bấm giờ liên tục).
+# - Mốc mm:ss của quan sát tính từ lúc bắt đầu scenario.
+# - Loại: H = hesitation, E = error, F = friction (không dùng F cho frustration).
+# - Mức độ: 1 nhẹ, 2 vừa, 3 nặng (làm hỏng bước hoặc lưu sai dữ liệu).
+# - Ô nào không có thông tin thì để trống, script không tự điền.

@@ -614,6 +614,88 @@ Chỉ chép, không thêm, không sửa lời nguyên văn. Ô nào trong phiế
 
 ---
 
+## #40 — Thiết kế Agent Skills cho GUI checklist và usability evaluation
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 23:30
+- **Prompt:** hãy thiết kế skill dựa trên phần đề xuất
+- **AI output:**
+  - Tạo 3 skill theo định dạng Agent Skills (SKILL.md có frontmatter `name`, `description`), rút từ quy trình Task 1 và Task 2 đã làm, có điểm dừng để người kiểm thử quyết định (giải đáp đặc tả, lọc checklist, chấm Pass/Fail, duyệt issue, xác nhận dữ liệu phiên)
+  - `gui-checklist`: 6 bước (bảng thành phần → AI sinh nháp → người lọc và bổ sung → Playwright ghi quan sát → người chấm, điền Excel → gom bug, tạo issue); tài liệu phương pháp (chủ đề theo IA, cách viết mục, 11 khía cạnh AI hay bỏ sót, tiêu chí lọc, gộp bug, severity/priority); prompt mẫu; template xlsx trống, ui-inventory, BUG; script `run-checklist.mjs` (harness Playwright tổng quát, chèn ghi chú vào ảnh, chạy lại theo ONLY), `checks.example.mjs` (3 mục mẫu), `fill_results.py`
+  - `usability-eval`: 5 bước (plan → pilot → chép phiên → phân tích → ghi bug); tài liệu phương pháp (lý do SUS, viết scenario, điều phối, ghi quan sát, phân tích, severity Nielsen, ghi bug, bảo vệ dữ liệu người tham gia); template plan, phiếu ghi, notes, participants, analysis, xlsx SUS trống; script `slip_to_notes.py`, `check_sessions.py`, `analyze.py`, `notes_lib.py`
+  - `ai-audit-log`: bản tổng quát của rule ghi log trong `CLAUDE.md`
+  - Kiểm chứng trên dữ liệu HW03: `run-checklist.mjs` chạy 3 mục mẫu trên SUT, quan sát đúng; `fill_results.py` tái tạo cột Kết quả/Notes/Screenshot khớp 100% với `checklist.xlsx` (26/44, 77 ảnh); `slip_to_notes.py` chép lại phiếu P2–P7 (có dòng bị ngắt) ra notes giống hệt 6/6 file và xlsx khớp 100%; `check_sessions.py` báo đúng B2 của P7; `analyze.py` ra SUS 56.07, SD 13.98, CI 43.1–69.0 và các bảng khớp `analysis.md`
+  - README của thư mục skills: cách cài, yêu cầu, bảng kiểm chứng, chỗ trống cho link video demo
+  - File: `submission/skills/README.md`, `submission/skills/gui-checklist/` (SKILL.md, references/, templates/, scripts/), `submission/skills/usability-eval/` (SKILL.md, references/, templates/, scripts/), `submission/skills/ai-audit-log/SKILL.md`
+
+---
+
+## #41 — Chạy skill gui-checklist cho màn Quản lý Đơn hàng (demo)
+
+- **AI tool:** Claude Code (Fable 5.2)
+- **Date & time:** 2026-11-15 23:52
+- **Prompt:** /gui-checklist Kiểm thử GUI màn Quản lý Đơn hàng của EShop Web Admin
+(http://localhost:5174, admin@eshop.com / Admin123!). Đây là màn hình mới, chưa có trong Task 1.
+- Đặc tả: README.md mục FR-10, FR-18, FR-21 → FR-24. Code: frontend-admin/src/App.jsx.
+- Đầu ra: demo/orders-checklist/. Playwright: scripts/node_modules/playwright-core, Chrome.
+- Giải đáp sẵn cho các điểm đặc tả không rõ: nút Hủy đơn là nút nguy hiểm, phải màu đỏ và có hộp thoại
+  xác nhận; đơn "Đã hủy" và "Đã giao" là trạng thái kết thúc, không được còn nút chuyển trạng thái;
+  tiền theo định dạng vi-VN; các điểm khác dùng giải đáp trong submission/task1-checklist/ui-inventory.md.
+Chạy đủ 6 bước của skill liền một lượt: ở bước lọc, tự đề xuất mục loại và mục AI bỏ sót kèm lý do;
+ở bước chấm, ghi "Gợi ý kết quả" rồi điền Excel theo gợi ý và đánh dấu rõ là chờ tôi kiểm chứng.
+Gom bug, kiểm trùng với submission/bugs/README.md. Dừng trước khi tạo GitHub issue và
+cho tôi xem bản nháp issue. Cuối cùng ghi một mục AI Audit Log.
+- **AI output:**
+  - Bước 1: bảng thành phần màn Đơn hàng (3 dòng khung chung, 16 dòng của màn), 9 điểm đặc tả không rõ; ghi nguyên văn giải đáp thành GĐ 1–3, các điểm còn lại dẫn về giải đáp Task 1 (T1-GĐ n)
+  - Bước 2: bản nháp 32 mục (IA-01: 13, IA-02: 2, IA-03: 5, IA-04: 12); các chủ đề form, breadcrumb, ảnh ghi N/A
+  - Bước 3: đề xuất loại 6 mục, gộp 4 mục, còn 22 mục; đề xuất 6 mục bổ sung kèm lý do AI bỏ sót (dữ liệu dài, 768px, zoom 200%, tương phản, kích thước và khoảng cách nút, trình đọc màn hình); tổng 28 mục, đưa vào `checklist.xlsx`
+  - Bước 4: reset SUT, seed 12 đơn đủ 5 trạng thái, chạy 28 mục bằng Playwright (Chrome 157.0.8103.79), 35 ảnh; bảng rỗng, tải chậm và lỗi tải được giả lập bằng chặn request
+  - Bước 5: gợi ý 10 Passed, 17 Failed, 1 mục cần kiểm tay (GUI-04-09); điền Excel theo gợi ý, mỗi dòng Notes có nhãn "[AI gợi ý, chờ kiểm chứng]"; chép 23 ảnh của mục Failed sang `screenshots/failed/`
+  - Bước 6: 17 mục Failed gom thành 2 nguyên nhân mới (BUG-36 địa chỉ render HTML, chạy được script ở phiên admin, Critical; BUG-37 đơn "Đã hủy" còn nút "Đánh dấu Đã giao", trùng issue #17 của repo) và 15 mục trùng nguyên nhân với 12 bug đã có (BUG-06, 13, 14, 15, 19, 20, 22, 25, 26, 27, 28, 29, 35)
+  - Dừng trước khi tạo issue: bản nháp 1 issue mới (BUG-36) và 14 comment bổ sung cho issue cũ nằm trong `issue-drafts.md`; chưa tạo gì trên GitHub, chưa sửa `submission/bugs/`
+  - File: `demo/orders-checklist/` gồm `ui-inventory.md`, `checklist-draft.md`, `checklist-filtered.md`, `checklist.xlsx`, `execution-observations.md`, `issue-drafts.md`, `bugs/BUG-36.md`, `bugs/BUG-37.md`, `bugs/README.md`, `seed-orders.mjs`, `checks.mjs`, `run.config.json`, `prefill-from-hints.py`, `build_xlsx.py`, `screenshots/run/`, `screenshots/failed/`
+
+---
+
+## #42 — Điền họ tên, MSSV, link video demo vào README
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-16 00:08
+- **Prompt:** link ytb https://www.youtube.com/watch?v=G0unHBjML7w
+họ tên Huỳnh Thái Toàn
+mssv 23120175
+- **AI output:**
+  - `submission/README.md`: tiêu đề có họ tên và MSSV; ô Demo video có link YouTube; điền ô SUS trung bình (56.07, SD 13.98, n = 7) còn để trống; sửa số issue mới từ 25 thành 27 (#126–#150 Task 1, #188–#189 Task 2)
+  - `submission/skills/README.md`: điền link video, thay đoạn gợi ý kịch bản bằng tóm tắt nội dung demo theo mục #41
+  - Ghi nhận: lần chạy demo (mục #41) tìm ra BUG-36 (địa chỉ giao hàng render HTML, chạy được script ở phiên admin, Critical) chưa có trong `submission/bugs/`; thư mục `demo/` và `.claude/` chưa được commit
+  - File: `submission/README.md`, `submission/skills/README.md`
+
+---
+
+## #43 — Viết mục 1, 5, 6, Phụ lục báo cáo chính và nháp AI Critique
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-16 00:13
+- **Prompt:** ok
+- **AI output:**
+  - Báo cáo chính: thêm dòng họ tên / MSSV / nhánh; mục 1 (SUT, phạm vi từng task và lý do chọn Web Admin, căn cứ kiểm thử, môi trường, công cụ, bảng tổng hợp số liệu); mục 5 (3 skill, nguyên tắc thiết kế, kiểm chứng trên dữ liệu HW03, video demo và kết quả lần chạy demo); mục 6 (kết luận Task 1–3, ưu tiên sửa, nhận xét về cộng tác với AI); Phụ lục (bảng trỏ tới audit log, critique, git log, checklist, bug, usability, ảnh cross-browser, skills)
+  - `ai/ai-critique.md`: bản nháp khoảng 280 từ trả lời 3 câu, dựa trên audit log (12 mục AI bỏ sót, 5 mục đo sai ở lần chạy đầu, các lần AI "lấp chỗ trống" ở Task 2); có dòng comment đánh dấu là bản nháp để sinh viên sửa
+  - File: `submission/report/main-report.md`, `submission/ai/ai-critique.md`
+
+---
+
+## #44 — Commit báo cáo, README, AI Critique và Agent Skills
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-16 00:23
+- **Prompt:** commit đi
+- **AI output:**
+  - Commit báo cáo chính (mục 1, 5, 6, Phụ lục), README (họ tên, MSSV, video, SUS, Self-Assessed 96), AI Critique, audit log và thư mục `submission/skills/` (3 skill), push nhánh `hw03/toanhuynh`
+  - Không commit `backend/database.sqlite`, `.claude/` và `demo/` (người dùng chưa quyết định đưa `demo/` vào bài nộp); chưa ghi BUG-36
+  - File: `submission/report/main-report.md`, `submission/README.md`, `submission/ai/ai-critique.md`, `submission/ai/ai-audit-log.md`, `submission/skills/`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>

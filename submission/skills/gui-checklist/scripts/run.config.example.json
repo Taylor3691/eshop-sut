@@ -1,0 +1,19 @@
+{
+  "title": "EShop Web Admin",
+  "baseUrl": "http://localhost:5174",
+  "checklist": "checklist-filtered.md",
+  "idPattern": "GUI-\\d\\d-\\d\\d",
+  "checks": "checks.mjs",
+  "outDir": ".",
+  "chrome": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "headless": true,
+  "viewport": { "width": 1366, "height": 768 },
+  "locale": "vi-VN",
+  "tabs": ["Dashboard", "Danh mục", "Sản phẩm", "Mã Giảm Giá"],
+  "login": {
+    "url": "http://localhost:5174",
+    "fields": { "input[placeholder=\"Email\"]": "admin@eshop.com", "input[placeholder=\"Password\"]": "Admin123!" },
+    "submit": "form button",
+    "waitFor": "text=EShop Admin"
+  }
+}

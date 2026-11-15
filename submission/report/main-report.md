@@ -1,6 +1,46 @@
 # Main Report — HW03 GUI & Usability
 
+**Sinh viên:** Huỳnh Thái Toàn — 23120175 · **Nhánh:** `hw03/toanhuynh` (repo `Taylor3691/eshop-sut`)
+
 ## 1. Giới thiệu & phạm vi
+
+**SUT:** EShop, ứng dụng thương mại điện tử mẫu dùng cho thực hành kiểm thử. Bài này kiểm thử phân hệ **Web Admin** (http://localhost:5174), có backend API ở cổng 3000. Toàn bộ giao diện admin nằm trong một file `frontend-admin/src/App.jsx`: một URL duy nhất, các màn hình đổi theo tab trên sidebar.
+
+**Phạm vi:** đã đăng ký ở tab "Th.Toàn" trong tài liệu chung của nhóm. Các thành viên khác đã chọn màn hình phía người dùng (Chi tiết sản phẩm, Giỏ hàng, Đăng nhập), nên phạm vi này chọn Web Admin để không trùng.
+
+| Task | Phạm vi |
+|---|---|
+| Task 1 — GUI Checklist | Màn hình chính **Quản lý Sản phẩm** (danh sách, thêm, sửa, xóa, Import CSV); màn hình phụ Admin Login, Dashboard, Quản lý Danh mục, Quản lý Mã giảm giá |
+| Task 2 — Usability | Flow của chủ shop: Đăng nhập Admin → Tạo danh mục → Thêm sản phẩm → Tạo mã giảm giá → Cập nhật trạng thái đơn đang chờ → Đăng xuất |
+| Task 3 — Cross-Browser | Các mục Task 1 có thể khác nhau giữa trình duyệt, chạy trên Chrome, Firefox, Safari (macOS) |
+| Agent Skills | Skill `gui-checklist`, `usability-eval`, `ai-audit-log`, kèm video demo trên màn Quản lý Đơn hàng |
+
+**Căn cứ kiểm thử:**
+- Đặc tả trong `README.md` của SUT: FR-10, FR-12 → FR-18, FR-21 → FR-24, SEC-04.
+- Bốn nhóm giao diện IA-01 → IA-04 trong đề.
+- 15 giải đáp của người kiểm thử cho các điểm đặc tả không nói rõ (`task1-checklist/ui-inventory.md`, ký hiệu GĐ 1–15).
+- Best practice có tên: Nielsen, WCAG.
+
+**Môi trường:**
+- macOS 27.2, Google Chrome 157 (Task 1, 2), Firefox 153.0.4 và Safari 27.2 (Task 3).
+- Dữ liệu được reset trước mỗi lần chạy bằng `scripts/start-sut.sh` (tạo lại CSDL mẫu) và `scripts/seed-hw03.sh 3` (3 đơn chờ duyệt).
+
+**Công cụ:**
+- Claude Code (Claude Opus 5.5; Fable 5.2 ở lần chạy demo skill), Codex qua Orca (thao tác trình duyệt ở Task 3).
+- Playwright (`playwright-core`) để chạy checklist và tái hiện bug, `gh` CLI để tạo GitHub issue, Microsoft Excel.
+- Mọi lần dùng AI được ghi trong AI Audit Report (`ai/ai-audit-log.md`).
+
+**Tổng hợp kết quả:**
+
+| Chỉ số | Giá trị |
+|---|---|
+| Màn hình (Task 1) / flow (Task 2) | 5 / 1 |
+| Checklist: designed / executed / passed / failed | 70 / 70 / 26 / 44 (58 mục từ AI, 12 mục tự thêm) |
+| Bug | 35 (17 Major, 14 Minor, 4 Trivial): 33 từ Task 1, 2 từ Task 2; 0 bug mới từ Task 3 (2 khác biệt bổ sung vào BUG-19, BUG-31) |
+| GitHub Issues | 27 issue mới (#126–#150, #188–#189) và 10 issue cũ bị trùng |
+| Người tham gia | 7 người, cộng 1 pilot |
+| SUS trung bình | 56.07 (SD 13.98), vùng Marginal |
+| Nền tảng (Task 3) | 3: Chrome, Firefox, Safari trên macOS |
 ## 2. Task 1 — GUI Checklist
 
 **Phạm vi:** 5 màn hình của EShop Web Admin (http://localhost:5174). Màn hình chính là Quản lý Sản phẩm (danh sách, thêm, sửa, xóa, Import CSV); các màn hình phụ là Admin Login, Dashboard, Quản lý Danh mục và Quản lý Mã giảm giá.
@@ -345,5 +385,56 @@ Nhập 100000 vào ô Giá, giữ con trỏ trên ô và cuộn chuột lên 3 n
 
 Không có bug mới chỉ xuất hiện trên Firefox hoặc Safari; hai khác biệt trên được ghi bổ sung vào bug đã có từ Task 1 thay vì tạo bug trùng.
 ## 5. Agent Skills
+
+Thư mục `skills/` đóng gói lại cách làm Task 1 và Task 2 thành 3 skill theo định dạng Agent Skills của Claude Code, để dùng lại cho màn hình và flow khác. Hướng dẫn cài đặt nằm trong `skills/README.md`.
+
+| Skill | Các bước | Công cụ kèm theo |
+|---|---|---|
+| `gui-checklist` | 6 bước: (1) bảng thành phần giao diện và các điểm đặc tả không rõ, (2) AI sinh bản nháp theo IA-01 → IA-04, (3) người kiểm thử lọc và thêm mục AI bỏ sót, (4) Playwright chạy, chỉ ghi quan sát, (5) người kiểm thử chấm Pass/Fail và điền Excel, (6) gom bug theo nguyên nhân, kiểm trùng, tạo issue | Tài liệu phương pháp (11 khía cạnh AI hay bỏ sót, tiêu chí lọc, quy tắc gộp bug); prompt mẫu; template xlsx, ui-inventory, BUG; `run-checklist.mjs`, `checks.example.mjs`, `fill_results.py` |
+| `usability-eval` | 5 bước: (1) kế hoạch, scenario, SUS, probe, (2) pilot, (3) chép từng phiên và kiểm dữ liệu, (4) phân tích (SUS, chỉ số theo bước, gom nhóm vấn đề, severity Nielsen), (5) tái hiện và ghi bug | Tài liệu phương pháp (scenario, điều phối, ghi quan sát, severity, khi nào ghi bug); template plan, phiếu ghi, notes, participants, analysis, xlsx; `slip_to_notes.py`, `check_sessions.py`, `analyze.py` |
+| `ai-audit-log` | Sau mỗi yêu cầu, ghi một mục gồm AI tool, ngày giờ, prompt nguyên văn, AI output | Rule tương ứng trong `CLAUDE.md` của dự án |
+
+**Nguyên tắc thiết kế:**
+- **Điểm dừng cho người kiểm thử (⛔).** AI không tự giải đáp đặc tả, không tự chấm Pass/Fail, không tạo issue khi chưa được duyệt, không tự sửa dữ liệu phiên bất thường.
+- **Không tạo dữ liệu thật.** AI không sinh người tham gia, lời nói, điểm SUS hay kết quả kiểm thử.
+- **Số liệu đọc lại từ file.** Có script kiểm tính nhất quán trước khi phân tích.
+
+**Kiểm chứng trên dữ liệu HW03:**
+- `fill_results.py` tạo lại đúng cột Kết quả / Notes / Screenshot của `checklist.xlsx` (26 Passed / 44 Failed, 77 ảnh).
+- `slip_to_notes.py` chép lại phiếu P2–P7 ra notes giống hệt cả 6 file, xlsx khớp 100%.
+- `check_sessions.py` phát hiện đúng điểm B2 của P7 vượt thời gian tối đa.
+- `analyze.py` ra cùng số liệu với `analysis.md` (SUS 56.07, SD 13.98, CI 43.1–69.0).
+
+**Video demo:** https://www.youtube.com/watch?v=G0unHBjML7w. Video dùng `gui-checklist` trên màn **Quản lý Đơn hàng** (không thuộc phạm vi Task 1), chạy đủ 6 bước bằng một prompt (AI Audit Log mục #41):
+- Lập bảng thành phần giao diện, có 9 điểm đặc tả không rõ.
+- Sinh bản nháp 32 mục; sau khi lọc và bổ sung còn 28 mục.
+- Playwright chụp 35 ảnh; kết quả gợi ý 10 Passed, 17 Failed, đánh dấu "chờ kiểm chứng".
+- Gom bug và kiểm trùng: 2 nguyên nhân mới, 15 mục trùng nguyên nhân với bug đã có.
+- Dừng ở bản nháp issue, chưa tạo issue nào trên GitHub.
+
+Kết quả demo chỉ dùng để minh họa skill, không tính vào số liệu Task 1.
+
 ## 6. Kết luận
+
+- **Task 1:** checklist 70 mục phủ đủ IA-01 → IA-04, pass rate 37.1%. Form (IA-02) yếu nhất: không có nhãn, ô có giá trị sẵn, gần như không kiểm tra dữ liệu. Phản hồi (IA-04) thiếu xác nhận khi xóa, thiếu trạng thái tải, lỗi hiện dạng chuỗi kỹ thuật. Điều hướng (IA-03) tốt nhất. 44 mục Failed gom thành 33 bug.
+- **Task 2:** 6/7 người hoàn thành cả flow mà không cần trợ giúp, nhưng SUS chỉ đạt 56.07 (dưới mốc 68). Hai bước tắc nhất là thêm sản phẩm và tạo mã giảm giá. Hai vấn đề chặn hoàn thành task đều thuộc form: ô có sẵn 0 / 1 không có nhãn (severity 4) và danh mục chọn sẵn (severity 3). Bảng sản phẩm không có cột danh mục nên người dùng không phát hiện được dữ liệu đã lưu sai. Phiên usability xác nhận bằng hành vi thật 4 bug đã tìm thấy ở Task 1, và tìm thêm 2 bug mới.
+- **Task 3:** hành vi giống nhau trên Chrome, Firefox và Safari, trừ 2 khác biệt (định dạng tiền theo ngôn ngữ trình duyệt; cuộn chuột đổi giá trị ô số chỉ trên Chrome). Cả hai được bổ sung vào bug đã có.
+- **Ưu tiên sửa:**
+  1. Thêm nhãn luôn hiện cho mọi ô và bỏ giá trị có sẵn.
+  2. Kiểm tra dữ liệu và báo lỗi bằng tiếng Việt ngay trong form.
+  3. Hiện lại đủ dữ liệu đã lưu (cột danh mục).
+  4. Hỏi xác nhận trước khi xóa hoặc hủy.
+- **Về cộng tác với AI:** AI làm nhanh và tốt các phần có cấu trúc: liệt kê thành phần giao diện, sinh bản nháp, viết script, tính toán, kiểm tính nhất quán. Các phần cần phán đoán vẫn phải do người kiểm thử giữ: giải đáp đặc tả, chấm Pass/Fail, dữ liệu phiên, quyết định ghi bug. Chi tiết trong AI Critique.
+
 ## Phụ lục: AI Audit Report, AI Critique, Git log
+
+| Tài liệu | File |
+|---|---|
+| AI Audit Report: mỗi yêu cầu một mục, gồm AI tool, ngày giờ, prompt, AI output | `ai/ai-audit-log.md` (bản PDF cùng tên) |
+| AI Critique (200–300 từ) | `ai/ai-critique.md` (bản PDF cùng tên) |
+| Git commit log | `git-log.txt` |
+| Checklist Excel và test summary | `task1-checklist/checklist.xlsx` |
+| Bug report | `bugs/README.md`, `bugs/BUG-01.md` → `BUG-35.md`; issue nhãn `hw03` trên GitHub |
+| Bằng chứng usability | `task2-usability/` (plan, participants, pilot, sessions P1–P7, `sus-and-metrics.xlsx`, `analysis.md`) |
+| Ảnh cross-browser | `task3-crossplatform/` (chrome, firefox, safari, browserstack) |
+| Agent Skills | `skills/` |
