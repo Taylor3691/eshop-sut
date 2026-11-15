@@ -87,7 +87,7 @@ Người tham gia **không thấy cần hỗ trợ kỹ thuật hay phải học
 - **B6:** mọi người đều vượt mục tiêu 30 giây. P3 cần một gợi ý mức 2 mới tìm thấy nút Đăng xuất (I7).
 - **Tổng cộng 80 dòng quan sát:** 55 H, 13 F, 12 E. Mức độ: 37 dòng mức 1, 39 dòng mức 2, 4 dòng mức 3. Cả 4 dòng mức 3 đều thuộc form sản phẩm và form mã giảm giá (P3 06:40, P3 08:20, P3 11:05, P7 09:50).
 
-> **Ghi chú dữ liệu:** B2 của P7 mất 200 giây, vượt thời gian tối đa 180 giây (`plan.md` mục 2) nhưng phiếu ghi là **Y**. Bảng trên giữ nguyên như phiếu, người điều phối cần xác nhận lại.
+> **Ghi chú dữ liệu:** B2 của P7 mất 200 giây, vượt thời gian tối đa 180 giây (`plan.md` mục 2) nhưng phiếu ghi là **Y**. Người điều phối đã xem lại và quyết định giữ **Y**, vì P7 vẫn tự hoàn thành bước này đúng tiêu chí mà không cần trợ giúp.
 
 ---
 

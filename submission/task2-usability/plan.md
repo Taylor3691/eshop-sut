@@ -4,7 +4,7 @@
 - **Hình thức:** đánh giá có điều phối (moderated), mẫu nhỏ: 7 người tham gia (P1–P7) + 1 phiên pilot, mỗi người một phiên, nói to suy nghĩ (think-aloud)
 - **Flow:** Đăng nhập Admin → Tạo danh mục → Thêm sản phẩm → Tạo mã giảm giá → Cập nhật trạng thái đơn đang chờ → Đăng xuất (theo `submission/README.md`)
 - **Công cụ đo:** SUS (sau phiên) + chỉ số theo bước (hoàn thành, thời gian, lỗi, số lần trợ giúp) + câu hỏi probe
-- **Ghi nhận:** không quay màn hình; người điều phối ghi phiếu ghi chép trong phiên (mốc thời gian, hành vi, lời nói nguyên văn), chép vào `session-notes-TEMPLATE.md`, nhập số liệu vào `sus-and-metrics.xlsx`
+- **Ghi nhận:** không quay màn hình (người tham gia không muốn chia sẻ bản ghi màn hình); người điều phối ghi phiếu ghi chép trong phiên (mốc thời gian, hành vi, lời nói nguyên văn), chép vào `session-notes-TEMPLATE.md`, nhập số liệu vào `sus-and-metrics.xlsx`
 
 ---
 

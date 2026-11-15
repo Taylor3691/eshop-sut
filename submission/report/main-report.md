@@ -7,6 +7,133 @@
 ### 2.3 Kết quả thực thi
 ### 2.4 Bug
 ## 3. Task 2 — Usability Evaluation
+
+Đánh giá có người điều phối (moderated), mẫu nhỏ: 7 người tham gia (P1–P7), mỗi người một phiên, nói to suy nghĩ trong lúc làm (think-aloud), cộng thêm 1 phiên pilot. Tất cả các phiên diễn ra ngày 15/11/2026 trên EShop Web Admin (http://localhost:5174). Tài liệu chi tiết nằm trong `task2-usability/`: `plan.md` (kế hoạch, công cụ đo), `participants.md`, `pilot/notes.md`, `sessions/P1–P7/notes.md`, `sus-and-metrics.xlsx`, `analysis.md`.
+
+### 3.1 Mục tiêu và flow
+
+**Câu hỏi chính:** một chủ shop lần đầu dùng EShop Admin có tự đưa được mặt hàng mới lên bán, tạo khuyến mãi và xử lý đơn mà không cần ai hướng dẫn không, và họ tự tin đến đâu? Câu hỏi này được tách thành 6 mục tiêu O1–O6 (`plan.md` mục 1): tỉ lệ hoàn thành, điểm nghẽn điều hướng, độ rõ của form, khả năng nhận ra và sửa lỗi, niềm tin rằng thao tác đã thành công, và điểm SUS so với mốc 68.
+
+**Flow:** B1 Đăng nhập → B2 Tạo danh mục → B3 Thêm sản phẩm → B4 Tạo mã giảm giá → B5 Cập nhật trạng thái đơn đang chờ → B6 Đăng xuất. Mỗi bước có tiêu chí hoàn thành kiểm được trên giao diện, thời gian mục tiêu và thời gian tối đa (`plan.md` mục 2). Ví dụ: ở B3, sản phẩm phải thuộc danh mục "Đồ mùa đông", không phải danh mục chọn sẵn; ở B6, chỉ đóng tab thì tính là không đạt.
+
+### 3.2 Task scenario
+
+Người tham gia nhận một **mục tiêu**, không nhận các bước cần bấm:
+
+> Anh/chị là chủ một cửa hàng thời trang nhỏ đang bán online trên trang EShop. Trời bắt đầu lạnh, anh/chị muốn mở bán một nhóm hàng mùa đông mới, tung một chương trình khuyến mãi để kéo khách, đồng thời xử lý một đơn khách vừa đặt đang chờ anh/chị duyệt. […] Khi xong việc, rời khỏi trang quản trị sao cho người khác dùng chung máy không vào được tài khoản của anh/chị.
+
+Dữ liệu cần nhập in trên một **thẻ thông tin**: tài khoản; nhóm hàng "Đồ mùa đông"; "Áo khoác lông vũ" giá 890.000 ₫; mã WINTER15 giảm 15% cho đơn từ 500.000 ₫, hạn 31/12/2026, mỗi khách 2 lần; đơn giao tới 45 Lê Lợi, Q.1, TP.HCM. Nguyên tắc viết scenario (`plan.md` mục 4.3):
+- Không dùng đúng nhãn trên giao diện như "Thêm mới", "Tạo mã", "Xác nhận", "Đăng xuất"; thay bằng cách nói của người bán hàng.
+- Đơn cần duyệt được nhận diện bằng địa chỉ chứ không bằng mã đơn.
+- Giá viết theo thói quen của người Việt (có dấu chấm) để quan sát cách người tham gia nhập vào ô số.
+
+### 3.3 Công cụ đo
+
+- **SUS** (bản tiếng Việt, 10 câu, thang 1–5), làm ngay sau scenario. Lý do chọn SUS thay cho UEQ-S (`plan.md` mục 5.1):
+  - SUS là thang chuẩn, đã được kiểm chứng và ổn định khi mẫu nhỏ.
+  - Có mốc so sánh là 68.
+  - Các câu hỏi đo đúng những gì quan trọng với một công cụ làm việc: dễ dùng, dễ học, tự tin khi dùng. Trong khi đó, một nửa số câu của UEQ-S đo cảm xúc và sự hấp dẫn, ít giá trị với trang quản trị.
+  - Chỉ 10 câu, làm khoảng 2 phút.
+- **Chỉ số theo bước:** hoàn thành (Y / A = có trợ giúp / N), thời gian (giây), số lỗi, số lần trợ giúp (`plan.md` mục 5.3).
+- **15 câu probe** chia theo 4 chủ đề: clarity (C1–C4), error recovery (E1–E3), speed (S1–S3), trust (T1–T4), cộng câu tổng kết W1. Mỗi phiên hỏi ít nhất 1 câu cho mỗi chủ đề (`plan.md` mục 6).
+- **Bảng quan sát:** thời điểm, bước, hành vi, lời nói nguyên văn, loại (H = hesitation, E = error, F = friction) và mức độ 1–3.
+
+### 3.4 Người tham gia
+
+| Mã | Nghề nghiệp | Tuổi | Kinh nghiệm trang quản lý bán hàng | Hình thức |
+|---|---|---|---|---|
+| P1 | SV năm 4 Kinh doanh quốc tế | 21 | Đã dùng (Sapo) | Online (Google Meet) |
+| P2 | SV năm 3 Kế toán - Kiểm toán | 20 | Chưa dùng | Offline |
+| P3 | SV năm 4 Ngôn ngữ Anh | 21 | Chưa dùng | Online (Google Meet) |
+| P4 | SV năm 4 Hệ thống thông tin | 21 | Đã dùng (đồ án quản lý bán hàng) | Offline |
+| P5 | SV năm 4 Marketing | 21 | Đã dùng (fanpage) | Online (Google Meet) |
+| P6 | SV năm 3 Quản trị kinh doanh | 20 | Đã dùng | Offline |
+| P7 | SV năm 4 Tài chính - Ngân hàng | 21 | Chưa dùng | Online (Google Meet) |
+
+- Tất cả là người ngoài lớp HW03. Họ tên và số điện thoại (đã che 4 số giữa) ghi trong `participants.md` để TA gọi xác minh; báo cáo chỉ dùng mã P1–P7.
+- Có 4 người đã từng dùng và 3 người chưa từng dùng trang quản lý bán hàng, đúng yêu cầu pha trộn ở `plan.md` mục 3.
+- 6/7 người không học IT. P4 học Hệ thống thông tin, nên các câu trả lời của P4 dùng thuật ngữ kỹ thuật (placeholder, select, submit).
+- Phiên pilot do một người khác thực hiện (không nằm trong P1–P7).
+
+### 3.5 Cách tiến hành
+
+1. **Chuẩn bị:** trước mỗi phiên, reset dữ liệu bằng `scripts/start-sut.sh` + `scripts/seed-hw03.sh 3` (3 đơn "Chờ xác nhận"). Mở Chrome cửa sổ 1366×768 ở màn đăng nhập.
+2. **Pilot** (13:00): flow chạy trọn trên dữ liệu reset, cả 6 bước đều trong thời gian tối đa. Sau pilot có hai chỉnh sửa (`plan.md` mục 9.2): thêm cách bấm giờ trực tiếp khi không quay video, và quy định mã F chỉ dùng cho friction. Lời dẫn và thẻ được giữ nguyên, vì việc mở nhầm Sản phẩm hay gõ "890.000" chính là hành vi cần quan sát.
+3. **Trong phiên:** giới thiệu rằng đang kiểm thử sản phẩm chứ không kiểm tra người dùng, cho tập nói to 1 phút, rồi đọc lời dẫn và đưa thẻ. Người điều phối quan sát trung lập: không gọi tên nút hay mục menu, không nói "đúng rồi" hay "sai rồi". Chỉ can thiệp theo 3 mức gợi ý khi người tham gia thật sự bế tắc (`plan.md` mục 7.4). Phiên online thì người tham gia điều khiển máy từ xa, người điều phối không bấm hộ.
+4. **Ghi nhận:** các phiên **không quay màn hình**. Người điều phối bấm giờ từng bước và ghi phiếu trong phiên (mốc thời gian, hành vi, lời nói nguyên văn), sau đó chép vào `sessions/Px/notes.md`. Lý do không quay màn hình: **người tham gia không muốn chia sẻ bản ghi màn hình**, nên dữ liệu chỉ được ghi bằng phiếu ghi chép.
+5. **Kết thúc phiên:** làm SUS trước, sau đó hỏi probe, bắt đầu từ những chỗ đã quan sát thấy khó khăn trong phiên.
+6. **Sau phiên:** nhập SUS và chỉ số vào `sus-and-metrics.xlsx`. Mỗi phiên có một commit riêng (`test(hw03): usability session Px`).
+
+### 3.6 Kết quả SUS
+
+| | P1 | P2 | P3 | P4 | P5 | P6 | P7 |
+|---|---|---|---|---|---|---|---|
+| SUS | 62.5 | 57.5 | 37.5 | 80.0 | 52.5 | 60.0 | 42.5 |
+
+- **Trung bình 56.07** (SD 13.98, trung vị 57.5, min 37.5, max 80.0, khoảng tin cậy 95% là 43.1–69.0). Điểm này thấp hơn mốc 68 và thuộc vùng **Marginal** theo thang mức chấp nhận của Bangor et al. (2009). Chỉ P4 đạt vùng Acceptable (> 70); P3 và P7 dưới 50.
+- **Theo từng câu:** điểm thấp nhất là Q6 (thiếu nhất quán) và Q2 (phức tạp không cần thiết); điểm cao nhất là Q4 (không cần người kỹ thuật hỗ trợ) và Q10 (không phải học nhiều). Nghĩa là người dùng tự đi hết flow được, nhưng thấy các form rối và thiếu nhất quán.
+- **Theo kinh nghiệm:** nhóm đã từng dùng trang quản lý bán hàng có trung bình 63.75, nhóm chưa dùng 45.83. Mỗi nhóm chỉ có 3–4 người nên đây chỉ là xu hướng.
+
+### 3.7 Chỉ số theo bước
+
+| Bước | Y / A / N | Thời gian TB (giây) | Mục tiêu / tối đa (giây) | Vượt mục tiêu | Lỗi (số người) | Trợ giúp |
+|---|---|---|---|---|---|---|
+| B1 Đăng nhập | 7 / 0 / 0 | 59.3 | 60 / 180 | 3/7 | 1 (1) | 0 |
+| B2 Danh mục | 7 / 0 / 0 | 123.9 | 60 / 180 | 6/7 | 4 (4) | 0 |
+| B3 Sản phẩm | 6 / 0 / 1 | 212.6 | 120 / 420 | 7/7 | 6 (5) | 0 |
+| B4 Mã giảm giá | 6 / 0 / 1 | 259.3 | 180 / 480 | 7/7 | 2 (2) | 0 |
+| B5 Đơn hàng | 7 / 0 / 0 | 114.0 | 120 / 240 | 3/7 | 0 (0) | 0 |
+| B6 Đăng xuất | 6 / 1 / 0 | 50.3 | 30 / 120 | 7/7 | 0 (0) | 1 |
+
+- **6/7 người hoàn thành cả flow mà không cần trợ giúp.** Thời gian trung bình 13:39 cho cả flow; chỉ P4 đạt mục tiêu ≤ 10 phút.
+- **P3 là người duy nhất không đạt bước nào đó:** P3 lưu sản phẩm vào danh mục "Điện thoại" (B3 = N), lưu mã với đơn tối thiểu 0 và số lần 1 (B4 = N), và cần một gợi ý mức 2 mới tìm thấy nút Đăng xuất (B6 = A).
+- **B3 và B4 là hai bước tắc nhất:** cả 7 người đều vượt thời gian mục tiêu ở hai bước này. Trong 80 dòng quan sát có 4 dòng mức 3, và cả 4 đều thuộc form sản phẩm hoặc form mã giảm giá.
+- **Ghi chú dữ liệu:** B2 của P7 mất 200 giây, vượt thời gian tối đa 180 giây nhưng phiếu ghi Y. Người điều phối đã xem lại và giữ Y, vì P7 vẫn tự hoàn thành bước này đúng tiêu chí mà không cần trợ giúp (`analysis.md` mục 2).
+
+### 3.8 Các vấn đề và mức độ nghiêm trọng
+
+Các quan sát được gom thành 10 nhóm (I1–I10, `analysis.md` mục 3) và xếp hạng theo thang Nielsen 0–4, dựa trên tần suất, tác động và tính lặp lại:
+
+| Nhóm | Vấn đề | Tần suất | Severity | Bug |
+|---|---|---|---|---|
+| I1 | Hai ô mã giảm giá có sẵn số 0 và 1, không có nhãn; P3 lưu sai điều kiện mã | 7/7 | **4** | BUG-17 |
+| I2 | Ô danh mục chọn sẵn "Điện thoại", không có nhãn; P3 lưu sai nhóm | 7/7 | **3** | BUG-23, BUG-17 |
+| I3 | Bảng sản phẩm không có cột danh mục, không kiểm lại được nhóm | 7/7 | **3** | **BUG-34** (mới) |
+| I4 | Ô giá nhận "890.000" thành số thập phân mà không cảnh báo | 5/7 | **3** | BUG-07 |
+| I7 | Nghĩ đóng tab là đã đăng xuất; P3 cần trợ giúp | 2/7 | **3** | Không ghi bug (đề xuất) |
+| I5 | "Danh mục" khác với cách gọi "nhóm hàng", mở nhầm Sản phẩm | 4/7 | 2 | Không ghi bug |
+| I6 | Nút Hủy nằm sát ngay dưới nút Xác nhận | 7/7 | 2 | **BUG-35** (mới) |
+| I9 | Chữ tiếng Anh trên giao diện (Login, Password, Choose File) | 4/7 | 2 | BUG-21 |
+| I8 | Ô ngày không nhận kiểu gõ 31/12/2026 | 1/7 | 2 | Không tái hiện được |
+| I10 | Không có ô tìm hoặc lọc đơn | 6/7 nhắc tới | 1 | Không ghi bug (yêu cầu tính năng) |
+
+- **Vấn đề chặn việc hoàn thành task (blocker):** chỉ có I1 và I2. Hai nhóm này gây ra hai bước N duy nhất trong toàn bộ 42 lượt bước. I3 khiến lỗi của I2 không bị phát hiện sau khi lưu.
+- **Bug riêng lẻ và vấn đề thiết kế:** I1, I2, I3, I4, I6, I8, I9 là bug riêng lẻ, sửa được tại chỗ. Năm vấn đề thiết kế lặp lại ở nhiều màn hình (`analysis.md` mục 4.2):
+  - D1: form dựa vào placeholder và không báo khi nhập sai;
+  - D2: sau khi lưu, giao diện không hiện lại đủ dữ liệu vừa lưu;
+  - D3: từ ngữ chưa khớp với cách nghĩ của chủ shop;
+  - D4: thao tác không quay lại được đặt sát thao tác chính;
+  - D5: kết thúc phiên đăng nhập không rõ ràng.
+- **Điểm làm tốt:** đăng nhập sai có thông báo; bảng mã giảm giá hiện đủ các giá trị đã lưu; trạng thái đơn đổi ngay trên đúng dòng (7/7 người chắc đã duyệt đúng đơn ở câu T2).
+- **Đề xuất cải tiến** (`analysis.md` mục 6), ưu tiên cao nhất:
+  1. Thêm nhãn luôn hiện cho mọi ô và bỏ giá trị 0 / 1 có sẵn — cả 7 người cùng đề xuất ở câu W1.
+  2. Để ô danh mục trống và bắt buộc phải chọn.
+  3. Thêm cột danh mục vào bảng sản phẩm.
+  4. Cảnh báo khi nhập giá có số thập phân.
+
+### 3.9 Bug
+
+| ID | Tiêu đề | Severity | Issue |
+|---|---|---|---|
+| BUG-34 | [Quản lý Sản phẩm] Bảng sản phẩm không có cột danh mục, không kiểm lại được sản phẩm thuộc nhóm nào | Major | [#188](https://github.com/Taylor3691/eshop-sut/issues/188) |
+| BUG-35 | [Quản lý Đơn hàng] Nút "Hủy" màu xám, nằm sát ngay dưới "Xác nhận" và hủy đơn ngay không hỏi lại | Major | [#189](https://github.com/Taylor3691/eshop-sut/issues/189) |
+
+- **Cách xác nhận:** cả hai bug được tái hiện lại trên SUT bằng Playwright (Chrome 157, 1366×768). Ảnh nằm trong `task2-usability/screenshots/` và được đính vào issue.
+- **Bug đã có từ Task 1:** I1, I2, I4, I9 cùng nguyên nhân với BUG-17, BUG-23, BUG-07, BUG-21. Không tạo bug trùng; bằng chứng từ phiên usability được bổ sung vào file bug và comment vào issue #134, #140, #29, #138.
+- **Không ghi bug:**
+  - I7: spec không yêu cầu phiên phải kết thúc khi đóng tab; nút "Đăng xuất" đúng FR-23.
+  - I8: gõ thử 4 kiểu ngày trên Chrome 157 đều được nhận đúng.
+  - I5, I10: là đề xuất về từ ngữ và tính năng, không trái spec.
 ## 4. Task 3 — Cross-Browser
 
 ### 4.1 Nền tảng

@@ -1,6 +1,6 @@
 # Danh sách người tham gia
 
-> Tất cả là người ngoài lớp HW03. Liên hệ đã che 4 số giữa. Các phiên không quay màn hình; dữ liệu được ghi bằng phiếu ghi chép trong phiên.
+> Tất cả là người ngoài lớp HW03. Liên hệ đã che 4 số giữa. Các phiên không quay màn hình vì người tham gia không muốn chia sẻ bản ghi màn hình; dữ liệu được ghi bằng phiếu ghi chép trong phiên.
 
 
 | Mã    | Họ tên              | Nghề nghiệp                             | Tuổi | Mức dùng máy tính | Kinh nghiệm quản trị (đã dùng / chưa dùng trang quản lý bán hàng) | Zalo / SĐT     | Ngày giờ         | Hình thức             |

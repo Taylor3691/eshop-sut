@@ -567,6 +567,30 @@ Chỉ chép, không thêm, không sửa lời nguyên văn. Ô nào trong phiế
 
 ---
 
+## #36 — Viết phần Task 2 trong báo cáo chính
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 23:08
+- **Prompt:** xử lý Mục 3 trong report/main-report.md còn trống. Đây là phần quan trọng nhất còn lại, vì đề yêu cầu ghi lại cách làm trong báo cáo chính. Nội dung cần có: cách làm, scenario, người tham gia, SUS, chỉ số theo bước, các vấn đề và mức độ nghiêm trọng, bug.
+- **AI output:**
+  - Viết mục 3 của báo cáo chính gồm 9 phần: 3.1 mục tiêu và flow, 3.2 task scenario (lời dẫn, thẻ thông tin, nguyên tắc viết), 3.3 công cụ đo (SUS và lý do chọn, chỉ số theo bước, 15 câu probe, bảng quan sát), 3.4 người tham gia (bảng P1–P7 chỉ dùng mã, không ghi tên và số điện thoại), 3.5 cách tiến hành (chuẩn bị, pilot, trong phiên, ghi nhận, SUS và probe, commit), 3.6 kết quả SUS, 3.7 chỉ số theo bước, 3.8 vấn đề và severity (bảng I1–I10, D1–D5, điểm làm tốt, đề xuất ưu tiên), 3.9 bug (BUG-34 #188, BUG-35 #189, bug Task 1 được bổ sung, nhóm không ghi bug)
+  - Số liệu lấy từ `analysis.md`, `plan.md`, `participants.md`; ghi chú lại dữ liệu B2 của P7 vượt thời gian tối đa
+  - Để chỗ trống "<người điều phối bổ sung>" cho lý do không quay màn hình ở mục 3.5 vì chưa có thông tin
+  - File: `submission/report/main-report.md`
+
+---
+
+## #37 — Bổ sung lý do không quay màn hình
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 23:08
+- **Prompt:** lý do không quay màn hình là người dùng không muốn chia sẻ
+- **AI output:**
+  - Điền lý do "người tham gia không muốn chia sẻ bản ghi màn hình" vào chỗ trống ở mục 3.5 của báo cáo chính, dòng "Ghi nhận" ở đầu `plan.md` và ghi chú đầu `participants.md`
+  - File: `submission/report/main-report.md`, `submission/task2-usability/plan.md`, `submission/task2-usability/participants.md`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
