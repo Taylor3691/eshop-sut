@@ -7,7 +7,7 @@
 - **Mã nguồn giao diện đã kiểm tra:** [`App.jsx`](../frontend-web/src/App.jsx), [`AuthContext.jsx`](../frontend-web/src/context/AuthContext.jsx), [`index.html`](../frontend-web/index.html), [`Profile.jsx`](../frontend-web/src/pages/Profile.jsx), [`Register.jsx`](../frontend-web/src/pages/Register.jsx), [`ForgotPassword.jsx`](../frontend-web/src/pages/ForgotPassword.jsx)
 - **File Excel đính kèm:** [`task1-gui-checklist.xlsx`](./task1-gui-checklist.xlsx)
 
-> **Trạng thái bản nháp (Browser Agent — Chrome DevTools):** Đã chạy thử 1 lượt trên `http://localhost:5173` (49/52 mục đã thực thi: **10 Passed**, **39 Failed**, **3 Pending** do thiếu đơn trạng thái `confirmed`/`shipping`/`delivered` hoặc chưa Tab tiếp khi có bảng đơn). Cột `Notes` chỉ ghi nguyên nhân cho các mục `Failed` (theo quy tắc của skill `gui-checklist-eshop`); cột `Screenshot` để trống để bạn chụp ảnh PNG riêng cho từng mục `Failed` khi hoàn thiện báo cáo & GitHub Issues.
+> **Trạng thái thực thi (Browser Agent — Chrome DevTools):** Đã thực thi đủ **52/52 mục** trên `http://localhost:5173` (kết hợp Web Admin `http://localhost:5174` để tạo đủ 5 trạng thái đơn hàng): **12 Passed**, **40 Failed**, **0 Pending**. Cột `Notes` chỉ ghi nguyên nhân cho các mục `Failed` (theo quy tắc của skill `gui-checklist-eshop`); cột `Screenshot` để trống để bạn chụp ảnh PNG riêng cho từng mục `Failed` khi hoàn thiện báo cáo & GitHub Issues.
 
 ---
 
@@ -78,8 +78,8 @@
 | GUI-06 | IA-01 | Register | Kiểm tra màu sắc nút submit `"Đăng Ký"` trên `/register` | Nút hành động tích cực `"Đăng Ký"` phải dùng màu xanh dương (không dùng màu đỏ) | FR-21 | AI | Failed | Nút submit "Đăng Ký" trên /register dùng màu đỏ bg-red-500 (rgb(239, 68, 68)) thay vì màu xanh dương cho hành động tích cực (FR-21). | |
 | GUI-07 | IA-01 | ForgotPassword | Kiểm tra màu sắc nút submit (`"Lấy mã OTP"`, `"Đặt lại mật khẩu"`) và nút phụ (`"← Quay lại"`) | Nút submit chính dùng màu xanh dương; nút quay lại/phụ phân biệt trực quan rõ với nút hành động chính | FR-21 | AI | Failed | Ở Bước 2 /forgot-password, cả nút submit chính "Đặt lại mật khẩu" và nút phụ "← Quay lại" đều dùng cùng màu xanh lá bg-green-600 (rgb(22, 163, 74)), không phân biệt cấp độ và không dùng xanh dương. | |
 | GUI-08 | IA-01 | Profile | Kiểm tra định dạng đơn vị tiền ở cột `Tổng tiền` trong Lịch sử đơn hàng | Số tiền phân cách hàng nghìn đúng chuẩn và luôn có ký hiệu `₫` (không dùng `VND` hoặc thiếu `₫`) | FR-21 | AI | Passed | | |
-| GUI-09 | IA-01 | Profile | Kiểm tra nhãn tiếng Việt và màu sắc badge cho cả 5 trạng thái đơn hàng | Hiển thị đúng tiếng Việt ("Chờ xác nhận", "Đã xác nhận", "Đang giao", "Đã giao", "Đã hủy") và màu badge phân biệt rõ ràng | FR-11 | AI | Pending | | |
-| GUI-10 | IA-01 | Profile | Kiểm tra thứ tự Tab (Tab Order) trên `/profile` | Focus di chuyển từ trên xuống dưới, trái sang phải: từ form Hồ sơ → nút `"Cập nhật"` → các nút `"Hủy đơn"` trong bảng | FR-21 | AI | Pending | | |
+| GUI-09 | IA-01 | Profile | Kiểm tra nhãn tiếng Việt và màu sắc badge cho cả 5 trạng thái đơn hàng | Hiển thị đúng tiếng Việt ("Chờ xác nhận", "Đã xác nhận", "Đang giao", "Đã giao", "Đã hủy") và màu badge phân biệt rõ ràng | FR-11 | AI | Passed | | |
+| GUI-10 | IA-01 | Profile | Kiểm tra thứ tự Tab (Tab Order) trên `/profile` | Focus di chuyển từ trên xuống dưới, trái sang phải: từ form Hồ sơ → nút `"Cập nhật"` → các nút `"Hủy đơn"` trong bảng | FR-21 | AI | Passed | | |
 | GUI-11 | IA-01 | Register | Kiểm tra bố cục responsive ở desktop (`1280x800`) và mobile (`375x812`) trên cả 3 màn hình | Khung form căn giữa, không tràn khung; 2 khối trên `/profile` xếp dọc hợp lý trên mobile, chữ không bị cắt | FR-21 | AI | Failed | Trên /profile ở mobile 375x812 khi có đơn hàng, bảng Lịch sử đơn hàng gây tràn ngang toàn trang (docScrollWidth: 397 > docClientWidth: 375). (/register và /forgot-password không tràn). | |
 | GUI-12 | IA-02 | Profile | Kiểm tra ký hiệu bắt buộc `*` cho trường `Họ Tên` trên `/profile` | Nhãn trường bắt buộc `Họ Tên` có ký hiệu `*` bên cạnh | FR-22, FR-04 | AI | Failed | Nhãn trường bắt buộc "Họ Tên" (và các nhãn khác) trên /profile không có ký hiệu * dù input có thuộc tính required. | |
 | GUI-13 | IA-02 | Profile | Kiểm tra trạng thái chỉ đọc của trường `Email` trên `/profile` | Ô Email bị khóa (`disabled`/read-only), người dùng không thể sửa hoặc đổi email qua giao diện | FR-04 | AI | Passed | | |
@@ -107,7 +107,7 @@
 | GUI-35 | IA-04 | Profile | Kiểm tra trạng thái Loading khi tải thông tin user (`/api/users/me`) và danh sách đơn (`/api/orders/my-orders`) lúc tải lại (F5) `/profile` | Hiển thị chỉ báo đang tải (loading/skeleton) trong lúc chờ API, không nháy màn hình `"Vui lòng đăng nhập"` hay báo trống giả | FR-24, FR-05 | AI | Failed | Khi F5 tải lại /profile lúc đã đăng nhập (quan sát dưới Slow 3G), không có spinner/skeleton loading và giao diện nháy tạm màn hình "Vui lòng đăng nhập" cùng Header chưa đăng nhập trước khi /api/users/me trả về. | |
 | GUI-36 | IA-04 | Profile | Kiểm tra phản hồi trực quan khi cập nhật hồ sơ thành công/thất bại và đồng bộ tên lên Navbar | Hiển thị toast/banner trạng thái trực quan (tránh `alert()`), cập nhật ngay tên mới trên Header (`Chào, <Họ Tên>`) khi đổi Họ Tên | FR-24, FR-04 | AI | Failed | Cập nhật hồ sơ dùng window.alert("Cập nhật thành công!.") chặn trình duyệt thay vì toast/banner, và tên mới trên Header vẫn giữ giá trị cũ cho tới khi F5 tải lại trang. | |
 | GUI-37 | IA-04 | Profile | Kiểm tra giao diện Empty State khi tài khoản chưa có đơn hàng nào trên `/profile` | Hiển thị icon/hình minh họa kèm thông báo thân thiện (kèm `alt` mô tả nếu dùng ảnh), không chỉ là văn bản thô đơn độc | FR-24 | AI | Failed | Empty State trong "Lịch sử đơn hàng" khi chưa có đơn chỉ hiển thị thẻ `<p>Bạn chưa có đơn hàng nào.</p>`, thiếu icon/hình minh họa và CTA điều hướng theo FR-24. | |
-| GUI-38 | IA-04 | Profile | Kiểm tra điều kiện hiển thị nút `"Hủy đơn"` theo State Machine trên bảng Lịch sử đơn hàng | Nút `"Hủy đơn"` chỉ hiện với đơn `pending` ("Chờ xác nhận") và `confirmed` ("Đã xác nhận"); ẩn với `shipping` ("Đang giao"), `delivered`, `canceled` | FR-10 | AI | Pending | | |
+| GUI-38 | IA-04 | Profile | Kiểm tra điều kiện hiển thị nút `"Hủy đơn"` theo State Machine trên bảng Lịch sử đơn hàng | Nút `"Hủy đơn"` chỉ hiện với đơn `pending` ("Chờ xác nhận") và `confirmed` ("Đã xác nhận"); ẩn với `shipping` ("Đang giao"), `delivered`, `canceled` | FR-10 | AI | Failed | Trên bảng Lịch sử đơn hàng (/profile), đơn hàng ở trạng thái "Đang giao" (shipping, đơn #3) vẫn hiển thị nút "Hủy đơn" đang hoạt động (disabled=false), vi phạm FR-10 quy định user không được phép tự hủy khi đơn đã sang shipping. | |
 | GUI-39 | IA-04 | Profile | Kiểm tra hộp thoại xác nhận trước khi hủy đơn hàng trên `/profile` | Bấm `"Hủy đơn"` mở dialog xác nhận trước khi gọi API; chọn hủy bỏ thao tác thì đơn hàng không đổi trạng thái | FR-24, FR-21 | AI | Failed | Bấm "Hủy đơn" gọi thẳng PUT /api/orders/1/cancel ngay lập tức mà không mở hộp thoại xác nhận trước khi hủy. | |
 | GUI-40 | IA-04 | Profile | Kiểm tra cập nhật trạng thái UI ngay sau khi hủy đơn hàng thành công | Thông báo hủy thành công trực quan, dòng đơn chuyển sang badge đỏ `"Đã hủy"` và ẩn nút `"Hủy đơn"` ngay không cần F5 | FR-10, FR-24 | AI | Passed | | |
 | GUI-41 | IA-04 | Register | Kiểm tra trạng thái đang gửi (loading/chống bấm đúp) và phản hồi lỗi trùng email/thành công trên `/register` | Nút `"Đăng Ký"` khóa/loading khi đang gọi API; email đã tồn tại báo lỗi rõ ràng trên form; thành công có phản hồi trực quan | FR-01, FR-24 | AI | Failed | Nút "Đăng Ký" không có trạng thái loading/disabled khi gửi API (0 DOM mutations); đăng ký trùng email "test@eshop.com" trả 200 OK (id: 3) thay vì báo lỗi trùng email; chuyển /login không có thông báo thành công. | |
@@ -154,27 +154,22 @@
 
 ---
 
-## 4. Test Summary (Bản nháp sau lượt chạy Browser Agent)
+## 4. Test Summary (Thực thi đủ 52/52 mục qua Browser Agent)
 
 - **Screens Tested:** `/profile` (Chính), `/register` (Phụ), `/forgot-password` (Phụ)
 - **Total Designed:** 52 (AI: 44, Human-added: 8)
-- **Executed:** 49
-- **Passed:** 10
-- **Failed:** 39
-- **Pending:** 3
-- **Pass Rate:** 20.4% (`10 / 49`)
-
-### Lý do 3 mục còn `Pending` (cần bổ sung dữ liệu/thao tác để chốt)
-- **`GUI-09`:** Đã quan sát được 2/5 trạng thái trên Chrome (`"Chờ xác nhận"` badge vàng, `"Đã hủy"` badge đỏ); cần dùng Web Admin chuyển đơn qua `confirmed`, `shipping`, `delivered` để xác minh đủ 5 nhãn & màu.
-- **`GUI-10`:** Đã Tab qua 4 phần tử trên form Hồ sơ (`Họ Tên` → `Số điện thoại` → `Địa chỉ giao hàng` → `"Cập nhật"`) khi bảng chưa có đơn; cần Tab tiếp qua nút `"Hủy đơn"` khi bảng có đơn hàng.
-- **`GUI-38`:** Đã quan sát `"Hủy đơn"` hiện ở `pending` và biến mất ở `canceled`; cần tạo đơn ở `confirmed`, `shipping`, `delivered` qua Web Admin để xác minh đặc tả (nhất là trạng thái `shipping` không cho user hủy theo `FR-10`).
+- **Executed:** 52
+- **Passed:** 12
+- **Failed:** 40
+- **Pending:** 0
+- **Pass Rate:** 23.1% (`12 / 52`)
 
 ---
 
 ## 5. Nhắc nhở hoàn thiện trước khi nộp (Human Review & Task 3)
-- **Human Review:** Tự kiểm tra lại toàn bộ 49 mục đã đánh dấu `Passed`/`Failed` và kiểm tra nốt 3 mục `Pending` (`GUI-09`, `GUI-10`, `GUI-38`).
+- **Human Review:** Tự kiểm tra lại toàn bộ 52 mục đã đánh dấu `Passed`/`Failed` trước khi chốt bản nộp.
 - **Chụp Screenshot bằng chứng:** Phiên Browser Agent chỉ xuất video recording trong conversation artifacts; bạn cần chụp/đính kèm đường dẫn file ảnh PNG **chỉ cho các mục `Failed`** vào cột `Screenshot` và tạo **GitHub Issues** (kèm ảnh) trước khi nộp.
-- **Khôi phục DB mẫu (nếu cần):** Lượt chạy thử đã tạo user `test@eshop.com` trùng (`id: 3`), user `xss_empty_23120146@example.com`, đặt & hủy đơn `#1` và cập nhật tên/SĐT của `test@eshop.com` — khởi động lại backend (`node server.js`) sẽ reset và seed lại DB theo [`AGENTS.md`](../AGENTS.md).
+- **Khôi phục DB mẫu (nếu cần):** Lượt chạy thử đã tạo user `test@eshop.com` trùng (`id: 3`), user `xss_empty_23120146@example.com`, cập nhật tên/SĐT của `test@eshop.com`, và tạo các đơn hàng `#1`–`#5` ở đủ 5 trạng thái — khởi động lại backend (`node server.js`) sẽ reset và seed lại DB theo [`AGENTS.md`](../AGENTS.md).
 - **Task 3 Cross-Browser / Cross-Platform (≥ 3 nền tảng):** Khi chụp screenshot trên từng nền tảng (vd Chrome, Firefox, Safari/Android Chrome/Expo Go), đảm bảo ảnh chụp thấy rõ:
   1. Tên trình duyệt / OS / thiết bị và URL `localhost`
   2. Overlay username dạng **email sinh viên** (`§6 Task 3`)
