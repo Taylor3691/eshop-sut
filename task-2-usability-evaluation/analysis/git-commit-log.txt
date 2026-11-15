@@ -6,5 +6,6 @@ f6d9ab1  Ghi cách tái thực thi và lịch sử commit (Document simulation r
 caf195be885c6ef04bcf0b3aa323c6fdfec81fd8  Thêm persona và ví dụ SUS tổng hợp (Add labeled synthetic personas and SUS response examples)
 e6d5d160ddfe3603620f7e483dee3214ad0c8605  Phát hành báo cáo mô phỏng và danh mục đầu ra (Publish simulated reports and indexed deliverables)
 72a9939  Ghi lại commit bàn giao Task 2 (Record final Task 2 delivery commit)
+e8934c29c8f1c7341be62e7eaf111b0da1d8b178  Chuyển kết quả Task 2 mô phỏng sang tiếng Việt (Translate Task 2 simulated results into Vietnamese)
 
 Các commit liệt kê chỉ gồm tài liệu Task 2 và dữ liệu mô phỏng. Trong lần khởi động backend, tệp CSDL đang có sửa đổi chưa commit đã bị khởi tạo lại do lệnh backup sai đường dẫn. Tệp sau đó được khôi phục về bản đang theo dõi trong Git; nội dung chưa commit trước đó không thể phục hồi và không nằm trong các commit này.
