@@ -1,6 +1,6 @@
 # Phiên P1 — 15/11/2026 14:30
 
-- Người tham gia: P1 · Thiết bị/trình duyệt: Chrome 1366×768, điều khiển từ xa qua Google Meet · Video: p1_truc.mp4 · Đồng ý ghi hình: Có
+- Người tham gia: P1 · Thiết bị/trình duyệt: Chrome 1366×768, điều khiển từ xa qua Google Meet
 - Bắt đầu: 14:37:10 · Kết thúc: 14:49:06 · Hoàn thành task:
 
 ## Ghi chú quan sát
