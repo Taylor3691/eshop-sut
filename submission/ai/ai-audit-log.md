@@ -456,6 +456,18 @@ Chỉ chép, không thêm, không sửa lời nguyên văn. Ô nào trong phiế
 
 ---
 
+## #28 — Viết phần Task 3 trong báo cáo chính
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 22:27
+- **Prompt:** hãy Viết phần Task 3 trong báo cáo chính: cách làm, lý do dùng trình duyệt thật thay cho BrowserStack, bảng tổng hợp, 2 khác biệt giữa các trình duyệt
+- **AI output:**
+  - Viết mục 4 của báo cáo chính: 4.1 nền tảng (Chrome 157.0.8103.51, Firefox 153.0.4, Safari 27.2 trên macOS 27.2, lấy từ ảnh About), 4.2 lý do dùng trình duyệt thật (giới hạn 1 phút/thiết bị của BrowserStack Free Trial + câu cho phép thay thế của đề), 4.3 cách làm (chọn 22 mục nhóm A, reset dữ liệu, thiết lập Safari, thực thi có trợ giúp AI điều khiển máy tính, ghi sheet, lý do N/A), 4.4 bảng tổng hợp 22 mục Task 1/CH/FF/SF kèm ghi chú, 4.5 hai khác biệt (định dạng tiền theo ngôn ngữ trình duyệt — BUG-19 #136; cuộn chuột đổi giá trị ô số chỉ trên Chrome — BUG-31 #148) kèm nguyên nhân và đề xuất sửa
+  - Đối chiếu với `frontend-admin/src/App.jsx` (`toLocaleString()` không truyền locale) và ghi chú Task 1 của GUI-01-16, GUI-02-11 trước khi chốt nội dung
+  - File: `submission/report/main-report.md`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
