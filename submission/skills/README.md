@@ -50,4 +50,4 @@ Nội dung video: dùng `gui-checklist` cho màn **Quản lý Đơn hàng** (ch�
 - Gom thành 2 nguyên nhân mới và 15 mục trùng nguyên nhân với bug đã có.
 - Dừng ở bản nháp issue, chưa tạo issue nào trên GitHub.
 
-Kết quả demo nằm trong thư mục `demo/orders-checklist/` của lần chạy, không thuộc bài nộp Task 1.
+Kết quả demo nằm trong thư mục `demo/orders-checklist/` của file zip nộp bài, không tính vào số liệu Task 1.

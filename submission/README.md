@@ -39,5 +39,6 @@
 | `bugs/` | Bug report (.md) + link GitHub Issues |
 | `ai/` | AI Audit Log, AI Critique (.md + .pdf) |
 | `skills/` | Agent Skills (SKILL.md) |
+| `demo/` | Kết quả lần chạy demo skill `gui-checklist` trên màn Quản lý Đơn hàng (video demo); chỉ có trong file zip, không tính vào số liệu Task 1 |
 | `test-data/` | Dữ liệu thử (CSV import) |
 | `git-log.txt` | Git commit log |

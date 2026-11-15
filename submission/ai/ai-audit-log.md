@@ -733,6 +733,19 @@ mssv 23120175
 
 ---
 
+## #48 — Thêm kết quả demo skill vào file zip
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-16 00:32
+- **Prompt:** thêm demo vô zip đi
+- **AI output:**
+  - Thêm thư mục `demo/orders-checklist/` (kết quả lần chạy demo skill `gui-checklist` trên màn Quản lý Đơn hàng: bảng thành phần, checklist, Excel, quan sát, 58 ảnh, 2 bug nháp, bản nháp issue) vào file zip dưới đường dẫn `demo/`; bỏ file trạng thái `.run-results.json`
+  - README: thêm dòng `demo/` vào bảng cấu trúc thư mục; `skills/README.md`: ghi rõ kết quả demo nằm trong file zip
+  - Xuất lại PDF audit log và `git-log.txt`, commit, nén lại zip
+  - File: `submission/README.md`, `submission/skills/README.md`, `submission/23120175_HW03_AI_GUIUsability_096.zip`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
