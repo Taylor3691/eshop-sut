@@ -1,15 +1,15 @@
-# Phase 1 — Danh sách 7 người tham gia (sinh viên 18–21 tuổi)
+# Phase 1 — Danh sách 7 người tham gia
 
-Không điền dữ liệu giả. Cả bảy người tham gia là sinh viên 18–21 tuổi nhưng phải ở ngoài lớp HW03. Che đúng bốn chữ số giữa của số điện thoại/Zalo (ví dụ `0912****345`), và giữ danh sách liên hệ đầy đủ ở nơi riêng tư để TA có thể xác minh khi cần.
+Cả bảy người tham gia là sinh viên 18–21 tuổi và phải ở ngoài lớp học Software Testing/HW03. Chỉ điền thông tin của người đã đồng ý tham gia. Ở cột **Thông tin liên hệ**, ghi Zalo, số điện thoại hoặc email có thể xác minh nhưng che bốn chữ số ở giữa, ví dụ `0912****345`. Giữ thông tin liên hệ đầy đủ ở nơi riêng tư để TA có thể xác minh khi cần.
 
-| Mã | Tuổi/khoảng tuổi | Bối cảnh/nghề nghiệp | Tần suất mua online | Ngoài lớp HW03? | Liên hệ đã che | Đồng ý tham gia | Ghi chú tuyển dụng |
-|---|---|---|---|---|---|---|---|
-| P01 | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` |
-| P02 | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` |
-| P03 | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` |
-| P04 | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` |
-| P05 | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` |
-| P06 | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` |
-| P07 | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` | `[Có/Không]` | `[TỰ ĐIỀN]` |
+| Mã | Họ và tên | Nghề nghiệp | Thông tin liên hệ | Đồng ý tham gia | Ghi chú |
+|---|---|---|---|---|---|
+| P01 | `Nguyễn Tiến Hoàng` | `Sinh viên` | `087****322` | `Có` | `Xác nhận ngoài lớp; đồng ý quay` |
+| P02 | `Lý Thị Thanh` | `Sinh viên` | `093****006` | `Có` | `Xác nhận ngoài lớp; đồng ý quay` |
+| P03 | `Phạm Bảo Huy` | `Sinh viên` | `[SĐT/Zalo/email đã che]` | `Có` | `Xác nhận ngoài lớp; đồng ý quay` |
+| P04 | `Phạm Võ Nhất Kha` | `Sinh viên` | `035****178]` | `Có` | `Xác nhận ngoài lớp; đồng ý quay` |
+| P05 | `Đặng Ngọc Tiên` | `Sinh viên` | `[SĐT/Zalo/email đã che]` | `Có` | `Xác nhận ngoài lớp; đồng ý quay` |
+| P06 | `Nguyễn Phạm Trí Viễn` | `Sinh viên` | `[SĐT/Zalo/email đã che]` | `Có` | `Xác nhận ngoài lớp; đồng ý quay` |
+| P07 | `Nguyễn Hoàng Danh` | `Sinh viên` | `[SĐT/Zalo/email đã che]` | `Có` | `Xác nhận ngoài lớp; đồng ý quay` |
 
-> Kiểm tra trước mỗi phiên: không phải thành viên đang học HW03; đã nhận thông tin đồng thuận; không chia sẻ mật khẩu tài khoản cá nhân của họ.
+> Trước mỗi phiên, xác nhận người đó không học cùng lớp Software Testing/HW03, đã đồng ý tham gia, và không có mật khẩu hay dữ liệu cá nhân nhạy cảm xuất hiện trong video hoặc repository.

@@ -55,13 +55,11 @@ Vì cả bảy người tham gia đều là sinh viên 18–21 tuổi, mẫu có
 |---|---|
 | URL SUT | `http://localhost:5173/` — xác nhận Vite thực sự chạy ở URL này trước mỗi phiên |
 | Backend API | `http://localhost:3000/` — phải chạy trước frontend |
-| Phiên bản/commit SUT | Ghi mã commit thật ngay trước Pilot/P01: `[TỰ ĐIỀN]` |
-| Trình duyệt, OS, thiết bị | Chrome trên Windows; ghi phiên bản/thông số thực tế khi chạy: `[TỰ ĐIỀN]` |
-| Tài khoản test | Tài khoản test do moderator cấp riêng; **không ghi mật khẩu** vào Markdown, video hoặc Git |
+| Trình duyệt, OS, thiết bị | Chrome trên Windows; ghi phiên bản/thông số thực tế khi chạy|
+| Tài khoản test |`test@eshop.com` / `Test1234!` |
 | Sản phẩm chuẩn bị | `iPhone 15 Pro Max` (seed product sau khi chạy `node database.js`); xác nhận sản phẩm hiển thị trước phiên |
 | Số lượng mục tiêu cho scenario | `2` |
 | Môi trường giỏ trống | `[Đã xác nhận / Chưa]` |
-| Ghi hình/ghi âm hoạt động | `[TỰ ĐIỀN]` |
 
 ### Thiết lập kỹ thuật đã xác minh từ source
 

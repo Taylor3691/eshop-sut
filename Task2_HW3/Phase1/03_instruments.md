@@ -18,30 +18,32 @@ Không dùng: “Bấm Giỏ hàng đi”, “Nút này dùng để thêm vào g
 
 ## 3. SUS sau phiên
 
-Người tham gia chọn 1–5 cho từng câu: 1 = Hoàn toàn không đồng ý; 5 = Hoàn toàn đồng ý.
+Sau khi hoàn thành luồng **đăng nhập → xem iPhone 15 Pro Max → chọn số lượng 2 → thêm vào giỏ → kiểm tra giỏ → đăng xuất**, người tham gia chọn 1–5 cho từng phát biểu: 1 = Hoàn toàn không đồng ý; 5 = Hoàn toàn đồng ý. Giữ nguyên 10 phát biểu dưới đây để có thể tính và so sánh điểm SUS chuẩn.
 
 | # | Phát biểu | Điểm 1–5 |
 |---:|---|:---:|
-| 1 | Tôi nghĩ tôi sẽ muốn sử dụng hệ thống này thường xuyên. | `[ ]` |
-| 2 | Tôi thấy hệ thống này không cần thiết phải phức tạp. | `[ ]` |
+| 1 | Tôi nghĩ rằng tôi sẽ muốn sử dụng hệ thống này thường xuyên. | `[ ]` |
+| 2 | Tôi thấy hệ thống này có những điểm phức tạp không cần thiết. | `[ ]` |
 | 3 | Tôi thấy hệ thống này dễ sử dụng. | `[ ]` |
-| 4 | Tôi nghĩ tôi sẽ cần hỗ trợ kỹ thuật để có thể sử dụng hệ thống này. | `[ ]` |
-| 5 | Tôi thấy các chức năng trong hệ thống được tích hợp tốt. | `[ ]` |
-| 6 | Tôi thấy có quá nhiều điểm không nhất quán trong hệ thống. | `[ ]` |
-| 7 | Tôi nghĩ đa số mọi người sẽ học cách sử dụng hệ thống này rất nhanh. | `[ ]` |
-| 8 | Tôi thấy hệ thống rất cồng kềnh khi sử dụng. | `[ ]` |
-| 9 | Tôi cảm thấy rất tự tin khi sử dụng hệ thống. | `[ ]` |
-| 10 | Tôi cần học nhiều thứ trước khi có thể bắt đầu sử dụng hệ thống này. | `[ ]` |
+| 4 | Tôi nghĩ rằng mình sẽ cần hỗ trợ của một người có kiến thức kỹ thuật để có thể sử dụng hệ thống này. | `[ ]` |
+| 5 | Tôi thấy các chức năng khác nhau của hệ thống được tích hợp tốt. | `[ ]` |
+| 6 | Tôi thấy có quá nhiều điểm không nhất quán trong hệ thống này. | `[ ]` |
+| 7 | Tôi nghĩ rằng phần lớn mọi người sẽ học cách sử dụng hệ thống này rất nhanh. | `[ ]` |
+| 8 | Tôi thấy hệ thống này rất cồng kềnh khi sử dụng. | `[ ]` |
+| 9 | Tôi cảm thấy rất tự tin khi sử dụng hệ thống này. | `[ ]` |
+| 10 | Tôi cần học nhiều điều trước khi có thể bắt đầu sử dụng hệ thống này. | `[ ]` |
+
+Chấm điểm SUS: với các câu lẻ (1, 3, 5, 7, 9), lấy điểm trả lời trừ 1; với các câu chẵn (2, 4, 6, 8, 10), lấy 5 trừ điểm trả lời. Cộng 10 kết quả rồi nhân 2,5 để được điểm SUS từ 0 đến 100.
 
 ## 4. Câu hỏi gợi mở sau SUS
 
-Hỏi toàn bộ câu hỏi, theo thứ tự linh hoạt; không gợi ý đáp án.
+Hỏi theo thứ tự linh hoạt và chỉ hỏi tiếp khi cần làm rõ câu trả lời; không gợi ý đáp án.
 
-1. **Clarity:** Chỗ nào trong luồng rõ ràng nhất và chỗ nào khó hiểu nhất? Vì sao?
-2. **Error recovery:** Nếu bạn chọn sai số lượng hoặc thêm nhầm sản phẩm, bạn nghĩ mình sẽ sửa bằng cách nào? Giao diện có giúp bạn nhận biết/sửa sai không?
-3. **Speed:** Phần nào nhanh, chậm hoặc có nhiều bước hơn bạn mong đợi?
-4. **Trust:** Điều gì khiến bạn tin hoặc chưa tin rằng sản phẩm và số lượng trong giỏ là chính xác? Bạn có cảm thấy an tâm khi đăng nhập/đăng xuất không?
-5. Nếu chỉ được thay đổi một điểm của luồng này, bạn sẽ thay đổi điều gì?
+1. Hệ thống có giúp bạn nhận biết mình đã đăng nhập thành công không?
+2. Bạn có dễ tìm được sản phẩm iPhone 15 Pro Max không? 
+3. Khi chọn số lượng 2 cho iPhone 15 Pro Max và ấn thêm vào giỏ, bạn mong đợi điều gì xảy ra?
+4. Trong giỏ hàng, bạn có dễ kiểm tra đúng iPhone 15 Pro Max và số lượng 2 không?
+5. Nếu thực hiện lại, bạn có tự tin hoàn thành luồng này mà không cần hỗ trợ không?
 
 ## 5. Mã ghi chú thống nhất cho người quan sát
 
