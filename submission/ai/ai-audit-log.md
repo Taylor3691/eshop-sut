@@ -440,6 +440,22 @@ Chỉ chép, không thêm, không sửa lời nguyên văn. Ô nào trong phiế
 
 ---
 
+## #27 — Ghi bug cross-browser và cập nhật README
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 22:13
+- **Prompt:** bạn hãy làm và ghi log lại
+1. Ghi bug cross-browser: BUG-34 cho lỗi định dạng tiền theo ngôn ngữ trình duyệt (01-10), BUG-35 cho lỗi cuộn chuột làm đổi giá trị ô số trên Chrome (02-24). Mỗi bug kèm GitHub issue có nhãn hw03.
+2. Cập nhật README: số nền tảng và số bug cross-platform.
+- **AI output:**
+  - Phát hiện hai lỗi này đã có từ Task 1 (BUG-19 #136 định dạng tiền, BUG-31 #148 cuộn chuột trên ô số) nên không tạo BUG-34/35 trùng; bổ sung mục "Kết quả cross-browser" với bảng Chrome / Firefox / Safari và ảnh Task 3 vào hai bug này
+  - Comment kết quả cross-browser kèm ảnh vào issue #136 và #148
+  - Cập nhật cột Nguồn trong `bugs/README.md`, cột Bug ID trong sheet Cross-Platform
+  - README: Task 3 chạy trên Chrome, Firefox, Safari (macOS) do BrowserStack Free Trial chỉ 1 phút/thiết bị; bug cross-platform: 0 mới (2 khác biệt bổ sung vào BUG-19, BUG-31)
+  - File: `submission/bugs/BUG-19.md`, `submission/bugs/BUG-31.md`, `submission/bugs/README.md`, `submission/README.md`, `submission/task1-checklist/checklist.xlsx`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
