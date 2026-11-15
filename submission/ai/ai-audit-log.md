@@ -746,6 +746,22 @@ mssv 23120175
 
 ---
 
+## #49 — Soát ảnh Task 3
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-16 00:55
+- **Prompt:** xem lại các tấm ảnh nào trong task 3 ko đúng không
+- **AI output:**
+  - Soát 79 ảnh Task 3 bằng 3 subagent chạy song song (Chrome, Firefox, Safari + BrowserStack), đối chiếu với yêu cầu của đề (tên trình duyệt, `localhost:5174`, ghi chú email / MSSV / họ tên) và ghi chú trong sheet Cross-Platform; tự kiểm lại các phát hiện nặng (MD5 ảnh trùng, crop GUI-01-10_SF, GUI-01-04_SF, GUI-01-03_CH, GUI-02-17_CH, GUI-01-10-2_CH)
+  - Lộ thông tin cá nhân: GUI-02-17_CH (hộp chọn file thấy thư mục keepass, `HPDQ_Private Pass.kdbx`, `LastMasterPassword.txt` và file công việc), GUI-01-10-2_CH và GUI-01-14_CH (Gmail cá nhân trong popup của Chrome); nhẹ hơn: GUI-02-17_SF, GUI-02-17_FF (thư mục cá nhân), GUI-01-15_CH (một phần mã của BrowserStack Local)
+  - Không đạt yêu cầu của đề: 9 ảnh Safari chụp lúc 21:43–21:48 thanh địa chỉ chỉ ghi "localhost" (GUI-01-02, 01-03, 01-04, 01-10, 01-10-2, 01-16, 01-21, 02-08, 02-22); GUI-01-10_SF thanh menu ghi "Orca" thay vì Safari; 3 ảnh Chrome (ABOUT, GUI-01-03, GUI-01-10) ghi chú sai tên "tôiHuỳnh Thái Toàn"
+  - Nội dung không khớp mục: GUI-01-10 cả 3 trình duyệt là màn Dashboard (bằng chứng thật ở ảnh -2); GUI-01-21 không thấy tiêu đề tab, và GUI-01-21_FF, GUI-01-21_SF trùng từng byte với GUI-01-02; GUI-02-13_CH không có dòng 1000.5; GUI-01-17 Chrome / Firefox không thấy dark mode; GUI-01-13_SF không có phần tử đang focus
+  - Ghi chú sheet sai: GUI-01-10 Firefox ghi "50.000 ₫" nhưng ảnh cho thấy SAVE10 là "300.000 ₫" ("50.000" là của BIGBUY); ghi chú Safari dẫn lại số sai này
+  - Không sửa file nào
+  - File: không có
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>

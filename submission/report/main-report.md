@@ -300,9 +300,9 @@ Các quan sát được gom thành 10 nhóm (I1–I10, `analysis.md` mục 3) v�
 
 | Mã | Trình duyệt | Hệ điều hành | Ảnh |
 |---|---|---|---|
-| CH | Google Chrome 157.0.8103.51 (arm64) | macOS 27.2 | `task3-crossplatform/chrome/` (25 ảnh) |
-| FF | Firefox 153.0.4 (aarch64), giao diện tiếng Việt | macOS 27.2 | `task3-crossplatform/firefox/` (26 ảnh) |
-| SF | Safari 27.2 | macOS 27.2 | `task3-crossplatform/safari/` (26 ảnh) |
+| CH | Google Chrome 157.0.8103.51 (arm64) | macOS 27.2 | `task3-crossplatform/chrome/` (24 ảnh) |
+| FF | Firefox 153.0.4 (aarch64), giao diện tiếng Việt | macOS 27.2 | `task3-crossplatform/firefox/` (25 ảnh) |
+| SF | Safari 27.2 | macOS 27.2 | `task3-crossplatform/safari/` (25 ảnh) |
 
 Phiên bản từng trình duyệt có ảnh màn About (`ABOUT_CH`, `ABOUT_FF`, `ABOUT_SF`). Mọi ảnh chụp toàn màn hình, thấy cùng lúc tên trình duyệt, thanh địa chỉ `localhost:5174` và ghi chú Stickies có email, MSSV, họ tên sinh viên.
 
