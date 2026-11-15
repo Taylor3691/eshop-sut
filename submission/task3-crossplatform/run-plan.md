@@ -1,22 +1,29 @@
-# Kế hoạch chạy Cross-Browser (BrowserStack Live)
+# Kế hoạch chạy Cross-Browser
+
+## Lý do đổi từ BrowserStack sang trình duyệt thật
+
+BrowserStack Free Trial chỉ cho **1 phút / thiết bị** ("Each device is available for up to 1 minute during Free Trial"), không đủ chạy checklist. Theo mục 6 của đề ("...or use real physical devices, provided your screenshots clearly show the browser / OS / device name alongside the SUT's localhost URL"), checklist được chạy đầy đủ trên trình duyệt thật cài trên máy Mac; BrowserStack chỉ dùng để chụp ảnh bằng chứng trong 1 phút.
 
 ## Cấu hình
 
-| Mã | Nền tảng | Thư mục ảnh |
+| Mã | Nền tảng chạy checklist | Thư mục ảnh |
 |---|---|---|
-| CH | Chrome (bản mới nhất) · Windows 11 | `chrome/` |
-| FF | Firefox (bản mới nhất) · Windows 11 | `firefox/` |
-| SF | Safari (bản mới nhất) · macOS | `safari/` |
+| CH | Google Chrome (bản đang cài) · macOS | `chrome/` |
+| FF | Firefox (bản đang cài) · macOS | `firefox/` |
+| SF | Safari (bản đang cài) · macOS | `safari/` |
 
-## Chuẩn bị (trước khi bấm Start để không tốn phút trial)
+Ảnh bằng chứng BrowserStack (1 phút / thiết bị) lưu ở `browserstack/`: Chrome 157 · Windows 11, Firefox 160 · Windows 11, Safari · macOS bản mới nhất — mỗi cấu hình 1–2 ảnh (màn Login, nếu kịp thì màn Sản phẩm sau khi đăng nhập).
+
+## Chuẩn bị
 
 1. `scripts/start-sut.sh` rồi `scripts/seed-hw03.sh 3` (dữ liệu sạch, giống nhau cho cả 3 trình duyệt).
-2. Bật **BrowserStack Local**, mở URL `http://localhost:5174`.
-3. Mở app **Stickies** trên Mac, ghi **email sinh viên + họ tên**, chọn *Window → Float on Top*, đặt ở góc màn hình.
-4. Chụp bằng **Cmd + Shift + 4 → Space → bấm vào cửa sổ trình duyệt** (hoặc vùng chọn) sao cho ảnh thấy cùng lúc:
-   thanh công cụ BrowserStack (tên OS + trình duyệt) · thanh địa chỉ có `localhost:5174` · ghi chú Stickies có email.
+2. Mở app **Stickies**, ghi 3 dòng: **họ tên đầy đủ**, **MSSV**, **email sinh viên**; chọn *Window → Float on Top*, đặt ở góc màn hình (đề mục 6 yêu cầu email, mục 11 yêu cầu MSSV + họ tên).
+3. Mỗi trình duyệt: chụp 1 ảnh màn **About** (Chrome: menu Chrome → About Google Chrome; Firefox: Firefox → About Firefox; Safari: Safari → About Safari) để ghi rõ phiên bản. Tên ảnh: `ABOUT_<CH|FF|SF>.png`.
+4. Chụp bằng **Cmd + Shift + 4** (kéo vùng) sao cho ảnh thấy cùng lúc:
+   tên trình duyệt (thanh menu macOS hoặc giao diện trình duyệt) · thanh địa chỉ có `localhost:5174` · ghi chú Stickies.
 5. Tên ảnh: `<ID>_<CH|FF|SF>.png` (ví dụ `GUI-01-10_FF.png`). Nhiều ảnh cho 1 mục: thêm `-2`, `-3`.
 6. Chạy lại `start-sut.sh` + `seed-hw03.sh 3` giữa các trình duyệt (dữ liệu test của trình duyệt trước làm bẩn bảng).
+7. BrowserStack (làm 1 lần cho mỗi cấu hình): chuẩn bị Stickies trước, bấm chọn trình duyệt, gõ ngay `http://localhost:5174` (Safari không mở được thì dùng `http://bs-local.com:5174`), chụp ngay. Tên ảnh: `BS_<CH|FF|SF>.png`, `BS_<CH|FF|SF>-2.png`.
 
 ## Nhóm A — Phụ thuộc trình duyệt: chạy kỹ + chụp ảnh trên CẢ 3 trình duyệt
 
@@ -47,12 +54,12 @@ Không phụ thuộc trình duyệt (cùng code React), chỉ cần xác nhận 
 | Sản phẩm | GUI-01-08, 02-12, 02-14 → 02-16, 04-03, 04-12 → 04-14 |
 | Mã giảm giá | GUI-02-19, 02-20, 04-15 |
 
-## Nhóm C — Không chạy trên cloud (ghi N/A trong sheet Cross-Platform, kèm lý do)
+## Nhóm C — Cần thao tác đặc biệt (chạy được trên máy thật thì chạy, không thì ghi N/A kèm lý do)
 
 | ID | Lý do |
 |---|---|
-| GUI-01-16 (zoom 200%) | Đã chạy trên máy thật ở Task 1; zoom trên cloud phụ thuộc màn hình máy ảo |
-| GUI-01-17 (dark mode) | Không đổi được giao diện tối của OS trong phiên Live |
+| GUI-01-16 (zoom 200%) | Chạy được bằng Cmd + (+) trên cả 3 trình duyệt |
+| GUI-01-17 (dark mode) | Chạy được: System Settings → Appearance → Dark |
 | GUI-01-18 (RTL), 01-19 (tương phản) | Cần DevTools; kết quả do CSS nên giống nhau |
 | GUI-01-20, 02-23 | Cần dữ liệu đặc biệt; logic hiển thị giống nhau |
 | GUI-04-01, 04-02 (mạng chậm) | Cần giả lập mạng bằng DevTools |
@@ -63,4 +70,4 @@ Không phụ thuộc trình duyệt (cùng code React), chỉ cần xác nhận 
 
 1. Điền sheet **Cross-Platform** trong `task1-checklist/checklist.xlsx` (Passed / Failed / N/A cho CH, FF, SF).
 2. Ghi lỗi **chỉ xảy ra trên 1 trình duyệt** thành bug mới (`BUG-34`…), tạo issue với label `hw03`.
-3. Ghi lại số phút trial đã dùng và thời gian chạy từng trình duyệt vào báo cáo.
+3. Ghi vào báo cáo: giới hạn 1 phút của BrowserStack (kèm ảnh `browserstack/`), phiên bản từng trình duyệt (ảnh ABOUT), thời gian chạy từng trình duyệt.
