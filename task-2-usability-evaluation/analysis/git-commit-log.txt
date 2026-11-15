@@ -1,0 +1,6 @@
+HW03 Task 2 simulated execution commit log
+
+f3c712c02ae0ae52f13e2fa2ee4cb9864ed86463  Record seven simulated Playwright usability flows
+fd92f550cffc2b6c2d27e6ab0676a0af39300b21  Analyze simulated usability evidence and disclose limits
+
+These commits contain only Task 2 simulation artifacts and analysis. The pre-existing modified database file was unintentionally reseeded during setup and then restored to the tracked HEAD version; its former uncommitted contents were not recoverable and are not part of these commits.
