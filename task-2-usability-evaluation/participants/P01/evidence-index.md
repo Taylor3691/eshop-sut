@@ -1,8 +1,11 @@
-# Evidence Index
+# Chỉ mục bằng chứng — P01 (SIMULATED)
 
-- **Mã người tham gia:** P01
-- **Ngày/giờ phiên:** NOT EXECUTED
-- **Video ghi màn hình:** NOT EXECUTED (path to video in `evidence/session-recordings/`)
-- **Ảnh chụp màn hình:** NOT EXECUTED (path to screenshots in `evidence/screenshots/`)
-- **Ghi chú:** NOT EXECUTED
+Các tệp PNG là screenshot trực tiếp từ Playwright; WEBM được ghi bởi Playwright trong phiên chạy. Không chỉnh sửa bằng chứng.
 
+- `../../evidence/session-recordings/P01-simulated.webm`
+- `../../evidence/screenshots/P01-01-login-home.png`
+- `../../evidence/screenshots/P01-02-cart.png`
+- `../../evidence/screenshots/P01-03-coupon-checkout.png`
+- `../../evidence/screenshots/P01-04-checkout-success.png`
+- `../../evidence/screenshots/P01-05-order-history.png`
+- `../../evidence/screenshots/P01-06-logout.png`

@@ -1,18 +1,7 @@
-# SUS Responses
+# SUS — P01
 
-- **Mã người tham gia:** P01
-- **Ngày phiên:** NOT EXECUTED
-- **SUS questionnaire completed:** NOT EXECUTED
-- **Câu trả lời (1‑5):**
-  1. 
-  2. 
-  3. 
-  4. 
-  5. 
-  6. 
-  7. 
-  8. 
-  9. 
- 10. 
-- **Ghi chú:** NOT EXECUTED
+> **SIMULATED run. Không có người trả lời bảng hỏi.** Không điền phản hồi tổng hợp hoặc suy đoán từ kết quả automation.
 
+- Tình trạng: NOT COLLECTED
+- 10 câu trả lời (1–5): N/A
+- SUS score: N/A — không tính điểm từ dữ liệu không tồn tại.

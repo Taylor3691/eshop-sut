@@ -1,12 +1,11 @@
-# Thông tin Người tham gia
+# Hồ sơ persona mô phỏng — P02
 
-- **Mã người tham gia:** P02
-- **Ngày/giờ phiên:** NOT EXECUTED
-- **Moderator:** NOT EXECUTED
-- **Consent status:** NOT EXECUTED
-- **Độ tuổi (khoảng):** ...
-- **Nghề nghiệp / Bối cảnh:** ...
-- **Mức độ quen thuộc với mua sắm online:** ...
-- **Kinh nghiệm với website tương tự:** ...
-- **Thông tin liên hệ (SĐT/Zalo):** ...
+> **SIMULATED — không phải người tham gia thật.** Tên được cung cấp trong yêu cầu chỉ dùng làm nhãn persona. Không tuyển dụng, liên hệ, xác minh danh tính hoặc thu thập dữ liệu cá nhân.
 
+- **Tên nhãn:** Trần Anh Khoa
+- **Tuổi theo chỉ định:** 21
+- **Bối cảnh theo chỉ định:** sinh viên
+- **Ngày chạy automation:** 2026-11-15
+- **Đặc điểm khác / kinh nghiệm mua sắm:** Không có dữ liệu; không suy đoán.
+- **Thông tin liên hệ:** Không có — đây không phải hồ sơ người thật.
+- **Consent:** Không áp dụng; automation không phải participant.

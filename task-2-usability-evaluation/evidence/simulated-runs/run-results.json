@@ -1,0 +1,107 @@
+[
+  {
+    "id": "P01",
+    "name": "Phạm Bảo Huy",
+    "registration": 200,
+    "registrationBody": "{\"message\":\"User registered successfully\",\"id\":14}",
+    "steps": [
+      "login:PASS",
+      "cart:PASS",
+      "coupon:PASS",
+      "checkout:PASS",
+      "verify-order:PASS",
+      "logout:PASS"
+    ],
+    "video": "session-recordings/P01-simulated.webm"
+  },
+  {
+    "id": "P02",
+    "name": "Trần Anh Khoa",
+    "registration": 200,
+    "registrationBody": "{\"message\":\"User registered successfully\",\"id\":15}",
+    "steps": [
+      "login:PASS",
+      "cart:PASS",
+      "coupon:PASS",
+      "checkout:PASS",
+      "verify-order:PASS",
+      "logout:PASS"
+    ],
+    "video": "session-recordings/P02-simulated.webm"
+  },
+  {
+    "id": "P03",
+    "name": "Tô Thành Long",
+    "registration": 200,
+    "registrationBody": "{\"message\":\"User registered successfully\",\"id\":16}",
+    "steps": [
+      "login:PASS",
+      "cart:PASS",
+      "coupon:PASS",
+      "checkout:PASS",
+      "verify-order:PASS",
+      "logout:PASS"
+    ],
+    "video": "session-recordings/P03-simulated.webm"
+  },
+  {
+    "id": "P04",
+    "name": "Nguyễn Minh Hiếu",
+    "registration": 200,
+    "registrationBody": "{\"message\":\"User registered successfully\",\"id\":17}",
+    "steps": [
+      "login:PASS",
+      "cart:PASS",
+      "coupon:PASS",
+      "checkout:PASS",
+      "verify-order:PASS",
+      "logout:PASS"
+    ],
+    "video": "session-recordings/P04-simulated.webm"
+  },
+  {
+    "id": "P05",
+    "name": "Nguyễn Viết Toàn",
+    "registration": 200,
+    "registrationBody": "{\"message\":\"User registered successfully\",\"id\":18}",
+    "steps": [
+      "login:PASS",
+      "cart:PASS",
+      "coupon:PASS",
+      "checkout:PASS",
+      "verify-order:PASS",
+      "logout:PASS"
+    ],
+    "video": "session-recordings/P05-simulated.webm"
+  },
+  {
+    "id": "P06",
+    "name": "Nguyễn Minh Tú",
+    "registration": 200,
+    "registrationBody": "{\"message\":\"User registered successfully\",\"id\":19}",
+    "steps": [
+      "login:PASS",
+      "cart:PASS",
+      "coupon:PASS",
+      "checkout:PASS",
+      "verify-order:PASS",
+      "logout:PASS"
+    ],
+    "video": "session-recordings/P06-simulated.webm"
+  },
+  {
+    "id": "P07",
+    "name": "Cao Trọng Khang",
+    "registration": 200,
+    "registrationBody": "{\"message\":\"User registered successfully\",\"id\":20}",
+    "steps": [
+      "login:PASS",
+      "cart:PASS",
+      "coupon:PASS",
+      "checkout:PASS",
+      "verify-order:PASS",
+      "logout:PASS"
+    ],
+    "video": "session-recordings/P07-simulated.webm"
+  }
+]

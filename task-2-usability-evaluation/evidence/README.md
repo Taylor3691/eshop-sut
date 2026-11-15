@@ -1,5 +1,7 @@
 # Hướng dẫn Lưu trữ Bằng chứng Đánh giá Usability (Evidence Directory)
 
+> **SIMULATED RUNS ONLY:** The files generated on 2026-11-15 are Playwright screenshots and videos from seven automated Chromium runs. They are not recordings of real participants, contain no audio/think-aloud data, and do not satisfy HW03's real-participant requirement. See `../analysis/main-report.md`.
+
 Thư mục này lưu trữ các bằng chứng thực nghiệm thu thập được từ 07 phiên kiểm thử người dùng thực tế trong HW03 Task 2.
 
 > **QUY TẮC BẮT BUỘC (HW03 Section 11 - Anti-AI-Cheat Constraints):**  

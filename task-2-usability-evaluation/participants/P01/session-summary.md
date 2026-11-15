@@ -1,15 +1,7 @@
-# Session Summary
+# Tổng kết phiên — P01 (SIMULATED)
 
-- **Mã người tham gia:** P01
-- **Ngày/giờ phiên:** NOT EXECUTED
-- **Moderator:** NOT EXECUTED
-- **Consent status:** NOT EXECUTED
-- **Task completion status:** NOT EXECUTED
-- **Start time:** NOT EXECUTED
-- **End time:** NOT EXECUTED
-- **Total duration:** NOT EXECUTED
-- **Errors / Hesitation:** NOT EXECUTED
-- **Requests for assistance:** NOT EXECUTED
-- **Key participant comments:** NOT EXECUTED
-- **Evidence references:** NOT EXECUTED
-
+- Persona label: Phạm Bảo Huy, 21 tuổi, sinh viên — chỉ theo dữ liệu yêu cầu.
+- Automated task flow: login:PASS, cart:PASS, coupon:PASS, checkout:PASS, verify-order:PASS, logout:PASS.
+- Kết luận kỹ thuật: luồng có thể hoàn tất trong cấu hình chạy này.
+- SUS / phỏng vấn: chưa thu thập; không có đánh giá chủ quan.
+- Đây không phải phiên moderated usability và không đáp ứng yêu cầu bảy người thật.

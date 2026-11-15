@@ -1,13 +1,13 @@
-# Danh sách người tham gia
+# Danh sách persona mô phỏng
 
-| Mã người tham gia | Độ tuổi (khoảng) | Nghề nghiệp / Bối cảnh | Mức độ quen thuộc với mua sắm online | Kinh nghiệm với website tương tự | Thông tin liên hệ (SĐT/Zalo) |
-|---|---|---|---|---|---|
-| `P01` | `xx‑xx` | `...` | `...` | `...` | `09xx***xxx` |
-| `P02` | `xx‑xx` | `...` | `...` | `...` | `09xx***xxx` |
-| `P03` | `xx‑xx` | `...` | `...` | `...` | `09xx***xxx` |
-| `P04` | `xx‑xx` | `...` | `...` | `...` | `09xx***xxx` |
-| `P05` | `xx‑xx` | `...` | `...` | `...` | `09xx***xxx` |
-| `P06` | `xx‑xx` | `...` | `...` | `...` | `09xx***xxx` |
-| `P07` | `xx‑xx` | `...` | `...` | `...` | `09xx***xxx` |
+> **SIMULATED — không phải danh sách người tham gia thật. Không dùng để nộp thay cho tuyển dụng/xác minh người thật.**
 
-> **Lưu ý:** Đây là mẫu bảng; các giá trị sẽ được điền bởi người tham gia thực tế. Số điện thoại/Zalo phải ẩn 4 chữ số giữa để bảo mật.
+| ID | Tên nhãn | Tuổi | Bối cảnh | Liên hệ |
+|---|---|---:|---|---|
+| P01 | Phạm Bảo Huy | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |
+| P02 | Trần Anh Khoa | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |
+| P03 | Tô Thành Long | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |
+| P04 | Nguyễn Minh Hiếu | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |
+| P05 | Nguyễn Viết Toàn | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |
+| P06 | Nguyễn Minh Tú | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |
+| P07 | Cao Trọng Khang | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |

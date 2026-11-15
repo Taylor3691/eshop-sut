@@ -1,14 +1,14 @@
-# Ghi chú phiên
+# Ghi chú phiên automation — P02
 
-- **Mã người tham gia:** P02
-- **Ngày/giờ phiên:** NOT EXECUTED
-- **Moderator:** NOT EXECUTED
-- **Consent status:** NOT EXECUTED
-- **Task completion status:** NOT EXECUTED
-- **Start time:** NOT EXECUTED
-- **End time:** NOT EXECUTED
-- **Errors / Hesitation:** NOT EXECUTED
-- **Requests for assistance:** NOT EXECUTED
-- **Actual participant comments:** NOT EXECUTED
-- **Evidence references:** NOT EXECUTED
+> **SIMULATED Playwright run; không phải usability session có người.** Không có think-aloud, moderator, phản ứng cảm xúc hay hành vi người dùng được quan sát.
 
+- Persona label: Trần Anh Khoa, 21 tuổi, sinh viên (theo yêu cầu)
+- Ngày chạy: 2026-11-15
+- Hình thức: Chromium headless, Playwright; viewport 1280×800
+- Consent / moderator: N/A
+- Trạng thái tổng quát: Tất cả checkpoint tự động báo PASS.
+- Kết quả checkpoint: login:PASS, cart:PASS, coupon:PASS, checkout:PASS, verify-order:PASS, logout:PASS
+- Thời gian usability / hesitation / hỗ trợ: Không đo; automation không đại diện cho tốc độ hay nỗ lực của người.
+- Phát biểu người tham gia: Không có.
+- Giới hạn: giỏ hàng được thêm bằng UI sau đăng nhập để giữ state; người dùng automation không suy nghĩ thành tiếng.
+- Bằng chứng: `../../evidence/screenshots/P02-*.png`; `../../evidence/session-recordings/P02-simulated.webm`.
