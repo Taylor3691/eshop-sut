@@ -166,9 +166,10 @@ Các quan sát và câu trả lời probe được gom theo nguyên nhân. Mỗi
 |---|---|---|
 | I1 | Ô Đơn tối thiểu và Số lần có giá trị sẵn 0 / 1, che mất placeholder, không có nhãn | BUG-17 (#134) — đã ghi ô có giá trị mặc định không còn placeholder |
 | I2 | Ô chọn danh mục chọn sẵn danh mục đầu, không có lựa chọn gợi ý | BUG-23 (#140); thiếu nhãn — BUG-17 (#134) |
-| I3 | Bảng sản phẩm không có cột danh mục | Chưa có — **ứng viên bug usability mới** |
+| I3 | Bảng sản phẩm không có cột danh mục | **BUG-34 (mới)** |
 | I4 | Ô giá nhận số thập phân (890.000 → 890) mà không cảnh báo | BUG-07 (#29) — form lưu được giá số lẻ |
-| I8 | Ô ngày không nhận kiểu gõ 31/12/2026 | Chưa có — cần kiểm lại xem đây có phải hành vi mặc định của ô ngày trên Chrome không, trước khi ghi bug |
+| I6 | Nút Hủy màu xám (không phải đỏ như FR-21), sát ngay dưới Xác nhận, hủy đơn ngay không hỏi lại | **BUG-35 (mới)** |
+| I8 | Ô ngày không nhận kiểu gõ 31/12/2026 | **Không ghi bug.** Đã kiểm lại trên Chrome 157 (ô trống, bấm vào phần ngày rồi gõ): cả "31/12/2026", "31122026", "31-12-2026" và "31.12.2026" đều được nhận là 2026-12-31. Ô dùng `input type="date"` gốc của trình duyệt. Không tái hiện được lỗi P6 gặp; phiên không quay màn hình nên không xác định được P6 đã thao tác thế nào. |
 | I9 | Chữ tiếng Anh: Login, Email, Password, Choose File, Import CSV | BUG-21 (#138) |
 
 ### 4.2. Vấn đề thiết kế hệ thống (lặp lại ở nhiều màn hình hoặc nhiều bước)
@@ -178,7 +179,7 @@ Các quan sát và câu trả lời probe được gom theo nguyên nhân. Mỗi
 | D1 | **Form dựa vào placeholder thay cho nhãn, lại không kiểm tra hay báo lỗi khi nhập.** Cả ba form (sản phẩm, mã giảm giá, ô ngày) đều để dữ liệu sai được lưu mà không có câu báo nào. | I1, I2, I4, I8 | Cả 4 dòng quan sát mức 3; 2 bước N của P3; *"Lúc sai giá và sai ngày thì không có câu nào."* (P6 E2) |
 | D2 | **Sau khi lưu, trang không hiện lại đủ những gì đã lưu**, nên người dùng không tự kiểm được và tin nhầm là đã xong. | I3 (cùng một phần I2) | T1 của 7/7 người; P3 không phát hiện được lỗi của chính mình |
 | D3 | **Từ ngữ và cách sắp xếp chưa khớp với cách nghĩ của chủ shop:** "Danh mục" thay cho "nhóm hàng", chữ tiếng Anh, Dashboard không chỉ ra việc đầu tiên cần làm, khối Import CSV nổi bật. | I5, I9 | 4/7 lỗi ở B2; Q6 và Q2 có điểm SUS thấp nhất |
-| D4 | **Thao tác không đảo ngược được đặt sát thao tác chính, không có lớp bảo vệ.** | I6 (cùng kiểu với BUG-04: xóa không hỏi lại) | 7/7 người do dự ở B5 |
+| D4 | **Thao tác không đảo ngược được đặt sát thao tác chính, không có lớp bảo vệ.** | I6 / BUG-35 (cùng kiểu với BUG-04: xóa không hỏi lại) | 7/7 người do dự ở B5 |
 | D5 | **Việc kết thúc phiên không rõ ràng:** đóng tab không đăng xuất, và nút đăng xuất không phải chữ mà người dùng tìm. | I7 | 2/7 định đóng tab; P3 cần trợ giúp |
 
 Nhóm I10 (thiếu ô tìm đơn) là **yêu cầu tính năng** cho lúc có nhiều đơn hơn, chưa phải lỗi gặp trong phiên.
@@ -223,4 +224,14 @@ Sắp theo thứ tự ưu tiên ở mục 5. Cột cuối là người tham gia 
 | 9 | Cho ô ngày nhận kiểu gõ dd/mm/yyyy có dấu gạch, hoặc ghi rõ cách gõ | I8, D1 | P6 |
 | 10 | Thêm ô tìm đơn theo địa chỉ, tên khách hoặc mã đơn, và lọc theo trạng thái | I10 | — |
 
-**Bug sẽ ghi từ Task 2:** I3, cùng I6 và I7 nếu xác định đây là lỗi thiết kế cần sửa chứ không chỉ là góp ý, là ứng viên bug usability mới. Các nhóm I1, I2, I4, I9 đã có bug từ Task 1 (mục 4.1), nên chỉ bổ sung bằng chứng từ phiên usability vào bug cũ, không tạo bug trùng. I8 cần kiểm lại trước khi quyết định.
+**Bug ghi từ Task 2** (`../bugs/README.md`):
+
+| Nhóm | Quyết định | Lý do |
+|---|---|---|
+| I3 | **BUG-34 (mới)** | Không xem được dữ liệu bắt buộc (danh mục) của sản phẩm; làm lỗi I2 không bị phát hiện (P3) |
+| I6 | **BUG-35 (mới)** | Nút hủy không dùng màu đỏ (trái FR-21); hủy đưa đơn sang trạng thái kết thúc (FR-10) mà không hỏi lại |
+| I1, I2, I4, I9 | Bổ sung bằng chứng vào BUG-17, BUG-23, BUG-07, BUG-21 | Cùng nguyên nhân với bug đã có từ Task 1, không tạo bug trùng |
+| I5 | Không ghi bug | Tên mục "Danh mục" không sai spec; là đề xuất về từ ngữ (ưu tiên 6) |
+| I7 | Không ghi bug | Không có yêu cầu nào bắt phiên phải kết thúc khi đóng tab; nút "Đăng xuất" đúng nhãn (FR-23), màu đỏ, 6/7 người tự tìm thấy. Giữ là đề xuất (ưu tiên 5) |
+| I8 | Không ghi bug | Không tái hiện được trên Chrome 157 (mục 4.1) |
+| I10 | Không ghi bug | Yêu cầu tính năng, không có trong spec |

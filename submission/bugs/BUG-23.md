@@ -3,7 +3,7 @@
 | Trường | Giá trị |
 |---|---|
 | GitHub Issue | [#140](https://github.com/Taylor3691/eshop-sut/issues/140) |
-| Nguồn phát hiện | Checklist GUI-02-14 |
+| Nguồn phát hiện | Checklist GUI-02-14; Usability P1–P7 |
 | Màn hình | Quản lý Sản phẩm |
 | Môi trường | macOS 27.2, Google Chrome 157.0.8103.51 (Playwright, headless), http://localhost:5174 |
 | Severity | Minor — người dùng dễ lưu sản phẩm vào nhầm danh mục |
@@ -22,3 +22,9 @@
 **Ảnh chụp:**
 
 ![GUI-02-14.png](../task1-checklist/screenshots/failed/GUI-02-14.png)
+
+**Bằng chứng từ đánh giá khả dụng (Task 2, 15/11/2026, nhóm I2 trong `task2-usability/analysis.md`):**
+- 7/7 người tham gia thấy ô danh mục đang chọn sẵn "Điện thoại" (P1 04:50, P2 04:50, P3 06:40, P4 03:10, P5 04:20, P6 06:20, P7 08:10).
+- P3 không nhận ra đó là ô chọn nhóm nên để nguyên. Sản phẩm "Áo khoác lông vũ" bị lưu vào danh mục "Điện thoại", và bước B3 không đạt: *"Ô này không có tên. Em không biết có phải nhóm hàng không, em để vậy."* (P3 06:40, mức 3).
+- Vì bảng sản phẩm không có cột danh mục (BUG-34), P3 không phát hiện được lỗi này sau khi lưu.
+- Sáu người còn lại tự đổi trước khi lưu, ví dụ *"Không được để mặc định. Áo này vào Đồ mùa đông."* (P1 04:50).

@@ -8,7 +8,7 @@
 | [BUG-04](BUG-04.md) | [Danh mục, Sản phẩm, Mã giảm giá] Bấm "Xóa" xóa ngay, không có hộp thoại xác nhận | GUI-04-06 | Major | [#127](https://github.com/Taylor3691/eshop-sut/issues/127) |
 | [BUG-05](BUG-05.md) | [Quản lý Danh mục] Xóa được danh mục đang có sản phẩm, không chặn và không cảnh báo | GUI-04-07 | Major | [#128](https://github.com/Taylor3691/eshop-sut/issues/128) |
 | [BUG-06](BUG-06.md) | [Danh mục, Login] Nút submit không bị khóa khi đang gửi, bấm đôi tạo bản ghi trùng | GUI-04-02 | Major | [#129](https://github.com/Taylor3691/eshop-sut/issues/129) |
-| [BUG-07](BUG-07.md) | [Quản lý Sản phẩm] Form sản phẩm lưu được giá trống, 0, âm, số lẻ và tên dài hơn 255 ký tự | GUI-02-11, GUI-02-12, GUI-02-13, GUI-02-03 | Major | [#29](https://github.com/Taylor3691/eshop-sut/issues/29) (trùng) |
+| [BUG-07](BUG-07.md) | [Quản lý Sản phẩm] Form sản phẩm lưu được giá trống, 0, âm, số lẻ và tên dài hơn 255 ký tự | GUI-02-11, GUI-02-12, GUI-02-13, GUI-02-03, Usability P1, P3, P5, P6, P7 | Major | [#29](https://github.com/Taylor3691/eshop-sut/issues/29) (trùng) |
 | [BUG-08](BUG-08.md) | [Quản lý Danh mục] Thêm được danh mục có tên trống hoặc chỉ có khoảng trắng | GUI-02-10, GUI-02-03 | Major | [#23](https://github.com/Taylor3691/eshop-sut/issues/23) (trùng) |
 | [BUG-09](BUG-09.md) | [Quản lý Mã giảm giá] Form tạo mã không kiểm tra dữ liệu: mã sai định dạng, giá trị ≤ 0, phần trăm > 100, đơn tối thiểu âm, ngày đã qua | GUI-02-19, GUI-02-20, GUI-02-21, GUI-02-22, GUI-02-03 | Major | [#89](https://github.com/Taylor3691/eshop-sut/issues/89), [#84](https://github.com/Taylor3691/eshop-sut/issues/84) (trùng) |
 | [BUG-10](BUG-10.md) | [Quản lý Sản phẩm] Import CSV tách sai trường có dấu phẩy trong nháy kép | GUI-04-12 | Major | [#57](https://github.com/Taylor3691/eshop-sut/issues/57) (trùng) |
@@ -18,13 +18,13 @@
 | [BUG-14](BUG-14.md) | [Nhiều màn hình] Lỗi tải dữ liệu và hết phiên đăng nhập bị bỏ qua, không có thông báo | GUI-04-09, GUI-04-11 | Major | [#131](https://github.com/Taylor3691/eshop-sut/issues/131) |
 | [BUG-15](BUG-15.md) | [Dashboard, Danh mục] Không có trạng thái loading, hiển thị số 0 và bảng trống khi đang tải | GUI-04-01 | Minor | [#132](https://github.com/Taylor3691/eshop-sut/issues/132) |
 | [BUG-16](BUG-16.md) | [Sidebar] Không thể dùng bàn phím để chuyển tab hoặc đăng xuất | GUI-01-13 | Major | [#133](https://github.com/Taylor3691/eshop-sut/issues/133) |
-| [BUG-17](BUG-17.md) | [Nhiều màn hình] Trường nhập không có nhãn và không có dấu * cho trường bắt buộc | GUI-02-01, GUI-02-02 | Major | [#134](https://github.com/Taylor3691/eshop-sut/issues/134) |
+| [BUG-17](BUG-17.md) | [Nhiều màn hình] Trường nhập không có nhãn và không có dấu * cho trường bắt buộc | GUI-02-01, GUI-02-02, Usability P1–P7 | Major | [#134](https://github.com/Taylor3691/eshop-sut/issues/134) |
 | [BUG-18](BUG-18.md) | [Admin Login] Ô Email không kiểm tra định dạng, để trống vẫn gửi đăng nhập | GUI-02-06, GUI-02-08 | Minor | [#135](https://github.com/Taylor3691/eshop-sut/issues/135) |
 | [BUG-19](BUG-19.md) | [Sản phẩm, Dashboard, Mã giảm giá] Số tiền không theo định dạng vi-VN thống nhất | GUI-01-09, GUI-01-10, Task 3 (CH/FF/SF) | Minor | [#136](https://github.com/Taylor3691/eshop-sut/issues/136) |
 | [BUG-20](BUG-20.md) | [Nhiều màn hình] Các màn không có thẻ `<h1>` mô tả nội dung riêng | GUI-01-01 | Minor | [#137](https://github.com/Taylor3691/eshop-sut/issues/137) |
-| [BUG-21](BUG-21.md) | [Nhiều màn hình] Còn chữ tiếng Anh và viết tắt trên giao diện | GUI-01-02, GUI-01-03 | Minor | [#138](https://github.com/Taylor3691/eshop-sut/issues/138) |
+| [BUG-21](BUG-21.md) | [Nhiều màn hình] Còn chữ tiếng Anh và viết tắt trên giao diện | GUI-01-02, GUI-01-03, Usability P1, P3, P4, P6 | Minor | [#138](https://github.com/Taylor3691/eshop-sut/issues/138) |
 | [BUG-22](BUG-22.md) | [Nhiều màn hình] Cách viết hoa không thống nhất giữa menu, tiêu đề và cột bảng | GUI-01-05 | Trivial | [#139](https://github.com/Taylor3691/eshop-sut/issues/139) |
-| [BUG-23](BUG-23.md) | [Quản lý Sản phẩm] Ô chọn danh mục không có lựa chọn gợi ý, mặc định chọn sẵn danh mục đầu | GUI-02-14 | Minor | [#140](https://github.com/Taylor3691/eshop-sut/issues/140) |
+| [BUG-23](BUG-23.md) | [Quản lý Sản phẩm] Ô chọn danh mục không có lựa chọn gợi ý, mặc định chọn sẵn danh mục đầu | GUI-02-14, Usability P1–P7 | Minor | [#140](https://github.com/Taylor3691/eshop-sut/issues/140) |
 | [BUG-24](BUG-24.md) | [Quản lý Sản phẩm] Bấm "Sửa" không đưa người dùng tới form sửa | GUI-02-15 | Minor | [#141](https://github.com/Taylor3691/eshop-sut/issues/141) |
 | [BUG-25](BUG-25.md) | [Nhiều màn hình] Các tab không có URL riêng: F5 về Dashboard, Back rời khỏi ứng dụng | GUI-03-06 | Minor | [#142](https://github.com/Taylor3691/eshop-sut/issues/142) |
 | [BUG-26](BUG-26.md) | [Danh mục, Sản phẩm, Mã giảm giá] Bảng rỗng không có thông báo trạng thái trống | GUI-04-08 | Minor | [#143](https://github.com/Taylor3691/eshop-sut/issues/143) |
@@ -35,8 +35,10 @@
 | [BUG-31](BUG-31.md) | [Sản phẩm, Mã giảm giá] Cuộn chuột trên ô số làm đổi giá trị đã nhập | GUI-02-24, Task 3 (chỉ Chrome) | Minor | [#148](https://github.com/Taylor3691/eshop-sut/issues/148) |
 | [BUG-32](BUG-32.md) | [Admin Login] Không tự đặt con trỏ vào ô Email, không có autocomplete | GUI-02-25 | Trivial | [#149](https://github.com/Taylor3691/eshop-sut/issues/149) |
 | [BUG-33](BUG-33.md) | [Nhiều màn hình] Tiêu đề tab trình duyệt luôn là "frontend-admin" | GUI-01-21 | Trivial | [#150](https://github.com/Taylor3691/eshop-sut/issues/150) |
+| [BUG-34](BUG-34.md) | [Quản lý Sản phẩm] Bảng sản phẩm không có cột danh mục, không kiểm lại được sản phẩm thuộc nhóm nào | Usability P1–P7 (I3) | Major | #__ |
+| [BUG-35](BUG-35.md) | [Quản lý Đơn hàng] Nút "Hủy" màu xám, nằm sát ngay dưới "Xác nhận" và hủy đơn ngay không hỏi lại | Usability P1–P7 (I6) | Major | #__ |
 
-**Tổng:** 33 bug — Major: 15, Minor: 14, Trivial: 4.
+**Tổng:** 35 bug — Major: 17, Minor: 14, Trivial: 4 (33 bug từ checklist GUI, 2 bug từ đánh giá khả dụng).
 
 Nguồn: 44 mục Failed của checklist GUI (`../task1-checklist/execution-observations.md`), gộp theo nguyên nhân — mỗi bug một nguyên nhân. Ảnh trong `../task1-checklist/screenshots/failed/`.
 

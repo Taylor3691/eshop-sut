@@ -13,7 +13,7 @@
 | Số màn hình (Task 1) | 5 |
 | Số flow (Task 2) | 1 |
 | Checklist: designed / executed / passed / failed | 70 / 70 / 26 / 44 (AI 58 + tự thêm 12) |
-| Số bug (GUI / usability / cross-platform) | 33 / _ / 0 mới (2 khác biệt giữa trình duyệt bổ sung vào BUG-19, BUG-31) |
+| Số bug (GUI / usability / cross-platform) | 33 / 2 (BUG-34, BUG-35; bằng chứng usability bổ sung vào BUG-07, BUG-17, BUG-21, BUG-23) / 0 mới (2 khác biệt giữa trình duyệt bổ sung vào BUG-19, BUG-31) |
 | Số người tham gia | 7 (+1 pilot) |
 | Điểm SUS trung bình | _ |
 | Số nền tảng | 3 — Chrome, Firefox, Safari trên macOS (BrowserStack Free Trial chỉ 1 phút/thiết bị, có ảnh bằng chứng) |
