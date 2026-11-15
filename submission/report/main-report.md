@@ -2,10 +2,130 @@
 
 ## 1. Giới thiệu & phạm vi
 ## 2. Task 1 — GUI Checklist
+
+**Phạm vi:** 5 màn hình của EShop Web Admin (http://localhost:5174). Màn hình chính là Quản lý Sản phẩm (danh sách, thêm, sửa, xóa, Import CSV); các màn hình phụ là Admin Login, Dashboard, Quản lý Danh mục và Quản lý Mã giảm giá.
+
+Tài liệu nằm trong `task1-checklist/`:
+- `ui-inventory.md`: bảng thành phần giao diện và 15 giải đáp đặc tả
+- `checklist-draft.md`: bản nháp AI sinh, 109 mục
+- `checklist-filtered.md`: bản đã lọc, 58 mục, cộng 12 mục tự thêm
+- `checklist.xlsx`: sheet Checklist, Test Summary và Cross-Platform
+- `execution-observations.md`: quan sát khi chạy
+- `screenshots/failed/`: ảnh của các mục Failed
+
 ### 2.1 Thiết kế (AI + review)
+
+Checklist được làm qua 4 bước. Prompt và kết quả của từng bước ghi trong AI Audit Report, mục #02–#10.
+
+1. **Liệt kê thành phần giao diện** (`ui-inventory.md`).
+   - AI được cung cấp đặc tả (FR-12 → FR-17, FR-21 → FR-24), định nghĩa IA-01 → IA-04 trong đề và mã nguồn `frontend-admin/src/App.jsx`. AI liệt kê form, trường nhập, nút, bảng, menu và thông báo của từng màn hình, ghi kèm mã FR và nhóm IA.
+   - AI cũng ghi riêng **15 điểm đặc tả không nói rõ**, ví dụ: `<h1>` trong ứng dụng một trang, thuật ngữ nào được giữ tiếng Anh, màu nút, dạng thông báo lỗi, xóa có cần hỏi lại không, định dạng tiền.
+   - Người kiểm thử tự quyết định cho từng điểm, thành **15 giải đáp** ("GĐ 1"–"GĐ 15"). Các giải đáp này được dùng làm căn cứ chấm Pass/Fail khi đặc tả không quy định. Phần nào không có trong đặc tả thì dựa vào best practice (Nielsen, WCAG).
+2. **AI sinh bản nháp** theo từng nhóm IA. Mỗi mục được viết dưới dạng tiêu chí cần đạt (không viết thành lỗi), có cách kiểm, điều kiện Pass và căn cứ (FR, GĐ hoặc BP). Kết quả là **109 mục** (`checklist-draft.md`): IA-01 có 26, IA-02 có 41, IA-03 có 15, IA-04 có 27.
+3. **Review và lọc** còn **58 mục** (`checklist-filtered.md`, cột "ID cũ" truy vết về bản nháp). Lý do loại:
+   - mục kiểm thử chức năng chứ không phải giao diện (khóa 30 giây, trùng tên, phép tính Dashboard);
+   - mục trùng nên gộp vào mục khác;
+   - mục giá trị thấp hoặc quá chi tiết;
+   - mục không áp dụng (breadcrumb không bắt buộc ở admin, không có form nhiều bước nên không có Step Indicator).
+4. **Bổ sung 12 mục AI bỏ sót** (mục 2.2), tổng cộng **70 mục**. Toàn bộ được chuyển vào sheet Checklist trong `checklist.xlsx`, với các cột ID, IA, Màn hình, Mục kiểm tra, Tiêu chí Pass, Tham chiếu, Nguồn (AI/Human), Lý do AI bỏ sót, Kết quả, Notes, Screenshot, Bug ID.
+
+| Nhóm | Nháp AI | Sau lọc (AI) | Tự thêm | Tổng |
+|---|---|---|---|---|
+| IA-01 General UI standards | 26 | 14 | 7 | 21 |
+| IA-02 Forms | 41 | 22 | 3 | 25 |
+| IA-03 Navigation | 15 | 7 | 1 | 8 |
+| IA-04 Feedback / State | 27 | 15 | 1 | 16 |
+| **Tổng** | **109** | **58** | **12** | **70** |
+
 ### 2.2 Mục AI bỏ sót & lý do
+
+| ID | IA | Mục kiểm tra | Lý do AI bỏ sót | Kết quả |
+|---|---|---|---|---|
+| GUI-01-15 | IA-01 | Bố cục không vỡ ở màn hình hẹp (1024px, 768px) | AI chỉ đọc code, không hiển thị giao diện ở nhiều kích thước; prompt không nêu kích thước cần hỗ trợ | Failed |
+| GUI-01-16 | IA-01 | Phóng to 200% vẫn dùng được | Như trên: chỉ thấy khi hiển thị thật, không suy ra được từ class Tailwind | Failed |
+| GUI-01-17 | IA-01 | Đọc được khi bật dark mode | Đặc tả không nhắc dark mode; code không có class `dark:` nên AI không có gì để phân tích | Passed |
+| GUI-01-18 | IA-01 | Bố cục chịu được chiều chữ phải sang trái (RTL) | Giao diện chỉ có tiếng Việt nên AI coi RTL nằm ngoài phạm vi | Passed |
+| GUI-01-19 | IA-01 | Độ tương phản chữ/nền ≥ 4.5:1 | AI xét màu theo ý nghĩa (đỏ = nguy hiểm) như FR-21, không tính tỉ lệ tương phản vì cần màu sau khi hiển thị | Failed |
+| GUI-01-20 | IA-01 | Dữ liệu dài không làm vỡ bảng | AI kiểm giới hạn 255 ký tự ở form, không xét dữ liệu đó hiện ra trong bảng thế nào | Failed |
+| GUI-01-21 | IA-01 | Tiêu đề tab trình duyệt mô tả màn đang mở | `<title>` và favicon nằm trong `index.html`, prompt chỉ đưa `App.jsx` | Failed |
+| GUI-02-23 | IA-02 | Dữ liệu người dùng nhập được hiển thị an toàn, không render HTML | Yêu cầu nằm ở mục Bảo mật (SEC-04), không nằm trong phần đặc tả đưa cho AI | Passed |
+| GUI-02-24 | IA-02 | Cuộn chuột trên ô số không làm đổi giá trị | Đây là hành vi mặc định của trình duyệt với `type="number"`, chỉ lộ ra khi thao tác thật | Failed |
+| GUI-02-25 | IA-02 | Ô nhập hỗ trợ nhập nhanh (con trỏ tự vào ô, có `autocomplete`) | AI bám sát FR-22; các thuộc tính hỗ trợ nhập liệu không có trong đặc tả | Failed |
+| GUI-03-08 | IA-03 | Điều hướng vẫn dùng được trên màn hình hẹp | Như GUI-01-15: AI không hiển thị ở nhiều kích thước | Passed |
+| GUI-04-16 | IA-04 | Trình đọc màn hình đọc được thông báo lỗi | AI không mô phỏng công nghệ hỗ trợ; prompt không yêu cầu kiểm accessibility | Passed |
+
+**Các lý do AI bỏ sót gom lại thành 3 nhóm:**
+- **Giới hạn của đầu vào (prompt):** prompt chỉ đưa `App.jsx` và một phần đặc tả, nên AI không thấy `index.html` và mục Bảo mật SEC-04.
+- **Giới hạn của AI:** AI chỉ phân tích mã nguồn tĩnh, không hiển thị giao diện, không thao tác thật và không dùng công nghệ hỗ trợ. Vì vậy AI bỏ qua responsive, zoom, độ tương phản, cuộn chuột trên ô số và trình đọc màn hình.
+- **Đặc điểm của giao diện:** chỉ có tiếng Việt, không có dark mode và đặc tả không nhắc tới. AI coi RTL và dark mode là ngoài phạm vi, trong khi đây chính là hai khía cạnh đề bài nêu là AI hay bỏ sót.
+
+**7/12 mục tự thêm bị Failed**, sinh ra 6 bug (BUG-27, 28, 29, 31, 32, 33). Như vậy phần review của người kiểm thử phát hiện thêm lỗi thật, không chỉ làm checklist dài hơn.
+
 ### 2.3 Kết quả thực thi
+
+**Cách chạy:**
+- Dữ liệu được reset bằng `scripts/start-sut.sh` + `scripts/seed-hw03.sh 3`.
+- 70 mục được chạy bằng script Playwright (`scripts/hw03-run-checklist.mjs`, Chrome 157 headless, 1366×768, vi-VN) theo 4 pha: mục chỉ cần xem → form → môi trường đặc biệt (mạng chậm, cửa sổ hẹp, zoom) → bảng rỗng và dừng backend. Riêng GUI-04-16 được kiểm tay bằng VoiceOver.
+- Script chụp 115 ảnh bằng chứng và chỉ ghi lại **quan sát**, không kết luận Pass/Fail (`execution-observations.md`).
+- **Người kiểm thử xem từng ảnh và quyết định Passed/Failed.** Kết quả được điền vào cột Kết quả và Notes của `checklist.xlsx`. Ảnh của các mục Failed được chép sang `screenshots/failed/` (77 ảnh cho 44 mục) và ghi tên ở cột Screenshot. Mục Passed không kèm ảnh.
+
+| Nhóm | Designed | Executed | Passed | Failed | Pass rate |
+|---|---|---|---|---|---|
+| IA-01 General UI standards | 21 | 21 | 8 | 13 | 38.1% |
+| IA-02 Forms | 25 | 25 | 6 | 19 | 24.0% |
+| IA-03 Navigation | 8 | 8 | 7 | 1 | 87.5% |
+| IA-04 Feedback / State | 16 | 16 | 5 | 11 | 31.3% |
+| **Tổng** | **70** | **70** | **26** | **44** | **37.1%** |
+
+**Nhận xét:**
+- **Forms (IA-02) yếu nhất:**
+  - Không trường nào có nhãn hay dấu `*`, chỉ có placeholder.
+  - Ô có giá trị sẵn (0, 1) làm mất placeholder.
+  - Form sản phẩm và form mã giảm giá gần như không kiểm tra dữ liệu (giá ≤ 0 hoặc số lẻ, phần trăm > 100, ngày đã qua).
+  - Import CSV nhận file sai định dạng, sai header hoặc file rỗng mà không báo lỗi.
+- **Feedback / State (IA-04):**
+  - Xóa ngay, không hỏi lại.
+  - Bấm đôi nút submit tạo bản ghi trùng.
+  - Không có trạng thái đang tải và không có thông báo khi bảng rỗng.
+  - Lỗi hiển thị dạng chuỗi kỹ thuật ("SQLITE_CONSTRAINT…", "Network Error").
+  - Sửa một sản phẩm thì mọi dòng trong bảng đổi theo tên mới.
+- **General UI (IA-01):**
+  - Không có `<h1>` riêng cho từng màn.
+  - Còn chữ tiếng Anh (Login, Password).
+  - Định dạng tiền không thống nhất, doanh thu trên Dashboard gấp đôi giá trị thực.
+  - Không dùng được sidebar bằng bàn phím.
+  - Responsive, zoom 200% và độ tương phản đều không đạt.
+- **Navigation (IA-03) tốt nhất:** sidebar highlight đúng mục, điều hướng sau đăng nhập/đăng xuất đúng, và chặn truy cập khi chưa đăng nhập. Mục Failed duy nhất là các tab không có URL riêng, nên F5 quay về Dashboard và Back thoát khỏi ứng dụng.
+
 ### 2.4 Bug
+
+44 mục Failed được gom thành **33 bug theo nguyên nhân** (mỗi bug một nguyên nhân): **15 Major, 14 Minor, 4 Trivial**.
+- **Gộp và tách theo nguyên nhân:** nhiều mục có chung nguyên nhân thì gộp thành một bug. Ví dụ, BUG-17 (thiếu nhãn và dấu `*`) gồm GUI-02-01 và GUI-02-02. Ngược lại, một mục có hai nguyên nhân thì tách thành hai bug. Ví dụ, GUI-01-10 tách thành BUG-01 (doanh thu gấp đôi) và BUG-19 (định dạng tiền).
+- **File bug:** mỗi bug là một file `bugs/BUG-xx.md` theo `BUG-TEMPLATE.md`, gồm: nguồn (ID checklist), màn hình, môi trường, severity/priority kèm lý do, tham chiếu FR/GĐ/BP, bước tái hiện, kết quả mong đợi trích đặc tả, kết quả thực tế và ảnh.
+- **GitHub Issues:** 25 issue mới (#126–#150, nhãn `hw03`, `module: admin`, kèm ảnh). Có 8 bug trùng với issue đã có trong repo (#23, #29, #57, #59, #60, #61/#63, #71, #84/#89): những bug này ghi số issue cũ, không tạo issue mới. Quan sát mới của BUG-07, BUG-09, BUG-12 được bổ sung bằng comment.
+- **Truy vết:** cột Bug ID trong `checklist.xlsx` liên kết mỗi mục Failed với bug và issue tương ứng.
+
+**Các bug Major:**
+
+| ID | Tiêu đề | Nguồn | Issue |
+|---|---|---|---|
+| BUG-01 | [Dashboard] Tổng doanh thu gấp đôi tổng tiền các đơn đã giao | GUI-01-10 | #71 (trùng) |
+| BUG-02 | [Sản phẩm] Import CSV thêm cả dòng không hợp lệ, không rollback, báo cáo không có lỗi theo dòng | GUI-04-13 | #61, #63 (trùng) |
+| BUG-03 | [Sản phẩm] Sau khi sửa một sản phẩm, mọi dòng trong bảng hiển thị cùng tên mới | GUI-04-04 | #126 |
+| BUG-04 | [Danh mục, Sản phẩm, Mã giảm giá] Bấm "Xóa" xóa ngay, không có hộp thoại xác nhận | GUI-04-06 | #127 |
+| BUG-05 | [Danh mục] Xóa được danh mục đang có sản phẩm, không chặn và không cảnh báo | GUI-04-07 | #128 |
+| BUG-06 | [Danh mục, Login] Nút submit không bị khóa khi đang gửi, bấm đôi tạo bản ghi trùng | GUI-04-02 | #129 |
+| BUG-07 | [Sản phẩm] Form lưu được giá trống, 0, âm, số lẻ và tên dài hơn 255 ký tự | GUI-02-11, 02-12, 02-13, 02-03 | #29 (trùng) |
+| BUG-08 | [Danh mục] Thêm được danh mục có tên trống hoặc chỉ có khoảng trắng | GUI-02-10, 02-03 | #23 (trùng) |
+| BUG-09 | [Mã giảm giá] Form tạo mã không kiểm tra dữ liệu | GUI-02-19 → 02-22, 02-03 | #89, #84 (trùng) |
+| BUG-10 | [Sản phẩm] Import CSV tách sai trường có dấu phẩy trong nháy kép | GUI-04-12 | #57 (trùng) |
+| BUG-11 | [Sản phẩm] Import CSV chấp nhận file sai header | GUI-02-18 | #60 (trùng) |
+| BUG-13 | [Nhiều màn hình] Thông báo lỗi hiển thị chuỗi kỹ thuật, tiếng Anh, viết tắt | GUI-01-04, 02-03, 04-09 | #130 |
+| BUG-14 | [Nhiều màn hình] Lỗi tải dữ liệu và hết phiên bị bỏ qua, không có thông báo | GUI-04-09, 04-11 | #131 |
+| BUG-16 | [Sidebar] Không dùng bàn phím để chuyển tab hoặc đăng xuất được | GUI-01-13 | #133 |
+| BUG-17 | [Nhiều màn hình] Trường nhập không có nhãn và không có dấu * | GUI-02-01, 02-02 | #134 |
+
+Danh sách đầy đủ 33 bug (cùng 14 Minor và 4 Trivial) nằm trong `bugs/README.md`. Bảng này cũng có BUG-34, BUG-35 từ Task 2 (mục 3.9).
 ## 3. Task 2 — Usability Evaluation
 
 Đánh giá có người điều phối (moderated), mẫu nhỏ: 7 người tham gia (P1–P7), mỗi người một phiên, nói to suy nghĩ trong lúc làm (think-aloud), cộng thêm 1 phiên pilot. Tất cả các phiên diễn ra ngày 15/11/2026 trên EShop Web Admin (http://localhost:5174). Tài liệu chi tiết nằm trong `task2-usability/`: `plan.md` (kế hoạch, công cụ đo), `participants.md`, `pilot/notes.md`, `sessions/P1–P7/notes.md`, `sus-and-metrics.xlsx`, `analysis.md`.

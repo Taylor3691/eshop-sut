@@ -591,6 +591,29 @@ Chỉ chép, không thêm, không sửa lời nguyên văn. Ô nào trong phiế
 
 ---
 
+## #38 — Viết phần Task 1 trong báo cáo chính
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 23:18
+- **Prompt:** bạn hãy viết mục 2 cho task 1
+- **AI output:**
+  - Viết mục 2 của báo cáo chính từ `ui-inventory.md`, `checklist-draft.md`, `checklist-filtered.md`, `checklist.xlsx`, `bugs/README.md` và audit log #02–#21: phạm vi 5 màn hình; 2.1 quy trình 4 bước (bảng thành phần + 15 giải đáp → AI sinh 109 mục → lọc còn 58 kèm lý do loại → thêm 12 mục, tổng 70) và bảng số mục theo IA; 2.2 bảng 12 mục AI bỏ sót kèm lý do và kết quả, gom lý do thành 3 nhóm (đầu vào prompt, giới hạn AI, đặc điểm giao diện), 7/12 mục Failed sinh 6 bug; 2.3 cách chạy (Playwright ghi quan sát, người kiểm thử quyết định Passed/Failed), bảng 26 Passed / 44 Failed theo IA (pass rate 37.1%) và nhận xét từng nhóm; 2.4 gộp 44 mục Failed thành 33 bug (15 Major, 14 Minor, 4 Trivial), 25 issue mới #126–#150, 8 bug trùng issue cũ, bảng 15 bug Major
+  - Đối chiếu số liệu với sheet Checklist (kết quả theo IA, mục Human, mục IA-03)
+  - File: `submission/report/main-report.md`
+
+---
+
+## #39 — Commit phần Task 1 trong báo cáo chính
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 23:20
+- **Prompt:** commit
+- **AI output:**
+  - Commit báo cáo chính và audit log với message `docs(hw03): write Task 1 GUI checklist section in main report`, push nhánh `hw03/toanhuynh`; không commit `backend/database.sqlite`
+  - File: `submission/report/main-report.md`, `submission/ai/ai-audit-log.md`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
