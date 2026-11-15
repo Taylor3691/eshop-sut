@@ -30,3 +30,4 @@
 
 *(Các tương tác tiếp theo khi tiến hành phân tích kết quả thực tế sẽ tiếp tục được bổ sung vào nhật ký này).*
 
+\n\n## 2026-11-15 addendum\n\nSee [simulated execution audit](simulated-execution-addendum.md) for the Codex prompt scope, output, observed run outcomes, corrections, and the database backup error.\n

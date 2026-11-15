@@ -1,5 +1,7 @@
 # HW03 Task 2 — Đánh giá Khả năng Sử dụng (Usability Evaluation Workspace)
 
+> **SIMULATED EXECUTION NOTICE (2026-11-15):** The completed P01–P07 records in this workspace document synthetic Playwright runs, not real participants. No human SUS responses, interview answers, consent, or think-aloud observations were collected. HW03 requires seven real participants; this simulation does not satisfy that requirement. See `analysis/main-report.md` and `ai-audit/simulated-execution-addendum.md`.
+
 ## 1. Tổng quan & Mục tiêu Đánh giá (Task 2 Objectives)
 
 Workspace này thiết lập cơ sở hạ tầng, tài liệu lập kế hoạch, bộ công cụ chuẩn hóa và quy trình thực hiện cho **Task 2 – Usability Evaluation** thuộc bài tập lớn HW03 (GUI & Usability Testing), áp dụng trên hệ thống **EShop** (Vietnamese E-commerce Demo SUT).
