@@ -1,0 +1,857 @@
+Git commit log — HW03 GUI & Usability — nhánh hw03/toanhuynh (các commit tính từ main, mới nhất ở trên)
+Xuất lúc: 2026-11-16 00:29 · Tổng: 48 commit
+
+commit dc79edc
+Date:   2026-11-16 00:29
+Author: Toan Huynh
+
+    docs(hw03): export main report, AI critique and AI audit report to PDF
+
+M	submission/ai/ai-audit-log.md
+A	submission/ai/ai-audit-log.pdf
+A	submission/ai/ai-critique.pdf
+A	submission/report/main-report.pdf
+
+commit cc1f09f
+Date:   2026-11-16 00:23
+Author: Toan Huynh
+
+    docs(hw03): finish main report, README, AI critique and add Agent Skills
+
+M	submission/README.md
+M	submission/ai/ai-audit-log.md
+M	submission/ai/ai-critique.md
+M	submission/report/main-report.md
+A	submission/skills/README.md
+A	submission/skills/ai-audit-log/SKILL.md
+D	submission/skills/gui-checklist/.gitkeep
+A	submission/skills/gui-checklist/SKILL.md
+A	submission/skills/gui-checklist/references/checklist-method.md
+A	submission/skills/gui-checklist/references/prompts.md
+A	submission/skills/gui-checklist/scripts/checks.example.mjs
+A	submission/skills/gui-checklist/scripts/fill_results.py
+A	submission/skills/gui-checklist/scripts/run-checklist.mjs
+A	submission/skills/gui-checklist/scripts/run.config.example.json
+A	submission/skills/gui-checklist/templates/BUG-TEMPLATE.md
+A	submission/skills/gui-checklist/templates/checklist.xlsx
+A	submission/skills/gui-checklist/templates/ui-inventory-TEMPLATE.md
+D	submission/skills/usability-eval/.gitkeep
+A	submission/skills/usability-eval/SKILL.md
+A	submission/skills/usability-eval/references/usability-method.md
+A	submission/skills/usability-eval/scripts/analyze.py
+A	submission/skills/usability-eval/scripts/check_sessions.py
+A	submission/skills/usability-eval/scripts/notes_lib.py
+A	submission/skills/usability-eval/scripts/slip_to_notes.py
+A	submission/skills/usability-eval/templates/analysis-TEMPLATE.md
+A	submission/skills/usability-eval/templates/participants-TEMPLATE.md
+A	submission/skills/usability-eval/templates/plan-TEMPLATE.md
+A	submission/skills/usability-eval/templates/session-notes-TEMPLATE.md
+A	submission/skills/usability-eval/templates/session-slip-TEMPLATE.txt
+A	submission/skills/usability-eval/templates/sus-and-metrics.xlsx
+
+commit 51f5d9b
+Date:   2026-11-15 23:20
+Author: Toan Huynh
+
+    docs(hw03): write Task 1 GUI checklist section in main report
+
+M	submission/ai/ai-audit-log.md
+M	submission/report/main-report.md
+
+commit 4ef8ea6
+Date:   2026-11-15 23:14
+Author: Toan Huynh
+
+    docs(hw03): write Task 2 usability section in main report
+
+M	submission/ai/ai-audit-log.md
+M	submission/report/main-report.md
+M	submission/task2-usability/analysis.md
+M	submission/task2-usability/participants.md
+M	submission/task2-usability/plan.md
+
+commit 4ef71bb
+Date:   2026-11-15 23:03
+Author: Toan Huynh
+
+    docs(hw03): link usability bugs to GitHub issues #188, #189 and log in AI audit log
+
+M	submission/ai/ai-audit-log.md
+M	submission/bugs/BUG-07.md
+M	submission/bugs/BUG-17.md
+M	submission/bugs/BUG-21.md
+M	submission/bugs/BUG-23.md
+M	submission/bugs/BUG-34.md
+M	submission/bugs/BUG-35.md
+M	submission/bugs/README.md
+
+commit 1b0b1c8
+Date:   2026-11-15 23:02
+Author: Toan Huynh
+
+    test(hw03): log usability bugs BUG-34, BUG-35 and add usability evidence to existing bugs
+
+M	submission/README.md
+M	submission/bugs/BUG-07.md
+M	submission/bugs/BUG-17.md
+M	submission/bugs/BUG-21.md
+M	submission/bugs/BUG-23.md
+A	submission/bugs/BUG-34.md
+A	submission/bugs/BUG-35.md
+M	submission/bugs/README.md
+M	submission/task2-usability/analysis.md
+A	submission/task2-usability/screenshots/UX-I3-product-table-no-category.png
+A	submission/task2-usability/screenshots/UX-I6-cancel-next-to-confirm.png
+A	submission/task2-usability/screenshots/UX-I6-cancel-no-confirm.png
+
+commit 49c9143
+Date:   2026-11-15 22:56
+Author: Toan Huynh
+
+    test(hw03): usability analysis
+
+M	submission/ai/ai-audit-log.md
+M	submission/task2-usability/analysis.md
+
+commit 9b630e6
+Date:   2026-11-15 22:50
+Author: Toan Huynh
+
+    docs(hw03): log usability sessions P2-P7 and fixes in AI audit log
+
+M	submission/ai/ai-audit-log.md
+
+commit fbe1cc8
+Date:   2026-11-15 22:50
+Author: Toan Huynh
+
+    test(hw03): usability session P7
+
+M	submission/task2-usability/sessions/P7/notes.md
+M	submission/task2-usability/sus-and-metrics.xlsx
+
+commit a96b081
+Date:   2026-11-15 22:50
+Author: Toan Huynh
+
+    test(hw03): usability session P6
+
+M	submission/task2-usability/sessions/P6/notes.md
+M	submission/task2-usability/sus-and-metrics.xlsx
+
+commit 45ae719
+Date:   2026-11-15 22:50
+Author: Toan Huynh
+
+    test(hw03): usability session P5
+
+M	submission/task2-usability/sessions/P5/notes.md
+M	submission/task2-usability/sus-and-metrics.xlsx
+
+commit 86d4458
+Date:   2026-11-15 22:50
+Author: Toan Huynh
+
+    test(hw03): usability session P4
+
+M	submission/task2-usability/sessions/P4/notes.md
+M	submission/task2-usability/sus-and-metrics.xlsx
+
+commit 87c5627
+Date:   2026-11-15 22:50
+Author: Toan Huynh
+
+    test(hw03): usability session P3
+
+M	submission/task2-usability/sessions/P3/notes.md
+M	submission/task2-usability/sus-and-metrics.xlsx
+
+commit 4b33f3a
+Date:   2026-11-15 22:50
+Author: Toan Huynh
+
+    test(hw03): usability session P2
+
+M	submission/task2-usability/sessions/P2/notes.md
+M	submission/task2-usability/sus-and-metrics.xlsx
+
+commit 5e66749
+Date:   2026-11-15 22:50
+Author: Toan Huynh
+
+    test(hw03): usability session P1 metrics in sus-and-metrics
+
+M	submission/task2-usability/sessions/P1/notes.md
+M	submission/task2-usability/sus-and-metrics.xlsx
+
+commit 1f40050
+Date:   2026-11-15 22:50
+Author: Toan Huynh
+
+    docs(hw03): drop screen recording, define F code as friction, fix P5 platform
+
+M	.gitignore
+M	submission/task2-usability/participants.md
+M	submission/task2-usability/pilot/notes.md
+M	submission/task2-usability/plan.md
+D	submission/task2-usability/recordings/.gitkeep
+M	submission/task2-usability/session-notes-TEMPLATE.md
+
+commit 4d7ee30
+Date:   2026-11-15 22:27
+Author: Toan Huynh
+
+    docs(hw03): log Task 3 report writing in AI audit log
+
+M	submission/ai/ai-audit-log.md
+
+commit a7a87ed
+Date:   2026-11-15 22:26
+Author: Toan Huynh
+
+    docs(hw03): write Task 3 cross-browser section in main report
+
+M	submission/report/main-report.md
+
+commit fb12875
+Date:   2026-11-15 22:24
+Author: Toan Huynh
+
+    test(hw03): recheck Safari 01-17, 02-24 and Firefox 02-21 cross-browser items
+
+M	submission/bugs/BUG-31.md
+M	submission/task1-checklist/checklist.xlsx
+M	submission/task3-crossplatform/firefox/GUI-02-21-2_FF.png
+A	submission/task3-crossplatform/safari/GUI-01-17_SF.png
+M	submission/task3-crossplatform/safari/GUI-02-24_SF.png
+
+commit ac53cc4
+Date:   2026-11-15 22:18
+Author: Toan Huynh
+
+    docs(hw03): mark non-rerun cross-platform items as N/A with reasons
+
+M	submission/task1-checklist/checklist.xlsx
+
+commit dada95f
+Date:   2026-11-15 22:14
+Author: Toan Huynh
+
+    docs(hw03): log cross-browser bug update in AI audit log
+
+M	submission/ai/ai-audit-log.md
+
+commit 23e7418
+Date:   2026-11-15 22:13
+Author: Toan Huynh
+
+    docs(hw03): add cross-browser results to BUG-19 and BUG-31, update README summary
+
+M	submission/README.md
+M	submission/bugs/BUG-19.md
+M	submission/bugs/BUG-31.md
+M	submission/bugs/README.md
+M	submission/task1-checklist/checklist.xlsx
+
+commit 1e52127
+Date:   2026-11-15 22:12
+Author: Toan Huynh
+
+    docs(hw03): add BrowserStack session-closed evidence
+
+A	submission/task3-crossplatform/browserstack/BS_session-closed.png
+
+commit f9c0875
+Date:   2026-11-15 22:09
+Author: Toan Huynh
+
+    docs(hw03): add BrowserStack free-trial limit evidence
+
+A	submission/task3-crossplatform/browserstack/BS_trial-limit.png
+
+commit 3624aa7
+Date:   2026-11-15 22:07
+Author: Toan Huynh
+
+    test(hw03): add Safari non-admin login capture
+
+M	submission/task1-checklist/checklist.xlsx
+A	submission/task3-crossplatform/safari/GUI-04-10_SF.png
+
+commit 8f6044e
+Date:   2026-11-15 22:06
+Author: Toan Huynh
+
+    test(hw03): cross-browser run on Safari (macOS)
+
+M	submission/task1-checklist/checklist.xlsx
+A	submission/task3-crossplatform/safari/ABOUT_SF.png
+A	submission/task3-crossplatform/safari/GUI-01-02_SF.png
+A	submission/task3-crossplatform/safari/GUI-01-03_SF.png
+A	submission/task3-crossplatform/safari/GUI-01-04_SF.png
+A	submission/task3-crossplatform/safari/GUI-01-09_SF.png
+A	submission/task3-crossplatform/safari/GUI-01-10-2_SF.png
+A	submission/task3-crossplatform/safari/GUI-01-10_SF.png
+A	submission/task3-crossplatform/safari/GUI-01-11_SF.png
+A	submission/task3-crossplatform/safari/GUI-01-13_SF.png
+A	submission/task3-crossplatform/safari/GUI-01-14_SF.png
+A	submission/task3-crossplatform/safari/GUI-01-15_SF.png
+A	submission/task3-crossplatform/safari/GUI-01-16_SF.png
+A	submission/task3-crossplatform/safari/GUI-01-21_SF.png
+A	submission/task3-crossplatform/safari/GUI-02-07_SF.png
+A	submission/task3-crossplatform/safari/GUI-02-08_SF.png
+A	submission/task3-crossplatform/safari/GUI-02-11_SF.png
+A	submission/task3-crossplatform/safari/GUI-02-13_SF.png
+A	submission/task3-crossplatform/safari/GUI-02-17-2_SF.png
+A	submission/task3-crossplatform/safari/GUI-02-17_SF.png
+A	submission/task3-crossplatform/safari/GUI-02-21-2_SF.png
+A	submission/task3-crossplatform/safari/GUI-02-21_SF.png
+A	submission/task3-crossplatform/safari/GUI-02-22_SF.png
+A	submission/task3-crossplatform/safari/GUI-02-24_SF.png
+A	submission/task3-crossplatform/safari/GUI-04-06_SF.png
+
+commit 3bcd760
+Date:   2026-11-15 17:01
+Author: Toan Huynh
+
+    test(hw03): cross-browser run on Firefox (macOS)
+
+M	submission/task1-checklist/checklist.xlsx
+A	submission/task3-crossplatform/firefox/ABOUT_FF.png
+A	submission/task3-crossplatform/firefox/GUI-01-02_FF.png
+A	submission/task3-crossplatform/firefox/GUI-01-03_FF.png
+A	submission/task3-crossplatform/firefox/GUI-01-04_FF.png
+A	submission/task3-crossplatform/firefox/GUI-01-09_FF.png
+A	submission/task3-crossplatform/firefox/GUI-01-10-2_FF.png
+A	submission/task3-crossplatform/firefox/GUI-01-10_FF.png
+A	submission/task3-crossplatform/firefox/GUI-01-11_FF.png
+A	submission/task3-crossplatform/firefox/GUI-01-13_FF.png
+A	submission/task3-crossplatform/firefox/GUI-01-14_FF.png
+A	submission/task3-crossplatform/firefox/GUI-01-15_FF.png
+A	submission/task3-crossplatform/firefox/GUI-01-16_FF.png
+A	submission/task3-crossplatform/firefox/GUI-01-17_FF.png
+A	submission/task3-crossplatform/firefox/GUI-01-21_FF.png
+A	submission/task3-crossplatform/firefox/GUI-02-07_FF.png
+A	submission/task3-crossplatform/firefox/GUI-02-08_FF.png
+A	submission/task3-crossplatform/firefox/GUI-02-11_FF.png
+A	submission/task3-crossplatform/firefox/GUI-02-13_FF.png
+A	submission/task3-crossplatform/firefox/GUI-02-17-2_FF.png
+A	submission/task3-crossplatform/firefox/GUI-02-17_FF.png
+A	submission/task3-crossplatform/firefox/GUI-02-21-2_FF.png
+A	submission/task3-crossplatform/firefox/GUI-02-21_FF.png
+A	submission/task3-crossplatform/firefox/GUI-02-22_FF.png
+A	submission/task3-crossplatform/firefox/GUI-02-24_FF.png
+A	submission/task3-crossplatform/firefox/GUI-04-06_FF.png
+A	submission/task3-crossplatform/firefox/GUI-04-10_FF.png
+
+commit 50fd051
+Date:   2026-11-15 16:07
+Author: Toan Huynh
+
+    test(hw03): cross-browser run on Chrome (macOS)
+
+M	submission/task1-checklist/checklist.xlsx
+A	submission/task3-crossplatform/chrome/ABOUT_CH.png
+A	submission/task3-crossplatform/chrome/GUI-01-02_CH.png
+A	submission/task3-crossplatform/chrome/GUI-01-03_CH.png
+A	submission/task3-crossplatform/chrome/GUI-01-04_CH.png
+A	submission/task3-crossplatform/chrome/GUI-01-09_CH.png
+A	submission/task3-crossplatform/chrome/GUI-01-10-2_CH.png
+A	submission/task3-crossplatform/chrome/GUI-01-10_CH.png
+A	submission/task3-crossplatform/chrome/GUI-01-11_CH.png
+A	submission/task3-crossplatform/chrome/GUI-01-13_CH.png
+A	submission/task3-crossplatform/chrome/GUI-01-14_CH.png
+A	submission/task3-crossplatform/chrome/GUI-01-15_CH.png
+A	submission/task3-crossplatform/chrome/GUI-01-16_CH.png
+A	submission/task3-crossplatform/chrome/GUI-01-17_CH.png
+A	submission/task3-crossplatform/chrome/GUI-01-21_CH.png
+A	submission/task3-crossplatform/chrome/GUI-02-07_CH.png
+A	submission/task3-crossplatform/chrome/GUI-02-08_CH.png
+A	submission/task3-crossplatform/chrome/GUI-02-11_CH.png
+A	submission/task3-crossplatform/chrome/GUI-02-13_CH.png
+A	submission/task3-crossplatform/chrome/GUI-02-17-2_CH.png
+A	submission/task3-crossplatform/chrome/GUI-02-17_CH.png
+A	submission/task3-crossplatform/chrome/GUI-02-21_CH.png
+A	submission/task3-crossplatform/chrome/GUI-02-22_CH.png
+A	submission/task3-crossplatform/chrome/GUI-02-24_CH.png
+A	submission/task3-crossplatform/chrome/GUI-04-06_CH.png
+A	submission/task3-crossplatform/chrome/GUI-04-10_CH.png
+
+commit 2e8c831
+Date:   2026-11-15 15:23
+Author: Toan Huynh
+
+    docs(hw03): switch cross-browser run to real browsers due to BrowserStack 1-minute trial
+
+M	submission/task1-checklist/checklist.xlsx
+M	submission/task3-crossplatform/run-plan.md
+
+commit d8ceac4
+Date:   2026-11-15 15:11
+Author: Toan Huynh
+
+    test(hw03): usability session P1 and pilot adjustments
+
+M	submission/ai/ai-audit-log.md
+M	submission/task2-usability/plan.md
+M	submission/task2-usability/sessions/P1/notes.md
+
+commit d7aa05a
+Date:   2026-11-15 14:40
+Author: Toan Huynh
+
+    docs(hw03): cross-browser run plan
+
+A	submission/task3-crossplatform/run-plan.md
+
+commit e51fa16
+Date:   2026-11-15 13:17
+Author: Toan Huynh
+
+    test(hw03): usability pilot session
+
+M	submission/ai/ai-audit-log.md
+M	submission/task2-usability/pilot/notes.md
+M	submission/task2-usability/sus-and-metrics.xlsx
+
+commit c767f91
+Date:   2026-11-15 12:52
+Author: Toan Huynh
+
+    docs(hw03): add usability participants and schedule
+
+M	submission/task2-usability/participants.md
+
+commit 04e0dee
+Date:   2026-11-15 12:45
+Author: Toan Huynh
+
+    docs(hw03): usability plan and instruments
+
+M	submission/ai/ai-audit-log.md
+M	submission/task2-usability/participants.md
+M	submission/task2-usability/plan.md
+
+commit d3eeb18
+Date:   2026-11-15 00:50
+Author: Toan Huynh
+
+    docs(hw03): fill Task 1 test summary
+
+M	submission/README.md
+
+commit c17346a
+Date:   2026-11-13 00:25
+Author: Toan Huynh
+
+    docs(hw03): link bug reports and checklist to GitHub issues
+
+M	submission/ai/ai-audit-log.md
+M	submission/bugs/BUG-01.md
+M	submission/bugs/BUG-02.md
+M	submission/bugs/BUG-03.md
+M	submission/bugs/BUG-04.md
+M	submission/bugs/BUG-05.md
+M	submission/bugs/BUG-06.md
+M	submission/bugs/BUG-07.md
+M	submission/bugs/BUG-08.md
+M	submission/bugs/BUG-09.md
+M	submission/bugs/BUG-10.md
+M	submission/bugs/BUG-11.md
+M	submission/bugs/BUG-12.md
+M	submission/bugs/BUG-13.md
+M	submission/bugs/BUG-14.md
+M	submission/bugs/BUG-15.md
+M	submission/bugs/BUG-16.md
+M	submission/bugs/BUG-17.md
+M	submission/bugs/BUG-18.md
+M	submission/bugs/BUG-19.md
+M	submission/bugs/BUG-20.md
+M	submission/bugs/BUG-21.md
+M	submission/bugs/BUG-22.md
+M	submission/bugs/BUG-23.md
+M	submission/bugs/BUG-24.md
+M	submission/bugs/BUG-25.md
+M	submission/bugs/BUG-26.md
+M	submission/bugs/BUG-27.md
+M	submission/bugs/BUG-28.md
+M	submission/bugs/BUG-29.md
+M	submission/bugs/BUG-30.md
+M	submission/bugs/BUG-31.md
+M	submission/bugs/BUG-32.md
+M	submission/bugs/BUG-33.md
+M	submission/bugs/README.md
+M	submission/task1-checklist/checklist.xlsx
+
+commit 489dbec
+Date:   2026-11-13 00:16
+Author: Toan Huynh
+
+    docs(hw03): write bug reports from failed GUI checklist items
+
+M	submission/ai/ai-audit-log.md
+A	submission/bugs/BUG-01.md
+A	submission/bugs/BUG-02.md
+A	submission/bugs/BUG-03.md
+A	submission/bugs/BUG-04.md
+A	submission/bugs/BUG-05.md
+A	submission/bugs/BUG-06.md
+A	submission/bugs/BUG-07.md
+A	submission/bugs/BUG-08.md
+A	submission/bugs/BUG-09.md
+A	submission/bugs/BUG-10.md
+A	submission/bugs/BUG-11.md
+A	submission/bugs/BUG-12.md
+A	submission/bugs/BUG-13.md
+A	submission/bugs/BUG-14.md
+A	submission/bugs/BUG-15.md
+A	submission/bugs/BUG-16.md
+A	submission/bugs/BUG-17.md
+A	submission/bugs/BUG-18.md
+A	submission/bugs/BUG-19.md
+A	submission/bugs/BUG-20.md
+A	submission/bugs/BUG-21.md
+A	submission/bugs/BUG-22.md
+A	submission/bugs/BUG-23.md
+A	submission/bugs/BUG-24.md
+A	submission/bugs/BUG-25.md
+A	submission/bugs/BUG-26.md
+A	submission/bugs/BUG-27.md
+A	submission/bugs/BUG-28.md
+A	submission/bugs/BUG-29.md
+A	submission/bugs/BUG-30.md
+A	submission/bugs/BUG-31.md
+A	submission/bugs/BUG-32.md
+A	submission/bugs/BUG-33.md
+M	submission/bugs/README.md
+
+commit 0585c07
+Date:   2026-11-13 00:11
+Author: Toan Huynh
+
+    test(hw03): fill verified checklist results and failed screenshots
+
+M	submission/ai/ai-audit-log.md
+M	submission/task1-checklist/checklist.xlsx
+D	submission/task1-checklist/screenshots/failed/.gitkeep
+A	submission/task1-checklist/screenshots/failed/GUI-01-01-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-01.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-02.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-03-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-03-3.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-03-4.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-03.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-05.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-09.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-10-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-10-3.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-10-4.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-10.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-13.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-15-2-coupon.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-15-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-15-coupon.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-15.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-16-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-16-3.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-16.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-19.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-20-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-20.png
+A	submission/task1-checklist/screenshots/failed/GUI-01-21.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-01-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-01-3.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-01-4.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-01.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-02.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-03.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-06.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-08.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-09.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-10.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-11-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-11.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-12.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-13.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-14.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-15-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-15.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-17.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-18-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-18-3.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-18.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-19.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-20.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-21.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-22.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-24-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-24.png
+A	submission/task1-checklist/screenshots/failed/GUI-02-25.png
+A	submission/task1-checklist/screenshots/failed/GUI-03-06-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-03-06.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-01-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-01-3.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-01.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-02-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-02.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-03.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-04-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-04.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-05.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-07.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-08-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-08-3.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-08.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-09-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-09-3.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-09.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-11-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-11.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-12-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-12.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-13-2.png
+A	submission/task1-checklist/screenshots/failed/GUI-04-13.png
+
+commit 8abfb97
+Date:   2026-11-13 00:07
+Author: Toan Huynh
+
+    test(hw03): verify checklist execution results.
+
+M	submission/task1-checklist/execution-observations.md
+
+commit 8c3fc97
+Date:   2026-11-12 23:57
+Author: Toan Huynh
+
+    test(hw03): run GUI checklist with Playwright and record observations
+
+A	scripts/hw03-run-checklist.mjs
+M	submission/ai/ai-audit-log.md
+M	submission/task1-checklist/checklist.xlsx
+A	submission/task1-checklist/execution-observations.md
+A	submission/task1-checklist/screenshots/run/GUI-01-01-2.png
+A	submission/task1-checklist/screenshots/run/GUI-01-01.png
+A	submission/task1-checklist/screenshots/run/GUI-01-02.png
+A	submission/task1-checklist/screenshots/run/GUI-01-03-2.png
+A	submission/task1-checklist/screenshots/run/GUI-01-03-3.png
+A	submission/task1-checklist/screenshots/run/GUI-01-03-4.png
+A	submission/task1-checklist/screenshots/run/GUI-01-03.png
+A	submission/task1-checklist/screenshots/run/GUI-01-05.png
+A	submission/task1-checklist/screenshots/run/GUI-01-06-2.png
+A	submission/task1-checklist/screenshots/run/GUI-01-06-3.png
+A	submission/task1-checklist/screenshots/run/GUI-01-06.png
+A	submission/task1-checklist/screenshots/run/GUI-01-07-2.png
+A	submission/task1-checklist/screenshots/run/GUI-01-07-3.png
+A	submission/task1-checklist/screenshots/run/GUI-01-07.png
+A	submission/task1-checklist/screenshots/run/GUI-01-08.png
+A	submission/task1-checklist/screenshots/run/GUI-01-09.png
+A	submission/task1-checklist/screenshots/run/GUI-01-10-2.png
+A	submission/task1-checklist/screenshots/run/GUI-01-10-3.png
+A	submission/task1-checklist/screenshots/run/GUI-01-10-4.png
+A	submission/task1-checklist/screenshots/run/GUI-01-10.png
+A	submission/task1-checklist/screenshots/run/GUI-01-11.png
+A	submission/task1-checklist/screenshots/run/GUI-01-12-2.png
+A	submission/task1-checklist/screenshots/run/GUI-01-12.png
+A	submission/task1-checklist/screenshots/run/GUI-01-13.png
+A	submission/task1-checklist/screenshots/run/GUI-01-14-2.png
+A	submission/task1-checklist/screenshots/run/GUI-01-14.png
+A	submission/task1-checklist/screenshots/run/GUI-01-15-2-coupon.png
+A	submission/task1-checklist/screenshots/run/GUI-01-15-2.png
+A	submission/task1-checklist/screenshots/run/GUI-01-15-coupon.png
+A	submission/task1-checklist/screenshots/run/GUI-01-15.png
+A	submission/task1-checklist/screenshots/run/GUI-01-16-2.png
+A	submission/task1-checklist/screenshots/run/GUI-01-16-3.png
+A	submission/task1-checklist/screenshots/run/GUI-01-16.png
+A	submission/task1-checklist/screenshots/run/GUI-01-17-2.png
+A	submission/task1-checklist/screenshots/run/GUI-01-17-3.png
+A	submission/task1-checklist/screenshots/run/GUI-01-17.png
+A	submission/task1-checklist/screenshots/run/GUI-01-18-2.png
+A	submission/task1-checklist/screenshots/run/GUI-01-18.png
+A	submission/task1-checklist/screenshots/run/GUI-01-19.png
+A	submission/task1-checklist/screenshots/run/GUI-01-20-2.png
+A	submission/task1-checklist/screenshots/run/GUI-01-20.png
+A	submission/task1-checklist/screenshots/run/GUI-01-21.png
+A	submission/task1-checklist/screenshots/run/GUI-02-01-2.png
+A	submission/task1-checklist/screenshots/run/GUI-02-01-3.png
+A	submission/task1-checklist/screenshots/run/GUI-02-01-4.png
+A	submission/task1-checklist/screenshots/run/GUI-02-01.png
+A	submission/task1-checklist/screenshots/run/GUI-02-02.png
+A	submission/task1-checklist/screenshots/run/GUI-02-03.png
+A	submission/task1-checklist/screenshots/run/GUI-02-04.png
+A	submission/task1-checklist/screenshots/run/GUI-02-05-2.png
+A	submission/task1-checklist/screenshots/run/GUI-02-05.png
+A	submission/task1-checklist/screenshots/run/GUI-02-06.png
+A	submission/task1-checklist/screenshots/run/GUI-02-07.png
+A	submission/task1-checklist/screenshots/run/GUI-02-08.png
+A	submission/task1-checklist/screenshots/run/GUI-02-09-2.png
+A	submission/task1-checklist/screenshots/run/GUI-02-09.png
+A	submission/task1-checklist/screenshots/run/GUI-02-10.png
+A	submission/task1-checklist/screenshots/run/GUI-02-11-2.png
+A	submission/task1-checklist/screenshots/run/GUI-02-11.png
+A	submission/task1-checklist/screenshots/run/GUI-02-12.png
+A	submission/task1-checklist/screenshots/run/GUI-02-13.png
+A	submission/task1-checklist/screenshots/run/GUI-02-14.png
+A	submission/task1-checklist/screenshots/run/GUI-02-15-2.png
+A	submission/task1-checklist/screenshots/run/GUI-02-15.png
+A	submission/task1-checklist/screenshots/run/GUI-02-16.png
+A	submission/task1-checklist/screenshots/run/GUI-02-17.png
+A	submission/task1-checklist/screenshots/run/GUI-02-18-2.png
+A	submission/task1-checklist/screenshots/run/GUI-02-18-3.png
+A	submission/task1-checklist/screenshots/run/GUI-02-18.png
+A	submission/task1-checklist/screenshots/run/GUI-02-19.png
+A	submission/task1-checklist/screenshots/run/GUI-02-20.png
+A	submission/task1-checklist/screenshots/run/GUI-02-21.png
+A	submission/task1-checklist/screenshots/run/GUI-02-22.png
+A	submission/task1-checklist/screenshots/run/GUI-02-23-2.png
+A	submission/task1-checklist/screenshots/run/GUI-02-23.png
+A	submission/task1-checklist/screenshots/run/GUI-02-24-2.png
+A	submission/task1-checklist/screenshots/run/GUI-02-24.png
+A	submission/task1-checklist/screenshots/run/GUI-02-25.png
+A	submission/task1-checklist/screenshots/run/GUI-03-01-2.png
+A	submission/task1-checklist/screenshots/run/GUI-03-01.png
+A	submission/task1-checklist/screenshots/run/GUI-03-02.png
+A	submission/task1-checklist/screenshots/run/GUI-03-03.png
+A	submission/task1-checklist/screenshots/run/GUI-03-04-2.png
+A	submission/task1-checklist/screenshots/run/GUI-03-04.png
+A	submission/task1-checklist/screenshots/run/GUI-03-05.png
+A	submission/task1-checklist/screenshots/run/GUI-03-06-2.png
+A	submission/task1-checklist/screenshots/run/GUI-03-06.png
+A	submission/task1-checklist/screenshots/run/GUI-03-07.png
+A	submission/task1-checklist/screenshots/run/GUI-03-08.png
+A	submission/task1-checklist/screenshots/run/GUI-04-01-2.png
+A	submission/task1-checklist/screenshots/run/GUI-04-01-3.png
+A	submission/task1-checklist/screenshots/run/GUI-04-01.png
+A	submission/task1-checklist/screenshots/run/GUI-04-02-2.png
+A	submission/task1-checklist/screenshots/run/GUI-04-02.png
+A	submission/task1-checklist/screenshots/run/GUI-04-03.png
+A	submission/task1-checklist/screenshots/run/GUI-04-04-2.png
+A	submission/task1-checklist/screenshots/run/GUI-04-04.png
+A	submission/task1-checklist/screenshots/run/GUI-04-05.png
+A	submission/task1-checklist/screenshots/run/GUI-04-07.png
+A	submission/task1-checklist/screenshots/run/GUI-04-08-2.png
+A	submission/task1-checklist/screenshots/run/GUI-04-08-3.png
+A	submission/task1-checklist/screenshots/run/GUI-04-08.png
+A	submission/task1-checklist/screenshots/run/GUI-04-09-2.png
+A	submission/task1-checklist/screenshots/run/GUI-04-09-3.png
+A	submission/task1-checklist/screenshots/run/GUI-04-09.png
+A	submission/task1-checklist/screenshots/run/GUI-04-10.png
+A	submission/task1-checklist/screenshots/run/GUI-04-11-2.png
+A	submission/task1-checklist/screenshots/run/GUI-04-11.png
+A	submission/task1-checklist/screenshots/run/GUI-04-12-2.png
+A	submission/task1-checklist/screenshots/run/GUI-04-12.png
+A	submission/task1-checklist/screenshots/run/GUI-04-13-2.png
+A	submission/task1-checklist/screenshots/run/GUI-04-13.png
+A	submission/task1-checklist/screenshots/run/GUI-04-14.png
+A	submission/task1-checklist/screenshots/run/GUI-04-15.png
+A	submission/task1-checklist/screenshots/run/GUI-04-16.png
+
+commit 91cfaca
+Date:   2026-11-12 23:18
+Author: Toan Huynh
+
+    test(hw03): filter checklist + add items AI missed
+
+A	submission/task1-checklist/checklist-filtered.md
+
+commit 73ffe26
+Date:   2026-11-12 23:10
+Author: Toan Huynh
+
+    test(hw03): add draft GUI checklist for Web Admin (IA-01 to IA-04)
+
+M	submission/ai/ai-audit-log.md
+A	submission/task1-checklist/checklist-draft.md
+
+commit 14253d8
+Date:   2026-11-12 22:58
+Author: Toan Huynh
+
+    docs(hw03): add Web Admin UI inventory and spec clarifications
+
+M	submission/ai/ai-audit-log.md
+A	submission/task1-checklist/ui-inventory.md
+
+commit d2853e7
+Date:   2026-11-12 22:56
+Author: Toan Huynh
+
+    docs(hw03): add commit rules to CLAUDE.md
+
+M	CLAUDE.md
+
+commit 6e1c7a0
+Date:   2026-11-12 22:30
+Author: Toan Huynh
+
+    docs(hw03): fix audit log formatting
+
+M	submission/ai/ai-audit-log.md
+
+commit 884afc9
+Date:   2026-11-12 22:30
+Author: Toan Huynh
+
+    chore(hw03): setup SUT scripts, submission structure, templates
+
+M	.gitignore
+A	CLAUDE.md
+A	scripts/seed-hw03.sh
+A	scripts/start-sut.sh
+A	scripts/stop-sut.sh
+A	submission/README.md
+A	submission/ai/ai-audit-log.md
+A	submission/ai/ai-critique.md
+A	submission/bugs/BUG-TEMPLATE.md
+A	submission/bugs/README.md
+A	submission/report/main-report.md
+A	submission/skills/gui-checklist/.gitkeep
+A	submission/skills/usability-eval/.gitkeep
+A	submission/task1-checklist/checklist.xlsx
+A	submission/task1-checklist/prompts/.gitkeep
+A	submission/task1-checklist/screenshots/failed/.gitkeep
+A	submission/task2-usability/analysis.md
+A	submission/task2-usability/participants.md
+A	submission/task2-usability/pilot/notes.md
+A	submission/task2-usability/plan.md
+A	submission/task2-usability/recordings/.gitkeep
+A	submission/task2-usability/session-notes-TEMPLATE.md
+A	submission/task2-usability/sessions/P1/notes.md
+A	submission/task2-usability/sessions/P2/notes.md
+A	submission/task2-usability/sessions/P3/notes.md
+A	submission/task2-usability/sessions/P4/notes.md
+A	submission/task2-usability/sessions/P5/notes.md
+A	submission/task2-usability/sessions/P6/notes.md
+A	submission/task2-usability/sessions/P7/notes.md
+A	submission/task2-usability/sus-and-metrics.xlsx
+A	submission/task3-crossplatform/README.md
+A	submission/task3-crossplatform/chrome/.gitkeep
+A	submission/task3-crossplatform/firefox/.gitkeep
+A	submission/task3-crossplatform/safari/.gitkeep
+A	submission/test-data/csv/01-valid-3-rows.csv
+A	submission/test-data/csv/02-invalid-negative-price.csv
+A	submission/test-data/csv/03-invalid-empty-name.csv
+A	submission/test-data/csv/04-boundary-price-zero.csv
+A	submission/test-data/csv/05-wrong-header.csv
+A	submission/test-data/csv/06-wrong-extension.txt
+A	submission/test-data/csv/07-name-255-256.csv
+A	submission/test-data/csv/08-html-escape.csv
+A	submission/test-data/csv/README.md
+
+commit 5e97551
+Date:   2026-11-12 16:52
+Author: Toan Huynh
+
+    upload requirement
+
+A	2026.HW03.GUI Usability_En.md
+
+commit a19e264
+Date:   2026-11-12 16:52
+Author: Toan Huynh
+
+    setup
+
+D	.agents/skills/domain-testing-bva/SKILL.md
+A	.gitignore
+D	AGENTS.md
