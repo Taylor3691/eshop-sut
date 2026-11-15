@@ -387,6 +387,34 @@
   - Kiểm dữ liệu SUT sau reset để scenario khớp: 3 danh mục mặc định, 3 đơn pending của seed (đơn cần duyệt: 45 Lê Lợi, Q.1, TP.HCM); danh mục "Đồ mùa đông", sản phẩm "Áo khoác lông vũ", mã "WINTER15" chưa tồn tại.
   - `submission/task2-usability/plan.md`
 
+## #23 — Chép phiếu phiên Pilot vào notes và bảng SUS
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 13:12
+- **Prompt:** Đây là phiếu ghi phiên {Pilot}. Hãy chép đúng từng phần vào
+{pilot/notes.md | sessions/Px/notes.md} theo session-notes-TEMPLATE.md
+và sus-and-metrics.xlsx (sheet SUS + Task metrics), báo lại điểm SUS.
+Chỉ chép, không thêm, không sửa lời nguyên văn. Ô nào trong phiếu
+để trống thì để trống (kèm phiếu ghi phiên Pilot)
+- **AI output:**
+  - Chép phiếu Pilot vào `pilot/notes.md` theo template: thông tin phiên, 16 dòng quan sát (giữ mã loại H/E/F và mức độ như phiếu), bảng kết quả 6 bước, SUS, 15 câu probe (cột Chủ đề lấy theo mã C/E/S/T/W ở plan.md mục 6); để trống "Hoàn thành task" và "Nhận xét của người điều phối" vì phiếu không có
+  - `sus-and-metrics.xlsx`: thêm dòng Pilot ở sheet SUS (dòng 16, ngoài vùng Mean/SD/Min/Max của P1–P7) và 6 dòng Pilot ở sheet Task metrics (dòng 44–49); tính lại bằng Excel: điểm SUS Pilot = 45
+  - Ghi nhận: giờ kết thúc trong phiếu (13:15:50) muộn hơn thời điểm nhận phiếu (13:12), đã báo người dùng kiểm tra lại
+  - File: `submission/task2-usability/pilot/notes.md`, `submission/task2-usability/sus-and-metrics.xlsx`
+
+---
+
+## #24 — Commit phiên Pilot
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 13:17
+- **Prompt:** không cần sửa đâu, nó đúng rồi, phần thời gian này ko quan trọng
+- **AI output:**
+  - Giữ nguyên dữ liệu Pilot theo xác nhận của người dùng, commit phiên Pilot
+  - File: `submission/task2-usability/pilot/notes.md`, `submission/task2-usability/sus-and-metrics.xlsx`, `submission/ai/ai-audit-log.md`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
