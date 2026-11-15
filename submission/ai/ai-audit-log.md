@@ -526,6 +526,29 @@ Chỉ chép, không thêm, không sửa lời nguyên văn. Ô nào trong phiế
 
 ---
 
+## #33 — Viết phân tích kết quả usability
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 22:55
+- **Prompt:** bạn hãy viết analysis.md
+- **AI output:**
+  - Viết đủ 6 mục của `analysis.md` từ notes P1–P7 và `sus-and-metrics.xlsx` (không tính Pilot): SUS từng người và thống kê (TB 56.07, SD 13.98, trung vị 57.5, CI 95% 43.1–69.0, vùng Marginal), đóng góp từng câu SUS (thấp nhất Q6, Q2), so sánh theo kinh nghiệm quản trị; task metrics theo bước và theo người (6/7 hoàn thành không trợ giúp, B3 và B4 tắc nhất); 10 nhóm vấn đề I1–I10 kèm trích dẫn theo mốc thời gian; tách bug riêng lẻ (đối chiếu BUG-07, BUG-17, BUG-21, BUG-23) và 5 vấn đề thiết kế D1–D5; xếp hạng Nielsen 0–4 (I1 = 4; I2, I3, I4, I7 = 3); 10 đề xuất cải tiến gắn với W1
+  - Phát hiện: B2 của P7 mất 200 giây, vượt thời gian tối đa 180 giây nhưng phiếu ghi Y; giữ nguyên số liệu, ghi chú để người điều phối xác nhận
+  - File: `submission/task2-usability/analysis.md`
+
+---
+
+## #34 — Commit phân tích usability
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 22:56
+- **Prompt:** commit
+- **AI output:**
+  - Commit `analysis.md` và audit log với message `test(hw03): usability analysis`; không commit `backend/database.sqlite`
+  - File: `submission/task2-usability/analysis.md`, `submission/ai/ai-audit-log.md`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
