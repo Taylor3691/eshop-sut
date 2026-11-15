@@ -468,6 +468,64 @@ Chỉ chép, không thêm, không sửa lời nguyên văn. Ô nào trong phiế
 
 ---
 
+## #29 — Chép phiếu phiên P2–P7 vào notes và bảng SUS
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 22:36
+- **Prompt:** Đây là phiếu ghi phiên từ P1 tới P7. Hãy chép đúng từng phần vào {pilot/notes.md | sessions/Px/notes.md} theo session-notes-TEMPLATE.md và sus-and-metrics.xlsx (sheet SUS + Task metrics), báo lại điểm SUS. Chỉ chép, không thêm. Ô nào trong phiếu để trống thì để trống (kèm phiếu ghi phiên P2–P7 dán nguyên văn)
+- **AI output:**
+  - Chép phiếu P2–P7 vào `sessions/P2…P7/notes.md` theo template và cùng bố cục với P1: thông tin phiên, bảng quan sát, bảng kết quả 6 bước, SUS, probe (cột Chủ đề theo mã câu hỏi ở plan.md mục 6); để trống "Hoàn thành task" và "Nhận xét của người điều phối"; giữ nguyên giá trị A (P3 B6) ở cột Hoàn thành
+  - `sus-and-metrics.xlsx`: điền 10 câu SUS cho P1–P7 và 42 dòng Task metrics; dòng P1 lấy từ `sessions/P1/notes.md` vì sheet chưa có dữ liệu P1; công thức giữ nguyên
+  - Điểm SUS: P1 62.5, P2 57.5, P3 37.5, P4 80, P5 52.5, P6 60, P7 42.5; Mean 56.07, SD 13.98, Min 37.5, Max 80
+  - Phát hiện trong phiếu (chép nguyên, không sửa): P5 điều khiển qua Zalo nhưng quan sát 00:20 ghi "Chờ con trỏ trên Meet"
+  - File: `submission/task2-usability/sessions/P2/notes.md` … `sessions/P7/notes.md`, `submission/task2-usability/sus-and-metrics.xlsx`
+
+---
+
+## #30 — Kiểm tra mức hoàn thành Task 2
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 22:44
+- **Prompt:** kiểm tra task 2 hoàn thành chưa
+- **AI output:**
+  - Đối chiếu yêu cầu Task 2 trong đề với thư mục `task2-usability/`, báo cáo chính, README, bugs và git log
+  - Đã xong: Phase 1 (`plan.md`: mục tiêu, scenario, SUS, probe, pilot mục 9.2; `participants.md` 7 người + pilot), Phase 2 (notes Pilot, P1–P7; SUS và Task metrics trong xlsx)
+  - Kiểm tra dữ liệu notes: tổng thời gian 6 bước bằng đúng thời lượng phiên ở cả 8 phiên, mọi mốc quan sát nằm trong khoảng của bước tương ứng
+  - Chưa xong: `analysis.md` mới có tiêu đề; mục 3 báo cáo chính trống; chưa ghi bug usability và GitHub issue (README còn "_"); P2–P7 chưa commit, đề yêu cầu commit theo từng phiên
+  - Mâu thuẫn: `plan.md` và `participants.md` nói không quay màn hình, nhưng notes P1, P4, P5 ghi video `.mp4` và đồng ý ghi hình "Có", trong khi repo không có file video; `plan.md` mục 7.4 và 9.2 quy định mã Fr/E/H/Fu sau pilot nhưng notes P1–P7 vẫn dùng F; P5 qua Zalo nhưng quan sát ghi "Meet"
+  - Không sửa file nào
+
+---
+
+## #31 — Sửa mâu thuẫn video, mã quan sát, nền tảng P5
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 22:46
+- **Prompt:** bạn hãy fix phần này trước
+> Chuyện quay video bị mâu thuẫn. plan.md và participants.md hiện ghi "không quay màn hình", nhưng notes P1, P4, P5 ghi p1_truc.mp4, p4_bao.mp4, p5_ngan.mp4 và "Đồng ý ghi hình: Có". Trong repo không có file video nào, và recordings/.gitkeep đã bị xóa. Đề yêu cầu quay màn hình nếu người tham gia đồng ý, nên báo cáo cần nói rõ là có quay hay không. Nếu không quay thì phải giải thích lý do.
+> Mã loại quan sát chưa thống nhất. Theo mục 7.4 và 9.2 của plan.md, sau pilot đã đổi sang mã Fr/E/H/Fu. Nhưng notes P1–P7 vẫn dùng F, nên không biết đó là friction hay frustration. Cách sửa: hoặc ghi rõ trong phân tích F nghĩa là gì, hoặc sửa lại mục 9.2.
+> P5 có thể ghi nhầm. Phiên P5 chạy qua Zalo nhưng quan sát lúc 00:20 ghi "Chờ con trỏ trên Meet".
+- **AI output:**
+  - Chưa sửa file: cả ba điểm cần sự thật chỉ người điều phối biết (video P1/P4/P5 có tồn tại không, F trong phiếu nghĩa là friction hay frustration, P5 chạy trên Zalo hay Meet); sửa theo hướng nào khi chưa biết sẽ là tự đặt dữ liệu phiên
+  - Đã hỏi lại người dùng ba câu trên và nêu cách sửa tương ứng cho từng câu trả lời
+
+---
+
+## #32 — Bỏ phần ghi hình, thống nhất mã F, sửa P5 sang Google Meet
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 22:48
+- **Prompt:** 1. xóa phần record
+2.F luôn là friction
+3. meet
+- **AI output:**
+  - Bỏ trường "Video" và "Đồng ý ghi hình" ở dòng thông tin phiên của Pilot và P1–P7 cho khớp `session-notes-TEMPLATE.md` (template đã bỏ hai trường này)
+  - `plan.md` mục 7.4: mã ghi tắt là F (friction), E (error), H (hesitation), F không dùng cho frustration; mục 9.2 dòng 3: chỉnh sửa sau pilot là quy định F chỉ dùng cho friction, P1–P7 ghi theo quy định này
+  - P5: đổi thiết bị thành "điều khiển từ xa qua Google Meet" trong notes và hình thức "Online (Google Meet)" trong `participants.md`; quan sát 00:20 ("trên Meet") nay đã khớp, giữ nguyên
+  - File: `submission/task2-usability/pilot/notes.md`, `submission/task2-usability/sessions/P1/notes.md` … `sessions/P7/notes.md`, `submission/task2-usability/plan.md`, `submission/task2-usability/participants.md`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
