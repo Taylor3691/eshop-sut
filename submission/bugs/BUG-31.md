@@ -32,7 +32,7 @@
 |---|---|---|
 | Chrome (macOS) | 100000 → 100003 | Lỗi xảy ra |
 | Firefox 153.0.4 (macOS) | giữ 100000 | Không xảy ra |
-| Safari 27.2 (macOS) | giữ 100000 (cuộn bằng sự kiện giả lập, cần xác nhận bằng chuột thật) | Không xảy ra |
+| Safari 27.2 (macOS) | giữ 100000 (sự kiện con lăn chuột cấp hệ điều hành) | Không xảy ra |
 
 Lỗi chỉ tái hiện trên Chrome (hành vi mặc định của Chrome với `<input type="number">` đang focus); cần chặn sự kiện wheel trên ô số để thống nhất giữa các trình duyệt.
 
