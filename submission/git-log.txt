@@ -1,5 +1,24 @@
 Git commit log — HW03 GUI & Usability — nhánh hw03/toanhuynh (các commit tính từ main, mới nhất ở trên)
-Xuất lúc: 2026-11-16 00:31 · Tổng: 50 commit
+Xuất lúc: 2026-11-16 00:32 · Tổng: 52 commit
+
+commit 96f490c
+Date:   2026-11-16 00:32
+Author: Toan Huynh
+
+    docs(hw03): include skill demo output in submission package
+
+M	submission/README.md
+M	submission/ai/ai-audit-log.md
+M	submission/ai/ai-audit-log.pdf
+M	submission/skills/README.md
+
+commit 5d14c0b
+Date:   2026-11-16 00:31
+Author: Toan Huynh
+
+    docs(hw03): update git commit log
+
+M	submission/git-log.txt
 
 commit 1acd5c6
 Date:   2026-11-16 00:31
