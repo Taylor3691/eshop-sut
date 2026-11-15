@@ -2,7 +2,7 @@
 
 | Trường | Giá trị |
 |---|---|
-| GitHub Issue | #__ |
+| GitHub Issue | [#188](https://github.com/Taylor3691/eshop-sut/issues/188) |
 | Nguồn phát hiện | Usability P1–P7 (nhóm I3 trong `task2-usability/analysis.md`) |
 | Màn hình | Quản lý Sản phẩm |
 | Môi trường | macOS 27.2, Google Chrome 157.0.8103.79 (Playwright, headless), http://localhost:5174 |

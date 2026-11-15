@@ -27,7 +27,7 @@
 ![GUI-02-13.png](../task1-checklist/screenshots/failed/GUI-02-13.png)
 ![GUI-02-12.png](../task1-checklist/screenshots/failed/GUI-02-12.png)
 
-**Bằng chứng từ đánh giá khả dụng (Task 2, 15/11/2026, nhóm I4 trong `task2-usability/analysis.md`):**
+**Bằng chứng từ đánh giá khả dụng (Task 2, 15/11/2026, nhóm I4 trong `task2-usability/analysis.md`; đã ghi vào issue bằng [comment](https://github.com/Taylor3691/eshop-sut/issues/29#issuecomment-6897305582)):**
 - 5/7 người tham gia gõ giá trên thẻ "890.000" vào ô Giá tiền (P1 03:40, P3 05:20, P5 02:40, P6 04:20, P7 06:30). Ô giữ nguyên "890.000", tức giá trị 890 (số lẻ), và trang không cảnh báo gì. Cả 5 người tự nhận ra và gõ lại 890000 trước khi lưu, nên không có giá sai nào được lưu trong phiên.
 - *"Ô nuốt dấu chấm thành số lẻ. Phải gõ 890000."* (P1 03:40); *"Trang không cảnh báo, em tự đếm chữ số."* (P7 E1); *"Bên Kiot em gõ có dấu cũng được. Ở đây ô giữ 890.000."* (P6 04:20).
 - Nếu người dùng không tự để ý, sản phẩm sẽ được lưu với giá 890 ₫. Đây đúng là trường hợp "số lẻ" mà bug này mô tả.

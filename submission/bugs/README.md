@@ -35,11 +35,13 @@
 | [BUG-31](BUG-31.md) | [Sản phẩm, Mã giảm giá] Cuộn chuột trên ô số làm đổi giá trị đã nhập | GUI-02-24, Task 3 (chỉ Chrome) | Minor | [#148](https://github.com/Taylor3691/eshop-sut/issues/148) |
 | [BUG-32](BUG-32.md) | [Admin Login] Không tự đặt con trỏ vào ô Email, không có autocomplete | GUI-02-25 | Trivial | [#149](https://github.com/Taylor3691/eshop-sut/issues/149) |
 | [BUG-33](BUG-33.md) | [Nhiều màn hình] Tiêu đề tab trình duyệt luôn là "frontend-admin" | GUI-01-21 | Trivial | [#150](https://github.com/Taylor3691/eshop-sut/issues/150) |
-| [BUG-34](BUG-34.md) | [Quản lý Sản phẩm] Bảng sản phẩm không có cột danh mục, không kiểm lại được sản phẩm thuộc nhóm nào | Usability P1–P7 (I3) | Major | #__ |
-| [BUG-35](BUG-35.md) | [Quản lý Đơn hàng] Nút "Hủy" màu xám, nằm sát ngay dưới "Xác nhận" và hủy đơn ngay không hỏi lại | Usability P1–P7 (I6) | Major | #__ |
+| [BUG-34](BUG-34.md) | [Quản lý Sản phẩm] Bảng sản phẩm không có cột danh mục, không kiểm lại được sản phẩm thuộc nhóm nào | Usability P1–P7 (I3) | Major | [#188](https://github.com/Taylor3691/eshop-sut/issues/188) |
+| [BUG-35](BUG-35.md) | [Quản lý Đơn hàng] Nút "Hủy" màu xám, nằm sát ngay dưới "Xác nhận" và hủy đơn ngay không hỏi lại | Usability P1–P7 (I6) | Major | [#189](https://github.com/Taylor3691/eshop-sut/issues/189) |
 
 **Tổng:** 35 bug — Major: 17, Minor: 14, Trivial: 4 (33 bug từ checklist GUI, 2 bug từ đánh giá khả dụng).
 
 Nguồn: 44 mục Failed của checklist GUI (`../task1-checklist/execution-observations.md`), gộp theo nguyên nhân — mỗi bug một nguyên nhân. Ảnh trong `../task1-checklist/screenshots/failed/`.
 
 Issue GitHub: 25 issue mới #126–#150 (nhãn `hw03`, `module: admin`); 8 bug trùng với issue có sẵn được ghi số issue cũ, phần quan sát mới của BUG-07, BUG-09, BUG-12 được bổ sung bằng comment.
+
+Bug từ đánh giá khả dụng (Task 2): 2 issue mới #188, #189 (nhãn `hw03`, `module: admin`). Bằng chứng usability của BUG-07, BUG-17, BUG-21, BUG-23 được bổ sung bằng comment vào issue #29, #134, #138, #140. Ảnh trong `../task2-usability/screenshots/`.

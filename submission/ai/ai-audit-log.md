@@ -549,6 +549,24 @@ Chỉ chép, không thêm, không sửa lời nguyên văn. Ô nào trong phiế
 
 ---
 
+## #35 — Ghi bug usability và bổ sung bằng chứng vào bug Task 1
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 23:03
+- **Prompt:** hãy làm phần ghi bug usability. I3 (bảng sản phẩm không có cột danh mục) chắc chắn là bug mới. I6 (nút Hủy sát nút Xác nhận) và I7 (đóng tab không đăng xuất) có ghi thành bug hay không là do bạn quyết. I8 (ô ngày) cần kiểm lại xem có phải hành vi mặc định của Chrome không. Với các bug đã có từ Task 1, chỉ cần thêm bằng chứng từ phiên usability vào.
+- **AI output:**
+  - Chạy lại SUT bằng Playwright (Chrome 157.0.8103.79, headless, 1366×768, vi-VN) để kiểm I3, I6, I8 và chụp ảnh; sau đó reset dữ liệu bằng `start-sut.sh` + `seed-hw03.sh 3`
+  - I3 → BUG-34 (Major, P2), issue #188: bảng sản phẩm chỉ có cột Ảnh / Tên SP / Giá / Hành động, API lưu đúng `category_id = 4` nhưng giao diện không hiện danh mục
+  - I6 → BUG-35 (Major, P2), issue #189: nút Hủy màu xám `rgb(156, 163, 175)` (trái FR-21), cách nút Xác nhận 4 px, bấm một lần là đơn sang "Đã hủy" (trạng thái kết thúc FR-10), không có hộp thoại xác nhận
+  - I7: không ghi bug — không có yêu cầu bắt phiên kết thúc khi đóng tab, nút "Đăng xuất" đúng FR-23; giữ là đề xuất
+  - I8: không ghi bug — gõ "31/12/2026", "31122026", "31-12-2026", "31.12.2026" vào ô ngày trống trên Chrome 157 đều nhận 2026-12-31; không tái hiện được lỗi của P6
+  - Bổ sung mục "Bằng chứng từ đánh giá khả dụng" vào BUG-07 (I4), BUG-17 (I1), BUG-21 (I9), BUG-23 (I2) và comment vào issue #29, #134, #138, #140
+  - Cập nhật `bugs/README.md` (35 bug: Major 17, Minor 14, Trivial 4), README (số bug usability = 2), `analysis.md` mục 4.1, 4.2 và bảng quyết định bug ở mục 6
+  - Phát hiện ngoài phạm vi: đơn "Đã hủy" vẫn có nút "Đánh dấu Đã giao", trái FR-10 (`canceled` là trạng thái kết thúc); chưa có trong danh sách bug, chưa ghi
+  - File: `submission/bugs/BUG-34.md`, `submission/bugs/BUG-35.md`, `submission/bugs/BUG-07.md`, `submission/bugs/BUG-17.md`, `submission/bugs/BUG-21.md`, `submission/bugs/BUG-23.md`, `submission/bugs/README.md`, `submission/README.md`, `submission/task2-usability/analysis.md`, `submission/task2-usability/screenshots/UX-I3-product-table-no-category.png`, `submission/task2-usability/screenshots/UX-I6-cancel-next-to-confirm.png`, `submission/task2-usability/screenshots/UX-I6-cancel-no-confirm.png`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>

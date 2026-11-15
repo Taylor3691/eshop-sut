@@ -27,7 +27,7 @@
 ![GUI-02-01-3.png](../task1-checklist/screenshots/failed/GUI-02-01-3.png)
 ![GUI-02-02.png](../task1-checklist/screenshots/failed/GUI-02-02.png)
 
-**Bằng chứng từ đánh giá khả dụng (Task 2, 15/11/2026, nhóm I1 và I2 trong `task2-usability/analysis.md`):**
+**Bằng chứng từ đánh giá khả dụng (Task 2, 15/11/2026, nhóm I1 và I2 trong `task2-usability/analysis.md`; đã ghi vào issue bằng [comment](https://github.com/Taylor3691/eshop-sut/issues/134#issuecomment-6897305999)):**
 - **Form Mã giảm giá:** 7/7 người tham gia dừng ở hai ô chỉ hiện "0" và "1" mà không biết đó là ô gì (P1 06:10, P2 06:30, P3 08:20, P4 04:20, P5 06:10, P6 08:10, P7 09:50). P3 giữ nguyên 0 và 1 rồi lưu mã WINTER15 với đơn tối thiểu 0 và số lần 1, nên bước B4 không đạt: *"Trong ô có số rồi. Em tưởng trang đã điền giúp."* (P3 08:20). Sáu người còn lại phải dò tiêu đề cột của bảng bên dưới mới biết ô nào là gì.
 - **Ô chọn danh mục (form Sản phẩm):** ô không có nhãn nên P3 không nhận ra đó là chỗ chọn nhóm: *"Ô này không có tên. Em không biết có phải nhóm hàng không, em để vậy."* (P3 06:40). Xem thêm BUG-23.
 - Câu W1 của cả 7 người đều đề nghị ghi tên ô hoặc bỏ số có sẵn, ví dụ *"Để tên ô luôn hiện, kể cả khi trong ô đã có số."* (P5 W1).
