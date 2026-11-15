@@ -1,6 +1,6 @@
 # Phiên Pilot — 15/11/2026 13:00
 
-- Người tham gia: Pilot · Thiết bị/trình duyệt: macOS, Chrome, cửa sổ 1366×768 · Video: không quay · Đồng ý ghi hình: Không
+- Người tham gia: Pilot · Thiết bị/trình duyệt: macOS, Chrome, cửa sổ 1366×768
 - Bắt đầu: 13:00:10 · Kết thúc: 13:15:50 · Hoàn thành task:
 
 ## Ghi chú quan sát

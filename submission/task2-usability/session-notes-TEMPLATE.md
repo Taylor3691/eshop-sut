@@ -1,6 +1,6 @@
 # Phiên Px — <ngày giờ>
 
-- Người tham gia: Px · Thiết bị/trình duyệt: · Video: · Đồng ý ghi hình: ☐
+- Người tham gia: Px · Thiết bị/trình duyệt:
 - Bắt đầu: · Kết thúc: · Hoàn thành task: Có / Có trợ giúp / Không
 
 ## Ghi chú quan sát

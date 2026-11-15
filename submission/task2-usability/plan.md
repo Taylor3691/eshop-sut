@@ -4,7 +4,7 @@
 - **Hình thức:** đánh giá có điều phối (moderated), mẫu nhỏ: 7 người tham gia (P1–P7) + 1 phiên pilot, mỗi người một phiên, nói to suy nghĩ (think-aloud)
 - **Flow:** Đăng nhập Admin → Tạo danh mục → Thêm sản phẩm → Tạo mã giảm giá → Cập nhật trạng thái đơn đang chờ → Đăng xuất (theo `submission/README.md`)
 - **Công cụ đo:** SUS (sau phiên) + chỉ số theo bước (hoàn thành, thời gian, lỗi, số lần trợ giúp) + câu hỏi probe
-- **Ghi nhận:** quay màn hình + âm thanh (khi người tham gia đồng ý), ghi chú theo `session-notes-TEMPLATE.md`, nhập số liệu vào `sus-and-metrics.xlsx`
+- **Ghi nhận:** không quay màn hình; người điều phối ghi phiếu ghi chép trong phiên (mốc thời gian, hành vi, lời nói nguyên văn), chép vào `session-notes-TEMPLATE.md`, nhập số liệu vào `sus-and-metrics.xlsx`
 
 ---
 
@@ -39,7 +39,7 @@ Dữ liệu người tham gia cần nhập được in sẵn trên **thẻ thôn
 
 Ghi chú khi chấm:
 - Dữ liệu được lưu nhưng **sai** (ví dụ sản phẩm vào danh mục "Điện thoại", ngày hết hạn sai) → bước đó **không đạt**, ghi là lỗi nhập; nếu người tham gia tự phát hiện và sửa trong thời gian tối đa thì tính **Y** kèm ghi chú "tự sửa".
-- Thời gian mỗi bước tính từ lúc người tham gia bắt đầu tìm chỗ thực hiện bước đó đến khi đạt tiêu chí, đo trên video. Nếu phiên không quay video, người điều phối bấm giờ trực tiếp và ghi mốc bắt đầu / kết thúc của từng bước vào phiếu ghi (bổ sung sau pilot).
+- Thời gian mỗi bước tính từ lúc người tham gia bắt đầu tìm chỗ thực hiện bước đó đến khi đạt tiêu chí; người điều phối bấm giờ trực tiếp và ghi mốc bắt đầu / kết thúc của từng bước vào phiếu ghi.
 - Lỗi đã biết của SUT có thể xuất hiện trong phiên (ví dụ bảng sản phẩm hiện sai tên sau khi sửa — BUG-03, xóa không xác nhận — BUG-04). Nếu lỗi SUT làm người tham gia không thể đạt tiêu chí, ghi **N (do lỗi SUT)** và mã bug, không tính là lỗi người dùng.
 
 ---
@@ -57,7 +57,7 @@ Ghi chú khi chấm:
 | Ưu tiên | Người không làm IT / không làm kiểm thử phần mềm |
 | Loại trừ | Sinh viên đang học HW03; người đã từng xem hoặc dùng EShop; người tham gia pilot không được làm phiên chính thức |
 | Liên hệ | Zalo / email / số điện thoại có thể xác minh (che 4 số giữa khi ghi vào `participants.md`); đồng ý để TA gọi xác minh |
-| Đồng ý | Đồng ý tham gia và (nếu được) ghi hình màn hình + âm thanh; chỉ dùng mã P1–P7 trong báo cáo |
+| Đồng ý | Đồng ý tham gia và để người điều phối ghi chép; chỉ dùng mã P1–P7 trong báo cáo |
 
 Bảng tuyển chọn được ghi trong `participants.md` (mã, nghề nghiệp, tuổi, mức dùng máy tính, kinh nghiệm quản trị, liên hệ đã che).
 
@@ -133,7 +133,7 @@ Cách tính (đã cài sẵn trong `sus-and-metrics.xlsx`): câu lẻ lấy (đi
 | Chỉ số | Cách ghi |
 |---|---|
 | Hoàn thành | Y / Assisted / N (theo tiêu chí mục 2) |
-| Thời gian | giây, đo trên video (không quay video: bấm giờ trực tiếp, xem ghi chú mục 2) |
+| Thời gian | giây, người điều phối bấm giờ trực tiếp (xem ghi chú mục 2) |
 | Số lỗi | mỗi lần nhập sai, bấm nhầm mục, lưu dữ liệu sai, thao tác phải làm lại |
 | Số lần trợ giúp | số gợi ý mức 2–3 của người điều phối (mục 7.4) |
 | Ghi chú | hành vi đáng chú ý, mã bug nếu do lỗi SUT |
@@ -173,7 +173,7 @@ Tổng thời gian dự kiến **40–60 phút** / phiên (chưa tính 5 phút c
 | Giai đoạn | Thời lượng |
 |---|---|
 | Chuẩn bị môi trường (trước khi người tham gia đến) | 5 phút |
-| Giới thiệu, đồng ý ghi hình, tập nói to | 5 phút |
+| Giới thiệu, đồng ý tham gia, tập nói to | 5 phút |
 | Thực hiện scenario | 10–30 phút |
 | SUS | 3 phút |
 | Probe + câu hỏi thêm | 10–15 phút |
@@ -183,7 +183,6 @@ Tổng thời gian dự kiến **40–60 phút** / phiên (chưa tính 5 phút c
 
 - [ ] Reset dữ liệu: `scripts/start-sut.sh` rồi `scripts/seed-hw03.sh 3` (mục 8)
 - [ ] Mở Chrome cửa sổ mới ở trang http://localhost:5174, **chưa đăng nhập**; phóng to 100%, ẩn bookmark, đóng các tab khác
-- [ ] Bật quay màn hình + micro, kiểm tra âm thanh
 - [ ] In thẻ thông tin (mục 4.2), chuẩn bị bảng SUS (giấy hoặc Google Form) và file ghi chú `sessions/Px/notes.md`
 - [ ] Đồng hồ bấm giờ / ghi mốc thời gian
 
@@ -193,9 +192,9 @@ Tổng thời gian dự kiến **40–60 phút** / phiên (chưa tính 5 phút c
 >
 > Trong lúc làm, anh/chị cứ **nói to những gì mình đang nghĩ**: đang tìm gì, định bấm gì, thấy gì lạ, thấy khó chịu chỗ nào. Em sẽ hạn chế trả lời câu hỏi trong lúc anh/chị làm, vì em muốn xem trang web tự hướng dẫn người dùng tốt đến đâu; cuối buổi em sẽ giải đáp hết.
 >
-> Em xin phép **ghi lại màn hình và giọng nói** để xem lại khi phân tích; video chỉ dùng cho bài tập và anh/chị được ghi bằng mã số, không ghi tên. Anh/chị đồng ý chứ? Anh/chị có thể dừng bất cứ lúc nào."
+> Em sẽ ghi chép lại những gì anh/chị làm và nói để phân tích; ghi chép chỉ dùng cho bài tập và anh/chị được ghi bằng mã số, không ghi tên. Anh/chị đồng ý chứ? Anh/chị có thể dừng bất cứ lúc nào."
 
-→ Ghi "Đồng ý ghi hình: ☑" vào ghi chú. Nếu không đồng ý: chỉ ghi chú tay, không quay.
+→ Ghi nhận sự đồng ý vào ghi chú.
 
 ### 7.3. Tập nói to (1 phút)
 
@@ -205,7 +204,7 @@ Sau đó quay lại trang http://localhost:5174, đọc lời dẫn (mục 4.1),
 
 ### 7.4. Trong khi người tham gia làm
 
-**Quan sát trung lập:** không gật đầu / lắc đầu khi họ chọn, không chỉ màn hình, không giải thích giao diện. Ghi chú theo bảng quan sát (thời điểm, bước, hành vi, lời nói nguyên văn, loại: friction / error / hesitation / frustration, mức độ). Khi ghi tắt dùng mã **Fr** (friction), **E** (error), **H** (hesitation), **Fu** (frustration) để không lẫn hai loại cùng bắt đầu bằng F (bổ sung sau pilot).
+**Quan sát trung lập:** không gật đầu / lắc đầu khi họ chọn, không chỉ màn hình, không giải thích giao diện. Ghi chú theo bảng quan sát (thời điểm, bước, hành vi, lời nói nguyên văn, loại: friction / error / hesitation / frustration, mức độ). Khi ghi tắt dùng mã **F** (friction), **E** (error), **H** (hesitation); mã F chỉ dùng cho friction, không dùng cho frustration (bổ sung sau pilot).
 
 **Câu nhắc trung lập được dùng:**
 - Khi họ im lặng > 10 giây: "Anh/chị đang nghĩ gì vậy?"
@@ -227,7 +226,7 @@ Nếu SUT lỗi làm không thể tiếp tục (trang trắng, mất kết nối
 
 ### 7.5. Kết thúc scenario
 
-Khi người tham gia nói "Tôi xong rồi" hoặc hết 30 phút (dù đang ở bước nào): dừng giờ, **không** sửa hay nhận xét kết quả. Người điều phối ghi nhanh trạng thái dữ liệu (danh mục, sản phẩm, mã, đơn) để chấm theo tiêu chí mục 2, hoặc chấm lại sau trên video.
+Khi người tham gia nói "Tôi xong rồi" hoặc hết 30 phút (dù đang ở bước nào): dừng giờ, **không** sửa hay nhận xét kết quả. Người điều phối ghi nhanh trạng thái dữ liệu (danh mục, sản phẩm, mã, đơn) để chấm theo tiêu chí mục 2.
 
 ### 7.6. SUS
 
@@ -247,7 +246,6 @@ Giải đáp các thắc mắc trong phiên (lúc này mới được giải th�
 
 ### 7.9. Sau phiên (người điều phối)
 
-- [ ] Lưu video vào `recordings/` (hoặc link nếu file lớn), ghi link vào `participants.md`
 - [ ] Hoàn thiện `sessions/Px/notes.md` (quan sát, SUS, probe, nhận xét)
 - [ ] Nhập SUS và chỉ số theo bước vào `sus-and-metrics.xlsx`
 - [ ] Commit riêng cho phiên: `test(hw03): usability session Px`
@@ -299,7 +297,7 @@ Kết quả và các chỉnh sửa sau pilot ghi tại `pilot/notes.md` và tóm
 |---|---|---|---|
 | 1 | Thời gian: cả 6 bước đều trong thời gian tối đa (B3: 246 giây / 7 phút; B4: 327 giây / 8 phút); toàn bộ scenario 15 phút 40 giây / 30 phút. Bước 1, 2, 3, 4, 6 vượt thời gian mục tiêu | Giữ nguyên thời gian tối đa và khung 30 phút. Không đổi thời gian mục tiêu vì đây là chỉ tiêu khả dụng cần đo, không phải giới hạn của phiên | Mục 2, 7, 9.1 |
 | 2 | Pilot không quay video, trong khi kế hoạch quy định đo thời gian trên video | Thêm cách đo khi không có video: người điều phối bấm giờ và ghi mốc bắt đầu / kết thúc từng bước | Mục 2 (ghi chú), 5.3 |
-| 3 | Phiếu ghi dùng mã loại H / E / F; mã F không phân biệt được friction với frustration | Quy định mã ghi tắt Fr / E / H / Fu | Mục 7.4 |
+| 3 | Phiếu ghi dùng mã loại H / E / F; mã F không phân biệt được friction với frustration | Quy định mã F chỉ dùng cho friction; các phiên P1–P7 ghi theo quy định này | Mục 7.4 |
 | 4 | Flow chạy trọn vẹn trên dữ liệu reset: tạo được danh mục, sản phẩm, mã WINTER15; đơn 45 Lê Lợi chuyển "Đã xác nhận", hai đơn còn lại giữ "Chờ xác nhận"; đăng xuất về màn đăng nhập | Không chỉnh | Mục 8 |
 | 5 | Cách nói "nhóm hàng" khiến họ mở Sản phẩm trước khi sang Danh mục (01:52, 03:18), giá 890.000 ₫ khiến họ nhập 890.000 rồi gõ lại (05:12, 05:38) | Không chỉnh lời dẫn và thẻ: đây là hành vi scenario cần quan sát (mục 4.3), ghi nhận làm phát hiện khả dụng | Mục 4 |
 | 6 | Thẻ thông tin không có ảnh và file CSV; người tham gia tự để trống ô URL Ảnh và bỏ qua Import CSV (03:55, S3), không bị chặn | Không chỉnh thẻ, để không gợi ý phải bỏ qua ô nào | Mục 4.2 |
