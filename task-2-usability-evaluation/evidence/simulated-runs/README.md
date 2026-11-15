@@ -11,3 +11,5 @@ node task-2-usability-evaluation/evidence/simulated-runs/run-flow.cjs
 ```
 
 The runner creates one isolated browser context and synthetic account per label, then writes screenshots, videos, and `run-results.json`. Running it again appends new orders to the active backend database and replaces the same named evidence files. This automation is not a human usability study.
+
+`generate_synthetic_research_data.py` writes fictional persona narratives, interviews, and SUS vectors. It does not control a browser or create evidence. All resulting responses are marked **SIMULATED DATA** and must not be presented as participant research.

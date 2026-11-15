@@ -43,4 +43,4 @@ The browser captures are direct Playwright output and were not edited. They docu
 
 ## Limitations / remaining required work
 
-Recruit seven eligible real participants, conduct and document moderated sessions with consent, collect their own SUS forms and interview answers, then recalculate the analysis. Do not use the synthetic persona details or scores as participant findings. Cross-browser/cross-platform runs are outside this seven-run Chromium simulation.
+Recruit seven eligible real participants, conduct and document a human pilot and moderated sessions with consent, collect their own SUS forms and interview answers, then recalculate the analysis. Do not use the synthetic persona details or scores as participant findings. The automation preflight at `../participants/pilot/automation-preflight-simulated.md` is not a human pilot. Cross-browser/cross-platform runs are outside this seven-run Chromium simulation.

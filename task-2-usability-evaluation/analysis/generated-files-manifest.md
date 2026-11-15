@@ -2,7 +2,7 @@
 
 > Files added or updated for the simulated evaluation. Fictional responses and scores are labeled SIMULATED DATA; screenshots and videos are genuine Playwright output.
 
-Total listed files (excluding this manifest): **120**.
+Total listed files (excluding this manifest): **125**.
 
 - task-2-usability-evaluation/README.md
 - task-2-usability-evaluation/ai-audit/ai-audit-log.md
@@ -124,4 +124,9 @@ Total listed files (excluding this manifest): **120**.
 - task-2-usability-evaluation/participants/P07/session-summary.md
 - task-2-usability-evaluation/participants/P07/sus-responses.md
 - task-2-usability-evaluation/participants/participant-list.md
+- task-2-usability-evaluation/participants/pilot/automation-preflight-simulated.md
+- task-2-usability-evaluation/evidence/simulated-runs/generate_pdfs.py
+- task-2-usability-evaluation/output/pdf/ai-audit-simulated.pdf
+- task-2-usability-evaluation/output/pdf/ai-critique-simulated.pdf
+- task-2-usability-evaluation/output/pdf/main-report-simulated.pdf
 - task-2-usability-evaluation/analysis/generated-files-manifest.md (this manifest)
