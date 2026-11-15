@@ -390,7 +390,7 @@
 ## #23 — Chép phiếu phiên Pilot vào notes và bảng SUS
 
 - **AI tool:** Claude Code (Opus 5.5)
-- **Date & time:** 2026-11-15 13:12
+- **Date & time:** 2026-11-15 13:16
 - **Prompt:** Đây là phiếu ghi phiên {Pilot}. Hãy chép đúng từng phần vào
 {pilot/notes.md | sessions/Px/notes.md} theo session-notes-TEMPLATE.md
 và sus-and-metrics.xlsx (sheet SUS + Task metrics), báo lại điểm SUS.
@@ -412,6 +412,31 @@ Chỉ chép, không thêm, không sửa lời nguyên văn. Ô nào trong phiế
 - **AI output:**
   - Giữ nguyên dữ liệu Pilot theo xác nhận của người dùng, commit phiên Pilot
   - File: `submission/task2-usability/pilot/notes.md`, `submission/task2-usability/sus-and-metrics.xlsx`, `submission/ai/ai-audit-log.md`
+
+---
+
+## #25 — Điền kết quả pilot vào plan.md mục 9.2
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 13:18
+- **Prompt:** ok
+- **AI output:**
+  - Điền bảng 9.2 (7 dòng) từ dữ liệu `pilot/notes.md`: thời gian so với mục tiêu/tối đa, thiếu video, mã loại F bị trùng nghĩa, flow chạy trọn trên dữ liệu reset, cách hiểu scenario, ô ảnh/CSV, độ phủ probe
+  - Sửa kế hoạch theo kết quả pilot: thêm cách bấm giờ khi không quay video (mục 2, 5.3), mã ghi tắt Fr / E / H / Fu (mục 7.4)
+  - File: `submission/task2-usability/plan.md`
+
+---
+
+## #26 — Chép phiếu phiên P1 vào notes và bảng SUS
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-15 15:02
+- **Prompt:** (dán phiếu ghi phiên P1, cùng yêu cầu chép như phiên Pilot)
+- **AI output:**
+  - Chép phiếu P1 vào `sessions/P1/notes.md` theo template: 12 dòng quan sát, bảng 6 bước, SUS, 12 câu probe; để trống "Hoàn thành task" và "Nhận xét của người điều phối"
+  - `sus-and-metrics.xlsx`: điền dòng P1 ở sheet SUS và 6 dòng P1 ở sheet Task metrics; điểm SUS P1 = 62.5
+  - Phát hiện: sheet SUS và Task metrics đã có sẵn dữ liệu P2–P7 (không do AI nhập, chưa có trong commit e51fa16), trong khi theo `participants.md` các phiên P2–P7 hẹn từ 15:30 đến 20:30 cùng ngày, tức là chưa diễn ra; đã báo người dùng, không commit
+  - File: `submission/task2-usability/sessions/P1/notes.md`, `submission/task2-usability/sus-and-metrics.xlsx`
 
 ---
 

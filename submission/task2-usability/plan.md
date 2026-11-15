@@ -39,7 +39,7 @@ Dữ liệu người tham gia cần nhập được in sẵn trên **thẻ thôn
 
 Ghi chú khi chấm:
 - Dữ liệu được lưu nhưng **sai** (ví dụ sản phẩm vào danh mục "Điện thoại", ngày hết hạn sai) → bước đó **không đạt**, ghi là lỗi nhập; nếu người tham gia tự phát hiện và sửa trong thời gian tối đa thì tính **Y** kèm ghi chú "tự sửa".
-- Thời gian mỗi bước tính từ lúc người tham gia bắt đầu tìm chỗ thực hiện bước đó đến khi đạt tiêu chí, đo trên video.
+- Thời gian mỗi bước tính từ lúc người tham gia bắt đầu tìm chỗ thực hiện bước đó đến khi đạt tiêu chí, đo trên video. Nếu phiên không quay video, người điều phối bấm giờ trực tiếp và ghi mốc bắt đầu / kết thúc của từng bước vào phiếu ghi (bổ sung sau pilot).
 - Lỗi đã biết của SUT có thể xuất hiện trong phiên (ví dụ bảng sản phẩm hiện sai tên sau khi sửa — BUG-03, xóa không xác nhận — BUG-04). Nếu lỗi SUT làm người tham gia không thể đạt tiêu chí, ghi **N (do lỗi SUT)** và mã bug, không tính là lỗi người dùng.
 
 ---
@@ -133,7 +133,7 @@ Cách tính (đã cài sẵn trong `sus-and-metrics.xlsx`): câu lẻ lấy (đi
 | Chỉ số | Cách ghi |
 |---|---|
 | Hoàn thành | Y / Assisted / N (theo tiêu chí mục 2) |
-| Thời gian | giây, đo trên video |
+| Thời gian | giây, đo trên video (không quay video: bấm giờ trực tiếp, xem ghi chú mục 2) |
 | Số lỗi | mỗi lần nhập sai, bấm nhầm mục, lưu dữ liệu sai, thao tác phải làm lại |
 | Số lần trợ giúp | số gợi ý mức 2–3 của người điều phối (mục 7.4) |
 | Ghi chú | hành vi đáng chú ý, mã bug nếu do lỗi SUT |
@@ -205,7 +205,7 @@ Sau đó quay lại trang http://localhost:5174, đọc lời dẫn (mục 4.1),
 
 ### 7.4. Trong khi người tham gia làm
 
-**Quan sát trung lập:** không gật đầu / lắc đầu khi họ chọn, không chỉ màn hình, không giải thích giao diện. Ghi chú theo bảng quan sát (thời điểm, bước, hành vi, lời nói nguyên văn, loại: friction / error / hesitation / frustration, mức độ).
+**Quan sát trung lập:** không gật đầu / lắc đầu khi họ chọn, không chỉ màn hình, không giải thích giao diện. Ghi chú theo bảng quan sát (thời điểm, bước, hành vi, lời nói nguyên văn, loại: friction / error / hesitation / frustration, mức độ). Khi ghi tắt dùng mã **Fr** (friction), **E** (error), **H** (hesitation), **Fu** (frustration) để không lẫn hai loại cùng bắt đầu bằng F (bổ sung sau pilot).
 
 **Câu nhắc trung lập được dùng:**
 - Khi họ im lặng > 10 giây: "Anh/chị đang nghĩ gì vậy?"
@@ -297,4 +297,10 @@ Kết quả và các chỉnh sửa sau pilot ghi tại `pilot/notes.md` và tóm
 
 | # | Vấn đề phát hiện khi pilot | Chỉnh sửa | Mục bị ảnh hưởng |
 |---|---|---|---|
-| | | | |
+| 1 | Thời gian: cả 6 bước đều trong thời gian tối đa (B3: 246 giây / 7 phút; B4: 327 giây / 8 phút); toàn bộ scenario 15 phút 40 giây / 30 phút. Bước 1, 2, 3, 4, 6 vượt thời gian mục tiêu | Giữ nguyên thời gian tối đa và khung 30 phút. Không đổi thời gian mục tiêu vì đây là chỉ tiêu khả dụng cần đo, không phải giới hạn của phiên | Mục 2, 7, 9.1 |
+| 2 | Pilot không quay video, trong khi kế hoạch quy định đo thời gian trên video | Thêm cách đo khi không có video: người điều phối bấm giờ và ghi mốc bắt đầu / kết thúc từng bước | Mục 2 (ghi chú), 5.3 |
+| 3 | Phiếu ghi dùng mã loại H / E / F; mã F không phân biệt được friction với frustration | Quy định mã ghi tắt Fr / E / H / Fu | Mục 7.4 |
+| 4 | Flow chạy trọn vẹn trên dữ liệu reset: tạo được danh mục, sản phẩm, mã WINTER15; đơn 45 Lê Lợi chuyển "Đã xác nhận", hai đơn còn lại giữ "Chờ xác nhận"; đăng xuất về màn đăng nhập | Không chỉnh | Mục 8 |
+| 5 | Cách nói "nhóm hàng" khiến họ mở Sản phẩm trước khi sang Danh mục (01:52, 03:18), giá 890.000 ₫ khiến họ nhập 890.000 rồi gõ lại (05:12, 05:38) | Không chỉnh lời dẫn và thẻ: đây là hành vi scenario cần quan sát (mục 4.3), ghi nhận làm phát hiện khả dụng | Mục 4 |
+| 6 | Thẻ thông tin không có ảnh và file CSV; người tham gia tự để trống ô URL Ảnh và bỏ qua Import CSV (03:55, S3), không bị chặn | Không chỉnh thẻ, để không gợi ý phải bỏ qua ô nào | Mục 4.2 |
+| 7 | Đã hỏi đủ 15 câu probe, có câu trả lời cho cả 4 chủ đề clarity, error recovery, speed, trust | Không chỉnh | Mục 6, 7.7 |
