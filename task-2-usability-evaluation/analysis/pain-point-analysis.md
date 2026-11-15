@@ -1,26 +1,26 @@
 # Phân tích pain point
 
-| Pain point | Participant / nguồn | Loại bằng chứng | Tác động dự kiến | Mức tin cậy |
-|---|---|---|---|---|
-| Chữ tiếng Việt lỗi mã hóa | P01–P07 screenshots; BUG-SIM-001 | Quan sát Playwright | Giảm khả năng đọc nhãn, thông báo và trạng thái | Cao về lỗi hiển thị; chưa đo tác động người dùng |
-| Form login gây nhầm lẫn | P01/P03 persona; BUG-SIM-002 | Máy + phản hồi mô phỏng | Người dùng có thể không hiểu đang đăng nhập; giảm tin cậy | Cao về lỗi UI; trung bình về hành vi |
-| Mật khẩu hiển thị dạng text | BUG-SIM-002 | Quan sát mã/UI | Rủi ro riêng tư và cảm nhận an toàn | Cao về tồn tại lỗi |
-| Tổng checkout có thể chỉnh sửa | P04 và ảnh checkout; FR-08 | Quan sát máy + persona | Người dùng nghi ngờ số tiền phải trả và tính đúng nghiệp vụ | Cao về tính cần khắc phục |
-| Tìm coupon/badge giỏ chưa trực quan | P02, P05 | Phản hồi persona | Tăng thời gian tìm kiếm và kiểm tra lại | Thấp–trung bình, cần người thật xác minh |
-| Phục hồi coupon | P03, P06 | Phản hồi persona | Người dùng cần hiểu lý do lỗi và cách sửa | Thấp–trung bình, chưa có log hỗ trợ |
-| Trạng thái đơn và logout chưa rõ | P02, P06, P07 | Phản hồi persona | Không chắc giao dịch đã hoàn tất hoặc phiên đã an toàn | Thấp–trung bình, cần quan sát thật |
+## Bảng phân tích theo issue
 
-## Mẫu nguyên nhân
+| Issue ID | Mô tả pain point | Flow step | Số participant/tín hiệu | Participant IDs | Quan sát hỗ trợ | Tác động đến hoàn thành | Cải thiện đề xuất |
+|---|---|---|---:|---|---|---|---|
+| UF-01 | Chữ tiếng Việt lỗi mã hóa | Login, Cart, Coupon, Checkout | 1 trực tiếp; UI rộng | P01 trực tiếp | BUG-SIM-001 và 3 ảnh P01 | Có thể làm người dùng không đọc được nhãn/trạng thái; chưa chứng minh bị chặn | Sửa UTF-8, kiểm tra chuỗi và thông báo |
+| UF-02 | Tiêu đề/nhãn login không đúng ngữ nghĩa | Login | 2 tín hiệu + 1 trực tiếp | P01, P03; P01 ảnh | P01 nhầm registration; P03 dừng ở tiêu đề; BUG-SIM-002 | Tăng do dự ở bước đầu, có thể nhập sai ngữ cảnh | Đổi tiêu đề “Đăng nhập”, nhãn email và nút tiếng Việt |
+| UF-03 | Password plaintext | Login | Không xác định | Không có tín hiệu persona riêng | BUG-SIM-002 và Login UI | Không chặn flow nhưng làm giảm an tâm và riêng tư | Dùng `type="password"` |
+| UF-04 | Tổng tiền checkout có thể sửa | Checkout | 3 tín hiệu + 1 trực tiếp | P01, P04, P07; P04 rõ nhất | FR-08, ảnh checkout, P04 đối chiếu tổng | Có thể khiến người dùng không tin số phải trả; rủi ro nghiệp vụ | Tính ở server, trường tổng chỉ đọc |
+| UF-05 | Khó tìm coupon/badge và hiểu lỗi coupon | Cart, Apply Coupon | 4 tín hiệu | P02, P03, P05, P06 | Session summary/observation/interview tương ứng | Tăng tìm kiếm và thao tác sửa; hồ sơ vẫn mô tả hoàn tất | Làm rõ affordance, điều kiện, lỗi và khoản giảm |
+| UF-06 | Feedback checkout/order chưa đủ rõ | Checkout, Verify Order | 3 tín hiệu | P02, P06, P07 | Kiểm tra lịch sử/trạng thái và cần xác nhận rõ | Có thể làm người dùng không chắc đơn đã tạo | Toast, mã đơn, tổng và trạng thái tiếng Việt |
+| UF-07 | Logout khó nhận biết | Logout | 1 tín hiệu | P07 | P07 dừng trước nhãn logout | Không chặn automation nhưng làm kết thúc phiên kém rõ | Nhãn “Đăng xuất”, feedback và xác nhận session |
 
-1. **Khả năng đọc và ngữ nghĩa:** lỗi mã hóa, nhãn tiếng Anh và tiêu đề sai
-   chức năng cùng làm tăng tải nhận thức.
-2. **Minh bạch giao dịch:** tổng tiền và khoản giảm chưa tạo được điểm kiểm tra
-   đáng tin cậy trước khi xác nhận.
-3. **Phản hồi trạng thái:** coupon, đơn hàng và logout chưa cung cấp tín hiệu
-   đủ rõ cho trạng thái thành công/lỗi.
+## Phân nhóm nguyên nhân
 
-## Ranh giới diễn giải
+- **Khả năng đọc và ngữ nghĩa:** UF-01, UF-02.
+- **Tin cậy giao dịch:** UF-03, UF-04.
+- **Khám phá và phục hồi:** UF-05.
+- **Phản hồi trạng thái và an toàn phiên:** UF-06, UF-07.
 
-Không có completion time, assistance log hoặc quan sát người thật. Vì vậy
-không tính được tỷ lệ pain point theo dân số và không dùng số participant được
-gắn trong persona như tần suất nghiên cứu.
+## Cảnh báo diễn giải
+
+Các con số trên là số hồ sơ hoặc tín hiệu trong dataset mô phỏng, không phải
+tỷ lệ dân số. Completion time, error count thực tế và assistance count không
+có trong hồ sơ; không chuyển các tín hiệu persona thành defect rate.

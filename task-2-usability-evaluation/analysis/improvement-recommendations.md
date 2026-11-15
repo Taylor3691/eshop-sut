@@ -1,24 +1,27 @@
 # Khuyến nghị cải thiện
 
-| ID | Khuyến nghị | Đối tượng | Tiêu chí xác nhận |
-|---|---|---|---|
-| R01 | Chuẩn hóa UTF-8 từ source đến response/render và rà soát chuỗi tiếng Việt | BUG-SIM-001 | Không còn ký tự lỗi trên login, cart, coupon, checkout và order history |
-| R02 | Đổi tiêu đề thành “Đăng nhập”, nhãn email đúng nghĩa, nút tiếng Việt; dùng `type="email"` và `type="password"` | BUG-SIM-002 | Người kiểm thử nhận diện đúng form; password không hiển thị plaintext |
-| R03 | Tính tổng từ dữ liệu server, khóa trường tổng và hiển thị giá gốc, giảm giá, phải trả | FR-08; P04 | Giá hiển thị khớp công thức; client không thể sửa số tiền phải trả |
-| R04 | Làm rõ ô coupon, điều kiện áp dụng, lỗi và số tiền giảm sau khi áp dụng | FR-09; P02/P03/P06 | Mã hợp lệ có feedback + khoản giảm; mã sai nêu lý do và cách sửa |
-| R05 | Tăng khả năng nhận biết cart/badge và liên kết tới ô coupon | FR-07/FR-09; P05 | Người kiểm thử tìm được cart và coupon mà không cần đoán |
-| R06 | Hiển thị trạng thái đơn bằng tiếng Việt, màu/nhãn nhất quán và thông báo đặt hàng thành công | FR-10/FR-11; P02/P07 | Có thể xác định mã đơn, trạng thái và tổng sau checkout |
-| R07 | Đổi nhãn logout thành “Đăng xuất”, thêm feedback rõ và xác nhận token/session đã xóa | FR-02; P06/P07 | Sau logout, người dùng thấy trạng thái kết thúc và không truy cập phiên cũ |
+## Danh sách ưu tiên hành động
 
-## Kế hoạch xác minh
+| ID | Ưu tiên | Liên quan | Khuyến nghị hành động | Tiêu chí nghiệm thu |
+|---|---|---|---|---|
+| R01 | 1 - High | UF-01 | Chuẩn hóa UTF-8 từ source/API đến browser; rà soát chuỗi tiếng Việt trong login, cart, coupon, checkout và order history | Không còn ký tự lỗi trong 6 checkpoint; ảnh regression hiển thị đúng |
+| R02 | 1 - High | UF-02, UF-03 | Đổi tiêu đề thành “Đăng nhập”, nhãn email đúng nghĩa, nút tiếng Việt; dùng `type="email"` và `type="password"` | Người kiểm thử nhận diện đúng form; password không hiển thị plaintext |
+| R03 | 1 - High | UF-04 | Tính/đối soát tổng từ dữ liệu server; hiển thị giá, giảm giá và phải trả dưới dạng chỉ đọc | Payload client bị sửa không thay đổi số tiền server; UI khớp công thức |
+| R04 | 2 - Medium | UF-05 | Làm nổi bật ô coupon; hiển thị điều kiện, lý do từ chối, trạng thái thành công và số tiền giảm | Coupon hợp lệ/sai/hết hạn/không đủ ngưỡng đều có feedback cụ thể |
+| R05 | 2 - Medium | UF-05 | Tăng affordance của badge/cart và đường dẫn tới coupon | Người kiểm thử tìm được cart và coupon mà không cần đoán |
+| R06 | 2 - Medium | UF-06 | Hiển thị toast thành công, mã đơn, tổng tiền và trạng thái đơn bằng tiếng Việt/màu nhất quán | Sau checkout xác định được đơn, tổng và trạng thái trong một lần kiểm tra |
+| R07 | 2 - Medium | UF-07 | Đổi nhãn thành “Đăng xuất”, hiển thị feedback và xác minh token/session đã xóa | Sau logout có trạng thái kết thúc rõ và không truy cập phiên cũ |
+| R08 | 3 - QA | UF-08 | Giữ lại run-flow và 6 checkpoint làm regression test sau mỗi thay đổi | 42/42 checkpoint tiếp tục PASS; không thay đổi artifact gốc |
 
-1. Chạy lại `run-flow.cjs` sau R01–R03; giữ cùng sáu checkpoint để so sánh.
-2. Thêm kiểm thử biên cho coupon hợp lệ, sai, hết hạn và không đủ ngưỡng.
-3. Kiểm tra tổng checkout ở cả UI và API, bao gồm payload bị sửa từ client.
-4. Thực hiện tối thiểu một pilot người thật trước khi diễn giải lại SUS hoặc
-   tần suất pain point.
-5. Thu completion time, error count, assistance count và consent cho từng
-   participant để thay thế các trường NOT PROVIDED.
+## Kế hoạch kiểm chứng
 
-Các khuyến nghị được suy ra từ dữ liệu mô phỏng và yêu cầu FR hiện có; việc
-triển khai cần được xác nhận bằng test QA và nghiên cứu người dùng thật.
+1. Chạy regression Playwright sau R01–R03; đối chiếu lại ảnh và
+   `run-results.json`.
+2. Kiểm tra coupon ở các điều kiện hợp lệ, sai, hết hạn và không đạt ngưỡng.
+3. Kiểm thử API/UI với tổng checkout bị sửa từ client.
+4. Chạy pilot với người thật để đo completion time, error count, assistance,
+   hiểu nhãn và feedback; sau đó mới diễn giải lại pain-point frequency hoặc
+   SUS như kết quả người dùng.
+
+Các khuyến nghị dựa trên bằng chứng có trong workspace và yêu cầu FR hiện có.
+Chúng không biến phản hồi persona mô phỏng thành bằng chứng người thật.
