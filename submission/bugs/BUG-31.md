@@ -25,3 +25,17 @@
 
 ![GUI-02-24.png](../task1-checklist/screenshots/failed/GUI-02-24.png)
 ![GUI-02-24-2.png](../task1-checklist/screenshots/failed/GUI-02-24-2.png)
+
+**Kết quả cross-browser (Task 3, trình duyệt thật trên macOS, 15/11/2026):**
+
+| Trình duyệt | Ô Giá 100000, cuộn lên 3 nấc | Kết quả |
+|---|---|---|
+| Chrome (macOS) | 100000 → 100003 | Lỗi xảy ra |
+| Firefox 153.0.4 (macOS) | giữ 100000 | Không xảy ra |
+| Safari 27.2 (macOS) | giữ 100000 (cuộn bằng sự kiện giả lập, cần xác nhận bằng chuột thật) | Không xảy ra |
+
+Lỗi chỉ tái hiện trên Chrome (hành vi mặc định của Chrome với `<input type="number">` đang focus); cần chặn sự kiện wheel trên ô số để thống nhất giữa các trình duyệt.
+
+![GUI-02-24_CH.png](../task3-crossplatform/chrome/GUI-02-24_CH.png)
+![GUI-02-24_FF.png](../task3-crossplatform/firefox/GUI-02-24_FF.png)
+![GUI-02-24_SF.png](../task3-crossplatform/safari/GUI-02-24_SF.png)

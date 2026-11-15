@@ -26,3 +26,17 @@
 ![GUI-01-10.png](../task1-checklist/screenshots/failed/GUI-01-10.png)
 ![GUI-01-10-3.png](../task1-checklist/screenshots/failed/GUI-01-10-3.png)
 ![GUI-01-10-4.png](../task1-checklist/screenshots/failed/GUI-01-10-4.png)
+
+**Kết quả cross-browser (Task 3, trình duyệt thật trên macOS, 15/11/2026):**
+
+| Trình duyệt | Cột Giá (Sản phẩm) | Bảng Mã giảm giá |
+|---|---|---|
+| Chrome (macOS) | 30000000 ₫ | 300,000 ₫ |
+| Firefox 153.0.4 (macOS, giao diện tiếng Việt) | 30000000 ₫ | 300.000 ₫ |
+| Safari 27.2 (macOS) | 30000000 ₫ | 300,000 ₫ |
+
+Cùng một dữ liệu, Firefox hiện dấu chấm còn Chrome và Safari hiện dấu phẩy, xác nhận định dạng tiền phụ thuộc ngôn ngữ của trình duyệt chứ không cố định vi-VN.
+
+![GUI-01-10-2_CH.png](../task3-crossplatform/chrome/GUI-01-10-2_CH.png)
+![GUI-01-10-2_FF.png](../task3-crossplatform/firefox/GUI-01-10-2_FF.png)
+![GUI-01-10-2_SF.png](../task3-crossplatform/safari/GUI-01-10-2_SF.png)

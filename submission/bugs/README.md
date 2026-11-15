@@ -20,7 +20,7 @@
 | [BUG-16](BUG-16.md) | [Sidebar] Không thể dùng bàn phím để chuyển tab hoặc đăng xuất | GUI-01-13 | Major | [#133](https://github.com/Taylor3691/eshop-sut/issues/133) |
 | [BUG-17](BUG-17.md) | [Nhiều màn hình] Trường nhập không có nhãn và không có dấu * cho trường bắt buộc | GUI-02-01, GUI-02-02 | Major | [#134](https://github.com/Taylor3691/eshop-sut/issues/134) |
 | [BUG-18](BUG-18.md) | [Admin Login] Ô Email không kiểm tra định dạng, để trống vẫn gửi đăng nhập | GUI-02-06, GUI-02-08 | Minor | [#135](https://github.com/Taylor3691/eshop-sut/issues/135) |
-| [BUG-19](BUG-19.md) | [Sản phẩm, Dashboard, Mã giảm giá] Số tiền không theo định dạng vi-VN thống nhất | GUI-01-09, GUI-01-10 | Minor | [#136](https://github.com/Taylor3691/eshop-sut/issues/136) |
+| [BUG-19](BUG-19.md) | [Sản phẩm, Dashboard, Mã giảm giá] Số tiền không theo định dạng vi-VN thống nhất | GUI-01-09, GUI-01-10, Task 3 (CH/FF/SF) | Minor | [#136](https://github.com/Taylor3691/eshop-sut/issues/136) |
 | [BUG-20](BUG-20.md) | [Nhiều màn hình] Các màn không có thẻ `<h1>` mô tả nội dung riêng | GUI-01-01 | Minor | [#137](https://github.com/Taylor3691/eshop-sut/issues/137) |
 | [BUG-21](BUG-21.md) | [Nhiều màn hình] Còn chữ tiếng Anh và viết tắt trên giao diện | GUI-01-02, GUI-01-03 | Minor | [#138](https://github.com/Taylor3691/eshop-sut/issues/138) |
 | [BUG-22](BUG-22.md) | [Nhiều màn hình] Cách viết hoa không thống nhất giữa menu, tiêu đề và cột bảng | GUI-01-05 | Trivial | [#139](https://github.com/Taylor3691/eshop-sut/issues/139) |
@@ -32,7 +32,7 @@
 | [BUG-28](BUG-28.md) | [Nhiều màn hình] Bố cục không thích ứng với màn hình hẹp và khi phóng to 200% | GUI-01-15, GUI-01-16 | Minor | [#145](https://github.com/Taylor3691/eshop-sut/issues/145) |
 | [BUG-29](BUG-29.md) | [Nhiều màn hình] Độ tương phản chữ/nền dưới 4.5:1 ở placeholder và nhiều nút | GUI-01-19 | Minor | [#146](https://github.com/Taylor3691/eshop-sut/issues/146) |
 | [BUG-30](BUG-30.md) | [Quản lý Sản phẩm] Nút Import hiện "Import 0 sản phẩm" khi chưa chọn file | GUI-04-03 | Trivial | [#147](https://github.com/Taylor3691/eshop-sut/issues/147) |
-| [BUG-31](BUG-31.md) | [Sản phẩm, Mã giảm giá] Cuộn chuột trên ô số làm đổi giá trị đã nhập | GUI-02-24 | Minor | [#148](https://github.com/Taylor3691/eshop-sut/issues/148) |
+| [BUG-31](BUG-31.md) | [Sản phẩm, Mã giảm giá] Cuộn chuột trên ô số làm đổi giá trị đã nhập | GUI-02-24, Task 3 (chỉ Chrome) | Minor | [#148](https://github.com/Taylor3691/eshop-sut/issues/148) |
 | [BUG-32](BUG-32.md) | [Admin Login] Không tự đặt con trỏ vào ô Email, không có autocomplete | GUI-02-25 | Trivial | [#149](https://github.com/Taylor3691/eshop-sut/issues/149) |
 | [BUG-33](BUG-33.md) | [Nhiều màn hình] Tiêu đề tab trình duyệt luôn là "frontend-admin" | GUI-01-21 | Trivial | [#150](https://github.com/Taylor3691/eshop-sut/issues/150) |
 
