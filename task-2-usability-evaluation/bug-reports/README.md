@@ -56,3 +56,16 @@ Khi đồng bộ lỗi lên GitHub Issues, sử dụng hệ thống nhãn (label
 3. Chụp ảnh màn hình minh chứng chân thực, lưu vào `task-2-usability-evaluation/evidence/screenshots/`.
 4. Tạo issue tương ứng trên GitHub Issues repository, gắn nhãn phù hợp, sau đó lưu bản sao issue vào `task-2-usability-evaluation/evidence/github-issues/`.
 
+## 4. Báo cáo đã xác minh trong Task 2
+
+| Báo cáo cục bộ | Phạm vi | GitHub |
+|---|---|---|
+| [BUG-001](./BUG-001.md) | Chuỗi tiếng Việt lỗi mã hóa | [#190](https://github.com/Taylor3691/eshop-sut/issues/190) |
+| [BUG-002](./BUG-002.md) | Nhãn login và password plaintext | Đã có [#92](https://github.com/Taylor3691/eshop-sut/issues/92) và [#109](https://github.com/Taylor3691/eshop-sut/issues/109) |
+
+Lỗi tổng checkout có thể chỉnh sửa đã được ghi nhận trước trong
+[#69](https://github.com/Taylor3691/eshop-sut/issues/69), vì vậy không tạo báo
+cáo/issue trùng. Các tệp `BUG-SIM-001.md` và `BUG-SIM-002.md` là bản tóm tắt
+legacy của dữ liệu mô phỏng; báo cáo `BUG-001.md` và `BUG-002.md` là bản truy
+vết tuần tự dùng cho Prompt 07.
+
