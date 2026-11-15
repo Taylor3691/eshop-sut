@@ -696,6 +696,31 @@ mssv 23120175
 
 ---
 
+## #45 — Xuất PDF cho báo cáo chính, AI Critique và AI Audit Report
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-16 00:26
+- **Prompt:** xuất các file yêu cầu cần pdf thì xuất qua pdf đi
+- **AI output:**
+  - Theo mục 14 của đề, 3 file cần bản PDF: báo cáo chính, AI Critique, AI Audit Report
+  - Chuyển Markdown sang HTML bằng thư viện Python `markdown` (bảng, khối code), rồi in PDF khổ A4 bằng Chrome qua Playwright; đầu trang có họ tên, MSSV, tên tài liệu, chân trang có số trang
+  - Sửa bộ chuyển đổi sau khi kiểm hình: khối prompt nằm trong danh sách bị vỡ thành chữ thường, danh sách lồng nhau cần thụt lề 4 dấu cách; đã mở lại trang đầu và các trang có bảng, danh sách lồng nhau, khối prompt để kiểm
+  - File: `submission/report/main-report.pdf`, `submission/ai/ai-critique.pdf`, `submission/ai/ai-audit-log.pdf`
+
+---
+
+## #46 — Commit PDF và xuất git commit log
+
+- **AI tool:** Claude Code (Opus 5.5)
+- **Date & time:** 2026-11-16 00:28
+- **Prompt:** commit đi rồi xuất git-log
+- **AI output:**
+  - Commit 3 file PDF và audit log, push nhánh `hw03/toanhuynh`
+  - Xuất các commit của nhánh `hw03/toanhuynh` tính từ `main` (mới nhất ở trên, kèm ngày giờ, tác giả, message và danh sách file) ra `submission/git-log.txt`, rồi commit file này ở commit cuối cùng
+  - File: `submission/report/main-report.pdf`, `submission/ai/ai-critique.pdf`, `submission/ai/ai-audit-log.pdf`, `submission/git-log.txt`
+
+---
+
 <!-- Mẫu cho mục tiếp theo:
 
 ## #NN — <Tên bước>
