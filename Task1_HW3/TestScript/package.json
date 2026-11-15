@@ -5,9 +5,13 @@
   "type": "module",
   "scripts": {
     "test": "node run-tests.js",
-    "test:headed": "node run-tests.js --headed"
+    "test:headed": "node run-tests.js --headed",
+    "test:gui-001": "node capture-gui-001.mjs"
   },
   "dependencies": {
     "puppeteer": "^24.0.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.1"
   }
 }
