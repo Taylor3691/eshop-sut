@@ -1,6 +1,6 @@
 # HW03 Task 2 — Đánh giá Khả năng Sử dụng (Usability Evaluation Workspace)
 
-> **SIMULATED EXECUTION NOTICE (2026-11-15):** The completed P01–P07 records in this workspace document synthetic Playwright runs, not real participants. No human SUS responses, interview answers, consent, or think-aloud observations were collected. HW03 requires seven real participants; this simulation does not satisfy that requirement. See `analysis/main-report.md` and `ai-audit/simulated-execution-addendum.md`.
+> **THÔNG BÁO DỮ LIỆU MÔ PHỎNG (2026-11-15):** Hồ sơ P01–P07 gồm các lượt Playwright tự động và persona/phản hồi giả định, không phải người tham gia thật. Không thu thập SUS, phỏng vấn, đồng thuận hay think-aloud từ con người. HW03 yêu cầu bảy người tham gia thật; bộ tài liệu này không đáp ứng yêu cầu đó. Xem `analysis/main-report.md` và `ai-audit/simulated-execution-addendum.md`.
 
 ## 1. Tổng quan & Mục tiêu Đánh giá (Task 2 Objectives)
 

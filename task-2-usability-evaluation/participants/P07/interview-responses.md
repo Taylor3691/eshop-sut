@@ -1,9 +1,9 @@
-# Interview responses — P07 (**SIMULATED DATA**)
+# Câu trả lời phỏng vấn - P07 (**SIMULATED DATA**)
 
-> Các câu trả lời sau được sáng tác cho kịch bản persona; không phải phỏng vấn hoặc lời trích dẫn thật.
+> Câu trả lời được sáng tác cho persona; không phải phỏng vấn hoặc lời trích dẫn thật.
 
-- **Clarity:** “I want the order status and sign-out action to be explicit.”
-- **Error recovery:** “If a coupon failed, I would confirm the reason before trying another one.”
-- **Speed:** “The flow feels efficient when the next state is obvious.”
-- **Trust:** “An order history entry helps, but the final confirmation should show the exact total.”
-- **Actual interview / recording / consent:** Không có.
+- **Độ rõ ràng:** “Tôi muốn trạng thái đơn hàng và thao tác đăng xuất được ghi rõ.”
+- **Khắc phục lỗi:** “Nếu mã giảm giá lỗi, tôi sẽ xem lý do trước khi thử mã khác.”
+- **Tốc độ:** “Luồng có vẻ hiệu quả khi trạng thái tiếp theo dễ nhận ra.”
+- **Độ tin cậy:** “Có đơn trong lịch sử giúp tôi yên tâm, nhưng xác nhận cuối cần nêu đúng tổng tiền.”
+- **Phỏng vấn / ghi âm / đồng thuận thật:** Không có.

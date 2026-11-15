@@ -1,10 +1,10 @@
-# Session summary — P06 (**SIMULATED DATA**)
+# Tóm tắt phiên - P06 (**SIMULATED DATA**)
 
-- Persona hư cấu: **Nguyễn Minh Tú**, 21 tuổi, sinh viên; prefers confirmation before irreversible actions.
-- Kịch bản tương tác hư cấu: She reads each page carefully, checks whether the coupon applied, then waits for a clear success signal before considering the task complete.
-- Điểm ngập ngừng: At coupon feedback and the final confirm-payment action.
-- Lỗi và khôi phục: Hypothetically mistypes the coupon once, sees an error, re-enters it, and continues.
-- **Kết quả automation độc lập:** login:PASS, cart:PASS, coupon:PASS, checkout:PASS, verify-order:PASS, logout:PASS.
-- **Kết quả persona được giả định:** Hoàn tất trong kịch bản sau khi gặp khó khăn như mô tả; đây không phải kết quả do người tham gia tạo ra.
-- SUS minh họa: **37.5/100**, tính từ câu trả lời tổng hợp; không gộp vào kết luận nghiên cứu.
-- Interview: các câu trả lời tổng hợp trong `interview-responses.md`.
+- Persona hư cấu: **Nguyễn Minh Tú**, 21 tuổi, sinh viên; muốn xác nhận trước thao tác khó hoàn tác.
+- Hành vi trong kịch bản giả định: Persona đọc kỹ từng trang, kiểm tra mã giảm giá đã áp dụng chưa rồi chờ tín hiệu thành công rõ ràng trước khi xem như xong.
+- Điểm ngập ngừng: Dừng ở phản hồi mã giảm giá và nút xác nhận thanh toán cuối.
+- Lỗi và khôi phục: Trong kịch bản, persona gõ sai mã một lần, thấy lỗi, nhập lại mã rồi tiếp tục.
+- **Kết quả automation độc lập:** đăng nhập: ĐẠT, giỏ hàng: ĐẠT, áp dụng mã: ĐẠT, thanh toán: ĐẠT, xác minh đơn: ĐẠT, đăng xuất: ĐẠT.
+- **Kết quả persona giả định:** Hoàn tất sau khó khăn đã mô tả; không phải kết quả do người tham gia tạo ra.
+- Điểm SUS minh họa: **37,5/100, SIMULATED DATA**.
+- Trả lời phỏng vấn tổng hợp: xem `interview-responses.md`.

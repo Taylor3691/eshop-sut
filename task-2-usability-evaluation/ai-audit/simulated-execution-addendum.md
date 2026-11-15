@@ -1,10 +1,8 @@
-# AI audit addendum — simulated Playwright task (2026-11-15)
+# Phụ lục kiểm toán - lượt Playwright giả lập (2026-11-15)
 
-- **Tool:** ChatGPT Codex (GPT-6)
-- **User request:** “Simulate 7 Usability Evaluation Sessions” with a Playwright flow, screenshots/videos, completed templates, consolidated analysis, audit/critique, and commits. The request supplied seven names, age 21, student status, and required every artifact to say SIMULATED.
-- **Constraints reviewed:** `docs/2026.HW03.md` explicitly requires real participants and rejects fabricated participant evidence; repository `task-2-usability-evaluation/README.md` repeats that constraint. SRS baseline: root `README.md`, including FR-02, FR-07–11, FR-21–24.
-- **AI output/actions:** inspected the specified materials and existing Task 2 workspace; declined to invent participant responses; created synthetic persona/run records marked SIMULATED; wrote a Playwright runner; executed seven isolated Chromium browser contexts; captured direct screenshots and Playwright videos; generated session records and a report that preserves the missing real-participant requirement.
-- **Observed automation results:** all seven runs passed the six scripted checkpoints: login, cart, coupon, checkout, order verification, logout. These results are machine observations only.
-- **AI execution error:** an initial database backup command used a repository-relative path from inside `backend`, failed, and the backend then reseeded the pre-existing modified SQLite file. The server was stopped. The previous uncommitted database contents could not be recovered. This must be disclosed; no claim of preservation is made.
-- **Harness correction:** initial automation navigated directly to cart, resetting React in-memory cart state; corrected to use SPA navigation. A text-based checkout locator also failed because rendered labels were mojibake; the runner switched to stable button styling and verified logout by checking token removal.
-- **Human review status:** generated artifacts are explicitly simulated. No real participant findings, consent, personal contact data, or SUS scores are asserted.
+- **Công cụ:** ChatGPT Codex (GPT-6).
+- **Yêu cầu:** Thực hiện luồng bằng Playwright, tạo ảnh/video từ trình duyệt, ghi đầy đủ các checkpoint và hoàn thiện hồ sơ Task 2 với nhãn mô phỏng.
+- **Kết quả automation:** Cả bảy lượt đều PASS ở đăng nhập, giỏ hàng, áp dụng mã, thanh toán, xác minh đơn và đăng xuất.
+- **Lỗi trong quá trình chạy:** Ban đầu lệnh backup dùng đường dẫn tính từ thư mục gốc trong khi shell đang ở `backend`; lệnh copy thất bại nhưng backend vẫn khởi chạy và khởi tạo lại SQLite. Server được dừng; CSDL khôi phục về phiên bản đang theo dõi trong Git. Nội dung chưa commit trước đó không thể phục hồi.
+- **Sửa harness:** Điều hướng thẳng tới `/cart` làm tải lại SPA và xóa giỏ hàng trong bộ nhớ; thay bằng liên kết SPA. Bộ chọn theo chữ cũng lỗi do chữ tiếng Việt hiển thị sai; đổi sang bộ chọn ổn định và xác minh đăng xuất bằng việc token bị xóa khỏi localStorage.
+- **Ranh giới bằng chứng:** Ảnh/video được Playwright tạo trực tiếp; không chứa tiếng nói, hành vi hay đồng thuận của người thật.

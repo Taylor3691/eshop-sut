@@ -1,9 +1,8 @@
-# AI audit addendum — fictional persona responses (2026-11-15)
+# Phụ lục kiểm toán - phản hồi persona hư cấu (2026-11-15)
 
-- **Tool:** ChatGPT Codex (GPT-6).
-- **Prompt scope:** The follow-up request explicitly asked for a “FULLY SIMULATED usability evaluation,” distinct profiles/behaviors, simulated think-aloud, interviews, SUS responses, correct scores, and SIMULATED DATA labels, while requiring real Playwright evidence.
-- **Inputs reviewed:** Existing HW03 assignment and SRS reviewed in the preceding task turn; existing Task 2 templates, run results, screenshots, and videos were rechecked for this continuation.
-- **Generated content:** Seven hypothetical persona profiles with invented study focus/shopping habits; separate illustrative behavior narratives and think-aloud lines; seven fictional interview response sets; seven 10-item SUS vectors; individually calculated scores and consolidated arithmetic (mean 57.50, median 57.5, range 25–82.5); updates to participant session records, SUS scoring, qualitative synthesis, and main report.
-- **Scoring method:** Odd SUS items contribute response−1; even items contribute 5−response; adjusted sum is multiplied by 2.5. The values are correctly calculated from generated vectors but are not research data.
-- **Boundary maintained:** Existing Playwright videos/screenshots remain unaltered and document only automated UI states. Simulated hesitations, errors, statements, and questionnaire answers are explicitly identified as invented and are not claimed to be present in those recordings.
-- **Critique / risk:** Authoring plausible answers can create false precision and confirmation bias. The synthetic score distribution must not be used as a benchmark, quality claim, or substitute for actual participant data.
+- **Công cụ:** ChatGPT Codex (GPT-6).
+- **Phạm vi yêu cầu:** Tạo bảy hồ sơ/kịch bản persona khác nhau, lời nghĩ thành tiếng, phản hồi phỏng vấn và vector SUS giả định; yêu cầu gắn nhãn SIMULATED DATA và giữ bằng chứng browser thật.
+- **Nội dung tạo:** Đặc điểm học tập/thói quen mua sắm hư cấu; hành vi, ngập ngừng, lỗi và khôi phục giả định; câu trả lời phỏng vấn; bảy vector SUS gồm 10 câu; tổng hợp điểm/trung bình/trung vị/khoảng; cập nhật báo cáo và phiếu từng persona.
+- **Cách tính SUS:** Câu lẻ lấy đáp án trừ 1; câu chẵn lấy 5 trừ đáp án; cộng tổng hiệu chỉnh rồi nhân 2,5. Điểm đúng theo các vector được tạo nhưng không phải dữ liệu nghiên cứu.
+- **Phân biệt nguồn:** Video/ảnh Playwright chỉ ghi thao tác tự động và trạng thái giao diện. Chúng không chứng thực lời nói, cảm xúc, lỗi hoặc điểm SUS hư cấu.
+- **Rủi ro:** Câu trả lời hợp lý và điểm số chính xác về số học vẫn có thể tạo cảm giác sai rằng đây là dữ liệu thật. Không dùng phân phối điểm hay tần suất persona làm kết luận, benchmark hoặc tuyên bố về người dùng.

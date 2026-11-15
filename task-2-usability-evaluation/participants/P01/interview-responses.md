@@ -1,9 +1,9 @@
-# Interview responses — P01 (**SIMULATED DATA**)
+# Câu trả lời phỏng vấn - P01 (**SIMULATED DATA**)
 
-> Các câu trả lời sau được sáng tác cho kịch bản persona; không phải phỏng vấn hoặc lời trích dẫn thật.
+> Câu trả lời được sáng tác cho persona; không phải phỏng vấn hoặc lời trích dẫn thật.
 
-- **Clarity:** “The screen looked like registration at first. The coupon saving was easier to understand once it appeared.”
-- **Error recovery:** “I would recheck the email field if login failed; the labels did not make that obvious.”
-- **Speed:** “The simulated flow felt manageable, but I would stop to read the totals.”
-- **Trust:** “I would want the final amount repeated clearly before confirming.”
-- **Actual interview / recording / consent:** Không có.
+- **Độ rõ ràng:** “Thoạt đầu tôi tưởng đây là trang đăng ký. Tôi hiểu khoản tiết kiệm hơn sau khi thấy mức giảm hiện ra.”
+- **Khắc phục lỗi:** “Nếu đăng nhập lỗi, tôi sẽ kiểm tra lại email; nhãn hiện tại chưa giúp tôi nhận ra ngay.”
+- **Tốc độ:** “Luồng giả định có vẻ làm được, nhưng tôi sẽ dừng lại để đọc tổng tiền.”
+- **Độ tin cậy:** “Tôi muốn tổng tiền cuối được nhắc lại rõ ràng trước khi xác nhận.”
+- **Phỏng vấn / ghi âm / đồng thuận thật:** Không có.

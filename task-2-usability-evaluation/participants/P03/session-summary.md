@@ -1,10 +1,10 @@
-# Session summary — P03 (**SIMULATED DATA**)
+# Tóm tắt phiên - P03 (**SIMULATED DATA**)
 
-- Persona hư cấu: **Tô Thành Long**, 21 tuổi, sinh viên; relies on descriptive cues.
-- Kịch bản tương tác hư cấu: He has trouble interpreting the malformed Vietnamese text and tentatively enters a coupon, then notices the feedback before proceeding.
-- Điểm ngập ngừng: Several short pauses at garbled headings, coupon action, and order status.
-- Lỗi và khôi phục: Hypothetically enters a mistyped coupon once, reads the error, corrects it, and proceeds.
-- **Kết quả automation độc lập:** login:PASS, cart:PASS, coupon:PASS, checkout:PASS, verify-order:PASS, logout:PASS.
-- **Kết quả persona được giả định:** Hoàn tất trong kịch bản sau khi gặp khó khăn như mô tả; đây không phải kết quả do người tham gia tạo ra.
-- SUS minh họa: **25/100**, tính từ câu trả lời tổng hợp; không gộp vào kết luận nghiên cứu.
-- Interview: các câu trả lời tổng hợp trong `interview-responses.md`.
+- Persona hư cấu: **Tô Thành Long**, 21 tuổi, sinh viên; cần chỉ dẫn và tín hiệu mô tả rõ.
+- Hành vi trong kịch bản giả định: Persona khó đọc phần chữ tiếng Việt bị lỗi hiển thị, nhập thử mã giảm giá rồi xem phản hồi trước khi đi tiếp.
+- Điểm ngập ngừng: Dừng vài lần ở tiêu đề khó đọc, nút áp dụng mã và trạng thái đơn.
+- Lỗi và khôi phục: Trong kịch bản, persona gõ sai mã một lần, đọc thông báo, sửa mã rồi tiếp tục.
+- **Kết quả automation độc lập:** đăng nhập: ĐẠT, giỏ hàng: ĐẠT, áp dụng mã: ĐẠT, thanh toán: ĐẠT, xác minh đơn: ĐẠT, đăng xuất: ĐẠT.
+- **Kết quả persona giả định:** Hoàn tất sau khó khăn đã mô tả; không phải kết quả do người tham gia tạo ra.
+- Điểm SUS minh họa: **25/100, SIMULATED DATA**.
+- Trả lời phỏng vấn tổng hợp: xem `interview-responses.md`.

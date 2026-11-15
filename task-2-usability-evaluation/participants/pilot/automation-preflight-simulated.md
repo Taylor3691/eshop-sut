@@ -1,13 +1,13 @@
-# Automation preflight — **SIMULATED / machine-only**
+# Chạy thử harness automation - **SIMULATED / chỉ dành cho máy**
 
-This note records Playwright harness setup, not a pilot with a person. No participant, think-aloud, consent, interview, or questionnaire was involved.
+Ghi chú này lưu lại quá trình thiết lập Playwright, không phải buổi pilot với người. Không có người tham gia, think-aloud, đồng thuận, phỏng vấn hoặc bảng hỏi.
 
-## Attempts and correction
+## Lần thử và điều chỉnh
 
-1. Initial harness navigated directly to `/cart`. The SPA reload cleared its in-memory cart, so the checkout locator timed out. This was a test-script defect, not a product-flow failure.
-2. Harness then clicked checkout but initially could not find the expected label because the rendered Vietnamese text was malformed and selectors were brittle.
-3. The script was corrected to use SPA navigation and stable control selectors. The final seven runs each passed login, cart, coupon, checkout, order verification, and logout checkpoints.
+1. Harness đầu tiên điều hướng thẳng tới `/cart`. Tải lại SPA làm mất giỏ hàng trong bộ nhớ, khiến bộ chọn nút thanh toán chờ quá hạn. Đây là lỗi của script kiểm thử, không phải lỗi luồng mua hàng.
+2. Lần tiếp theo, bộ chọn theo nội dung nút không khớp vì chữ tiếng Việt hiển thị lỗi và selector quá mong manh.
+3. Script được sửa để dùng điều hướng SPA và selector ổn định. Cả bảy lượt cuối đều PASS ở đăng nhập, giỏ, coupon, thanh toán, xác minh đơn và đăng xuất.
 
-## Outcome
+## Kết quả
 
-The rehearsal improved the automation script and established a repeatable Chromium flow. It is **not** the HW03 pilot usability session: the required real-person pilot remains outstanding. Do not cite this note as participant research.
+Chạy thử giúp cải thiện script và tạo luồng Chromium có thể lặp lại. Đây **không phải pilot usability có người** theo HW03; pilot thật vẫn chưa được thực hiện. Không trích dẫn ghi chú này như nghiên cứu người dùng.

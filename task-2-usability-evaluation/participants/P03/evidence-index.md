@@ -1,6 +1,6 @@
-# Evidence index — P03 (**SIMULATED DATA**)
+# Chỉ mục bằng chứng - P03 (**SIMULATED DATA**)
 
-## Bằng chứng browser có thật từ Playwright
+## Bằng chứng trình duyệt thật từ Playwright
 
 - `../../evidence/session-recordings/P03-simulated.webm`
 - `../../evidence/screenshots/P03-01-login-home.png`
@@ -10,6 +10,6 @@
 - `../../evidence/screenshots/P03-05-order-history.png`
 - `../../evidence/screenshots/P03-06-logout.png`
 
-## Nội dung hư cấu
+## Nội dung giả định
 
-Profile traits, verbalizations, hesitations, errors, interviews, and SUS responses are invented scenario data. The evidence above does not verify them.
+Hồ sơ, lời nói, ngập ngừng, lỗi, phỏng vấn và câu trả lời SUS là dữ liệu được sáng tác. Ảnh/video chỉ ghi trạng thái trình duyệt do automation tạo ra, không xác minh hành vi persona.

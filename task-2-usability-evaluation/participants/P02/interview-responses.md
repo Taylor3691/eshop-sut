@@ -1,9 +1,9 @@
-# Interview responses — P02 (**SIMULATED DATA**)
+# Câu trả lời phỏng vấn - P02 (**SIMULATED DATA**)
 
-> Các câu trả lời sau được sáng tác cho kịch bản persona; không phải phỏng vấn hoặc lời trích dẫn thật.
+> Câu trả lời được sáng tác cho persona; không phải phỏng vấn hoặc lời trích dẫn thật.
 
-- **Clarity:** “The discount amount and final amount are the clearest feedback.”
-- **Error recovery:** “I would edit the code and apply it again if rejected.”
-- **Speed:** “The simulated task is quick once the cart is populated.”
-- **Trust:** “Seeing the order in history would reassure me, but I want the total to be read-only.”
-- **Actual interview / recording / consent:** Không có.
+- **Độ rõ ràng:** “Số tiền được giảm và tổng tiền cuối là phản hồi rõ nhất.”
+- **Khắc phục lỗi:** “Nếu mã bị từ chối, tôi sẽ sửa mã rồi áp dụng lại.”
+- **Tốc độ:** “Nhiệm vụ giả định diễn ra nhanh khi giỏ đã có sản phẩm.”
+- **Độ tin cậy:** “Thấy đơn trong lịch sử sẽ giúp tôi yên tâm, nhưng tôi muốn tổng tiền chỉ đọc.”
+- **Phỏng vấn / ghi âm / đồng thuận thật:** Không có.

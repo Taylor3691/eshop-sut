@@ -1,42 +1,42 @@
-# Usability evaluation summary report — **SIMULATED DATA**
+# Báo cáo tổng kết đánh giá usability - **SIMULATED DATA**
 
-> The behavioral narratives and interview text are invented, not observed. Separate factual browser results from hypothetical persona scenarios below.
+> Hành vi và câu phỏng vấn được sáng tác, không phải quan sát thật. Tách riêng kết quả browser có thật với tình huống persona giả định.
 
-## Automated outcomes (directly observed)
+## Kết quả automation quan sát trực tiếp
 
-All seven Playwright runs passed Login, Cart, Apply Coupon, Checkout, Verify Order, and Logout. These results establish scripted UI-flow execution only.
+7/7 lượt Playwright vượt qua Đăng nhập, Giỏ hàng, Áp dụng mã, Thanh toán, Xác minh đơn và Đăng xuất. Kết quả chỉ thể hiện các thao tác được script hóa.
 
-## Hypothetical persona pain points (invented)
+## Điểm khó giả định trong kịch bản persona
 
-| Theme | Personas | Synthetic pattern | Priority |
+| Chủ đề | Persona | Mẫu tình huống hư cấu | Ưu tiên |
 |---|---|---|---|
-| Label comprehension | P01, P03 | Registration-like heading, malformed words, uncertainty over form meaning | High |
-| Price confidence | P01, P04, P07 | Rechecking coupon math and concern about editable checkout amount | High |
-| Error recovery | P03, P06 | Hypothetical mistyped coupon and need for actionable feedback | Medium |
-| Navigation state | P02, P05 | Looking for coupon and cart-count cues | Medium |
-| Completion confidence | P06, P07 | Need clear confirmation and explicit logout label | Medium |
+| Hiểu nhãn | P01, P03 | Tiêu đề giống trang đăng ký, chữ lỗi mã hóa, chưa rõ ý nghĩa biểu mẫu | Cao |
+| Tin cậy giá | P01, P04, P07 | Kiểm tra lại phép tính giảm và lo ngại tổng thanh toán sửa được | Cao |
+| Phục hồi lỗi | P03, P06 | Gõ sai mã giả định và cần hướng dẫn sửa cụ thể | Trung bình |
+| Trạng thái điều hướng | P02, P05 | Tìm ô mã giảm giá và dấu hiệu số lượng trong giỏ | Trung bình |
+| Tự tin hoàn tất | P06, P07 | Cần xác nhận rõ và nhãn đăng xuất dễ hiểu | Trung bình |
 
-Frequencies in this table describe authored scenarios and are not prevalence estimates.
+Số persona trong bảng là số kịch bản do tác giả tạo, không phải tần suất hoặc tỷ lệ người dùng.
 
-## Browser-visible defects (factual observations)
+## Lỗi giao diện quan sát được
 
-| Finding | Severity | Evidence / requirement |
+| Phát hiện | Mức độ | Bằng chứng / yêu cầu |
 |---|---|---|
-| Malformed Vietnamese text across several screens | High | BUG-SIM-001; screenshots; FR-21 |
-| Misleading login heading/labels and plain-text password field | High | BUG-SIM-002; login screenshot; FR-02, FR-22 |
-| Checkout total is editable | Medium | checkout screenshot; FR-08 says total is calculated automatically |
+| Chữ tiếng Việt bị lỗi hiển thị trên nhiều màn hình | Cao | BUG-SIM-001; ảnh chụp; FR-21 |
+| Nhãn/tiêu đề đăng nhập gây hiểu nhầm, mật khẩu dạng văn bản | Cao | BUG-SIM-002; ảnh đăng nhập; FR-02, FR-22 |
+| Tổng tiền checkout có thể chỉnh sửa | Trung bình | ảnh checkout; FR-08 yêu cầu tự tính |
 
-## Recommendations
+## Khuyến nghị
 
-1. Correct UTF-8 rendering and review every visible label in Vietnamese.
-2. Correct login title, field labels, email/password input types, and localized action text.
-3. Calculate authoritative totals server-side and display a read-only breakdown including coupon savings.
-4. Make coupon validation errors actionable; show cart count, order number/status, and an explicit “Đăng xuất” control.
-5. Validate these priorities with real participants before treating persona frequency or SUS as evidence.
+1. Sửa mã hóa UTF-8 và rà soát toàn bộ nhãn tiếng Việt.
+2. Sửa tiêu đề đăng nhập, nhãn trường, kiểu email/mật khẩu và nội dung nút.
+3. Tính tổng tiền chuẩn ở phía máy chủ; hiển thị bảng chi tiết chỉ đọc, có khoản giảm.
+4. Làm rõ lỗi mã giảm giá, số lượng giỏ, mã/trạng thái đơn và nút “Đăng xuất”.
+5. Kiểm chứng mức ưu tiên bằng người tham gia thật trước khi suy rộng.
 
-## SUS
+## Điểm SUS
 
-Scores appear in `sus-scoring.md`; they are generated from fictional response vectors. No empirical mean, usability grade, or confidence interval is available.
+Điểm trong `sus-scoring.md` được tính từ vector hư cấu. Không có trung bình thực nghiệm hoặc xếp loại usability hợp lệ.
 
 
-The seven browser flows are simulated Playwright executions, not moderated sessions. The persona profiles, task reactions, interviews, and SUS values are all SIMULATED DATA. See `main-report.md` for methods, evidence index, and limitations.
+Đây là bảy lượt Playwright tự động, không phải phiên có điều phối viên/người dùng. Hồ sơ, phản ứng, phỏng vấn và điểm SUS đều là dữ liệu giả lập. Báo cáo chính: `main-report.md`.

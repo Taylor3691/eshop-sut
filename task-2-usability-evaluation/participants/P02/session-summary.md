@@ -1,10 +1,10 @@
-# Session summary — P02 (**SIMULATED DATA**)
+# Tóm tắt phiên - P02 (**SIMULATED DATA**)
 
-- Persona hư cấu: **Trần Anh Khoa**, 21 tuổi, sinh viên; looks for discount and order status.
-- Kịch bản tương tác hư cấu: He goes directly to the cart, checks the product and searches for a coupon field. He notices the reduction and then confirms the order.
-- Điểm ngập ngừng: Briefly looks for the coupon control, then scans the final amount.
-- Lỗi và khôi phục: No error in the hypothetical path; recognizes the success and order-history states.
-- **Kết quả automation độc lập:** login:PASS, cart:PASS, coupon:PASS, checkout:PASS, verify-order:PASS, logout:PASS.
-- **Kết quả persona được giả định:** Hoàn tất trong kịch bản sau khi gặp khó khăn như mô tả; đây không phải kết quả do người tham gia tạo ra.
-- SUS minh họa: **75/100**, tính từ câu trả lời tổng hợp; không gộp vào kết luận nghiên cứu.
-- Interview: các câu trả lời tổng hợp trong `interview-responses.md`.
+- Persona hư cấu: **Trần Anh Khoa**, 21 tuổi, sinh viên; chú ý ưu đãi và trạng thái đơn.
+- Hành vi trong kịch bản giả định: Persona mở giỏ, kiểm tra sản phẩm rồi tìm ô nhập mã giảm giá. Persona nhận thấy khoản giảm và xác nhận đơn.
+- Điểm ngập ngừng: Tìm ô nhập mã trong chốc lát rồi kiểm tra tổng tiền cuối.
+- Lỗi và khôi phục: Không có lỗi trong kịch bản giả định; persona nhận ra trạng thái thành công và mục lịch sử đơn hàng.
+- **Kết quả automation độc lập:** đăng nhập: ĐẠT, giỏ hàng: ĐẠT, áp dụng mã: ĐẠT, thanh toán: ĐẠT, xác minh đơn: ĐẠT, đăng xuất: ĐẠT.
+- **Kết quả persona giả định:** Hoàn tất sau khó khăn đã mô tả; không phải kết quả do người tham gia tạo ra.
+- Điểm SUS minh họa: **75/100, SIMULATED DATA**.
+- Trả lời phỏng vấn tổng hợp: xem `interview-responses.md`.

@@ -1,21 +1,21 @@
-# SUS responses — P05 (**SIMULATED DATA**)
+# Phiếu SUS - P05 (**SIMULATED DATA**)
 
-> Các mức 1–5 là phản hồi hư cấu để minh họa phép chấm SUS. Không có người trả lời thực.
+> **DỮ LIỆU MÔ PHỎNG:** Không có người trả lời. Mức 1-5 dưới đây được tạo để minh họa cách tính, không phải phép đo thực tế.
 
-| # | SUS statement | Simulated response (1–5) |
+| # | Phát biểu SUS | Mức trả lời giả định (1-5) |
 |---:|---|---:|
-| 1 | I think that I would like to use this system frequently. | 4 |
-| 2 | I found the system unnecessarily complex. | 1 |
-| 3 | I thought the system was easy to use. | 4 |
-| 4 | I think that I would need the support of a technical person to be able to use this system. | 2 |
-| 5 | I found the various functions in this system were well integrated. | 4 |
-| 6 | I thought there was too much inconsistency in this system. | 2 |
-| 7 | I would imagine that most people would learn to use this system very quickly. | 5 |
-| 8 | I found the system very cumbersome to use. | 1 |
-| 9 | I felt very confident using the system. | 4 |
-| 10 | I needed to learn a lot of things before I could get going with this system. | 2 |
+| 1 | Tôi nghĩ rằng mình muốn sử dụng hệ thống này thường xuyên. | 4 |
+| 2 | Tôi thấy hệ thống này phức tạp một cách không cần thiết. | 1 |
+| 3 | Tôi thấy hệ thống này dễ sử dụng. | 4 |
+| 4 | Tôi nghĩ mình cần người có chuyên môn kỹ thuật hỗ trợ để sử dụng hệ thống này. | 2 |
+| 5 | Tôi thấy các chức năng trong hệ thống được tích hợp tốt. | 4 |
+| 6 | Tôi thấy hệ thống có quá nhiều điểm không nhất quán. | 2 |
+| 7 | Tôi nghĩ hầu hết mọi người sẽ học cách sử dụng hệ thống này rất nhanh. | 5 |
+| 8 | Tôi thấy hệ thống này rất cồng kềnh khi sử dụng. | 1 |
+| 9 | Tôi cảm thấy tự tin khi sử dụng hệ thống. | 4 |
+| 10 | Tôi cần học nhiều điều trước khi có thể bắt đầu sử dụng hệ thống này. | 2 |
 
-**Tính điểm:** câu lẻ trừ 1; câu chẵn tính 5 trừ đáp án; tổng hiệu chỉnh × 2.5.
+**Cách tính:** Câu lẻ trừ 1; câu chẵn lấy 5 trừ đáp án; tổng hiệu chỉnh nhân 2,5.
 
-- Adjusted total: 33 / 40
-- **Illustrative SUS score: 82.5 / 100 (SIMULATED DATA; không phải kết quả nghiên cứu).**
+- Tổng hiệu chỉnh: 33/40
+- **Điểm SUS minh họa: 82,5/100 (SIMULATED DATA).**

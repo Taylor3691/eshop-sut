@@ -1,21 +1,21 @@
-# Observation log — P01 (**SIMULATED DATA**)
+# Nhật ký quan sát - P01 (**SIMULATED DATA**)
 
-## A. Sự kiện được Playwright quan sát trực tiếp
+## A. Sự kiện Playwright quan sát trực tiếp
 
-| Checkpoint | Kết quả automation | Tệp screenshot |
+| Mốc | Kết quả automation | Screenshot |
 |---|---|---|
-| Login | PASS | `P01-01-login-home.png` |
-| Cart | PASS | `P01-02-cart.png` |
-| Apply coupon | PASS | `P01-03-coupon-checkout.png` |
-| Checkout | PASS | `P01-04-checkout-success.png` |
-| Verify order | PASS | `P01-05-order-history.png` |
-| Logout | PASS — token localStorage bị xóa | `P01-06-logout.png` |
+| Đăng nhập | ĐẠT | `P01-01-login-home.png` |
+| Giỏ hàng | ĐẠT | `P01-02-cart.png` |
+| Áp dụng mã | ĐẠT | `P01-03-coupon-checkout.png` |
+| Thanh toán | ĐẠT | `P01-04-checkout-success.png` |
+| Xác minh đơn | ĐẠT | `P01-05-order-history.png` |
+| Đăng xuất | ĐẠT - token localStorage đã bị xóa | `P01-06-logout.png` |
 
 ## B. Kịch bản hành vi tổng hợp (không phải quan sát thật)
 
-- Hesitation: Login heading and Username label; compares the total before and after coupon.
-- Error / recovery: Initially interprets the login screen as registration; recovers by noticing the existing-account sign-in action.
-- Think-aloud hư cấu: “The screen looked like registration at first. The coupon saving was easier to understand once it appeared.”
-- Hỗ trợ moderator / biểu hiện cảm xúc thật: Không có dữ liệu.
+- Ngập ngừng giả định: Dừng ở tiêu đề đăng nhập và nhãn Username; so sánh tổng tiền trước và sau mã giảm giá.
+- Lỗi / khôi phục giả định: Trong kịch bản, persona ban đầu hiểu nhầm trang đăng nhập là đăng ký, sau đó nhận ra thao tác đăng nhập.
+- Think-aloud hư cấu: “Thoạt đầu tôi tưởng đây là trang đăng ký. Tôi hiểu khoản tiết kiệm hơn sau khi thấy mức giảm hiện ra.”
+- Hỗ trợ điều phối / cảm xúc thật: Không có dữ liệu.
 
-Kịch bản B được tạo để minh họa một persona, không phải phân tích hành vi từ video ở phần A.
+Phần B là tình huống giả định, không phải phân tích video ở phần A.

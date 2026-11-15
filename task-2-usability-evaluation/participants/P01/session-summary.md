@@ -1,10 +1,10 @@
-# Session summary — P01 (**SIMULATED DATA**)
+# Tóm tắt phiên - P01 (**SIMULATED DATA**)
 
-- Persona hư cấu: **Phạm Bảo Huy**, 21 tuổi, sinh viên; checks labels carefully.
-- Kịch bản tương tác hư cấu: The login heading looks like registration, so he pauses and checks the fields before entering credentials. In the simulated narrative he completes login, then asks whether the cart total includes the coupon.
-- Điểm ngập ngừng: Login heading and Username label; compares the total before and after coupon.
-- Lỗi và khôi phục: Initially interprets the login screen as registration; recovers by noticing the existing-account sign-in action.
-- **Kết quả automation độc lập:** login:PASS, cart:PASS, coupon:PASS, checkout:PASS, verify-order:PASS, logout:PASS.
-- **Kết quả persona được giả định:** Hoàn tất trong kịch bản sau khi gặp khó khăn như mô tả; đây không phải kết quả do người tham gia tạo ra.
-- SUS minh họa: **57.5/100**, tính từ câu trả lời tổng hợp; không gộp vào kết luận nghiên cứu.
-- Interview: các câu trả lời tổng hợp trong `interview-responses.md`.
+- Persona hư cấu: **Phạm Bảo Huy**, 21 tuổi, sinh viên; đọc kỹ nhãn trước khi thao tác.
+- Hành vi trong kịch bản giả định: Tiêu đề trang đăng nhập khiến persona tưởng đây là trang đăng ký; persona dừng lại đọc nhãn rồi tiếp tục. Sau đó persona tự hỏi tổng giỏ hàng đã tính mã giảm giá chưa.
+- Điểm ngập ngừng: Dừng ở tiêu đề đăng nhập và nhãn Username; so sánh tổng tiền trước và sau mã giảm giá.
+- Lỗi và khôi phục: Trong kịch bản, persona ban đầu hiểu nhầm trang đăng nhập là đăng ký, sau đó nhận ra thao tác đăng nhập.
+- **Kết quả automation độc lập:** đăng nhập: ĐẠT, giỏ hàng: ĐẠT, áp dụng mã: ĐẠT, thanh toán: ĐẠT, xác minh đơn: ĐẠT, đăng xuất: ĐẠT.
+- **Kết quả persona giả định:** Hoàn tất sau khó khăn đã mô tả; không phải kết quả do người tham gia tạo ra.
+- Điểm SUS minh họa: **57,5/100, SIMULATED DATA**.
+- Trả lời phỏng vấn tổng hợp: xem `interview-responses.md`.

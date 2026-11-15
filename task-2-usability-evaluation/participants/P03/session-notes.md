@@ -1,13 +1,13 @@
-# Ghi chú phiên — P03 (**SIMULATED DATA**)
+# Ghi chú phiên - P03 (**SIMULATED DATA**)
 
-> Nội dung think-aloud và hành vi dưới đây là kịch bản hư cấu. Chúng **không** được nghe, quan sát hay trích xuất từ video Playwright. Video chỉ ghi lại thao tác tự động.
+> Think-aloud và hành vi dưới đây là kịch bản hư cấu, không được nghe, quan sát hoặc trích xuất từ video Playwright. Video chỉ ghi thao tác tự động.
 
 - **Persona:** Tô Thành Long, 21 tuổi, sinh viên; đặc điểm giả định trong hồ sơ.
-- **Run thực tế:** Playwright Chromium, 2026-11-15; kết quả kỹ thuật: login:PASS, cart:PASS, coupon:PASS, checkout:PASS, verify-order:PASS, logout:PASS.
-- **Kịch bản hành vi hư cấu:** He has trouble interpreting the malformed Vietnamese text and tentatively enters a coupon, then notices the feedback before proceeding.
-- **Điểm ngập ngừng giả định:** Several short pauses at garbled headings, coupon action, and order status.
-- **Lỗi / phục hồi giả định:** Hypothetically enters a mistyped coupon once, reads the error, corrects it, and proceeds.
-- **Lời nói mô phỏng:** “Some labels were difficult to read; I was unsure which page I was on.” (câu hư cấu, không phải verbatim thật).
-- **Consent / moderator / âm thanh:** N/A; không có participant.
-- **Thời lượng usability:** Không đo người thật. Thời gian chạy tự động không được diễn giải là thời gian người dùng.
-- **Evidence:** Playwright state capture tại `../../evidence/screenshots/P03-*.png`; video `../../evidence/session-recordings/P03-simulated.webm`. Không dùng chúng làm bằng chứng rằng persona đã nói/hành xử như trên.
+- **Chạy tự động thực tế:** Playwright Chromium, 2026-11-15; đăng nhập: ĐẠT, giỏ hàng: ĐẠT, áp dụng mã: ĐẠT, thanh toán: ĐẠT, xác minh đơn: ĐẠT, đăng xuất: ĐẠT.
+- **Kịch bản hành vi hư cấu:** Persona khó đọc phần chữ tiếng Việt bị lỗi hiển thị, nhập thử mã giảm giá rồi xem phản hồi trước khi đi tiếp.
+- **Điểm ngập ngừng giả định:** Dừng vài lần ở tiêu đề khó đọc, nút áp dụng mã và trạng thái đơn.
+- **Lỗi / phục hồi giả định:** Trong kịch bản, persona gõ sai mã một lần, đọc thông báo, sửa mã rồi tiếp tục.
+- **Lời nói mô phỏng:** “Một số nhãn khó đọc; tôi không chắc mình đang ở trang nào.” - câu hư cấu, không phải trích dẫn thật.
+- **Điều phối / đồng thuận / âm thanh:** Không áp dụng; không có người tham gia.
+- **Thời lượng sử dụng:** Không đo người thật; thời gian automation không đại diện cho thời gian người dùng.
+- **Bằng chứng trình duyệt:** `../../evidence/screenshots/P03-*.png`; `../../evidence/session-recordings/P03-simulated.webm`. Bằng chứng này không xác nhận kịch bản persona.

@@ -1,9 +1,9 @@
-# Interview responses — P04 (**SIMULATED DATA**)
+# Câu trả lời phỏng vấn - P04 (**SIMULATED DATA**)
 
-> Các câu trả lời sau được sáng tác cho kịch bản persona; không phải phỏng vấn hoặc lời trích dẫn thật.
+> Câu trả lời được sáng tác cho persona; không phải phỏng vấn hoặc lời trích dẫn thật.
 
-- **Clarity:** “The item list is useful, but the editable total makes the calculation feel ambiguous.”
-- **Error recovery:** “I would go back to the cart to compare if the total looked wrong.”
-- **Speed:** “Most screens seem quick; checking price arithmetic adds time.”
-- **Trust:** “I would trust the order history more than an editable checkout amount.”
-- **Actual interview / recording / consent:** Không có.
+- **Độ rõ ràng:** “Danh sách sản phẩm hữu ích, nhưng tổng tiền sửa được khiến cách tính chưa rõ ràng.”
+- **Khắc phục lỗi:** “Nếu tổng tiền có vẻ sai, tôi sẽ quay lại giỏ để đối chiếu.”
+- **Tốc độ:** “Hầu hết trang có vẻ nhanh; việc kiểm tra phép tính làm mất thêm thời gian.”
+- **Độ tin cậy:** “Tôi tin lịch sử đơn hàng hơn một ô tổng tiền có thể chỉnh sửa.”
+- **Phỏng vấn / ghi âm / đồng thuận thật:** Không có.

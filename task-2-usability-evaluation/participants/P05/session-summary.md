@@ -1,10 +1,10 @@
-# Session summary — P05 (**SIMULATED DATA**)
+# Tóm tắt phiên - P05 (**SIMULATED DATA**)
 
-- Persona hư cấu: **Nguyễn Viết Toàn**, 21 tuổi, sinh viên; expects clear badges and compact navigation.
-- Kịch bản tương tác hư cấu: He expects a cart badge, looks at the header, then uses the cart link. At checkout he checks that the discount is reflected before confirming.
-- Điểm ngập ngừng: Looks for a quantity badge in the header and scans the cart summary.
-- Lỗi và khôi phục: No hypothetical error; notes that absent/unclear cart-count feedback could prompt a second check.
-- **Kết quả automation độc lập:** login:PASS, cart:PASS, coupon:PASS, checkout:PASS, verify-order:PASS, logout:PASS.
-- **Kết quả persona được giả định:** Hoàn tất trong kịch bản sau khi gặp khó khăn như mô tả; đây không phải kết quả do người tham gia tạo ra.
-- SUS minh họa: **82.5/100**, tính từ câu trả lời tổng hợp; không gộp vào kết luận nghiên cứu.
-- Interview: các câu trả lời tổng hợp trong `interview-responses.md`.
+- Persona hư cấu: **Nguyễn Viết Toàn**, 21 tuổi, sinh viên; mong đợi huy hiệu giỏ và điều hướng gọn.
+- Hành vi trong kịch bản giả định: Persona mong thấy huy hiệu số lượng trên giỏ, nhìn thanh đầu trang rồi chọn liên kết giỏ hàng. Khi thanh toán, persona kiểm tra khoản giảm đã được tính chưa.
+- Điểm ngập ngừng: Tìm huy hiệu số lượng trên thanh đầu trang và xem lại tóm tắt giỏ.
+- Lỗi và khôi phục: Không có lỗi giả định; persona nhận xét tín hiệu số lượng giỏ không rõ có thể khiến phải kiểm tra lại.
+- **Kết quả automation độc lập:** đăng nhập: ĐẠT, giỏ hàng: ĐẠT, áp dụng mã: ĐẠT, thanh toán: ĐẠT, xác minh đơn: ĐẠT, đăng xuất: ĐẠT.
+- **Kết quả persona giả định:** Hoàn tất sau khó khăn đã mô tả; không phải kết quả do người tham gia tạo ra.
+- Điểm SUS minh họa: **82,5/100, SIMULATED DATA**.
+- Trả lời phỏng vấn tổng hợp: xem `interview-responses.md`.

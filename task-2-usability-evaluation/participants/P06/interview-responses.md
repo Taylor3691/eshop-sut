@@ -1,9 +1,9 @@
-# Interview responses — P06 (**SIMULATED DATA**)
+# Câu trả lời phỏng vấn - P06 (**SIMULATED DATA**)
 
-> Các câu trả lời sau được sáng tác cho kịch bản persona; không phải phỏng vấn hoặc lời trích dẫn thật.
+> Câu trả lời được sáng tác cho persona; không phải phỏng vấn hoặc lời trích dẫn thật.
 
-- **Clarity:** “I need the final amount and the words on the buttons to be easy to understand.”
-- **Error recovery:** “A specific coupon error would tell me whether to fix the code or the order amount.”
-- **Speed:** “I would take time to confirm rather than move quickly.”
-- **Trust:** “I want a visible order record and a clear sign-out action.”
-- **Actual interview / recording / consent:** Không có.
+- **Độ rõ ràng:** “Tôi cần tổng tiền cuối và chữ trên nút dễ hiểu.”
+- **Khắc phục lỗi:** “Thông báo mã lỗi cụ thể sẽ giúp tôi biết cần sửa mã hay giá trị đơn hàng.”
+- **Tốc độ:** “Tôi sẽ dành thời gian kiểm tra thay vì thao tác nhanh.”
+- **Độ tin cậy:** “Tôi muốn thấy đơn hàng và một thao tác đăng xuất rõ ràng.”
+- **Phỏng vấn / ghi âm / đồng thuận thật:** Không có.

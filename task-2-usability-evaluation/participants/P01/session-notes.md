@@ -1,13 +1,13 @@
-# Ghi chú phiên — P01 (**SIMULATED DATA**)
+# Ghi chú phiên - P01 (**SIMULATED DATA**)
 
-> Nội dung think-aloud và hành vi dưới đây là kịch bản hư cấu. Chúng **không** được nghe, quan sát hay trích xuất từ video Playwright. Video chỉ ghi lại thao tác tự động.
+> Think-aloud và hành vi dưới đây là kịch bản hư cấu, không được nghe, quan sát hoặc trích xuất từ video Playwright. Video chỉ ghi thao tác tự động.
 
 - **Persona:** Phạm Bảo Huy, 21 tuổi, sinh viên; đặc điểm giả định trong hồ sơ.
-- **Run thực tế:** Playwright Chromium, 2026-11-15; kết quả kỹ thuật: login:PASS, cart:PASS, coupon:PASS, checkout:PASS, verify-order:PASS, logout:PASS.
-- **Kịch bản hành vi hư cấu:** The login heading looks like registration, so he pauses and checks the fields before entering credentials. In the simulated narrative he completes login, then asks whether the cart total includes the coupon.
-- **Điểm ngập ngừng giả định:** Login heading and Username label; compares the total before and after coupon.
-- **Lỗi / phục hồi giả định:** Initially interprets the login screen as registration; recovers by noticing the existing-account sign-in action.
-- **Lời nói mô phỏng:** “The screen looked like registration at first. The coupon saving was easier to understand once it appeared.” (câu hư cấu, không phải verbatim thật).
-- **Consent / moderator / âm thanh:** N/A; không có participant.
-- **Thời lượng usability:** Không đo người thật. Thời gian chạy tự động không được diễn giải là thời gian người dùng.
-- **Evidence:** Playwright state capture tại `../../evidence/screenshots/P01-*.png`; video `../../evidence/session-recordings/P01-simulated.webm`. Không dùng chúng làm bằng chứng rằng persona đã nói/hành xử như trên.
+- **Chạy tự động thực tế:** Playwright Chromium, 2026-11-15; đăng nhập: ĐẠT, giỏ hàng: ĐẠT, áp dụng mã: ĐẠT, thanh toán: ĐẠT, xác minh đơn: ĐẠT, đăng xuất: ĐẠT.
+- **Kịch bản hành vi hư cấu:** Tiêu đề trang đăng nhập khiến persona tưởng đây là trang đăng ký; persona dừng lại đọc nhãn rồi tiếp tục. Sau đó persona tự hỏi tổng giỏ hàng đã tính mã giảm giá chưa.
+- **Điểm ngập ngừng giả định:** Dừng ở tiêu đề đăng nhập và nhãn Username; so sánh tổng tiền trước và sau mã giảm giá.
+- **Lỗi / phục hồi giả định:** Trong kịch bản, persona ban đầu hiểu nhầm trang đăng nhập là đăng ký, sau đó nhận ra thao tác đăng nhập.
+- **Lời nói mô phỏng:** “Thoạt đầu tôi tưởng đây là trang đăng ký. Tôi hiểu khoản tiết kiệm hơn sau khi thấy mức giảm hiện ra.” - câu hư cấu, không phải trích dẫn thật.
+- **Điều phối / đồng thuận / âm thanh:** Không áp dụng; không có người tham gia.
+- **Thời lượng sử dụng:** Không đo người thật; thời gian automation không đại diện cho thời gian người dùng.
+- **Bằng chứng trình duyệt:** `../../evidence/screenshots/P01-*.png`; `../../evidence/session-recordings/P01-simulated.webm`. Bằng chứng này không xác nhận kịch bản persona.

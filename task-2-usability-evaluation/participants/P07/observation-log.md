@@ -1,21 +1,21 @@
-# Observation log — P07 (**SIMULATED DATA**)
+# Nhật ký quan sát - P07 (**SIMULATED DATA**)
 
-## A. Sự kiện được Playwright quan sát trực tiếp
+## A. Sự kiện Playwright quan sát trực tiếp
 
-| Checkpoint | Kết quả automation | Tệp screenshot |
+| Mốc | Kết quả automation | Screenshot |
 |---|---|---|
-| Login | PASS | `P07-01-login-home.png` |
-| Cart | PASS | `P07-02-cart.png` |
-| Apply coupon | PASS | `P07-03-coupon-checkout.png` |
-| Checkout | PASS | `P07-04-checkout-success.png` |
-| Verify order | PASS | `P07-05-order-history.png` |
-| Logout | PASS — token localStorage bị xóa | `P07-06-logout.png` |
+| Đăng nhập | ĐẠT | `P07-01-login-home.png` |
+| Giỏ hàng | ĐẠT | `P07-02-cart.png` |
+| Áp dụng mã | ĐẠT | `P07-03-coupon-checkout.png` |
+| Thanh toán | ĐẠT | `P07-04-checkout-success.png` |
+| Xác minh đơn | ĐẠT | `P07-05-order-history.png` |
+| Đăng xuất | ĐẠT - token localStorage đã bị xóa | `P07-06-logout.png` |
 
 ## B. Kịch bản hành vi tổng hợp (không phải quan sát thật)
 
-- Hesitation: Checks the order status and pauses before using the ambiguously labeled logout action.
-- Error / recovery: No hypothetical task error; logout wording makes the end of the task less explicit.
-- Think-aloud hư cấu: “I want the order status and sign-out action to be explicit.”
-- Hỗ trợ moderator / biểu hiện cảm xúc thật: Không có dữ liệu.
+- Ngập ngừng giả định: Kiểm tra trạng thái đơn và dừng trước nhãn đăng xuất chưa rõ nghĩa.
+- Lỗi / khôi phục giả định: Không có lỗi tác vụ giả định; cách ghi nhãn đăng xuất làm kết thúc luồng kém rõ.
+- Think-aloud hư cấu: “Tôi muốn trạng thái đơn hàng và thao tác đăng xuất được ghi rõ.”
+- Hỗ trợ điều phối / cảm xúc thật: Không có dữ liệu.
 
-Kịch bản B được tạo để minh họa một persona, không phải phân tích hành vi từ video ở phần A.
+Phần B là tình huống giả định, không phải phân tích video ở phần A.

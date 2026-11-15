@@ -1,6 +1,6 @@
-# Re-running the simulated Playwright flow
+# Chạy lại luồng Playwright mô phỏng
 
-Run from the repository root. Requires the backend and storefront on ports 3000 and 5173. **Backend startup reinitializes `backend/database.sqlite`;** confirm you have a restorable copy before starting it.
+Chạy từ thư mục gốc repository. Cần backend và storefront ở cổng 3000 và 5173. **Backend khởi động sẽ khởi tạo lại `backend/database.sqlite`;** hãy bảo đảm có bản sao khôi phục trước khi chạy.
 
 ```powershell
 $runner = Join-Path $env:TEMP 'eshop-playwright'
@@ -10,6 +10,6 @@ $env:PLAYWRIGHT_MODULE = Join-Path $runner 'node_modules/playwright'
 node task-2-usability-evaluation/evidence/simulated-runs/run-flow.cjs
 ```
 
-The runner creates one isolated browser context and synthetic account per label, then writes screenshots, videos, and `run-results.json`. Running it again appends new orders to the active backend database and replaces the same named evidence files. This automation is not a human usability study.
+Runner tạo browser context và tài khoản tổng hợp riêng cho mỗi nhãn, sau đó ghi ảnh, video và `run-results.json`. Chạy lại sẽ thêm đơn hàng vào CSDL đang dùng và thay các tệp bằng chứng cùng tên. Đây là automation, không phải nghiên cứu usability có người.
 
-`generate_synthetic_research_data.py` writes fictional persona narratives, interviews, and SUS vectors. It does not control a browser or create evidence. All resulting responses are marked **SIMULATED DATA** and must not be presented as participant research.
+`generate_vietnamese_research_data.py` tạo hồ sơ persona, câu trả lời phỏng vấn và vector SUS hư cấu. Script này không điều khiển browser và không tạo ảnh/video. Mọi phản hồi đều gắn nhãn **SIMULATED DATA**, không được trình bày như nghiên cứu người dùng.

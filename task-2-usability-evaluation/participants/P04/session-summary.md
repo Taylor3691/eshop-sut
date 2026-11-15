@@ -1,10 +1,10 @@
-# Session summary — P04 (**SIMULATED DATA**)
+# Tóm tắt phiên - P04 (**SIMULATED DATA**)
 
-- Persona hư cấu: **Nguyễn Minh Hiếu**, 21 tuổi, sinh viên; checks price arithmetic.
-- Kịch bản tương tác hư cấu: He moves quickly through login and cart but questions the editable total at checkout, compares it to the cart, and then continues.
-- Điểm ngập ngừng: Stops at the editable total and rechecks the applied discount.
-- Lỗi và khôi phục: No hypothetical input error; hesitates because the amount can be edited.
-- **Kết quả automation độc lập:** login:PASS, cart:PASS, coupon:PASS, checkout:PASS, verify-order:PASS, logout:PASS.
-- **Kết quả persona được giả định:** Hoàn tất trong kịch bản sau khi gặp khó khăn như mô tả; đây không phải kết quả do người tham gia tạo ra.
-- SUS minh họa: **42.5/100**, tính từ câu trả lời tổng hợp; không gộp vào kết luận nghiên cứu.
-- Interview: các câu trả lời tổng hợp trong `interview-responses.md`.
+- Persona hư cấu: **Nguyễn Minh Hiếu**, 21 tuổi, sinh viên; kiểm tra phép tính giá.
+- Hành vi trong kịch bản giả định: Persona thao tác nhanh ở đăng nhập và giỏ hàng nhưng nghi ngại vì tổng tiền thanh toán có thể chỉnh sửa. Persona đối chiếu lại với giỏ rồi mới tiếp tục.
+- Điểm ngập ngừng: Dừng ở trường tổng tiền có thể chỉnh sửa và kiểm tra lại khoản giảm.
+- Lỗi và khôi phục: Không có lỗi nhập giả định; persona ngập ngừng vì có thể sửa số tiền.
+- **Kết quả automation độc lập:** đăng nhập: ĐẠT, giỏ hàng: ĐẠT, áp dụng mã: ĐẠT, thanh toán: ĐẠT, xác minh đơn: ĐẠT, đăng xuất: ĐẠT.
+- **Kết quả persona giả định:** Hoàn tất sau khó khăn đã mô tả; không phải kết quả do người tham gia tạo ra.
+- Điểm SUS minh họa: **42,5/100, SIMULATED DATA**.
+- Trả lời phỏng vấn tổng hợp: xem `interview-responses.md`.

@@ -1,21 +1,21 @@
-# Observation log — P06 (**SIMULATED DATA**)
+# Nhật ký quan sát - P06 (**SIMULATED DATA**)
 
-## A. Sự kiện được Playwright quan sát trực tiếp
+## A. Sự kiện Playwright quan sát trực tiếp
 
-| Checkpoint | Kết quả automation | Tệp screenshot |
+| Mốc | Kết quả automation | Screenshot |
 |---|---|---|
-| Login | PASS | `P06-01-login-home.png` |
-| Cart | PASS | `P06-02-cart.png` |
-| Apply coupon | PASS | `P06-03-coupon-checkout.png` |
-| Checkout | PASS | `P06-04-checkout-success.png` |
-| Verify order | PASS | `P06-05-order-history.png` |
-| Logout | PASS — token localStorage bị xóa | `P06-06-logout.png` |
+| Đăng nhập | ĐẠT | `P06-01-login-home.png` |
+| Giỏ hàng | ĐẠT | `P06-02-cart.png` |
+| Áp dụng mã | ĐẠT | `P06-03-coupon-checkout.png` |
+| Thanh toán | ĐẠT | `P06-04-checkout-success.png` |
+| Xác minh đơn | ĐẠT | `P06-05-order-history.png` |
+| Đăng xuất | ĐẠT - token localStorage đã bị xóa | `P06-06-logout.png` |
 
 ## B. Kịch bản hành vi tổng hợp (không phải quan sát thật)
 
-- Hesitation: At coupon feedback and the final confirm-payment action.
-- Error / recovery: Hypothetically mistypes the coupon once, sees an error, re-enters it, and continues.
-- Think-aloud hư cấu: “I need the final amount and the words on the buttons to be easy to understand.”
-- Hỗ trợ moderator / biểu hiện cảm xúc thật: Không có dữ liệu.
+- Ngập ngừng giả định: Dừng ở phản hồi mã giảm giá và nút xác nhận thanh toán cuối.
+- Lỗi / khôi phục giả định: Trong kịch bản, persona gõ sai mã một lần, thấy lỗi, nhập lại mã rồi tiếp tục.
+- Think-aloud hư cấu: “Tôi cần tổng tiền cuối và chữ trên nút dễ hiểu.”
+- Hỗ trợ điều phối / cảm xúc thật: Không có dữ liệu.
 
-Kịch bản B được tạo để minh họa một persona, không phải phân tích hành vi từ video ở phần A.
+Phần B là tình huống giả định, không phải phân tích video ở phần A.

@@ -1,37 +1,30 @@
-# Nhật ký Kiểm toán Sử dụng AI (AI Audit Log - HW03 Task 2)
+# Báo cáo kiểm toán việc sử dụng AI - HW03 Task 2 (**SIMULATED DATA**)
 
-> **Tuyên bố sử dụng AI:** Tôi sử dụng công cụ AI (Gemini 3.8 Flash trong vai trò Antigravity Senior QA & Usability Specialist) để hỗ trợ lập kế hoạch, cấu trúc tài liệu, soạn thảo bộ công cụ chuẩn (SUS, UEQ-S, Probe questions) và thiết kế biểu mẫu quan sát. Toàn bộ kịch bản, quy trình và biểu mẫu đều được rà soát bởi con người. Các phiên kiểm thử người dùng thực tế và bằng chứng kiểm thử hoàn toàn do con người thực hiện, tuân thủ nghiêm ngặt chính sách Anti-AI-Cheat.
+## Tuyên bố
 
----
+Tôi sử dụng ChatGPT Codex để đọc yêu cầu, hỗ trợ viết Playwright, tổng hợp tài liệu và tạo các persona/phản hồi giả định theo yêu cầu của bài tập mô phỏng. Không sử dụng văn bản do AI tạo như lời khai hay kết quả của người tham gia thật.
 
-## 1. Bảng Tổng hợp Tương tác AI (Interaction Summary Table)
+## Nhật ký tương tác trong lần hoàn thiện này
 
-| Interaction ID | AI Tool | Date/Time | Prompt File | Purpose | Output Deliverable |
-|:---:|---|---|---|---|---|
-| **AI-001** | Gemini 3.8 Flash (Antigravity Senior QA Specialist) | 2026-11-11 21:05 +07:00 | `prompts/00-prepare-workspace.md` | Chuẩn bị cấu trúc thư mục workspace cho Task 2 Usability Evaluation, thiết lập các phân hệ prompts, planning, instruments, participants, analysis, bug-reports, ai-audit và evidence. | Toàn bộ cấu trúc workspace `task-2-usability-evaluation/` và `README.md`. |
-| **AI-002** | Gemini 3.8 Flash (Antigravity Senior QA Specialist) | 2026-11-11 21:06 +07:00 | `prompts/01-planning-and-instruments.md` | Thiết kế Kế hoạch kiểm thử Usability toàn diện (`test-plan.md`), Kịch bản nhiệm vụ hướng mục tiêu (`task-scenarios.md`), bộ thang đo chuẩn SUS, UEQ-S, câu hỏi phỏng vấn sâu và form cam kết đồng thuận. | `planning/test-plan.md`, `planning/task-scenarios.md`, các tập tin trong `instruments/`. |
-| **AI-003** | Gemini 3.8 Flash (Antigravity Senior QA Specialist) | 2026-11-11 21:07 +07:00 | `prompts/02-participant-recruitment-and-pilot.md` & `prompts/03-session-observation-and-notes.md` | Soạn thảo biểu mẫu danh sách người tham gia (bảo mật ẩn 4 số giữa), biểu mẫu ghi chép quan sát phiên theo giao thức Think-Aloud, và biểu mẫu phiên thử nghiệm Pilot. | `participants/participant-roster-template.md`, `participants/session-notes-template.md`, `participants/pilot-session-notes-template.md`. |
-| **AI-004** | Gemini 3.8 Flash (Antigravity Senior QA Specialist) | 2026-11-11 21:08 +07:00 | `prompts/04-quantitative-qualitative-analysis.md` & `prompts/05-bug-reporting-and-issues.md` | Xây dựng mô hình tính điểm SUS, biểu mẫu tổng hợp định tính theo chủ đề và quy ước báo cáo lỗi Usability kèm đồng bộ GitHub Issues. | `analysis/sus-scoring-template.md`, `analysis/qualitative-synthesis-template.md`, `bug-reports/BUG-REPORT-TEMPLATE.md`. |
+| Ngày | Công cụ | Yêu cầu | Đầu ra |
+|---|---|---|---|
+| 2026-11-15 | ChatGPT Codex (GPT-6) | Đọc HW03, SRS và workspace Task 2; thực hiện luồng Login → Cart → Coupon → Checkout → Verify Order → Logout bằng Playwright; tạo ảnh/video thật; ghi nhận kết quả trung thực; tạo báo cáo và commit. | Runner Playwright, bảy bộ ảnh/video thật, kết quả máy, báo cáo findings và hồ sơ phiên gắn nhãn SIMULATED. |
+| 2026-11-15 | ChatGPT Codex (GPT-6) | Yêu cầu tiếp theo: tạo hồ sơ và phản hồi hư cấu khác nhau cho bảy persona tuổi 21; tạo think-aloud, phỏng vấn và SUS; tính điểm; yêu cầu bằng chứng vẫn phải là ảnh/video Playwright thật. | Bảy hồ sơ persona, kịch bản phản ứng/phỏng vấn giả định, bảy vector SUS được tính theo công thức; tổng hợp định tính và cập nhật báo cáo tiếng Việt. |
+| 2026-11-15 | ChatGPT Codex (GPT-6) | Chuyển kết quả sang tiếng Việt và yêu cầu bỏ nhãn mô phỏng, trình bày như dữ liệu người thật. | Chấp nhận dịch thuật; từ chối xóa nhãn hoặc mô tả dữ liệu sáng tác là dữ liệu thật. Báo cáo và PDF giữ rõ SIMULATED DATA. |
 
----
+## Quy trình / đầu ra có thể kiểm chứng
 
-## 2. Chi tiết Nhật ký Tương tác (Interaction Records)
+- `../evidence/simulated-runs/run-flow.cjs` chạy bảy browser context Playwright riêng biệt.
+- `../evidence/simulated-runs/run-results.json` ghi kết quả checkpoint tự động.
+- `../evidence/screenshots/` có 42 ảnh PNG được Playwright chụp trực tiếp.
+- `../evidence/session-recordings/` có bảy video WEBM được Playwright ghi trực tiếp.
+- `../evidence/simulated-runs/generate_vietnamese_research_data.py` tạo persona, câu trả lời và điểm giả định; script này không tạo ảnh/video.
+- `../evidence/simulated-runs/generate_pdfs.py` xuất PDF từ các báo cáo Markdown.
 
-### Tương tác AI-001: Chuẩn bị Workspace
-- **Công cụ:** Antigravity Senior QA Engineer Agent (Gemini 3.8 Flash).
-- **Thời gian:** 2026-11-11 21:05:07 +07:00.
-- **Tập tin Prompt liên quan:** `task-2-usability-evaluation/prompts/00-prepare-workspace.md`.
-- **Tài liệu nguồn đã đọc và phân tích:**
-  - `README.md` (Đặc tả Yêu cầu Hệ thống EShop).
-  - `docs/2026.HW03.md` (Đề cương và yêu cầu bài tập HW03).
-  - `task-1-gui-checklist/` (Cấu trúc, phong cách đặt tên và quy ước Task 1).
-- **Giới hạn thực thi (Execution Boundary):** Không tự tạo dữ liệu người tham gia giả mạo; không tạo bằng chứng hay video giả; giữ các prompt bằng tiếng Anh và tài liệu chính khóa luận bằng tiếng Việt.
-- **Đầu ra tạo lập:** Thư mục `task-2-usability-evaluation/` và tập tin điều phối tổng thể `README.md`.
+## Kiểm tra và giới hạn
 
-*(Các tương tác tiếp theo khi tiến hành phân tích kết quả thực tế sẽ tiếp tục được bổ sung vào nhật ký này).*
+Kết quả automation: 7/7 lượt PASS ở sáu checkpoint. Điểm SUS giả định: 57,5; 75; 25; 42,5; 82,5; 37,5; 82,5. Công thức áp dụng đúng cho vector hư cấu; các giá trị không phải đo lường thực nghiệm.
 
-## 2026-11-15 addenda
+Một lệnh backup CSDL ban đầu dùng sai đường dẫn tương đối; backend sau đó khởi tạo lại tệp SQLite đang có thay đổi chưa commit. Tệp được khôi phục về bản đang theo dõi trong Git, nhưng trạng thái chưa commit trước đó không thể phục hồi. Chi tiết nằm trong `simulated-execution-addendum.md`.
 
-See [simulated execution audit](simulated-execution-addendum.md) for the Codex prompt scope, output, observed run outcomes, corrections, and database backup error.
-
-See [fictional response audit](synthetic-data-addendum.md) for the follow-up request and generated fictional profiles, interviews, think-aloud narratives, and non-empirical SUS scores.
+Lưu bản audit trước khi cập nhật dịch thuật tại `ai-audit-log-before-vietnamese-update.md` để giữ lịch sử workspace.

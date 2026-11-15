@@ -1,11 +1,11 @@
-# Persona mô phỏng — P02
+# Hồ sơ persona - P02 (**SIMULATED DATA**)
 
-> **SIMULATED DATA — hồ sơ hư cấu, không mô tả người thật.** Tên, tuổi 21 và bối cảnh sinh viên được cung cấp trong yêu cầu. Các đặc điểm dưới đây được sáng tác để tạo các kịch bản khác nhau.
+> **DỮ LIỆU MÔ PHỎNG.** Hồ sơ hư cấu, không mô tả người thật. Tên, tuổi 21 và bối cảnh sinh viên theo yêu cầu; các thuộc tính khác được sáng tác.
 
 - **Tên nhãn:** Trần Anh Khoa
 - **Tuổi / bối cảnh:** 21 / sinh viên
-- **Hướng học tập hư cấu:** economics studies
-- **Thói quen mua sắm giả định:** frequent online shopper
-- **Mức tự tin giả định:** high
-- **Đặc điểm hành vi giả định:** looks for discount and order status
-- **Liên hệ / consent:** N/A — persona hư cấu; không có cá nhân được tuyển dụng hoặc liên hệ.
+- **Ngành học giả định:** kinh tế
+- **Thói quen mua sắm giả định:** mua sắm trực tuyến thường xuyên
+- **Mức tự tin giả định:** cao
+- **Đặc điểm hành vi giả định:** chú ý ưu đãi và trạng thái đơn
+- **Liên hệ / đồng thuận:** Không áp dụng - persona hư cấu, không có người được tuyển dụng hoặc liên hệ.

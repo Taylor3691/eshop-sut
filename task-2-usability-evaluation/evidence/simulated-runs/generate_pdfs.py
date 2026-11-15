@@ -129,7 +129,7 @@ def footer(canvas, doc):
     canvas.line(18*mm, 15*mm, w-18*mm, 15*mm)
     canvas.setFont("Arial", 7.5)
     canvas.setFillColor(GRAY)
-    canvas.drawString(18*mm, 10*mm, "HW03 Task 2 | SIMULATED DATA")
+    canvas.drawString(18*mm, 10*mm, "HW03 Bài 2 | SIMULATED DATA")
     canvas.drawRightString(w-18*mm, 10*mm, f"Page {doc.page}")
     canvas.restoreState()
 

@@ -1,9 +1,9 @@
-# Interview responses — P05 (**SIMULATED DATA**)
+# Câu trả lời phỏng vấn - P05 (**SIMULATED DATA**)
 
-> Các câu trả lời sau được sáng tác cho kịch bản persona; không phải phỏng vấn hoặc lời trích dẫn thật.
+> Câu trả lời được sáng tác cho persona; không phải phỏng vấn hoặc lời trích dẫn thật.
 
-- **Clarity:** “I want an obvious cart count and a clear breakdown of savings.”
-- **Error recovery:** “I would return to the cart and check quantities if anything seemed off.”
-- **Speed:** “The simulated path is fast if navigation feedback is visible.”
-- **Trust:** “A clear order number and status would make me more comfortable.”
-- **Actual interview / recording / consent:** Không có.
+- **Độ rõ ràng:** “Tôi muốn thấy số lượng trong giỏ thật rõ và khoản tiết kiệm được tách bạch.”
+- **Khắc phục lỗi:** “Nếu thấy gì đó không ổn, tôi sẽ quay lại giỏ để kiểm tra số lượng.”
+- **Tốc độ:** “Luồng giả định nhanh nếu tín hiệu điều hướng dễ thấy.”
+- **Độ tin cậy:** “Mã đơn và trạng thái rõ ràng sẽ khiến tôi yên tâm hơn.”
+- **Phỏng vấn / ghi âm / đồng thuận thật:** Không có.

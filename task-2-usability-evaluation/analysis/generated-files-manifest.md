@@ -1,11 +1,12 @@
-# Generated file manifest ? HW03 Task 2
+# Danh mục tệp đầu ra - HW03 Task 2
 
-> Files added or updated for the simulated evaluation. Fictional responses and scores are labeled SIMULATED DATA; screenshots and videos are genuine Playwright output.
+> Các tệp được thêm/cập nhật cho đánh giá mô phỏng. Phản hồi và điểm hư cấu được gắn nhãn SIMULATED DATA; ảnh/video là đầu ra Playwright thật.
 
-Total listed files (excluding this manifest): **125**.
+Tổng số tệp được liệt kê (không tính danh mục này): **128**.
 
 - task-2-usability-evaluation/README.md
 - task-2-usability-evaluation/ai-audit/ai-audit-log.md
+- task-2-usability-evaluation/ai-audit/ai-audit-log-before-vietnamese-update.md
 - task-2-usability-evaluation/ai-audit/ai-critique-playwright-execution.md
 - task-2-usability-evaluation/ai-audit/ai-critique-previous-draft.md
 - task-2-usability-evaluation/ai-audit/ai-critique.md
@@ -126,7 +127,9 @@ Total listed files (excluding this manifest): **125**.
 - task-2-usability-evaluation/participants/participant-list.md
 - task-2-usability-evaluation/participants/pilot/automation-preflight-simulated.md
 - task-2-usability-evaluation/evidence/simulated-runs/generate_pdfs.py
+- task-2-usability-evaluation/evidence/simulated-runs/generate_vietnamese_research_data.py
+- task-2-usability-evaluation/evidence/simulated-runs/results-summary-vi.md
 - task-2-usability-evaluation/output/pdf/ai-audit-simulated.pdf
 - task-2-usability-evaluation/output/pdf/ai-critique-simulated.pdf
 - task-2-usability-evaluation/output/pdf/main-report-simulated.pdf
-- task-2-usability-evaluation/analysis/generated-files-manifest.md (this manifest)
+- task-2-usability-evaluation/analysis/generated-files-manifest.md (danh mục này)
