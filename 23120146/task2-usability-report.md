@@ -21,14 +21,14 @@
 
 | Mã phiên | Vai trò | Họ và tên | Nghề nghiệp / Non-IT? | Liên hệ xác minh (che 4 số giữa) | Trạng thái hoàn thành | Điểm SUS (`/100`) |
 | :---: | :---: | :--- | :--- | :--- | :---: | :---: |
-| **Pilot** | Pilot | *(Điền tên người chạy thử Pilot)* | *(Cần bổ sung)* | `09xx-xxxx-xx` | *(Chưa ghi trong results)* | *(Phiên hiệu chỉnh)* |
-| **P1** | Chính thức | *(Điền tên P1)* | Non-IT | `09xx-xxxx-xx` | Success | **80.0** |
-| **P2** | Chính thức | *(Điền tên P2)* | Non-IT | `09xx-xxxx-xx` | Success | **92.5** |
-| **P3** | Chính thức | *(Điền tên P3)* | Non-IT | `09xx-xxxx-xx` | Success | **82.5** |
-| **P4** | Chính thức | *(Điền tên P4)* | Non-IT | `09xx-xxxx-xx` | Success | **82.5** |
-| **P5** | Chính thức | *(Điền tên P5)* | Non-IT | `09xx-xxxx-xx` | Success | **90.0** |
-| **P6** | Chính thức | *(Điền tên P6)* | Non-IT | `09xx-xxxx-xx` | Success | **80.0** |
-| **P7** | Chính thức | *(Điền tên P7)* | Non-IT | `09xx-xxxx-xx` | Success | **87.5** |
+| **Pilot** | Pilot | Hoàng Ngọc | IT  | `09xx-xxx3-93` | Success | *90* |
+| **P1** | Chính thức | Hoàng Duy Khang | Non-IT | `09xx-xxx3-93` | Success | **80.0** |
+| **P2** | Chính thức | Hoàng Thái Minh Hiếu | Non-IT | `09xx-xxx3-93` | Success | **92.5** |
+| **P3** | Chính thức | Hoàng Kim Phú | Non-IT | `09xx-xxx9-83` | Success | **82.5** |
+| **P4** | Chính thức | Hoàng Võ Vân Anh | Non-IT | `09xx-xxx3-93` | Success | **82.5** |
+| **P5** | Chính thức | Hoàng Võ Phụng Anh | Non-IT | `09xx-xxx3-93` | Success | **90.0** |
+| **P6** | Chính thức | Tống Mỹ Linh | Non-IT | `09xx-xxx2-71` | Success | **80.0** |
+| **P7** | Chính thức | Hoàng Tống Minh Đăng | Non-IT | `09xx-xxx1-37` | Success | **87.5** |
 
 ---
 
@@ -81,19 +81,17 @@ $$\text{SUS} = \left(\sum_{i \in \{1,3,5,7,9\}} (Q_i - 1) + \sum_{j \in \{2,4,6,
 
 Theo yêu cầu của phương pháp đánh giá Usability ([`usability-evaluation-eshop/SKILL.md`](../.agents/skills/usability-evaluation-eshop/SKILL.md#L24)), các phát hiện từ đợt khảo sát và kiểm tra trên luồng E2E được phân tách rõ thành **2 nhóm bản chất**:
 
-```mermaid
-flowchart TD
-    A["Kết quả Đánh giá Usability Luồng Tài khoản & Hồ sơ (P1–P7)"] --> B["Nhóm A: Vấn đề Thiết kế Hệ thống (Systemic Design Issues)"]
-    A --> C["Nhóm B: Lỗi Code / Validation Đơn lẻ (Isolated Bugs)"]
-    B --> B1["USAB-SYS-01: Điểm vào Hồ sơ cá nhân ẩn dưới câu chào 'Chào, <Tên>' (7/7)"]
-    B --> B2["USAB-SYS-02: Nhập địa chỉ thủ công bằng textarea thô, thiếu chọn Tỉnh/Huyện/Xã & Autocomplete (7/7)"]
-    B --> B3["USAB-SYS-03: Phản hồi trạng thái bằng window.alert() & thiếu inline validation tại từng ô (7/7)"]
-    B --> B4["USAB-SYS-04: Thiếu xác nhận & điều hướng an toàn sau khi Đăng xuất trên máy chung (4/7)"]
-    C --> C1["USAB-BUG-01: Regex SĐT chặn số 0 đầu (0912345678) trái ngược placeholder (#200)"]
-    C --> C2["USAB-BUG-02: Regex mật khẩu bắt buộc dấu cách, từ chối ký tự đặc biệt (#212)"]
-    C --> C3["USAB-BUG-03: Lưu hồ sơ không đồng bộ tên mới lên Navbar & nháy 'Vui lòng đăng nhập' khi F5 (#205, #206)"]
-    C --> C4["USAB-BUG-04: Đăng xuất không thu hồi phiên ở tab khác trên máy dùng chung (#207)"]
-```
+| Nhóm phân loại | Mã phát hiện | Tóm tắt nguyên nhân & tác động chính | Liên kết Issue |
+| :--- | :---: | :--- | :---: |
+| **Nhóm A: Vấn đề Thiết kế Hệ thống**<br>*(Systemic Design Issues)* | `USAB-SYS-01` | Điểm vào Hồ sơ cá nhân ẩn dưới câu chào `Chào, <Tên>` và `/login` hiển thị sai nhãn (`7/7` phản ánh) | [`#222`](https://github.com/Taylor3691/eshop-sut/issues/222), [`#193`](https://github.com/Taylor3691/eshop-sut/issues/193) |
+| **Nhóm A: Vấn đề Thiết kế Hệ thống** | `USAB-SYS-02` | Nhập địa chỉ thủ công bằng `<textarea>` thô, thiếu chọn Tỉnh/Huyện/Xã & Autocomplete (`7/7` phản ánh chậm nhất) | [`#223`](https://github.com/Taylor3691/eshop-sut/issues/223), [`#196`](https://github.com/Taylor3691/eshop-sut/issues/196) |
+| **Nhóm A: Vấn đề Thiết kế Hệ thống** | `USAB-SYS-03` | Phản hồi trạng thái bằng `window.alert()`, thiếu hướng dẫn định dạng & thiếu inline validation tại từng ô (`7/7`) | [`#223`](https://github.com/Taylor3691/eshop-sut/issues/223), [`#206`](https://github.com/Taylor3691/eshop-sut/issues/206) |
+| **Nhóm A: Vấn đề Thiết kế Hệ thống** | `USAB-SYS-04` | Thiếu chuyển hướng về `/login` và thiếu xác nhận đăng xuất an toàn trên máy dùng chung | [`#224`](https://github.com/Taylor3691/eshop-sut/issues/224), [`#204`](https://github.com/Taylor3691/eshop-sut/issues/204) |
+| **Nhóm B: Lỗi Code / Validation Đơn lẻ**<br>*(Isolated Bugs)* | `USAB-BUG-01` | Regex SĐT (`/^[1-9][0-9]{8,9}$/`) chặn số `0` đầu (`0912345678`), trái ngược placeholder | [`#200`](https://github.com/Taylor3691/eshop-sut/issues/200) |
+| **Nhóm B: Lỗi Code / Validation Đơn lẻ** | `USAB-BUG-02` | Regex mật khẩu bắt buộc khoảng trắng (`(?=.*\s)`), từ chối ký tự đặc biệt (`Test1234!`) | [`#212`](https://github.com/Taylor3691/eshop-sut/issues/212) |
+| **Nhóm B: Lỗi Code / Validation Đơn lẻ** | `USAB-BUG-03` | Lưu hồ sơ không đồng bộ tên mới lên Navbar & nháy `"Vui lòng đăng nhập"` khi tải lại trang | [`#205`](https://github.com/Taylor3691/eshop-sut/issues/205), [`#206`](https://github.com/Taylor3691/eshop-sut/issues/206) |
+| **Nhóm B: Lỗi Code / Validation Đơn lẻ** | `USAB-BUG-04` | Đăng xuất ở tab khác không thu hồi phiên khiến tab `/profile` vẫn gửi JWT cũ cập nhật DB | [`#207`](https://github.com/Taylor3691/eshop-sut/issues/207) |
+| **Nhóm B: Lỗi Code / Validation Đơn lẻ** | `USAB-BUG-05` | Form `/register` thiếu ô `Xác nhận mật khẩu`, Email dùng `type="text"` và cho đăng ký trùng email | [`#211`](https://github.com/Taylor3691/eshop-sut/issues/211), [`#213`](https://github.com/Taylor3691/eshop-sut/issues/213), [`#214`](https://github.com/Taylor3691/eshop-sut/issues/214) |
 
 ### 3.1. Nhóm A — Vấn đề Thiết kế Hệ thống (Systemic Design Issues)
 Đây là các khiếm khuyết về kiến trúc thông tin (*Information Architecture*), luồng tương tác và quy ước phản hồi lặp lại xuyên suốt nhiều màn hình:
