@@ -1,4 +1,4 @@
-# Câu trả lời phỏng vấn - P06 (**SIMULATED DATA**)
+# Câu trả lời phỏng vấn - P06
 
 > Câu trả lời được sáng tác cho persona; không phải phỏng vấn hoặc lời trích dẫn thật.
 

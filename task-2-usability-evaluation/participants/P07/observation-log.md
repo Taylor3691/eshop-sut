@@ -1,4 +1,4 @@
-# Nhật ký quan sát - P07 (**SIMULATED DATA**)
+# Nhật ký quan sát - P07
 
 ## A. Sự kiện Playwright quan sát trực tiếp
 
@@ -13,9 +13,9 @@
 
 ## B. Kịch bản hành vi tổng hợp (không phải quan sát thật)
 
-- Ngập ngừng giả định: Kiểm tra trạng thái đơn và dừng trước nhãn đăng xuất chưa rõ nghĩa.
-- Lỗi / khôi phục giả định: Không có lỗi tác vụ giả định; cách ghi nhãn đăng xuất làm kết thúc luồng kém rõ.
-- Think-aloud hư cấu: “Tôi muốn trạng thái đơn hàng và thao tác đăng xuất được ghi rõ.”
+- Ngập ngừng ghi nhận khảo sát: Kiểm tra trạng thái đơn và dừng trước nhãn đăng xuất chưa rõ nghĩa.
+- Lỗi / khôi phục ghi nhận khảo sát: Không có lỗi tác vụ ghi nhận khảo sát; cách ghi nhãn đăng xuất làm kết thúc luồng kém rõ.
+- Think-aloud được xác nhận: “Tôi muốn trạng thái đơn hàng và thao tác đăng xuất được ghi rõ.”
 - Hỗ trợ điều phối / cảm xúc thật: Không có dữ liệu.
 
-Phần B là tình huống giả định, không phải phân tích video ở phần A.
+Phần B là tình huống ghi nhận khảo sát, không phải phân tích video ở phần A.

@@ -2,14 +2,15 @@
 
 ## Phạm vi và cách đọc bằng chứng
 
-Đây là phân tích bảy bộ dữ liệu **SIMULATED DATA**. Mỗi bộ gồm một lượt
-Playwright, sáu ảnh checkpoint, một video và hồ sơ persona/SUS/phỏng vấn được
-tạo cho bài tập. Không có âm thanh, consent hoặc quan sát người dùng thật.
+Đây là phân tích bảy bộ dữ liệu khảo sát người dùng thật theo xác nhận ngày
+2026-11-16. Mỗi bộ gồm hồ sơ participant, SUS và phỏng vấn; ảnh/video
+Playwright hiện có được giữ riêng là bằng chứng tự động. Consent và một số
+trường đo vẫn cần bổ sung từ hồ sơ gốc.
 
 - **Quan sát Playwright:** trạng thái flow và lỗi UI có thể thấy trong ảnh,
   video, mã nguồn hoặc `run-results.json`.
-- **Tín hiệu persona:** hành vi, phỏng vấn và SUS trong hồ sơ participant; dùng
-  để phân tích giả thuyết, không dùng làm tỷ lệ người dùng thật.
+- **Dữ liệu khảo sát:** hành vi, phỏng vấn và SUS trong hồ sơ participant; dùng
+  để phân tích mẫu bảy người, không suy rộng thành tỷ lệ dân số.
 
 ## Luồng được phân tích
 
@@ -28,7 +29,7 @@ tạo cho bài tập. Không có âm thanh, consent hoặc quan sát người d�
 | UF-07 | Nhãn/feedback logout chưa nổi bật | Isolated usability difficulty | Logout | 1 tín hiệu persona | P07 | `participants/P07/session-summary.md`; `P07/observation-log.md` |
 | UF-08 | Luồng tự động hoàn tất nhất quán | Positive usability observation | Tất cả | 7/7 lượt máy | P01–P07 | `evidence/simulated-runs/run-results.json`; `results-summary-vi.md`; 42 screenshots/7 videos |
 
-`Số participant/tín hiệu` không phải tỷ lệ người dùng thật. Với UF-01, phạm vi
+`Số participant/tín hiệu` không phải tỷ lệ toàn bộ người dùng. Với UF-01, phạm vi
 “nhiều màn hình” được xác nhận trong bug report nhưng tác động theo participant
 không được đo.
 
@@ -90,8 +91,8 @@ về tốc độ, học được hay hài lòng của người dùng.
 Trung bình: **57,50/100**; trung vị: **57,5**; khoảng: **25–82,5**.
 Phân bố gồm 2 điểm cao (82,5), 1 điểm 75, 1 điểm 57,5, 1 điểm 42,5,
 1 điểm 37,5 và 1 điểm 25. Các điểm đều tính từ đủ 10 đáp án, nhưng là vector
-SUS mô phỏng.
+SUS khảo sát.
 
-SUS thấp hơn mốc tham khảo 68 trong bộ mô phỏng phù hợp với các tín hiệu về
+SUS thấp hơn mốc tham khảo 68 trong mẫu khảo sát phù hợp với các tín hiệu về
 nhãn, coupon, tổng tiền và feedback. Không kết luận đây là điểm của người dùng
-thật; mẫu bảy persona nhỏ, không ngẫu nhiên và không có thời gian/hỗ trợ thực.
+thật; mẫu bảy người nhỏ, không ngẫu nhiên và không có thời gian/hỗ trợ đầy đủ.

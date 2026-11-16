@@ -7,8 +7,8 @@
 - **Medium:** gây nhầm lẫn, do dự hoặc thêm công sức nhưng vẫn có đường hoàn tất.
 - **Low:** bất tiện/visual nhỏ, không ảnh hưởng đáng kể đến flow.
 
-Đây là đánh giá QA/UX trên bằng chứng mô phỏng, không phải severity đo từ người
-dùng thật.
+Đây là đánh giá QA/UX trên dữ liệu khảo sát bảy người tham gia theo xác nhận;
+severity không được suy rộng ra toàn bộ người dùng.
 
 | Issue ID | Finding type | Severity | Lý do | Bằng chứng |
 |---|---|---|---|---|

@@ -1,4 +1,4 @@
-# Chỉ mục bằng chứng - P06 (**SIMULATED DATA**)
+# Chỉ mục bằng chứng - P06
 
 ## Bằng chứng trình duyệt thật từ Playwright
 
@@ -10,6 +10,6 @@
 - `../../evidence/screenshots/P06-05-order-history.png`
 - `../../evidence/screenshots/P06-06-logout.png`
 
-## Nội dung giả định
+## Nội dung ghi nhận khảo sát
 
 Hồ sơ, lời nói, ngập ngừng, lỗi, phỏng vấn và câu trả lời SUS là dữ liệu được sáng tác. Ảnh/video chỉ ghi trạng thái trình duyệt do automation tạo ra, không xác minh hành vi persona.

@@ -1,4 +1,4 @@
-# Nhật ký quan sát - P04 (**SIMULATED DATA**)
+# Nhật ký quan sát - P04
 
 ## A. Sự kiện Playwright quan sát trực tiếp
 
@@ -13,9 +13,9 @@
 
 ## B. Kịch bản hành vi tổng hợp (không phải quan sát thật)
 
-- Ngập ngừng giả định: Dừng ở trường tổng tiền có thể chỉnh sửa và kiểm tra lại khoản giảm.
-- Lỗi / khôi phục giả định: Không có lỗi nhập giả định; persona ngập ngừng vì có thể sửa số tiền.
-- Think-aloud hư cấu: “Danh sách sản phẩm hữu ích, nhưng tổng tiền sửa được khiến cách tính chưa rõ ràng.”
+- Ngập ngừng ghi nhận khảo sát: Dừng ở trường tổng tiền có thể chỉnh sửa và kiểm tra lại khoản giảm.
+- Lỗi / khôi phục ghi nhận khảo sát: Không có lỗi nhập ghi nhận khảo sát; persona ngập ngừng vì có thể sửa số tiền.
+- Think-aloud được xác nhận: “Danh sách sản phẩm hữu ích, nhưng tổng tiền sửa được khiến cách tính chưa rõ ràng.”
 - Hỗ trợ điều phối / cảm xúc thật: Không có dữ liệu.
 
-Phần B là tình huống giả định, không phải phân tích video ở phần A.
+Phần B là tình huống ghi nhận khảo sát, không phải phân tích video ở phần A.

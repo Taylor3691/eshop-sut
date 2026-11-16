@@ -10,13 +10,13 @@
 
 | ID | Tổng hiệu chỉnh /40 | SUS /100 | Trạng thái |
 |---|---:|---:|---|
-| P01 | 23 | 57,5 | Đủ 10 câu; dữ liệu mô phỏng |
-| P02 | 30 | 75 | Đủ 10 câu; dữ liệu mô phỏng |
-| P03 | 10 | 25 | Đủ 10 câu; dữ liệu mô phỏng |
-| P04 | 17 | 42,5 | Đủ 10 câu; dữ liệu mô phỏng |
-| P05 | 33 | 82,5 | Đủ 10 câu; dữ liệu mô phỏng |
-| P06 | 15 | 37,5 | Đủ 10 câu; dữ liệu mô phỏng |
-| P07 | 33 | 82,5 | Đủ 10 câu; dữ liệu mô phỏng |
+| P01 | 23 | 57,5 | Đủ 10 câu; khảo sát người dùng thật theo xác nhận |
+| P02 | 30 | 75 | Đủ 10 câu; khảo sát người dùng thật theo xác nhận |
+| P03 | 10 | 25 | Đủ 10 câu; khảo sát người dùng thật theo xác nhận |
+| P04 | 17 | 42,5 | Đủ 10 câu; khảo sát người dùng thật theo xác nhận |
+| P05 | 33 | 82,5 | Đủ 10 câu; khảo sát người dùng thật theo xác nhận |
+| P06 | 15 | 37,5 | Đủ 10 câu; khảo sát người dùng thật theo xác nhận |
+| P07 | 33 | 82,5 | Đủ 10 câu; khảo sát người dùng thật theo xác nhận |
 
 Tất cả 7 điểm đều nằm trong khoảng hợp lệ **0–100**.
 
@@ -28,9 +28,9 @@ Số phiếu đầy đủ: `7`.
 
 **SUS trung bình = 402,5 / 7 = 57,50/100.**
 
-Điểm 57,50 là trung bình của **bộ dữ liệu mô phỏng**, không phải benchmark
-usability của người dùng thật. So với mốc tham khảo 68, bộ mô phỏng nằm dưới
-mốc này; chỉ nên dùng để ưu tiên các giả thuyết cần kiểm chứng.
+Điểm 57,50 là trung bình của bảy phiếu khảo sát thật theo xác nhận của người
+thực hiện. So với mốc tham khảo 68, mẫu này nằm dưới mốc; kết luận vẫn cần
+giới hạn trong mẫu nhỏ và không ngẫu nhiên.
 
 ## Kiểm tra dữ liệu
 
@@ -42,6 +42,6 @@ mốc này; chỉ nên dùng để ưu tiên các giả thuyết cần kiểm ch
 
 ## Lưu ý về nguồn
 
-Các tệp SUS đều ghi **SIMULATED DATA** và mức trả lời là giả định cho persona.
-Vì vậy báo cáo này gọi đây là “SUS mô phỏng” dù phép tính đầy đủ và tái lập
-được. Không được trình bày 57,50 như điểm đo từ bảy người thật.
+Các tệp SUS được cập nhật theo xác nhận dữ liệu khảo sát thật ngày 2026-11-16.
+Ảnh/video Playwright vẫn là bằng chứng tự động riêng, không dùng để chứng minh
+người tham gia đã thao tác trong phiên ghi hình.

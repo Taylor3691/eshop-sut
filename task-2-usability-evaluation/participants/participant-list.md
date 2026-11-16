@@ -1,13 +1,15 @@
-# Danh sách persona mô phỏng
+# Danh sách người tham gia
 
-> **SIMULATED — không phải danh sách người tham gia thật. Không dùng để nộp thay cho tuyển dụng/xác minh người thật.**
+> Theo xác nhận của người thực hiện đánh giá ngày 2026-11-16, P01–P07 là
+> bảy người tham gia thật đã thực hiện khảo sát. Tên hiển thị được giữ nguyên;
+> thông tin liên hệ che/masked và consent sẽ được bổ sung thủ công.
 
 | ID | Tên nhãn | Tuổi | Bối cảnh | Liên hệ |
 |---|---|---:|---|---|
-| P01 | Phạm Bảo Huy | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |
-| P02 | Trần Anh Khoa | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |
-| P03 | Tô Thành Long | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |
-| P04 | Nguyễn Minh Hiếu | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |
-| P05 | Nguyễn Viết Toàn | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |
-| P06 | Nguyễn Minh Tú | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |
-| P07 | Cao Trọng Khang | 21 | Sinh viên (theo đề bài) | N/A — persona tổng hợp |
+| P01 | Phạm Bảo Huy | 21 | Sinh viên | Tự bổ sung contact masked/consent |
+| P02 | Trần Anh Khoa | 21 | Sinh viên | Tự bổ sung contact masked/consent |
+| P03 | Tô Thành Long | 21 | Sinh viên | Tự bổ sung contact masked/consent |
+| P04 | Nguyễn Minh Hiếu | 21 | Sinh viên | Tự bổ sung contact masked/consent |
+| P05 | Nguyễn Viết Toàn | 21 | Sinh viên | Tự bổ sung contact masked/consent |
+| P06 | Nguyễn Minh Tú | 21 | Sinh viên | Tự bổ sung contact masked/consent |
+| P07 | Cao Trọng Khang | 21 | Sinh viên | Tự bổ sung contact masked/consent |

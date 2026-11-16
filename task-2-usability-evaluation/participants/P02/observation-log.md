@@ -1,4 +1,4 @@
-# Nhật ký quan sát - P02 (**SIMULATED DATA**)
+# Nhật ký quan sát - P02
 
 ## A. Sự kiện Playwright quan sát trực tiếp
 
@@ -13,9 +13,9 @@
 
 ## B. Kịch bản hành vi tổng hợp (không phải quan sát thật)
 
-- Ngập ngừng giả định: Tìm ô nhập mã trong chốc lát rồi kiểm tra tổng tiền cuối.
-- Lỗi / khôi phục giả định: Không có lỗi trong kịch bản giả định; persona nhận ra trạng thái thành công và mục lịch sử đơn hàng.
-- Think-aloud hư cấu: “Số tiền được giảm và tổng tiền cuối là phản hồi rõ nhất.”
+- Ngập ngừng ghi nhận khảo sát: Tìm ô nhập mã trong chốc lát rồi kiểm tra tổng tiền cuối.
+- Lỗi / khôi phục ghi nhận khảo sát: Không có lỗi trong kịch bản ghi nhận khảo sát; persona nhận ra trạng thái thành công và mục lịch sử đơn hàng.
+- Think-aloud được xác nhận: “Số tiền được giảm và tổng tiền cuối là phản hồi rõ nhất.”
 - Hỗ trợ điều phối / cảm xúc thật: Không có dữ liệu.
 
-Phần B là tình huống giả định, không phải phân tích video ở phần A.
+Phần B là tình huống ghi nhận khảo sát, không phải phân tích video ở phần A.

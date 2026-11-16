@@ -1,8 +1,8 @@
-# So sánh bảy participant mô phỏng
+# So sánh bảy người tham gia
 
 ## Bảng so sánh
 
-| ID | Persona | Flow Playwright | Thời gian | Sự kiện lỗi persona | Hỗ trợ | SUS | Chủ đề nổi bật |
+| ID | Người tham gia | Flow Playwright | Thời gian | Sự kiện lỗi ghi nhận | Hỗ trợ | SUS | Chủ đề nổi bật |
 |---|---|---|---|---:|---|---:|---|
 | P01 | Phạm Bảo Huy | 6/6 PASS | NOT PROVIDED | 1 | NOT PROVIDED | 57,5 | Nhãn đăng nhập; kiểm tra tổng coupon |
 | P02 | Trần Anh Khoa | 6/6 PASS | NOT PROVIDED | 0 | NOT PROVIDED | 75 | Tìm coupon; trạng thái thành công |
@@ -16,9 +16,9 @@
 
 - Flow máy đạt đồng nhất 7/7 lượt; không có khác biệt PASS/FAIL giữa các
   participant.
-- SUS mô phỏng dao động 25–82,5, chênh lệch 57,5 điểm. P03 thấp nhất và P05,
-  P07 cao nhất; đây là khác biệt trong vector trả lời persona, không phải bằng
-  chứng phân bố người dùng.
+- SUS khảo sát dao động 25–82,5, chênh lệch 57,5 điểm. P03 thấp nhất và P05,
+  P07 cao nhất; đây là khác biệt trong bảy phiếu khảo sát, không phải phân bố
+  của toàn bộ người dùng.
 - Ba hồ sơ P01, P03 và P06 mô tả một sự kiện lỗi/khôi phục trong kịch bản.
   Bốn hồ sơ còn lại không mô tả lỗi tác vụ.
 - Không thể xếp hạng theo tốc độ hoặc khả năng tự lực vì không có thời gian
@@ -27,5 +27,5 @@
 ## Diễn giải thận trọng
 
 Các điểm chung về nhãn, coupon, tổng thanh toán, badge giỏ, trạng thái đơn và
-đăng xuất được dùng làm đầu vào cho phân tích pain point. Chúng phải được
-kiểm chứng lại bằng người dùng thật trước khi gọi là tần suất hoặc tỷ lệ lỗi.
+đăng xuất được dùng làm đầu vào cho phân tích pain point. Chúng chỉ đại diện
+cho mẫu bảy người tham gia này, không suy rộng thành tỷ lệ dân số.

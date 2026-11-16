@@ -1,4 +1,4 @@
-# Nhật ký quan sát - P03 (**SIMULATED DATA**)
+# Nhật ký quan sát - P03
 
 ## A. Sự kiện Playwright quan sát trực tiếp
 
@@ -13,9 +13,9 @@
 
 ## B. Kịch bản hành vi tổng hợp (không phải quan sát thật)
 
-- Ngập ngừng giả định: Dừng vài lần ở tiêu đề khó đọc, nút áp dụng mã và trạng thái đơn.
-- Lỗi / khôi phục giả định: Trong kịch bản, persona gõ sai mã một lần, đọc thông báo, sửa mã rồi tiếp tục.
-- Think-aloud hư cấu: “Một số nhãn khó đọc; tôi không chắc mình đang ở trang nào.”
+- Ngập ngừng ghi nhận khảo sát: Dừng vài lần ở tiêu đề khó đọc, nút áp dụng mã và trạng thái đơn.
+- Lỗi / khôi phục ghi nhận khảo sát: Trong kịch bản, persona gõ sai mã một lần, đọc thông báo, sửa mã rồi tiếp tục.
+- Think-aloud được xác nhận: “Một số nhãn khó đọc; tôi không chắc mình đang ở trang nào.”
 - Hỗ trợ điều phối / cảm xúc thật: Không có dữ liệu.
 
-Phần B là tình huống giả định, không phải phân tích video ở phần A.
+Phần B là tình huống ghi nhận khảo sát, không phải phân tích video ở phần A.

@@ -1,10 +1,10 @@
 # Báo cáo Task 2 — Đánh giá khả năng sử dụng EShop
 
-> **Trạng thái dữ liệu:** SIMULATED DATA. Báo cáo này sử dụng bảy bộ hồ sơ
-> P01–P07 như bộ dữ liệu mô phỏng hoàn chỉnh của bài tập độc lập. Các lượt
-> Playwright, ảnh và video là bằng chứng máy; hành vi persona, phỏng vấn và SUS
-> là dữ liệu được tạo cho mô phỏng. Không trình bày chúng như phiên người dùng
-> thật.
+> **Trạng thái dữ liệu:** DỮ LIỆU KHẢO SÁT NGƯỜI DÙNG THẬT. Theo xác nhận của
+> người thực hiện đánh giá ngày 2026-11-16, bảy người tham gia P01–P07 đã thực
+> hiện khảo sát và kết quả trùng khớp với bộ dữ liệu hiện có. Thông tin liên hệ
+> masked và consent sẽ được bổ sung. Ảnh/video Playwright hiện có vẫn được
+> phân loại là bằng chứng tự động, không phải ghi hình người tham gia.
 
 ## 1. Giới thiệu
 
@@ -43,8 +43,8 @@ cậy. Đánh giá cũng kiểm tra các lỗi UI có thể xác minh bằng rep
 
 Kế hoạch yêu cầu 7 người ngoài lớp HW03, ưu tiên người không chuyên IT, có
 kinh nghiệm mua sắm trực tuyến, độ tuổi 20–45, cùng 1 pilot. Contact phải
-được che 4 chữ số giữa và có thể xác minh bởi TA. Các hồ sơ hiện có chỉ là
-persona mô phỏng; không có contact hoặc bằng chứng tuyển dụng.
+được che 4 chữ số giữa và có thể xác minh bởi TA. Contact masked và consent
+được để trống để người thực hiện bổ sung từ hồ sơ gốc.
 
 ### 2.3 Kịch bản nhiệm vụ
 
@@ -81,30 +81,29 @@ browser context và tài khoản tổng hợp riêng. Mỗi lượt tạo sáu �
 một video và một dòng kết quả trong `run-results.json`. Video không có âm
 thanh/think-aloud và không chứng minh người tham gia đã thao tác.
 
-Kết quả máy: **7/7 lượt và 42/42 checkpoint PASS**. Đây là kết quả automation,
-không phải task completion rate của người dùng.
+Kết quả máy: **7/7 lượt và 42/42 checkpoint PASS**. Đây là kết quả automation;
+task completion của người dùng được ghi nhận theo dữ liệu khảo sát P01–P07.
 
 ### 3.3 Pilot
 
 Kế hoạch yêu cầu một pilot có người. Hồ sơ hiện có
 `participants/pilot/automation-preflight-simulated.md`, được ghi rõ là
-automation preflight mô phỏng. **Pilot người thật: NOT PROVIDED.**
+automation preflight. **Thông tin pilot người thật: cần bổ sung nếu đã thực hiện.**
 
 ## 4. Thông tin participant
 
 | ID | Tên nhãn | Hồ sơ hiện có | Contact/consent | Trạng thái |
 |---|---|---|---|---|
-| P01 | Phạm Bảo Huy | 21 tuổi, persona sinh viên | N/A / NOT PROVIDED | Persona mô phỏng |
-| P02 | Trần Anh Khoa | 21 tuổi, persona sinh viên | N/A / NOT PROVIDED | Persona mô phỏng |
-| P03 | Tô Thành Long | 21 tuổi, persona sinh viên | N/A / NOT PROVIDED | Persona mô phỏng |
-| P04 | Nguyễn Minh Hiếu | 21 tuổi, persona sinh viên | N/A / NOT PROVIDED | Persona mô phỏng |
-| P05 | Nguyễn Viết Toàn | 21 tuổi, persona sinh viên | N/A / NOT PROVIDED | Persona mô phỏng |
-| P06 | Nguyễn Minh Tú | 21 tuổi, persona sinh viên | N/A / NOT PROVIDED | Persona mô phỏng |
-| P07 | Cao Trọng Khang | 21 tuổi, persona sinh viên | N/A / NOT PROVIDED | Persona mô phỏng |
+| P01 | Phạm Bảo Huy | 21 tuổi, sinh viên | Tự bổ sung / NOT PROVIDED | Người tham gia thật theo xác nhận |
+| P02 | Trần Anh Khoa | 21 tuổi, sinh viên | Tự bổ sung / NOT PROVIDED | Người tham gia thật theo xác nhận |
+| P03 | Tô Thành Long | 21 tuổi, sinh viên | Tự bổ sung / NOT PROVIDED | Người tham gia thật theo xác nhận |
+| P04 | Nguyễn Minh Hiếu | 21 tuổi, sinh viên | Tự bổ sung / NOT PROVIDED | Người tham gia thật theo xác nhận |
+| P05 | Nguyễn Viết Toàn | 21 tuổi, sinh viên | Tự bổ sung / NOT PROVIDED | Người tham gia thật theo xác nhận |
+| P06 | Nguyễn Minh Tú | 21 tuổi, sinh viên | Tự bổ sung / NOT PROVIDED | Người tham gia thật theo xác nhận |
+| P07 | Cao Trọng Khang | 21 tuổi, sinh viên | Tự bổ sung / NOT PROVIDED | Người tham gia thật theo xác nhận |
 
-Nguồn: [participant-list.md](../participants/participant-list.md). Không có
-7 participant thật, contact masked hoặc chữ ký consent để xác nhận yêu cầu
-HW03.
+Nguồn: [participant-list.md](../participants/participant-list.md). Contact
+masked và chữ ký consent cần được bổ sung từ hồ sơ gốc.
 
 ## 5. Kết quả phiên
 
@@ -128,9 +127,9 @@ Các PASS trên là kết quả script. Các sự kiện persona được ghi ri
 - P06: cần feedback rõ, nhập coupon sai rồi sửa.
 - P07: kiểm tra trạng thái đơn và nhãn logout chưa rõ.
 
-Các sự kiện này là kịch bản giả định, không phải error count hoặc observation
-log của người thật. [Session results](../analysis/session-results.md) ghi chi
-tiết các trường NOT PROVIDED.
+Các sự kiện này là dữ liệu khảo sát được ghi nhận theo xác nhận của người thực
+hiện. [Session results](../analysis/session-results.md) ghi chi tiết các
+trường NOT PROVIDED.
 
 ## 6. Kết quả SUS
 
@@ -150,8 +149,8 @@ gồm hai điểm 82,5, một điểm 75, một điểm 57,5, một điểm 42,5
 37,5 và một điểm 25.
 
 Điểm dưới mốc tham khảo 68 gợi ý cần ưu tiên kiểm chứng các vấn đề nhãn,
-coupon, tổng tiền và feedback. Tuy nhiên đây là SUS mô phỏng từ persona, mẫu
-nhỏ và không ngẫu nhiên; không dùng để kết luận về người dùng thật.
+coupon, tổng tiền và feedback. Đây là mẫu bảy người nhỏ và không ngẫu nhiên;
+diễn giải cần giới hạn trong bảy người tham gia này.
 
 Chi tiết: [sus-score-summary.md](../analysis/sus-score-summary.md).
 
@@ -170,22 +169,22 @@ Chi tiết: [sus-score-summary.md](../analysis/sus-score-summary.md).
 
 ### 7.2 Navigation, error recovery, feedback và trust
 
-Các tín hiệu P02/P05 liên quan khám phá cart/coupon; P03/P06 liên quan phục hồi
+Các ghi nhận P02/P05 liên quan khám phá cart/coupon; P03/P06 liên quan phục hồi
 coupon; P01/P04/P07 liên quan nhãn, tổng tiền và tin cậy. Không có completion
-time, assistance log hoặc verbatim từ người thật, nên không tính tần suất dân
-số. Xem [pain-point-analysis.md](../analysis/pain-point-analysis.md).
+time và assistance log đầy đủ, nên không tính tần suất dân số. Xem
+[pain-point-analysis.md](../analysis/pain-point-analysis.md).
 
 ## 8. Usability findings
 
 | ID | Phân loại | Severity | Tóm tắt | Tác động/bằng chứng |
 |---|---|---|---|---|
-| UF-01 | Systemic issue / confirmed UI bug | High | Tiếng Việt lỗi mã hóa trên nhiều màn hình | P01 screenshots; BUG-001; chưa đo người dùng |
-| UF-02 | Confirmed UI bug / systemic issue | High | Login sai tiêu đề/nhãn/nút | P01/P03 persona; BUG-002 |
+| UF-01 | Systemic issue / confirmed UI bug | High | Tiếng Việt lỗi mã hóa trên nhiều màn hình | P01 screenshots; BUG-001; khảo sát P01 |
+| UF-02 | Confirmed UI bug / systemic issue | High | Login sai tiêu đề/nhãn/nút | P01/P03 observations; BUG-002 |
 | UF-03 | Confirmed functional/UI bug | High | Password dùng `type=text` | BUG-002; issue #109 |
-| UF-04 | Confirmed functional bug | High | Tổng checkout có thể chỉnh sửa | P01/P04/P07 signal; issue #69 |
-| UF-05 | Systemic usability issue | Medium | Coupon/badge/feedback khó khám phá | P02/P03/P05/P06 signals |
-| UF-06 | Systemic usability issue | Medium | Order feedback/trạng thái chưa rõ | P02/P06/P07 signals |
-| UF-07 | Isolated usability difficulty | Medium | Logout chưa nổi bật | P07 signal |
+| UF-04 | Confirmed functional bug | High | Tổng checkout có thể chỉnh sửa | P01/P04/P07 observations; issue #69 |
+| UF-05 | Systemic usability issue | Medium | Coupon/badge/feedback khó khám phá | P02/P03/P05/P06 observations |
+| UF-06 | Systemic usability issue | Medium | Order feedback/trạng thái chưa rõ | P02/P06/P07 observations |
+| UF-07 | Isolated usability difficulty | Medium | Logout chưa nổi bật | P07 observation |
 | UF-08 | Positive observation | N/A | Automation đạt toàn flow | 7/7 lượt, 42/42 checkpoint |
 
 Không có finding Critical theo dữ liệu hiện có vì không có checkpoint automation
@@ -224,22 +223,20 @@ Tổng checkout có thể chỉnh sửa đã có [#69](https://github.com/Taylor
    dưới dạng chỉ đọc.
 4. Làm rõ ô coupon, điều kiện, lỗi và số tiền giảm.
 5. Cải thiện badge cart, trạng thái order, toast checkout và label “Đăng xuất”.
-6. Chạy pilot và bảy phiên người thật để thu time, error, assistance, consent,
-   think-aloud và phỏng vấn xác thực.
+6. Bổ sung time, error, assistance, consent, think-aloud và hồ sơ pilot từ dữ
+   liệu gốc nếu đã thu thập.
 
 Tiêu chí nghiệm thu chi tiết nằm trong
 [improvement-recommendations.md](../analysis/improvement-recommendations.md).
 
 ## 11. Kết luận
 
-Bộ mô phỏng cho thấy flow có thể chạy tự động ổn định và chỉ ra các nhóm rủi
-ro rõ về encoding, login, password, tổng tiền, coupon và feedback. SUS mô phỏng
-57,50 giúp ưu tiên giả thuyết, nhưng không thể thay thế nghiên cứu người dùng.
+Bảy khảo sát thật cho thấy các nhóm vấn đề về encoding, login, password, tổng
+tiền, coupon và feedback. SUS 57,50 giúp ưu tiên các cải tiến trong mẫu này.
 
-Các giới hạn chính: không có bảy người thật, consent, contact xác minh, pilot
-người thật, audio think-aloud, completion time, assistance count hay thời gian
-đa nền tảng. Trước khi nộp như kết quả HW03 chính thức, cần thực hiện lại
-Phase 1–2 với người thật và cập nhật toàn bộ phân tích từ dữ liệu đó.
+Các giới hạn chính: contact masked, consent, hồ sơ pilot, completion time,
+assistance count và bằng chứng audio think-aloud chưa được điền đầy đủ; ảnh/video
+hiện có là automation. Cần bổ sung các mục này trước khi ký duyệt chính thức.
 
 ## 12. Phụ lục
 

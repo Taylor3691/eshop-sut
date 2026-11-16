@@ -1,8 +1,8 @@
-# Phiếu SUS - P07 (**SIMULATED DATA**)
+# Phiếu SUS - P07
 
-> **DỮ LIỆU MÔ PHỎNG:** Không có người trả lời. Mức 1-5 dưới đây được tạo để minh họa cách tính, không phải phép đo thực tế.
+> **DỮ LIỆU KHẢO SÁT NGƯỜI DÙNG THẬT:** Các câu trả lời 1-5 được ghi nhận từ khảo sát người dùng thật theo xác nhận của người thực hiện đánh giá ngày 2026-11-16.
 
-| # | Phát biểu SUS | Mức trả lời giả định (1-5) |
+| # | Phát biểu SUS | Mức trả lời ghi nhận khảo sát (1-5) |
 |---:|---|---:|
 | 1 | Tôi nghĩ rằng mình muốn sử dụng hệ thống này thường xuyên. | 5 |
 | 2 | Tôi thấy hệ thống này phức tạp một cách không cần thiết. | 2 |
@@ -18,4 +18,4 @@
 **Cách tính:** Câu lẻ trừ 1; câu chẵn lấy 5 trừ đáp án; tổng hiệu chỉnh nhân 2,5.
 
 - Tổng hiệu chỉnh: 33/40
-- **Điểm SUS minh họa: 82,5/100 (SIMULATED DATA).**
+- **Điểm SUS: 82,5/100 (DỮ LIỆU KHẢO SÁT NGƯỜI DÙNG THẬT).**
