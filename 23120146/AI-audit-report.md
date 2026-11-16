@@ -36,7 +36,7 @@
 ### Tương tác #1 — Phân tích Yêu cầu & Ràng buộc Kỹ thuật cho Task 3 (Cross-Platform Testing)
 - **Name of the AI tool:** Google Antigravity (Gemini)
 - **Date and time:** `2026-11-16 04:13` – `04:16` (`+07:00`)
-- **Prompt (Chuẩn hóa nội dung yêu cầu từ sinh viên):**
+- **Your prompt:**
   > Tổng hợp ngắn gọn yêu cầu, các ràng buộc chống giả mạo và danh mục tài liệu cần nộp cho Task 3 dựa trên tài liệu đặc tả trong thư mục `docs/`; đề xuất quy trình thực hiện cụ thể trên phạm vi màn hình đã chọn (`/profile`, `/register`, `/forgot-password`).
 - **The AI output:**
   > Trích xuất quy định từ `2026.HW03.GUI Usability_En.pdf` và `HW03-yeu-cau-va-cong-viec.md`: cần thực thi lại 52 mục checklist trên tối thiểu 3 nền tảng (`Chrome`, `Firefox`, `Safari` hoặc thiết bị di động qua Expo Go). Ảnh minh chứng bắt buộc hiển thị tên trình duyệt/OS/thiết bị + URL `localhost`, overlay email sinh viên (`§6 Task 3`), và MSSV + Họ tên đầy đủ trong form SUT (`§11 Anti-AI-Cheat`).
@@ -47,7 +47,7 @@
 ### Tương tác #2 — Cấu hình Sauce Connect Tunnel & Xử lý Sự cố Định tuyến Proxy Đa Trình duyệt
 - **Name of the AI tool:** Google Antigravity (Gemini)
 - **Date and time:** `2026-11-16 04:55` – `06:19` (`+07:00`)
-- **Prompt (Chuẩn hóa nội dung yêu cầu từ sinh viên):**
+- **Your prompt:**
   > Hướng dẫn thiết lập đường hầm Sauce Connect Proxy trên PowerShell để đưa ứng dụng cục bộ (`http://localhost:5173`) lên môi trường kiểm thử đám mây Sauce Labs Live và khắc phục lỗi không thể kết nối trên Firefox/Safari.
 - **The AI output:**
   > Cung cấp câu lệnh `sauce-connect.exe run` kết nối tới vùng `eu-central`. Khi kiểm thử thực tế phát hiện Firefox 160 chặn chuyển tiếp proxy cho `localhost` (`network.proxy.allow_hijacking_localhost = false`) và Safari 26 tự động nâng cấp HTTP sang HTTPS (`CONNECT`), AI cấu hình bộ phân giải DNS cục bộ (`127.0.0.1:15353`), proxy `/api` trên Vite (`--host 0.0.0.0`) và bộ điều phối HTTP/HTTPS song song với tên miền định tuyến `localhost.lvh.me:5173` mà không chỉnh sửa mã nguồn SUT.
@@ -58,7 +58,7 @@
 ### Tương tác #3 — Thực thi Kiểm thử Đối chiếu 52 Mục Trên 3 Nền tảng & Thu thập Bằng chứng Task 3
 - **Name of the AI tool:** Google Antigravity (Gemini + Browser Subagent)
 - **Date and time:** `2026-11-16 05:05` – `06:29` (`+07:00`)
-- **Prompt (Chuẩn hóa nội dung yêu cầu từ sinh viên):**
+- **Your prompt:**
   > Thực hiện kiểm thử đối chiếu 52 mục GUI Checklist trên 3 nền tảng độc lập (Google Chrome trên Windows cục bộ, cùng Mozilla Firefox và Apple Safari thông qua đường hầm Sauce Labs Live đang hoạt động), chụp ảnh minh chứng tuân thủ đầy đủ quy định xác thực và tổng hợp báo cáo so sánh đa nền tảng.
 - **The AI output:**
   > Thực thi kiểm tra trên **Chrome 136 (Windows 11 — Blink)**, **Firefox 160 (macOS Tahoe 26 — Gecko)** và **Safari 26 (macOS Tahoe 26 — WebKit)**; lưu 9 ảnh chụp minh chứng tại `23120146/screenshots/task3/` và lập báo cáo [`task3-cross-platform.md`](./task3-cross-platform.md). Kết quả ghi nhận `12 Passed / 40 Failed` đồng nhất trên cả 3 trình duyệt cùng 6 khác biệt kỹ thuật (chính sách proxy loopback, tự nâng cấp HTTPS-First, cơ chế ẩn path trên thanh địa chỉ Safari, điều hướng `Tab`/`Option+Tab`, kích thước ký tự che mật khẩu và cách hiển thị hộp thoại `window.alert()`).
@@ -69,7 +69,7 @@
 ### Tương tác #4 — Đồng bộ Bằng chứng Đa Nền tảng Lên 31 GitHub Issues (`#191`–`#221`)
 - **Name of the AI tool:** Google Antigravity (Gemini)
 - **Date and time:** `2026-11-16 06:34` – `08:08` (`+07:00`)
-- **Prompt (Chuẩn hóa nội dung yêu cầu từ sinh viên):**
+- **Your prompt:**
   > Cập nhật toàn bộ 31 GitHub Issues của Task 1 (`#191`–`#221`) với kết quả kiểm thử đa nền tảng và ảnh chụp minh chứng từ 3 trình duyệt, đồng thời chụp lại ảnh toàn trang của các Issue đã cập nhật đưa vào kho lưu trữ và cập nhật [`task1-bug-report.md`](./task1-bug-report.md).
 - **The AI output:**
   > Đẩy bộ ảnh Task 3 lên GitHub (commit `b88bc8d`), cập nhật nội dung 31 Issues (`#191`–`#221`) qua GitHub REST API kèm bảng ma trận 3 nền tảng và 3 ảnh minh chứng, chụp lại 31 ảnh toàn trang các Issue vào `23120146/screenshots/github-issues/issue-191.png`–`issue-221.png` (commit `5bd8399`).
@@ -80,8 +80,8 @@
 ### Tương tác #5 — Tiếp nhận Dữ liệu Khảo sát Thực tế Task 2, Phân tích Định lượng/Định tính & Đóng gói Báo cáo
 - **Name of the AI tool:** Google Antigravity (Gemini)
 - **Date and time:** `2026-11-16 08:44` – `09:05` (`+07:00`)
-- **Prompt (Chuẩn hóa nội dung yêu cầu từ sinh viên):**
+- **Your prompt:**
   > Dựa trên dữ liệu phiếu khảo sát thực tế từ 7 người tham gia (`P1`–`P7`) đã ghi nhận trong [`task2-participant-results.md`](./task2-participant-results.md), thực hiện phân tích Phase 2 & 3 cho Task 2 (tính điểm SUS, tổng hợp nhận xét mở theo 4 trụ cột, phân tách Isolated Bugs và Systemic Design Issues, lập bảng mức độ nghiêm trọng, tạo GitHub Issues kèm ảnh minh chứng), sau đó tổng hợp các tài liệu báo cáo nộp bài chuẩn học thuật (Main Report, AI Audit Report, AI Critique, README và bản xuất PDF).
 - **The AI output:**
   > Tính toán thống kê SUS (`Mean = 85.00 / 100`, `Median = 82.50`, `Min = 80.00`, `Max = 92.50`, `SD = 5.00`), tổng hợp 4 nhóm vấn đề hệ thống (`USAB-SYS-01`–`04`) xuất hiện ở `7/7` người tham gia trong [`task2-usability-report.md`](./task2-usability-report.md); chụp 4 ảnh minh chứng tại `screenshots/task2/` và tạo 3 GitHub Issues Task 2 ([`#222`](https://github.com/Taylor3691/eshop-sut/issues/222), [`#223`](https://github.com/Taylor3691/eshop-sut/issues/223), [`#224`](https://github.com/Taylor3691/eshop-sut/issues/224)). Tiếp theo, tổng hợp [`main-report.md`](./main-report.md), [`AI-audit-report.md`](./AI-audit-report.md), [`AI-critique.md`](./AI-critique.md) (`265` từ), [`README.md`](./README.md) và xuất đầy đủ các bản `.pdf`.
-- **Human review & refinements:** Sinh viên kiểm tra định dạng học thuật của các báo cáo (chuẩn hóa ngôn ngữ văn bản kỹ thuật trong `AI-audit-report.md`), tự bổ sung thông tin liên hệ xác minh đã che 4 số giữa của `P1`–`P7` (và phiên Pilot) vào Bảng 1.1 của [`task2-usability-report.md`](./task2-usability-report.md) và đính kèm liên kết video demo Agent Skill trên YouTube trước khi đóng gói nộp Moodle.
+- **Human review & refinements:** Sinh viên kiểm tra lại toàn bộ báo cáo, tự bổ sung thông tin liên hệ xác minh đã che 4 số giữa của `P1`–`P7` (và phiên Pilot) vào Bảng 1.1 của [`task2-usability-report.md`](./task2-usability-report.md) và đính kèm liên kết video demo Agent Skill trên YouTube trước khi đóng gói nộp Moodle.
