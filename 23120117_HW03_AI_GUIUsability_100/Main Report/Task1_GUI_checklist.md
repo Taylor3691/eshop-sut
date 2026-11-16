@@ -4,7 +4,7 @@
 **Màn hình chính / Luồng:** Chi tiết sản phẩm — Danh sách sản phẩm → Xem chi tiết → Chi tiết sản phẩm → Thêm vào giỏ hàng → Giỏ hàng  
 **Các màn hình trong phạm vi:** Danh sách sản phẩm; Chi tiết sản phẩm; Giỏ hàng  
 **Vai trò:** Khách hàng đã đăng nhập  
-**Người rà soát:** Chưa cung cấp  
+**Người rà soát:** Võ Hoàng Danh  
 **Ngày:** 2026-11-14  
 **Trạng thái:** Đã thực thi
 ## Checklist
