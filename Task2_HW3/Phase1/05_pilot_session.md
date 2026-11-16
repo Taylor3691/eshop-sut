@@ -36,4 +36,4 @@ Pilot nhằm sửa kịch bản/công cụ/môi trường trước 7 phiên chí
 | 1 | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[TỰ ĐIỀN]` | `[Có/Không]` |
 
 **Quyết định:** `[Đủ điều kiện chạy 7 phiên / Cần pilot lại]`  
-**Người xác nhận:** `[TỰ ĐIỀN]`
+**Người xác nhận:** `Võ Hoàng Danh`
