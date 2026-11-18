@@ -1,0 +1,2 @@
+username,password,product_id,quantity
+<verified_test_user>,<managed_secret>,<verified_product_id>,<valid_quantity>
