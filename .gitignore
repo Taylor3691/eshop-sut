@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+jmeter.log
+
+# JMeter: file tạm và backup do GUI sinh ra
+# (KHÔNG ignore *.jtl và thư mục HTML report vì đề yêu cầu nộp)
+*.jmx.bak
+*.jmx~
+
+# SQLite: file tạm
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Biến môi trường / bí mật
+.env
+.env.*
