@@ -1,6 +1,5 @@
 # AI Audit Report
-Tôi sử dụng các công cụ AI để hỗ trợ cho việc giải quyết Task 1 và Task 2. Công cụ AI sử
-dụng là OpenAI Codex. Cam kết mọi kết quả của AI đều đã được Human Review lại
+Tôi sử dụng các công cụ AI để hỗ trợ cho việc giải quyết Task 1 và Task 2. Công cụ AI sử dụng là OpenAI Codex. Cam kết mọi kết quả của AI đều đã được Human Review lại
 ## Phạm vi và quy ước ghi nhận
 
 - Báo cáo ghi lại các prompt do người dùng chủ động gửi và các phản hồi hội thoại của AI trong phiên làm việc này.

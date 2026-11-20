@@ -1,102 +1,85 @@
 # GUI Checklist
 
 **Dự án:** EShop SUT  
-**Màn hình chính / Luồng:** Chi tiết sản phẩm — Danh sách sản phẩm → Xem chi tiết → Chi tiết sản phẩm → Thêm vào giỏ hàng → Giỏ hàng  
+**Màn hình chính / Luồng:** Chi tiết sản phẩm — Danh sách sản phẩm → Nhấn **Xem chi tiết** → Chi tiết sản phẩm → Nhấn **Thêm vào giỏ hàng** → Giỏ hàng  
 **Các màn hình trong phạm vi:** Danh sách sản phẩm; Chi tiết sản phẩm; Giỏ hàng  
 **Vai trò:** Khách hàng đã đăng nhập  
-**Người rà soát:** Chưa cung cấp  
-**Ngày:** 2026-11-14  
+**Người rà soát:** Võ Hoàng Danh  
+**Ngày:** 16/11/2026  
+**Nền tảng / Viewport:** Chrome trên Windows, 1440 × 900  
+**Ảnh tham chiếu:** `MH_DanhSachSanPham.png`, `MH_ChiTietSanPham.png`, `MH_GioHang.png`  
 **Trạng thái:** Đã thiết kế — Chưa thực thi
+
 ## Checklist
 
 | # | Màn hình / Trạng thái | Phân loại | Checkpoint | Tiêu chí xác minh | Đạt | Không đạt | Ghi chú / Minh chứng |
 |---:|---|---|---|---|:---:|:---:|---|
-| 1 | Cả ba màn hình | IA-01 (Tiêu chuẩn giao diện chung) | Nhất quán ngôn ngữ | Tất cả tiêu đề, nhãn, nút, thông báo và hướng dẫn dùng tiếng Việt; chỉ dùng tiếng Anh cho thuật ngữ kỹ thuật phổ biến. | ☐ | ☐ | — |
-| 2 | Cả ba màn hình | IA-01 (Tiêu chuẩn giao diện chung) | Màu hành động tích cực | Các nút `Tìm`, `Thêm vào giỏ hàng` và `Tiến hành thanh toán` đều dùng màu xanh dương. | ☐ | ☐ | — |
-| 3 | Giỏ hàng / Navbar | IA-01 (Tiêu chuẩn giao diện chung) | Màu hành động nguy hiểm | Các nút `Xóa` và `Đăng xuất` dùng màu đỏ, khác rõ với nút hành động tích cực. | ☐ | ☐ | — |
-| 4 | Cả ba màn hình | IA-01 (Tiêu chuẩn giao diện chung) | Định dạng tiền tệ | Mọi số tiền có dạng như `30.000.000 ₫`; không dùng lẫn `VND` và `₫`. | ☐ | ☐ | — |
-| 5 | Cả ba màn hình | IA-01 (Tiêu chuẩn giao diện chung) | Một tiêu đề cấp 1 | Mỗi trang có đúng một thẻ `<h1>` ghi đúng tên trang hoặc tên sản phẩm. | ☐ | ☐ | — |
-| 6 | Danh sách sản phẩm / Có dữ liệu | IA-01 (Tiêu chuẩn giao diện chung) | Bố cục lưới sản phẩm | Các thẻ sản phẩm có cùng chiều rộng; ảnh, khoảng cách và nhóm nút được căn đều trong cùng một hàng. | ☐ | ☐ | — |
-| 7 | Danh sách và Chi tiết sản phẩm | IA-01 (Tiêu chuẩn giao diện chung) | Tỷ lệ ảnh sản phẩm | Ảnh nằm gọn trong khung, không méo và không bị cắt mất phần quan trọng. | ☐ | ☐ | — |
-| 8 | Cả ba màn hình | IA-01 (Tiêu chuẩn giao diện chung) | Không chồng lấn nội dung | Tiêu đề, ảnh, giá, nút, bảng và chân trang không đè lên nhau, không bị cắt hoặc tràn khỏi khung. | ☐ | ☐ | — |
-| 9 | Cả ba màn hình | IA-01 (Tiêu chuẩn giao diện chung) | Phân cấp chữ | Tiêu đề, tên sản phẩm, giá, nhãn và nội dung có cỡ chữ, độ đậm rõ ràng và nhất quán. | ☐ | ☐ | — |
-| 10 | Cả ba màn hình | IA-01 (Tiêu chuẩn giao diện chung) | Khoảng trắng và căn chỉnh | Các nội dung liên quan được căn thẳng hàng, cách đều và không bị tách quá xa nhau. | ☐ | ☐ | — |
-| 11 | Cả ba màn hình / Responsive | IA-01 (Tiêu chuẩn giao diện chung) | Reflow theo viewport | Khi màn hình hẹp hơn, bố cục tự sắp xếp lại, không có thanh cuộn ngang và mọi nút vẫn dùng được. | ☐ | ☐ | — |
-| 12 | Cả ba màn hình | IA-01 (Tiêu chuẩn giao diện chung) | Độ tương phản | Chữ thường đạt ít nhất 4.5:1, chữ lớn đạt ít nhất 3:1; chữ trên nút và liên kết luôn dễ đọc. | ☐ | ☐ | — |
-| 13 | Chi tiết sản phẩm / Có dữ liệu | IA-01 (Tiêu chuẩn giao diện chung) | Đủ thông tin sản phẩm | Trang hiển thị đủ ảnh lớn, tên, giá, mô tả và danh mục của sản phẩm. | ☐ | ☐ | — |
-| 14 | Danh sách sản phẩm | IA-02 (Form và control) | Nhận diện ô tìm kiếm | Ô tìm kiếm có tên rõ ràng để người dùng và trình đọc màn hình nhận biết; chữ gợi ý không thay thế cho nhãn. | ☐ | ☐ | — |
-| 15 | Danh sách sản phẩm | IA-02 (Form và control) | Gửi tìm kiếm | Nhấn nút `Tìm` hoặc phím Enter cho cùng một kết quả và chỉ gửi tìm kiếm một lần. | ☐ | ☐ | — |
-| 16 | Danh sách sản phẩm / Có từ khóa | IA-02 (Form và control) | Hiển thị an toàn từ khóa | Từ khóa được hiển thị như chữ thường; mã HTML hoặc script không được chạy. | ☐ | ☐ | — |
-| 17 | Chi tiết sản phẩm | IA-02 (Form và control) | Kiểu dữ liệu số lượng | Ô `Số lượng` chỉ nhận số nguyên lớn hơn 0. | ☐ | ☐ | — |
-| 18 | Chi tiết sản phẩm / Mặc định | IA-02 (Form và control) | Giá trị số lượng mặc định | Khi mở trang, ô `Số lượng` có sẵn giá trị `1`. | ☐ | ☐ | — |
-| 19 | Chi tiết sản phẩm / Dữ liệu không hợp lệ | IA-02 (Form và control) | Validation số lượng | Không chấp nhận ô trống, chữ, số 0, số âm hoặc số thập phân; lỗi hiển thị trên nút `Thêm vào giỏ hàng`. | ☐ | ☐ | — |
-| 20 | Chi tiết sản phẩm | IA-02 (Form và control) | Ký hiệu trường bắt buộc | Nếu bắt buộc nhập số lượng, nhãn `Số lượng` có dấu `*` và ý nghĩa của dấu này được giải thích. | ☐ | ☐ | — |
-| 21 | Danh sách sản phẩm / Bàn phím | IA-02 (Form và control) | Tab order vùng tìm kiếm và card | Phím Tab đi từ ô tìm kiếm đến nút `Tìm`, rồi đến các nút sản phẩm theo thứ tự trên xuống dưới, trái sang phải. | ☐ | ☐ | — |
-| 22 | Chi tiết sản phẩm / Bàn phím | IA-02 (Form và control) | Tab order vùng mua hàng | Phím Tab đi đến ô `Số lượng`, rồi đến nút `Thêm vào giỏ hàng`; không bỏ qua hoặc lặp bất thường. | ☐ | ☐ | — |
-| 23 | Giỏ hàng / Có sản phẩm | IA-02 (Form và control) | Control tăng giảm số lượng | Mỗi sản phẩm có nút `-` và `+`; số lượng hiện tại hiển thị rõ cạnh hai nút. | ☐ | ☐ | — |
-| 24 | Cả ba màn hình | IA-03 (Điều hướng) | Logo về trang danh sách | Nhấn logo `EShop` luôn đưa người dùng về trang Danh sách sản phẩm. | ☐ | ☐ | — |
-| 25 | Cả ba màn hình | IA-03 (Điều hướng) | Highlight trang hiện tại | Thanh điều hướng làm nổi bật đúng trang đang mở và không làm nổi bật nhầm mục khác. | ☐ | ☐ | — |
-| 26 | Cả ba màn hình / Có sản phẩm trong giỏ | IA-03 (Điều hướng) | Badge số lượng Giỏ hàng | Mục `Giỏ hàng` có badge hiển thị đúng số lượng và badge nằm sát mục này. | ☐ | ☐ | — |
-| 27 | Cả ba màn hình / Đã đăng nhập | IA-03 (Điều hướng) | Nhãn Đăng xuất | Nút đăng xuất luôn có nhãn `Đăng xuất`, không dùng nhãn `Thoát`. | ☐ | ☐ | — |
-| 28 | Chi tiết sản phẩm | IA-03 (Điều hướng) | Breadcrumb Chi tiết sản phẩm | Breadcrumb cho biết đường dẫn đến trang Chi tiết sản phẩm; người dùng có thể nhấn các cấp trước để quay lại. | ☐ | ☐ | — |
-| 29 | Giỏ hàng | IA-03 (Điều hướng) | Breadcrumb Giỏ hàng | Trang Giỏ hàng có breadcrumb về trang gốc và làm rõ `Giỏ hàng` là trang hiện tại. | ☐ | ☐ | — |
-| 30 | Danh sách → Chi tiết sản phẩm | IA-03 (Điều hướng) | Điều hướng Xem chi tiết | Nhấn `Xem chi tiết` mở đúng sản phẩm; tên, ảnh và giá khớp với thẻ đã chọn. | ☐ | ☐ | — |
-| 31 | Giỏ hàng → Danh sách sản phẩm | IA-03 (Điều hướng) | Tiếp tục mua sắm | Nhấn `Tiếp tục mua sắm` quay về Danh sách sản phẩm và vẫn giữ nguyên giỏ hàng. | ☐ | ☐ | — |
-| 32 | Danh sách sản phẩm / Đang tải | IA-04 (Phản hồi và trạng thái) | Trạng thái loading | Khi đang tải, trang hiển thị trạng thái chờ rõ ràng, không báo nhầm là không có dữ liệu và không gửi yêu cầu lặp. | ☐ | ☐ | — |
-| 33 | Danh sách sản phẩm / Không có kết quả | IA-04 (Phản hồi và trạng thái) | Empty state tìm kiếm | Khi không có kết quả, trang hiển thị hình minh họa và thông báo tiếng Việt dễ hiểu. | ☐ | ☐ | — |
-| 34 | Danh sách sản phẩm / Sau khi thêm giỏ | IA-04 (Phản hồi và trạng thái) | Phản hồi Thêm vào giỏ từ card | Sau khi nhấn `Thêm vào giỏ`, toast hoặc badge cho biết sản phẩm đã được thêm. | ☐ | ☐ | — |
-| 35 | Chi tiết sản phẩm / Sau khi thêm giỏ | IA-04 (Phản hồi và trạng thái) | Phản hồi Thêm vào giỏ từ chi tiết | Sau khi thêm sản phẩm, toast hoặc badge xuất hiện, không che nút chính và có thể tự ẩn hoặc đóng. | ☐ | ☐ | — |
-| 36 | Giỏ hàng / Thêm lại cùng sản phẩm | IA-04 (Phản hồi và trạng thái) | Gộp sản phẩm trùng | Thêm lại cùng sản phẩm chỉ tăng số lượng ở dòng hiện có, không tạo dòng mới. | ☐ | ☐ | — |
-| 37 | Giỏ hàng / Thay đổi số lượng | IA-04 (Phản hồi và trạng thái) | Cập nhật thành tiền | Nhấn `+` hoặc `-` cập nhật ngay số lượng, thành tiền của sản phẩm và tổng cộng. | ☐ | ☐ | — |
-| 38 | Giỏ hàng / Có sản phẩm | IA-04 (Phản hồi và trạng thái) | Nhãn tổng tiền chính xác | Tổng tiền có đúng nhãn `Tổng cộng`, không dùng `Tổng tạm tính`, và dễ phân biệt với tiền từng sản phẩm. | ☐ | ☐ | — |
-| 39 | Giỏ hàng / Xóa sản phẩm | IA-04 (Phản hồi và trạng thái) | Dialog xác nhận xóa | Nhấn `Xóa` mở hộp xác nhận có nút đồng ý và hủy; chỉ xóa sản phẩm sau khi người dùng đồng ý. | ☐ | ☐ | — |
-| 40 | Giỏ hàng / Rỗng | IA-04 (Phản hồi và trạng thái) | Empty state giỏ hàng | Giỏ hàng rỗng có hình minh họa, thông báo rõ ràng và nút quay lại mua sắm; không hiển thị bảng hoặc tổng tiền gây nhầm lẫn. | ☐ | ☐ | — |
-| 41 | Danh sách và Chi tiết sản phẩm / DOM | IA-01 (Tiêu chuẩn giao diện chung) | Alt text ảnh sản phẩm | Mỗi ảnh sản phẩm có mô tả `alt` đúng với sản phẩm; ảnh chỉ để trang trí được bỏ qua bởi trình đọc màn hình. | ☐ | ☐ | — |
-| 42 | Cả ba màn hình / Zoom 200% | IA-01 (Tiêu chuẩn giao diện chung) | Bảo toàn nội dung khi zoom | Khi phóng to 200%, nội dung và nút vẫn thấy rõ, không đè lên nhau và vẫn sử dụng được. | ☐ | ☐ | — |
-| 43 | Cả ba màn hình | IA-01 (Tiêu chuẩn giao diện chung) | Không chỉ dựa vào màu sắc | Trang hiện tại, lỗi, nút nguy hiểm và thông báo có thêm chữ, biểu tượng hoặc đường viền; không chỉ dùng màu để phân biệt. | ☐ | ☐ | — |
-| 44 | Danh sách và Chi tiết sản phẩm / DOM | IA-02 (Form và control) | Liên kết nhãn với control | Trình đọc màn hình đọc đúng tên, loại và giá trị của ô tìm kiếm và ô `Số lượng`. | ☐ | ☐ | — |
-| 45 | Chi tiết sản phẩm / Lỗi số lượng | IA-02 (Form và control) | Lỗi có thể được công nghệ hỗ trợ nhận biết | Trình đọc màn hình đọc được lỗi số lượng; điểm chọn được giữ hoặc chuyển đến nơi giúp người dùng sửa lỗi. | ☐ | ☐ | — |
-| 46 | Danh sách và Chi tiết sản phẩm / Sau khi thêm giỏ | IA-04 (Phản hồi và trạng thái) | Toast/badge nhất quán sau khi Thêm vào giỏ | Cả hai màn hình dùng toast hoặc badge giống nhau; thông báo đúng kết quả và badge cập nhật đúng số lượng. | ☐ | ☐ | — |
-| 47 | Giỏ hàng / Xác nhận xóa | IA-04 (Phản hồi và trạng thái) | Dialog xác nhận xóa đầy đủ | Hộp xác nhận ghi rõ sản phẩm cần xóa, có nút `Xác nhận` và `Hủy`; chọn Hủy không làm đổi giỏ hàng. | ☐ | ☐ | — |
-| 48 | Danh sách sản phẩm không có kết quả và Giỏ hàng rỗng | IA-04 (Phản hồi và trạng thái) | Empty State có hướng phục hồi | Mỗi trang trống có hình minh họa, thông báo dễ hiểu và nút phù hợp để tìm lại hoặc tiếp tục mua sắm. | ☐ | ☐ | — |
-| 49 | Toàn bộ luồng / Chỉ dùng bàn phím | IA-03 (Điều hướng) | Điều hướng bàn phím đầy đủ | Có thể dùng bàn phím để đi đến và kích hoạt mọi nút, liên kết và ô nhập; điểm chọn luôn thấy rõ và không bị kẹt. | ☐ | ☐ | — |
-| 50 | Danh sách và Chi tiết sản phẩm / Phản hồi động | IA-04 (Phản hồi và trạng thái) | Công bố trạng thái cho công nghệ hỗ trợ | Trình đọc màn hình thông báo đúng lúc khi đang tải, có lỗi, trang trống, thêm giỏ thành công hoặc badge thay đổi; không tự chuyển điểm chọn. | ☐ | ☐ | — |
-| 51 | Cả ba màn hình / Cấu trúc ngữ nghĩa | IA-01 (Tiêu chuẩn giao diện chung) | Landmark, heading và bảng có ngữ nghĩa | Trang có các vùng đầu trang, điều hướng và nội dung chính rõ ràng; tiêu đề đúng thứ tự và cột Giỏ hàng gắn đúng với dữ liệu. | ☐ | ☐ | — |
-| 52 | Cả ba màn hình / RTL | IA-01 (Tiêu chuẩn giao diện chung) | Bố cục thích ứng chiều phải sang trái | Ở chế độ chữ từ phải sang trái, các vùng giao diện đổi hướng đúng, không chồng lấn, bị cắt hoặc xuất hiện cuộn ngang. | ☐ | ☐ | — |
-| 53 | Toàn bộ luồng / RTL | IA-03 (Điều hướng) | Thứ tự và ký hiệu điều hướng trong RTL | Ở chế độ phải sang trái, thứ tự đọc, thứ tự Tab và mũi tên quay lại đổi hướng đúng; số, giá và ký hiệu `₫` vẫn dễ đọc. | ☐ | ☐ | — |
-| 54 | Cả ba màn hình / Dark mode | IA-01 (Tiêu chuẩn giao diện chung) | Áp dụng giao diện tối nhất quán | Khi bật chế độ tối, nền trang, thanh điều hướng, thẻ sản phẩm, bảng, ô nhập và chân trang đều chuyển sang màu tối phù hợp. | ☐ | ☐ | — |
-| 55 | Cả ba màn hình / Dark mode | IA-01 (Tiêu chuẩn giao diện chung) | Độ tương phản và trạng thái tương tác trong dark mode | Trong chế độ tối, chữ, giá, liên kết, viền, biểu tượng và nút vẫn dễ đọc; trạng thái được chọn, bị khóa và báo lỗi vẫn rõ. | ☐ | ☐ | — |
-| 56 | Loading, Empty State, toast/badge và dialog / Dark mode | IA-04 (Phản hồi và trạng thái) | Phản hồi hệ thống rõ ràng trong dark mode | Trong chế độ tối, trạng thái chờ, trang trống, toast, badge và hộp xác nhận vẫn dễ nhìn và các nút vẫn đọc rõ. | ☐ | ☐ | — |
+| 1 | Danh sách sản phẩm | IA-01 (Tiêu chuẩn giao diện chung) | Ngôn ngữ giao diện | Toàn bộ nhãn, tiêu đề, nút và placeholder dùng tiếng Việt, trừ thuật ngữ kỹ thuật chuẩn. [FR-21] | ☐ | ☐ | — |
+| 2 | Chi tiết sản phẩm | IA-01 (Tiêu chuẩn giao diện chung) | Ngôn ngữ giao diện | Nội dung hiển thị và nhãn **Số lượng**, **Thêm vào giỏ hàng** dùng tiếng Việt nhất quán. [FR-21] | ☐ | ☐ | — |
+| 3 | Giỏ hàng | IA-01 (Tiêu chuẩn giao diện chung) | Ngôn ngữ giao diện | Tiêu đề, cột bảng, tổng tiền và các nút thao tác dùng tiếng Việt nhất quán. [FR-21] | ☐ | ☐ | — |
+| 4 | Danh sách sản phẩm | IA-01 (Tiêu chuẩn giao diện chung) | Tiêu đề trang | Trang có đúng một phần tử `<h1>` mô tả danh sách sản phẩm. [FR-05, FR-21] | ☐ | ☐ | — |
+| 5 | Chi tiết sản phẩm | IA-01 (Tiêu chuẩn giao diện chung) | Tiêu đề trang | Trang có đúng một `<h1>` mô tả sản phẩm đang xem; tên sản phẩm hiển thị đầy đủ, không bị che khuất hay cắt mất nghĩa. [FR-06, FR-21] | ☐ | ☐ | — |
+| 6 | Giỏ hàng | IA-01 (Tiêu chuẩn giao diện chung) | Tiêu đề trang | Trang có đúng một `<h1>` mô tả Giỏ hàng. [FR-21] | ☐ | ☐ | — |
+| 7 | Danh sách sản phẩm | IA-01 (Tiêu chuẩn giao diện chung) | Lưới sản phẩm | Mỗi thẻ sản phẩm hiển thị ảnh theo tỷ lệ nhất quán, tên và giá; các thẻ không chồng lấn ở viewport đã nêu. [FR-05] | ☐ | ☐ | — |
+| 8 | Danh sách sản phẩm | IA-01 (Tiêu chuẩn giao diện chung) | Định dạng tiền | Giá từng sản phẩm dùng ký hiệu `₫` và phân tách hàng nghìn nhất quán. [FR-05, FR-21] | ☐ | ☐ | — |
+| 9 | Chi tiết sản phẩm | IA-01 (Tiêu chuẩn giao diện chung) | Thông tin sản phẩm | Hiển thị ảnh lớn, tên, giá, mô tả và danh mục của sản phẩm; các thông tin này đọc được và không tràn bố cục. [FR-06] | ☐ | ☐ | — |
+| 10 | Chi tiết sản phẩm | IA-01 (Tiêu chuẩn giao diện chung) | Định dạng tiền | Giá sản phẩm dùng ký hiệu `₫` và phân tách hàng nghìn nhất quán với danh sách và giỏ hàng. [FR-21] | ☐ | ☐ | — |
+| 11 | Giỏ hàng | IA-01 (Tiêu chuẩn giao diện chung) | Bảng giỏ hàng | Các cột Sản phẩm, Đơn giá, Số lượng, Thành tiền và Thao tác được căn chỉnh rõ với dữ liệu ở mỗi dòng. [FR-07] | ☐ | ☐ | — |
+| 12 | Giỏ hàng | IA-01 (Tiêu chuẩn giao diện chung) | Tổng tiền | Tổng tiền dùng ký hiệu `₫`, phân tách hàng nghìn và nhãn chính xác **Tổng cộng**. [FR-07, FR-21] | ☐ | ☐ | — |
+| 13 | Cả ba màn hình | IA-01 (Tiêu chuẩn giao diện chung) | Khả năng đọc | Văn bản có độ tương phản đủ với nền và không chỉ truyền đạt ý nghĩa bằng màu sắc (ví dụ giá, thao tác xóa, trạng thái chọn). [WCAG 2.2 SC 1.4.3, 1.4.1 — bổ sung sau rà soát] | ☐ | ☐ | — |
+| 14 | Chi tiết sản phẩm — mặc định | IA-02 (Form và control) | Ô Số lượng | Có nhãn hiển thị rõ **Số lượng** gắn với ô nhập; giá trị mặc định là 1. [FR-06] | ☐ | ☐ | — |
+| 15 | Chi tiết sản phẩm — nhập hợp lệ | IA-02 (Form và control) | Kiểu dữ liệu số lượng | Ô Số lượng chỉ chấp nhận số nguyên dương và giới hạn nhỏ nhất là 1. [FR-06] | ☐ | ☐ | — |
+| 16 | Chi tiết sản phẩm — nhập không hợp lệ | IA-02 (Form và control) | Xác thực số lượng | Khi để trống, nhập 0, số âm, số thập phân hoặc ký tự không phải số, hệ thống chặn thao tác thêm giỏ và nêu lỗi cụ thể. [FR-06; heuristic phòng ngừa lỗi] | ☐ | ☐ | — |
+| 17 | Chi tiết sản phẩm — lỗi số lượng | IA-02 (Form và control) | Vị trí lỗi | Thông báo lỗi số lượng xuất hiện gần trường lỗi và phía trên nút **Thêm vào giỏ hàng**, không che control. [FR-22; heuristic khả năng hiển thị lỗi] | ☐ | ☐ | — |
+| 18 | Chi tiết sản phẩm | IA-02 (Form và control) | Trạng thái lỗi | Trường lỗi được nhận biết bằng văn bản/thông báo và trạng thái lập trình phù hợp, không chỉ thay đổi màu viền. [WCAG 2.2 SC 3.3.1, 1.4.1 — bổ sung sau rà soát] | ☐ | ☐ | — |
+| 19 | Chi tiết sản phẩm | IA-02 (Form và control) | Điều khiển bằng bàn phím | Có thể focus, thay đổi giá trị số lượng và kích hoạt nút thêm giỏ chỉ bằng bàn phím; focus nhìn thấy rõ. [WCAG 2.2 SC 2.1.1, 2.4.7 — bổ sung sau rà soát] | ☐ | ☐ | — |
+| 20 | Danh sách sản phẩm — tìm kiếm | IA-02 (Form và control) | Nhãn tìm kiếm | Ô tìm kiếm có nhãn lập trình hoặc accessible name mô tả mục đích; placeholder không là nguồn nhãn duy nhất. [FR-05; WCAG 2.2 SC 3.3.2 — bổ sung sau rà soát] | ☐ | ☐ | — |
+| 21 | Danh sách sản phẩm — tìm kiếm | IA-02 (Form và control) | Gửi tìm kiếm | Có thể gửi truy vấn bằng nút **Tìm** và phím Enter; nút có nhãn rõ ràng. [FR-05; heuristic tính linh hoạt sử dụng] | ☐ | ☐ | — |
+| 22 | Danh sách sản phẩm — tìm kiếm | IA-02 (Form và control) | An toàn hiển thị truy vấn | Từ khóa tìm kiếm được hiển thị/diễn giải dạng văn bản an toàn, không render HTML do người dùng nhập. [FR-05] | ☐ | ☐ | — |
+| 23 | Danh sách sản phẩm — tìm kiếm | IA-02 (Form và control) | Giá trị truy vấn | Sau khi tìm, ô tìm kiếm duy trì từ khóa hiện hành hoặc trang hiển thị rõ từ khóa đã áp dụng để người dùng đối chiếu kết quả. [FR-05; heuristic khả năng nhìn thấy trạng thái — bổ sung sau rà soát] | ☐ | ☐ | — |
+| 24 | Danh sách sản phẩm | IA-03 (Điều hướng) | Truy cập chi tiết | Mỗi sản phẩm có control **Xem chi tiết** xác định được sản phẩm đích và điều hướng đến đúng trang chi tiết khi kích hoạt. [FR-05, FR-06] | ☐ | ☐ | — |
+| 25 | Danh sách sản phẩm | IA-03 (Điều hướng) | Thứ tự Tab | Tab đi theo thứ tự trực quan từ trên xuống dưới, trái sang phải: navbar, tìm kiếm, rồi từng thẻ và control trong thẻ. [FR-21] | ☐ | ☐ | — |
+| 26 | Chi tiết sản phẩm | IA-03 (Điều hướng) | Breadcrumb | Có breadcrumb thể hiện vị trí trang Chi tiết sản phẩm và cho phép trở lại cấp Danh sách sản phẩm. [FR-23] | ☐ | ☐ | — |
+| 27 | Chi tiết sản phẩm | IA-03 (Điều hướng) | Thứ tự Tab | Tab đi từ navbar/breadcrumb đến ô Số lượng rồi nút **Thêm vào giỏ hàng**, không bỏ qua control hoặc tạo bẫy focus. [FR-21; WCAG 2.2 SC 2.1.2 — bổ sung sau rà soát] | ☐ | ☐ | — |
+| 28 | Giỏ hàng | IA-03 (Điều hướng) | Breadcrumb | Có breadcrumb thể hiện vị trí trang Giỏ hàng và liên kết quay lại cấp trước phù hợp. [FR-23] | ☐ | ☐ | — |
+| 29 | Giỏ hàng | IA-03 (Điều hướng) | Tiếp tục mua sắm | Có nút **Tiếp tục mua sắm** dẫn về trang chủ/danh sách sản phẩm theo FR-07; nhãn nêu rõ đích đến. [FR-07] | ☐ | ☐ | — |
+| 30 | Giỏ hàng | IA-03 (Điều hướng) | Thanh toán | Nút **Tiến hành thanh toán** là control điều hướng rõ ràng đến bước thanh toán cho người dùng đã đăng nhập. [FR-08] | ☐ | ☐ | — |
+| 31 | Cả ba màn hình — navbar | IA-03 (Điều hướng) | Trang đang chọn | Navbar highlight rõ trang hiện tại; khi ở trang con, quy tắc highlight được áp dụng nhất quán và không gây hiểu nhầm. [FR-23] | ☐ | ☐ | — |
+| 32 | Cả ba màn hình — navbar | IA-03 (Điều hướng) | Link Giỏ hàng | Link **Giỏ hàng** có badge số lượng sản phẩm hiện có; badge cập nhật theo trạng thái giỏ. [FR-23] | ☐ | ☐ | — |
+| 33 | Cả ba màn hình — navbar | IA-03 (Điều hướng) | Đăng xuất | Control kết thúc phiên có nhãn đúng là **Đăng xuất**, không dùng nhãn **Thoát**. [FR-23] | ☐ | ☐ | — |
+| 34 | Cả ba màn hình — navbar | IA-03 (Điều hướng) | Nhận biết focus | Mọi liên kết và nút navbar có chỉ báo focus bàn phím nhìn thấy rõ, kể cả trạng thái đang chọn. [WCAG 2.2 SC 2.4.7 — bổ sung sau rà soát] | ☐ | ☐ | — |
+| 35 | Giỏ hàng | IA-03 (Điều hướng) | Thứ tự Tab | Tab đi theo dòng đọc: breadcrumb/navbar, cột hoặc control trong từng dòng giỏ, **Tiếp tục mua sắm**, rồi **Tiến hành thanh toán**. [FR-21] | ☐ | ☐ | — |
+| 36 | Cả ba màn hình | IA-03 (Điều hướng) | Tiêu điểm và tiêu đề khi chuyển trang | Sau điều hướng bằng **Xem chi tiết**, breadcrumb, hoặc navbar, tiêu điểm được đặt tại vùng nội dung/tiêu đề mới để người dùng bàn phím và trình đọc màn hình nhận biết trang đã đổi. [WCAG 2.2 SC 2.4.3, 2.4.6 — bổ sung sau rà soát] | ☐ | ☐ | — |
+| 37 | Danh sách sản phẩm — đang tải | IA-04 (Phản hồi và trạng thái) | Loading | Khi tải danh sách hoặc kết quả tìm kiếm, có trạng thái loading dễ nhận biết và nội dung không bị hiểu nhầm là danh sách hoàn chỉnh. [FR-05] | ☐ | ☐ | — |
+| 38 | Danh sách sản phẩm — không có kết quả | IA-04 (Phản hồi và trạng thái) | Empty state tìm kiếm | Khi không tìm thấy sản phẩm, hiển thị empty state nêu rõ không có kết quả và có icon/hình minh họa phù hợp. [FR-05, FR-24] | ☐ | ☐ | — |
+| 39 | Chi tiết sản phẩm — sau thêm giỏ hợp lệ | IA-04 (Phản hồi và trạng thái) | Phản hồi thêm giỏ | Sau khi bấm **Thêm vào giỏ hàng**, có phản hồi trực quan kịp thời như toast hoặc badge cập nhật, xác định thao tác đã được tiếp nhận. [FR-06, FR-24] | ☐ | ☐ | — |
+| 40 | Chi tiết sản phẩm — sau thêm giỏ hợp lệ | IA-04 (Phản hồi và trạng thái) | Thông báo cho công nghệ hỗ trợ | Toast/phản hồi thêm giỏ có role hoặc live region phù hợp để trình đọc màn hình nhận biết mà không tự động giành focus. [WCAG 2.2 SC 4.1.3 — bổ sung sau rà soát] | ☐ | ☐ | — |
+| 41 | Danh sách sản phẩm / Chi tiết sản phẩm | IA-04 (Phản hồi và trạng thái) | Ảnh sản phẩm | Mỗi ảnh sản phẩm có `alt` mô tả nội dung/hình ảnh sản phẩm, không để trống; alt phù hợp với sản phẩm đang hiển thị. [FR-05, FR-24] | ☐ | ☐ | — |
+| 42 | Danh sách sản phẩm — thêm giỏ | IA-04 (Phản hồi và trạng thái) | Phản hồi thêm trực tiếp | Khi dùng **Thêm vào giỏ** từ một thẻ sản phẩm, có phản hồi trực quan và badge giỏ cập nhật. [FR-24] | ☐ | ☐ | — |
+| 43 | Giỏ hàng — một mặt hàng | IA-04 (Phản hồi và trạng thái) | Dữ liệu dòng giỏ | Dòng giỏ phản ánh đúng sản phẩm, đơn giá, số lượng, thành tiền; thành tiền được tính theo đơn giá × số lượng. [FR-07] | ☐ | ☐ | — |
+| 44 | Giỏ hàng — thêm lại cùng sản phẩm | IA-04 (Phản hồi và trạng thái) | Gộp sản phẩm trùng | Thêm cùng một sản phẩm lần nữa làm tăng số lượng ở dòng hiện có, không tạo một dòng sản phẩm trùng. [FR-07] | ☐ | ☐ | — |
+| 45 | Giỏ hàng — thay đổi số lượng | IA-04 (Phản hồi và trạng thái) | Điều chỉnh số lượng | Mỗi dòng có nút `+` và `−` để điều chỉnh số lượng; sau điều chỉnh, thành tiền, tổng cộng và badge giỏ được cập nhật nhất quán. [FR-07, FR-23] | ☐ | ☐ | — |
+| 46 | Giỏ hàng — xác nhận xóa | IA-04 (Phản hồi và trạng thái) | Dialog xóa | Bấm **Xóa sản phẩm** mở dialog xác nhận trước khi xóa; dialog nêu rõ sản phẩm/hành động, có lựa chọn xác nhận và hủy, và focus được giữ trong dialog rồi trả về control gọi. [FR-07, FR-24; WCAG 2.2 SC 2.4.3 — bổ sung sau rà soát] | ☐ | ☐ | — |
+| 47 | Giỏ hàng — sau xác nhận xóa | IA-04 (Phản hồi và trạng thái) | Phản hồi xóa | Sau khi xác nhận xóa, dòng sản phẩm, thành tiền, **Tổng cộng** và badge giỏ cập nhật; sau hủy, dữ liệu giỏ giữ nguyên. [FR-07, FR-23, FR-24] | ☐ | ☐ | — |
+| 48 | Giỏ hàng — trống | IA-04 (Phản hồi và trạng thái) | Empty state giỏ | Khi không còn sản phẩm, hiển thị icon/hình minh họa cùng thông báo rõ ràng và một cách tiếp tục mua sắm. [FR-07, FR-24] | ☐ | ☐ | — |
+| 49 | Giỏ hàng — đang cập nhật | IA-04 (Phản hồi và trạng thái) | Trạng thái thao tác bất đồng bộ | Trong lúc cập nhật số lượng, xóa hoặc chuyển thanh toán, control liên quan thể hiện đang xử lý và ngăn gửi lặp ngoài ý muốn; kết thúc phải thông báo kết quả. [Heuristic Nielsen: visibility of system status, error prevention — bổ sung sau rà soát] | ☐ | ☐ | — |
+| 50 | Cả ba màn hình — lỗi tải dữ liệu | IA-04 (Phản hồi và trạng thái) | Lỗi có thể khôi phục | Nếu tải sản phẩm/giỏ thất bại, hiển thị thông điệp dễ hiểu, không làm mất ngữ cảnh và cung cấp hành động thử lại hoặc đường đi thay thế. [Heuristic Nielsen: help users recognize, diagnose, and recover from errors — bổ sung sau rà soát] | ☐ | ☐ | — |
 
-## Ba mục bổ sung theo yêu cầu người dùng
+## Rà soát phản biện và mục bổ sung
 
-| Mục | Yêu cầu được bổ sung | Vì sao cần bổ sung ngoài bộ ban đầu |
-|---:|---|---|
-| 46 | Sau khi bấm `Thêm vào giỏ`, phải có phản hồi trực quan bằng toast/badge. | Các mục #34 và #35 đã kiểm tra từng màn hình riêng, nhưng chưa kiểm tra tính nhất quán và việc badge phản ánh đúng số lượng giữa hai điểm thêm sản phẩm. |
-| 47 | Khi xóa item khỏi giỏ phải có dialog xác nhận. | Mục #39 đã kiểm tra sự tồn tại của dialog, nhưng chưa bao phủ tên sản phẩm, quản lý focus và việc Hủy không làm thay đổi dữ liệu. |
-| 48 | Empty State phải có icon/hình minh họa và message thân thiện. | Các mục #33 và #40 đã kiểm tra từng trạng thái rỗng, nhưng chưa kiểm tra thống nhất hành động phục hồi phù hợp cho từng ngữ cảnh. |
+Các mục 13, 18–20, 23, 27, 34, 36, 40, 46, 49 và 50 được bổ sung sau lượt tạo ban đầu. Lượt đầu tập trung vào các control và yêu cầu nghiệp vụ nhìn thấy trong ảnh nên có thể bỏ sót tiêu chí không thể xác định chỉ bằng ảnh tĩnh: độ tương phản, lỗi không chỉ bằng màu, nhãn lập trình, vận hành bằng bàn phím, focus, live region, quản lý focus dialog và phục hồi lỗi. Các mục này bổ sung khả năng tiếp cận, phản hồi bất đồng bộ và phục hồi lỗi mà vẫn gắn với các control thuộc phạm vi đã chọn.
 
-## Các phần AI thường bỏ sót được bổ sung
+## Giả định và mâu thuẫn nguồn
 
-| Phần rà soát | Bao phủ đã có trong #1–#48 | Mục bổ sung | Khả năng triển khai kiểm thử |
-|---|---|---|---|
-| Accessibility | Đã có độ tương phản, Tab order, accessible name, alt text, zoom, không chỉ dựa vào màu, liên kết label và thông báo lỗi. | #49–#51 bổ sung điều hướng bàn phím toàn luồng, thông báo trạng thái động và cấu trúc ngữ nghĩa. | Có thể kiểm tra bằng bàn phím, accessibility tree/DOM và trình đọc màn hình. |
-| RTL layout | Chưa có mục riêng. | #52–#53 kiểm tra reflow, thứ tự đọc/focus, biểu tượng điều hướng và dữ liệu số trong RTL. | Có thể kiểm tra bằng cách đặt `dir="rtl"` cho tài liệu và dùng nội dung RTL đại diện. |
-| Dark mode | Chưa có mục riêng. | #54–#56 kiểm tra theme tối, độ tương phản/trạng thái tương tác và các phản hồi động. | Có thể kiểm tra qua theme của ứng dụng hoặc `prefers-color-scheme: dark`; nếu không có cơ chế kích hoạt thì ghi Không đạt khi thực thi. |
-
-## Tổng hợp độ bao phủ
-
-| Phân loại | AI tạo ban đầu | Bổ sung sau rà soát | Người dùng yêu cầu bổ sung | Bổ sung Accessibility/RTL/Dark mode | Tổng cộng |
-|---|---:|---:|---:|---:|---:|
-| IA-01 | 13 | 3 | 0 | 4 | 20 |
-| IA-02 | 10 | 2 | 0 | 0 | 12 |
-| IA-03 | 8 | 0 | 0 | 2 | 10 |
-| IA-04 | 9 | 0 | 3 | 2 | 14 |
-| **Tổng cộng** | **40** | **5** | **3** | **8** | **56** |
+- Ảnh là ngữ cảnh để nhận diện màn hình/trạng thái, không phải bằng chứng Đạt/Không đạt; mọi ô kết quả giữ trống để thực thi sau.
+- Checklist kiểm tra các trạng thái chưa có ảnh (loading, không có kết quả, giỏ trống, lỗi nhập, dialog xóa) vì chúng được yêu cầu trực tiếp trong FR-05, FR-06, FR-07 và FR-24.
+- Ảnh có thể hiển thị nhãn/định dạng khác một số yêu cầu (ví dụ **Thoát**, **Tổng tạm tính**, `VND`, hoặc thiếu breadcrumb/badge). Theo thứ tự ưu tiên, tiêu chí vẫn dùng yêu cầu chính thức của `README.md`; đây không phải kết luận lỗi.
+- Chỉ Chrome trên Windows tại 1440 × 900 nằm trong phạm vi. Responsive, dark mode, RTL và các trình duyệt/nền tảng khác không được kết luận trong checklist này.
 
 ## Tổng hợp kết quả kiểm thử
 
-- Đã thiết kế: 56
+- Đã thiết kế: 50 mục checklist
+- Phân bố: IA-01: 13; IA-02: 10; IA-03: 13; IA-04: 14
 - Đã thực thi: 0
 - Đạt: Chưa thực thi
 - Không đạt: Chưa thực thi

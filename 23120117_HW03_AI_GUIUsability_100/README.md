@@ -13,7 +13,7 @@
 | Bug reports và ảnh lỗi | `Bug Report/` và `Screenshot_Task1/` |
 | Excel checklist | `GUI_Checklist.xlsx` |
 | Evidence usability | `Usability-session evidence/` — gồm kế hoạch, scenario, SUS, roster, P01–P07 và phân tích Phase 3 |
-| Cross-browser screenshots | `Cross-platform screenshots/Chrome/`, `Cross-platform screenshots/Firefox/` và `Cross-platform screenshots/Android_chrome/` |
+| Cross-browser screenshots | https://drive.google.com/drive/folders/1fBYLM1ZZXYMjONeBDm1FOWgl8Bh-ICQq?usp=drive_link |
 | AI Audit Report | `AI Audit Report/AI_Audit_Report.md` |
 | AI Critique | `AI Critique/AI_Critique.md` |
 | Agent skill hiện có | `Supporting Documents/Agent Skills/GUI_skill.md` |
@@ -33,7 +33,9 @@
 | Nền tảng cross-browser có ảnh | 3 (Chrome, Firefox và Android Chrome) |
 | Ảnh cross-browser | 168 (56 ảnh mỗi nền tảng) |
 
-Nguồn số liệu Task 1 là `GUI_Checklist.xlsx` và `Main Report/Task1_GUI_checklist.md`. Nguồn số liệu Task 2 là `Usability-session evidence/Phase2/P01.md` đến `P07.md` và `Usability-session evidence/Phase3/01_sus_scoring.md`.
+Nguồn Task 1 là `GUI_Checklist.xlsx` và `Main Report/Task1_GUI_checklist.md`. 
+
+Nguồn Task 2 là `Usability-session evidence/Phase2/P01.md` đến `P07.md` và `Usability-session evidence/Phase3/01_sus_scoring.md`.
 ## Demo Agent skills
 Link Video demo: https://youtu.be/gtZqrHbJ484
 ## Demo videos của các phiên usability
@@ -47,7 +49,8 @@ Link Video demo: https://youtu.be/gtZqrHbJ484
 | P05 | https://youtu.be/y3bywbb1lnI |
 | P06 | https://youtu.be/6q1XfAlIZ2M |
 | P07 | https://youtu.be/4fNNykArtCo |
-
+## Cross-browser screenshots
+Do 3 file hình ảnh quá nặng không thể up được lên nên em đã up lên drive và đính kèm link vào đây: https://drive.google.com/drive/folders/1fBYLM1ZZXYMjONeBDm1FOWgl8Bh-ICQq?usp=drive_link
 ## Self-assessment table
 
 | STT | Tiêu chí | Điểm tối đa | Self-assessed grade |
