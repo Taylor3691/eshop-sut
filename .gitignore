@@ -34,3 +34,4 @@ hw05/reports/*_try/
 
 # Bản .jtl gốc quá 100 MB (giới hạn GitHub): repo lưu bản nén .jtl.gz, bản gốc nộp trong file zip
 hw05/results/stress.jtl
+hw05/results/soak.jtl

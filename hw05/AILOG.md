@@ -5,7 +5,7 @@
 | AI tool | Model | Dùng cho |
 |---|---|---|
 | Claude Code | Claude Opus 5.5 | Phân tích SUT, chọn luồng, lập kế hoạch prompt, chuẩn bị môi trường, sinh/review test plan, phân tích log |
-| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress |
+| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress, đề xuất mức Soak từ kết quả Stress, sinh test plan Soak và script ghi RAM |
 
 Mỗi mục gồm đúng 4 trường theo đề (mục 9): tên AI tool, ngày giờ, prompt, AI output.
 
@@ -190,6 +190,75 @@ ok sửa và commit lại
   - Đính chính trong lúc làm: AI trước đó tính sai thời lượng Stress cũ là khoảng 350 giây; số đo thật là 445 giây (mỗi bậc = 10 giây ramp-up + 30 giây chờ), ghi chú gốc của Cursor là đúng.
   - Commit `5eb22e4` (Stress, review, `.gitignore`) và `a214fe1` (smoke test, kịch bản video). Sau đó người dùng yêu cầu không commit kịch bản video, commit thứ hai được amend thành `82ba65b`, chỉ còn `scripts/smoke_test.sh`.
   - File: `hw05/23120175_Stress_20261121.jmx`, `hw05/REVIEW_TESTPLANS.md`, `hw05/scripts/smoke_test.sh`, `.gitignore`
+
+---
+
+## #07 — Đề xuất mức tải Soak từ kết quả Stress
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 16:14
+- **Prompt:**
+
+```
+Từ kết quả Stress (statistics.json), hãy đề xuất mức tải
+cho soak test 10–15 phút, khoảng 70–80% điểm hệ thống bắt đầu suy giảm.
+Tôi cần đo: RPS ổn định tối đa, p95, error rate, RAM của process node theo thời gian.
+Đề xuất cách ghi RAM định kỳ trên macOS (ví dụ ps -o rss -p <pid> mỗi 5 giây ra file).
+```
+
+- **AI output:**
+  - `statistics.json`: 1.852.603 sample, p95 = 2 ms, p99 = 4 ms, throughput 5293 request/giây. Một lỗi duy nhất là `LOCK_04`. Năm sampler chính 0 lỗi.
+  - Tách `stress.jtl` mỗi 30 giây: 200 thread ở giây 270–330 đạt 8861 rồi 8930 request/giây, p95 3 ms, lỗi luồng chính 0%. Request/giây tăng gần thẳng theo thread, khoảng 44 request/giây mỗi thread. Kết luận điểm suy giảm chưa xuất hiện trong bài này.
+  - Đề xuất soak 150 thread (75% của 200), ramp-up 60 giây, duration 960 giây, kỳ vọng khoảng 6700 request/giây. Ngưỡng đoạn giữ tải: RPS mỗi phút trong ±10% phút giữa, p95 trên 15 ms thì coi là bắt đầu suy, error luồng chính dưới 0,1%.
+  - Sai: thấy cột `IdleTime` = 0 nên kết luận bài Stress không có think-time, và đề xuất để timer = 0. Cách đọc này sai. Prompt sau (#08) sửa lại: giữ timer 0–50 ms, 6700 request/giây là khoảng 59% của điểm bão hòa khoảng 11.400 request/giây khi tắt think-time.
+  - Đưa vòng `ps -o rss=` mỗi 5 giây, PID lấy bằng `lsof` cổng 3000, ghi `epoch_ms,rss_kb`. `rss` trên macOS là kilobyte.
+  - File: không tạo/sửa file ở lượt này.
+
+---
+
+## #08 — Sửa đề xuất Soak và sinh plan
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 16:20
+- **Prompt:**
+
+```
+Mình đã kiểm tra lại đề xuất soak của bạn và thấy một chỗ sai, cần sửa trước khi sinh plan:
+
+1. Bạn kết luận "cột IdleTime = 0 nên bài Stress không có think-time". Sai:
+   - IdleTime trong JMeter không ghi thời gian chờ của timer, nên luôn bằng 0 dù có think-time.
+   - Plan 23120175_Stress_20261121.jmx có 4 Uniform Random Timer: delay 0, range 50 (0–50 ms).
+   - Chính số liệu của bạn chứng minh: 45 request/giây/thread → mỗi vòng 5 request mất ~110 ms,
+     trong đó ~100 ms là timer, chỉ ~10 ms là server xử lý.
+   - Mình đã đo thử không think-time: Node bão hòa ở ~50 thread, ~11.400 request/giây;
+     150 thread không think-time thì p95 lên ~27 ms. Vậy để timer = 0 ở 150 thread là vượt bão hòa,
+     không còn là soak 75%.
+   Hãy giải thích ngắn gọn vì sao bạn đọc sai.
+
+2. Sinh file hw05/23120175_Soak_20261121.jmx từ plan Stress (giữ luồng, CSV, assertion,
+   setUp lockout, xử lý bỏ qua vòng lặp khi lỗi):
+   - Thread Group thường: 150 thread, ramp-up 60 giây, duration 960 giây
+   - GIỮ timer 0–50 ms như Stress
+   - Listener: không thêm listener mới (3 plan chính đã dùng đủ 3 loại khác nhau)
+   - Ghi chú trong Test Plan: mục tiêu ~6.700 request/giây ≈ 59% điểm bão hòa đo được (~11.400)
+   - Lệnh chạy phải có -Jhttpclient.reset_state_on_thread_group_iteration=false
+     (thiếu thì macOS hết cổng TCP, lỗi BindException)
+
+3. Ước tính dung lượng soak.jtl (~131 byte/dòng) và đề xuất cách lưu lên GitHub (giới hạn 100 MB).
+
+4. Viết script hw05/scripts/record_node_rss.sh từ đoạn ghi RAM bạn đưa, tự dừng khi file
+   soak.jtl ngừng thay đổi hoặc khi nhận Ctrl+C.
+
+Chạy thử plan Soak với 3 thread trong 30 giây để chắc plan mở được và luồng pass. Chưa chạy bản thật.
+```
+
+- **AI output:**
+  - Giải thích chỗ sai: cột `IdleTime` không ghi thời gian Uniform Random Timer, nên bằng 0 dù timer vẫn chạy. Bốn timer 0–50 ms (trung bình khoảng 25 ms) cộng khoảng 10 ms xử lý năm request cho một vòng khoảng 110 ms, khớp khoảng 45 request/giây mỗi thread. Tắt timer là bài khác: Node bão hòa khoảng 50 thread, khoảng 11.400 request/giây.
+  - Tạo `hw05/23120175_Soak_20261121.jmx` từ plan Stress. Thread Group thường `TG Soak 150x960s`: 150 thread, ramp-up 60 giây, duration 960 giây. Giữ CSV, assertion, setUp lockout, bỏ qua phần còn lại của vòng khi login hoặc apply-coupon lỗi, và bốn timer delay 0 / range 50. Không gắn listener. Ghi chú trong Test Plan: mục tiêu khoảng 6.700 request/giây, khoảng 59% của khoảng 11.400. Lệnh chạy có `-Jhttpclient.reset_state_on_thread_group_iteration=false`.
+  - `stress.jtl` đo được 131,95 byte/dòng. Soak ước lượng khoảng 6,23 triệu dòng, khoảng 784 MB thô, gzip khoảng 38 MB (tỷ lệ nén của `stress.jtl` là 4,8%). GitHub từ chối file trên 100 MB. Thêm `hw05/results/soak.jtl` vào `.gitignore`, cùng cách với `stress.jtl`: repo giữ `soak.jtl.gz`, bản gốc để trong zip nộp bài. Commit thêm `statistics.json`.
+  - Viết `hw05/scripts/record_node_rss.sh`: ghi `epoch_ms,rss_kb` mỗi 5 giây. Dừng khi `soak.jtl` không đổi trong 15 giây, khi Ctrl+C, hoặc khi process cổng 3000 tắt.
+  - Lần thử đầu backend không chạy, 592.758 sample lỗi kết nối. Bật lại `node server.js` (DB seed lại) và chạy `create_users.sh`: 200 user, id 3–202. Chạy lại 3 thread trong 30 giây: plan mở được. `01_Login` đến `05_Checkout` 0 lỗi (765, 765, 763, 762, 762 sample). `LOCK_01`–`LOCK_03` đúng. `LOCK_04` lỗi 1 sample, assertion chờ HTTP 200, server trả 403 sau hai lần sai mật khẩu. Chưa chạy 150 thread.
+  - File: `hw05/23120175_Soak_20261121.jmx`, `hw05/scripts/record_node_rss.sh`, `.gitignore`, `hw05/data/users.csv`
 
 ---
 
