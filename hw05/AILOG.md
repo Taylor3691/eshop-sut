@@ -5,7 +5,7 @@
 | AI tool | Model | Dùng cho |
 |---|---|---|
 | Claude Code | Claude Opus 5.5 | Phân tích SUT, chọn luồng, lập kế hoạch prompt, chuẩn bị môi trường, sinh/review test plan, phân tích log |
-| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress, đề xuất mức Soak từ kết quả Stress, sinh test plan Soak và script ghi RAM, phân tích statistics.json và .jtl theo cửa sổ thời gian của Load/Stress/Spike/Soak, đề xuất tối ưu hiệu năng từ kết quả đo và code backend |
+| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress, đề xuất mức Soak từ kết quả Stress, sinh test plan Soak và script ghi RAM, phân tích statistics.json và .jtl theo cửa sổ thời gian của Load/Stress/Spike/Soak, đề xuất tối ưu hiệu năng từ kết quả đo và code backend, phân loại commit nào cần chạy performance test |
 
 Mỗi mục gồm đúng 4 trường theo đề (mục 9): tên AI tool, ngày giờ, prompt, AI output.
 
@@ -367,6 +367,36 @@ Với mỗi đề xuất: vấn đề nó giải quyết, chỗ cần sửa tron
   - Bỏ `SELECT COUNT(*)` trên `coupon_usage` trong nhánh `user_id` của `POST /api/apply-coupon`, hoặc cache 3 mã. Bớt khoảng một phần sáu lệnh SQLite mỗi vòng. Mean ApplyCoupon ở Stress 1,29 ms có thể về gần 1 ms. Không kéo p99 phút 8–15 về 3 ms nếu chưa xóa giỏ. Rủi ro: `max_uses_per_user` sai nếu không còn đếm; cache cũ khi admin sửa mã lúc process đang chạy.
   - Chỉ `UPDATE login_attempts` khi attempts khác 0 hoặc `locked_until` khác null. Sau vài giây, mỗi vòng còn một lần ghi thay vì hai. Cùng WAL, đây là phần chính của ước lượng trần 12.500–13.500 request/giây. Với timer 0–50 ms, throughput vẫn quanh 6.800. Rủi ro: hai login đúng song song cùng email vẫn có thể cùng ghi, không tệ hơn hiện tại vì `UPDATE` cũng không nằm trong transaction.
   - `CREATE INDEX idx_users_email ON users(email)`. Với khoảng 200 user: dưới 1% throughput, mean login khó giảm quá 0,1 ms. Không thêm `UNIQUE` vì register trùng email sẽ đổi từ thành công sang lỗi.
+  - File: không tạo/sửa file ở lượt này.
+
+---
+
+## #13 — Phân loại commit nào cần chạy performance test
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 17:30
+- **Prompt:**
+
+```
+Repo EShop gồm backend (Node.js + Express + SQLite, backend/server.js, backend/database.js),
+3 frontend (frontend-web, frontend-admin, frontend-mobile) và thư mục hw05 chứa test plan JMeter.
+Mình muốn một cơ chế tự quyết định commit nào cần chạy performance test.
+
+1. Phân loại các đường dẫn/loại thay đổi thành: bắt buộc chạy, chạy nhẹ, bỏ qua. Giải thích vì sao
+   mỗi loại ảnh hưởng (hoặc không) tới 5 API trong luồng test: login, product detail, cart,
+   apply-coupon, checkout.
+2. Ngoài đường dẫn file, còn tín hiệu nào nên dùng (nội dung diff, dependency đổi version,
+   nhãn PR, commit message...)? Cái nào dễ bị lừa?
+3. Đề xuất quy tắc cụ thể dạng bảng, kèm ví dụ commit minh họa cho từng loại.
+```
+
+- **AI output:**
+  - Năm API dùng chung một process Node và một connection SQLite, nên sửa một handler có thể làm chậm cả luồng. Quyết định theo đường dẫn, rồi nâng hoặc hạ bằng nội dung diff. Nhãn PR và commit message không được hạ mức.
+  - Bắt buộc: middleware `app.use` / `bodyParser`, `authenticateToken`, thân năm route, `userCarts`, `database.js` khi đổi connection, PRAGMA, schema hoặc index của `users` / `products` / `coupons` / `coupon_usage` / `orders`, seed làm bảng lớn hơn, và lockfile khi đổi version đã resolve của `express`, `body-parser`, `cors`, `jsonwebtoken`, `sqlite3`. File `backend/**/*.js` mới được `server.js` nạp cũng bắt buộc, không khóa cứng chỉ hai file hiện có.
+  - Chạy nhẹ, không ghi baseline: handler mà luồng JMeter không gọi (forgot/reset password, users/me, CRUD product, category, admin, coupon-usage, hủy đơn) nếu hunk không đụng middleware hay `userCarts`; chỉ đổi số seed khi schema và số dòng giữ nguyên.
+  - Bỏ qua: ba frontend (JMeter gọi `localhost:3000`), `backend/database.sqlite` vì `initDatabase()` DROP và seed lại mỗi lần khởi động, `backend/test_profile.js`, `hw05/**`, comment và khoảng trắng. Index bảng `categories` cũng bỏ qua vì không nằm trên năm API.
+  - Tín hiệu dễ lừa: nhãn `skip-perf`, commit message, số dòng diff, `frontend-web/src/pages/Checkout.jsx` (cùng tên API nhưng không nằm trên đường đo), `package.json` đổi range mà lockfile không đổi.
+  - Commit lấy mức cao nhất trong các file. Ví dụ thật ở nhóm bỏ qua: `2abb497` `hw05: test plan Load`.
   - File: không tạo/sửa file ở lượt này.
 
 ---
