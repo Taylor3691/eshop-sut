@@ -5,7 +5,7 @@
 | AI tool | Model | Dùng cho |
 |---|---|---|
 | Claude Code | Claude Opus 5.5 | Phân tích SUT, chọn luồng, lập kế hoạch prompt, chuẩn bị môi trường, sinh/review test plan, phân tích log |
-| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load |
+| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress |
 
 Mỗi mục gồm đúng 4 trường theo đề (mục 9): tên AI tool, ngày giờ, prompt, AI output.
 
@@ -141,6 +141,33 @@ Giải thích từng thành phần bạn thêm vào.
   - Listener duy nhất: Aggregate Report, filename để trống để khi chạy non-GUI ghi bằng `-l`.
   - Smoke 1 thread, 1 vòng, timer bằng 0, trên server đang chạy: 5 sample, HTTP 200, 0% lỗi. Chưa chạy đủ 30 thread trong 10 phút. `users.csv` (id 3–202) chỉ đúng với process backend hiện tại; restart thì phải chạy lại `hw05/scripts/create_users.sh`.
   - File: `hw05/23120175_Load_20261121.jmx`
+
+---
+
+## #05 — Sinh test plan Stress
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 12:10
+- **Prompt:**
+
+```
+Dựa trên <MSSV>_Load_<YYYYMMDD>.jmx (đã sửa, tôi đính kèm), tạo <MSSV>_Stress_<YYYYMMDD>.jmx:
+- Giữ nguyên luồng, CSV và assertion
+- Đổi Thread Group theo tham số Stress ở bước 3 (tăng theo bậc)
+- Listener: Summary Report (không dùng Aggregate Report)
+- Thêm xử lý khi login trả về 403 (tài khoản bị khóa): ghi nhận lỗi rõ ràng và bỏ qua vòng lặp đó
+Chỉ ra những gì khác so với plan Load.
+```
+
+- **AI output:**
+  - Tạo `hw05/23120175_Stress_20261121.jmx` từ `hw05/23120175_Load_20261121.jmx`. Giữ 5 sampler, body, CSV (`data/users.csv`, `data/products.csv`, `data/coupons.csv`), header và assertion. `xmllint` và kiểm tra cặp `hashTree` đều đạt.
+  - Đổi sang Stepping Thread Group `TG Stress stepping 200`: 200 thread, chờ 0 giây, thêm 20 thread mỗi 30 giây, ramp-up mỗi bậc 10 giây, giữ đỉnh 60 giây, hạ 50 thread mỗi 5 giây. Plugin cộng ramp vào khoảng cách bậc nên mỗi bậc cách nhau 40 giây. Lịch chạy khoảng 445 giây (7 phút 25 giây). Khi sampler lỗi thì thread chạy tiếp.
+  - Think-time đổi theo tham số Stress ở bước 3: Uniform Random Timer offset 200 ms, maximum 300 ms (200–500 ms) trước sampler 02–05. `01_Login` không có timer.
+  - Listener duy nhất: Summary Report, filename để trống. Không còn Aggregate Report.
+  - Login 403: JSR223 PostProcessor đổi nhãn sample thành `01_Login_403_Locked` và ghi message `403: Tài khoản đã bị khóa. Vui lòng thử lại sau. Bỏ qua vòng lặp này.` JSR223 Assertion đặt cùng câu đó làm failure message. If Controller `${login_locked}` gọi TestAction Start Next Thread Loop (action 3), nên `02`–`05` của vòng đó không chạy. Login 401 không đi vào nhánh này.
+  - Máy chưa có Custom Thread Groups. Đã thêm `jmeter-plugins-casutg` 3.1.1 và `jmeter-plugins-cmn-jmeter` 0.6 vào `lib/ext` của JMeter 5.6.3. Không có hai jar này thì plan không mở được.
+  - Smoke 1 thread, 1 vòng, timer bằng 0: user hợp lệ cho 5 sample HTTP 200, 0% lỗi. User `stresslock@eshop.com` (id 203, không nằm trong `users.csv`) sau khi bị khóa cho đúng 1 sample `01_Login_403_Locked`, lỗi, không có sampler 02–05. Chưa chạy đủ 200 thread.
+  - File: `hw05/23120175_Stress_20261121.jmx`
 
 ---
 
