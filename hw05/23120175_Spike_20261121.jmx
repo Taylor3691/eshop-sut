@@ -2,7 +2,7 @@
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="23120175_Spike_20261121" enabled="true">
-      <stringProp name="TestPlan.comments">Spike. Ultimate Thread Group, two rows that add. Row 1 baseline: 20 threads, delay 0, startup 20, hold 160, shutdown 20. Row 2 spike: 130 threads, delay 80, startup 10, hold 40, shutdown 10. Peak 150 threads from about 90s to 130s. Back to 20 threads from 140s to 180s. Total about 200s. Think time 200-500 ms. View Results Tree logs errors only. Login 403 is labeled 01_Login_403_Locked and skips the iteration.</stringProp>
+      <stringProp name="TestPlan.comments">Spike. Ultimate Thread Group, two rows that add. Row 1 baseline: 20 threads, delay 0, startup 20, hold 240, shutdown 20. Row 2 spike: 130 threads, delay 80, startup 10, hold 40, shutdown 10. Peak 150 threads from about 90s to 130s. Back to 20 threads from 140s to 260s (120s recovery window). Total about 280s. Think time 500-1500 ms. View Results Tree logs errors only. setUp thread group checks FR-02 lockout. Any failed login or apply-coupon skips the rest of the iteration.</stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
@@ -86,6 +86,150 @@
         <stringProp name="variableNames">code,min_order_amount</stringProp>
       </CSVDataSet>
       <hashTree />
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp - Lockout check (FR-02)" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Lockout account" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="LOCK_EMAIL" elementType="Argument">
+              <stringProp name="Argument.name">LOCK_EMAIL</stringProp>
+              <stringProp name="Argument.value">lockcheck_${__time(,)}@eshop.com</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="LOCK_01_Register" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;name&quot;:&quot;Lockout Check&quot;,&quot;email&quot;:&quot;${LOCK_EMAIL}&quot;,&quot;password&quot;:&quot;Lock1234!&quot;}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.path">/api/register</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="LOCK_01 Assert HTTP 200" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="200">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="LOCK_02_WrongPassword" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;email&quot;:&quot;${LOCK_EMAIL}&quot;,&quot;password&quot;:&quot;WrongPass!&quot;}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.path">/api/login</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="LOCK_02 Assert HTTP 401" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="401">401</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">true</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="LOCK_03_WrongPassword_2" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;email&quot;:&quot;${LOCK_EMAIL}&quot;,&quot;password&quot;:&quot;WrongPass!&quot;}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.path">/api/login</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="LOCK_03 Assert HTTP 401" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="401">401</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">true</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="LOCK_04_CorrectPassword_after_2_fails" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;email&quot;:&quot;${LOCK_EMAIL}&quot;,&quot;password&quot;:&quot;Lock1234!&quot;}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.path">/api/login</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="LOCK_04 Assert HTTP 200 (đặc tả FR-02: khóa sau 3 lần sai)" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="200">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message">Bị khóa sau 2 lần sai: server cộng login_attempts + 2, khóa khi &gt;= 3</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
       <kg.apc.jmeter.threads.UltimateThreadGroup guiclass="kg.apc.jmeter.threads.UltimateThreadGroupGui" testclass="kg.apc.jmeter.threads.UltimateThreadGroup" testname="TG Spike baseline 20 peak 150" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <collectionProp name="ultimatethreadgroupdata">
@@ -93,7 +237,7 @@
             <stringProp name="0">20</stringProp>
             <stringProp name="1">0</stringProp>
             <stringProp name="2">20</stringProp>
-            <stringProp name="3">160</stringProp>
+            <stringProp name="3">240</stringProp>
             <stringProp name="4">20</stringProp>
           </collectionProp>
           <collectionProp name="1">
@@ -187,8 +331,8 @@ if (code == "403") {
           </JSONPathAssertion>
           <hashTree />
         </hashTree>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If login 403 then skip iteration" enabled="true">
-          <stringProp name="IfController.condition">${login_locked}</stringProp>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If login failed then skip iteration" enabled="true">
+          <stringProp name="IfController.condition">${__jexl3("${JMeterThread.last_sample_ok}" == "false",)}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -216,9 +360,9 @@ if (code == "403") {
           <stringProp name="HTTPSampler.response_timeout" />
         </HTTPSamplerProxy>
         <hashTree>
-          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Stress think time before 02" enabled="true">
-            <stringProp name="ConstantTimer.delay">200</stringProp>
-            <stringProp name="RandomTimer.range">300</stringProp>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Spike think time before 02" enabled="true">
+            <stringProp name="ConstantTimer.delay">500</stringProp>
+            <stringProp name="RandomTimer.range">1000</stringProp>
           </UniformRandomTimer>
           <hashTree />
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="02 Assert HTTP 200" enabled="true">
@@ -263,9 +407,9 @@ if (code == "403") {
           <stringProp name="HTTPSampler.response_timeout" />
         </HTTPSamplerProxy>
         <hashTree>
-          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Stress think time before 03" enabled="true">
-            <stringProp name="ConstantTimer.delay">200</stringProp>
-            <stringProp name="RandomTimer.range">300</stringProp>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Spike think time before 03" enabled="true">
+            <stringProp name="ConstantTimer.delay">500</stringProp>
+            <stringProp name="RandomTimer.range">1000</stringProp>
           </UniformRandomTimer>
           <hashTree />
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Authorization for cart" enabled="true">
@@ -319,9 +463,9 @@ if (code == "403") {
           <stringProp name="HTTPSampler.response_timeout" />
         </HTTPSamplerProxy>
         <hashTree>
-          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Stress think time before 04" enabled="true">
-            <stringProp name="ConstantTimer.delay">200</stringProp>
-            <stringProp name="RandomTimer.range">300</stringProp>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Spike think time before 04" enabled="true">
+            <stringProp name="ConstantTimer.delay">500</stringProp>
+            <stringProp name="RandomTimer.range">1000</stringProp>
           </UniformRandomTimer>
           <hashTree />
           <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract final_amount" enabled="true">
@@ -331,6 +475,29 @@ if (code == "403") {
             <stringProp name="JSONPostProcessor.defaultValues">FINAL_AMOUNT_NOT_FOUND</stringProp>
           </JSONPostProcessor>
           <hashTree />
+          <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="04 Assert amount hợp lệ (discount &gt;= 0, final &lt;= total)" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import groovy.json.JsonSlurper
+try {
+    def r = new JsonSlurper().parseText(prev.getResponseDataAsString())
+    def total = new BigDecimal(vars.get("price"))
+    if (r.final_amount == null || r.discount_amount == null) {
+        AssertionResult.setFailure(true)
+        AssertionResult.setFailureMessage("Thiếu final_amount hoặc discount_amount")
+    } else if (new BigDecimal(r.discount_amount.toString()) &lt; 0 || new BigDecimal(r.final_amount.toString()) &gt; total) {
+        AssertionResult.setFailure(true)
+        AssertionResult.setFailureMessage("Sai số tiền: code=" + vars.get("code") + ", total=" + total + ", discount=" + r.discount_amount + ", final=" + r.final_amount)
+    }
+} catch (Exception e) {
+    AssertionResult.setFailure(true)
+    AssertionResult.setFailureMessage("Response không phải JSON: " + e.getMessage())
+}
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Assertion>
+          <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="04 Assert HTTP 200" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="200">200</stringProp>
@@ -350,6 +517,19 @@ if (code == "403") {
             <boolProp name="ISREGEX">false</boolProp>
           </JSONPathAssertion>
           <hashTree />
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If apply-coupon failed then skip checkout" enabled="true">
+          <stringProp name="IfController.condition">${__jexl3("${JMeterThread.last_sample_ok}" == "false",)}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Start next thread loop" enabled="true">
+            <intProp name="ActionProcessor.action">3</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="05_Checkout" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
@@ -373,9 +553,9 @@ if (code == "403") {
           <stringProp name="HTTPSampler.response_timeout" />
         </HTTPSamplerProxy>
         <hashTree>
-          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Stress think time before 05" enabled="true">
-            <stringProp name="ConstantTimer.delay">200</stringProp>
-            <stringProp name="RandomTimer.range">300</stringProp>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Spike think time before 05" enabled="true">
+            <stringProp name="ConstantTimer.delay">500</stringProp>
+            <stringProp name="RandomTimer.range">1000</stringProp>
           </UniformRandomTimer>
           <hashTree />
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Authorization for checkout" enabled="true">
