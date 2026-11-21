@@ -27,3 +27,7 @@ jmeter.log
 # Biến môi trường / bí mật
 .env
 .env.*
+
+# Kết quả chạy thử (không nộp)
+hw05/results/*_try.jtl
+hw05/reports/*_try/

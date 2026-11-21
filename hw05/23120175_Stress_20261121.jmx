@@ -2,7 +2,7 @@
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="23120175_Stress_20261121" enabled="true">
-      <stringProp name="TestPlan.comments">Stress. Stepping Thread Group: 200 threads, start 20 every 30s with ramp-up 10s, hold 60s, stop 50 every 5s. About 445s. Think time 200-500 ms on purpose to push load (threads are not equal to real users). setUp thread group checks FR-02 lockout. Any failed login or apply-coupon skips the rest of the iteration; login 403 is labeled 01_Login_403_Locked.</stringProp>
+      <stringProp name="TestPlan.comments">Stress. Stepping Thread Group: up to 200 threads, add 20 every 25s with ramp-up 5s, hold 60s at 200, stop 50 every 5s. About 6.5 min. Think time 0-50 ms on purpose: with 200-500 ms the first run reached only about 700 req/s at 200 threads with p95 3 ms and never saturated the backend. A probe without think time saturated Node at about 50 threads (about 11k req/s). Run with -Jhttpclient.reset_state_on_thread_group_iteration=false, otherwise macOS runs out of ephemeral ports (BindException) before the backend saturates. setUp thread group checks FR-02 lockout. Any failed login or apply-coupon skips the rest of the iteration; login 403 is labeled 01_Login_403_Locked.</stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
@@ -235,11 +235,11 @@
         <stringProp name="Threads initial delay">0</stringProp>
         <stringProp name="Start users count">20</stringProp>
         <stringProp name="Start users count burst">0</stringProp>
-        <stringProp name="Start users period">30</stringProp>
+        <stringProp name="Start users period">25</stringProp>
         <stringProp name="Stop users count">50</stringProp>
         <stringProp name="Stop users period">5</stringProp>
         <stringProp name="flighttime">60</stringProp>
-        <stringProp name="rampUp">10</stringProp>
+        <stringProp name="rampUp">5</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">true</boolProp>
           <stringProp name="LoopController.loops">-1</stringProp>
@@ -354,8 +354,8 @@ if (code == "403") {
         </HTTPSamplerProxy>
         <hashTree>
           <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Stress think time before 02" enabled="true">
-            <stringProp name="ConstantTimer.delay">200</stringProp>
-            <stringProp name="RandomTimer.range">300</stringProp>
+            <stringProp name="ConstantTimer.delay">0</stringProp>
+            <stringProp name="RandomTimer.range">50</stringProp>
           </UniformRandomTimer>
           <hashTree />
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="02 Assert HTTP 200" enabled="true">
@@ -401,8 +401,8 @@ if (code == "403") {
         </HTTPSamplerProxy>
         <hashTree>
           <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Stress think time before 03" enabled="true">
-            <stringProp name="ConstantTimer.delay">200</stringProp>
-            <stringProp name="RandomTimer.range">300</stringProp>
+            <stringProp name="ConstantTimer.delay">0</stringProp>
+            <stringProp name="RandomTimer.range">50</stringProp>
           </UniformRandomTimer>
           <hashTree />
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Authorization for cart" enabled="true">
@@ -457,8 +457,8 @@ if (code == "403") {
         </HTTPSamplerProxy>
         <hashTree>
           <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Stress think time before 04" enabled="true">
-            <stringProp name="ConstantTimer.delay">200</stringProp>
-            <stringProp name="RandomTimer.range">300</stringProp>
+            <stringProp name="ConstantTimer.delay">0</stringProp>
+            <stringProp name="RandomTimer.range">50</stringProp>
           </UniformRandomTimer>
           <hashTree />
           <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract final_amount" enabled="true">
@@ -547,8 +547,8 @@ try {
         </HTTPSamplerProxy>
         <hashTree>
           <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Stress think time before 05" enabled="true">
-            <stringProp name="ConstantTimer.delay">200</stringProp>
-            <stringProp name="RandomTimer.range">300</stringProp>
+            <stringProp name="ConstantTimer.delay">0</stringProp>
+            <stringProp name="RandomTimer.range">50</stringProp>
           </UniformRandomTimer>
           <hashTree />
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Authorization for checkout" enabled="true">
