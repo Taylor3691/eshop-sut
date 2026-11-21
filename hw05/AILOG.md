@@ -5,7 +5,7 @@
 | AI tool | Model | Dùng cho |
 |---|---|---|
 | Claude Code | Claude Opus 5.5 | Phân tích SUT, chọn luồng, lập kế hoạch prompt, chuẩn bị môi trường, sinh/review test plan, phân tích log |
-| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike |
+| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load |
 
 Mỗi mục gồm đúng 4 trường theo đề (mục 9): tên AI tool, ngày giờ, prompt, AI output.
 
@@ -105,6 +105,42 @@ Trình bày dạng bảng.
   - Spike: Ultimate Thread Group. Hàng 1: 20 thread, delay 0, startup 20, hold 160, shutdown 20. Hàng 2: 130 thread, delay 80, startup 10, hold 40, shutdown 10. Đỉnh 150 thread khoảng giây 90–130. Cùng timer với Stress. Nền: p95 < 300 ms, error < 1%. Đỉnh: p95 < 1500 ms, error < 5%. 30 giây sau khi hạ: p95 < 500 ms, error < 1%.
   - Trần 200 thread vì CSV chỉ có 200 user. Node một thread và SQLite không WAL nên không tăng lên hàng nghìn thread. Chạy non-GUI, heap JMeter ≤ 1 GB, cắm sạc, chừa khoảng 3 GB RAM. Plugin cần có: Custom Thread Groups (`jpgc-casutg`). Error rate chỉ có nghĩa nếu assertion áp mã không bắt công thức `SAVE10`.
   - File: không tạo/sửa file ở lượt này. Ảnh đã đọc: `hw05/evidence/hardware/hardware_fastfetch.png`.
+
+---
+
+## #04 — Sinh test plan Load
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 12:03
+- **Prompt:**
+
+```
+Hãy sinh file JMeter test plan (.jmx, JMeter) tên 23120175_Load_<YYYYMMDD>.jmx với:
+- User Defined Variables: HOST=localhost, PORT=3000
+- HTTP Header Manager: Content-Type: application/json
+- 3 CSV Data Set Config: users.csv, products.csv, coupons.csv (theo thiết kế ở bước 2)
+- Thread Group theo tham số Load ở bước 3
+- 5 sampler đặt tên rõ ràng: 01_Login, 02_ProductDetail, 03_AddToCart, 04_ApplyCoupon, 05_Checkout
+- JSON Extractor lấy token sau 01_Login, gắn header Authorization: Bearer ${token} cho 03 và 05
+- Dùng final_amount từ 04_ApplyCoupon làm total_amount cho 05_Checkout
+- Assertion cho từng sampler: Response Code 200 và JSON Assertion kiểm tra trường quan trọng
+  (token tồn tại, id sản phẩm khớp, "Added to cart", success=true, orderId tồn tại)
+- Think-time giữa các bước theo bước 3
+- Listener: Aggregate Report
+Giải thích từng thành phần bạn thêm vào.
+```
+
+- **AI output:**
+  - Tạo `hw05/23120175_Load_20261121.jmx` (JMeter 5.6.3). `xmllint` và kiểm tra cặp `hashTree` đều đạt.
+  - User Defined Variables: `HOST=localhost`, `PORT=3000`. HTTP Request Defaults dùng hai biến này, encoding UTF-8, connect timeout 5 giây, response timeout 10 giây. Header gốc: `Content-Type: application/json`.
+  - Ba CSV Data Set Config, đường dẫn tính từ thư mục chứa `.jmx`: `data/users.csv` (`email`, `password`, `user_id`), `data/products.csv` (`product_id`, `price`), `data/coupons.csv` (`code`, `min_order_amount`). Cả ba: Ignore first line True, Recycle True, Stop thread False, Sharing mode All threads.
+  - Thread Group thường `TG Load 30x600s`: 30 thread, ramp-up 60 giây, loop vô hạn, scheduler 600 giây. Khi sampler lỗi thì thread chạy tiếp.
+  - `01_Login` `POST /api/login` không auth; JSON Extractor `$.token` → `token`. `02_ProductDetail` `GET /api/products/${product_id}`. `03_AddToCart` `POST /api/cart` với `Authorization: Bearer ${token}`, `quantity` 1, `price` từ CSV. `04_ApplyCoupon` `POST /api/apply-coupon` không auth, `total_amount` = `${price}`, `user_id` = `${user_id}`; JSON Extractor `$.final_amount`. `05_Checkout` `POST /api/checkout` với Bearer, `total_amount` = `${final_amount}`, địa chỉ cố định `123 Le Loi, TP.HCM`.
+  - Mỗi sampler: Response Assertion HTTP 200 và JSON Assertion. `$.token` tồn tại; `$.id` = `${product_id}`; `$.message` = `Added to cart`; `$.success` = `true`; `$.orderId` tồn tại. Assertion áp mã không kiểm tra số tiền giảm vì `SAVE10` vẫn trả `success: true` khi công thức percent sai.
+  - Think-time: bốn Uniform Random Timer (offset 1000 ms, maximum 2000 ms) đứng trước sampler 02–05. `01_Login` không có timer. Trung bình khoảng 8 giây think-time mỗi vòng.
+  - Listener duy nhất: Aggregate Report, filename để trống để khi chạy non-GUI ghi bằng `-l`.
+  - Smoke 1 thread, 1 vòng, timer bằng 0, trên server đang chạy: 5 sample, HTTP 200, 0% lỗi. Chưa chạy đủ 30 thread trong 10 phút. `users.csv` (id 3–202) chỉ đúng với process backend hiện tại; restart thì phải chạy lại `hw05/scripts/create_users.sh`.
+  - File: `hw05/23120175_Load_20261121.jmx`
 
 ---
 
