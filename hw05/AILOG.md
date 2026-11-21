@@ -262,6 +262,27 @@ Chạy thử plan Soak với 3 thread trong 30 giây để chắc plan mở đư
 
 ---
 
+## #09 — Viết báo cáo Task 1
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-21 17:05
+- **Prompt:**
+
+```
+hãy viết báo cáo phần task 1
+```
+
+- **AI output:**
+  - Tính lại số liệu trực tiếp từ `results/load.jtl`, `stress.jtl`, `spike.jtl`, `soak.jtl` (bỏ sample `LOCK_*`), theo từng bước và theo cửa sổ thời gian (Load 60 giây, Spike 10 giây, Soak 1 phút).
+  - Load: 10.739 request, 0 lỗi luồng chính, ổn định ~18,9 request/giây, p95 = 4 ms, p99 = 5 ms, max 41 ms; `05_Checkout` chậm nhất (trung bình 3,7 ms). Stress: 1.852.603 request, đỉnh ~8.900 request/giây ở 200 thread, p95 2–3 ms, 0 lỗi luồng chính. Spike: 14.473 request; nền ~24 request/giây, đỉnh ~186 request/giây ở 150 thread, p95 4–5 ms suốt bài.
+  - Phát hiện: Spike quá nhẹ, đỉnh chỉ < 3% năng lực ổn định (~6.800 request/giây), nên chưa thử được đột biến gần ngưỡng. Ghi là hạn chế, đề xuất spike tới vùng 6.000–11.000 request/giây.
+  - Phát hiện: percentile trong `reports/soak/statistics.json` khác giá trị tính từ `.jtl`: Total p99 3 ms (report) so với 86 ms (`.jtl`); `01_Login` p99 110 so với 58 ms; `04_ApplyCoupon` p99 211 so với 177 ms. Báo cáo dùng giá trị từ `.jtl`; nguyên nhân chưa xác minh.
+  - Viết `hw05/REPORT_TASK1.md` 11 mục: môi trường, luồng và nhóm endpoint, CSV, quy trình AI theo AILOG, thiết kế 3 kịch bản, bảng review 10 dòng (thêm dòng 10: AI đọc sai `IdleTime` khi đề xuất Soak), thực thi và các bước reset lockout, kết quả, ngưỡng chịu tải, bug #225–#229, hạn chế.
+  - Còn TODO: ảnh JMeter + resource monitor cho Load/Stress/Spike, ảnh 3 listener, ảnh các bước reset lockout, link video. AILOG chưa có mục cho bước sinh plan Spike.
+  - File: `hw05/REPORT_TASK1.md`
+
+---
+
 <!--
 MẪU MỤC MỚI (chèn ngay phía trên khối comment này, đánh số tăng dần)
 
