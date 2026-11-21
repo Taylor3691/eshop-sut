@@ -1,0 +1,156 @@
+# Phác thảo cổng p95 cho PR. Chưa gắn runner và chưa có baseline trên GitHub.
+#
+# Số millisecond chỉ so được khi baseline và lần chạy mới cùng loại máy.
+# Baseline 2–4 ms trong bài đo trên MacBook Air M5. Runner ubuntu-latest
+# không dùng các số đó. Job này bỏ qua cổng p95 khi chưa có
+# hw05/baselines/pr.json. Khi có self-hosted cùng loại máy, đổi runs-on
+# và tạo baseline bằng:
+#   python3 hw05/scripts/p95_regression.py baseline \
+#     -o hw05/baselines/pr.json --tier pr --machine macbook-air-m5 run.jtl
+#
+# Nightly Soak 960 s và weekly Stress 350 s chạy trên máy M5, không nằm trong file này.
+# LOCK_04 fail mọi lần vì bug #225. p95_regression.py bỏ label LOCK_*.
+
+name: Performance
+
+on:
+  pull_request:
+    paths:
+      - "backend/**"
+      - "!backend/database.sqlite"
+      - "!backend/test_profile.js"
+      - "hw05/scripts/**"
+      - "hw05/data/**"
+      - "hw05/23120175_Load_20261121.jmx"
+      - ".github/workflows/perf.yml"
+  workflow_dispatch:
+
+jobs:
+  pr-short:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cài Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Cài Java cho JMeter
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Cài JMeter 5.6.3
+        run: |
+          curl -fsSL -o /tmp/jmeter.tgz https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz
+          mkdir -p "$HOME/jmeter"
+          tar -xzf /tmp/jmeter.tgz -C "$HOME/jmeter"
+          echo "$HOME/jmeter/apache-jmeter-5.6.3/bin" >> "$GITHUB_PATH"
+
+      - name: Cài dependency backend
+        working-directory: backend
+        run: npm ci
+
+      - name: Plan rút gọn 30 thread, 90 giây
+        run: |
+          mkdir -p "$RUNNER_TEMP/perf"
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          src = Path("hw05/23120175_Load_20261121.jmx").read_text(encoding="utf-8")
+          markers = {
+              '"ThreadGroup.num_threads">30<': 1,
+              '"ThreadGroup.ramp_time">60<': 1,
+              '"ThreadGroup.duration">600<': 1,
+              '"ConstantTimer.delay">1000<': 4,
+              '"RandomTimer.range">2000<': 4,
+          }
+          for old, expected in markers.items():
+              found = src.count(old)
+              if found != expected:
+                  raise SystemExit(f"{old}: expected {expected}, found {found}")
+          src = src.replace('"ThreadGroup.ramp_time">60<', '"ThreadGroup.ramp_time">10<')
+          src = src.replace('"ThreadGroup.duration">600<', '"ThreadGroup.duration">90<')
+          src = src.replace('"ConstantTimer.delay">1000<', '"ConstantTimer.delay">0<')
+          src = src.replace('"RandomTimer.range">2000<', '"RandomTimer.range">50<')
+          out = Path(os.environ["RUNNER_TEMP"]) / "perf" / "short.jmx"
+          out.write_text(src, encoding="utf-8")
+          PY
+
+      - name: Chạy JMeter và so p95
+        id: perf
+        run: |
+          set -euo pipefail
+          PERF="$RUNNER_TEMP/perf"
+          BASELINE="hw05/baselines/pr.json"
+          run_plan() {
+            if [[ -f /tmp/backend.pid ]]; then
+              kill "$(cat /tmp/backend.pid)" 2>/dev/null || true
+              sleep 1
+            fi
+            node backend/server.js > /tmp/backend.log 2>&1 &
+            echo $! > /tmp/backend.pid
+            for _ in $(seq 1 30); do
+              if curl -sf http://localhost:3000/api/products/1 | grep -q '"id"'; then
+                break
+              fi
+              sleep 1
+            done
+            curl -sf http://localhost:3000/api/products/1 | grep -q '"id"'
+            bash hw05/scripts/create_users.sh
+            rm -rf "$PERF/data"
+            cp -R hw05/data "$PERF/data"
+            rm -f "$PERF/short.jtl"
+            (
+              cd "$PERF"
+              jmeter -n -t short.jmx -l short.jtl \
+                -Jhttpclient.reset_state_on_thread_group_iteration=false
+            )
+          }
+
+          run_plan
+          if [[ ! -f "$BASELINE" ]]; then
+            echo "Chưa có $BASELINE sinh trên cùng loại máy. Bỏ qua cổng p95. File .jtl vẫn được lưu."
+            exit 0
+          fi
+
+          set +e
+          python3 hw05/scripts/p95_regression.py check \
+            --baseline "$BASELINE" \
+            --jtl "$PERF/short.jtl" \
+            --tier pr \
+            | tee "$PERF/p95-report.txt"
+          code=${PIPESTATUS[0]}
+          set -e
+          if [[ "$code" -eq 0 ]]; then
+            exit 0
+          fi
+          if [[ "$code" -ne 2 ]]; then
+            exit "$code"
+          fi
+
+          echo "p95 lệch khỏi dải +1 ms. Khởi động lại backend và chạy xác nhận một lần."
+          run_plan
+          python3 hw05/scripts/p95_regression.py check \
+            --baseline "$BASELINE" \
+            --jtl "$PERF/short.jtl" \
+            --tier pr \
+            --confirm \
+            | tee "$PERF/p95-report.txt"
+
+      - name: Lưu .jtl và báo cáo
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-pr-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/perf/short.jtl
+            ${{ runner.temp }}/perf/p95-report.txt
+          retention-days: 14
+          if-no-files-found: warn

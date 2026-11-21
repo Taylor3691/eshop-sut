@@ -5,7 +5,7 @@
 | AI tool | Model | Dùng cho |
 |---|---|---|
 | Claude Code | Claude Opus 5.5 | Phân tích SUT, chọn luồng, lập kế hoạch prompt, chuẩn bị môi trường, sinh/review test plan, phân tích log |
-| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress, đề xuất mức Soak từ kết quả Stress, sinh test plan Soak và script ghi RAM, phân tích statistics.json và .jtl theo cửa sổ thời gian của Load/Stress/Spike/Soak, đề xuất tối ưu hiệu năng từ kết quả đo và code backend, phân loại commit nào cần chạy performance test, thiết kế pipeline nhiều tầng và ngưỡng p95 regression, vẽ flow chart Mermaid và lưu thành file |
+| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress, đề xuất mức Soak từ kết quả Stress, sinh test plan Soak và script ghi RAM, phân tích statistics.json và .jtl theo cửa sổ thời gian của Load/Stress/Spike/Soak, đề xuất tối ưu hiệu năng từ kết quả đo và code backend, phân loại commit nào cần chạy performance test, thiết kế pipeline nhiều tầng và ngưỡng p95 regression, vẽ flow chart Mermaid và lưu thành file, viết p95_regression.py và workflow perf.yml |
 
 Mỗi mục gồm đúng 4 trường theo đề (mục 9): tên AI tool, ngày giờ, prompt, AI output.
 
@@ -469,6 +469,34 @@ tạo file đi
 - **AI output:**
   - Ghi sơ đồ Mermaid ở mục #15 và đoạn giải thích baseline vào `hw05/PERF_PIPELINE_FLOW.md`. Không đổi nội dung sơ đồ.
   - File: `hw05/PERF_PIPELINE_FLOW.md`
+
+---
+
+## #17 — Script so p95 và workflow phác thảo
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 17:37
+- **Prompt:**
+
+```
+Viết hw05/scripts/p95_regression.py:
+- đầu vào: một file .jtl (hoặc .jtl.gz) mới và một file baseline JSON;
+- tính p95 (và p99) cho từng label từ cột elapsed, BỎ các label LOCK_*, KHÔNG dùng statistics.json;
+- so với baseline theo tiêu chí ở bước 2, in bảng kết quả, exit code 0 = pass, 1 = regression,
+  2 = cần chạy lại xác nhận;
+- có lệnh tạo baseline từ một hoặc nhiều file .jtl.
+
+Viết thêm .github/workflows/perf.yml phác thảo (chưa cần chạy trên GitHub): lọc đường dẫn,
+cài Node và JMeter, khởi động backend, chạy create_users.sh, chạy plan rút gọn, gọi p95_regression.py,
+upload .jtl và báo cáo làm artifact.
+```
+
+- **AI output:**
+  - `hw05/scripts/p95_regression.py`: nearest-rank trên cột `elapsed`, bỏ label `LOCK_*`. Lệnh `baseline` lấy trung vị p95/p99 từ một hoặc nhiều `.jtl`/`.jtl.gz`. Lệnh `check` in bảng từng label.
+  - Exit 0 khi lệch p95 ≤ 1 ms. Exit 2 khi lệch ≥ 2 ms ở lần đầu. Exit 1 khi `--confirm` mà lệch vẫn ≥ 3 ms. Lệch đúng 2 ms sau `--confirm` chỉ in cảnh báo và exit 0. `--tier nightly` xét từng phút từ phút 8 (p99 ≥ 20 ms, dưới 6.120 req/s, p95 ≥ 9 ms). `--tier weekly` xét đỉnh 200 thread dưới 8.000 req/s.
+  - Tự kiểm với `hw05/results/load.jtl` làm cả baseline lẫn file mới: exit 0. `05_Checkout` p95 = 5 ms, p99 = 6 ms. Bốn label kia p95 = 3 ms.
+  - `.github/workflows/perf.yml`: chạy khi diff đụng backend (trừ `database.sqlite` và `test_profile.js`), script, CSV, plan Load, hoặc chính workflow. Rút Load còn 30 thread, ramp 10 s, 90 s, think-time 0–50 ms. Chưa có `hw05/baselines/pr.json` thì lưu `.jtl` và không chặn, vì runner Ubuntu không so số ms với máy M5.
+  - File: `hw05/scripts/p95_regression.py`, `.github/workflows/perf.yml`
 
 ---
 
