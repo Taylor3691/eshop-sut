@@ -5,7 +5,7 @@
 | AI tool | Model | Dùng cho |
 |---|---|---|
 | Claude Code | Claude Opus 5.5 | Phân tích SUT, chọn luồng, lập kế hoạch prompt, chuẩn bị môi trường, sinh/review test plan, phân tích log |
-| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user |
+| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike |
 
 Mỗi mục gồm đúng 4 trường theo đề (mục 9): tên AI tool, ngày giờ, prompt, AI output.
 
@@ -72,6 +72,39 @@ Với mỗi file, nêu rõ cấu hình CSV Data Set Config nên dùng
   - CSV Data Set Config cho cả 3 file chính: Ignore first line True, Recycle on EOF True, Stop thread on EOF False, Sharing mode All threads. Current thread khiến mọi thread đọc cùng dòng đầu. Số thread đồng thời nên ≤ 200 để không dùng chung một tài khoản.
   - `SAVE10` còn hạn nên nằm ở file chính, nhưng assertion luồng chính chỉ nên kiểm tra HTTP 200 và `$.success` = true. Công thức percent là `total_amount * (1 - 10)`, không phải giảm 10%.
   - File: `hw05/scripts/create_users.sh`, `hw05/data/users.csv`, `hw05/data/products.csv`, `hw05/data/coupons.csv`, `hw05/data/coupons_negative.csv`
+
+---
+
+## #03 — Tham số Load, Stress, Spike
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 11:57
+- **Prompt:**
+
+```
+Máy chạy test và SUT là cùng một máy: cấu hình trong ảnh bên dưới .
+Backend là Node.js single-thread + SQLite.
+
+Hãy đề xuất tham số cho 3 kịch bản dùng chung luồng trên:
+- Load: tải bình thường kéo dài
+- Stress: tăng dần đến khi hệ thống bắt đầu lỗi hoặc chậm rõ rệt
+- Spike: tăng đột ngột rồi giảm
+
+Với mỗi kịch bản, cho: số thread, ramp-up, thời lượng hoặc số vòng lặp, think-time
+(loại timer + giá trị), loại Thread Group (Thread Group thường, Stepping/Concurrency Thread Group,
+hoặc Ultimate Thread Group). Giải thích vì sao các con số đó thực tế với máy của tôi.
+Đề xuất ngưỡng chấp nhận (p95, error rate) cho từng kịch bản.
+Trình bày dạng bảng.
+/Users/toanhuynh/orca/workspaces/eshop-sut/hw05-toanhuynh/hw05/evidence/hardware/hardware_fastfetch.png
+```
+
+- **AI output:**
+  - Máy trong ảnh: MacBook Air 13-inch M5, CPU 4+6 nhân @ 4.46 GHz, RAM 16 GB đang dùng 12.64 GB (79%), swap chưa dùng. JMeter và Node cùng máy. Các số là mức khởi đầu, chưa benchmark.
+  - Load: Thread Group thường, 30 thread, ramp-up 60 giây, loop vô hạn, duration 600 giây. Uniform Random Timer offset 1000 ms + maximum 2000 ms (trung bình 2 giây/request, khoảng 15 request/giây). Ngưỡng: p95 < 300 ms, error < 1%.
+  - Stress: Stepping Thread Group, tối đa 200 thread, thêm 20 thread mỗi 30 giây, ramp-up mỗi bậc 10 giây, giữ đỉnh 60 giây, hạ 50 thread mỗi 5 giây (khoảng 6–7 phút). Timer offset 200 ms + maximum 300 ms. Bậc khỏe: p95 < 800 ms, error < 1%. Suy giảm: p95 > 1000 ms hoặc error > 2% suốt một bậc. Không chắc bậc nào chạm ngưỡng.
+  - Spike: Ultimate Thread Group. Hàng 1: 20 thread, delay 0, startup 20, hold 160, shutdown 20. Hàng 2: 130 thread, delay 80, startup 10, hold 40, shutdown 10. Đỉnh 150 thread khoảng giây 90–130. Cùng timer với Stress. Nền: p95 < 300 ms, error < 1%. Đỉnh: p95 < 1500 ms, error < 5%. 30 giây sau khi hạ: p95 < 500 ms, error < 1%.
+  - Trần 200 thread vì CSV chỉ có 200 user. Node một thread và SQLite không WAL nên không tăng lên hàng nghìn thread. Chạy non-GUI, heap JMeter ≤ 1 GB, cắm sạc, chừa khoảng 3 GB RAM. Plugin cần có: Custom Thread Groups (`jpgc-casutg`). Error rate chỉ có nghĩa nếu assertion áp mã không bắt công thức `SAVE10`.
+  - File: không tạo/sửa file ở lượt này. Ảnh đã đọc: `hw05/evidence/hardware/hardware_fastfetch.png`.
 
 ---
 
