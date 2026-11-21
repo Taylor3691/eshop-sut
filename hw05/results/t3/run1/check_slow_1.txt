@@ -1,0 +1,9 @@
+label             n      lỗi  p95  base p95  lệch  p99  base p99  lệch p99  kết luận    
+----------------  -----  ---  ---  --------  ----  ---  --------  --------  ------------
+01_Login          20413  0    3    2         1     4    4         0         đạt         
+02_ProductDetail  20403  0    3    2         1     5    4         1         đạt         
+03_AddToCart      20397  0    1    1         0     2    2         0         đạt         
+04_ApplyCoupon    20391  0    5    3         2     6    5         1         cần chạy lại
+05_Checkout       20384  0    9    3         6     11   4         7         cần chạy lại
+
+Kết luận: cần chạy lại một lần trên process Node mới. Không ghi baseline.

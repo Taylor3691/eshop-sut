@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "percentile": "nearest-rank",
+  "elapsed_column": "elapsed",
+  "elapsed_unit": "ms",
+  "excluded_prefix": "LOCK_",
+  "tier": "pr",
+  "runs": 5,
+  "files": [
+    "/tmp/hw05t3/exp2/jtl/base_1.jtl",
+    "/tmp/hw05t3/exp2/jtl/base_2.jtl",
+    "/tmp/hw05t3/exp2/jtl/base_3.jtl",
+    "/tmp/hw05t3/exp2/jtl/base_4.jtl",
+    "/tmp/hw05t3/exp2/jtl/base_5.jtl"
+  ],
+  "labels": {
+    "01_Login": {
+      "p95_ms": 2,
+      "p99_ms": 3,
+      "p95_runs": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "p99_runs": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "sample_count_runs": [
+        23013,
+        23033,
+        22501,
+        21373,
+        21356
+      ]
+    },
+    "02_ProductDetail": {
+      "p95_ms": 2,
+      "p99_ms": 3,
+      "p95_runs": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "p99_runs": [
+        3,
+        3,
+        3,
+        4,
+        4
+      ],
+      "sample_count_runs": [
+        23005,
+        23023,
+        22495,
+        21366,
+        21355
+      ]
+    },
+    "03_AddToCart": {
+      "p95_ms": 1,
+      "p99_ms": 1,
+      "p95_runs": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "p99_runs": [
+        1,
+        1,
+        1,
+        2,
+        2
+      ],
+      "sample_count_runs": [
+        23001,
+        23017,
+        22487,
+        21359,
+        21344
+      ]
+    },
+    "04_ApplyCoupon": {
+      "p95_ms": 3,
+      "p99_ms": 4,
+      "p95_runs": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "p99_runs": [
+        4,
+        4,
+        4,
+        5,
+        5
+      ],
+      "sample_count_runs": [
+        22993,
+        23011,
+        22481,
+        21348,
+        21338
+      ]
+    },
+    "05_Checkout": {
+      "p95_ms": 3,
+      "p99_ms": 4,
+      "p95_runs": [
+        2,
+        2,
+        3,
+        3,
+        3
+      ],
+      "p99_runs": [
+        3,
+        4,
+        4,
+        4,
+        4
+      ],
+      "sample_count_runs": [
+        22983,
+        23004,
+        22473,
+        21344,
+        21329
+      ]
+    }
+  },
+  "machine": "macbook-air-m5"
+}

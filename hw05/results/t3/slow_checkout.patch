@@ -1,0 +1,11 @@
+--- backend/server.js	2026-11-21 00:28:20
++++ slow/server.js	2026-11-22 00:59:22
+@@ -303,7 +303,7 @@
+     [userId, total_amount, "pending", shipping_address],
+     function (err) {
+       if (err) return res.status(500).json({ error: err.message });
+-      res.json({ message: "Checkout successful", orderId: this.lastID });
++      const orderId = this.lastID; setTimeout(() => res.json({ message: "Checkout successful", orderId }), 5); // HW05 T3: regression giả +5 ms
+     },
+   );
+ });

@@ -1,0 +1,9 @@
+label             n      lỗi  p95  base p95  lệch  p99  base p99  lệch p99  kết luận
+----------------  -----  ---  ---  --------  ----  ---  --------  --------  --------
+01_Login          21243  0    3    2         1     4    4         0         đạt     
+02_ProductDetail  21238  0    3    2         1     5    4         1         đạt     
+03_AddToCart      21233  0    1    1         0     2    2         0         đạt     
+04_ApplyCoupon    21226  0    4    3         1     7    5         2         đạt     
+05_Checkout       21215  0    4    3         1     6    4         2         đạt     
+
+Kết luận: pass. Baseline chỉ được ghi khi lần chạy này là trên main và cùng máy.

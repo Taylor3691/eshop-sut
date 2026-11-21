@@ -1,0 +1,9 @@
+label             n      lỗi  p95  base p95  lệch  p99  base p99  lệch p99  kết luận  
+----------------  -----  ---  ---  --------  ----  ---  --------  --------  ----------
+01_Login          20395  0    3    2         1     4    4         0         đạt       
+02_ProductDetail  20390  0    3    2         1     5    4         1         đạt       
+03_AddToCart      20381  0    1    1         0     2    2         0         đạt       
+04_ApplyCoupon    20378  0    4    3         1     6    5         1         đạt       
+05_Checkout       20368  0    9    3         6     11   4         7         regression
+
+Kết luận: regression. Không ghi baseline.
