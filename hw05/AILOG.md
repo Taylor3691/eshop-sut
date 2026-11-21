@@ -171,6 +171,28 @@ Chỉ ra những gì khác so với plan Load.
 
 ---
 
+## #06 — Tăng tải Stress để tìm điểm bão hòa
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-21 13:37
+- **Prompt:**
+
+```
+ok sửa và commit lại
+```
+
+- **AI output:**
+  - Bối cảnh: lần chạy Stress thật (`results/stress_try.jtl`, 445 giây, 178.301 sample) chỉ đạt khoảng 700 request/giây ở 200 thread, p95 = 3 ms, 0 lỗi luồng chính, nên chưa tìm được điểm gãy. Đo thử bản rút gọn không think-time (trong `/tmp`, không nộp): Node bão hòa ở khoảng 50 thread, khoảng 11.400 request/giây; ở 200 thread còn khoảng 8.600 request/giây, p95 tăng từ 4 ms lên 35 ms, CPU `node` khoảng 125–130%.
+  - Sửa `23120175_Stress_20261121.jmx`: think-time từ 200–500 ms xuống 0–50 ms; Stepping Thread Group thêm 20 thread mỗi 25 giây, ramp-up 5 giây, tối đa 200 thread, giữ 60 giây. Ước tính khoảng 6,5 phút (chưa chạy đủ thời lượng để đo).
+  - Ghi chú trong plan: phải chạy với `-Jhttpclient.reset_state_on_thread_group_iteration=false`. Nếu không, JMeter mở kết nối mới mỗi vòng lặp, macOS hết cổng TCP tạm (49152–65535) sau khoảng 8 giây và báo `BindException` (28% lỗi ngay ở 25 thread), lỗi do máy test chứ không do backend.
+  - `REVIEW_TESTPLANS.md`: thêm dòng 8 (Stress không đủ tải) và dòng 9 (hết cổng TCP) vào bảng "AI sai/thiếu", sửa dòng 6 cho khớp. `scripts/smoke_test.sh`: cập nhật giá trị gốc của Stress và tự thêm tham số giữ kết nối. `.gitignore`: bỏ qua `hw05/results/*_try.jtl`, `hw05/reports/*_try/`.
+  - Chạy lại `smoke_test.sh stress`: 4.800 sample, luồng chính 0 lỗi, chỉ `LOCK_04` failed như kỳ vọng.
+  - Đính chính trong lúc làm: AI trước đó tính sai thời lượng Stress cũ là khoảng 350 giây; số đo thật là 445 giây (mỗi bậc = 10 giây ramp-up + 30 giây chờ), ghi chú gốc của Cursor là đúng.
+  - Commit `5eb22e4` (Stress, review, `.gitignore`) và `a214fe1` (smoke test, kịch bản video). Sau đó người dùng yêu cầu không commit kịch bản video, commit thứ hai được amend thành `82ba65b`, chỉ còn `scripts/smoke_test.sh`.
+  - File: `hw05/23120175_Stress_20261121.jmx`, `hw05/REVIEW_TESTPLANS.md`, `hw05/scripts/smoke_test.sh`, `.gitignore`
+
+---
+
 <!--
 MẪU MỤC MỚI (chèn ngay phía trên khối comment này, đánh số tăng dần)
 
