@@ -165,8 +165,6 @@ Không dùng p95 của giao dịch E2E để đánh giá tốc độ backend vì
 
 Ngưỡng lỗi 0,5% là quy tắc đề xuất ban đầu, không phải yêu cầu nghiệp vụ đã được xác nhận. Checkout có thể áp dụng không chấp nhận lỗi nếu nhóm dự án quyết định đây là giao dịch quan trọng.
 
-Các giá trị trên cũng được lưu dưới dạng máy đọc trong [baseline-policy.example.yaml](baseline-policy.example.yaml).
-
 ## 6. Công cụ
 
 | Công cụ | Vai trò |
