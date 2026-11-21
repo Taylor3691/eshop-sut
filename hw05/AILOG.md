@@ -5,7 +5,7 @@
 | AI tool | Model | Dùng cho |
 |---|---|---|
 | Claude Code | Claude Opus 5.5 | Phân tích SUT, chọn luồng, lập kế hoạch prompt, chuẩn bị môi trường, sinh/review test plan, phân tích log |
-| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress, đề xuất mức Soak từ kết quả Stress, sinh test plan Soak và script ghi RAM, phân tích statistics.json và .jtl theo cửa sổ thời gian của Load/Stress/Spike/Soak, đề xuất tối ưu hiệu năng từ kết quả đo và code backend, phân loại commit nào cần chạy performance test |
+| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress, đề xuất mức Soak từ kết quả Stress, sinh test plan Soak và script ghi RAM, phân tích statistics.json và .jtl theo cửa sổ thời gian của Load/Stress/Spike/Soak, đề xuất tối ưu hiệu năng từ kết quả đo và code backend, phân loại commit nào cần chạy performance test, thiết kế pipeline nhiều tầng và ngưỡng p95 regression, vẽ flow chart Mermaid và lưu thành file |
 
 Mỗi mục gồm đúng 4 trường theo đề (mục 9): tên AI tool, ngày giờ, prompt, AI output.
 
@@ -398,6 +398,77 @@ Mình muốn một cơ chế tự quyết định commit nào cần chạy perfo
   - Tín hiệu dễ lừa: nhãn `skip-perf`, commit message, số dòng diff, `frontend-web/src/pages/Checkout.jsx` (cùng tên API nhưng không nằm trên đường đo), `package.json` đổi range mà lockfile không đổi.
   - Commit lấy mức cao nhất trong các file. Ví dụ thật ở nhóm bỏ qua: `2abb497` `hw05: test plan Load`.
   - File: không tạo/sửa file ở lượt này.
+
+---
+
+## #14 — Pipeline perf test nhiều tầng và ngưỡng p95
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 17:32
+- **Prompt:**
+
+```
+Dựa trên kết quả thật của mình (Load p95 4 ms, Stress đỉnh ~8.900 req/s, Soak suy giảm từ phút 8,
+lỗi LOCK_04 luôn fail vì bug #225), hãy thiết kế pipeline perf test nhiều tầng:
+- tầng chạy mỗi commit/PR (thời gian tối đa bao lâu?),
+- tầng chạy khi merge vào main,
+- tầng chạy định kỳ (nightly/weekly).
+Với mỗi tầng: kịch bản nào, bao nhiêu thread, chạy bao lâu, chạy ở đâu (máy nào), chi phí thời gian.
+
+Sau đó thiết kế tiêu chí cảnh báo p95 regression:
+- so với baseline nào (lần chạy trước? trung vị N lần gần nhất? nhánh main?),
+- ngưỡng tương đối và tuyệt đối, cách xử lý độ nhiễu giữa các lần chạy,
+- khi nào chỉ cảnh báo, khi nào chặn merge, khi nào tự chạy lại để xác nhận.
+Mọi con số ngưỡng phải giải thích bằng số liệu của mình, không lấy số chung chung.
+```
+
+- **AI output:**
+  - PR chạy nhẹ: 3 thread, 30 s, không chặn bằng p95. PR bắt buộc: 30 thread, think-time 0–50 ms, 90 s, trần job khoảng 3 phút, trên MacBook Air M5 self-hosted. Merge vào main: 80 thread, ramp 30 s + giữ 120 s. Nightly: đúng plan Soak 150 thread, 960 s, máy rảnh và cắm sạc. Weekly: đúng plan Stress ~350 s để xem đỉnh ~8.900 req/s. Số millisecond không so với runner GitHub.
+  - Mỗi lần chạy khởi động lại backend, chạy lại `create_users.sh`, và dùng `-Jhttpclient.reset_state_on_thread_group_iteration=false`. p95 tính từ cột `elapsed`, từng label `01`–`05`, bỏ `LOCK_*`. `LOCK_04` fail vì bug #225 không làm pipeline đỏ.
+  - Baseline là trung vị 5 lần đạt gần nhất trên `main`, cùng plan, cùng máy. Load p95 4 ms không dùng làm baseline cho profile 0–50 ms. Trong một lần chạy, p95 cùng profile đã nhảy 2 ms và 3 ms. Ngưỡng tương đối 10–20% nhỏ hơn 1 ms nên không dùng.
+  - Đạt khi p95 ≤ trung vị + 1 ms. Cảnh báo và chạy lại một lần khi p95 ≥ trung vị + 3 ms. Chặn merge chỉ khi lần chạy lại của cùng label vẫn ≥ trung vị + 3 ms. Lần chậm không ghi vào baseline.
+  - Nightly không thể chỉ nhìn p95: phút 8 p95 từ 2 lên 4 ms, trong khi p99 từ 3 lên 125 ms và throughput từ ~6.820 xuống 5.885 req/s. Cảnh báo thêm nếu từ phút 8 có p99 ≥ 20 ms, throughput < 6.120 req/s, hoặc p95 phút ≥ 9 ms. Weekly cảnh báo nếu đỉnh 200 thread < 8.000 req/s.
+  - Tầng PR và merge cố ý không thấy rò rỉ giỏ hàng, vì sự cố đó chỉ hiện từ phút 8. Nightly không chặn merge.
+  - File: không tạo/sửa file ở lượt này.
+
+---
+
+## #15 — Flow chart pipeline perf test
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 17:34
+- **Prompt:**
+
+```
+Vẽ flow chart cho mô hình ở bước 1–2 bằng Mermaid (flowchart TD): từ lúc có commit/PR,
+bước phân loại thay đổi, chọn tầng test, chuẩn bị môi trường (khởi động backend, tạo user,
+reset lockout), chạy JMeter, tính p95 từ .jtl, so baseline, quyết định pass/cảnh báo/chặn/chạy lại,
+cập nhật baseline, thông báo. Mỗi nút ngắn gọn, nhánh quyết định ghi rõ điều kiện.
+```
+
+- **AI output:**
+  - Vẽ một `flowchart TD` với hai lối vào: commit/PR và lịch nightly/weekly. Phân loại diff ra bỏ qua, chạy nhẹ (3 thread, 30 giây), PR bắt buộc (30 thread, 90 giây) và merge vào main (80 thread, 150 giây).
+  - Chuẩn bị môi trường là restart node, tạo user, xóa lockout, rồi chạy JMeter. p95 tính từ `elapsed`, bỏ `LOCK_*`. Lỗi ở 5 label chính thì restart và chạy lại một lần. Lần hai vẫn lỗi thì báo lỗi môi trường, không ghi baseline.
+  - PR và merge: lệch tối đa 1 ms thì pass. p95 ≥ trung vị main + 3 ms thì chạy lại một lần. Cùng label vẫn ≥ +3 ms thì chặn merge. Chạy lại về mức khỏe thì chỉ cảnh báo, bỏ lần chậm.
+  - Nightly xét p95 phút 1–7 và điều kiện từ phút 8 (p99 ≥ 20 ms, dưới 6.120 req/s, hoặc p95 ≥ 9 ms). Weekly xét đỉnh dưới 8.000 req/s. Cả hai chỉ cảnh báo, không chặn merge.
+  - Baseline chỉ ghi khi pass trên `main`. p95 cả file Soak vẫn 2 ms dù phút 8 đã hỏng, nên nightly xét từng phút. Nhãn PR và commit message không nằm trên sơ đồ.
+  - File: không tạo/sửa file ở lượt này.
+
+---
+
+## #16 — Lưu flow chart ra file
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 17:35
+- **Prompt:**
+
+```
+tạo file đi
+```
+
+- **AI output:**
+  - Ghi sơ đồ Mermaid ở mục #15 và đoạn giải thích baseline vào `hw05/PERF_PIPELINE_FLOW.md`. Không đổi nội dung sơ đồ.
+  - File: `hw05/PERF_PIPELINE_FLOW.md`
 
 ---
 
