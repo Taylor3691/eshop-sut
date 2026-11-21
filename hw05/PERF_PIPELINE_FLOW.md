@@ -41,13 +41,13 @@ flowchart TD
   cmp2 -->|"không"| warn["Chỉ cảnh báo, bỏ lần chậm"]
 
   gate -->|"nightly"| nEarly{"p95 phút 1 đến 7 ≥ trung vị + 3 ms?"}
-  nEarly -->|"có"| warnNight["Cảnh báo Soak, không chặn merge"]
-  nEarly -->|"không"| nLate{"Từ phút 8: p99 ≥ 20 ms, hoặc dưới 6120 req/s, hoặc p95 ≥ 9 ms?"}
+  nEarly -->|"có"| warnNight["Exit 1. Job lịch đỏ, không chặn merge"]
+  nEarly -->|"không"| nLate{"Phút trọn từ phút 8: p99 ≥ 20 ms, hoặc dưới 6120 req/s, hoặc p95 ≥ 9 ms?"}
   nLate -->|"có"| warnNight
   nLate -->|"không"| pass
 
   gate -->|"weekly"| w{"Đỉnh dưới 8000 req/s, hoặc p95 ≥ trung vị + 3 ms?"}
-  w -->|"có"| warnWeek["Cảnh báo trần throughput"]
+  w -->|"có"| warnWeek["Exit 1. Job lịch đỏ, không chặn merge"]
   w -->|"không"| pass
 
   pass --> dest{"Lần chạy này của main?"}
@@ -57,3 +57,5 @@ flowchart TD
 ```
 
 Nhãn PR và commit message không có mặt trên sơ đồ, vì chúng không được phép hạ mức phân loại. Baseline chỉ ghi khi lần chạy đạt và xảy ra trên `main`. PR, tầng nhẹ, lần chạy lại trở về mức khỏe, và lần Soak từ phút 8 bị lệch đều không ghi đè baseline. p95 của cả file Soak vẫn là 2 ms dù phút 8 đã hỏng, nên nightly xét từng phút chứ không xét một p95 cho cả 960 giây.
+
+Nightly bỏ phút 0 vì đó là 60 giây ramp-up, và bỏ phút cuối nếu cửa sổ không đủ 60 giây vì đó là lúc thread đang dừng. Hai phút này có ở mọi lần chạy. Exit 1 trên nightly và weekly nghĩa là regression: job lịch báo đỏ. Job đó không phải required check của PR, nên không chặn merge. Exit 2 chỉ dành cho lần chạy lại để xác nhận p95. Không thấy file `.jtl` hoặc baseline là exit 3, vì chạy lại plan không tạo ra file đã ghi sai đường dẫn.

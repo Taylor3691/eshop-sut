@@ -131,6 +131,7 @@ jobs:
           if [[ "$code" -eq 0 ]]; then
             exit 0
           fi
+          # 2 = chạy lại plan một lần. 3 = thiếu file hoặc sai đầu vào, chạy lại không hết lỗi.
           if [[ "$code" -ne 2 ]]; then
             exit "$code"
           fi

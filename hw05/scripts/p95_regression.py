@@ -13,7 +13,13 @@ Ngưỡng p95, cùng plan và cùng máy với baseline:
 Lệch 1 ms nằm trong bước nhảy đã thấy trên cùng profile (p95 2 ms và 3 ms).
 Ngưỡng tương đối 10–20% nhỏ hơn 1 ms nên không dùng.
 
-Exit code: 0 pass, 1 regression, 2 cần chạy lại xác nhận.
+Exit code:
+  0  pass
+  1  regression. Trên PR đây là lần xác nhận còn lệch, job chặn merge.
+     Trên nightly/weekly đây cũng là regression: job lịch báo đỏ, nhưng
+     job đó không phải required check nên không chặn merge.
+  2  cần chạy lại đúng plan một lần để xác nhận
+  3  lỗi đầu vào (không thấy file, sai cột, sai tầng). Chạy lại plan không sửa được.
 """
 
 from __future__ import annotations
@@ -33,6 +39,7 @@ REGRESSION_DELTA_MS = 3
 # Soak 150 thread, think-time 0–50 ms: phút 1–7 p99 = 3 ms, p95 = 2 ms,
 # khoảng 6.801–6.839 req/s. Phút 8: p95 4, p99 125, 5.885 req/s.
 NIGHTLY_MIN_DURATION_S = 8 * 60
+NIGHTLY_RAMP_S = 60
 NIGHTLY_FROM_MINUTE = 8
 NIGHTLY_P99_MS = 20
 NIGHTLY_P95_MS = 9
@@ -46,6 +53,7 @@ WINDOW_MS = 30_000
 EXIT_PASS = 0
 EXIT_REGRESSION = 1
 EXIT_RERUN = 2
+EXIT_INPUT = 3
 
 
 class JtlError(Exception):
@@ -336,10 +344,19 @@ def window_rps(count: int, index: int, last_index: int, t0: int, width_ms: int, 
     return count / duration
 
 
+def minute_covered_ms(index: int, t0: int, test_end: int) -> int:
+    start = t0 + index * 60_000
+    if test_end <= start:
+        return 0
+    return min(test_end, start + 60_000) - start
+
+
 def nightly_findings(parsed: dict) -> list[tuple[int, str]]:
     """Ngưỡng phút 8 đứng xa độ nhiễu 1 ms nên là regression, không cần --confirm.
 
     p95 của cả file Soak vẫn là 2 ms sau khi phút 8 đã hỏng, nên phải xét từng phút.
+    Phút 0 là ramp-up 60 giây. Phút cuối không đủ 60 giây là lúc thread đang dừng.
+    Cả hai có ở mọi lần chạy và không được đưa vào ngưỡng.
     """
     if parsed["duration_s"] + 1e-9 < NIGHTLY_MIN_DURATION_S:
         return [(
@@ -348,20 +365,30 @@ def nightly_findings(parsed: dict) -> list[tuple[int, str]]:
         )]
     minutes = parsed["minutes"]
     t0 = parsed["min_ts"]
-    if not minutes or t0 is None:
+    test_end = parsed["max_ts"]
+    if not minutes or t0 is None or test_end is None:
         return [(EXIT_RERUN, "Không có timeStamp để chia phút.")]
     last_index = max(minutes)
     findings = []
     print("\nPhút Soak (bỏ LOCK_*)")
-    print(f"{'phút':>6} {'req/s':>10} {'p95':>6} {'p99':>6} {'n':>10}")
+    print(f"{'phút':>6} {'giây':>8} {'req/s':>10} {'p95':>6} {'p99':>6} {'n':>10}  ghi chú")
     for index in range(0, last_index + 1):
         hist = minutes.get(index)
         if not hist:
             continue
         stats = label_stats(hist)
-        rps = window_rps(hist["n"], index, last_index, t0, 60_000, hist["max_ts"])
-        print(f"{index:6d} {rps:10.1f} {stats['p95_ms']:6} {stats['p99_ms']:6} {stats['sample_count']:10d}")
-        if index < NIGHTLY_FROM_MINUTE:
+        covered = minute_covered_ms(index, t0, test_end)
+        rps = hist["n"] / (covered / 1000.0) if covered else 0.0
+        note = ""
+        if covered < 60_000:
+            note = "bỏ qua, không đủ 60 giây"
+        elif index * 60 < NIGHTLY_RAMP_S:
+            note = "bỏ qua, ramp-up"
+        print(
+            f"{index:6d} {covered / 1000.0:8.3f} {rps:10.1f} "
+            f"{stats['p95_ms']:6} {stats['p99_ms']:6} {stats['sample_count']:10d}  {note}"
+        )
+        if note or index < NIGHTLY_FROM_MINUTE:
             continue
         if stats["p99_ms"] is not None and stats["p99_ms"] >= NIGHTLY_P99_MS:
             findings.append((EXIT_REGRESSION, f"phút {index}: p99 {stats['p99_ms']} ms >= {NIGHTLY_P99_MS} ms"))
@@ -522,6 +549,8 @@ def check(baseline_path: Path, jtl_path: Path, confirm: bool, tier: str, machine
             print("\nKết luận: pass. Baseline chỉ được ghi khi lần chạy này là trên main và cùng máy.")
     elif exit_code == EXIT_RERUN:
         print("\nKết luận: cần chạy lại một lần trên process Node mới. Không ghi baseline.")
+    elif tier in ("nightly", "weekly"):
+        print("\nKết luận: regression (exit 1). Job lịch báo đỏ và không chặn merge. Không ghi baseline.")
     else:
         print("\nKết luận: regression. Không ghi baseline.")
     return exit_code
@@ -571,7 +600,7 @@ def main(argv: list[str] | None = None) -> int:
         return args.func(args)
     except JtlError as exc:
         print(f"Lỗi: {exc}", file=sys.stderr)
-        return EXIT_RERUN
+        return EXIT_INPUT
 
 
 if __name__ == "__main__":
