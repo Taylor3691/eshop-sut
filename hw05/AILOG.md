@@ -5,7 +5,7 @@
 | AI tool | Model | Dùng cho |
 |---|---|---|
 | Claude Code | Claude Opus 5.5 | Phân tích SUT, chọn luồng, lập kế hoạch prompt, chuẩn bị môi trường, sinh/review test plan, phân tích log |
-| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress, đề xuất mức Soak từ kết quả Stress, sinh test plan Soak và script ghi RAM |
+| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress, đề xuất mức Soak từ kết quả Stress, sinh test plan Soak và script ghi RAM, phân tích statistics.json và .jtl theo cửa sổ thời gian của Load/Stress/Spike/Soak, đề xuất tối ưu hiệu năng từ kết quả đo và code backend |
 
 Mỗi mục gồm đúng 4 trường theo đề (mục 9): tên AI tool, ngày giờ, prompt, AI output.
 
@@ -280,6 +280,94 @@ hãy viết báo cáo phần task 1
   - Viết `hw05/REPORT_TASK1.md` 11 mục: môi trường, luồng và nhóm endpoint, CSV, quy trình AI theo AILOG, thiết kế 3 kịch bản, bảng review 10 dòng (thêm dòng 10: AI đọc sai `IdleTime` khi đề xuất Soak), thực thi và các bước reset lockout, kết quả, ngưỡng chịu tải, bug #225–#229, hạn chế.
   - Còn TODO: ảnh JMeter + resource monitor cho Load/Stress/Spike, ảnh 3 listener, ảnh các bước reset lockout, link video. AILOG chưa có mục cho bước sinh plan Spike.
   - File: `hw05/REPORT_TASK1.md`
+
+---
+
+## #10 — Phân tích statistics.json bốn lần chạy
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 17:11
+- **Prompt:**
+
+```
+Mình chạy performance test backend EShop (Node.js + Express + SQLite) bằng JMeter trên MacBook Air M5,
+JMeter và backend chạy chung máy. Luồng mỗi vòng lặp: 01_Login → 02_ProductDetail → 03_AddToCart
+→ 04_ApplyCoupon → 05_Checkout. Mình đính kèm statistics.json của 4 lần chạy:
+- Load: 30 thread, ramp-up 60 s, 600 s, think-time 1–3 s
+- Stress: Stepping Thread Group 20 → 200 thread, +20 mỗi 25 s, think-time 0–50 ms
+- Spike: nền 20 thread, spike +130 thread trong 10 s, giữ 40 s, think-time 0,5–1,5 s
+- Soak: 150 thread, ramp-up 60 s, 960 s, think-time 0–50 ms
+
+Hãy:
+1. Với từng lần chạy, tóm tắt throughput, thời gian phản hồi (mean, p90, p95, p99, max), tỉ lệ lỗi.
+2. Đánh giá từng kịch bản đạt hay không, bước nào là nút thắt.
+3. Đề xuất ngưỡng hiệu năng (SLA) cho hệ thống: p95, p99, error rate, throughput tối thiểu, kèm lý do.
+4. Kết luận năng lực tối đa của hệ thống trên m��y này.
+Trình bày bằng bảng, ghi rõ mỗi con số lấy từ trường nào của file.
+```
+
+- **AI output:**
+  - Đọc `hw05/reports/{load,stress,spike,soak}/statistics.json`. Đối chiếu `dashboard.js`: `pct1ResTime` = p90, `pct2ResTime` = p95, `pct3ResTime` = p99. `throughput` là trung bình cả lần chạy, gồm cả lúc tăng và giảm thread.
+  - `Total.throughput`: Load 17,90; Stress 5.292,79; Spike 51,81; Soak 5.886,43 request/giây. `Total.pct2ResTime`: 4, 2, 4, 2 ms. Lỗi nghiệp vụ của năm bước: `errorCount` = 0. Một lỗi `Total` ở cả bốn bài là `LOCK_04` (`errorCount` = 1).
+  - Nút thắt: Load và Spike là `05_Checkout` (mean 3,74 ms và 3,07 ms). Stress và Soak là `04_ApplyCoupon` (Soak p99 = 211 ms, max = 1.145 ms). `03_AddToCart` có mean thấp nhất vì chỉ ghi RAM. `Total.pct3ResTime` của Soak là 3 ms trong khi p99 từng bước là 48–211 ms, vì đuôi của một bước chỉ chiếm khoảng một phần năm số sample.
+  - Ngưỡng đề xuất, áp cho từng label `01`–`05`: p95 ≤ 50 ms, p99 ≤ 100 ms, error rate ≤ 0,1%, throughput tối thiểu ≥ 15 request/giây ở profile Load. Load, Stress, Spike đạt. Soak vượt p99 100 ms ở Login, ProductDetail, Checkout và ApplyCoupon.
+  - Năng lực đọc từ bốn file: khoảng 5.300–5.900 request/giây trung bình với think-time 0–50 ms mà p95 vẫn vài millisecond. Giữ 150 thread khoảng 16 phút thì đuôi p99 của coupon và checkout khoảng 200 ms, max trên 1 giây. Mốc khoảng 11.400 request/giây khi tắt think-time không có trong bốn file này.
+  - Số trong mục này lấy từ `statistics.json`, không tính lại từ `.jtl`. Mục #09 đã ghi percentile của Soak trong report khác giá trị tính từ `.jtl`.
+  - File: không tạo/sửa file ở lượt này.
+
+---
+
+## #11 — Phân tích .jtl theo cửa sổ thời gian
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 17:14
+- **Prompt:**
+
+```
+Statistics.json chỉ là số tổng. Giờ hãy phân tích file .jtl thô (stress và soak đang nén .gz,
+soak.jtl khoảng 714 MB nên cần đọc theo luồng, không nạp hết vào RAM).
+Bạn có thể viết script Python để tính.
+
+1. Với Stress: throughput, p95, p99 theo từng cửa sổ 30 giây, kèm số thread (cột allThreads).
+   Hệ thống bão hòa ở đâu?
+2. Với Spike: so sánh trước, trong và sau spike (cửa sổ 10 giây). Hệ thống có phục hồi không?
+3. Với Soak: throughput, p95, p99, max theo từng phút; ghép với RSS của node trong soak_node_rss.csv
+   (epoch_ms cùng đơn vị với cột timeStamp). Có suy giảm theo thời gian không? Nguyên nhân?
+4. Các số liệu này có khớp với statistics.json ở bước trước không? Nếu lệch, số nào đúng?
+Chỉ dùng số đọc được từ file, ghi rõ cột nào của .jtl dùng cho mỗi chỉ số.
+```
+
+- **AI output:**
+  - Đọc theo dòng `hw05/results/stress.jtl` (233 MB), `spike.jtl` (1,9 MB), `soak.jtl` (681 MB). Phân vị nearest-rank trên cột `elapsed` làm tròn millisecond. Throughput dùng `timeStamp`. Thread là max `allThreads` trong cửa sổ. Lỗi dùng `success`. Cửa sổ bỏ sample `LOCK_*`.
+  - Stress, cửa sổ 30 giây: từ 20 thread / 813 request/giây lên 200 thread / 8.861 rồi 8.930 request/giây. p95 giữ 2–3 ms, p99 3–5 ms, lỗi 0%. Request/giây mỗi thread ở bậc 20 là 40,6 và ở bậc 200 là 44,6. Cửa sổ giây 330 dài 20 giây vì test dài 350,0 giây và thread đang hạ. Trong bài này chưa bão hòa. Mức cao nhất còn khỏe: 200 thread, khoảng 8.930 request/giây.
+  - Spike, cửa sổ 10 giây: nền giây 20–70 là 20 thread, 24,2–25,3 request/giây, p95 4–5 ms. Đỉnh giây 90–120 là 150 thread, 184–187 request/giây, p95 4 ms, p99 5 ms. Giây 140, cửa sổ đầu sau khi còn 20 thread, về 24,6 request/giây, p95 4 ms, p99 5 ms, lỗi 0%. Có phục hồi ngay. Đỉnh 187 request/giây bằng khoảng 2% của 8.930 request/giây ở Stress.
+  - Soak, 960,06 giây, 150 thread từ phút 1 đến phút 15. Phút 1–7: khoảng 6.820 request/giây, p95 2 ms, p99 3 ms. Từ phút 8: throughput khoảng 5.300 request/giây (giảm khoảng 22%), p99 khoảng 200 ms, p99 `04_ApplyCoupon` 188 ms và `05_Checkout` 144 ms ngay phút 8, sau đó vùng 200–325 ms. Max lên 1.145 ms. RSS từ 80.528 KB (78,6 MB) lên 327.376 KB (319,7 MB), khoảng +241 MB. Có nhịp RSS tụt ở phút 7 và phút 14. Không hồi đến hết bài.
+  - Nguyên nhân: `POST /api/cart` chỉ `push` vào `userCarts` và không xóa. Khoảng 1.360 lần thêm giỏ mỗi giây. RSS tăng khoảng 15 MB/phút. Nhịp RSS tụt phút 7 rồi độ trễ gãy phút 8 khớp GC trên một thread Node. Hai bước đụng SQLite chậm nhất sau đó.
+  - `sampleCount`, `errorCount`, `meanResTime`, `maxResTime`, `throughput` khớp `statistics.json` ở cả ba file. Percentile khớp ở Stress và Spike. Soak thì không: `Total.pct3ResTime` trong json là 3 ms, cột `elapsed` cho p99 = 86 ms. Login 110 so với 58, ApplyCoupon 211 so với 177, Checkout 189 so với 127. Phân vị đúng là cột `elapsed`. Mean và throughput của file tổng vẫn đúng.
+  - File: không tạo/sửa file ở lượt này.
+
+---
+
+## #12 — Đề xuất tối ưu hiệu năng
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 17:18
+- **Prompt:**
+
+```
+Dựa trên kết quả phân tích và code backend, hãy đề xuất các cách tối ưu hiệu năng
+Với mỗi đề xuất: vấn đề nó giải quyết, chỗ cần sửa trong code, mức cải thiện dự kiến
+(ước lượng bằng con số), rủi ro.
+```
+
+- **AI output:**
+  - Năm đề xuất, chỉ đề xuất, chưa sửa code. Số cải thiện là ước lượng từ cửa sổ Soak/Stress đã đo.
+  - Xóa `userCarts[userId]` sau `INSERT` orders thành công trong `POST /api/checkout` (`server.js`). Giữ soak 150 thread quanh 6.800 request/giây, p95 khoảng 2 ms, p99 khoảng 3 ms suốt 15 phút, thay vì rơi xuống khoảng 5.300 request/giây và p99 khoảng 200 ms từ phút 8. RSS dưới khoảng 150 MB thay vì 320 MB. Rủi ro: `GET /api/cart` sau checkout trả mảng rỗng.
+  - `PRAGMA journal_mode=WAL`, `synchronous=NORMAL`, `busy_timeout=5000` ngay sau khi mở DB trong `database.js`. Mặt phẳng 6.820 request/giây bị think-time chặn nên gần như không đổi. Trần tắt think-time (khoảng 11.400 request/giây) ước lượng lên khoảng 12.500–13.500. Rủi ro: file `-wal`/`-shm`, có thể mất transaction cuối nếu mất điện.
+  - Bỏ `SELECT COUNT(*)` trên `coupon_usage` trong nhánh `user_id` của `POST /api/apply-coupon`, hoặc cache 3 mã. Bớt khoảng một phần sáu lệnh SQLite mỗi vòng. Mean ApplyCoupon ở Stress 1,29 ms có thể về gần 1 ms. Không kéo p99 phút 8–15 về 3 ms nếu chưa xóa giỏ. Rủi ro: `max_uses_per_user` sai nếu không còn đếm; cache cũ khi admin sửa mã lúc process đang chạy.
+  - Chỉ `UPDATE login_attempts` khi attempts khác 0 hoặc `locked_until` khác null. Sau vài giây, mỗi vòng còn một lần ghi thay vì hai. Cùng WAL, đây là phần chính của ước lượng trần 12.500–13.500 request/giây. Với timer 0–50 ms, throughput vẫn quanh 6.800. Rủi ro: hai login đúng song song cùng email vẫn có thể cùng ghi, không tệ hơn hiện tại vì `UPDATE` cũng không nằm trong transaction.
+  - `CREATE INDEX idx_users_email ON users(email)`. Với khoảng 200 user: dưới 1% throughput, mean login khó giảm quá 0,1 ms. Không thêm `UNIQUE` vì register trùng email sẽ đổi từ thành công sang lỗi.
+  - File: không tạo/sửa file ở lượt này.
 
 ---
 
