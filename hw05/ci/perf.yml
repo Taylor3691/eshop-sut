@@ -1,5 +1,8 @@
 # Phác thảo cổng p95 cho PR. Chưa gắn runner và chưa có baseline trên GitHub.
 #
+# File cố ý để ở hw05/ci/ chứ không ở .github/workflows/: đây là bản phác thảo cho báo cáo,
+# không chạy trên repo chung của nhóm. Muốn bật thì chép sang .github/workflows/perf.yml.
+#
 # Số millisecond chỉ so được khi baseline và lần chạy mới cùng loại máy.
 # Baseline 2–4 ms trong bài đo trên MacBook Air M5. Runner ubuntu-latest
 # không dùng các số đó. Job này bỏ qua cổng p95 khi chưa có

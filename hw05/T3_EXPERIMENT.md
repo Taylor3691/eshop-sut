@@ -3,7 +3,7 @@
 - **Máy:** `CT-TOAN-HUYNH` (MacBook Air M5). Thí nghiệm lặp **2 lần độc lập**:
   - **Lần 1:** 2026-11-22 00:59 → 01:13 (màn hình bị khóa khi kết thúc nên không có ảnh), dữ liệu [`results/t3/run1/`](results/t3/run1/)
   - **Lần 2:** 2026-11-22 01:15 → 01:30 (có ảnh), dữ liệu [`results/t3/run2/`](results/t3/run2/), ảnh [`evidence/t3/`](evidence/t3/)
-- **Plan:** bản rút gọn của `23120175_Load_20261121.jmx` giống job `pr-short` trong `.github/workflows/perf.yml`: 30 thread, ramp-up 10 s, 90 s, think-time 0–50 ms, chạy với `-Jhttpclient.reset_state_on_thread_group_iteration=false`
+- **Plan:** bản rút gọn của `23120175_Load_20261121.jmx` giống job `pr-short` trong [`ci/perf.yml`](ci/perf.yml): 30 thread, ramp-up 10 s, 90 s, think-time 0–50 ms, chạy với `-Jhttpclient.reset_state_on_thread_group_iteration=false`
 - **Mỗi lần chạy JMeter:** khởi động lại backend (DB seed lại, reset lockout, xóa `userCarts`), chạy `create_users.sh`, rồi chạy plan
 - **Regression giả:** bản sao backend trong thư mục tạm, checkout trả response sau **5 ms** (`setTimeout`), xem [`results/t3/slow_checkout.patch`](results/t3/slow_checkout.patch). Code backend trong repo **không** bị sửa.
 - **Script thí nghiệm:** [`results/t3/run_experiment.sh`](results/t3/run_experiment.sh)
