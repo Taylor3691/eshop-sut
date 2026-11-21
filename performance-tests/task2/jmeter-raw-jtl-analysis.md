@@ -155,70 +155,45 @@ Ba raw JTL không ghi nhận lỗi (`0.000%` ở Load, Stress và Spike). Spike 
 
 ## 8. Review and correct — human review
 
-Phần này giữ nguyên phân tích AI ở trên và đối chiếu lại trực tiếp ba raw JTL. Các thống kê toàn run về sample count, percentile theo `elapsed` và số lỗi đều khớp; những điểm dưới đây là các diễn giải hoặc cách gắn nhãn cần hiệu chỉnh.
+Phần này đối chiếu phân tích của AI với ba tệp JTL gốc. Các số liệu đúng được giữ nguyên; chỉ các điểm sai hoặc chưa đủ căn cứ mới được sửa.
 
-### HR-01 — Throughput theo phase dùng mẫu số không khớp cửa sổ phase
+### 8.1 Throughput theo giai đoạn
 
-- **Nhận định của AI:** các giá trị `7.183`, `25.651`, `64.171` sample/s... được trình bày như throughput trong các cửa sổ cố định 0–60s, 60–120s hoặc 60–350s.
-- **Giá trị đúng từ raw JTL:** nếu sample được chọn theo `timeStamp` nằm trong một cửa sổ cố định, sample-start rate phải dùng chính độ dài cửa sổ đó làm mẫu số.
+AI chọn các dòng theo `timeStamp` của từng giai đoạn nhưng lại tính đến lúc mẫu cuối kết thúc. Vì mẫu tổng E2E có thể kết thúc sau giai đoạn, thời gian dùng để chia bị dài hơn. Nếu báo throughput trong một khoảng thời gian cố định, công thức phải là:
 
-| Scenario / phase | Số dòng JTL trong phase | Độ dài phase | Rate đúng theo cửa sổ (sample/s) | Giá trị AI |
-|---|---:|---:|---:|---:|
-| Load 0–60s | 489 | 60s | `489 / 60 = 8.150` | 7.183 |
-| Load 60–350s | 4,354 | 290s | `4,354 / 290 = 15.014` | 14.636 |
-| Stress 0–60s | 483 | 60s | `483 / 60 = 8.050` | 7.026 |
-| Stress 60–120s | 1,746 | 60s | `1,746 / 60 = 29.100` | 25.651 |
-| Stress 120–180s | 3,443 | 60s | `3,443 / 60 = 57.383` | 50.103 |
-| Stress 180–300s | 10,542 | 120s | `10,542 / 120 = 87.850` | 87.856 |
-| Spike 0–60s | 354 | 60s | `354 / 60 = 5.900` | 5.410 |
-| Spike 60–120s | 4,249 | 60s | `4,249 / 60 = 70.817` | 64.171 |
-| Spike 120–180s | 451 | 60s | `451 / 60 = 7.517` | 7.591 |
+`Số dòng JTL trong cửa sổ / thời lượng cửa sổ`.
 
-- **Giải thích lỗi:** AI lọc sample theo `timeStamp` của phase nhưng lại chia cho khoảng từ sample bắt đầu sớm nhất đến `timeStamp + elapsed` lớn nhất. Parent E2E có thể kết thúc sau biên phase nên mẫu số bị kéo dài, chẳng hạn Stress 0–60s bị chia cho `68.748s` thay vì `60s`.
-- **Hiệu chỉnh:** gọi các số đã sửa là **sample-start rate trong cửa sổ phase**. Nếu muốn dùng công thức từ sample đầu đến khi sample cuối hoàn tất thì phải đổi tên chỉ số và không coi đó là throughput của đúng cửa sổ 60 giây. Các số làm cơ sở cho threshold ở mục 5.2 cũng phải dùng nhất quán cùng một quy ước.
+| Giai đoạn | AI tính (sample/s) | Giá trị đúng (sample/s) |
+|---|---:|---:|
+| Load 0–60s | 7.183 | `489 / 60 = 8.150` |
+| Load 60–350s | 14.636 | `4,354 / 290 = 15.014` |
+| Stress 0–60s | 7.026 | `483 / 60 = 8.050` |
+| Stress 60–120s | 25.651 | `1,746 / 60 = 29.100` |
+| Stress 120–180s | 50.103 | `3,443 / 60 = 57.383` |
+| Stress 180–300s | 87.856 | `10,542 / 120 = 87.850` |
+| Spike 0–60s | 5.410 | `354 / 60 = 5.900` |
+| Spike 60–120s | 64.171 | `4,249 / 60 = 70.817` |
+| Spike 120–180s | 7.591 | `451 / 60 = 7.517` |
 
-### HR-02 — Cột “Max VU” của Stress không phải giá trị lớn nhất đọc từ `allThreads`
+**Sửa:** dùng các giá trị ở cột cuối khi báo throughput của từng khoảng thời gian. Mục 5.2 cũng phải dùng cùng cách tính.
 
-- **Nhận định của AI:** bảng Stress ghi Max VU lần lượt là `20`, `40`, `80`, `120`.
-- **Giá trị đúng từ raw JTL:** khi lọc bằng `timeStamp` theo bốn phase, max `allThreads` thực tế lần lượt là `38`, `73`, `115`, `120`. Ví dụ, raw Stress có parent E2E tại `timeStamp=1795261636347` (`+59.815s`), `elapsed=8933 ms`, nhưng `allThreads=38`.
-- **Giải thích lỗi:** `timeStamp` của parent E2E là thời điểm transaction bắt đầu, trong khi transaction trên kết thúc sau mốc +60s, lúc các thread của stage kế tiếp đã chạy. Vì vậy không thể vừa phân phase theo thời điểm bắt đầu của parent sample vừa đọc `allThreads` như số VU tại cùng thời điểm đó. Các số `20/40/80/120` là tải mục tiêu theo thiết kế stage, không phải max `allThreads` của tập raw rows.
-- **Hiệu chỉnh:** đổi tiêu đề cột thành **“VU mục tiêu theo stage”**. Không dùng cột này như một thống kê max VU tính trực tiếp từ raw JTL.
+### 8.2 Các điểm cần sửa khác
 
-### HR-03 — Cửa sổ recovery của Spike còn chứa sample thuộc burst
+| Điểm AI phân tích chưa đúng | Bằng chứng từ raw JTL | Giải thích và cách sửa |
+|---|---|---|
+| Stress có “Max VU” là `20/40/80/120`. | Giá trị `allThreads` lớn nhất trong bốn tập dữ liệu là `38/73/115/120`. Dòng E2E tại `timeStamp=1795261636347` bắt đầu ở `+59.815s` nhưng có `allThreads=38`. | `timeStamp` là lúc E2E bắt đầu, còn `allThreads` được ghi khi E2E kết thúc. Các số `20/40/80/120` là tải đặt trước, không phải giá trị lớn nhất trong JTL. Đổi tên cột thành **VU mục tiêu**. |
+| Toàn bộ 120–180s của Spike được xem là giai đoạn phục hồi 10 VU. | Trong 451 dòng có 450 dòng của nhóm tải nền và một dòng của nhóm tải tăng đột biến tại `+120.010s`: `05 - Verify order in history`, `elapsed=4 ms`. | Một mẫu của nhóm tăng tải đã nằm trong giai đoạn phục hồi. Cần loại dòng này hoặc ghi rõ ngoại lệ. Khi chỉ tính 450 dòng tải nền, throughput là `450 / 60 = 7.500 mẫu/giây`. |
+| Connect trung bình của toàn kịch bản là Load `0.13 ms`, Stress `0.08 ms`, Spike `0.11 ms`. | Khi chỉ tính yêu cầu HTTP, kết quả đúng là Load `0.081 ms` (`4,151` mẫu), Stress `0.046 ms` (`13,538` mẫu), Spike `0.064 ms` (`4,233` mẫu). | AI đã trộn mẫu tổng E2E với các yêu cầu HTTP, làm dữ liệu bị tính lặp. Chỉ dùng các yêu cầu HTTP để đánh giá Connect. Kết luận vẫn là chưa thấy vấn đề kết nối. |
+| Checkout được gọi là điểm nghẽn. | Checkout có p95 cao nhất: Load `17 ms`, Stress `17 ms`, Spike `19 ms`. Tuy nhiên Stress không có lỗi (`0/16,214`) và throughput không giảm. | Dữ liệu chỉ chứng minh Checkout là API chậm nhất trong năm API, chưa chứng minh nó giới hạn hệ thống. Sửa thành **API có p95 cao nhất**. |
+| Ngưỡng tỷ lệ lỗi được đặt là `0.000%`. | Kết quả đo là Load `0/4,978`, Stress `0/16,214`, Spike `0/5,054`, đều bằng `0.000%`. | `0.000%` là kết quả của ba lần chạy, không phải ngưỡng yêu cầu. Ghi **tỷ lệ lỗi quan sát = 0.000%**; chỉ đặt ngưỡng chấp nhận khi có mục tiêu dịch vụ hoặc quy định của dự án. |
 
-- **Nhận định của AI:** cửa sổ 120–180s được gọi hoàn toàn là Recovery/10 VU.
-- **Giá trị đúng từ raw JTL:** cửa sổ này có `451` dòng, gồm `450` dòng của `Spike Baseline - 10 VU` và một dòng của `Spike Burst - add 90 VU`: `timeStamp=1795260360275` (`+120.010s`), label `05 - Verify order in history`, `elapsed=4 ms`, `allThreads=11`.
-- **Giải thích lỗi:** phân phase chỉ theo biên thời gian đã đưa sample burst cuối cùng vào tập recovery. Ảnh hưởng của một sample tới percentile ở đây rất nhỏ, nhưng gọi tập này là recovery thuần là không chính xác.
-- **Hiệu chỉnh:** loại dòng có `threadName` thuộc burst khi phân tích recovery thuần, hoặc ghi rõ cửa sổ 120–180s chứa một sample đuôi của burst. Khi chỉ tính 450 dòng baseline, total sample-start rate là `450 / 60 = 7.500 sample/s`.
+### 8.3 Các số liệu đã kiểm tra và đúng
 
-### HR-04 — Connect average của “Scenario total” trộn parent và HTTP child samples
-
-- **Nhận định của AI:** Connect avg Scenario total là Load `0.13 ms`, Stress `0.08 ms`, Spike `0.11 ms` và được dùng để nhận xét thời gian thiết lập kết nối.
-- **Giá trị đúng từ raw JTL:** khi chỉ tính năm HTTP sampler, weighted Connect average là Load `0.081 ms` trên `4,151` HTTP samples, Stress `0.046 ms` trên `13,538` samples và Spike `0.064 ms` trên `4,233` samples.
-- **Giải thích lỗi:** Scenario total còn chứa parent `E2E - Login to order verification`. Trường `Connect` của parent lặp lại/bao gồm thông tin từ transaction con, nên trộn parent với child làm chỉ số kết nối bị tính hai lần và không còn là trung bình của các HTTP request độc lập.
-- **Hiệu chỉnh:** dùng HTTP-only Connect average để đánh giá kết nối. Kết luận định tính vẫn không đổi: các giá trị đều rất nhỏ và raw JTL không cho thấy nghẽn thiết lập kết nối.
-
-### HR-05 — “Chậm nhất” chưa đủ để kết luận là bottleneck
-
-- **Nhận định của AI:** Checkout được gọi là “nút thắt tương đối”.
-- **Giá trị đúng từ raw JTL:** Checkout đúng là HTTP label có p95 cao nhất: Load `17 ms`, Stress `17 ms`, Spike `19 ms`. Tuy nhiên Stress Stage 4 vẫn có `0/10,542` sample lỗi trong cửa sổ, còn throughput không sụp; toàn run Stress có `0/16,214` lỗi.
-- **Giải thích lỗi:** thứ hạng response time chỉ chứng minh Checkout là endpoint chậm nhất trong năm label đã đo. “Bottleneck” hàm ý nó đang giới hạn throughput hoặc gây saturation, điều mà ba JTL không chứng minh.
-- **Hiệu chỉnh:** mô tả Checkout là **HTTP endpoint có p95 cao nhất quan sát được**, không kết luận đây là bottleneck nếu chưa có resource metrics, trace hoặc capacity breakpoint.
-
-### HR-06 — Error rate quan sát được không tự động trở thành error-rate threshold
-
-- **Nhận định của AI:** mục 5.1 đề xuất error-rate threshold `0.000%` cho mọi label vì ba run không có lỗi.
-- **Giá trị đúng từ raw JTL:** mức quan sát là Load `0/4,978`, Stress `0/16,214` và Spike `0/5,054`, tức `0.000%` trong đúng ba run này.
-- **Giải thích lỗi:** số lỗi quan sát được là kết quả đo, không phải yêu cầu chấp nhận. Raw JTL không chứa business SLO để chứng minh threshold bắt buộc phải bằng 0%.
-- **Hiệu chỉnh:** báo cáo **observed error rate = 0.000%**; để error-rate threshold là **chưa xác định** cho đến khi có SLO/risk policy. Nếu dự án chủ động chọn zero-tolerance thì phải ghi đó là quyết định kiểm thử, không phải kết luận suy ra từ JTL.
-
-### Các kết quả đã đối chiếu và không cần sửa
-
-- Sample count toàn run: Load `4,978`, Stress `16,214`, Spike `5,054`.
-- E2E p95/p99 toàn run: Load `9,938/10,682 ms`, Stress `9,893/10,592 ms`, Spike `10,034/10,668 ms`.
-- Cả ba raw JTL đều chỉ có `responseCode=200`, `success=true`; observed error rate thực tế là `0.000%`.
-- Các percentile theo label trong mục 2 khớp phép tính nearest-rank từ cột `elapsed`.
-- Nhận xét rằng raw JTL một mình không xác định được nguyên nhân nội bộ của E2E khoảng 8 giây hoặc capacity breakpoint là phù hợp; không nên tự suy diễn thêm nguyên nhân từ raw log.
+- Tổng số sample: Load `4,978`, Stress `16,214`, Spike `5,054`.
+- E2E p95/p99: Load `9,938/10,682 ms`, Stress `9,893/10,592 ms`, Spike `10,034/10,668 ms`.
+- Mọi dòng đều có `responseCode=200`, `success=true`; tỷ lệ lỗi quan sát là `0.000%`.
+- Các phân vị theo từng nhãn trong mục 2 khớp với cột `elapsed`.
+- JTL gốc không đủ dữ liệu để xác định nguyên nhân E2E khoảng 8 giây hoặc giới hạn tải của hệ thống.
 
 ## 9. Judge the AI's recommendations — đề xuất và đánh giá tối ưu SUT
 
