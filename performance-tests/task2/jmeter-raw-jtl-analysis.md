@@ -17,7 +17,7 @@ Quy ước tính:
 - Throughput của một tập sample = `sample count / (max(timeStamp + elapsed) - min(timeStamp))`, đơn vị sample/s. Vì vậy throughput của từng label có cửa sổ thời gian riêng.
 - Error rate = số dòng có `success=false` / sample count. Cả ba file chỉ có `responseCode=200` và `success=true`.
 - Dòng **Scenario total** gồm cả năm HTTP sampler và parent sample `E2E - Login to order verification`. Do parent E2E bao quanh các child sample, đây là số sample JMeter ghi nhận chứ không phải số HTTP request độc lập; percentile total vì thế không nên dùng thay percentile từng endpoint.
-- Các mốc `+Xs` tính từ `timeStamp` nhỏ nhất trong từng file. Script tái lập phép tính: `performance-tests/task2/analyze_jtl.py`.
+- Các mốc `+Xs` tính từ `timeStamp` nhỏ nhất trong từng file.
 
 ## 2. Thống kê theo scenario và label
 
