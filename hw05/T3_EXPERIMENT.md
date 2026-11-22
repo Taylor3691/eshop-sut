@@ -53,8 +53,8 @@ p99 `05_Checkout`: baseline 4 ms → 10–11 ms khi chậm.
 1. **Cổng bắt đúng regression +5 ms ở cả 2 lần lặp**, đúng label `05_Checkout` (p95 3 → 8–9 ms), qua đúng hai bước: lần đầu yêu cầu chạy lại, lần xác nhận báo regression.
 2. **Không báo động giả** ở cả 2 lần chạy không đổi code. Nhưng ở lần 1, 4/5 label lệch đúng +1 ms, là mức tối đa còn được coi là đạt: **biên an toàn mỏng**. Lần 2 không lệch.
 3. **Bước chạy lại có tác dụng thật:** ở lần 1, `04_ApplyCoupon` (không bị sửa) lệch +2 ms trong `slow_1`; nếu chặn ngay lần đầu sẽ đổ lỗi sai label. Lần xác nhận đưa nó về +1 ms.
-4. **Độ trễ đo được +5 đến +6 ms** khi cấy 5 ms: `setTimeout` của Node có độ phân giải ~1 ms.
-5. **Throughput không dùng được làm tiêu chí ở tầng PR:** giữa các lần không đổi code dao động tới −7% (1.277 → 1.185 request/giây), trong khi regression giả chỉ làm giảm ~4%; `slow_2` lần 2 (1.220) còn cao hơn `unchanged` (1.186).
+4. **Độ trễ đo được +5 đến +6 ms** khi cấy 5 ms: `setTimeout` của Node có độ phân giải ≈1 ms.
+5. **Throughput không dùng được làm tiêu chí ở tầng PR:** giữa các lần không đổi code dao động tới −7% (1.277 → 1.185 request/giây), trong khi regression giả chỉ làm giảm ≈4%; `slow_2` lần 2 (1.220) còn cao hơn `unchanged` (1.186).
 6. **Ngưỡng phát hiện tối thiểu:** lệch ≥ 3 ms bị chặn; +2 ms chỉ cảnh báo; +1 ms không phân biệt được với nhiễu.
 
 ## Hạn chế

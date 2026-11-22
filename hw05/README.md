@@ -26,9 +26,9 @@ Luồng mỗi virtual user: `POST /api/login` → `GET /api/products/:id` → `P
 
 | Kịch bản | Test plan | Cấu hình | Request | Lỗi luồng chính | p95 | Kết quả |
 |---|---|---|---|---|---|---|
-| Load | [`23120175_Load_20261121.jmx`](23120175_Load_20261121.jmx) | 30 thread, ramp-up 60 s, 600 s, think-time 1–3 s; Aggregate Report | 10.739 | 0 | 4 ms | Đạt (p95 < 300 ms, lỗi < 1%), ổn định ~18,9 req/s |
-| Stress | [`23120175_Stress_20261121.jmx`](23120175_Stress_20261121.jmx) | Stepping 20 → 200 thread, think-time 0–50 ms; Summary Report | 1.852.603 | 0 | 2 ms | Đỉnh ~8.930 req/s ở 200 thread, CPU `node` ~101% |
-| Spike | [`23120175_Spike_20261121.jmx`](23120175_Spike_20261121.jmx) | Ultimate: nền 20, spike +130 trong 10 s; View Results Tree | 14.473 | 0 | 4 ms | Không suy giảm, phục hồi ngay (biên độ spike nhỏ: ~186 req/s) |
+| Load | [`23120175_Load_20261121.jmx`](23120175_Load_20261121.jmx) | 30 thread, ramp-up 60 s, 600 s, think-time 1–3 s; Aggregate Report | 10.739 | 0 | 4 ms | Đạt (p95 < 300 ms, lỗi < 1%), ổn định ≈18,9 req/s |
+| Stress | [`23120175_Stress_20261121.jmx`](23120175_Stress_20261121.jmx) | Stepping 20 → 200 thread, think-time 0–50 ms; Summary Report | 1.852.603 | 0 | 2 ms | Đỉnh ≈8.930 req/s ở 200 thread, CPU `node` ≈101% |
+| Spike | [`23120175_Spike_20261121.jmx`](23120175_Spike_20261121.jmx) | Ultimate: nền 20, spike +130 trong 10 s; View Results Tree | 14.473 | 0 | 4 ms | Không suy giảm, phục hồi ngay (biên độ spike nhỏ: ≈186 req/s) |
 | Soak | [`23120175_Soak_20261121.jmx`](23120175_Soak_20261121.jmx) | 150 thread, 960 s, think-time 0–50 ms | 5.651.325 | 0 | 2 ms (gộp) | Suy giảm từ phút 8 |
 
 ### Nhóm endpoint đã phủ
@@ -45,9 +45,9 @@ Luồng mỗi virtual user: `POST /api/login` → `GET /api/products/:id` → `P
 |---|---|
 | RPS ổn định tối đa | **≈ 6.800 request/giây** (phút 1–7 của Soak), p95 2 ms, p99 3 ms |
 | RPS duy trì 15 phút | **≈ 5.000–5.500 request/giây**, p95 ≤ 27 ms, p99 ≈ 190–236 ms, 0 lỗi |
-| Bắt đầu suy giảm | Phút thứ 8: throughput −20%, p99 tăng ~70 lần |
+| Bắt đầu suy giảm | Phút thứ 8: throughput −20%, p99 tăng ≈70 lần |
 | Memory ceiling quan sát | RSS `node` **79 → 329 MB** (≈ 9–10 MB/phút), chưa chạm trần |
-| Điểm bão hòa (đo riêng, không think-time) | ≈ 11.400 request/giây ở ~50 thread |
+| Điểm bão hòa (đo riêng, không think-time) | ≈ 11.400 request/giây ở ≈50 thread |
 
 Chi tiết: [`SOAK_RESULT.md`](SOAK_RESULT.md).
 

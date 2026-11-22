@@ -93,7 +93,7 @@ AI được dẫn dắt theo đúng các bước của kỹ thuật, không dùn
 
 **Lý do chọn tham số**
 - **Load:** 30 người dùng đồng thời với think-time 1–3 s mô phỏng tải bình thường; ramp-up 60 s tránh biến Load thành spike.
-- **Stress:** think-time gần 0 để mỗi thread tạo ~45 request/giây, đủ đẩy backend lên vùng cao. Bản đầu (200–500 ms) chỉ đạt ~700 request/giây ở 200 thread, không tìm được điểm gãy (review dòng 8).
+- **Stress:** think-time gần 0 để mỗi thread tạo ≈45 request/giây, đủ đẩy backend lên vùng cao. Bản đầu (200–500 ms) chỉ đạt ≈700 request/giây ở 200 thread, không tìm được điểm gãy (review dòng 8).
 - **Spike:** tăng 130 thread trong 10 giây để mô phỏng đột biến, sau đó giữ tải nền 120 s để quan sát phục hồi.
 
 **Thành phần chung của cả 3 plan** (sau review):
@@ -116,7 +116,7 @@ Chi tiết và kiểm chứng: [`REVIEW_TESTPLANS.md`](REVIEW_TESTPLANS.md).
 | 5 | Áp mã lỗi vẫn gửi checkout với JSON hỏng | Bỏ checkout khi bước 04 lỗi | AI không lần theo hậu quả của giá trị mặc định ở bước sau |
 | 6 | Think-time Stress/Spike 200–500 ms, không thực tế | Stress 0–50 ms (có chủ đích), Spike 0,5–1,5 s | AI tối ưu cho đẩy tải, bỏ qua tính thực tế |
 | 7 | Spike chỉ quan sát phục hồi 40 s | Tăng lên 120 s | AI rút ngắn thời lượng cho "gọn" |
-| 8 | Stress không đủ tải để tìm điểm gãy (~700 req/s, p95 3 ms) | Giảm think-time; đo được Node bão hòa ~11.400 req/s ở ~50 thread khi không think-time | AI không ước lượng throughput mỗi thread so với năng lực server |
+| 8 | Stress không đủ tải để tìm điểm gãy (≈700 req/s, p95 3 ms) | Giảm think-time; đo được Node bão hòa ≈11.400 req/s ở ≈50 thread khi không think-time | AI không ước lượng throughput mỗi thread so với năng lực server |
 | 9 | Không lường trước macOS hết cổng TCP khi giảm think-time (`BindException`, 28% lỗi giả) | Chạy với `-Jhttpclient.reset_state_on_thread_group_iteration=false` | Lỗi nằm ở môi trường máy test, AI không chạy thử nên không thấy |
 | 10 | Đề xuất Soak: đọc cột `IdleTime = 0` thành "không có think-time", đề xuất đặt timer về 0 ở 150 thread (vượt điểm bão hòa) | Giữ think-time 0–50 ms; `IdleTime` không ghi thời gian timer; 45 req/s/thread chứng minh có think-time | AI suy luận từ tên cột thay vì ngữ nghĩa của JMeter (AILOG #07, #08) |
 
@@ -167,13 +167,13 @@ Số liệu tính trực tiếp từ file `.jtl` (luồng chính, bỏ sample `L
 
 | Kịch bản | Request | Lỗi luồng chính | Throughput | p95 | p99 | Max |
 |---|---|---|---|---|---|---|
-| Load | 10.739 | 0 | ~18,9 req/s (ổn định) | 4 ms | 5 ms | 41 ms |
-| Stress | 1.852.603 | 0 | đỉnh ~8.900 req/s ở 200 thread | 2 ms | 4 ms | 87 ms |
-| Spike | 14.473 | 0 | nền ~24 req/s, đỉnh ~186 req/s | 4 ms | 5 ms | 28 ms |
+| Load | 10.739 | 0 | ≈18,9 req/s (ổn định) | 4 ms | 5 ms | 41 ms |
+| Stress | 1.852.603 | 0 | đỉnh ≈8.900 req/s ở 200 thread | 2 ms | 4 ms | 87 ms |
+| Spike | 14.473 | 0 | nền ≈24 req/s, đỉnh ≈186 req/s | 4 ms | 5 ms | 28 ms |
 
 ### 8.2 Load: đạt
 
-Tải giữ đều 30 thread, ~18,9 request/giây trong 9 phút sau ramp-up; p95 = 4 ms, p99 = 5 ms ở mọi phút, 0 lỗi. Phút đầu chậm hơn một chút (trung bình 2,95 ms so với ~2,1 ms các phút sau) do khởi động. Bước chậm nhất là `05_Checkout` (trung bình 3,7 ms, p95 5 ms), hợp lý vì là bước duy nhất ghi SQLite. **Đạt** ngưỡng p95 < 300 ms và lỗi < 1% với khoảng cách rất xa.
+Tải giữ đều 30 thread, ≈18,9 request/giây trong 9 phút sau ramp-up; p95 = 4 ms, p99 = 5 ms ở mọi phút, 0 lỗi. Phút đầu chậm hơn một chút (trung bình 2,95 ms so với ≈2,1 ms các phút sau) do khởi động. Bước chậm nhất là `05_Checkout` (trung bình 3,7 ms, p95 5 ms), hợp lý vì là bước duy nhất ghi SQLite. **Đạt** ngưỡng p95 < 300 ms và lỗi < 1% với khoảng cách rất xa.
 
 ### 8.3 Stress: chưa chạm điểm gãy trong plan, điểm bão hòa đo riêng
 
@@ -184,17 +184,17 @@ Tải giữ đều 30 thread, ~18,9 request/giây trong 9 phút sau ramp-up; p95
 | 180–210 s | 140 | 6.315 | 2 ms |
 | 270–330 s | 200 | 8.862–8.930 | 3 ms |
 
-Throughput tăng tuyến tính (~45 request/giây mỗi thread), p95 không đổi, 0 lỗi: ở 200 thread với think-time 0–50 ms backend **chưa bão hòa**. Lần đo riêng không think-time (ghi trong review dòng 8, chạy ngoài plan nộp) cho thấy Node bão hòa ở **~50 thread, ~11.400 request/giây**; tăng lên 200 thread throughput giảm còn ~8.600 request/giây và p95 tăng từ 4 lên 35 ms, CPU `node` ~125–130% (một nhân chạy kín). Ngay trong lần chạy nộp, ảnh htop lúc đỉnh 200 thread (`evidence/stress/stress_01_peak_200threads_1547.png`, ~8.950 request/giây) cho thấy `node` đã ở **101,4% CPU**: luồng chính sát mức bão hòa dù p95 vẫn 2–3 ms. Nút thắt là **luồng xử lý chính duy nhất của Node.js**: máy có 10 nhân nhưng backend chỉ dùng được một.
+Throughput tăng tuyến tính (≈45 request/giây mỗi thread), p95 không đổi, 0 lỗi: ở 200 thread với think-time 0–50 ms backend **chưa bão hòa**. Lần đo riêng không think-time (ghi trong review dòng 8, chạy ngoài plan nộp) cho thấy Node bão hòa ở **≈50 thread, ≈11.400 request/giây**; tăng lên 200 thread throughput giảm còn ≈8.600 request/giây và p95 tăng từ 4 lên 35 ms, CPU `node` ≈125–130% (một nhân chạy kín). Ngay trong lần chạy nộp, ảnh htop lúc đỉnh 200 thread (`evidence/stress/stress_01_peak_200threads_1547.png`, ≈8.950 request/giây) cho thấy `node` đã ở **101,4% CPU**: luồng chính sát mức bão hòa dù p95 vẫn 2–3 ms. Nút thắt là **luồng xử lý chính duy nhất của Node.js**: máy có 10 nhân nhưng backend chỉ dùng được một.
 
 ### 8.4 Spike: không suy giảm, nhưng biên độ spike quá nhỏ
 
 | Giai đoạn | Thread | Request/giây | p95 |
 |---|---|---|---|
-| Nền trước spike (10–70 s) | 20 | ~24 | 4–5 ms |
-| Spike (80–130 s) | 150 | ~183–189 | 4–5 ms |
-| Phục hồi (140–260 s) | 20 | ~24–26 | 4–5 ms |
+| Nền trước spike (10–70 s) | 20 | ≈24 | 4–5 ms |
+| Spike (80–130 s) | 150 | ≈183–189 | 4–5 ms |
+| Phục hồi (140–260 s) | 20 | ≈24–26 | 4–5 ms |
 
-Hệ thống không suy giảm lúc spike và trở về mức nền ngay lập tức. **Hạn chế:** với think-time 0,5–1,5 s, đỉnh spike chỉ ~186 request/giây, chưa tới 3% năng lực đo được (~6.800 request/giây ổn định), nên kịch bản chưa thử được phản ứng của hệ thống với đột biến gần ngưỡng. Muốn spike có ý nghĩa cần spike tới vùng 6.000–11.000 request/giây (ví dụ think-time 0–50 ms, 50 → 200 thread).
+Hệ thống không suy giảm lúc spike và trở về mức nền ngay lập tức. **Hạn chế:** với think-time 0,5–1,5 s, đỉnh spike chỉ ≈186 request/giây, chưa tới 3% năng lực đo được (≈6.800 request/giây ổn định), nên kịch bản chưa thử được phản ứng của hệ thống với đột biến gần ngưỡng. Muốn spike có ý nghĩa cần spike tới vùng 6.000–11.000 request/giây (ví dụ think-time 0–50 ms, 50 → 200 thread).
 
 ### 8.5 Lưu ý khi đọc báo cáo HTML của JMeter
 
@@ -218,9 +218,9 @@ Chi tiết theo từng phút: [`SOAK_RESULT.md`](SOAK_RESULT.md). Plan `23120175
 |---|---|
 | **RPS ổn định tối đa** | **≈ 6.800 request/giây** trong phút 1–7, p95 = 2 ms, p99 = 3 ms |
 | **RPS duy trì được suốt 15 phút** | **≈ 5.000–5.500 request/giây**, p95 ≤ 27 ms, p99 ≈ 190–236 ms |
-| **Bắt đầu suy giảm** | Phút thứ 8: throughput −20%, p99 tăng ~70 lần (3 → 125–236 ms), vẫn 0 lỗi |
+| **Bắt đầu suy giảm** | Phút thứ 8: throughput −20%, p99 tăng ≈70 lần (3 → 125–236 ms), vẫn 0 lỗi |
 | **Memory ceiling** | RSS `node` 79 MB (trước khi chạy) → **329 MB** (cao nhất) (≈ 9–10 MB/phút), chưa chạm trần |
-| **Điểm bão hòa** (đo riêng) | ~11.400 request/giây ở ~50 thread không think-time |
+| **Điểm bão hòa** (đo riêng) | ≈11.400 request/giây ở ≈50 thread không think-time |
 
 **Nhận định:** hệ thống không lỗi nhưng **suy giảm theo thời gian** dù tải không đổi, điều Load/Stress (≤ 10 phút) không thấy được. Giả thuyết chính: `userCarts` không giải phóng (#229) làm heap V8 phình, GC dừng lâu hơn. Giả thuyết khác chưa loại trừ: máy không quạt bị hạ xung khi chạy kín nhiều phút.
 
@@ -242,7 +242,7 @@ Tổng hợp: [`BUG_REPORTS.md`](BUG_REPORTS.md). **5 issue mới** (#225–#229
 
 ## 11. Hạn chế
 
-- JMeter và backend chạy chung một máy: ở tải cao JMeter (~35% CPU) cạnh tranh tài nguyên với backend.
-- Điểm bão hòa ~11.400 request/giây đo bằng plan rút gọn ngoài 3 plan nộp; plan Stress nộp chưa chạm tới mức đó.
+- JMeter và backend chạy chung một máy: ở tải cao JMeter (≈35% CPU) cạnh tranh tài nguyên với backend.
+- Điểm bão hòa ≈11.400 request/giây đo bằng plan rút gọn ngoài 3 plan nộp; plan Stress nộp chưa chạm tới mức đó.
 - Spike có biên độ quá nhỏ so với năng lực hệ thống (mục 8.4).
 - Nguyên nhân suy giảm sau 7 phút ở Soak mới là giả thuyết, chưa có dữ liệu GC hoặc nhiệt độ để khẳng định.

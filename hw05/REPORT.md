@@ -125,7 +125,7 @@ AI được dẫn dắt theo đúng các bước của kỹ thuật, không dùn
 
 **Lý do chọn tham số**
 - **Load:** 30 người dùng đồng thời với think-time 1–3 s mô phỏng tải bình thường; ramp-up 60 s tránh biến Load thành spike.
-- **Stress:** think-time gần 0 để mỗi thread tạo ~45 request/giây, đủ đẩy backend lên vùng cao. Bản đầu (200–500 ms) chỉ đạt ~700 request/giây ở 200 thread, không tìm được điểm gãy (review dòng 8).
+- **Stress:** think-time gần 0 để mỗi thread tạo ≈45 request/giây, đủ đẩy backend lên vùng cao. Bản đầu (200–500 ms) chỉ đạt ≈700 request/giây ở 200 thread, không tìm được điểm gãy (review dòng 8).
 - **Spike:** tăng 130 thread trong 10 giây để mô phỏng đột biến, sau đó giữ tải nền 120 s để quan sát phục hồi.
 
 **Thành phần chung của cả 3 plan** (sau review):
@@ -148,7 +148,7 @@ Chi tiết và kiểm chứng: [`REVIEW_TESTPLANS.md`](REVIEW_TESTPLANS.md).
 | 5 | Áp mã lỗi vẫn gửi checkout với JSON hỏng | Bỏ checkout khi bước 04 lỗi | AI không lần theo hậu quả của giá trị mặc định ở bước sau |
 | 6 | Think-time Stress/Spike 200–500 ms, không thực tế | Stress 0–50 ms (có chủ đích), Spike 0,5–1,5 s | AI tối ưu cho đẩy tải, bỏ qua tính thực tế |
 | 7 | Spike chỉ quan sát phục hồi 40 s | Tăng lên 120 s | AI rút ngắn thời lượng cho "gọn" |
-| 8 | Stress không đủ tải để tìm điểm gãy (~700 req/s, p95 3 ms) | Giảm think-time; đo được Node bão hòa ~11.400 req/s ở ~50 thread khi không think-time | AI không ước lượng throughput mỗi thread so với năng lực server |
+| 8 | Stress không đủ tải để tìm điểm gãy (≈700 req/s, p95 3 ms) | Giảm think-time; đo được Node bão hòa ≈11.400 req/s ở ≈50 thread khi không think-time | AI không ước lượng throughput mỗi thread so với năng lực server |
 | 9 | Không lường trước macOS hết cổng TCP khi giảm think-time (`BindException`, 28% lỗi giả) | Chạy với `-Jhttpclient.reset_state_on_thread_group_iteration=false` | Lỗi nằm ở môi trường máy test, AI không chạy thử nên không thấy |
 | 10 | Đề xuất Soak: đọc cột `IdleTime = 0` thành "không có think-time", đề xuất đặt timer về 0 ở 150 thread (vượt điểm bão hòa) | Giữ think-time 0–50 ms; `IdleTime` không ghi thời gian timer; 45 req/s/thread chứng minh có think-time | AI suy luận từ tên cột thay vì ngữ nghĩa của JMeter (AILOG #07, #08) |
 
@@ -199,13 +199,13 @@ Số liệu tính trực tiếp từ file `.jtl` (luồng chính, bỏ sample `L
 
 | Kịch bản | Request | Lỗi luồng chính | Throughput | p95 | p99 | Max |
 |---|---|---|---|---|---|---|
-| Load | 10.739 | 0 | ~18,9 req/s (ổn định) | 4 ms | 5 ms | 41 ms |
-| Stress | 1.852.603 | 0 | đỉnh ~8.900 req/s ở 200 thread | 2 ms | 4 ms | 87 ms |
-| Spike | 14.473 | 0 | nền ~24 req/s, đỉnh ~186 req/s | 4 ms | 5 ms | 28 ms |
+| Load | 10.739 | 0 | ≈18,9 req/s (ổn định) | 4 ms | 5 ms | 41 ms |
+| Stress | 1.852.603 | 0 | đỉnh ≈8.900 req/s ở 200 thread | 2 ms | 4 ms | 87 ms |
+| Spike | 14.473 | 0 | nền ≈24 req/s, đỉnh ≈186 req/s | 4 ms | 5 ms | 28 ms |
 
 #### 8.2 Load: đạt
 
-Tải giữ đều 30 thread, ~18,9 request/giây trong 9 phút sau ramp-up; p95 = 4 ms, p99 = 5 ms ở mọi phút, 0 lỗi. Phút đầu chậm hơn một chút (trung bình 2,95 ms so với ~2,1 ms các phút sau) do khởi động. Bước chậm nhất là `05_Checkout` (trung bình 3,7 ms, p95 5 ms), hợp lý vì là bước duy nhất ghi SQLite. **Đạt** ngưỡng p95 < 300 ms và lỗi < 1% với khoảng cách rất xa.
+Tải giữ đều 30 thread, ≈18,9 request/giây trong 9 phút sau ramp-up; p95 = 4 ms, p99 = 5 ms ở mọi phút, 0 lỗi. Phút đầu chậm hơn một chút (trung bình 2,95 ms so với ≈2,1 ms các phút sau) do khởi động. Bước chậm nhất là `05_Checkout` (trung bình 3,7 ms, p95 5 ms), hợp lý vì là bước duy nhất ghi SQLite. **Đạt** ngưỡng p95 < 300 ms và lỗi < 1% với khoảng cách rất xa.
 
 #### 8.3 Stress: chưa chạm điểm gãy trong plan, điểm bão hòa đo riêng
 
@@ -216,17 +216,17 @@ Tải giữ đều 30 thread, ~18,9 request/giây trong 9 phút sau ramp-up; p95
 | 180–210 s | 140 | 6.315 | 2 ms |
 | 270–330 s | 200 | 8.862–8.930 | 3 ms |
 
-Throughput tăng tuyến tính (~45 request/giây mỗi thread), p95 không đổi, 0 lỗi: ở 200 thread với think-time 0–50 ms backend **chưa bão hòa**. Lần đo riêng không think-time (ghi trong review dòng 8, chạy ngoài plan nộp) cho thấy Node bão hòa ở **~50 thread, ~11.400 request/giây**; tăng lên 200 thread throughput giảm còn ~8.600 request/giây và p95 tăng từ 4 lên 35 ms, CPU `node` ~125–130% (một nhân chạy kín). Ngay trong lần chạy nộp, ảnh htop lúc đỉnh 200 thread (`evidence/stress/stress_01_peak_200threads_1547.png`, ~8.950 request/giây) cho thấy `node` đã ở **101,4% CPU**: luồng chính sát mức bão hòa dù p95 vẫn 2–3 ms. Nút thắt là **luồng xử lý chính duy nhất của Node.js**: máy có 10 nhân nhưng backend chỉ dùng được một.
+Throughput tăng tuyến tính (≈45 request/giây mỗi thread), p95 không đổi, 0 lỗi: ở 200 thread với think-time 0–50 ms backend **chưa bão hòa**. Lần đo riêng không think-time (ghi trong review dòng 8, chạy ngoài plan nộp) cho thấy Node bão hòa ở **≈50 thread, ≈11.400 request/giây**; tăng lên 200 thread throughput giảm còn ≈8.600 request/giây và p95 tăng từ 4 lên 35 ms, CPU `node` ≈125–130% (một nhân chạy kín). Ngay trong lần chạy nộp, ảnh htop lúc đỉnh 200 thread (`evidence/stress/stress_01_peak_200threads_1547.png`, ≈8.950 request/giây) cho thấy `node` đã ở **101,4% CPU**: luồng chính sát mức bão hòa dù p95 vẫn 2–3 ms. Nút thắt là **luồng xử lý chính duy nhất của Node.js**: máy có 10 nhân nhưng backend chỉ dùng được một.
 
 #### 8.4 Spike: không suy giảm, nhưng biên độ spike quá nhỏ
 
 | Giai đoạn | Thread | Request/giây | p95 |
 |---|---|---|---|
-| Nền trước spike (10–70 s) | 20 | ~24 | 4–5 ms |
-| Spike (80–130 s) | 150 | ~183–189 | 4–5 ms |
-| Phục hồi (140–260 s) | 20 | ~24–26 | 4–5 ms |
+| Nền trước spike (10–70 s) | 20 | ≈24 | 4–5 ms |
+| Spike (80–130 s) | 150 | ≈183–189 | 4–5 ms |
+| Phục hồi (140–260 s) | 20 | ≈24–26 | 4–5 ms |
 
-Hệ thống không suy giảm lúc spike và trở về mức nền ngay lập tức. **Hạn chế:** với think-time 0,5–1,5 s, đỉnh spike chỉ ~186 request/giây, chưa tới 3% năng lực đo được (~6.800 request/giây ổn định), nên kịch bản chưa thử được phản ứng của hệ thống với đột biến gần ngưỡng. Muốn spike có ý nghĩa cần spike tới vùng 6.000–11.000 request/giây (ví dụ think-time 0–50 ms, 50 → 200 thread).
+Hệ thống không suy giảm lúc spike và trở về mức nền ngay lập tức. **Hạn chế:** với think-time 0,5–1,5 s, đỉnh spike chỉ ≈186 request/giây, chưa tới 3% năng lực đo được (≈6.800 request/giây ổn định), nên kịch bản chưa thử được phản ứng của hệ thống với đột biến gần ngưỡng. Muốn spike có ý nghĩa cần spike tới vùng 6.000–11.000 request/giây (ví dụ think-time 0–50 ms, 50 → 200 thread).
 
 #### 8.5 Lưu ý khi đọc báo cáo HTML của JMeter
 
@@ -250,9 +250,9 @@ Chi tiết theo từng phút: [`SOAK_RESULT.md`](SOAK_RESULT.md). Plan `23120175
 |---|---|
 | **RPS ổn định tối đa** | **≈ 6.800 request/giây** trong phút 1–7, p95 = 2 ms, p99 = 3 ms |
 | **RPS duy trì được suốt 15 phút** | **≈ 5.000–5.500 request/giây**, p95 ≤ 27 ms, p99 ≈ 190–236 ms |
-| **Bắt đầu suy giảm** | Phút thứ 8: throughput −20%, p99 tăng ~70 lần (3 → 125–236 ms), vẫn 0 lỗi |
+| **Bắt đầu suy giảm** | Phút thứ 8: throughput −20%, p99 tăng ≈70 lần (3 → 125–236 ms), vẫn 0 lỗi |
 | **Memory ceiling** | RSS `node` 79 MB (trước khi chạy) → **329 MB** (cao nhất) (≈ 9–10 MB/phút), chưa chạm trần |
-| **Điểm bão hòa** (đo riêng) | ~11.400 request/giây ở ~50 thread không think-time |
+| **Điểm bão hòa** (đo riêng) | ≈11.400 request/giây ở ≈50 thread không think-time |
 
 **Nhận định:** hệ thống không lỗi nhưng **suy giảm theo thời gian** dù tải không đổi, điều Load/Stress (≤ 10 phút) không thấy được. Giả thuyết chính: `userCarts` không giải phóng (#229) làm heap V8 phình, GC dừng lâu hơn. Giả thuyết khác chưa loại trừ: máy không quạt bị hạ xung khi chạy kín nhiều phút.
 
@@ -274,8 +274,8 @@ Tổng hợp: [`BUG_REPORTS.md`](BUG_REPORTS.md). **5 issue mới** (#225–#229
 
 ### 11. Hạn chế
 
-- JMeter và backend chạy chung một máy: ở tải cao JMeter (~35% CPU) cạnh tranh tài nguyên với backend.
-- Điểm bão hòa ~11.400 request/giây đo bằng plan rút gọn ngoài 3 plan nộp; plan Stress nộp chưa chạm tới mức đó.
+- JMeter và backend chạy chung một máy: ở tải cao JMeter (≈35% CPU) cạnh tranh tài nguyên với backend.
+- Điểm bão hòa ≈11.400 request/giây đo bằng plan rút gọn ngoài 3 plan nộp; plan Stress nộp chưa chạm tới mức đó.
 - Spike có biên độ quá nhỏ so với năng lực hệ thống (mục 8.4).
 - Nguyên nhân suy giảm sau 7 phút ở Soak mới là giả thuyết, chưa có dữ liệu GC hoặc nhiệt độ để khẳng định.
 
@@ -303,7 +303,7 @@ Mọi "giá trị đúng" bên dưới tính trực tiếp từ file `.jtl` gố
 ### 2. Tóm tắt phân tích của AI
 
 - **Bước 1:** throughput tổng Load 17,90; Stress 5.292,79; Spike 51,81; Soak 5.886,43 request/giây. Lỗi duy nhất là `LOCK_04`. Nút thắt: `05_Checkout` (Load, Spike), `04_ApplyCoupon` (Stress, Soak). SLA đề xuất cho từng bước: p95 ≤ 50 ms, p99 ≤ 100 ms, lỗi ≤ 0,1%, throughput ≥ 15 request/giây ở profile Load. Năng lực: "khoảng 5.300–5.900 request/giây trung bình".
-- **Bước 2:** Stress chưa bão hòa, cao nhất 200 thread / 8.930 request/giây. Spike phục hồi ngay, đỉnh chỉ ~2% năng lực. Soak: phút 1–7 ~6.820 request/giây, từ phút 8 giảm ~22% còn ~5.300, p99 ~200 ms; RSS 78,6 → 319,7 MB. Nguyên nhân: `userCarts` không xóa, "khớp GC". Percentile Soak trong `statistics.json` sai, đúng là từ cột `elapsed`.
+- **Bước 2:** Stress chưa bão hòa, cao nhất 200 thread / 8.930 request/giây. Spike phục hồi ngay, đỉnh chỉ ≈2% năng lực. Soak: phút 1–7 ≈6.820 request/giây, từ phút 8 giảm ≈22% còn ≈5.300, p99 ≈200 ms; RSS 78,6 → 319,7 MB. Nguyên nhân: `userCarts` không xóa, "khớp GC". Percentile Soak trong `statistics.json` sai, đúng là từ cột `elapsed`.
 
 ---
 
@@ -314,13 +314,13 @@ Mọi "giá trị đúng" bên dưới tính trực tiếp từ file `.jtl` gố
 | --- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | #10: "`Total.pct3ResTime` của Soak là 3 ms trong khi p99 từng bước là 48–211 ms, **vì đuôi của một bước chỉ chiếm khoảng một phần năm số sample**" | `soak.jtl`: p99 toàn bộ = **86 ms** (p99,9 = 354 ms)                                                                                                           | Lời giải thích sai về toán: nếu **mỗi** bước đều có ≥ 1% sample trên 48 ms thì tập gộp cũng có ≥ 1% sample trên 48 ms, nên p99 gộp không thể là 3 ms. AI hợp lý hóa con số sai thay vì nghi ngờ nó |
 | 2   | #10: "Soak vượt p99 100 ms ở **Login**, ProductDetail, Checkout và ApplyCoupon" (dựa trên p99 report: 110, 168, 189, 211 ms)                       | p99 từ `soak.jtl`: Login **58**, ProductDetail **108**, Checkout **127**, ApplyCoupon **177** ms                                                               | Dùng percentile của report (sai với lần chạy lớn). **Login thực ra đạt** ngưỡng p99 ≤ 100 ms; các bước khác vượt nhưng mức vượt nhỏ hơn AI nói                                                     |
-| 3   | #10: "Năng lực đọc từ bốn file: **khoảng 5.300–5.900 request/giây trung bình**"                                                                    | Stress đạt **8.862–8.930 request/giây** ở 200 thread (giây 270–330) mà p95 = 3 ms; Soak giữ **\~6.820 request/giây** ổn định phút 1–7                          | Lấy `throughput` trung bình cả bài (gồm cả lúc tăng/giảm thread) làm năng lực. Trung bình thấp hơn đỉnh 40%. Chính AI ở bước 2 đã đưa ra 8.930, mâu thuẫn với kết luận bước 1                      |
+| 3   | #10: "Năng lực đọc từ bốn file: **khoảng 5.300–5.900 request/giây trung bình**"                                                                    | Stress đạt **8.862–8.930 request/giây** ở 200 thread (giây 270–330) mà p95 = 3 ms; Soak giữ **\≈6.820 request/giây** ổn định phút 1–7                          | Lấy `throughput` trung bình cả bài (gồm cả lúc tăng/giảm thread) làm năng lực. Trung bình thấp hơn đỉnh 40%. Chính AI ở bước 2 đã đưa ra 8.930, mâu thuẫn với kết luận bước 1                      |
 | 4   | #10: "Soak p99 `04_ApplyCoupon` = 211 ms"                                                                                                          | `.jtl`: **177 ms**                                                                                                                                             | Cùng nguyên nhân #2. Thứ hạng "ApplyCoupon chậm nhất" vẫn đúng                                                                                                                                     |
 | 5   | #10: throughput tối thiểu SLA "≥ 15 request/giây ở profile Load" dựa trên 17,90                                                                    | Load ổn định **18,6–18,9 request/giây** mỗi phút sau ramp-up; phút đầu 9,6                                                                                     | 17,90 là trung bình gồm phút ramp-up. Ngưỡng 15 vẫn dùng được, nhưng lý do nên dựa trên mức ổn định                                                                                                |
 | 6   | #11: "Nhịp RSS tụt phút 7 rồi độ trễ gãy phút 8 **khớp GC** trên một thread Node" (#12 viết thành "p99 … **là do** heap và GC")                    | Dữ liệu chỉ có RSS (`soak_node_rss.csv`) và độ trễ; **không có log GC**. `pmset -g therm` sau bài: chưa ghi nhận cảnh báo nhiệt, nhưng không đo trong lúc chạy | Tương quan thời gian bị trình bày như nguyên nhân. Giả thuyết máy không quạt bị hạ xung CPU chưa được loại trừ. Cần `node --trace-gc` hoặc chạy lại sau khi sửa `userCarts`                        |
 
 
-**Nhận định của AI đã kiểm chứng là đúng** (không phải lỗi): Stress chưa bão hòa, 8.930 request/giây ở 200 thread, p95 2–3 ms, p99 3–5 ms (`.jtl`: p95 2, p99 4 cả bài); Spike đỉnh 184–187 request/giây, phục hồi ngay; Soak phút 1–7 ~6.820 request/giây, giảm ~22% từ phút 8; p99 `04_ApplyCoupon` 188 ms ở phút 8 lên 325 ms ở phút 11, `05_Checkout` 144 → 277 ms; RSS 78,6 → 319,7 MB; lỗi duy nhất là `LOCK_04`.
+**Nhận định của AI đã kiểm chứng là đúng** (không phải lỗi): Stress chưa bão hòa, 8.930 request/giây ở 200 thread, p95 2–3 ms, p99 3–5 ms (`.jtl`: p95 2, p99 4 cả bài); Spike đỉnh 184–187 request/giây, phục hồi ngay; Soak phút 1–7 ≈6.820 request/giây, giảm ≈22% từ phút 8; p99 `04_ApplyCoupon` 188 ms ở phút 8 lên 325 ms ở phút 11, `05_Checkout` 144 → 277 ms; RSS 78,6 → 319,7 MB; lỗi duy nhất là `LOCK_04`.
 
 ---
 
@@ -329,8 +329,8 @@ Mọi "giá trị đúng" bên dưới tính trực tiếp từ file `.jtl` gố
 
 | #   | Đề xuất                                             | Phân loại                                                                | Lý do                                                                                                                                                                                                                                                                                                                               |
 | --- | --------------------------------------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | Xóa `userCarts[userId]` sau checkout                | **Khả thi** (đúng nguyên nhân); **mức cải thiện dự kiến chưa có căn cứ** | Sửa đúng bug #229/#70: `POST /api/cart` chỉ `push` (`server.js:293`), checkout không xóa. Nhưng dự đoán "giữ 6.800 request/giây, p99 \~3 ms suốt 15 phút, RSS < 150 MB" dựa trên giả định suy giảm do GC (mục 3, dòng 6), chưa đo lại                                                                                               |
-| 2   | WAL + `synchronous=NORMAL` + `busy_timeout`         | Cách làm **khả thi**; mức cải thiện **bịa**                              | Nhận định nền đúng (SQLite mặc định `synchronous = 2` FULL; hai lần ghi ở `server.js:48` và `:302`). Nhưng "trần lên 12.500–13.500 request/giây" không dựa trên lần đo nào. Thư viện `sqlite3` chạy truy vấn ngoài luồng chính của Node; nút thắt đo được là CPU luồng chính (\~125–130% lúc bão hòa), nên giảm fsync khó nâng trần |
+| 1   | Xóa `userCarts[userId]` sau checkout                | **Khả thi** (đúng nguyên nhân); **mức cải thiện dự kiến chưa có căn cứ** | Sửa đúng bug #229/#70: `POST /api/cart` chỉ `push` (`server.js:293`), checkout không xóa. Nhưng dự đoán "giữ 6.800 request/giây, p99 \≈3 ms suốt 15 phút, RSS < 150 MB" dựa trên giả định suy giảm do GC (mục 3, dòng 6), chưa đo lại                                                                                               |
+| 2   | WAL + `synchronous=NORMAL` + `busy_timeout`         | Cách làm **khả thi**; mức cải thiện **bịa**                              | Nhận định nền đúng (SQLite mặc định `synchronous = 2` FULL; hai lần ghi ở `server.js:48` và `:302`). Nhưng "trần lên 12.500–13.500 request/giây" không dựa trên lần đo nào. Thư viện `sqlite3` chạy truy vấn ngoài luồng chính của Node; nút thắt đo được là CPU luồng chính (\≈125–130% lúc bão hòa), nên giảm fsync khó nâng trần |
 | 3   | Bỏ `SELECT COUNT(*)` trên `coupon_usage` / cache mã | **Không nên áp dụng**                                                    | Bỏ đếm làm mất quy tắc `max_uses_per_user` (FR-09): đổi tính đúng lấy tốc độ. "Không gọi COUNT khi chưa có bản ghi" luẩn quẩn vì phải truy vấn mới biết. Lợi ích nhỏ: COUNT trên bảng rỗng, chạy ngoài luồng chính. Bảng rỗng chỉ vì luồng test không gọi `/api/coupon-usage`, không phải hành vi thật                              |
 | 4   | Chỉ `UPDATE login_attempts` khi cần reset           | **Khả thi**, rủi ro thấp                                                 | Logic đúng, bớt một lần ghi mỗi vòng. Mức cải thiện lại dựa vào con số 12.500–13.500 không có căn cứ của mục 2                                                                                                                                                                                                                      |
 | 5   | `CREATE INDEX idx_users_email`                      | **Khả thi**, lợi ích nhỏ                                                 | Bảng `users` không có index cho `email` (`database.js`). AI tự đánh giá < 1% với 200 user là hợp lý. Lưu ý về `UNIQUE` đúng (đăng ký trùng email hiện vẫn thành công, issue #211)                                                                                                                                                   |
@@ -394,7 +394,7 @@ Chi tiết: [`skill-demo/search/ANALYSIS.md`](skill-demo/search/ANALYSIS.md), [`
 
 1. **Hệ thống đáp ứng tải bình thường rất tốt:** Load 30 thread có p95 4 ms, 0 lỗi; Spike không làm suy giảm (dù biên độ spike nhỏ so với năng lực).
 2. **Năng lực bị giới hạn bởi một luồng Node.js:** đỉnh Stress ≈ 8.930 request/giây khi CPU `node` đã ≈ 101%; điểm bão hòa đo riêng ≈ 11.400 request/giây. Máy 10 nhân nhưng backend chỉ dùng được một.
-3. **Vấn đề nghiêm trọng nhất chỉ lộ ra khi chạy lâu:** Soak giữ ≈ 6.800 request/giây trong 7 phút rồi suy giảm (throughput −20%, p99 tăng ~70 lần) trong khi RAM tăng 79 → 329 MB. Giả thuyết chính là `userCarts` không được giải phóng (#229); chưa loại trừ khả năng máy không quạt bị hạ xung.
+3. **Vấn đề nghiêm trọng nhất chỉ lộ ra khi chạy lâu:** Soak giữ ≈ 6.800 request/giây trong 7 phút rồi suy giảm (throughput −20%, p99 tăng ≈70 lần) trong khi RAM tăng 79 → 329 MB. Giả thuyết chính là `userCarts` không được giải phóng (#229); chưa loại trừ khả năng máy không quạt bị hạ xung.
 4. **Bug chức năng tìm được qua kiểm thử hiệu năng:** khóa tài khoản sau 2 lần sai (#225), coupon phần trăm tính sai (#20), lộ stack trace (#226), `price` sai kiểu (#228), 200 thay vì 404 (#227), SQL injection ở tìm kiếm (demo skill).
 5. **Về làm việc với AI:** AI sinh plan và phân tích nhanh nhưng sai ở những chỗ cần đối chiếu dữ liệu thật (percentile của report, throughput trung bình, cột `IdleTime`, cặp dữ liệu so sánh). Mọi kết luận trong báo cáo đều tính lại từ file `.jtl`.
 
@@ -406,7 +406,7 @@ Chi tiết: [`skill-demo/search/ANALYSIS.md`](skill-demo/search/ANALYSIS.md), [`
 Ba đặc điểm đo được ở Task 1 quyết định thiết kế:
 
 1. **Độ trễ rất nhỏ:** p95 chỉ 1–4 ms. JMeter đo theo đơn vị 1 ms, nên tăng 1 ms đã là +25–50%. Ngưỡng tương đối kiểu "p95 tăng > 10%" không dùng được.
-2. **Suy giảm theo thời gian:** Soak ổn định ~6.800 request/giây trong 7 phút rồi mới gãy (p99 3 → 125–236 ms). Test ngắn mỗi commit không thấy được.
+2. **Suy giảm theo thời gian:** Soak ổn định ≈6.800 request/giây trong 7 phút rồi mới gãy (p99 3 → 125–236 ms). Test ngắn mỗi commit không thấy được.
 3. **Percentile của report HTML sai với lần chạy lớn** (Soak: Total p99 3 ms so với 86 ms thật). Cổng phải tính từ file `.jtl`.
 
 ---
@@ -429,11 +429,11 @@ Quyết định theo đường dẫn file, rồi nâng mức theo nội dung dif
 
 | Tầng | Khi nào | Kịch bản | Chi phí **đo được** | Hành động khi lỗi |
 |---|---|---|---|---|
-| Nhẹ | PR mức "chạy nhẹ" | 3 thread, 30 s | ~35 s + khởi động (chưa đo riêng) | Chỉ cảnh báo |
-| **PR** | PR mức "bắt buộc" | 30 thread, 90 s, think-time 0–50 ms | **92–111 s / lần** + 4–6 s khởi động; nếu phải xác nhận: **~223 s** | Chặn merge sau khi xác nhận |
+| Nhẹ | PR mức "chạy nhẹ" | 3 thread, 30 s | ≈35 s + khởi động (chưa đo riêng) | Chỉ cảnh báo |
+| **PR** | PR mức "bắt buộc" | 30 thread, 90 s, think-time 0–50 ms | **92–111 s / lần** + 4–6 s khởi động; nếu phải xác nhận: **≈223 s** | Chặn merge sau khi xác nhận |
 | Merge | Push vào `main` | 80 thread, 150 s | **Chưa đo** | Như PR; pass thì cập nhật baseline |
 | **Nightly** | Mỗi ngày, máy rảnh, cắm sạc | Soak 150 thread, 960 s | **16 phút**; `.jtl` 714 MB (36 MB nén) | Job đỏ, không chặn merge |
-| Weekly | Mỗi tuần | Stress 20 → 200 thread | **~350 s**; `.jtl` 244 MB (12 MB nén) | Job đỏ, không chặn merge |
+| Weekly | Mỗi tuần | Stress 20 → 200 thread | **≈350 s**; `.jtl` 244 MB (12 MB nén) | Job đỏ, không chặn merge |
 
 Mọi tầng: khởi động lại backend (DB seed lại, reset lockout, xóa `userCarts`), chạy `create_users.sh`, chạy JMeter với `-Jhttpclient.reset_state_on_thread_group_iteration=false`.
 
@@ -540,7 +540,7 @@ Chi tiết: [`T3_EXPERIMENT.md`](T3_EXPERIMENT.md). Hai lần lặp độc lập
 
 #### 5.1 Chi phí
 
-- **Tầng PR:** ~1,5–2 phút mỗi lần; tối đa ~4 phút nếu phải chạy lại. Chỉ chạy khi diff ở mức "bắt buộc", nên phần lớn commit (frontend, tài liệu, `hw05/`) không tốn gì.
+- **Tầng PR:** ≈1,5–2 phút mỗi lần; tối đa ≈4 phút nếu phải chạy lại. Chỉ chạy khi diff ở mức "bắt buộc", nên phần lớn commit (frontend, tài liệu, `hw05/`) không tốn gì.
 - **Nightly:** 16 phút máy bận; `.jtl` 714 MB vượt giới hạn 100 MB của GitHub, phải nén (36 MB) và chỉ giữ lần mới nhất.
 - **Chi phí đo phụ thuộc môi trường:** cùng plan 90 s, run 1 mất 92–93 s nhưng run 2 mất 104–110 s (run 2 chạy kèm Terminal hiển thị, htop và chụp màn hình).
 - **Một máy chỉ chạy được một job một lúc** (cùng cổng 3000): các job phải xếp hàng.
@@ -550,7 +550,7 @@ Chi tiết: [`T3_EXPERIMENT.md`](T3_EXPERIMENT.md). Hai lần lặp độc lập
 | Nguồn nhiễu | Số đo | Cách giảm |
 |---|---|---|
 | p95 dao động giữa các lần | Tối đa **1 ms** qua 12 lần không đổi code | Dải đạt +1 ms; baseline là trung vị 5 lần |
-| Label không bị sửa nhích theo | 1 lần `04_ApplyCoupon` +2 ms (trên 24 lần kiểm tra label không bị sửa, ~4%) | **Bắt buộc chạy lại** trước khi chặn; lần chạy lại đưa về +1 ms |
+| Label không bị sửa nhích theo | 1 lần `04_ApplyCoupon` +2 ms (trên 24 lần kiểm tra label không bị sửa, ≈4%) | **Bắt buộc chạy lại** trước khi chặn; lần chạy lại đưa về +1 ms |
 | p99 | Lệch +2 ms ngay ở lần không đổi code | Không dùng p99 làm cổng |
 | Throughput | −7% giữa các lần không đổi code (lớn hơn −4% do regression) | Không dùng throughput làm cổng ở tầng PR |
 | Khác loại máy | Baseline 1–4 ms đo trên M5; **chưa đo** trên runner khác | Baseline gắn tên máy; workflow bỏ qua cổng khi chưa có baseline cùng loại máy |

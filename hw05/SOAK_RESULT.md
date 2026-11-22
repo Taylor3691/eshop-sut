@@ -37,7 +37,7 @@ Tổng: 5.651.325 request luồng chính, **0 lỗi**. Lỗi duy nhất trong fi
 |---|---|
 | RPS ổn định tối đa (phút 1–7) | **≈ 6.800 request/giây**, p95 = 2 ms, p99 = 3 ms |
 | RPS duy trì được suốt 15 phút | **≈ 5.000–5.500 request/giây**, p95 ≤ 27 ms, p99 ≈ 190–236 ms, 0 lỗi |
-| Thời điểm bắt đầu suy giảm | **Phút thứ 8** (khoảng 7 phút giữ tải): RPS giảm ~20%, p99 tăng từ 3 ms lên 125–236 ms (≈ 70 lần) |
+| Thời điểm bắt đầu suy giảm | **Phút thứ 8** (khoảng 7 phút giữ tải): RPS giảm ≈20%, p99 tăng từ 3 ms lên 125–236 ms (≈ 70 lần) |
 | Memory ceiling quan sát được | **329 MB** RSS cao nhất (79 MB trước khi chạy, mẫu đầu tiên trong `soak_node_rss.csv`), xu hướng tăng ≈ 9–10 MB/phút, chưa chạm trần |
 
 ## Nhận định

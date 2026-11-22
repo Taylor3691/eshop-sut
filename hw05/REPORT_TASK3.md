@@ -11,7 +11,7 @@
 Ba đặc điểm đo được ở Task 1 quyết định thiết kế:
 
 1. **Độ trễ rất nhỏ:** p95 chỉ 1–4 ms. JMeter đo theo đơn vị 1 ms, nên tăng 1 ms đã là +25–50%. Ngưỡng tương đối kiểu "p95 tăng > 10%" không dùng được.
-2. **Suy giảm theo thời gian:** Soak ổn định ~6.800 request/giây trong 7 phút rồi mới gãy (p99 3 → 125–236 ms). Test ngắn mỗi commit không thấy được.
+2. **Suy giảm theo thời gian:** Soak ổn định ≈6.800 request/giây trong 7 phút rồi mới gãy (p99 3 → 125–236 ms). Test ngắn mỗi commit không thấy được.
 3. **Percentile của report HTML sai với lần chạy lớn** (Soak: Total p99 3 ms so với 86 ms thật). Cổng phải tính từ file `.jtl`.
 
 ---
@@ -34,11 +34,11 @@ Quyết định theo đường dẫn file, rồi nâng mức theo nội dung dif
 
 | Tầng | Khi nào | Kịch bản | Chi phí **đo được** | Hành động khi lỗi |
 |---|---|---|---|---|
-| Nhẹ | PR mức "chạy nhẹ" | 3 thread, 30 s | ~35 s + khởi động (chưa đo riêng) | Chỉ cảnh báo |
-| **PR** | PR mức "bắt buộc" | 30 thread, 90 s, think-time 0–50 ms | **92–111 s / lần** + 4–6 s khởi động; nếu phải xác nhận: **~223 s** | Chặn merge sau khi xác nhận |
+| Nhẹ | PR mức "chạy nhẹ" | 3 thread, 30 s | ≈35 s + khởi động (chưa đo riêng) | Chỉ cảnh báo |
+| **PR** | PR mức "bắt buộc" | 30 thread, 90 s, think-time 0–50 ms | **92–111 s / lần** + 4–6 s khởi động; nếu phải xác nhận: **≈223 s** | Chặn merge sau khi xác nhận |
 | Merge | Push vào `main` | 80 thread, 150 s | **Chưa đo** | Như PR; pass thì cập nhật baseline |
 | **Nightly** | Mỗi ngày, máy rảnh, cắm sạc | Soak 150 thread, 960 s | **16 phút**; `.jtl` 714 MB (36 MB nén) | Job đỏ, không chặn merge |
-| Weekly | Mỗi tuần | Stress 20 → 200 thread | **~350 s**; `.jtl` 244 MB (12 MB nén) | Job đỏ, không chặn merge |
+| Weekly | Mỗi tuần | Stress 20 → 200 thread | **≈350 s**; `.jtl` 244 MB (12 MB nén) | Job đỏ, không chặn merge |
 
 Mọi tầng: khởi động lại backend (DB seed lại, reset lockout, xóa `userCarts`), chạy `create_users.sh`, chạy JMeter với `-Jhttpclient.reset_state_on_thread_group_iteration=false`.
 
@@ -145,7 +145,7 @@ Chi tiết: [`T3_EXPERIMENT.md`](T3_EXPERIMENT.md). Hai lần lặp độc lập
 
 ### 5.1 Chi phí
 
-- **Tầng PR:** ~1,5–2 phút mỗi lần; tối đa ~4 phút nếu phải chạy lại. Chỉ chạy khi diff ở mức "bắt buộc", nên phần lớn commit (frontend, tài liệu, `hw05/`) không tốn gì.
+- **Tầng PR:** ≈1,5–2 phút mỗi lần; tối đa ≈4 phút nếu phải chạy lại. Chỉ chạy khi diff ở mức "bắt buộc", nên phần lớn commit (frontend, tài liệu, `hw05/`) không tốn gì.
 - **Nightly:** 16 phút máy bận; `.jtl` 714 MB vượt giới hạn 100 MB của GitHub, phải nén (36 MB) và chỉ giữ lần mới nhất.
 - **Chi phí đo phụ thuộc môi trường:** cùng plan 90 s, run 1 mất 92–93 s nhưng run 2 mất 104–110 s (run 2 chạy kèm Terminal hiển thị, htop và chụp màn hình).
 - **Một máy chỉ chạy được một job một lúc** (cùng cổng 3000): các job phải xếp hàng.
@@ -155,7 +155,7 @@ Chi tiết: [`T3_EXPERIMENT.md`](T3_EXPERIMENT.md). Hai lần lặp độc lập
 | Nguồn nhiễu | Số đo | Cách giảm |
 |---|---|---|
 | p95 dao động giữa các lần | Tối đa **1 ms** qua 12 lần không đổi code | Dải đạt +1 ms; baseline là trung vị 5 lần |
-| Label không bị sửa nhích theo | 1 lần `04_ApplyCoupon` +2 ms (trên 24 lần kiểm tra label không bị sửa, ~4%) | **Bắt buộc chạy lại** trước khi chặn; lần chạy lại đưa về +1 ms |
+| Label không bị sửa nhích theo | 1 lần `04_ApplyCoupon` +2 ms (trên 24 lần kiểm tra label không bị sửa, ≈4%) | **Bắt buộc chạy lại** trước khi chặn; lần chạy lại đưa về +1 ms |
 | p99 | Lệch +2 ms ngay ở lần không đổi code | Không dùng p99 làm cổng |
 | Throughput | −7% giữa các lần không đổi code (lớn hơn −4% do regression) | Không dùng throughput làm cổng ở tầng PR |
 | Khác loại máy | Baseline 1–4 ms đo trên M5; **chưa đo** trên runner khác | Baseline gắn tên máy; workflow bỏ qua cổng khi chưa có baseline cùng loại máy |
