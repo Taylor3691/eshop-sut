@@ -18,7 +18,8 @@ BACKEND_DIR="${BACKEND_DIR:-$REPO/backend}"
 START_CMD="${START_CMD:-node server.js}"
 PORT="${PORT:-3000}"
 HEALTH_URL="${HEALTH_URL:-http://localhost:$PORT/api/products/1}"
-SEED_CMD="${SEED_CMD:-bash $HERE/create_users.sh}"
+# `:-` coi chuỗi rỗng là chưa gán và vẫn tạo user. Dùng `-` để SEED_CMD= (rỗng) bỏ qua seed.
+SEED_CMD="${SEED_CMD-bash $HERE/create_users.sh}"
 LOG="${LOG:-/tmp/perf_backend.log}"
 
 PIDS="$(lsof -nP -iTCP:"$PORT" -sTCP:LISTEN -t 2>/dev/null || true)"
