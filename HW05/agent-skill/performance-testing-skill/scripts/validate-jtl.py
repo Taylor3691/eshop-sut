@@ -28,6 +28,13 @@ def main() -> int:
                 if None in row:
                     errors.append(f"Line {line}: extra fields beyond header")
                     continue
+                missing_values = [key for key, value in row.items() if value is None]
+                if missing_values:
+                    errors.append(
+                        f"Line {line}: missing values for columns: "
+                        + ", ".join(missing_values)
+                    )
+                    continue
                 for key in REQUIRED & fields:
                     value = (row.get(key) or "").strip()
                     if not value:

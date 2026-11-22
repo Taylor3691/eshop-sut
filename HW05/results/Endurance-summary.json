@@ -1,0 +1,150 @@
+{
+  "source_file": "HW05\\results\\Endurance.jtl",
+  "required_columns": [
+    "elapsed",
+    "label",
+    "success",
+    "timeStamp"
+  ],
+  "percentile_method": "nearest rank, ceil(p*n), one-based",
+  "overall": {
+    "samples": 309,
+    "errors": 0,
+    "error_rate_percent": 0.0,
+    "elapsed_ms": {
+      "min": 2,
+      "mean": 21.042071197411005,
+      "p90": 41.0,
+      "p95": 98.0,
+      "p99": 281.0,
+      "max": 314
+    },
+    "throughput_samples_per_second": 0.661923949436722,
+    "window": {
+      "start_epoch_ms": 1795354915532,
+      "end_epoch_ms": 1795355382352,
+      "start_utc": "2026-11-22T13:41:55.532000+00:00",
+      "end_utc": "2026-11-22T13:49:42.352000+00:00",
+      "inclusive_span_ms": 466821,
+      "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+    }
+  },
+  "by_label": {
+    "01 - Login": {
+      "samples": 62,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 4,
+        "mean": 18.903225806451612,
+        "p90": 17.0,
+        "p95": 120.0,
+        "p99": 190.0,
+        "max": 190
+      },
+      "throughput_samples_per_second": 0.13643525486985836,
+      "window": {
+        "start_epoch_ms": 1795354915532,
+        "end_epoch_ms": 1795355369959,
+        "start_utc": "2026-11-22T13:41:55.532000+00:00",
+        "end_utc": "2026-11-22T13:49:29.959000+00:00",
+        "inclusive_span_ms": 454428,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "02 - Search products": {
+      "samples": 62,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 3,
+        "mean": 15.516129032258064,
+        "p90": 37.0,
+        "p95": 98.0,
+        "p99": 157.0,
+        "max": 157
+      },
+      "throughput_samples_per_second": 0.13649202292185392,
+      "window": {
+        "start_epoch_ms": 1795354918734,
+        "end_epoch_ms": 1795355372972,
+        "start_utc": "2026-11-22T13:41:58.734000+00:00",
+        "end_utc": "2026-11-22T13:49:32.972000+00:00",
+        "inclusive_span_ms": 454239,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "03 - Product detail": {
+      "samples": 62,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 2,
+        "mean": 14.17741935483871,
+        "p90": 8.0,
+        "p95": 11.0,
+        "p99": 314.0,
+        "max": 314
+      },
+      "throughput_samples_per_second": 0.13646077963124775,
+      "window": {
+        "start_epoch_ms": 1795354921744,
+        "end_epoch_ms": 1795355376086,
+        "start_utc": "2026-11-22T13:42:01.744000+00:00",
+        "end_utc": "2026-11-22T13:49:36.086000+00:00",
+        "inclusive_span_ms": 454343,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "04 - Add item to cart": {
+      "samples": 62,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 2,
+        "mean": 13.209677419354838,
+        "p90": 8.0,
+        "p95": 13.0,
+        "p99": 261.0,
+        "max": 261
+      },
+      "throughput_samples_per_second": 0.13646047928441885,
+      "window": {
+        "start_epoch_ms": 1795354924751,
+        "end_epoch_ms": 1795355379094,
+        "start_utc": "2026-11-22T13:42:04.751000+00:00",
+        "end_utc": "2026-11-22T13:49:39.094000+00:00",
+        "inclusive_span_ms": 454344,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "05 - Checkout": {
+      "samples": 61,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 14,
+        "mean": 43.77049180327869,
+        "p90": 70.0,
+        "p95": 88.0,
+        "p99": 290.0,
+        "max": 290
+      },
+      "throughput_samples_per_second": 0.13419186797280086,
+      "window": {
+        "start_epoch_ms": 1795354927780,
+        "end_epoch_ms": 1795355382352,
+        "start_utc": "2026-11-22T13:42:07.780000+00:00",
+        "end_utc": "2026-11-22T13:49:42.352000+00:00",
+        "inclusive_span_ms": 454573,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    }
+  },
+  "warnings": [
+    "Excluded 1 malformed row(s); see malformed_rows"
+  ],
+  "malformed_rows": [
+    "line 311: missing values for columns: allThreads, URL, Latency, IdleTime, Connect"
+  ]
+}

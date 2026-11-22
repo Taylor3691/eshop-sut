@@ -1,0 +1,311 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1795354915532,90,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,90,0,72
+1795354915532,90,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,90,0,72
+1795354918734,6,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,6,0,0
+1795354918734,7,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,7,0,0
+1795354921744,4,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795354921744,5,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,5,0,0
+1795354924751,13,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,13,0,0
+1795354924766,7,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,7,0,0
+1795354927780,28,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,312,446,1,2,http://localhost:3000/api/checkout,28,0,0
+1795354927782,43,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,312,446,1,2,http://localhost:3000/api/checkout,42,0,0
+1795354930828,7,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,7,0,0
+1795354930842,4,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795354933848,5,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795354933863,3,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795354936869,4,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795354936869,5,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,5,0,0
+1795354939879,5,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,4,0,0
+1795354939879,7,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,7,0,0
+1795354942898,38,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,312,446,1,2,http://localhost:3000/api/checkout,38,0,0
+1795354942901,50,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,312,446,1,2,http://localhost:3000/api/checkout,50,0,0
+1795354945954,5,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795354945970,5,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795354948976,4,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795354948990,4,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795354951994,3,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795354952014,5,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,5,0,0
+1795354955024,4,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,4,0,0
+1795354955025,7,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,7,0,0
+1795354958034,20,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,312,446,1,2,http://localhost:3000/api/checkout,20,0,0
+1795354958048,23,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,312,446,1,2,http://localhost:3000/api/checkout,23,0,0
+1795354961083,169,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,169,0,0
+1795354961066,190,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,190,0,0
+1795354964267,6,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795354964267,6,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,6,0,0
+1795354967287,5,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,5,0,0
+1795354967295,5,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795354970306,4,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,4,0,0
+1795354970306,6,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,6,0,0
+1795354973315,21,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,312,446,1,2,http://localhost:3000/api/checkout,21,0,0
+1795354973315,41,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,312,446,1,2,http://localhost:3000/api/checkout,41,0,0
+1795354976347,14,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,14,0,10
+1795354976362,14,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,14,0,7
+1795354979372,61,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,61,0,0
+1795354979388,52,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,52,0,0
+1795354982448,5,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,5,0,0
+1795354982449,7,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,6,0,0
+1795354985468,3,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795354985469,4,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,4,0,0
+1795354988485,22,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,312,446,1,2,http://localhost:3000/api/checkout,21,0,0
+1795354988485,39,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,39,0,0
+1795354991522,5,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795354991535,4,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795354994542,3,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795354994544,5,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795354997551,4,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795354997551,5,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,5,0,0
+1795355000559,3,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355000559,9,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,9,0,0
+1795355003569,22,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,22,0,0
+1795355003585,33,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,33,0,0
+1795355006607,11,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,11,0,0
+1795355006620,4,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355009628,6,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795355009640,4,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795355012638,4,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795355012655,4,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795355015660,5,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,5,0,0
+1795355015673,8,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,8,0,0
+1795355018670,17,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,17,0,0
+1795355018685,27,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,27,0,0
+1795355021702,9,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,9,0,0
+1795355021718,5,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355024724,23,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,23,0,0
+1795355024740,37,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,37,0,0
+1795355027762,6,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,6,0,0
+1795355027793,3,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355030770,35,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,35,0,0
+1795355030800,7,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,7,0,0
+1795355033813,71,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,71,0,0
+1795355033813,71,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,71,0,0
+1795355036887,17,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,17,0,11
+1795355036905,13,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,13,0,5
+1795355039912,5,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795355039930,3,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355042921,11,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,11,0,0
+1795355042937,3,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355045938,3,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355045952,3,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355048948,21,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,21,0,0
+1795355048965,24,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,24,0,0
+1795355051986,5,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355052000,6,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355055004,3,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355055016,3,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355058014,3,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355058031,5,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,5,0,0
+1795355061023,6,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,6,0,0
+1795355061053,3,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355064044,22,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,22,0,0
+1795355064059,35,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,35,0,0
+1795355067073,5,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355067104,5,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355070084,3,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355070115,3,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355073105,4,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795355073134,3,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355076119,3,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355076149,3,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355079131,17,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,17,0,0
+1795355079162,70,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,70,0,0
+1795355082164,4,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355082243,5,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355085180,4,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795355085260,3,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355088190,4,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355088268,3,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355091209,6,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,6,0,0
+1795355091286,3,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355094221,24,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,24,0,0
+1795355094301,18,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,18,0,0
+1795355097253,12,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,12,0,6
+1795355097331,12,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,12,0,7
+1795355100280,6,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,6,0,0
+1795355100361,3,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355103292,6,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,6,0,0
+1795355103370,2,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,2,0,0
+1795355106300,5,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,5,0,0
+1795355106380,6,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,6,0,0
+1795355109320,23,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,23,0,0
+1795355109398,34,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,34,0,0
+1795355112364,5,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355112437,6,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,6,0,0
+1795355115378,4,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795355115459,6,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,6,0,0
+1795355118384,3,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355118479,3,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355121392,4,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,4,0,0
+1795355121484,3,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355124407,53,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,53,0,0
+1795355124494,290,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,290,0,0
+1795355127478,5,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355127802,5,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355130495,3,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355130816,3,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355133510,3,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355133822,6,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,6,0,0
+1795355136522,6,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,5,0,0
+1795355136831,3,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355139540,20,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,20,0,0
+1795355139835,19,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,19,0,0
+1795355142569,6,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355142866,4,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355145587,5,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795355145879,3,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355148598,3,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355148893,6,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,6,0,0
+1795355151609,3,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355151904,6,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,5,0,0
+1795355154623,65,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,65,0,0
+1795355154916,41,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,41,0,0
+1795355157696,12,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,12,0,6
+1795355157974,6,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,6,0,2
+1795355160723,5,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795355160990,4,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795355163736,5,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,5,0,0
+1795355163998,3,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355166750,4,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,4,0,0
+1795355167010,3,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,2,0,0
+1795355169755,22,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,22,0,0
+1795355170023,21,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,21,0,0
+1795355172794,5,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355173048,4,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355175809,4,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795355176056,5,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795355178818,5,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,5,0,0
+1795355179066,4,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795355181826,4,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355182077,3,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355184835,20,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,20,0,0
+1795355185083,35,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,35,0,0
+1795355187863,4,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355188142,4,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355190870,6,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,6,0,0
+1795355191161,4,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355193879,3,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355194174,3,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355196892,4,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,4,0,0
+1795355197189,6,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,6,0,0
+1795355199906,21,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,21,0,0
+1795355200209,53,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,53,0,0
+1795355202942,4,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355203274,4,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355205962,3,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355206289,5,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795355208969,5,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,5,0,0
+1795355209295,3,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355211980,3,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355212303,4,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,4,0,0
+1795355214990,26,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,26,0,0
+1795355215320,19,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,19,0,0
+1795355218032,10,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,10,0,5
+1795355218358,8,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,8,0,3
+1795355221048,4,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795355221373,3,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355224058,314,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,314,0,0
+1795355224386,3,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355227375,3,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355227391,2,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,2,0,0
+1795355230386,16,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,16,0,0
+1795355230401,14,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,14,0,0
+1795355233417,4,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355233417,5,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355236430,156,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,156,0,0
+1795355236430,157,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,157,0,0
+1795355239598,3,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355239598,3,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355242615,3,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355242615,5,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,5,0,0
+1795355245623,282,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,282,0,0
+1795355245624,281,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,281,0,0
+1795355248912,6,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,6,0,0
+1795355248912,7,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,7,0,0
+1795355251935,5,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795355251938,5,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795355254945,4,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795355254945,7,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,7,0,0
+1795355257956,4,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,4,0,0
+1795355257956,6,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,5,0,0
+1795355260973,22,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,22,0,0
+1795355260973,40,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,40,0,0
+1795355264010,4,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355264024,4,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355267018,5,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795355267033,6,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,6,0,0
+1795355270026,9,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,9,0,0
+1795355270042,3,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355273037,5,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,5,0,0
+1795355273053,3,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355276048,26,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,26,0,0
+1795355276063,29,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,29,0,0
+1795355279083,9,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,9,0,5
+1795355279097,9,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,9,0,4
+1795355282094,3,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355282111,3,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355285117,5,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,5,0,0
+1795355285118,4,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795355288129,5,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,5,0,0
+1795355288133,5,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,5,0,0
+1795355291151,23,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,23,0,0
+1795355291152,37,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,37,0,0
+1795355294183,4,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355294199,6,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,6,0,0
+1795355297194,6,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,6,0,0
+1795355297209,6,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795355300202,10,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,10,0,0
+1795355300217,8,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,7,0,0
+1795355303223,3,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355303242,12,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,12,0,0
+1795355306230,30,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,30,0,0
+1795355306261,45,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,45,0,0
+1795355309266,7,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,7,0,0
+1795355309315,5,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355312280,5,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795355312325,4,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795355315293,7,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,7,0,0
+1795355315341,5,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,5,0,0
+1795355318304,3,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355318350,3,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355321312,23,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,23,0,0
+1795355321361,21,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,21,0,0
+1795355324340,4,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355324401,4,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,3,0,0
+1795355327360,4,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795355327419,3,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355330366,4,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795355330428,4,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795355333376,4,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,4,0,0
+1795355333437,3,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355336388,24,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,24,0,0
+1795355336451,27,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,27,0,0
+1795355339420,120,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,120,0,5
+1795355339483,150,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,150,0,2
+1795355342542,3,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355342639,3,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795355345557,3,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,3,0,0
+1795355345650,4,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795355348563,5,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,5,0,0
+1795355348657,6,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,6,0,0
+1795355351577,22,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,22,0,0
+1795355351672,20,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,20,0,0
+1795355354617,5,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,5,0,0
+1795355354711,4,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355357635,6,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,6,0,0
+1795355357731,5,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795355360659,132,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,132,0,0
+1795355360737,168,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,168,0,0
+1795355363805,3,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,3,0,0
+1795355363913,4,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,4,0,0
+1795355366820,88,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,88,0,0
+1795355366930,21,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,21,0,0
+1795355369915,9,01 - Login,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,687,273,1,2,http://localhost:3000/api/login,9,0,0
+1795355369959,4,01 - Login,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,687,273,1,2,http://localhost:3000/api/login,4,0,0
+1795355372925,144,02 - Search products,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,144,0,0
+1795355372972,98,02 - Search products,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,453,154,1,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,97,0,0
+1795355376071,2,03 - Product detail,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,2,0,0
+1795355376086,4,03 - Product detail,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,451,131,1,2,http://localhost:3000/api/products/1,4,0,0
+1795355379078,261,04 - Add item to cart,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,261,0,0
+1795355379094,247,04 - Add item to cart,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,294,400,1,2,http://localhost:3000/api/cart,247,0,0
+1795355382352,20,05 - Checkout,200,OK,Endurance User 2 - one isolated account 2-1,text,true,,313,446,1,2,http://localhost:3000/api/checkout,20,0,0
+1795355382352,36,05 - Checkout,200,OK,Endurance User 1 - one isolated account 1-1,text,true,,313,446,1

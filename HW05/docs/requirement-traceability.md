@@ -32,10 +32,10 @@
 | T1-20 | Resource-monitor evidence (Load) | `evidence/Load/` | Screenshots JMeter + backend cùng frame | Kiểm tra file ảnh | NOT STARTED |
 | T1-21 | Resource-monitor evidence (Stress) | `evidence/Stress/` | Screenshots JMeter + backend cùng frame | Kiểm tra file ảnh | NOT STARTED |
 | T1-22 | Resource-monitor evidence (Spike) | `evidence/Spike/` | Screenshots JMeter + backend cùng frame | Kiểm tra file ảnh | NOT STARTED |
-| T1-23 | Hardware report + spec table | `evidence/Hardware/` | dxdiag screenshot + bảng thông số | Kiểm tra hostname | NOT STARTED |
+| T1-23 | Hardware report + spec table | `evidence/Hardware/` | dxdiag screenshot + bảng thông số | Kiểm tra hostname | IN PROGRESS |
 | T1-24 | Account-lockout reset documentation | `docs/execution-procedure.md` | Reset procedure | Kiểm tra steps | NOT STARTED |
-| T1-25 | Endurance test (~10-15 phút) | `results/Endurance.jtl` | JTL + report | Kiểm tra duration ≥10 min | NOT STARTED |
-| T1-26 | Endurance threshold (concrete numbers) | `docs/endurance-test-report.md` | Max stable RPS, memory | Kiểm tra metrics | NOT STARTED |
+| T1-25 | Endurance test (~10-15 phút) | `results/Endurance.jtl` | JTL + report | Kiểm tra duration ≥10 min | IN PROGRESS |
+| T1-26 | Endurance threshold (concrete numbers) | `docs/endurance-test-report.md` | Max stable RPS, memory | Kiểm tra metrics | IN PROGRESS |
 | T1-27 | Human review documentation | `analysis/test-plan-review.md` | Review findings | Kiểm tra corrections | NOT STARTED |
 | T1-28 | AI design mistakes documentation | `analysis/ai-design-mistakes.md` | Mistakes + fixes | Kiểm tra evidence | NOT STARTED |
 | T1-29 | Demo video Task 1 (≥6 phút, YouTube) | YouTube unlisted | Video link | Mở link, kiểm tra duration | NOT STARTED |
@@ -92,8 +92,8 @@
 
 | Trạng thái | Số lượng |
 |-----------|---------|
-| NOT STARTED | 53 |
-| IN PROGRESS | 0 |
+| NOT STARTED | 50 |
+| IN PROGRESS | 3 |
 | COMPLETED | 0 |
 | BLOCKED | 0 |
 | **Tổng** | **53** |

@@ -58,6 +58,11 @@ def read_jtl(path: Path) -> tuple[list[dict], list[str], list[str]]:
             raise ValueError("Missing required columns: " + ", ".join(sorted(missing)))
         for line, raw in enumerate(reader, start=2):
             try:
+                if None in raw:
+                    raise ValueError("extra fields beyond header")
+                missing_values = [name for name, value in raw.items() if value is None]
+                if missing_values:
+                    raise ValueError("missing values for columns: " + ", ".join(missing_values))
                 timestamp = int(raw["timeStamp"])
                 elapsed = int(raw["elapsed"])
                 label = (raw["label"] or "").strip()

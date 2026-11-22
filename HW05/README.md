@@ -73,23 +73,23 @@ Login → Search Products → View Product Detail → Add to Cart → Checkout
 
 | Metric | Load | Stress | Spike | Endurance |
 |--------|------|--------|-------|-----------|
-| Virtual Users | 1 | 1 → 2 → 4 (3 run riêng) | 1 → 4 → 1 | NOT EXECUTED |
-| Duration | 16 s | 16 / 16 / 18 s mỗi stage | 76 s gồm phase delay | NOT EXECUTED |
-| Avg Response Time | 15.20 ms | 33.80 / 19.20 / 10.15 ms | 53.50 ms tổng | — |
-| p95 Response Time | 48 ms | 141 / 116 / 26 ms | 354 ms tổng | — |
-| Throughput (RPS) | 0.41 | 0.41 / 0.78 / 1.34 | 0.42 toàn khoảng timestamp | — |
-| Error Rate | 0% (5/5) | 0% (35/35) | 0% (30/30) | NOT EXECUTED |
+| Virtual Users | 1 | 1 → 2 → 4 (3 run riêng) | 1 → 4 → 1 | 2 |
+| Duration | 16 s | 16 / 16 / 18 s mỗi stage | 76 s gồm phase delay | Dừng tại 8m39s / mục tiêu 10m |
+| Avg Response Time | 15.20 ms | 33.80 / 19.20 / 10.15 ms | 53.50 ms tổng | 21.04 ms* |
+| p95 Response Time | 48 ms | 141 / 116 / 26 ms | 354 ms tổng | 98 ms* |
+| Throughput (RPS) | 0.41 | 0.41 / 0.78 / 1.34 | 0.42 toàn khoảng timestamp | 0.662* |
+| Error Rate | 0% (5/5) | 0% (35/35) | 0% (30/30) | 0% (309 complete rows)* |
 
-> Các mẫu nhỏ (5–30 request/run), không có SLO; Spike chạm 395 MiB RAM khả dụng và CPU 100%. Chưa xác lập năng lực chịu tải. Endurance 10–15 phút và screenshot/video evidence chưa thực hiện.
+> *Endurance PARTIALLY EXECUTED: target 10 phút, dừng lúc RAM khả dụng 253 MiB (<512 MiB guardrail). Raw JTL có 309 dòng đầy đủ và một dòng cuối thiếu cột; metrics chỉ dùng dòng đầy đủ. Maximum stable RPS/memory ceiling chưa xác định. Xem [báo cáo Endurance](docs/endurance-test-report.md). Screenshot/video evidence chưa thực hiện.
 
 ---
 
 ## Endurance Threshold
 
-> ⚠️ **Chưa xác định.** Sẽ được cập nhật sau endurance test.
+> ⚠️ **Chưa xác định.** Run Endurance bị dừng sớm; 0.662 request/s là throughput quan sát được, không phải maximum stable RPS.
 
-- Maximum stable RPS: —
-- Memory ceiling: —
+- Maximum stable RPS: Chưa xác định (2 VU; observed throughput 0.662 request/s trong JTL span)
+- Memory ceiling: Chưa xác định (host available RAM chạm 253 MiB; dừng theo guardrail 512 MiB)
 
 ---
 

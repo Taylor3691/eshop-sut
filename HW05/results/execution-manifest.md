@@ -114,3 +114,56 @@ Thực hiện các precondition và command được ghi trong [execution-proced
 ## Workspace integrity note
 
 Sau khi ghi manifest, `git status` cho thấy `backend/database.sqlite` đang modified và `backend/node_modules/` là untracked. Các thao tác của Prompt 08 chỉ đọc SQLite bằng `mode=ro`; không chạy npm, không khởi động Node/backend và không sửa/xóa các path này. Nguồn gốc thay đổi chưa xác định; giữ nguyên hiện trạng và kiểm tra/backup trước khi dùng DB cho lần chạy tiếp theo.
+
+## Prompt 09 — Endurance / Soak (2026-11-22, Asia/Bangkok)
+
+### Trạng thái
+
+**PARTIALLY EXECUTED.** Plan đặt 600 giây, 2 VU, nhưng dừng khi available RAM giảm xuống dưới guardrail 512 MiB. JMeter chạy từ khoảng 20:41:51 đến lệnh dừng 20:50:30 (+07), tổng thời gian process khoảng 8 phút 39 giây. JTL timestamp span của các mẫu thực tế chỉ 466.8 giây. Không tiếp tục test sau khi đã chạm guardrail.
+
+### Setup và kiểm soát side effect
+
+- Backend source được sao chép và `npm ci` trong `C:\Users\PHUC\AppData\Local\Temp\eshop-hw05-prompt09-20261122_203509`; không copy hoặc mở `backend/database.sqlite`. Database được seed trong thư mục temp. Process backend PID 39836 sở hữu port 3000; sau khi dừng backend, port 3000 không còn listener. DB gốc không thay đổi.
+- Trước test, isolated DB có 4 users (2 seed + 2 test), 0 orders, 0 locked accounts. Sau khi dừng, DB cô lập có 70 orders và 0 locked accounts. Hai credentials riêng ở hai CSV temp và không được commit.
+- Catalog `GET /api/products/1` xác nhận product 1 `iPhone 15 Pro Max`, giá `30000000`. JMX chạy hai group độc lập, một VU/account/cart mỗi group, loop vô hạn nhưng scheduler có giới hạn600s, `recycle=true`, think-time3s, status200 và body assertions. Mỗi checkout side effect nằm trong DB cô lập.
+- Host trước run: 15.68 GiB RAM, counter Available Memory khoảng 2,665 MiB, CPU mẫu nền 10.3–32.2%. JMeter 5.6.3; heap `-Xms128m -Xmx256m`.
+
+### Kết quả từ raw JTL và log
+
+| Chỉ số | Kết quả |
+|---|---:|
+| VU / thời lượng đặt | 2 VU / 600 giây |
+| Process active trước khi dừng | khoảng 8m39s |
+| Raw JTL | 310 data lines: 309 dòng đầy đủ + 1 dòng cuối thiếu 5/17 cột |
+| Samples đủ schema được phân tích | 309 |
+| Success / fail / error rate trong 309 rows | 309 / 0 / 0.00% |
+| Mean / median (ms) | 21.04 / 5 |
+| Min / max (ms) | 2 / 314 |
+| p90 / p95 / p99 (ms) | 41 / 98 / 281 |
+| Throughput của complete-row timestamp span | 0.6619 request/s trong 466.8 giây |
+| Maximum stable RPS | **Chưa xác định**; không gọi throughput quan sát được là maximum |
+
+JMeter periodic summarizer ghi nhận 341 samples, error0 tại mốc 8m39s, nhưng raw JTL chỉ còn 309 records đủ schema cộng một dòng checkout bị ghi dở. Database có 70 orders, trong khi raw JTL có 61 checkout rows đủ schema. Không backfill, sửa hoặc ước tính các sample không có trong raw JTL. JMeter HTML report generator từ chối raw file: line311 có 12 columns thay vì17, nên không tạo Dashboard Endurance.
+
+### CPU, bộ nhớ và điều kiện dừng
+
+- Monitor script `evidence/Endurance/monitor-resources.ps1` ghi CPU, available RAM, backend working set/private memory và JMeter working set/private memory khoảng mỗi6 giây.
+- Trong khoảng test, host CPU mean83.7%, max100%. Mức CPU cao không thể quy riêng cho EShop.
+- Available RAM khoảng2,039 MiB đầu cửa sổ run, thấp nhất253 MiB lúc20:49:53 (+07), và khoảng929 MiB ở monitor sample gần cuối. Guardrail 512 MiB đã bị vượt qua; đây là **safety stop**, không phải SUT point-of-failure.
+- Backend working set cao nhất53.0 MiB/private memory61.9 MiB; JMeter private memory cao nhất263.6 MiB. Không có bằng chứng backend memory tăng đều. Backend còn listen ngay sau khi JMeter dừng.
+- Mean latency không tăng đều qua từng phút; các bucket muộn có vài p95 spike (phút5:282ms, phút7 partial:247ms), nhưng JTL thiếu phần cuối và run bị dừng nên chưa kết luận sustained degradation.
+
+### Artifacts và kiểm tra
+
+- JMX: `test-plans/23120157_Endurance_20261122.jmx`
+- Raw JTL: `results/Endurance.jtl` (giữ nguyên, có một dòng cuối không đầy đủ)
+- JMeter log: `results/Endurance_20261122_203509.log`
+- Resource CSV và script: `evidence/Endurance/23120157_Endurance_20261122_203509_resources.csv`, `evidence/Endurance/monitor-resources.ps1`
+- Metrics: `results/Endurance-analysis.md`, `results/Endurance-summary.json`; analyzer loại 1 malformed row và chỉ tính309 rows.
+- CLI: `HEAP=-Xms128m -Xmx256m`; `jmeter.bat -n -t HW05/test-plans/23120157_Endurance_20261122.jmx -Jduration_seconds=600 -Jcsv_file_user1=C:/Users/PHUC/AppData/Local/Temp/eshop-hw05-prompt09-20261122_203509/data/user1.csv -Jcsv_file_user2=C:/Users/PHUC/AppData/Local/Temp/eshop-hw05-prompt09-20261122_203509/data/user2.csv -l HW05/results/Endurance.jtl -j HW05/results/Endurance_20261122_203509.log -e -o HW05/html-reports/Endurance/23120157_Endurance_20261122_203509`. Lệnh bị dừng nên JMeter không chạy tới bước tự tạo report `-e -o`. Lần tạo report sau bằng `jmeter.bat -g HW05/results/Endurance.jtl -o ...` cũng thất bại tại line311 (12 cột thay vì17).
+- `validate-jtl.py` được tăng cường để kiểm tra trường bị thiếu giữa dòng. Trước sửa, raw file bị chấp nhận dù thiếu cột không bắt buộc; sau sửa, validator từ chối đúng line311. Analysis/validation trên bản sao chỉ gồm309 dòng đầy đủ thành công.
+- Không có screenshot desktop. Không tạo giả HTML report.
+
+### Kết luận
+
+Đã đo được throughput 0.6619 request/s ở workload 2 VU trong timestamp span dữ liệu đầy đủ. Run không đủ 10 phút, có vấn đề ghi dở JTL và host memory chạm safety stop; vì vậy **maximum stable RPS, memory ceiling, và sustained threshold chưa xác định**. Lần đo tiếp theo cần host có RAM headroom ổn định, cùng guardrail, kết thúc JMeter bình thường và JTL đủ17 cột trên mọi dòng.
