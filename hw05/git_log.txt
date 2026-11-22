@@ -1,8 +1,8 @@
 HW05 – Performance Testing · 23120175 · Git commit log
 Repo: https://github.com/Taylor3691/eshop-sut (nhánh hw05/toanhuynh)
 Phạm vi: các commit của nhánh hw05/toanhuynh tính từ main (git log main..HEAD), xếp từ cũ đến mới
-Xuất lúc: 2026-11-22 23:00:19 +0700 · HEAD: 8838a4b
-Số commit: 33
+Xuất lúc: 2026-11-22 23:14:12 +0700 · HEAD: b9efbbe
+Số commit: 35
 
 == Tóm tắt ==
 0d6bc1b  2026-11-21 01:03  hw05: chuẩn bị môi trường và báo cáo phần cứng
@@ -38,6 +38,8 @@ d479f54  2026-11-22 21:33  hw05: ảnh bằng chứng Task 1 (Load, Stress, Spik
 504b363  2026-11-22 22:49  hw05: ảnh trang GitHub Issues và bản PDF
 5f02015  2026-11-22 22:49  hw05: git commit log (git_log.txt)
 8838a4b  2026-11-22 23:00  hw05: sửa chữ bị gạch ngang và trang trống trong PDF
+1fa9e7f  2026-11-22 23:00  hw05: cập nhật git commit log
+b9efbbe  2026-11-22 23:14  hw05: README mục nộp Moodle (20 MB) và script đóng gói zip
 
 == Chi tiết (nội dung commit và file thay đổi) ==
 
@@ -1237,3 +1239,27 @@ Date:   2026-11-22 23:00:19 +0700
  hw05/report/export_pdf.sh    |  18 ++++++++++++++++++
  hw05/report/md2html.mjs      |  29 +++++++++++++++++++++++++++++
  14 files changed, 110 insertions(+), 63 deletions(-)
+
+
+commit 1fa9e7f80c5734998baddbccd254986530b6f277
+Author: Toan Huynh
+Date:   2026-11-22 23:00:20 +0700
+
+    hw05: cập nhật git commit log
+
+ hw05/git_log.txt | 47 +++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 45 insertions(+), 2 deletions(-)
+
+
+commit b9efbbe1475c7d7da396222894150c31c5115473
+Author: Toan Huynh
+Date:   2026-11-22 23:14:12 +0700
+
+    hw05: README mục nộp Moodle (20 MB) và script đóng gói zip
+    
+    - README: phần để trên GitHub (Soak .jtl/report/ảnh, .jtl Task 3, .jtl và report demo skill), stress.jtl dạng .xz, ảnh JPEG trong zip
+    - report/build_zip.sh: đóng gói từ bản sao, không sửa repo
+
+ hw05/README.md           | 17 ++++++++++++++++-
+ hw05/report/build_zip.sh | 62 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 78 insertions(+), 1 deletion(-)
