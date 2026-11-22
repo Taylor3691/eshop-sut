@@ -45,12 +45,12 @@
 
 | Req ID | Yêu cầu bài tập | Vị trí triển khai | Bằng chứng yêu cầu | Phương pháp xác minh | Trạng thái |
 |--------|-----------------|-------------------|--------------------|--------------------|-----------|
-| T2-01 | AI Analysis từ JTL thực | `analysis/AI_Analysis.md` | Metric calculations | So sánh với JTL raw | NOT STARTED |
-| T2-02 | Metric calculations chính xác | `analysis/AI_Analysis.md` | Avg, Median, p90, p95, p99, RPS | Tính lại từ JTL | NOT STARTED |
-| T2-03 | Misinterpretation Hunt | `analysis/Misinterpretation_Hunt.md` | AI errors documented | AI statement vs raw value | NOT STARTED |
-| T2-04 | Raw values cited cho mỗi error | `analysis/Misinterpretation_Hunt.md` | Specific JTL samples | Cross-reference JTL | NOT STARTED |
-| T2-05 | Optimization recommendations | `analysis/Optimization_Review.md` | Categorized recommendations | Verify against source code | NOT STARTED |
-| T2-06 | Feasible/Hallucinated/Needs verification | `analysis/Optimization_Review.md` | Classification table | Verify against EShop architecture | NOT STARTED |
+| T2-01 | AI Analysis từ JTL thực | `analysis/AI_Analysis.md` | Metric calculations | So sánh với JTL raw | COMPLETED |
+| T2-02 | Metric calculations chính xác | `analysis/AI_Analysis.md` | Avg, Median, p90, p95, p99, RPS | Tính lại từ JTL | COMPLETED |
+| T2-03 | Misinterpretation Hunt | `analysis/Misinterpretation_Hunt.md` | AI errors documented | AI statement vs raw value | COMPLETED |
+| T2-04 | Raw values cited cho mỗi error | `analysis/Misinterpretation_Hunt.md` | Specific JTL samples | Cross-reference JTL | COMPLETED |
+| T2-05 | Optimization recommendations | `analysis/Optimization_Review.md` | Categorized recommendations | Verify against source code | COMPLETED |
+| T2-06 | Feasible/Hallucinated/Needs verification | `analysis/Optimization_Review.md` | Classification table | Verify against EShop architecture | COMPLETED |
 
 ## 3. Task 3: Continuous Performance Testing (10 điểm)
 
@@ -92,11 +92,11 @@
 
 | Trạng thái | Số lượng |
 |-----------|---------|
-| NOT STARTED | 50 |
+| NOT STARTED | 46 |
 | IN PROGRESS | 3 |
-| COMPLETED | 0 |
+| COMPLETED | 6 |
 | BLOCKED | 0 |
-| **Tổng** | **53** |
+| **Tổng** | **55** |
 
 ---
 
