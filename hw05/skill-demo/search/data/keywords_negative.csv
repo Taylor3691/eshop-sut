@@ -1,0 +1,4 @@
+keyword,note
+',quote returns HTTP 500 HTML and the SQLite error text
+%,LIKE wildcard matches every product name
+_,LIKE wildcard matches every product name
