@@ -5,7 +5,7 @@
 | AI tool | Model | Dùng cho |
 |---|---|---|
 | Claude Code | Claude Opus 5.5 | Phân tích SUT, chọn luồng, lập kế hoạch prompt, chuẩn bị môi trường, sinh/review test plan, phân tích log |
-| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress, đề xuất mức Soak từ kết quả Stress, sinh test plan Soak và script ghi RAM, phân tích statistics.json và .jtl theo cửa sổ thời gian của Load/Stress/Spike/Soak, đề xuất tối ưu hiệu năng từ kết quả đo và code backend, phân loại commit nào cần chạy performance test, thiết kế pipeline nhiều tầng và ngưỡng p95 regression, vẽ flow chart Mermaid và lưu thành file, viết p95_regression.py và workflow perf.yml, thảo luận chi phí và regression bị bỏ sót |
+| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress, sinh test plan Spike, đề xuất mức Soak từ kết quả Stress, sinh test plan Soak và script ghi RAM, phân tích statistics.json và .jtl theo cửa sổ thời gian của Load/Stress/Spike/Soak, đề xuất tối ưu hiệu năng từ kết quả đo và code backend, phân loại commit nào cần chạy performance test, thiết kế pipeline nhiều tầng và ngưỡng p95 regression, vẽ flow chart Mermaid và lưu thành file, viết p95_regression.py và workflow perf.yml, thảo luận chi phí và regression bị bỏ sót |
 
 Mỗi mục gồm đúng 4 trường theo đề (mục 9): tên AI tool, ngày giờ, prompt, AI output.
 
@@ -547,6 +547,30 @@ bạn hãy giúp mình tạo skill như đã đề xuất
   - Lỗi phát hiện khi chạy thử: `reset_sut.sh` treo khi bị pipe vì subshell khởi động backend giữ stdout. Sửa bằng `( cd … && exec nohup … ) > LOG 2>&1 < /dev/null &`; chạy lại xong trong 5 giây.
   - Chưa làm: video demo skill trên nhóm endpoint khác.
   - File: `hw05/skill/perf-test/**`, `.claude/skills/perf-test`
+
+---
+
+## #20 — Sinh test plan Spike
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-21 12:19
+- **Prompt:**
+
+```
+Tạo <MSSV>_Spike_<YYYYMMDD>.jmx từ cùng luồng:
+- Thread Group cho spike: tải nền thấp → tăng vọt trong vài giây → giữ ngắn → giảm về nền
+- Listener: View Results Tree, chỉ log lỗi
+Giải thích cách đọc kết quả để thấy hệ thống phục hồi sau spike.
+```
+
+- **AI output:**
+  - Ghi bổ sung ngày 2026-11-22. Prompt gửi 2026-11-21 12:19, ngay sau mục #05. Mục #09 từng ghi là AILOG chưa có bước này.
+  - Tạo `hw05/23120175_Spike_20261121.jmx` từ plan Stress lúc đó. Giữ 5 sampler, CSV, assertion, think-time 200–500 ms và nhánh login 403. JMeter đọc lịch thành 150 thread.
+  - Ultimate Thread Group cộng hai hàng. Nền: 20 thread, chờ 0, tăng 20 giây, giữ 160 giây, giảm 20 giây. Spike: 130 thread, chờ 80 giây, tăng 10 giây, giữ 40 giây, giảm 10 giây. Đỉnh 150 thread khoảng giây 90–130. Về 20 thread khoảng giây 140–180. Kết thúc khoảng giây 200.
+  - Listener duy nhất: View Results Tree, bật Log/Display Only: Errors, filename để trống. File `-l` vẫn ghi mọi sample.
+  - Smoke 1 vòng, timer 0: user hợp lệ cho 5 sample HTTP 200. Tài khoản bị khóa cho đúng 1 sample `01_Login_403_Locked`, không chạy bước 02–05. Xóa plan smoke tạm. Chưa chạy đủ 150 thread.
+  - Đọc phục hồi: mốc giây 140, khi thread spike đã giảm hết. Cửa sổ giây 140–170 là 30 giây sau đó. View Results Tree chỉ còn lỗi. Lỗi ngừng trong cửa sổ đó thì phục hồi về mặt lỗi. Biểu đồ Active Threads Over Time phải có bậc 20 → 150 → 20. p95 giây 140–170 về ngang giây 20–80 thì độ trễ đã phục hồi. `01_Login_403_Locked` không tính vào kết luận phục hồi vì khóa dài hơn cả bài test.
+  - File: `hw05/23120175_Spike_20261121.jmx`
 
 ---
 
