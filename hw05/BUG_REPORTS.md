@@ -19,3 +19,15 @@ Repo: https://github.com/Taylor3691/eshop-sut/issues?q=label%3Ahw05
 | [#20](https://github.com/Taylor3691/eshop-sut/issues/20) | Coupon phần trăm (`SAVE10`) tạo giảm giá âm, tổng tiền tăng gấp 10 | Assertion `04_ApplyCoupon`: `total=6000000, discount=-54000000, final=60000000` |
 | [#34](https://github.com/Taylor3691/eshop-sut/issues/34), [#68](https://github.com/Taylor3691/eshop-sut/issues/68) | Checkout tin `total_amount` do client gửi | Đọc code `POST /api/checkout` |
 | [#70](https://github.com/Taylor3691/eshop-sut/issues/70) | Giỏ không được xóa sau checkout | Là nguyên nhân chức năng của #229 |
+
+## Ảnh chụp trang GitHub Issues
+
+Ảnh chụp toàn trang (nội dung, nhãn, ảnh bằng chứng đính kèm) của từng issue, chụp ngày 22/11/2026: [`evidence/issues/`](evidence/issues/)
+
+| Issue | Ảnh |
+|---|---|
+| #225 | [`issue_225_lockout.jpg`](evidence/issues/issue_225_lockout.jpg) |
+| #226 | [`issue_226_stacktrace.jpg`](evidence/issues/issue_226_stacktrace.jpg) |
+| #227 | [`issue_227_notfound.jpg`](evidence/issues/issue_227_notfound.jpg) |
+| #228 | [`issue_228_pricetype.jpg`](evidence/issues/issue_228_pricetype.jpg) |
+| #229 | [`issue_229_memory.jpg`](evidence/issues/issue_229_memory.jpg) |

@@ -103,7 +103,7 @@ AI được dẫn dắt theo đúng các bước của kỹ thuật, không dùn
 | 3 | Chọn tham số Load/Stress/Spike theo cấu hình máy | Cursor | #03 |
 | 4 | Sinh plan Load | Cursor | #04 |
 | 5 | Sinh plan Stress | Cursor | #05 |
-| 6 | Sinh plan Spike | Cursor | **TODO: chưa có mục log** |
+| 6 | Sinh plan Spike | Cursor | #20 |
 | 7 | Review 3 plan theo 8 tiêu chí, sửa lỗi, chạy thử | Claude Code + tự kiểm tra | [`REVIEW_TESTPLANS.md`](REVIEW_TESTPLANS.md) |
 | 8 | Tăng tải Stress sau khi đo không tìm được điểm bão hòa | Claude Code | #06 |
 | 9 | Đề xuất và sinh plan Soak (AI đọc sai `IdleTime`, đã sửa) | Cursor | #07, #08 |
@@ -616,8 +616,6 @@ Chi tiết đối chiếu từng con số: [`REVIEW_TASK3.md`](REVIEW_TASK3.md).
 
 ## Phần 5 – AI Critique
 
-<!-- Bản nháp do Claude Code viết theo yêu cầu, sinh viên review và chỉnh sửa trước khi nộp. Độ dài phần thân: 286 từ (yêu cầu 200–300). Xóa dòng này sau khi review. -->
-
 Trong HW05, AI giúp tôi đi nhanh ở khâu sinh test plan và phân tích, nhưng lại sai ở đúng những chỗ cần đối chiếu với dữ liệu thật. Report HTML ghi p99 tổng của bài Soak là 3 ms trong khi mọi bước đều có p99 từ 48 ms trở lên, vậy mà AI không nghi ngờ, còn giải thích rằng "đuôi chỉ chiếm một phần năm số sample"; tính lại từ file .jtl, p99 thật là 86 ms. AI cũng lấy throughput trung bình 5.293 request/giây làm năng lực dù đỉnh đo được là 8.930, đọc cột IdleTime bằng 0 thành "không có think-time", và viết assertion chỉ kiểm tra success = true nên để lọt mã giảm giá làm tổng tiền tăng gấp mười. Trợ lý review cũng từng khẳng định sai rằng tài khoản bị khóa sau một lần nhập sai, trong khi chạy thử cho thấy là hai lần. Nguyên nhân chung là AI suy luận từ tên cột, đặc tả và thông lệ thay vì chạy thử; nó hợp lý hóa con số đầu vào thay vì kiểm tra tính nhất quán, và trình bày giả thuyết như thể đã đo. Một phần lỗi đến từ prompt của tôi: tôi yêu cầu "xử lý" lockout chứ không yêu cầu "kiểm thử" nó. Nguyên tắc tôi rút ra là luôn tính lại từ dữ liệu thô, kiểm tra mâu thuẫn giữa các con số, buộc AI ghi nguồn từng con số và đánh dấu "chưa đo", và review sau từng bước. Tôi đã biến các lỗi này thành checklist trong Agent Skill để lần sau AI tự soát trước khi tôi review.
 
 ---
@@ -632,5 +630,3 @@ Trong HW05, AI giúp tôi đi nhanh ở khâu sinh test plan và phân tích, nh
 | Claude Code | Claude Opus 5.5 | Đọc đề và chọn luồng; kế hoạch prompt; review và sửa test plan; chạy thử, đo điểm bão hòa, chạy Soak; tạo bug report và GitHub Issues; thí nghiệm cổng p95; đối chiếu số liệu cho Task 2 và Task 3; viết nháp báo cáo; tạo Agent Skill `perf-test` |
 
 Nhật ký đầy đủ (tên tool, ngày giờ, prompt nguyên văn, output) cho từng lần dùng AI: [`AILOG.md`](AILOG.md). Demo skill có nhật ký riêng: [`skill-demo/search/AILOG.md`](skill-demo/search/AILOG.md).
-
-> **TODO:** AILOG hiện chưa ghi đủ các lần dùng Claude Code trong quá trình review, chạy thử, chạy Soak, tạo issue, thí nghiệm Task 3 và viết nháp báo cáo; cùng một số prompt Cursor (sinh plan Spike, sửa lỗi nightly, đánh giá ngưỡng sau thí nghiệm). Cần bổ sung trước khi nộp.

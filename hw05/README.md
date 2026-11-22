@@ -78,7 +78,7 @@ Chi tiết: [`SOAK_RESULT.md`](SOAK_RESULT.md).
 | Video demo (Unlisted) | Task 1: https://youtu.be/7uUt8abLXus · Skill: https://youtu.be/aPxXErQeGD0 |
 | AI Critique + AI Audit Report (Markdown + PDF) | [`AI_CRITIQUE.md`](AI_CRITIQUE.md), [`AILOG.md`](AILOG.md) (Phần 5, 6 của `REPORT.md`) |
 | Git commit log | `git_log.txt` |
-| Bug report + ảnh trang Issues | [`BUG_REPORTS.md`](BUG_REPORTS.md), [`evidence/bugs/`](evidence/bugs/), `evidence/issues_page.png` (**TODO**) |
+| Bug report + ảnh trang Issues | [`BUG_REPORTS.md`](BUG_REPORTS.md), [`evidence/bugs/`](evidence/bugs/), [`evidence/issues/`](evidence/issues/) (ảnh chụp trang GitHub của #225–#229) |
 | Agent Skill + video | [`skill/perf-test/`](skill/perf-test/), [`skill-demo/search/`](skill-demo/search/) |
 | Tài liệu hỗ trợ | [`REVIEW_TESTPLANS.md`](REVIEW_TESTPLANS.md), [`REPORT_TASK2.md`](REPORT_TASK2.md), [`REPORT_TASK3.md`](REPORT_TASK3.md), [`T3_EXPERIMENT.md`](T3_EXPERIMENT.md), [`PERF_PIPELINE_FLOW.md`](PERF_PIPELINE_FLOW.md), [`scripts/`](scripts/), [`ci/perf.yml`](ci/perf.yml) |
 

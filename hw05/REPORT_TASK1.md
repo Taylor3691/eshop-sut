@@ -6,8 +6,6 @@
 - **AI:** Cursor (Grok 4.7) sinh và chỉnh test plan; Claude Code (Claude Opus 5.5) review, đo kiểm chứng. Nhật ký đầy đủ: [`AILOG.md`](AILOG.md)
 - **Nhánh:** `hw05/toanhuynh`
 
-> Các mục đánh dấu **TODO** là phần bằng chứng cần bổ sung trước khi nộp.
-
 ---
 
 ## 1. Môi trường
@@ -73,7 +71,7 @@ AI được dẫn dắt theo đúng các bước của kỹ thuật, không dùn
 | 3 | Chọn tham số Load/Stress/Spike theo cấu hình máy | Cursor | #03 |
 | 4 | Sinh plan Load | Cursor | #04 |
 | 5 | Sinh plan Stress | Cursor | #05 |
-| 6 | Sinh plan Spike | Cursor | **TODO: chưa có mục log** |
+| 6 | Sinh plan Spike | Cursor | #20 |
 | 7 | Review 3 plan theo 8 tiêu chí, sửa lỗi, chạy thử | Claude Code + tự kiểm tra | [`REVIEW_TESTPLANS.md`](REVIEW_TESTPLANS.md) |
 | 8 | Tăng tải Stress sau khi đo không tìm được điểm bão hòa | Claude Code | #06 |
 | 9 | Đề xuất và sinh plan Soak (AI đọc sai `IdleTime`, đã sửa) | Cursor | #07, #08 |
