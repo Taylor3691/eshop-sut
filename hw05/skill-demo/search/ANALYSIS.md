@@ -1,5 +1,7 @@
 # Phân tích Search Load — 23120175_SearchLoad_20261122
 
+**Video demo skill `perf-test`:** https://youtu.be/aPxXErQeGD0
+
 Nguồn số: `python3 scripts/jtl_analyze.py results/23120175_SearchLoad_20261122.jtl --window 30 --compare reports/23120175_SearchLoad_20261122/statistics.json --rss results/node_rss.csv`. Percentile là nearest-rank trên cột `elapsed` của file `.jtl`. Lần chạy 19:57:50–19:59:50 ICT ngày 22/11/2026, sau khi process Node mới khởi động, `GET /api/products/1` trả 200, bảng `users` còn 2 dòng seed. Không gọi `create_users.sh`.
 
 Ngưỡng chốt ở bước 3 cho kịch bản này: p95 &lt; 50 ms, lỗi &lt; 1%.

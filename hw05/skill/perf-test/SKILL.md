@@ -110,3 +110,8 @@ evidence/*.png  ·  ANALYSIS.md (output jtl_analyze + review AI)  ·  REVIEW.md 
 - Giả thuyết phải ghi là giả thuyết, kèm cách kiểm chứng (C6).
 - Không sửa code SUT trong repo để thử nghiệm; dùng bản sao.
 - Không bịa bằng chứng: ảnh, `.jtl`, video phải từ lần chạy thật.
+
+## Demo
+
+- **Video (YouTube, Unlisted):** https://youtu.be/aPxXErQeGD0
+- Dùng skill từ đầu đến cuối trên nhóm endpoint read-heavy (`GET /api/categories` → `GET /api/products?search=` → `GET /api/products/:id`). Kết quả: [`hw05/skill-demo/search/`](../../skill-demo/search/) (plan, CSV, `.jtl`, report HTML, `REVIEW.md`, `ANALYSIS.md`).
