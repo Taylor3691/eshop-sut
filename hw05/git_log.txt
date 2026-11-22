@@ -1,8 +1,8 @@
 HW05 – Performance Testing · 23120175 · Git commit log
 Repo: https://github.com/Taylor3691/eshop-sut (nhánh hw05/toanhuynh)
 Phạm vi: các commit của nhánh hw05/toanhuynh tính từ main (git log main..HEAD), xếp từ cũ đến mới
-Xuất lúc: 2026-11-22 22:49:27 +0700 · HEAD: 504b363
-Số commit: 31
+Xuất lúc: 2026-11-22 23:00:19 +0700 · HEAD: 8838a4b
+Số commit: 33
 
 == Tóm tắt ==
 0d6bc1b  2026-11-21 01:03  hw05: chuẩn bị môi trường và báo cáo phần cứng
@@ -36,6 +36,8 @@ d479f54  2026-11-22 21:33  hw05: ảnh bằng chứng Task 1 (Load, Stress, Spik
 6886e11  2026-11-22 21:37  hw05: Document Spike test plan session in AILOG
 634b724  2026-11-22 22:37  hw05: báo cáo chính, README, nháp AI Critique, link video Task 1
 504b363  2026-11-22 22:49  hw05: ảnh trang GitHub Issues và bản PDF
+5f02015  2026-11-22 22:49  hw05: git commit log (git_log.txt)
+8838a4b  2026-11-22 23:00  hw05: sửa chữ bị gạch ngang và trang trống trong PDF
 
 == Chi tiết (nội dung commit và file thay đổi) ==
 
@@ -1194,3 +1196,44 @@ Date:   2026-11-22 22:49:27 +0700
  hw05/evidence/issues/issue_229_memory.jpg     | Bin 0 -> 978753 bytes
  hw05/report/60_ai_audit.md                    |   2 --
  13 files changed, 15 insertions(+), 11 deletions(-)
+
+
+commit 5f020152503acda59c4a87cda1f0eaa15c3a8f81
+Author: Toan Huynh
+Date:   2026-11-22 22:49:28 +0700
+
+    hw05: git commit log (git_log.txt)
+    
+    - Xuất bằng hw05/report/export_git_log.sh, phạm vi main..HEAD
+
+ hw05/git_log.txt              | 1196 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ hw05/report/export_git_log.sh |   18 ++
+ 2 files changed, 1214 insertions(+)
+
+
+commit 8838a4b11e4bed79335f2a6131bf8528f7b40835
+Author: Toan Huynh
+Date:   2026-11-22 23:00:19 +0700
+
+    hw05: sửa chữ bị gạch ngang và trang trống trong PDF
+    
+    - Thay dấu ~ (nghĩa là khoảng) bằng ≈ ngoài phần mã: GFM hiểu ~chữ~ là gạch ngang, cả trên GitHub lẫn PDF
+    - Khi xuất PDF, thoát dấu ~ còn lại (AILOG giữ nguyên văn)
+    - Giới hạn chiều cao sơ đồ Mermaid để flow chart nằm cùng trang với tiêu đề
+    - report/md2html.mjs, report/export_pdf.sh: xuất lại 3 PDF bằng một lệnh
+
+ hw05/AILOG.pdf               | Bin 783901 -> 783901 bytes
+ hw05/AI_CRITIQUE.pdf         | Bin 26303 -> 26303 bytes
+ hw05/README.md               |  10 +++++-----
+ hw05/REPORT.md               |  54 +++++++++++++++++++++++++++---------------------------
+ hw05/REPORT.pdf              | Bin 949038 -> 946366 bytes
+ hw05/REPORT_TASK1.md         |  30 +++++++++++++++---------------
+ hw05/REPORT_TASK2.md         |  10 +++++-----
+ hw05/REPORT_TASK3.md         |  12 ++++++------
+ hw05/REVIEW_TASK3.md         |   2 +-
+ hw05/SOAK_RESULT.md          |   2 +-
+ hw05/T3_EXPERIMENT.md        |   4 ++--
+ hw05/report/40_conclusion.md |   2 +-
+ hw05/report/export_pdf.sh    |  18 ++++++++++++++++++
+ hw05/report/md2html.mjs      |  29 +++++++++++++++++++++++++++++
+ 14 files changed, 110 insertions(+), 63 deletions(-)
