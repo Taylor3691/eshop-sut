@@ -5,7 +5,7 @@
 | AI tool | Model | Dùng cho |
 |---|---|---|
 | Claude Code | Claude Opus 5.5 | Phân tích SUT, chọn luồng, lập kế hoạch prompt, chuẩn bị môi trường, sinh/review test plan, phân tích log |
-| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress, đề xuất mức Soak từ kết quả Stress, sinh test plan Soak và script ghi RAM, phân tích statistics.json và .jtl theo cửa sổ thời gian của Load/Stress/Spike/Soak, đề xuất tối ưu hiệu năng từ kết quả đo và code backend, phân loại commit nào cần chạy performance test, thiết kế pipeline nhiều tầng và ngưỡng p95 regression, vẽ flow chart Mermaid và lưu thành file, viết p95_regression.py và workflow perf.yml |
+| Cursor | Grok 4.7 | Phân tích luồng end-to-end, mapping endpoint, hành vi ảnh hưởng test tải, thiết kế CSV và script tạo user, đề xuất tham số Load/Stress/Spike, sinh test plan Load, sinh test plan Stress, đề xuất mức Soak từ kết quả Stress, sinh test plan Soak và script ghi RAM, phân tích statistics.json và .jtl theo cửa sổ thời gian của Load/Stress/Spike/Soak, đề xuất tối ưu hiệu năng từ kết quả đo và code backend, phân loại commit nào cần chạy performance test, thiết kế pipeline nhiều tầng và ngưỡng p95 regression, vẽ flow chart Mermaid và lưu thành file, viết p95_regression.py và workflow perf.yml, thảo luận chi phí và regression bị bỏ sót |
 
 Mỗi mục gồm đúng 4 trường theo đề (mục 9): tên AI tool, ngày giờ, prompt, AI output.
 
@@ -497,6 +497,56 @@ upload .jtl và báo cáo làm artifact.
   - Tự kiểm với `hw05/results/load.jtl` làm cả baseline lẫn file mới: exit 0. `05_Checkout` p95 = 5 ms, p99 = 6 ms. Bốn label kia p95 = 3 ms.
   - `.github/workflows/perf.yml`: chạy khi diff đụng backend (trừ `database.sqlite` và `test_profile.js`), script, CSV, plan Load, hoặc chính workflow. Rút Load còn 30 thread, ramp 10 s, 90 s, think-time 0–50 ms. Chưa có `hw05/baselines/pr.json` thì lưu `.jtl` và không chặn, vì runner Ubuntu không so số ms với máy M5.
   - File: `hw05/scripts/p95_regression.py`, `.github/workflows/perf.yml`
+
+---
+
+## #18 — Thảo luận chi phí và regression bị bỏ sót
+
+- **AI tool:** Cursor (Grok 4.7)
+- **Date & time:** 2026-11-22 19:01
+- **Prompt:**
+
+```
+Phần trên mới trả lời ngưỡng có bắt được regression không. Mình cần phần thảo luận đánh đổi:
+1. Chi phí thời gian từng tầng (PR, merge, nightly, weekly), kể cả lần chạy lại, và dung lượng .jtl
+   cần lưu — lấy thời lượng thật từ exp.log và SOAK_RESULT.md.
+2. Loại regression mô hình bỏ sót, với ví dụ từ dữ liệu của mình.
+3. Runner dùng chung của GitHub so với máy riêng.
+4. Cấu hình cân bằng cho nhóm 4–5 sinh viên.
+Ngoài ra kiểm tra lại câu "Run 1 lệch p95 đúng +1 ms ở cả năm label" với check_unchanged.txt của run1,
+và giải thích lại: ApplyCoupon +2 ms ở slow_1 run 1 có phải là nhiễu đã xuất hiện không.
+```
+
+- **AI output:**
+  - Câu +1 ms ở cả năm label không khớp `check_unchanged.txt` run 1. Lệch p95: Login +1, ProductDetail +1, AddToCart +0, ApplyCoupon +1, Checkout +1.
+  - ApplyCoupon +2 ms ở `slow_1` run 1 không có trong năm baseline (p95 3, 3, 3, 3, 4) và không có ở lần không sửa code (p95 4, lệch +1). Lần `slow_2` đưa về p95 4, lệch +1, kết luận đạt. Mức +2 ms xuất hiện một lần trên label không bị sửa và không lặp lại.
+  - PR 90 giây trong `exp.log`: JMeter 92–111 giây, khởi động lại backend 4–6 giây. Đường `slow_1` rồi `slow_2` dài 223 giây cả hai run. `base_1` run 1: 14,0 MB thô, 0,73 MB nén. Merge 150 giây không có mốc trong `exp.log` hay `SOAK_RESULT.md`. Nightly: 16:41:30 → 16:57:30, 714 MB thô, `soak.jtl.gz` 36 MB, không có `--confirm`. Weekly chỉ được `SOAK_RESULT.md` giới hạn Load/Stress ≤ 7,5 phút. `stress.jtl` giải nén 244 MB, `.gz` 12 MB.
+  - PR 90 giây bỏ sót gãy Soak ở phút 8 (5.885 req/s, p95 4 ms, p99 125 ms) vì p95 cả file vẫn 2 ms. Lệch p95 đúng +2 ms và giữ nguyên sau xác nhận thì exit 0, không chặn. p99 ApplyCoupon và Checkout lệch +2 ms ở lần không sửa code run 1 trong khi p95 vẫn đạt.
+  - Số đo trên `CT-TOAN-HUYNH`. Cùng plan, `base_1` 113.857 sample và `slow_1` 101.992 sample. Dải đạt +1 ms không mang sang runner khác. Một máy, một cổng 3000.
+  - Nhóm 4–5 người: một máy M5, xếp hàng. PR khoảng 2 phút, trần xác nhận khoảng 4 phút. Nightly 16 phút mỗi ngày khi máy rảnh. Weekly một lần mỗi tuần, không thay nightly. Giữ bản nén, không commit Soak 714 MB.
+  - File: không tạo/sửa file ở lượt này.
+
+---
+
+## #19 — Tạo Agent Skill perf-test
+
+- **AI tool:** Claude Code (Claude Opus 5.5)
+- **Date & time:** 2026-11-22 19:20
+- **Prompt:**
+
+```
+bạn hãy giúp mình tạo skill như đã đề xuất
+```
+
+- **AI output:**
+  - Tạo skill `hw05/skill/perf-test/` theo cấu trúc `SKILL.md`, `scripts/`, `templates/`, `references/` (giống skill `gui-checklist` của HW03). Tạo liên kết `.claude/skills/perf-test` trỏ về thư mục này để Claude Code nhận skill.
+  - Script mới: `jtl_analyze.py` (percentile nearest-rank từ cột `elapsed`, đọc `.jtl`/`.jtl.gz` theo luồng, bảng theo label, theo cửa sổ thời gian kèm số thread, ghép RSS, `--compare` đối chiếu `statistics.json`, loại tiền tố `LOCK_`); `shrink_plan.py` (rút gọn Thread Group thường/Stepping/Ultimate, timer, chuyển đường dẫn CSV tương đối thành tuyệt đối); `reset_sut.sh` (dừng process cổng, khởi động lại, health check, tạo dữ liệu, cấu hình bằng biến môi trường).
+  - Lấy lại từ HW05 và tổng quát hóa: `create_users.sh` (thêm `PREFIX`, `DOMAIN`, `WORKDIR`), `record_node_rss.sh` (thêm `PORT`, `WORKDIR`), `p95_regression.py` (giữ nguyên bản Cursor viết ở #17, đã sửa nightly/exit code).
+  - `templates/plan_template.jmx`: lấy từ plan Load, 16 chỗ tham số `${__P(...)}` (host, port, threads, rampup, duration, think_min, think_range, 3 file CSV), bỏ listener. `templates/prompts.md`: prompt từng bước rút từ AILOG #01–#17. `references/pitfalls.md`: 29 bẫy chia 4 nhóm (thiết kế plan, môi trường, phân tích, cổng regression), mỗi bẫy có cách xử lý và bằng chứng trong HW05. `SKILL.md`: quy trình 9 bước, mỗi bước có lệnh và mục review bắt buộc.
+  - Chạy thử: `jtl_analyze.py` với `load.jtl` và `soak.jtl.gz` (714 MB, 15 giây) khớp các phân tích trước, đánh dấu Total p99 3 ms (`statistics.json`) so với 86 ms (`.jtl`). `shrink_plan.py` với 4 plan HW05: XML hợp lệ. Chuỗi `reset_sut.sh` → `plan_template.jmx` (`-Jthreads=3 -Jduration=15`) → `jtl_analyze.py`: 1.805 request luồng chính, 0 lỗi.
+  - Lỗi phát hiện khi chạy thử: `reset_sut.sh` treo khi bị pipe vì subshell khởi động backend giữ stdout. Sửa bằng `( cd … && exec nohup … ) > LOG 2>&1 < /dev/null &`; chạy lại xong trong 5 giây.
+  - Chưa làm: video demo skill trên nhóm endpoint khác.
+  - File: `hw05/skill/perf-test/**`, `.claude/skills/perf-test`
 
 ---
 
