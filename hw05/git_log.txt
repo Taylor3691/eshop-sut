@@ -1,0 +1,1196 @@
+HW05 – Performance Testing · 23120175 · Git commit log
+Repo: https://github.com/Taylor3691/eshop-sut (nhánh hw05/toanhuynh)
+Phạm vi: các commit của nhánh hw05/toanhuynh tính từ main (git log main..HEAD), xếp từ cũ đến mới
+Xuất lúc: 2026-11-22 22:49:27 +0700 · HEAD: 504b363
+Số commit: 31
+
+== Tóm tắt ==
+0d6bc1b  2026-11-21 01:03  hw05: chuẩn bị môi trường và báo cáo phần cứng
+35fdd97  2026-11-21 11:53  hw05: dữ liệu CSV và script tạo user
+3f9ed9f  2026-11-21 12:01  hw05: tham số kịch bản Load/Stress/Spike
+2abb497  2026-11-21 12:10  hw05: test plan Load
+135b3c3  2026-11-21 12:19  hw05: test plan Stress
+e2e87ba  2026-11-21 12:25  hw05: test plan Spike
+1e10c7f  2026-11-21 12:45  hw05: review và sửa test plan
+5eb22e4  2026-11-21 13:37  hw05: tăng tải Stress để tìm điểm bão hòa
+82ba65b  2026-11-21 13:37  hw05: script chạy thử nhanh
+61309b8  2026-11-21 16:12  hw05: Add JMeter load test HTML reports for hw05
+a88f2af  2026-11-21 16:34  hw05: ảnh bằng chứng cho bug report
+12392c4  2026-11-21 16:35  hw05: tổng hợp bug report và link GitHub Issues #225-#229
+91fcefd  2026-11-21 17:00  hw05: test plan Soak và script ghi RAM node
+361f3f1  2026-11-21 17:00  hw05: kết quả Soak test và ngưỡng chịu tải
+2aaaf0d  2026-11-21 17:08  hw05: báo cáo Task 1
+816babb  2026-11-21 17:25  hw05: Task 2 - AI phân tích log và review
+81fb141  2026-11-21 17:34  hw05: Log AI session on classifying commits for performance tests
+3778a59  2026-11-21 17:37  hw05: Add performance-test pipeline flowchart and AI log
+dfb12bc  2026-11-21 18:21  hw05: Add p95 regression check and draft CI workflow
+96d393f  2026-11-22 01:33  hw05: sửa nightly báo động giả và mã thoát của p95_regression.py
+39944d2  2026-11-22 01:33  hw05: thí nghiệm kiểm chứng cổng p95 (Task 3)
+619e388  2026-11-22 01:35  hw05: ghi chú perf.yml là bản phác thảo đặt ở hw05/ci
+abd3781  2026-11-22 19:16  hw05: báo cáo Task 3 - Continuous Performance Testing
+b94ec71  2026-11-22 19:29  hw05: Agent Skill perf-test
+6c3335e  2026-11-22 20:02  hw05: để SEED_CMD rỗng bỏ qua bước tạo user
+c5fbd34  2026-11-22 20:02  hw05: Load demo nhóm search theo skill perf-test
+2fae1af  2026-11-22 21:22  hw05: thêm link video demo Agent Skill perf-test
+d479f54  2026-11-22 21:33  hw05: ảnh bằng chứng Task 1 (Load, Stress, Spike, listener)
+6886e11  2026-11-22 21:37  hw05: Document Spike test plan session in AILOG
+634b724  2026-11-22 22:37  hw05: báo cáo chính, README, nháp AI Critique, link video Task 1
+504b363  2026-11-22 22:49  hw05: ảnh trang GitHub Issues và bản PDF
+
+== Chi tiết (nội dung commit và file thay đổi) ==
+
+commit 0d6bc1b3959a4a07b754809f683eff316c158d42
+Author: Toan Huynh
+Date:   2026-11-21 01:03:49 +0700
+
+    hw05: chuẩn bị môi trường và báo cáo phần cứng
+
+ .gitignore                                          |  29 +++++++++++++++++++++++++++++
+ backend/database.sqlite                             | Bin 36864 -> 36864 bytes
+ hw05/evidence/hardware/HARDWARE_SPEC.md             |  20 ++++++++++++++++++++
+ hw05/evidence/hardware/hardware_fastfetch.png       | Bin 0 -> 925210 bytes
+ hw05/evidence/hardware/hardware_system_profiler.png | Bin 0 -> 614960 bytes
+ 5 files changed, 49 insertions(+)
+
+
+commit 35fdd9732be12624bbed6432675d3df9f418323c
+Author: Toan Huynh
+Date:   2026-11-21 11:53:51 +0700
+
+    hw05: dữ liệu CSV và script tạo user
+
+ backend/database.sqlite        | Bin 36864 -> 53248 bytes
+ hw05/AILOG.md                  |  92 +++++++++++++++++++++++++++++++++++++
+ hw05/data/coupons.csv          |   4 ++
+ hw05/data/coupons_negative.csv |   2 +
+ hw05/data/products.csv         |   6 +++
+ hw05/data/users.csv            | 201 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ hw05/scripts/create_users.sh   |  99 ++++++++++++++++++++++++++++++++++++++++
+ 7 files changed, 404 insertions(+)
+
+
+commit 3f9ed9f116b9f8f447b54501bd82c9aff779c936
+Author: Toan Huynh
+Date:   2026-11-21 12:01:25 +0700
+
+    hw05: tham số kịch bản Load/Stress/Spike
+
+ hw05/AILOG.md | 35 ++++++++++++++++++++++++++++++++++-
+ 1 file changed, 34 insertions(+), 1 deletion(-)
+
+
+commit 2abb497ecf28bac90806f0bdb84e0dbcab48aa23
+Author: Toan Huynh
+Date:   2026-11-21 12:10:13 +0700
+
+    hw05: test plan Load
+
+ backend/database.sqlite         | Bin 53248 -> 53248 bytes
+ hw05/23120175_Load_20261121.jmx | 399 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ hw05/AILOG.md                   |  38 +++++++-
+ 3 files changed, 436 insertions(+), 1 deletion(-)
+
+
+commit 135b3c35d5213382837a5849762e2961368cda1a
+Author: Toan Huynh
+Date:   2026-11-21 12:19:19 +0700
+
+    hw05: test plan Stress
+
+ backend/database.sqlite           | Bin 53248 -> 53248 bytes
+ hw05/23120175_Stress_20261121.jmx | 443 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ hw05/AILOG.md                     |  29 +++++-
+ 3 files changed, 471 insertions(+), 1 deletion(-)
+
+
+commit e2e87ba1264294781b71f75eec76a3847b4b0092
+Author: Toan Huynh
+Date:   2026-11-21 12:25:35 +0700
+
+    hw05: test plan Spike
+
+ backend/database.sqlite          | Bin 53248 -> 53248 bytes
+ hw05/23120175_Spike_20261121.jmx | 450 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 450 insertions(+)
+
+
+commit 1e10c7f207684246a4dc08d823d15e78e1c0d951
+Author: Toan Huynh
+Date:   2026-11-21 12:45:29 +0700
+
+    hw05: review và sửa test plan
+
+ hw05/23120175_Load_20261121.jmx   | 206 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ hw05/23120175_Spike_20261121.jmx  | 212 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++------
+ hw05/23120175_Stress_20261121.jmx | 186 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--
+ hw05/REVIEW_TESTPLANS.md          | 114 ++++++++++++++++++++++++++++++++++++++++++
+ hw05/data/coupons.csv             |   1 -
+ 5 files changed, 698 insertions(+), 21 deletions(-)
+
+
+commit 5eb22e40694712d9dd0a8d7c3bc23b7e7abe6a36
+Author: Toan Huynh
+Date:   2026-11-21 13:37:20 +0700
+
+    hw05: tăng tải Stress để tìm điểm bão hòa
+    
+    - Think-time Stress giảm từ 200-500 ms xuống 0-50 ms, mỗi bậc thêm 20 thread sau 25 s
+    - Ghi chú chạy với -Jhttpclient.reset_state_on_thread_group_iteration=false để tránh hết cổng TCP trên macOS
+    - Bổ sung dòng 8, 9 vào bảng review AI
+    - Bỏ qua kết quả chạy thử (*_try) trong .gitignore
+
+ .gitignore                        |  4 ++++
+ hw05/23120175_Stress_20261121.jmx | 22 +++++++++++-----------
+ hw05/REVIEW_TESTPLANS.md          |  6 ++++--
+ 3 files changed, 19 insertions(+), 13 deletions(-)
+
+
+commit 82ba65bc3078e232bbbe51b3a89ce9c5bf050923
+Author: Toan Huynh
+Date:   2026-11-21 13:37:20 +0700
+
+    hw05: script chạy thử nhanh
+    
+    - scripts/smoke_test.sh: chạy bản rút gọn của 3 test plan trong thư mục tạm, không sửa file gốc
+
+ hw05/scripts/smoke_test.sh | 96 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 96 insertions(+)
+
+
+commit 61309b8bf222dd0ffcb3282923d3dfdb58159965
+Author: Toan Huynh
+Date:   2026-11-21 16:12:50 +0700
+
+    hw05: Add JMeter load test HTML reports for hw05
+    
+    - Báo cáo HTML và file .jtl của 3 kịch bản Load, Stress, Spike
+    - stress.jtl (244 MB, vượt giới hạn 100 MB của GitHub) lưu dạng nén stress.jtl.gz (12 MB); bản gốc nộp trong file zip
+
+ .gitignore                                                                  |     3 +
+ hw05/AILOG.md                                                               |    22 +
+ hw05/reports/load/content/css/dashboard.css                                 |    48 +
+ hw05/reports/load/content/css/jquery-ui.min.css                             |     7 +
+ hw05/reports/load/content/css/jquery-ui.structure.min.css                   |     5 +
+ hw05/reports/load/content/css/jquery-ui.theme.min.css                       |     5 +
+ hw05/reports/load/content/css/legends.css                                   |    61 +
+ hw05/reports/load/content/css/theme.blue.css                                |   233 +
+ hw05/reports/load/content/js/curvedLines.js                                 |   483 ++
+ hw05/reports/load/content/js/customGraph.js                                 |    50 +
+ hw05/reports/load/content/js/dashboard-commons.js                           |   462 ++
+ hw05/reports/load/content/js/dashboard.js                                   |   235 +
+ hw05/reports/load/content/js/graph.js                                       |  1416 ++++
+ hw05/reports/load/content/js/hashtable.js                                   |   402 +
+ hw05/reports/load/content/js/jquery-ui.min.js                               |    13 +
+ hw05/reports/load/content/js/jquery.cookie.js                               |   117 +
+ hw05/reports/load/content/js/jquery.flot.stack.js                           |    83 +
+ hw05/reports/load/content/js/jquery.numberformatter-1.2.3.min.js            |     1 +
+ hw05/reports/load/content/js/jquery.tablesorter.min.js                      |     2 +
+ hw05/reports/load/content/pages/CustomsGraphs.html                          |   176 +
+ hw05/reports/load/content/pages/OverTime.html                               |   512 ++
+ hw05/reports/load/content/pages/ResponseTimes.html                          |   373 +
+ hw05/reports/load/content/pages/Throughput.html                             |   463 ++
+ hw05/reports/load/content/pages/icon-apache.png                             |   Bin 0 -> 4944 bytes
+ hw05/reports/load/index.html                                                |   203 +
+ hw05/reports/load/sbadmin2-1.0.7/README.md                                  |    27 +
+ hw05/reports/load/sbadmin2-1.0.7/bower.json                                 |    39 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/bootstrap/.bower.json     |    48 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/bootstrap/README.md       |   134 +
+ .../sbadmin2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css    |     6 +
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot  |   Bin 0 -> 20127 bytes
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg  |   288 +
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf  |   Bin 0 -> 45404 bytes
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff |   Bin 0 -> 23424 bytes
+ .../bootstrap/dist/fonts/glyphicons-halflings-regular.woff2                 |   Bin 0 -> 18028 bytes
+ .../load/sbadmin2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js |     7 +
+ .../load/sbadmin2-1.0.7/bower_components/flot-axislabels/.bower.json        |    14 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot-axislabels/README.md |   101 +
+ .../bower_components/flot-axislabels/jquery.flot.axislabels.js              |   466 ++
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot.tooltip/.bower.json  |    24 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot.tooltip/bower.json   |    13 +
+ .../load/sbadmin2-1.0.7/bower_components/flot.tooltip/js/excanvas.min.js    |     1 +
+ .../load/sbadmin2-1.0.7/bower_components/flot.tooltip/js/jquery.flot.js     |  3168 ++++++++
+ .../sbadmin2-1.0.7/bower_components/flot.tooltip/js/jquery.flot.tooltip.js  |   490 ++
+ .../bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js             |    12 +
+ .../bower_components/flot.tooltip/js/jquery.flot.tooltip.source.js          |   479 ++
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/.bower.json          |    19 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/.travis.yml          |     3 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/API.md               |  1498 ++++
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/CONTRIBUTING.md      |    98 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/FAQ.md               |    75 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/Makefile             |    12 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/NEWS.md              |  1026 +++
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/PLUGINS.md           |   143 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/README.md            |   110 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/component.json       |     8 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/excanvas.js          |  1428 ++++
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/excanvas.min.js      |     1 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/flot.jquery.json     |    27 +
+ .../load/sbadmin2-1.0.7/bower_components/flot/jquery.colorhelpers.js        |   180 +
+ .../reports/load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.canvas.js |   345 +
+ .../load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.categories.js     |   190 +
+ .../load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.crosshair.js      |   176 +
+ .../load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.errorbars.js      |   353 +
+ .../load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.fillbetween.js    |   226 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.image.js |   241 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.js       |  3168 ++++++++
+ .../load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.navigate.js       |   346 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.pie.js   |   820 ++
+ .../reports/load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.resize.js |    59 +
+ .../load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.selection.js      |   360 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.stack.js |   188 +
+ .../reports/load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.symbol.js |    71 +
+ .../load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.threshold.js      |   142 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/jquery.flot.time.js  |   432 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/flot/package.json         |    11 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/font-awesome/.bower.json  |    36 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/font-awesome/.npmignore   |    42 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/font-awesome/bower.json   |    23 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/css/font-awesome.css  |  1672 ++++
+ .../sbadmin2-1.0.7/bower_components/font-awesome/css/font-awesome.min.css   |     4 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/fonts/FontAwesome.otf |   Bin 0 -> 85908 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.eot             |   Bin 0 -> 56006 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.svg             |   520 ++
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.ttf             |   Bin 0 -> 112160 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.woff            |   Bin 0 -> 65452 bytes
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/bordered-pulled.less  |    16 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/less/core.less        |    11 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/less/extras.less      |     2 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/less/fixed-width.less |     6 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/font-awesome.less     |    17 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/less/icons.less       |   552 ++
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/less/larger.less      |    13 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/less/list.less        |    19 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/less/mixins.less      |    25 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/less/path.less        |    14 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/rotated-flipped.less  |    20 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/less/spinning.less    |    29 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/less/stacked.less     |    20 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/less/variables.less   |   561 ++
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_bordered-pulled.scss |    16 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/scss/_core.scss       |    11 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/scss/_extras.scss     |    44 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_fixed-width.scss     |     6 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/scss/_icons.scss      |   552 ++
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/scss/_larger.scss     |    13 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/scss/_list.scss       |    19 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/scss/_mixins.scss     |    25 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/scss/_path.scss       |    14 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_rotated-flipped.scss |    20 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/scss/_spinning.scss   |    29 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/scss/_stacked.scss    |    20 +
+ .../load/sbadmin2-1.0.7/bower_components/font-awesome/scss/_variables.scss  |   561 ++
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/font-awesome.scss     |    17 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/jquery/.bower.json        |    37 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/jquery/bower.json         |    27 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/jquery/dist/jquery.js     | 10364 ++++++++++++++++++++++++
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/jquery/dist/jquery.min.js |     2 +
+ .../reports/load/sbadmin2-1.0.7/bower_components/jquery/dist/jquery.min.map |     1 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/metisMenu/.bower.json     |    45 +
+ hw05/reports/load/sbadmin2-1.0.7/bower_components/metisMenu/README.md       |   113 +
+ .../load/sbadmin2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css   |    10 +
+ .../load/sbadmin2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js    |     9 +
+ hw05/reports/load/sbadmin2-1.0.7/dist/css/sb-admin-2.css                    |   431 +
+ hw05/reports/load/sbadmin2-1.0.7/dist/js/sb-admin-2.js                      |    36 +
+ hw05/reports/load/sbadmin2-1.0.7/less/mixins.less                           |     1 +
+ hw05/reports/load/sbadmin2-1.0.7/less/sb-admin-2.less                       |   366 +
+ hw05/reports/load/sbadmin2-1.0.7/less/variables.less                        |    14 +
+ hw05/reports/load/statistics.json                                           |   162 +
+ hw05/reports/spike/content/css/dashboard.css                                |    48 +
+ hw05/reports/spike/content/css/jquery-ui.min.css                            |     7 +
+ hw05/reports/spike/content/css/jquery-ui.structure.min.css                  |     5 +
+ hw05/reports/spike/content/css/jquery-ui.theme.min.css                      |     5 +
+ hw05/reports/spike/content/css/legends.css                                  |    61 +
+ hw05/reports/spike/content/css/theme.blue.css                               |   233 +
+ hw05/reports/spike/content/js/curvedLines.js                                |   483 ++
+ hw05/reports/spike/content/js/customGraph.js                                |    50 +
+ hw05/reports/spike/content/js/dashboard-commons.js                          |   462 ++
+ hw05/reports/spike/content/js/dashboard.js                                  |   235 +
+ hw05/reports/spike/content/js/graph.js                                      |  1416 ++++
+ hw05/reports/spike/content/js/hashtable.js                                  |   402 +
+ hw05/reports/spike/content/js/jquery-ui.min.js                              |    13 +
+ hw05/reports/spike/content/js/jquery.cookie.js                              |   117 +
+ hw05/reports/spike/content/js/jquery.flot.stack.js                          |    83 +
+ hw05/reports/spike/content/js/jquery.numberformatter-1.2.3.min.js           |     1 +
+ hw05/reports/spike/content/js/jquery.tablesorter.min.js                     |     2 +
+ hw05/reports/spike/content/pages/CustomsGraphs.html                         |   176 +
+ hw05/reports/spike/content/pages/OverTime.html                              |   512 ++
+ hw05/reports/spike/content/pages/ResponseTimes.html                         |   373 +
+ hw05/reports/spike/content/pages/Throughput.html                            |   463 ++
+ hw05/reports/spike/content/pages/icon-apache.png                            |   Bin 0 -> 4944 bytes
+ hw05/reports/spike/index.html                                               |   203 +
+ hw05/reports/spike/sbadmin2-1.0.7/README.md                                 |    27 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower.json                                |    39 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/bootstrap/.bower.json    |    48 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/bootstrap/README.md      |   134 +
+ .../sbadmin2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css    |     6 +
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot  |   Bin 0 -> 20127 bytes
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg  |   288 +
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf  |   Bin 0 -> 45404 bytes
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff |   Bin 0 -> 23424 bytes
+ .../bootstrap/dist/fonts/glyphicons-halflings-regular.woff2                 |   Bin 0 -> 18028 bytes
+ .../sbadmin2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js      |     7 +
+ .../spike/sbadmin2-1.0.7/bower_components/flot-axislabels/.bower.json       |    14 +
+ .../reports/spike/sbadmin2-1.0.7/bower_components/flot-axislabels/README.md |   101 +
+ .../bower_components/flot-axislabels/jquery.flot.axislabels.js              |   466 ++
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot.tooltip/.bower.json |    24 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot.tooltip/bower.json  |    13 +
+ .../spike/sbadmin2-1.0.7/bower_components/flot.tooltip/js/excanvas.min.js   |     1 +
+ .../spike/sbadmin2-1.0.7/bower_components/flot.tooltip/js/jquery.flot.js    |  3168 ++++++++
+ .../sbadmin2-1.0.7/bower_components/flot.tooltip/js/jquery.flot.tooltip.js  |   490 ++
+ .../bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js             |    12 +
+ .../bower_components/flot.tooltip/js/jquery.flot.tooltip.source.js          |   479 ++
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/.bower.json         |    19 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/.travis.yml         |     3 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/API.md              |  1498 ++++
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/CONTRIBUTING.md     |    98 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/FAQ.md              |    75 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/Makefile            |    12 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/NEWS.md             |  1026 +++
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/PLUGINS.md          |   143 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/README.md           |   110 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/component.json      |     8 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/excanvas.js         |  1428 ++++
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/excanvas.min.js     |     1 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/flot.jquery.json    |    27 +
+ .../spike/sbadmin2-1.0.7/bower_components/flot/jquery.colorhelpers.js       |   180 +
+ .../spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.canvas.js        |   345 +
+ .../spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.categories.js    |   190 +
+ .../spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.crosshair.js     |   176 +
+ .../spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.errorbars.js     |   353 +
+ .../spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.fillbetween.js   |   226 +
+ .../reports/spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.image.js |   241 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.js      |  3168 ++++++++
+ .../spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.navigate.js      |   346 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.pie.js  |   820 ++
+ .../spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.resize.js        |    59 +
+ .../spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.selection.js     |   360 +
+ .../reports/spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.stack.js |   188 +
+ .../spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.symbol.js        |    71 +
+ .../spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.threshold.js     |   142 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/jquery.flot.time.js |   432 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/flot/package.json        |    11 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/font-awesome/.bower.json |    36 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/font-awesome/.npmignore  |    42 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/font-awesome/bower.json  |    23 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/css/font-awesome.css |  1672 ++++
+ .../sbadmin2-1.0.7/bower_components/font-awesome/css/font-awesome.min.css   |     4 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/fonts/FontAwesome.otf      |   Bin 0 -> 85908 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.eot             |   Bin 0 -> 56006 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.svg             |   520 ++
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.ttf             |   Bin 0 -> 112160 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.woff            |   Bin 0 -> 65452 bytes
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/bordered-pulled.less  |    16 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/less/core.less       |    11 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/less/extras.less     |     2 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/fixed-width.less      |     6 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/font-awesome.less     |    17 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/less/icons.less      |   552 ++
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/less/larger.less     |    13 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/less/list.less       |    19 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/less/mixins.less     |    25 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/less/path.less       |    14 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/rotated-flipped.less  |    20 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/less/spinning.less   |    29 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/less/stacked.less    |    20 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/less/variables.less  |   561 ++
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_bordered-pulled.scss |    16 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/scss/_core.scss      |    11 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/scss/_extras.scss    |    44 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_fixed-width.scss     |     6 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/scss/_icons.scss     |   552 ++
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/scss/_larger.scss    |    13 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/scss/_list.scss      |    19 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/scss/_mixins.scss    |    25 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/scss/_path.scss      |    14 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_rotated-flipped.scss |    20 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/scss/_spinning.scss  |    29 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/scss/_stacked.scss   |    20 +
+ .../spike/sbadmin2-1.0.7/bower_components/font-awesome/scss/_variables.scss |   561 ++
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/font-awesome.scss     |    17 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/jquery/.bower.json       |    37 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/jquery/bower.json        |    27 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/jquery/dist/jquery.js    | 10364 ++++++++++++++++++++++++
+ .../reports/spike/sbadmin2-1.0.7/bower_components/jquery/dist/jquery.min.js |     2 +
+ .../spike/sbadmin2-1.0.7/bower_components/jquery/dist/jquery.min.map        |     1 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/metisMenu/.bower.json    |    45 +
+ hw05/reports/spike/sbadmin2-1.0.7/bower_components/metisMenu/README.md      |   113 +
+ .../spike/sbadmin2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css  |    10 +
+ .../spike/sbadmin2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js   |     9 +
+ hw05/reports/spike/sbadmin2-1.0.7/dist/css/sb-admin-2.css                   |   431 +
+ hw05/reports/spike/sbadmin2-1.0.7/dist/js/sb-admin-2.js                     |    36 +
+ hw05/reports/spike/sbadmin2-1.0.7/less/mixins.less                          |     1 +
+ hw05/reports/spike/sbadmin2-1.0.7/less/sb-admin-2.less                      |   366 +
+ hw05/reports/spike/sbadmin2-1.0.7/less/variables.less                       |    14 +
+ hw05/reports/spike/statistics.json                                          |   162 +
+ hw05/reports/stress/content/css/dashboard.css                               |    48 +
+ hw05/reports/stress/content/css/jquery-ui.min.css                           |     7 +
+ hw05/reports/stress/content/css/jquery-ui.structure.min.css                 |     5 +
+ hw05/reports/stress/content/css/jquery-ui.theme.min.css                     |     5 +
+ hw05/reports/stress/content/css/legends.css                                 |    61 +
+ hw05/reports/stress/content/css/theme.blue.css                              |   233 +
+ hw05/reports/stress/content/js/curvedLines.js                               |   483 ++
+ hw05/reports/stress/content/js/customGraph.js                               |    50 +
+ hw05/reports/stress/content/js/dashboard-commons.js                         |   462 ++
+ hw05/reports/stress/content/js/dashboard.js                                 |   235 +
+ hw05/reports/stress/content/js/graph.js                                     |  1416 ++++
+ hw05/reports/stress/content/js/hashtable.js                                 |   402 +
+ hw05/reports/stress/content/js/jquery-ui.min.js                             |    13 +
+ hw05/reports/stress/content/js/jquery.cookie.js                             |   117 +
+ hw05/reports/stress/content/js/jquery.flot.stack.js                         |    83 +
+ hw05/reports/stress/content/js/jquery.numberformatter-1.2.3.min.js          |     1 +
+ hw05/reports/stress/content/js/jquery.tablesorter.min.js                    |     2 +
+ hw05/reports/stress/content/pages/CustomsGraphs.html                        |   176 +
+ hw05/reports/stress/content/pages/OverTime.html                             |   512 ++
+ hw05/reports/stress/content/pages/ResponseTimes.html                        |   373 +
+ hw05/reports/stress/content/pages/Throughput.html                           |   463 ++
+ hw05/reports/stress/content/pages/icon-apache.png                           |   Bin 0 -> 4944 bytes
+ hw05/reports/stress/index.html                                              |   203 +
+ hw05/reports/stress/sbadmin2-1.0.7/README.md                                |    27 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower.json                               |    39 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/bootstrap/.bower.json   |    48 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/bootstrap/README.md     |   134 +
+ .../sbadmin2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css    |     6 +
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot  |   Bin 0 -> 20127 bytes
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg  |   288 +
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf  |   Bin 0 -> 45404 bytes
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff |   Bin 0 -> 23424 bytes
+ .../bootstrap/dist/fonts/glyphicons-halflings-regular.woff2                 |   Bin 0 -> 18028 bytes
+ .../sbadmin2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js      |     7 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot-axislabels/.bower.json      |    14 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot-axislabels/README.md        |   101 +
+ .../bower_components/flot-axislabels/jquery.flot.axislabels.js              |   466 ++
+ .../reports/stress/sbadmin2-1.0.7/bower_components/flot.tooltip/.bower.json |    24 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot.tooltip/bower.json |    13 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot.tooltip/js/excanvas.min.js  |     1 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot.tooltip/js/jquery.flot.js   |  3168 ++++++++
+ .../sbadmin2-1.0.7/bower_components/flot.tooltip/js/jquery.flot.tooltip.js  |   490 ++
+ .../bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js             |    12 +
+ .../bower_components/flot.tooltip/js/jquery.flot.tooltip.source.js          |   479 ++
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/.bower.json        |    19 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/.travis.yml        |     3 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/API.md             |  1498 ++++
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/CONTRIBUTING.md    |    98 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/FAQ.md             |    75 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/Makefile           |    12 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/NEWS.md            |  1026 +++
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/PLUGINS.md         |   143 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/README.md          |   110 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/component.json     |     8 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/excanvas.js        |  1428 ++++
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/excanvas.min.js    |     1 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/flot.jquery.json   |    27 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot/jquery.colorhelpers.js      |   180 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.canvas.js       |   345 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.categories.js   |   190 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.crosshair.js    |   176 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.errorbars.js    |   353 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.fillbetween.js  |   226 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.image.js        |   241 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.js     |  3168 ++++++++
+ .../stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.navigate.js     |   346 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.pie.js |   820 ++
+ .../stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.resize.js       |    59 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.selection.js    |   360 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.stack.js        |   188 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.symbol.js       |    71 +
+ .../stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.threshold.js    |   142 +
+ .../reports/stress/sbadmin2-1.0.7/bower_components/flot/jquery.flot.time.js |   432 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/flot/package.json       |    11 +
+ .../reports/stress/sbadmin2-1.0.7/bower_components/font-awesome/.bower.json |    36 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/font-awesome/.npmignore |    42 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/font-awesome/bower.json |    23 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/css/font-awesome.css       |  1672 ++++
+ .../sbadmin2-1.0.7/bower_components/font-awesome/css/font-awesome.min.css   |     4 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/fonts/FontAwesome.otf      |   Bin 0 -> 85908 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.eot             |   Bin 0 -> 56006 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.svg             |   520 ++
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.ttf             |   Bin 0 -> 112160 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.woff            |   Bin 0 -> 65452 bytes
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/bordered-pulled.less  |    16 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/less/core.less      |    11 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/less/extras.less    |     2 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/fixed-width.less      |     6 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/font-awesome.less     |    17 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/less/icons.less     |   552 ++
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/less/larger.less    |    13 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/less/list.less      |    19 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/less/mixins.less    |    25 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/less/path.less      |    14 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/rotated-flipped.less  |    20 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/less/spinning.less  |    29 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/less/stacked.less   |    20 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/less/variables.less |   561 ++
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_bordered-pulled.scss |    16 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/scss/_core.scss     |    11 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/scss/_extras.scss   |    44 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_fixed-width.scss     |     6 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/scss/_icons.scss    |   552 ++
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/scss/_larger.scss   |    13 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/scss/_list.scss     |    19 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/scss/_mixins.scss   |    25 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/scss/_path.scss     |    14 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_rotated-flipped.scss |    20 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/scss/_spinning.scss |    29 +
+ .../stress/sbadmin2-1.0.7/bower_components/font-awesome/scss/_stacked.scss  |    20 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_variables.scss       |   561 ++
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/font-awesome.scss     |    17 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/jquery/.bower.json      |    37 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/jquery/bower.json       |    27 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/jquery/dist/jquery.js   | 10364 ++++++++++++++++++++++++
+ .../stress/sbadmin2-1.0.7/bower_components/jquery/dist/jquery.min.js        |     2 +
+ .../stress/sbadmin2-1.0.7/bower_components/jquery/dist/jquery.min.map       |     1 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/metisMenu/.bower.json   |    45 +
+ hw05/reports/stress/sbadmin2-1.0.7/bower_components/metisMenu/README.md     |   113 +
+ .../stress/sbadmin2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css |    10 +
+ .../stress/sbadmin2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js  |     9 +
+ hw05/reports/stress/sbadmin2-1.0.7/dist/css/sb-admin-2.css                  |   431 +
+ hw05/reports/stress/sbadmin2-1.0.7/dist/js/sb-admin-2.js                    |    36 +
+ hw05/reports/stress/sbadmin2-1.0.7/less/mixins.less                         |     1 +
+ hw05/reports/stress/sbadmin2-1.0.7/less/sb-admin-2.less                     |   366 +
+ hw05/reports/stress/sbadmin2-1.0.7/less/variables.less                      |    14 +
+ hw05/reports/stress/statistics.json                                         |   162 +
+ hw05/results/load.jtl                                                       | 10740 +++++++++++++++++++++++++
+ hw05/results/spike.jtl                                                      | 14474 ++++++++++++++++++++++++++++++++++
+ hw05/results/stress.jtl.gz                                                  |   Bin 0 -> 11817492 bytes
+ 386 files changed, 142209 insertions(+)
+
+
+commit a88f2af91f006670a6b550bec07030d1928b2497
+Author: Toan Huynh
+Date:   2026-11-21 16:34:22 +0700
+
+    hw05: ảnh bằng chứng cho bug report
+    
+    - bug_lockout: khóa tài khoản sau 2 lần sai (FR-02)
+    - bug_stacktrace: lộ stack trace HTML khi JSON không hợp lệ
+    - bug_notfound: GET /api/products/:id trả 200 {} khi không tồn tại (FR-06)
+    - bug_pricetype: price dạng chuỗi với id chẵn (FR-06)
+    - bug_memory: RAM node tăng 90 -> 241 MB dưới tải Stress, userCarts không giải phóng
+
+ hw05/evidence/bugs/bug_lockout.png    | Bin 0 -> 835331 bytes
+ hw05/evidence/bugs/bug_memory.png     | Bin 0 -> 842300 bytes
+ hw05/evidence/bugs/bug_notfound.png   | Bin 0 -> 643503 bytes
+ hw05/evidence/bugs/bug_pricetype.png  | Bin 0 -> 642660 bytes
+ hw05/evidence/bugs/bug_stacktrace.png | Bin 0 -> 822344 bytes
+ 5 files changed, 0 insertions(+), 0 deletions(-)
+
+
+commit 12392c44a8707163ba9bb71794ea2ee5cdb9ff67
+Author: Toan Huynh
+Date:   2026-11-21 16:35:06 +0700
+
+    hw05: tổng hợp bug report và link GitHub Issues #225-#229
+
+ hw05/BUG_REPORTS.md | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+
+commit 91fcefd38e061d82766cc9411f8cdad63eedfbee
+Author: Toan Huynh
+Date:   2026-11-21 17:00:33 +0700
+
+    hw05: test plan Soak và script ghi RAM node
+    
+    - 23120175_Soak_20261121.jmx: 150 thread, ramp-up 60 s, 960 s, giữ think-time 0-50 ms
+    - scripts/record_node_rss.sh: ghi RSS node mỗi 5 s, tự dừng khi soak.jtl ngừng ghi
+    - AILOG #07, #08: đề xuất soak của AI và phần sửa lỗi đọc sai IdleTime
+
+ .gitignore                      |   1 +
+ hw05/23120175_Soak_20261121.jmx | 583 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ hw05/AILOG.md                   |  71 +++++++++-
+ hw05/scripts/record_node_rss.sh |  68 ++++++++++
+ 4 files changed, 722 insertions(+), 1 deletion(-)
+
+
+commit 361f3f1ccf6b2c783bff242d65b8f58f9462ab0c
+Author: Toan Huynh
+Date:   2026-11-21 17:00:34 +0700
+
+    hw05: kết quả Soak test và ngưỡng chịu tải
+    
+    - 16 phút, 5.651.325 request, 0 lỗi luồng chính
+    - Ổn định ~6.800 req/s (p95 2 ms) trong 7 phút đầu; từ phút 8 giảm còn ~5.000-5.500 req/s, p99 125-236 ms
+    - RSS node 87 -> 329 MB
+    - soak.jtl (714 MB) lưu dạng soak.jtl.gz (36 MB); ảnh JMeter + htop + RSS trong evidence/soak
+
+ hw05/SOAK_RESULT.md                                                         |    48 +
+ hw05/evidence/soak/soak_01_full_load_t124s.png                              |   Bin 0 -> 2741371 bytes
+ hw05/evidence/soak/soak_02_middle_t480s.png                                 |   Bin 0 -> 3058829 bytes
+ hw05/evidence/soak/soak_03_near_end_t940s.png                               |   Bin 0 -> 3057677 bytes
+ hw05/evidence/soak/soak_04_finished.png                                     |   Bin 0 -> 3025807 bytes
+ hw05/reports/soak/content/css/dashboard.css                                 |    48 +
+ hw05/reports/soak/content/css/jquery-ui.min.css                             |     7 +
+ hw05/reports/soak/content/css/jquery-ui.structure.min.css                   |     5 +
+ hw05/reports/soak/content/css/jquery-ui.theme.min.css                       |     5 +
+ hw05/reports/soak/content/css/legends.css                                   |    61 +
+ hw05/reports/soak/content/css/theme.blue.css                                |   233 +
+ hw05/reports/soak/content/js/curvedLines.js                                 |   483 ++
+ hw05/reports/soak/content/js/customGraph.js                                 |    50 +
+ hw05/reports/soak/content/js/dashboard-commons.js                           |   462 ++
+ hw05/reports/soak/content/js/dashboard.js                                   |   235 +
+ hw05/reports/soak/content/js/graph.js                                       |  1416 +++++
+ hw05/reports/soak/content/js/hashtable.js                                   |   402 ++
+ hw05/reports/soak/content/js/jquery-ui.min.js                               |    13 +
+ hw05/reports/soak/content/js/jquery.cookie.js                               |   117 +
+ hw05/reports/soak/content/js/jquery.flot.stack.js                           |    83 +
+ hw05/reports/soak/content/js/jquery.numberformatter-1.2.3.min.js            |     1 +
+ hw05/reports/soak/content/js/jquery.tablesorter.min.js                      |     2 +
+ hw05/reports/soak/content/pages/CustomsGraphs.html                          |   176 +
+ hw05/reports/soak/content/pages/OverTime.html                               |   512 ++
+ hw05/reports/soak/content/pages/ResponseTimes.html                          |   373 ++
+ hw05/reports/soak/content/pages/Throughput.html                             |   463 ++
+ hw05/reports/soak/content/pages/icon-apache.png                             |   Bin 0 -> 4944 bytes
+ hw05/reports/soak/index.html                                                |   203 +
+ hw05/reports/soak/sbadmin2-1.0.7/README.md                                  |    27 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower.json                                 |    39 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/bootstrap/.bower.json     |    48 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/bootstrap/README.md       |   134 +
+ .../sbadmin2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css    |     6 +
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot  |   Bin 0 -> 20127 bytes
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg  |   288 +
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf  |   Bin 0 -> 45404 bytes
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff |   Bin 0 -> 23424 bytes
+ .../bootstrap/dist/fonts/glyphicons-halflings-regular.woff2                 |   Bin 0 -> 18028 bytes
+ .../soak/sbadmin2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js |     7 +
+ .../soak/sbadmin2-1.0.7/bower_components/flot-axislabels/.bower.json        |    14 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot-axislabels/README.md |   101 +
+ .../bower_components/flot-axislabels/jquery.flot.axislabels.js              |   466 ++
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot.tooltip/.bower.json  |    24 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot.tooltip/bower.json   |    13 +
+ .../soak/sbadmin2-1.0.7/bower_components/flot.tooltip/js/excanvas.min.js    |     1 +
+ .../soak/sbadmin2-1.0.7/bower_components/flot.tooltip/js/jquery.flot.js     |  3168 +++++++++++
+ .../sbadmin2-1.0.7/bower_components/flot.tooltip/js/jquery.flot.tooltip.js  |   490 ++
+ .../bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js             |    12 +
+ .../bower_components/flot.tooltip/js/jquery.flot.tooltip.source.js          |   479 ++
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/.bower.json          |    19 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/.travis.yml          |     3 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/API.md               |  1498 +++++
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/CONTRIBUTING.md      |    98 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/FAQ.md               |    75 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/Makefile             |    12 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/NEWS.md              |  1026 ++++
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/PLUGINS.md           |   143 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/README.md            |   110 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/component.json       |     8 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/excanvas.js          |  1428 +++++
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/excanvas.min.js      |     1 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/flot.jquery.json     |    27 +
+ .../soak/sbadmin2-1.0.7/bower_components/flot/jquery.colorhelpers.js        |   180 +
+ .../reports/soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.canvas.js |   345 ++
+ .../soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.categories.js     |   190 +
+ .../soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.crosshair.js      |   176 +
+ .../soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.errorbars.js      |   353 ++
+ .../soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.fillbetween.js    |   226 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.image.js |   241 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.js       |  3168 +++++++++++
+ .../soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.navigate.js       |   346 ++
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.pie.js   |   820 +++
+ .../reports/soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.resize.js |    59 +
+ .../soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.selection.js      |   360 ++
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.stack.js |   188 +
+ .../reports/soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.symbol.js |    71 +
+ .../soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.threshold.js      |   142 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/jquery.flot.time.js  |   432 ++
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/flot/package.json         |    11 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/font-awesome/.bower.json  |    36 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/font-awesome/.npmignore   |    42 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/font-awesome/bower.json   |    23 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/css/font-awesome.css  |  1672 ++++++
+ .../sbadmin2-1.0.7/bower_components/font-awesome/css/font-awesome.min.css   |     4 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/fonts/FontAwesome.otf |   Bin 0 -> 85908 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.eot             |   Bin 0 -> 56006 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.svg             |   520 ++
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.ttf             |   Bin 0 -> 112160 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.woff            |   Bin 0 -> 65452 bytes
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/bordered-pulled.less  |    16 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/less/core.less        |    11 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/less/extras.less      |     2 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/less/fixed-width.less |     6 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/font-awesome.less     |    17 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/less/icons.less       |   552 ++
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/less/larger.less      |    13 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/less/list.less        |    19 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/less/mixins.less      |    25 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/less/path.less        |    14 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/rotated-flipped.less  |    20 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/less/spinning.less    |    29 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/less/stacked.less     |    20 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/less/variables.less   |   561 ++
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_bordered-pulled.scss |    16 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/scss/_core.scss       |    11 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/scss/_extras.scss     |    44 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_fixed-width.scss     |     6 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/scss/_icons.scss      |   552 ++
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/scss/_larger.scss     |    13 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/scss/_list.scss       |    19 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/scss/_mixins.scss     |    25 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/scss/_path.scss       |    14 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_rotated-flipped.scss |    20 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/scss/_spinning.scss   |    29 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/scss/_stacked.scss    |    20 +
+ .../soak/sbadmin2-1.0.7/bower_components/font-awesome/scss/_variables.scss  |   561 ++
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/font-awesome.scss     |    17 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/jquery/.bower.json        |    37 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/jquery/bower.json         |    27 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/jquery/dist/jquery.js     | 10364 ++++++++++++++++++++++++++++++++++
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/jquery/dist/jquery.min.js |     2 +
+ .../reports/soak/sbadmin2-1.0.7/bower_components/jquery/dist/jquery.min.map |     1 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/metisMenu/.bower.json     |    45 +
+ hw05/reports/soak/sbadmin2-1.0.7/bower_components/metisMenu/README.md       |   113 +
+ .../soak/sbadmin2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css   |    10 +
+ .../soak/sbadmin2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js    |     9 +
+ hw05/reports/soak/sbadmin2-1.0.7/dist/css/sb-admin-2.css                    |   431 ++
+ hw05/reports/soak/sbadmin2-1.0.7/dist/js/sb-admin-2.js                      |    36 +
+ hw05/reports/soak/sbadmin2-1.0.7/less/mixins.less                           |     1 +
+ hw05/reports/soak/sbadmin2-1.0.7/less/sb-admin-2.less                       |   366 ++
+ hw05/reports/soak/sbadmin2-1.0.7/less/variables.less                        |    14 +
+ hw05/reports/soak/statistics.json                                           |   162 +
+ hw05/results/soak.jtl.gz                                                    |   Bin 0 -> 35936845 bytes
+ hw05/results/soak_node_rss.csv                                              |   197 +
+ 134 files changed, 39235 insertions(+)
+
+
+commit 2aaaf0d691a9cb6298de1154d518089f5b735073
+Author: Toan Huynh
+Date:   2026-11-21 17:08:20 +0700
+
+    hw05: báo cáo Task 1
+    
+    - REPORT_TASK1.md: môi trường, luồng và nhóm endpoint, CSV, quy trình AI, thiết kế 3 kịch bản, bảng review 10 dòng, reset lockout, kết quả Load/Stress/Spike, ngưỡng chịu tải Soak, bug, hạn chế
+    - AILOG #09
+
+ hw05/AILOG.md        |  21 ++++++++
+ hw05/REPORT_TASK1.md | 250 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 271 insertions(+)
+
+
+commit 816babbcb4077487d191425374f32326bf900020
+Author: Toan Huynh
+Date:   2026-11-21 17:25:37 +0700
+
+    hw05: Task 2 - AI phân tích log và review
+    
+    - AILOG #10-#12: Cursor phân tích statistics.json, .jtl theo thời gian, đề xuất tối ưu
+    - REPORT_TASK2.md: 6 chỗ AI đọc sai kèm giá trị đúng từ .jtl, phân loại 5 đề xuất tối ưu, phần AI bỏ sót, bài học
+    - Sửa RSS ban đầu của Soak thành 79 MB (đo trước khi chạy) trong REPORT_TASK1.md, SOAK_RESULT.md
+
+ hw05/AILOG.md        | 90 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ hw05/REPORT_TASK1.md |  2 +-
+ hw05/REPORT_TASK2.md | 70 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ hw05/SOAK_RESULT.md  |  2 +-
+ 4 files changed, 161 insertions(+), 3 deletions(-)
+
+
+commit 81fb141e8fafbb27f5a64510f0060ac8299ae3f4
+Author: Toan Huynh
+Date:   2026-11-21 17:34:01 +0700
+
+    hw05: Log AI session on classifying commits for performance tests
+
+ hw05/AILOG.md | 32 +++++++++++++++++++++++++++++++-
+ 1 file changed, 31 insertions(+), 1 deletion(-)
+
+
+commit 3778a59d8529a361462f1d2d3fada7ae084aae1a
+Author: Toan Huynh
+Date:   2026-11-21 17:37:27 +0700
+
+    hw05: Add performance-test pipeline flowchart and AI log
+    
+    Record the tiered test design, p95 thresholds, and Mermaid flow so the Task 3 report can use them.
+    
+    Co-authored-by: Cursor <cursoragent@cursor.com>
+
+ hw05/AILOG.md              | 73 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ hw05/PERF_PIPELINE_FLOW.md | 59 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 131 insertions(+), 1 deletion(-)
+
+
+commit dfb12bcf15a887a8ca7c59b26572dfdc1a5503b5
+Author: Toan Huynh
+Date:   2026-11-21 18:21:19 +0700
+
+    hw05: Add p95 regression check and draft CI workflow
+    
+    Compare per-label elapsed percentiles to a baseline and sketch the pull-request job that runs the shortened plan.
+    
+    Co-authored-by: Cursor <cursoragent@cursor.com>
+
+ hw05/AILOG.md                  |  30 ++++-
+ hw05/ci/perf.yml               | 156 ++++++++++++++++++++++
+ hw05/scripts/p95_regression.py | 578 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 763 insertions(+), 1 deletion(-)
+
+
+commit 96d393f029c3b031c5e6af72204547a92f7816b6
+Author: Toan Huynh
+Date:   2026-11-22 01:33:34 +0700
+
+    hw05: sửa nightly báo động giả và mã thoát của p95_regression.py
+    
+    - Nightly bỏ phút ramp-up và phút cuối không đủ 60 giây (trước đây phút 16 chỉ 144 sample trong 34 ms bị tính 4235 req/s)
+    - Nightly/weekly trả exit 1, job lịch báo đỏ nhưng không chặn merge; thống nhất với PERF_PIPELINE_FLOW.md
+    - Thiếu file .jtl hoặc baseline trả exit 3 thay vì exit 2
+
+ hw05/PERF_PIPELINE_FLOW.md     |  8 +++++---
+ hw05/ci/perf.yml               |  1 +
+ hw05/scripts/p95_regression.py | 43 ++++++++++++++++++++++++++++++++++++-------
+ 3 files changed, 42 insertions(+), 10 deletions(-)
+
+
+commit 39944d29695bb072c3de02ddc3794123edfff871
+Author: Toan Huynh
+Date:   2026-11-22 01:33:34 +0700
+
+    hw05: thí nghiệm kiểm chứng cổng p95 (Task 3)
+    
+    - 2 lần lặp: 5 lần baseline, 1 lần không đổi code, 2 lần backend chậm +5 ms ở checkout
+    - Không đổi code: exit 0; chậm lần đầu: exit 2; chạy lại xác nhận: exit 1 ở 05_Checkout (p95 3 -> 8-9 ms)
+    - p95 dao động tối đa 1 ms giữa các lần; throughput dao động tới 7% nên không dùng làm tiêu chí
+    - .jtl nén, baseline, kết quả check, script, patch regression giả và 3 ảnh chụp
+
+ hw05/T3_EXPERIMENT.md                         |  70 ++++++++++++++++++++++++++++++++
+ hw05/evidence/t3/t3_01_baseline_running.png   | Bin 0 -> 3289919 bytes
+ hw05/evidence/t3/t3_02_slow_running.png       | Bin 0 -> 3643672 bytes
+ hw05/evidence/t3/t3_03_results.png            | Bin 0 -> 3899430 bytes
+ hw05/results/t3/run1/base_1.jtl.gz            | Bin 0 -> 732562 bytes
+ hw05/results/t3/run1/base_2.jtl.gz            | Bin 0 -> 732348 bytes
+ hw05/results/t3/run1/base_3.jtl.gz            | Bin 0 -> 732289 bytes
+ hw05/results/t3/run1/base_4.jtl.gz            | Bin 0 -> 735388 bytes
+ hw05/results/t3/run1/base_5.jtl.gz            | Bin 0 -> 689080 bytes
+ hw05/results/t3/run1/baseline_pr.json         | 144 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ hw05/results/t3/run1/check_slow_1.txt         |   9 +++++
+ hw05/results/t3/run1/check_slow_2_confirm.txt |   9 +++++
+ hw05/results/t3/run1/check_unchanged.txt      |   9 +++++
+ hw05/results/t3/run1/slow_1.jtl.gz            | Bin 0 -> 673764 bytes
+ hw05/results/t3/run1/slow_2.jtl.gz            | Bin 0 -> 671556 bytes
+ hw05/results/t3/run1/unchanged.jtl.gz         | Bin 0 -> 687006 bytes
+ hw05/results/t3/run2/base_1.jtl.gz            | Bin 0 -> 724660 bytes
+ hw05/results/t3/run2/base_2.jtl.gz            | Bin 0 -> 726465 bytes
+ hw05/results/t3/run2/base_3.jtl.gz            | Bin 0 -> 710442 bytes
+ hw05/results/t3/run2/base_4.jtl.gz            | Bin 0 -> 680026 bytes
+ hw05/results/t3/run2/base_5.jtl.gz            | Bin 0 -> 679525 bytes
+ hw05/results/t3/run2/baseline_pr.json         | 144 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ hw05/results/t3/run2/check_slow_1.txt         |   9 +++++
+ hw05/results/t3/run2/check_slow_2_confirm.txt |   9 +++++
+ hw05/results/t3/run2/check_unchanged.txt      |   9 +++++
+ hw05/results/t3/run2/slow_1.jtl.gz            | Bin 0 -> 666496 bytes
+ hw05/results/t3/run2/slow_2.jtl.gz            | Bin 0 -> 711655 bytes
+ hw05/results/t3/run2/unchanged.jtl.gz         | Bin 0 -> 679715 bytes
+ hw05/results/t3/run_experiment.sh             |  32 +++++++++++++++
+ hw05/results/t3/slow_checkout.patch           |  11 +++++
+ 30 files changed, 455 insertions(+)
+
+
+commit 619e388f1663e128cbaf2cdbaf60036f28f1cb63
+Author: Toan Huynh
+Date:   2026-11-22 01:35:29 +0700
+
+    hw05: ghi chú perf.yml là bản phác thảo đặt ở hw05/ci
+    
+    - Không đặt trong .github/workflows để không chạy trên PR của cả nhóm
+    - Cập nhật đường dẫn trong T3_EXPERIMENT.md
+
+ hw05/T3_EXPERIMENT.md | 2 +-
+ hw05/ci/perf.yml      | 3 +++
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+
+commit abd378174a35721d2b532d8b52922bc18e9d5d5c
+Author: Toan Huynh
+Date:   2026-11-22 19:16:51 +0700
+
+    hw05: báo cáo Task 3 - Continuous Performance Testing
+    
+    - REPORT_TASK3.md: phân loại commit, 5 tầng test kèm chi phí đo được, cổng p95 (+1/+2/+3 ms), flow chart theo hành vi script đã kiểm chứng, prototype, thí nghiệm regression giả, đánh đổi, bảng review 12 dòng
+    - REVIEW_TASK3.md: đối chiếu output của AI ở bước 5-6 với dữ liệu thí nghiệm
+
+ hw05/REPORT_TASK3.md | 218 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ hw05/REVIEW_TASK3.md |  68 +++++++++++++++++++++++++++++
+ 2 files changed, 286 insertions(+)
+
+
+commit b94ec716b19931d453ac099e2a8bc5d24e58ef85
+Author: Toan Huynh
+Date:   2026-11-22 19:29:36 +0700
+
+    hw05: Agent Skill perf-test
+    
+    - SKILL.md: quy trình 9 bước từ phân tích endpoint đến cổng p95 regression, mỗi bước có lệnh và mục review
+    - scripts: jtl_analyze.py, shrink_plan.py, reset_sut.sh (mới); create_users.sh, record_node_rss.sh, p95_regression.py (tổng quát hóa từ HW05)
+    - templates: plan_template.jmx tham số hóa bằng -J, prompts.md
+    - references/pitfalls.md: 29 bẫy đã gặp kèm cách xử lý và bằng chứng
+    - .claude/skills/perf-test trỏ về hw05/skill/perf-test
+    - AILOG #18 (Cursor: chi phí và regression bị bỏ sót), #19 (tạo skill)
+
+ .claude/skills/perf-test                         |   1 +
+ hw05/AILOG.md                                    |  52 +++++-
+ hw05/skill/perf-test/SKILL.md                    | 112 ++++++++++++
+ hw05/skill/perf-test/references/pitfalls.md      |  52 ++++++
+ hw05/skill/perf-test/scripts/create_users.sh     | 101 +++++++++++
+ hw05/skill/perf-test/scripts/jtl_analyze.py      | 239 +++++++++++++++++++++++++
+ hw05/skill/perf-test/scripts/p95_regression.py   | 607 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ hw05/skill/perf-test/scripts/record_node_rss.sh  |  69 ++++++++
+ hw05/skill/perf-test/scripts/reset_sut.sh        |  39 ++++
+ hw05/skill/perf-test/scripts/shrink_plan.py      | 112 ++++++++++++
+ hw05/skill/perf-test/templates/plan_template.jmx | 566 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ hw05/skill/perf-test/templates/prompts.md        |  90 ++++++++++
+ 12 files changed, 2039 insertions(+), 1 deletion(-)
+
+
+commit 6c3335e630a1ac1b5706a3724d70e98ca05c0126
+Author: Toan Huynh
+Date:   2026-11-22 20:02:21 +0700
+
+    hw05: để SEED_CMD rỗng bỏ qua bước tạo user
+    
+    Phép :- coi chuỗi rỗng là chưa gán nên reset vẫn chạy create_users.sh.
+    
+    Co-authored-by: Cursor <cursoragent@cursor.com>
+
+ hw05/skill/perf-test/scripts/reset_sut.sh | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+
+commit c5fbd34b514592399ee2156e02ee56a40a4e2470
+Author: Toan Huynh
+Date:   2026-11-22 20:02:22 +0700
+
+    hw05: Load demo nhóm search theo skill perf-test
+    
+    Đo GET categories, search và chi tiết sản phẩm, rồi phân tích .jtl từ dữ liệu thô.
+    
+    Co-authored-by: Cursor <cursoragent@cursor.com>
+
+ hw05/skill-demo/search/23120175_SearchLoad_20261122.jmx                     |    329 +
+ hw05/skill-demo/search/AILOG.md                                             |    110 +
+ hw05/skill-demo/search/ANALYSIS.md                                          |    125 +
+ hw05/skill-demo/search/REVIEW.md                                            |     40 +
+ hw05/skill-demo/search/data/keywords.csv                                    |     18 +
+ hw05/skill-demo/search/data/keywords_negative.csv                           |      4 +
+ hw05/skill-demo/search/data/products.csv                                    |      6 +
+ .../search/reports/23120175_SearchLoad_20261122/content/css/dashboard.css   |     48 +
+ .../reports/23120175_SearchLoad_20261122/content/css/jquery-ui.min.css      |      7 +
+ .../23120175_SearchLoad_20261122/content/css/jquery-ui.structure.min.css    |      5 +
+ .../23120175_SearchLoad_20261122/content/css/jquery-ui.theme.min.css        |      5 +
+ .../search/reports/23120175_SearchLoad_20261122/content/css/legends.css     |     61 +
+ .../search/reports/23120175_SearchLoad_20261122/content/css/theme.blue.css  |    233 +
+ .../search/reports/23120175_SearchLoad_20261122/content/js/curvedLines.js   |    483 +
+ .../search/reports/23120175_SearchLoad_20261122/content/js/customGraph.js   |     50 +
+ .../reports/23120175_SearchLoad_20261122/content/js/dashboard-commons.js    |    462 +
+ .../search/reports/23120175_SearchLoad_20261122/content/js/dashboard.js     |    235 +
+ .../search/reports/23120175_SearchLoad_20261122/content/js/graph.js         |   1416 +
+ .../search/reports/23120175_SearchLoad_20261122/content/js/hashtable.js     |    402 +
+ .../search/reports/23120175_SearchLoad_20261122/content/js/jquery-ui.min.js |     13 +
+ .../search/reports/23120175_SearchLoad_20261122/content/js/jquery.cookie.js |    117 +
+ .../reports/23120175_SearchLoad_20261122/content/js/jquery.flot.stack.js    |     83 +
+ .../content/js/jquery.numberformatter-1.2.3.min.js                          |      1 +
+ .../23120175_SearchLoad_20261122/content/js/jquery.tablesorter.min.js       |      2 +
+ .../reports/23120175_SearchLoad_20261122/content/pages/CustomsGraphs.html   |    176 +
+ .../search/reports/23120175_SearchLoad_20261122/content/pages/OverTime.html |    512 +
+ .../reports/23120175_SearchLoad_20261122/content/pages/ResponseTimes.html   |    373 +
+ .../reports/23120175_SearchLoad_20261122/content/pages/Throughput.html      |    463 +
+ .../reports/23120175_SearchLoad_20261122/content/pages/icon-apache.png      |    Bin 0 -> 4944 bytes
+ hw05/skill-demo/search/reports/23120175_SearchLoad_20261122/index.html      |    203 +
+ .../search/reports/23120175_SearchLoad_20261122/sbadmin2-1.0.7/README.md    |     27 +
+ .../search/reports/23120175_SearchLoad_20261122/sbadmin2-1.0.7/bower.json   |     39 +
+ .../sbadmin2-1.0.7/bower_components/bootstrap/.bower.json                   |     48 +
+ .../sbadmin2-1.0.7/bower_components/bootstrap/README.md                     |    134 +
+ .../sbadmin2-1.0.7/bower_components/bootstrap/dist/css/bootstrap.min.css    |      6 +
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot  |    Bin 0 -> 20127 bytes
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg  |    288 +
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf  |    Bin 0 -> 45404 bytes
+ .../bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff |    Bin 0 -> 23424 bytes
+ .../bootstrap/dist/fonts/glyphicons-halflings-regular.woff2                 |    Bin 0 -> 18028 bytes
+ .../sbadmin2-1.0.7/bower_components/bootstrap/dist/js/bootstrap.min.js      |      7 +
+ .../sbadmin2-1.0.7/bower_components/flot-axislabels/.bower.json             |     14 +
+ .../sbadmin2-1.0.7/bower_components/flot-axislabels/README.md               |    101 +
+ .../bower_components/flot-axislabels/jquery.flot.axislabels.js              |    466 +
+ .../sbadmin2-1.0.7/bower_components/flot.tooltip/.bower.json                |     24 +
+ .../sbadmin2-1.0.7/bower_components/flot.tooltip/bower.json                 |     13 +
+ .../sbadmin2-1.0.7/bower_components/flot.tooltip/js/excanvas.min.js         |      1 +
+ .../sbadmin2-1.0.7/bower_components/flot.tooltip/js/jquery.flot.js          |   3168 +
+ .../sbadmin2-1.0.7/bower_components/flot.tooltip/js/jquery.flot.tooltip.js  |    490 +
+ .../bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js             |     12 +
+ .../bower_components/flot.tooltip/js/jquery.flot.tooltip.source.js          |    479 +
+ .../sbadmin2-1.0.7/bower_components/flot/.bower.json                        |     19 +
+ .../sbadmin2-1.0.7/bower_components/flot/.travis.yml                        |      3 +
+ .../sbadmin2-1.0.7/bower_components/flot/API.md                             |   1498 +
+ .../sbadmin2-1.0.7/bower_components/flot/CONTRIBUTING.md                    |     98 +
+ .../sbadmin2-1.0.7/bower_components/flot/FAQ.md                             |     75 +
+ .../sbadmin2-1.0.7/bower_components/flot/Makefile                           |     12 +
+ .../sbadmin2-1.0.7/bower_components/flot/NEWS.md                            |   1026 +
+ .../sbadmin2-1.0.7/bower_components/flot/PLUGINS.md                         |    143 +
+ .../sbadmin2-1.0.7/bower_components/flot/README.md                          |    110 +
+ .../sbadmin2-1.0.7/bower_components/flot/component.json                     |      8 +
+ .../sbadmin2-1.0.7/bower_components/flot/excanvas.js                        |   1428 +
+ .../sbadmin2-1.0.7/bower_components/flot/excanvas.min.js                    |      1 +
+ .../sbadmin2-1.0.7/bower_components/flot/flot.jquery.json                   |     27 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.colorhelpers.js             |    180 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.canvas.js              |    345 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.categories.js          |    190 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.crosshair.js           |    176 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.errorbars.js           |    353 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.fillbetween.js         |    226 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.image.js               |    241 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.js                     |   3168 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.navigate.js            |    346 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.pie.js                 |    820 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.resize.js              |     59 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.selection.js           |    360 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.stack.js               |    188 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.symbol.js              |     71 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.threshold.js           |    142 +
+ .../sbadmin2-1.0.7/bower_components/flot/jquery.flot.time.js                |    432 +
+ .../sbadmin2-1.0.7/bower_components/flot/package.json                       |     11 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/.bower.json                |     36 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/.npmignore                 |     42 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/bower.json                 |     23 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/css/font-awesome.css       |   1672 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/css/font-awesome.min.css   |      4 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/fonts/FontAwesome.otf      |    Bin 0 -> 85908 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.eot             |    Bin 0 -> 56006 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.svg             |    520 +
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.ttf             |    Bin 0 -> 112160 bytes
+ .../bower_components/font-awesome/fonts/fontawesome-webfont.woff            |    Bin 0 -> 65452 bytes
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/bordered-pulled.less  |     16 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/core.less             |     11 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/extras.less           |      2 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/fixed-width.less      |      6 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/font-awesome.less     |     17 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/icons.less            |    552 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/larger.less           |     13 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/list.less             |     19 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/mixins.less           |     25 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/path.less             |     14 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/rotated-flipped.less  |     20 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/spinning.less         |     29 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/stacked.less          |     20 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/less/variables.less        |    561 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_bordered-pulled.scss |     16 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_core.scss            |     11 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_extras.scss          |     44 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_fixed-width.scss     |      6 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_icons.scss           |    552 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_larger.scss          |     13 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_list.scss            |     19 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_mixins.scss          |     25 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_path.scss            |     14 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_rotated-flipped.scss |     20 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_spinning.scss        |     29 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_stacked.scss         |     20 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/_variables.scss       |    561 +
+ .../sbadmin2-1.0.7/bower_components/font-awesome/scss/font-awesome.scss     |     17 +
+ .../sbadmin2-1.0.7/bower_components/jquery/.bower.json                      |     37 +
+ .../sbadmin2-1.0.7/bower_components/jquery/bower.json                       |     27 +
+ .../sbadmin2-1.0.7/bower_components/jquery/dist/jquery.js                   |  10364 ++
+ .../sbadmin2-1.0.7/bower_components/jquery/dist/jquery.min.js               |      2 +
+ .../sbadmin2-1.0.7/bower_components/jquery/dist/jquery.min.map              |      1 +
+ .../sbadmin2-1.0.7/bower_components/metisMenu/.bower.json                   |     45 +
+ .../sbadmin2-1.0.7/bower_components/metisMenu/README.md                     |    113 +
+ .../sbadmin2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.css        |     10 +
+ .../sbadmin2-1.0.7/bower_components/metisMenu/dist/metisMenu.min.js         |      9 +
+ .../23120175_SearchLoad_20261122/sbadmin2-1.0.7/dist/css/sb-admin-2.css     |    431 +
+ .../23120175_SearchLoad_20261122/sbadmin2-1.0.7/dist/js/sb-admin-2.js       |     36 +
+ .../reports/23120175_SearchLoad_20261122/sbadmin2-1.0.7/less/mixins.less    |      1 +
+ .../23120175_SearchLoad_20261122/sbadmin2-1.0.7/less/sb-admin-2.less        |    366 +
+ .../reports/23120175_SearchLoad_20261122/sbadmin2-1.0.7/less/variables.less |     14 +
+ hw05/skill-demo/search/reports/23120175_SearchLoad_20261122/statistics.json |     66 +
+ hw05/skill-demo/search/results/23120175_SearchLoad_20261122.jtl             | 185572 +++++++++++++++++++++++++++++++++
+ hw05/skill-demo/search/results/node_rss.csv                                 |     29 +
+ 136 files changed, 225127 insertions(+)
+
+
+commit 2fae1af8bb519032b9dc6056143296e5d3201413
+Author: Toan Huynh
+Date:   2026-11-22 21:22:31 +0700
+
+    hw05: thêm link video demo Agent Skill perf-test
+
+ hw05/skill-demo/search/ANALYSIS.md | 2 ++
+ hw05/skill/perf-test/SKILL.md      | 5 +++++
+ 2 files changed, 7 insertions(+)
+
+
+commit d479f54452ef40d6ccade8bf740c88ed8d8e3ead
+Author: Toan Huynh
+Date:   2026-11-22 21:33:26 +0700
+
+    hw05: ảnh bằng chứng Task 1 (Load, Stress, Spike, listener)
+    
+    - evidence/load, stress, spike: JMeter cùng htop process node, chụp trong chính các lần chạy có file .jtl nộp
+    - evidence/listeners: Aggregate Report (load.jtl), Summary Report (stress.jtl), View Results Tree (spike.jtl)
+    - REPORT_TASK1.md: cập nhật bảng bằng chứng 7.3, bằng chứng reset 7.2, CPU node 101,4% lúc đỉnh Stress
+
+ hw05/REPORT_TASK1.md                                    |  10 +++++-----
+ hw05/evidence/listeners/load_aggregate_report.png       | Bin 0 -> 1324510 bytes
+ hw05/evidence/listeners/spike_view_results_tree.png     | Bin 0 -> 1316593 bytes
+ hw05/evidence/listeners/stress_summary_report.png       | Bin 0 -> 1501563 bytes
+ hw05/evidence/load/load_01_running_1532.png             | Bin 0 -> 2057010 bytes
+ hw05/evidence/load/load_02_finished_1536.png            | Bin 0 -> 2075695 bytes
+ hw05/evidence/spike/spike_01_during_spike_1553.png      | Bin 0 -> 2014265 bytes
+ hw05/evidence/spike/spike_02_just_after_spike_1554.png  | Bin 0 -> 2012929 bytes
+ hw05/evidence/spike/spike_03_finished_1556.png          | Bin 0 -> 2056113 bytes
+ hw05/evidence/stress/stress_01_peak_200threads_1547.png | Bin 0 -> 2055631 bytes
+ hw05/evidence/stress/stress_02_finished_1548.png        | Bin 0 -> 2018408 bytes
+ 11 files changed, 5 insertions(+), 5 deletions(-)
+
+
+commit 6886e115702a49fed251ab500c082185a2cc4022
+Author: Toan Huynh
+Date:   2026-11-22 21:37:54 +0700
+
+    hw05: Document Spike test plan session in AILOG
+
+ hw05/AILOG.md | 26 +++++++++++++++++++++++++-
+ 1 file changed, 25 insertions(+), 1 deletion(-)
+
+
+commit 634b72458823a5b5ff7d6ff4eb0dda7438e0be61
+Author: Toan Huynh
+Date:   2026-11-22 22:37:52 +0700
+
+    hw05: báo cáo chính, README, nháp AI Critique, link video Task 1
+    
+    - REPORT.md ghép từ REPORT_TASK1/2/3 và report/*.md bằng report/build_report.py
+    - README.md: bảng tự đánh giá (chưa điền điểm), tóm tắt kịch bản, nhóm endpoint, ngưỡng chịu tải, bug, danh mục bài nộp
+    - AI_CRITIQUE.md: bản nháp 286 từ, chờ sinh viên review
+    - Link video Task 1: https://youtu.be/7uUt8abLXus
+
+ hw05/AI_CRITIQUE.md          |   3 +
+ hw05/README.md               |  97 +++++++++++++
+ hw05/REPORT.md               | 636 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ hw05/REPORT_TASK1.md         |   2 +-
+ hw05/report/00_header.md     |  37 +++++
+ hw05/report/30_skill.md      |  30 ++++
+ hw05/report/40_conclusion.md |   9 ++
+ hw05/report/60_ai_audit.md   |  10 ++
+ hw05/report/build_report.py  |  49 +++++++
+ 9 files changed, 872 insertions(+), 1 deletion(-)
+
+
+commit 504b363afff5895621bd2d8f9f7d92dd62e44a3c
+Author: Toan Huynh
+Date:   2026-11-22 22:49:27 +0700
+
+    hw05: ảnh trang GitHub Issues và bản PDF
+    
+    - evidence/issues: ảnh chụp toàn trang issue #225-#229
+    - REPORT.pdf, AI_CRITIQUE.pdf, AILOG.pdf (Markdown -> HTML bằng marked, Mermaid -> SVG, in PDF bằng Chrome headless)
+    - README, BUG_REPORTS: liên kết ảnh trang Issues; REPORT_TASK1: bước sinh plan Spike trỏ AILOG #20
+    - REPORT.md ghép lại với AI Critique đã review; bỏ ghi chú TODO ở phần AI Audit Report
+
+ hw05/AILOG.pdf                                | Bin 0 -> 783901 bytes
+ hw05/AI_CRITIQUE.pdf                          | Bin 0 -> 26303 bytes
+ hw05/BUG_REPORTS.md                           |  12 ++++++++++++
+ hw05/README.md                                |   2 +-
+ hw05/REPORT.md                                |   6 +-----
+ hw05/REPORT.pdf                               | Bin 0 -> 949038 bytes
+ hw05/REPORT_TASK1.md                          |   4 +---
+ hw05/evidence/issues/issue_225_lockout.jpg    | Bin 0 -> 967348 bytes
+ hw05/evidence/issues/issue_226_stacktrace.jpg | Bin 0 -> 855290 bytes
+ hw05/evidence/issues/issue_227_notfound.jpg   | Bin 0 -> 758431 bytes
+ hw05/evidence/issues/issue_228_pricetype.jpg  | Bin 0 -> 804261 bytes
+ hw05/evidence/issues/issue_229_memory.jpg     | Bin 0 -> 978753 bytes
+ hw05/report/60_ai_audit.md                    |   2 --
+ 13 files changed, 15 insertions(+), 11 deletions(-)
