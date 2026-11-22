@@ -73,7 +73,7 @@ Chi tiết: [`SOAK_RESULT.md`](SOAK_RESULT.md).
 | Link repo GitHub | https://github.com/Taylor3691/eshop-sut/tree/hw05/toanhuynh/hw05 |
 | 3 test plan (+ Soak) | `23120175_{Load,Stress,Spike,Soak}_20261121.jmx` |
 | Dữ liệu CSV | [`data/`](data/) |
-| 3 file `.jtl` thô + 3 thư mục HTML report | `results/load.jtl`, `results/stress.jtl`, `results/spike.jtl` (+ `soak.jtl`); [`reports/`](reports/). Repo lưu bản nén `.jtl.gz` cho file > 100 MB; bản gốc trong zip |
+| 3 file `.jtl` thô + 3 thư mục HTML report | `results/load.jtl`, `results/spike.jtl`, `results/stress.jtl` (trong zip: `stress.jtl.xz`, giải nén ra đúng file gốc 233 MB); [`reports/`](reports/). Soak: xem mục bên dưới |
 | Ảnh resource monitor và phần cứng | [`evidence/load/`](evidence/load/), [`evidence/stress/`](evidence/stress/), [`evidence/spike/`](evidence/spike/), [`evidence/soak/`](evidence/soak/), [`evidence/listeners/`](evidence/listeners/), [`evidence/hardware/`](evidence/hardware/) |
 | Video demo (Unlisted) | Task 1: https://youtu.be/7uUt8abLXus · Skill: https://youtu.be/aPxXErQeGD0 |
 | AI Critique + AI Audit Report (Markdown + PDF) | [`AI_CRITIQUE.md`](AI_CRITIQUE.md), [`AILOG.md`](AILOG.md) (Phần 5, 6 của `REPORT.md`) |
@@ -81,6 +81,21 @@ Chi tiết: [`SOAK_RESULT.md`](SOAK_RESULT.md).
 | Bug report + ảnh trang Issues | [`BUG_REPORTS.md`](BUG_REPORTS.md), [`evidence/bugs/`](evidence/bugs/), [`evidence/issues/`](evidence/issues/) (ảnh chụp trang GitHub của #225–#229) |
 | Agent Skill + video | [`skill/perf-test/`](skill/perf-test/), [`skill-demo/search/`](skill-demo/search/) |
 | Tài liệu hỗ trợ | [`REVIEW_TESTPLANS.md`](REVIEW_TESTPLANS.md), [`REPORT_TASK2.md`](REPORT_TASK2.md), [`REPORT_TASK3.md`](REPORT_TASK3.md), [`T3_EXPERIMENT.md`](T3_EXPERIMENT.md), [`PERF_PIPELINE_FLOW.md`](PERF_PIPELINE_FLOW.md), [`scripts/`](scripts/), [`ci/perf.yml`](ci/perf.yml) |
+
+## Nộp trên Moodle (giới hạn 20 MB)
+
+File zip `23120175_HW05_AI_Performance_098.zip` chứa toàn bộ bài nộp, trừ các phần dưới đây (quá lớn) được để trên GitHub:
+
+| Phần | Lý do | Link |
+|---|---|---|
+| `soak.jtl` (Soak, 681 MB thô) | Không thuộc 3 file `.jtl` bắt buộc; quá lớn | [`results/soak.jtl.gz`](https://github.com/Taylor3691/eshop-sut/blob/hw05/toanhuynh/hw05/results/soak.jtl.gz) (35 MB, giải nén ra đúng file gốc) |
+| Báo cáo HTML và ảnh của Soak | Đi kèm lần chạy Soak | [`reports/soak/`](https://github.com/Taylor3691/eshop-sut/tree/hw05/toanhuynh/hw05/reports/soak), [`evidence/soak/`](https://github.com/Taylor3691/eshop-sut/tree/hw05/toanhuynh/hw05/evidence/soak) |
+| `.jtl` thí nghiệm Task 3 (16 file) | 11 MB | [`results/t3/`](https://github.com/Taylor3691/eshop-sut/tree/hw05/toanhuynh/hw05/results/t3) (zip giữ baseline, kết quả `check_*.txt`, log) |
+| `.jtl` và báo cáo HTML của demo skill | 26 MB | [`skill-demo/search/`](https://github.com/Taylor3691/eshop-sut/tree/hw05/toanhuynh/hw05/skill-demo/search) (zip giữ plan, CSV, `ANALYSIS.md`, `REVIEW.md`, `AILOG.md`) |
+
+Trong zip:
+- `results/stress.jtl.xz`: bản nén xz của `stress.jtl`; giải nén bằng `xz -dk results/stress.jtl.xz` (hoặc 7-Zip trên Windows).
+- Ảnh trong `evidence/` được chuyển sang JPEG (chất lượng 70, cạnh dài tối đa 1800 px) để vừa dung lượng; bản PNG gốc ở [`evidence/`](https://github.com/Taylor3691/eshop-sut/tree/hw05/toanhuynh/hw05/evidence) trên GitHub.
 
 ## Chạy lại
 
