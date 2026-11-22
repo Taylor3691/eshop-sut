@@ -157,7 +157,7 @@ Bằng chứng: khung dưới của các ảnh trong `evidence/load/`, `evidence
 | Spike (15:51–15:56) | [`results/spike.jtl`](results/spike.jtl) | [`reports/spike/`](reports/spike/) | [`evidence/spike/`](evidence/spike/): đang spike 15:53, ngay sau spike 15:54, kết thúc 15:56 | [View Results Tree](evidence/listeners/spike_view_results_tree.png) (chỉ lỗi: `LOCK_04` 403) |
 | Soak | `results/soak.jtl` (714 MB, nộp trong zip; repo lưu [`soak.jtl.gz`](results/soak.jtl.gz)) | [`reports/soak/`](reports/soak/) | [`evidence/soak/`](evidence/soak/) (4 ảnh) | không áp dụng |
 
-**Video demo:** **TODO** link YouTube (Unlisted).
+**Video demo (YouTube, Unlisted):** https://youtu.be/7uUt8abLXus (JMeter và resource monitor cùng khung hình, thuyết minh tiếng Việt).
 
 ---
 
