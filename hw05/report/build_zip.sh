@@ -48,6 +48,14 @@ done
 
 # 6. Sửa liên kết ảnh .png -> .jpg trong các file .md của bản sao
 find "$STAGE" -name '*.md' -print0 | xargs -0 perl -pi -e 's#(evidence/[^\s)`"]+?)\.png#$1.jpg#g'
+# Phần để ngoài zip: trỏ thẳng lên GitHub; stress.jtl trong zip là bản .xz
+G="https://github.com/Taylor3691/eshop-sut"; B="hw05/toanhuynh/hw05"
+find "$STAGE" -name '*.md' -print0 | xargs -0 perl -pi -e "
+  s#\\]\\(results/stress\\.jtl\\.gz\\)#](results/stress.jtl.xz)#g;
+  s#\\]\\(results/soak\\.jtl\\.gz\\)#]($G/blob/$B/results/soak.jtl.gz)#g;
+  s#\\]\\(reports/soak/\\)#]($G/tree/$B/reports/soak)#g;
+  s#\\]\\(evidence/soak/\\)#]($G/tree/$B/evidence/soak)#g;"
+
 
 # 7. Bỏ file không nộp
 find "$STAGE" \( -name '.DS_Store' -o -name 'jmeter.log' \) -delete
