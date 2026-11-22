@@ -146,15 +146,15 @@ Mỗi plan cố ý khóa 1 tài khoản trong setUp; ngoài ra login lỗi dư�
 3. Tạo lại user test: `bash hw05/scripts/create_users.sh` (200 user, ghi lại `data/users.csv`).
 4. Kiểm tra: `curl -s -X POST localhost:3000/api/login -H 'Content-Type: application/json' -d '{"email":"loaduser001@eshop.com","password":"LoadUser123!"}'` trả token.
 
-**TODO:** ảnh chụp các bước reset (hoặc đoạn trong video).
+Bằng chứng: khung dưới của các ảnh trong `evidence/load/`, `evidence/stress/`, `evidence/spike/` ghi lại bước 1–3 trước mỗi lần chạy (Ctrl+C, `node database.js && node server.js` với dòng "Database initialized and seeded", `create_users.sh` với dòng "Wrote 200 rows"). Bước 4 (curl kiểm tra login) chưa có ảnh riêng.
 
 ### 7.3 Bằng chứng
 
 | Lần chạy | `.jtl` thô | Báo cáo HTML | Ảnh JMeter + resource monitor | Ảnh listener |
 |---|---|---|---|---|
-| Load | [`results/load.jtl`](results/load.jtl) | [`reports/load/`](reports/load/) | **TODO** | **TODO** Aggregate Report |
-| Stress | `results/stress.jtl` (244 MB, nộp trong zip; repo lưu [`stress.jtl.gz`](results/stress.jtl.gz)) | [`reports/stress/`](reports/stress/) | **TODO** | **TODO** Summary Report |
-| Spike | [`results/spike.jtl`](results/spike.jtl) | [`reports/spike/`](reports/spike/) | **TODO** | **TODO** View Results Tree |
+| Load (15:26–15:36) | [`results/load.jtl`](results/load.jtl) | [`reports/load/`](reports/load/) | [`evidence/load/`](evidence/load/): giữa bài 15:32, kết thúc 15:36 | [Aggregate Report](evidence/listeners/load_aggregate_report.png) |
+| Stress (15:42–15:48) | `results/stress.jtl` (244 MB, nộp trong zip; repo lưu [`stress.jtl.gz`](results/stress.jtl.gz)) | [`reports/stress/`](reports/stress/) | [`evidence/stress/`](evidence/stress/): đỉnh 200 thread 15:47, kết thúc 15:48 | [Summary Report](evidence/listeners/stress_summary_report.png) |
+| Spike (15:51–15:56) | [`results/spike.jtl`](results/spike.jtl) | [`reports/spike/`](reports/spike/) | [`evidence/spike/`](evidence/spike/): đang spike 15:53, ngay sau spike 15:54, kết thúc 15:56 | [View Results Tree](evidence/listeners/spike_view_results_tree.png) (chỉ lỗi: `LOCK_04` 403) |
 | Soak | `results/soak.jtl` (714 MB, nộp trong zip; repo lưu [`soak.jtl.gz`](results/soak.jtl.gz)) | [`reports/soak/`](reports/soak/) | [`evidence/soak/`](evidence/soak/) (4 ảnh) | không áp dụng |
 
 **Video demo:** **TODO** link YouTube (Unlisted).
@@ -186,7 +186,7 @@ Tải giữ đều 30 thread, ~18,9 request/giây trong 9 phút sau ramp-up; p95
 | 180–210 s | 140 | 6.315 | 2 ms |
 | 270–330 s | 200 | 8.862–8.930 | 3 ms |
 
-Throughput tăng tuyến tính (~45 request/giây mỗi thread), p95 không đổi, 0 lỗi: ở 200 thread với think-time 0–50 ms backend **chưa bão hòa**. Lần đo riêng không think-time (ghi trong review dòng 8, chạy ngoài plan nộp) cho thấy Node bão hòa ở **~50 thread, ~11.400 request/giây**; tăng lên 200 thread throughput giảm còn ~8.600 request/giây và p95 tăng từ 4 lên 35 ms, CPU `node` ~125–130% (một nhân chạy kín). Nút thắt là **luồng xử lý chính duy nhất của Node.js**: máy có 10 nhân nhưng backend chỉ dùng được một.
+Throughput tăng tuyến tính (~45 request/giây mỗi thread), p95 không đổi, 0 lỗi: ở 200 thread với think-time 0–50 ms backend **chưa bão hòa**. Lần đo riêng không think-time (ghi trong review dòng 8, chạy ngoài plan nộp) cho thấy Node bão hòa ở **~50 thread, ~11.400 request/giây**; tăng lên 200 thread throughput giảm còn ~8.600 request/giây và p95 tăng từ 4 lên 35 ms, CPU `node` ~125–130% (một nhân chạy kín). Ngay trong lần chạy nộp, ảnh htop lúc đỉnh 200 thread (`evidence/stress/stress_01_peak_200threads_1547.png`, ~8.950 request/giây) cho thấy `node` đã ở **101,4% CPU**: luồng chính sát mức bão hòa dù p95 vẫn 2–3 ms. Nút thắt là **luồng xử lý chính duy nhất của Node.js**: máy có 10 nhân nhưng backend chỉ dùng được một.
 
 ### 8.4 Spike: không suy giảm, nhưng biên độ spike quá nhỏ
 
