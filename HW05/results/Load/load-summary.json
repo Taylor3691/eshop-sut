@@ -1,0 +1,148 @@
+{
+  "source_file": "HW05\\results\\Load\\23120157_Load_20261122_161045.jtl",
+  "required_columns": [
+    "elapsed",
+    "label",
+    "success",
+    "timeStamp"
+  ],
+  "percentile_method": "nearest rank, ceil(p*n), one-based",
+  "overall": {
+    "samples": 5,
+    "errors": 0,
+    "error_rate_percent": 0.0,
+    "elapsed_ms": {
+      "min": 4,
+      "mean": 15.2,
+      "p90": 48.0,
+      "p95": 48.0,
+      "p99": 48.0,
+      "max": 48
+    },
+    "throughput_samples_per_second": 0.4114210483008311,
+    "window": {
+      "start_epoch_ms": 1795338937843,
+      "end_epoch_ms": 1795338949995,
+      "start_utc": "2026-11-22T09:15:37.843000+00:00",
+      "end_utc": "2026-11-22T09:15:49.995000+00:00",
+      "inclusive_span_ms": 12153,
+      "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+    }
+  },
+  "by_label": {
+    "01 - Login": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 48,
+        "mean": 48.0,
+        "p90": 48.0,
+        "p95": 48.0,
+        "p99": 48.0,
+        "max": 48
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795338937843,
+        "end_epoch_ms": 1795338937843,
+        "start_utc": "2026-11-22T09:15:37.843000+00:00",
+        "end_utc": "2026-11-22T09:15:37.843000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "02 - Search products": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 4,
+        "mean": 4.0,
+        "p90": 4.0,
+        "p95": 4.0,
+        "p99": 4.0,
+        "max": 4
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795338940957,
+        "end_epoch_ms": 1795338940957,
+        "start_utc": "2026-11-22T09:15:40.957000+00:00",
+        "end_utc": "2026-11-22T09:15:40.957000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "03 - Product detail": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 4,
+        "mean": 4.0,
+        "p90": 4.0,
+        "p95": 4.0,
+        "p99": 4.0,
+        "max": 4
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795338943976,
+        "end_epoch_ms": 1795338943976,
+        "start_utc": "2026-11-22T09:15:43.976000+00:00",
+        "end_utc": "2026-11-22T09:15:43.976000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "04 - Add item to cart": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 5,
+        "mean": 5.0,
+        "p90": 5.0,
+        "p95": 5.0,
+        "p99": 5.0,
+        "max": 5
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795338946983,
+        "end_epoch_ms": 1795338946983,
+        "start_utc": "2026-11-22T09:15:46.983000+00:00",
+        "end_utc": "2026-11-22T09:15:46.983000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "05 - Checkout": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 15,
+        "mean": 15.0,
+        "p90": 15.0,
+        "p95": 15.0,
+        "p99": 15.0,
+        "max": 15
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795338949995,
+        "end_epoch_ms": 1795338949995,
+        "start_utc": "2026-11-22T09:15:49.995000+00:00",
+        "end_utc": "2026-11-22T09:15:49.995000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    }
+  },
+  "warnings": [
+    "Insufficient data for stable tail percentiles: only 5 valid sample(s)"
+  ],
+  "malformed_rows": []
+}

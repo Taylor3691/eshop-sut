@@ -1,0 +1,11 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1795339178750,116,Stage 2 - 01 - Login,200,OK,Stage 2 - 2 VU 1-1,text,true,,695,271,2,2,http://localhost:3000/api/login,115,0,97
+1795339179488,5,Stage 2 - 01 - Login,200,OK,Stage 2 - 2 VU 1-2,text,true,,695,271,2,2,http://localhost:3000/api/login,5,0,2
+1795339181946,3,Stage 2 - 02 - Search products,200,OK,Stage 2 - 2 VU 1-1,text,true,,453,154,2,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795339182504,2,Stage 2 - 02 - Search products,200,OK,Stage 2 - 2 VU 1-2,text,true,,453,154,2,2,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,2,0,0
+1795339184959,3,Stage 2 - 03 - Product detail,200,OK,Stage 2 - 2 VU 1-1,text,true,,451,131,2,2,http://localhost:3000/api/products/1,3,0,0
+1795339185520,7,Stage 2 - 03 - Product detail,200,OK,Stage 2 - 2 VU 1-2,text,true,,451,131,2,2,http://localhost:3000/api/products/1,7,0,0
+1795339187974,3,Stage 2 - 04 - Add item to cart,200,OK,Stage 2 - 2 VU 1-1,text,true,,294,400,2,2,http://localhost:3000/api/cart,3,0,0
+1795339188531,4,Stage 2 - 04 - Add item to cart,200,OK,Stage 2 - 2 VU 1-2,text,true,,294,400,2,2,http://localhost:3000/api/cart,4,0,0
+1795339190981,26,Stage 2 - 05 - Checkout,200,OK,Stage 2 - 2 VU 1-1,text,true,,312,446,2,2,http://localhost:3000/api/checkout,26,0,0
+1795339191539,23,Stage 2 - 05 - Checkout,200,OK,Stage 2 - 2 VU 1-2,text,true,,312,446,1,1,http://localhost:3000/api/checkout,23,0,0

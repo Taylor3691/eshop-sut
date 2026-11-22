@@ -69,16 +69,18 @@ Login → Search Products → View Product Detail → Add to Cart → Checkout
 
 ## Kết Quả Kiểm Thử
 
-> ⚠️ **Chưa thực thi.** Kết quả sẽ được cập nhật sau khi chạy test.
+> **Đã thực thi Prompt 08 ngày 2026-11-22** trong backend/DB cô lập. Các JTL và giới hạn diễn giải được ghi trong [execution manifest](results/execution-manifest.md) và [phân tích kết quả](results/performance-analysis-20261122.md). Đây là các workflow hữu hạn; không đại diện sustained load hoặc SLO.
 
 | Metric | Load | Stress | Spike | Endurance |
 |--------|------|--------|-------|-----------|
-| Virtual Users | — | — | — | — |
-| Duration | — | — | — | — |
-| Avg Response Time | — | — | — | — |
-| p95 Response Time | — | — | — | — |
-| Throughput (RPS) | — | — | — | — |
-| Error Rate | — | — | — | — |
+| Virtual Users | 1 | 1 → 2 → 4 (3 run riêng) | 1 → 4 → 1 | NOT EXECUTED |
+| Duration | 16 s | 16 / 16 / 18 s mỗi stage | 76 s gồm phase delay | NOT EXECUTED |
+| Avg Response Time | 15.20 ms | 33.80 / 19.20 / 10.15 ms | 53.50 ms tổng | — |
+| p95 Response Time | 48 ms | 141 / 116 / 26 ms | 354 ms tổng | — |
+| Throughput (RPS) | 0.41 | 0.41 / 0.78 / 1.34 | 0.42 toàn khoảng timestamp | — |
+| Error Rate | 0% (5/5) | 0% (35/35) | 0% (30/30) | NOT EXECUTED |
+
+> Các mẫu nhỏ (5–30 request/run), không có SLO; Spike chạm 395 MiB RAM khả dụng và CPU 100%. Chưa xác lập năng lực chịu tải. Endurance 10–15 phút và screenshot/video evidence chưa thực hiện.
 
 ---
 

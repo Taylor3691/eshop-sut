@@ -1,0 +1,146 @@
+{
+  "source_file": "HW05\\results\\Stress\\23120157_Stress_Stage3_20261122_161045.jtl",
+  "required_columns": [
+    "elapsed",
+    "label",
+    "success",
+    "timeStamp"
+  ],
+  "percentile_method": "nearest rank, ceil(p*n), one-based",
+  "overall": {
+    "samples": 20,
+    "errors": 0,
+    "error_rate_percent": 0.0,
+    "elapsed_ms": {
+      "min": 3,
+      "mean": 10.15,
+      "p90": 20.0,
+      "p95": 26.0,
+      "p99": 51.0,
+      "max": 51
+    },
+    "throughput_samples_per_second": 1.341741580571582,
+    "window": {
+      "start_epoch_ms": 1795339372584,
+      "end_epoch_ms": 1795339387489,
+      "start_utc": "2026-11-22T09:22:52.584000+00:00",
+      "end_utc": "2026-11-22T09:23:07.489000+00:00",
+      "inclusive_span_ms": 14906,
+      "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+    }
+  },
+  "by_label": {
+    "Stage 3 - 01 - Login": {
+      "samples": 4,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 6,
+        "mean": 17.75,
+        "p90": 51.0,
+        "p95": 51.0,
+        "p99": 51.0,
+        "max": 51
+      },
+      "throughput_samples_per_second": 1.404494382022472,
+      "window": {
+        "start_epoch_ms": 1795339372584,
+        "end_epoch_ms": 1795339375431,
+        "start_utc": "2026-11-22T09:22:52.584000+00:00",
+        "end_utc": "2026-11-22T09:22:55.431000+00:00",
+        "inclusive_span_ms": 2848,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Stage 3 - 02 - Search products": {
+      "samples": 4,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 4,
+        "mean": 4.5,
+        "p90": 5.0,
+        "p95": 5.0,
+        "p99": 5.0,
+        "max": 5
+      },
+      "throughput_samples_per_second": 1.4498006524102935,
+      "window": {
+        "start_epoch_ms": 1795339375692,
+        "end_epoch_ms": 1795339378450,
+        "start_utc": "2026-11-22T09:22:55.692000+00:00",
+        "end_utc": "2026-11-22T09:22:58.450000+00:00",
+        "inclusive_span_ms": 2759,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Stage 3 - 03 - Product detail": {
+      "samples": 4,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 3,
+        "mean": 4.0,
+        "p90": 5.0,
+        "p95": 5.0,
+        "p99": 5.0,
+        "max": 5
+      },
+      "throughput_samples_per_second": 1.4492753623188406,
+      "window": {
+        "start_epoch_ms": 1795339378699,
+        "end_epoch_ms": 1795339381458,
+        "start_utc": "2026-11-22T09:22:58.699000+00:00",
+        "end_utc": "2026-11-22T09:23:01.458000+00:00",
+        "inclusive_span_ms": 2760,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Stage 3 - 04 - Add item to cart": {
+      "samples": 4,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 3,
+        "mean": 3.75,
+        "p90": 5.0,
+        "p95": 5.0,
+        "p99": 5.0,
+        "max": 5
+      },
+      "throughput_samples_per_second": 1.444043321299639,
+      "window": {
+        "start_epoch_ms": 1795339381708,
+        "end_epoch_ms": 1795339384477,
+        "start_utc": "2026-11-22T09:23:01.708000+00:00",
+        "end_utc": "2026-11-22T09:23:04.477000+00:00",
+        "inclusive_span_ms": 2770,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Stage 3 - 05 - Checkout": {
+      "samples": 4,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 18,
+        "mean": 20.75,
+        "p90": 26.0,
+        "p95": 26.0,
+        "p99": 26.0,
+        "max": 26
+      },
+      "throughput_samples_per_second": 1.4492753623188406,
+      "window": {
+        "start_epoch_ms": 1795339384730,
+        "end_epoch_ms": 1795339387489,
+        "start_utc": "2026-11-22T09:23:04.730000+00:00",
+        "end_utc": "2026-11-22T09:23:07.489000+00:00",
+        "inclusive_span_ms": 2760,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    }
+  },
+  "warnings": [],
+  "malformed_rows": []
+}

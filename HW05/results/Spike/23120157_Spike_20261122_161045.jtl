@@ -1,0 +1,31 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1795339459572,120,Baseline - 1 VU - 01 - Login,200,OK,Baseline - 1 VU 1-1,text,true,,696,270,1,1,http://localhost:3000/api/login,120,0,101
+1795339462800,5,Baseline - 1 VU - 02 - Search products,200,OK,Baseline - 1 VU 1-1,text,true,,453,154,1,1,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795339465817,4,Baseline - 1 VU - 03 - Product detail,200,OK,Baseline - 1 VU 1-1,text,true,,451,131,1,1,http://localhost:3000/api/products/1,4,0,0
+1795339468838,4,Baseline - 1 VU - 04 - Add item to cart,200,OK,Baseline - 1 VU 1-1,text,true,,294,402,1,1,http://localhost:3000/api/cart,4,0,0
+1795339471844,19,Baseline - 1 VU - 05 - Checkout,200,OK,Baseline - 1 VU 1-1,text,true,,313,448,1,1,http://localhost:3000/api/checkout,19,0,0
+1795339485931,6,Spike Peak - 4 VU - 01 - Login,200,OK,Spike Peak - 4 VU 2-1,text,true,,696,270,4,4,http://localhost:3000/api/login,6,0,3
+1795339486449,12,Spike Peak - 4 VU - 01 - Login,200,OK,Spike Peak - 4 VU 2-2,text,true,,696,270,4,4,http://localhost:3000/api/login,12,0,8
+1795339486930,7,Spike Peak - 4 VU - 01 - Login,200,OK,Spike Peak - 4 VU 2-3,text,true,,696,270,4,4,http://localhost:3000/api/login,7,0,4
+1795339487444,13,Spike Peak - 4 VU - 01 - Login,200,OK,Spike Peak - 4 VU 2-4,text,true,,696,270,4,4,http://localhost:3000/api/login,13,0,8
+1795339490945,14,Spike Peak - 4 VU - 02 - Search products,200,OK,Spike Peak - 4 VU 2-1,text,true,,453,154,4,4,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,14,0,10
+1795339491471,6,Spike Peak - 4 VU - 02 - Search products,200,OK,Spike Peak - 4 VU 2-2,text,true,,453,154,4,4,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,6,0,3
+1795339491952,5,Spike Peak - 4 VU - 02 - Search products,200,OK,Spike Peak - 4 VU 2-3,text,true,,453,154,4,4,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,2
+1795339492469,5,Spike Peak - 4 VU - 02 - Search products,200,OK,Spike Peak - 4 VU 2-4,text,true,,453,154,4,4,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,2
+1795339495973,6,Spike Peak - 4 VU - 03 - Product detail,200,OK,Spike Peak - 4 VU 2-1,text,true,,451,131,4,4,http://localhost:3000/api/products/1,5,0,2
+1795339496486,6,Spike Peak - 4 VU - 03 - Product detail,200,OK,Spike Peak - 4 VU 2-2,text,true,,451,131,4,4,http://localhost:3000/api/products/1,6,0,4
+1795339496972,6,Spike Peak - 4 VU - 03 - Product detail,200,OK,Spike Peak - 4 VU 2-3,text,true,,451,131,4,4,http://localhost:3000/api/products/1,6,0,3
+1795339497484,5,Spike Peak - 4 VU - 03 - Product detail,200,OK,Spike Peak - 4 VU 2-4,text,true,,451,131,4,4,http://localhost:3000/api/products/1,5,0,2
+1795339500982,4,Spike Peak - 4 VU - 04 - Add item to cart,200,OK,Spike Peak - 4 VU 2-1,text,true,,294,402,4,4,http://localhost:3000/api/cart,4,0,2
+1795339501495,5,Spike Peak - 4 VU - 04 - Add item to cart,200,OK,Spike Peak - 4 VU 2-2,text,true,,294,402,4,4,http://localhost:3000/api/cart,5,0,2
+1795339501991,5,Spike Peak - 4 VU - 04 - Add item to cart,200,OK,Spike Peak - 4 VU 2-3,text,true,,294,402,4,4,http://localhost:3000/api/cart,5,0,3
+1795339502505,7,Spike Peak - 4 VU - 04 - Add item to cart,200,OK,Spike Peak - 4 VU 2-4,text,true,,294,402,4,4,http://localhost:3000/api/cart,7,0,4
+1795339506001,354,Spike Peak - 4 VU - 05 - Checkout,200,OK,Spike Peak - 4 VU 2-1,text,true,,313,448,4,4,http://localhost:3000/api/checkout,354,0,3
+1795339506507,595,Spike Peak - 4 VU - 05 - Checkout,200,OK,Spike Peak - 4 VU 2-2,text,true,,313,448,3,3,http://localhost:3000/api/checkout,595,0,9
+1795339507000,287,Spike Peak - 4 VU - 05 - Checkout,200,OK,Spike Peak - 4 VU 2-3,text,true,,313,448,2,2,http://localhost:3000/api/checkout,287,0,5
+1795339507526,50,Spike Peak - 4 VU - 05 - Checkout,200,OK,Spike Peak - 4 VU 2-4,text,true,,313,448,1,1,http://localhost:3000/api/checkout,50,0,8
+1795339518968,10,Recovery - 1 VU - 01 - Login,200,OK,Recovery - 1 VU 3-1,text,true,,696,270,1,1,http://localhost:3000/api/login,10,0,6
+1795339521991,3,Recovery - 1 VU - 02 - Search products,200,OK,Recovery - 1 VU 3-1,text,true,,453,154,1,1,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,3,0,0
+1795339525009,5,Recovery - 1 VU - 03 - Product detail,200,OK,Recovery - 1 VU 3-1,text,true,,451,131,1,1,http://localhost:3000/api/products/1,5,0,0
+1795339528026,10,Recovery - 1 VU - 04 - Add item to cart,200,OK,Recovery - 1 VU 3-1,text,true,,294,402,1,1,http://localhost:3000/api/cart,10,0,0
+1795339531055,27,Recovery - 1 VU - 05 - Checkout,200,OK,Recovery - 1 VU 3-1,text,true,,313,448,1,1,http://localhost:3000/api/checkout,27,0,0

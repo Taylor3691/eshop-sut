@@ -1,0 +1,366 @@
+{
+  "source_file": "HW05\\results\\Spike\\23120157_Spike_20261122_161045.jtl",
+  "required_columns": [
+    "elapsed",
+    "label",
+    "success",
+    "timeStamp"
+  ],
+  "percentile_method": "nearest rank, ceil(p*n), one-based",
+  "overall": {
+    "samples": 30,
+    "errors": 0,
+    "error_rate_percent": 0.0,
+    "elapsed_ms": {
+      "min": 3,
+      "mean": 53.5,
+      "p90": 120.0,
+      "p95": 354.0,
+      "p99": 595.0,
+      "max": 595
+    },
+    "throughput_samples_per_second": 0.41967433271781096,
+    "window": {
+      "start_epoch_ms": 1795339459572,
+      "end_epoch_ms": 1795339531055,
+      "start_utc": "2026-11-22T09:24:19.572000+00:00",
+      "end_utc": "2026-11-22T09:25:31.055000+00:00",
+      "inclusive_span_ms": 71484,
+      "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+    }
+  },
+  "by_label": {
+    "Baseline - 1 VU - 01 - Login": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 120,
+        "mean": 120.0,
+        "p90": 120.0,
+        "p95": 120.0,
+        "p99": 120.0,
+        "max": 120
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795339459572,
+        "end_epoch_ms": 1795339459572,
+        "start_utc": "2026-11-22T09:24:19.572000+00:00",
+        "end_utc": "2026-11-22T09:24:19.572000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Baseline - 1 VU - 02 - Search products": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 5,
+        "mean": 5.0,
+        "p90": 5.0,
+        "p95": 5.0,
+        "p99": 5.0,
+        "max": 5
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795339462800,
+        "end_epoch_ms": 1795339462800,
+        "start_utc": "2026-11-22T09:24:22.800000+00:00",
+        "end_utc": "2026-11-22T09:24:22.800000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Baseline - 1 VU - 03 - Product detail": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 4,
+        "mean": 4.0,
+        "p90": 4.0,
+        "p95": 4.0,
+        "p99": 4.0,
+        "max": 4
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795339465817,
+        "end_epoch_ms": 1795339465817,
+        "start_utc": "2026-11-22T09:24:25.817000+00:00",
+        "end_utc": "2026-11-22T09:24:25.817000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Baseline - 1 VU - 04 - Add item to cart": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 4,
+        "mean": 4.0,
+        "p90": 4.0,
+        "p95": 4.0,
+        "p99": 4.0,
+        "max": 4
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795339468838,
+        "end_epoch_ms": 1795339468838,
+        "start_utc": "2026-11-22T09:24:28.838000+00:00",
+        "end_utc": "2026-11-22T09:24:28.838000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Baseline - 1 VU - 05 - Checkout": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 19,
+        "mean": 19.0,
+        "p90": 19.0,
+        "p95": 19.0,
+        "p99": 19.0,
+        "max": 19
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795339471844,
+        "end_epoch_ms": 1795339471844,
+        "start_utc": "2026-11-22T09:24:31.844000+00:00",
+        "end_utc": "2026-11-22T09:24:31.844000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Recovery - 1 VU - 01 - Login": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 10,
+        "mean": 10.0,
+        "p90": 10.0,
+        "p95": 10.0,
+        "p99": 10.0,
+        "max": 10
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795339518968,
+        "end_epoch_ms": 1795339518968,
+        "start_utc": "2026-11-22T09:25:18.968000+00:00",
+        "end_utc": "2026-11-22T09:25:18.968000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Recovery - 1 VU - 02 - Search products": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 3,
+        "mean": 3.0,
+        "p90": 3.0,
+        "p95": 3.0,
+        "p99": 3.0,
+        "max": 3
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795339521991,
+        "end_epoch_ms": 1795339521991,
+        "start_utc": "2026-11-22T09:25:21.991000+00:00",
+        "end_utc": "2026-11-22T09:25:21.991000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Recovery - 1 VU - 03 - Product detail": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 5,
+        "mean": 5.0,
+        "p90": 5.0,
+        "p95": 5.0,
+        "p99": 5.0,
+        "max": 5
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795339525009,
+        "end_epoch_ms": 1795339525009,
+        "start_utc": "2026-11-22T09:25:25.009000+00:00",
+        "end_utc": "2026-11-22T09:25:25.009000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Recovery - 1 VU - 04 - Add item to cart": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 10,
+        "mean": 10.0,
+        "p90": 10.0,
+        "p95": 10.0,
+        "p99": 10.0,
+        "max": 10
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795339528026,
+        "end_epoch_ms": 1795339528026,
+        "start_utc": "2026-11-22T09:25:28.026000+00:00",
+        "end_utc": "2026-11-22T09:25:28.026000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Recovery - 1 VU - 05 - Checkout": {
+      "samples": 1,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 27,
+        "mean": 27.0,
+        "p90": 27.0,
+        "p95": 27.0,
+        "p99": 27.0,
+        "max": 27
+      },
+      "throughput_samples_per_second": 1000.0,
+      "window": {
+        "start_epoch_ms": 1795339531055,
+        "end_epoch_ms": 1795339531055,
+        "start_utc": "2026-11-22T09:25:31.055000+00:00",
+        "end_utc": "2026-11-22T09:25:31.055000+00:00",
+        "inclusive_span_ms": 1,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Spike Peak - 4 VU - 01 - Login": {
+      "samples": 4,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 6,
+        "mean": 9.5,
+        "p90": 13.0,
+        "p95": 13.0,
+        "p99": 13.0,
+        "max": 13
+      },
+      "throughput_samples_per_second": 2.642007926023778,
+      "window": {
+        "start_epoch_ms": 1795339485931,
+        "end_epoch_ms": 1795339487444,
+        "start_utc": "2026-11-22T09:24:45.931000+00:00",
+        "end_utc": "2026-11-22T09:24:47.444000+00:00",
+        "inclusive_span_ms": 1514,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Spike Peak - 4 VU - 02 - Search products": {
+      "samples": 4,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 5,
+        "mean": 7.5,
+        "p90": 14.0,
+        "p95": 14.0,
+        "p99": 14.0,
+        "max": 14
+      },
+      "throughput_samples_per_second": 2.622950819672131,
+      "window": {
+        "start_epoch_ms": 1795339490945,
+        "end_epoch_ms": 1795339492469,
+        "start_utc": "2026-11-22T09:24:50.945000+00:00",
+        "end_utc": "2026-11-22T09:24:52.469000+00:00",
+        "inclusive_span_ms": 1525,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Spike Peak - 4 VU - 03 - Product detail": {
+      "samples": 4,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 5,
+        "mean": 5.75,
+        "p90": 6.0,
+        "p95": 6.0,
+        "p99": 6.0,
+        "max": 6
+      },
+      "throughput_samples_per_second": 2.6455026455026456,
+      "window": {
+        "start_epoch_ms": 1795339495973,
+        "end_epoch_ms": 1795339497484,
+        "start_utc": "2026-11-22T09:24:55.973000+00:00",
+        "end_utc": "2026-11-22T09:24:57.484000+00:00",
+        "inclusive_span_ms": 1512,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Spike Peak - 4 VU - 04 - Add item to cart": {
+      "samples": 4,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 4,
+        "mean": 5.25,
+        "p90": 7.0,
+        "p95": 7.0,
+        "p99": 7.0,
+        "max": 7
+      },
+      "throughput_samples_per_second": 2.6246719160104988,
+      "window": {
+        "start_epoch_ms": 1795339500982,
+        "end_epoch_ms": 1795339502505,
+        "start_utc": "2026-11-22T09:25:00.982000+00:00",
+        "end_utc": "2026-11-22T09:25:02.505000+00:00",
+        "inclusive_span_ms": 1524,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    },
+    "Spike Peak - 4 VU - 05 - Checkout": {
+      "samples": 4,
+      "errors": 0,
+      "error_rate_percent": 0.0,
+      "elapsed_ms": {
+        "min": 50,
+        "mean": 321.5,
+        "p90": 595.0,
+        "p95": 595.0,
+        "p99": 595.0,
+        "max": 595
+      },
+      "throughput_samples_per_second": 2.6212319790301444,
+      "window": {
+        "start_epoch_ms": 1795339506001,
+        "end_epoch_ms": 1795339507526,
+        "start_utc": "2026-11-22T09:25:06.001000+00:00",
+        "end_utc": "2026-11-22T09:25:07.526000+00:00",
+        "inclusive_span_ms": 1526,
+        "definition": "sample count / (max timestamp - min timestamp + 1 ms); observed timestamp span"
+      }
+    }
+  },
+  "warnings": [],
+  "malformed_rows": []
+}

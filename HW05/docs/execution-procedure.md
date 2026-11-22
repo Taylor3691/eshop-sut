@@ -1,7 +1,7 @@
 # Quy trình thực thi Load, Stress, Spike — HW05
 
 **Ngày preflight:** 2026-11-19 (Asia/Bangkok)  
-**Trạng thái hiện tại:** BLOCKED — chưa chạy bất kỳ JMeter scenario nào. Xem [execution-manifest.md](../results/execution-manifest.md) để biết kết quả preflight thực tế.
+**Trạng thái hiện tại:** Prompt 08 đã thực thi Load, Stress 3 stage, và Spike ngày 2026-11-22. Preflight BLOCKED ngày 2026-11-19 bên dưới là lịch sử; kết quả thật nằm trong [execution-manifest.md](../results/execution-manifest.md). Các bước dưới đây giữ vai trò quy trình tái chạy sau khi đánh giá lại tài nguyên và hoàn tất screenshot/endurance còn thiếu.
 
 ## 1. Điều kiện cần trước khi chạy
 
@@ -108,4 +108,4 @@ Không gửi password sai có chủ đích. Source hiện cộng login attempts 
 
 ## 8. Hiện tại
 
-Preflight 2026-11-19 15:23 +07:00 cho thấy JMeter không có command/`JMETER_HOME`, backend port 3000 không listen, free RAM khoảng 1.71 GiB, CSV chỉ có một dòng và shipping address trống. Vì vậy Load/Stress/Spike đều **BLOCKED**, không có screenshot/JTL/HTML report hay performance result nào được tạo. Xem manifest để kiểm tra từng mục.
+Preflight 2026-11-19 15:23 +07:00 ban đầu ghi JMeter không có command/`JMETER_HOME`, backend port 3000 không listen, free RAM khoảng 1.71 GiB, CSV chỉ có một dòng và shipping address trống. Kết quả này đã được supersede: JMeter 5.6.3 tìm thấy bằng đường dẫn cài đặt; backend test chạy trong bản sao cô lập; tài khoản/CSV riêng được tạo trong `%TEMP%`; Load, ba Stress stage và Spike đã có JTL/Dashboard. Spike chạm minimum 395 MiB available RAM. Không có screenshot desktop đồng thời; Endurance chưa chạy. Xem manifest để kiểm tra các giới hạn.

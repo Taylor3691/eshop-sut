@@ -1,0 +1,21 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1795339372584,51,Stage 3 - 01 - Login,200,OK,Stage 3 - 4 VU 1-1,text,true,,695,271,4,4,http://localhost:3000/api/login,51,0,33
+1795339373411,6,Stage 3 - 01 - Login,200,OK,Stage 3 - 4 VU 1-2,text,true,,695,271,4,4,http://localhost:3000/api/login,6,0,2
+1795339374422,7,Stage 3 - 01 - Login,200,OK,Stage 3 - 4 VU 1-3,text,true,,698,271,4,4,http://localhost:3000/api/login,6,0,2
+1795339375431,7,Stage 3 - 01 - Login,200,OK,Stage 3 - 4 VU 1-4,text,true,,698,271,4,4,http://localhost:3000/api/login,7,0,2
+1795339375692,5,Stage 3 - 02 - Search products,200,OK,Stage 3 - 4 VU 1-1,text,true,,453,154,4,4,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795339376424,4,Stage 3 - 02 - Search products,200,OK,Stage 3 - 4 VU 1-2,text,true,,453,154,4,4,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795339377438,5,Stage 3 - 02 - Search products,200,OK,Stage 3 - 4 VU 1-3,text,true,,453,154,4,4,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,5,0,0
+1795339378450,4,Stage 3 - 02 - Search products,200,OK,Stage 3 - 4 VU 1-4,text,true,,453,154,4,4,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795339378699,3,Stage 3 - 03 - Product detail,200,OK,Stage 3 - 4 VU 1-1,text,true,,451,131,4,4,http://localhost:3000/api/products/1,3,0,0
+1795339379430,4,Stage 3 - 03 - Product detail,200,OK,Stage 3 - 4 VU 1-2,text,true,,451,131,4,4,http://localhost:3000/api/products/1,3,0,0
+1795339380460,4,Stage 3 - 03 - Product detail,200,OK,Stage 3 - 4 VU 1-3,text,true,,451,131,4,4,http://localhost:3000/api/products/1,3,0,0
+1795339381458,5,Stage 3 - 03 - Product detail,200,OK,Stage 3 - 4 VU 1-4,text,true,,451,131,4,4,http://localhost:3000/api/products/1,5,0,0
+1795339381708,5,Stage 3 - 04 - Add item to cart,200,OK,Stage 3 - 4 VU 1-1,text,true,,294,400,4,4,http://localhost:3000/api/cart,5,0,0
+1795339382441,4,Stage 3 - 04 - Add item to cart,200,OK,Stage 3 - 4 VU 1-2,text,true,,294,400,4,4,http://localhost:3000/api/cart,4,0,0
+1795339383478,3,Stage 3 - 04 - Add item to cart,200,OK,Stage 3 - 4 VU 1-3,text,true,,294,402,4,4,http://localhost:3000/api/cart,3,0,0
+1795339384477,3,Stage 3 - 04 - Add item to cart,200,OK,Stage 3 - 4 VU 1-4,text,true,,294,402,4,4,http://localhost:3000/api/cart,3,0,0
+1795339384730,19,Stage 3 - 05 - Checkout,200,OK,Stage 3 - 4 VU 1-1,text,true,,312,446,4,4,http://localhost:3000/api/checkout,19,0,0
+1795339385449,18,Stage 3 - 05 - Checkout,200,OK,Stage 3 - 4 VU 1-2,text,true,,312,446,3,3,http://localhost:3000/api/checkout,18,0,0
+1795339386491,26,Stage 3 - 05 - Checkout,200,OK,Stage 3 - 4 VU 1-3,text,true,,312,448,2,2,http://localhost:3000/api/checkout,26,0,0
+1795339387489,20,Stage 3 - 05 - Checkout,200,OK,Stage 3 - 4 VU 1-4,text,true,,312,448,1,1,http://localhost:3000/api/checkout,20,0,0

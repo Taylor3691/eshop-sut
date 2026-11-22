@@ -1,0 +1,6 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1795338937843,48,01 - Login,200,OK,Load - one workflow per isolated user 1-1,text,true,,691,269,1,1,http://localhost:3000/api/login,47,0,34
+1795338940957,4,02 - Search products,200,OK,Load - one workflow per isolated user 1-1,text,true,,453,154,1,1,http://localhost:3000/api/products?search=iPhone+15+Pro+Max,4,0,0
+1795338943976,4,03 - Product detail,200,OK,Load - one workflow per isolated user 1-1,text,true,,451,131,1,1,http://localhost:3000/api/products/1,4,0,0
+1795338946983,5,04 - Add item to cart,200,OK,Load - one workflow per isolated user 1-1,text,true,,294,400,1,1,http://localhost:3000/api/cart,5,0,0
+1795338949995,15,05 - Checkout,200,OK,Load - one workflow per isolated user 1-1,text,true,,312,446,1,1,http://localhost:3000/api/checkout,15,0,0
