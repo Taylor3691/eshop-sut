@@ -9,7 +9,7 @@ Các nguồn đã được đối chiếu:
 - `backend/server.js` và `backend/database.js`.
 - `task1-human-review.md`.
 
-Các phát hiện từ source code được đánh dấu **source-confirmed**. Trước khi đăng GitHub Issue, cần tái hiện trên backend đang chạy và chụp request/response thật; không sử dụng source inspection thay cho execution evidence.
+Bảy phát hiện đã được tái hiện bằng HTTP request thật trên backend Node.js tạm ở cổng `3100`, dùng bản sao SQLite tách biệt. Ảnh request/response và JSON kết quả nằm trong `23120117_HW05_AI_Performance_100/Bug Reports/`; JWT và password đã được che. Báo cáo này không chứa URL GitHub Issue công khai.
 
 ## 2. Kiểm tra performance issues từ raw JTL
 
@@ -32,17 +32,17 @@ Không có bằng chứng đủ mạnh để mở performance issue từ bốn r
 
 E2E Transaction Controller có p95 khoảng 10 giây vì chứa think-time 1–3 giây giữa các bước. Không được báo p95 E2E này như một lỗi API latency.
 
-## 3. Issue candidates được xác nhận từ source
+## 3. Runtime-confirmed issues
 
 | ID | Tiêu đề | Loại | Mức độ | Trạng thái |
 |---|---|---|---|---|
-| ISSUE-01 | API Admin không kiểm tra role admin | Security/Authorization | Critical | Source-confirmed, cần runtime screenshot |
-| ISSUE-02 | User có thể tự đổi role thành admin | Security/Privilege escalation | Critical | Source-confirmed, cần runtime screenshot |
-| ISSUE-03 | Checkout tin cậy total_amount từ client | Functional/Security | High | Source-confirmed, cần runtime screenshot |
-| ISSUE-04 | Giỏ hàng không được xóa sau checkout | Functional | High | Source-confirmed, cần runtime screenshot |
-| ISSUE-05 | Thêm cùng sản phẩm tạo dòng trùng thay vì tăng quantity | Functional | Medium | Source-confirmed, cần runtime screenshot |
-| ISSUE-06 | Công thức coupon phần trăm tạo số tiền sai | Functional | High | Source-confirmed, cần runtime screenshot |
-| ISSUE-07 | Login lockout tăng sai bộ đếm và khóa sai thời gian | Functional/Security | High | Source-confirmed, cần runtime screenshot |
+| ISSUE-01 | API Admin không kiểm tra role admin | Security/Authorization | Critical | Runtime-confirmed; screenshot available |
+| ISSUE-02 | User có thể tự đổi role thành admin | Security/Privilege escalation | Critical | Runtime-confirmed; screenshot available |
+| ISSUE-03 | Checkout tin cậy total_amount từ client | Functional/Security | High | Runtime-confirmed; screenshot available |
+| ISSUE-04 | Giỏ hàng không được xóa sau checkout | Functional | High | Runtime-confirmed; screenshot available |
+| ISSUE-05 | Thêm cùng sản phẩm tạo dòng trùng thay vì tăng quantity | Functional | Medium | Runtime-confirmed; screenshot available |
+| ISSUE-06 | Công thức coupon phần trăm tạo số tiền sai | Functional | High | Runtime-confirmed; screenshot available |
+| ISSUE-07 | Login lockout tăng sai bộ đếm và khóa sai thời gian | Functional/Security | High | Runtime-confirmed; screenshot available |
 
 ## 4. GitHub Issue drafts
 
@@ -64,7 +64,7 @@ E2E Transaction Controller có p95 khoảng 10 giây vì chứa think-time 1–3
 3. Gửi `GET /api/admin/orders` bằng cùng token.
 
 **Expected:** Server trả 403 cho tài khoản không có role admin.  
-**Actual predicted from source:** Request được xử lý và trả dữ liệu admin.
+**Kết quả thực tế:** User role `user` gọi `GET /api/admin/users` và nhận HTTP 200 cùng danh sách 2 user.
 
 **Impact:** User thường có thể đọc dữ liệu người dùng/đơn hàng và gọi các API thay đổi dữ liệu admin.
 
@@ -88,7 +88,7 @@ E2E Transaction Controller có p95 khoảng 10 giây vì chứa think-time 1–3
 3. Gọi lại `GET /api/users/me`.
 
 **Expected:** Server bỏ qua hoặc từ chối trường `role`; role vẫn là `user`.  
-**Actual predicted from source:** Role được cập nhật thành `admin`.
+**Kết quả thực tế:** `PUT /api/users/me` chứa role `admin` trả HTTP 200; lần `GET /api/users/me` sau đó trả role `admin`.
 
 **Impact:** Privilege escalation từ user thường thành admin.
 
@@ -112,7 +112,7 @@ README yêu cầu backend tự tính tổng từ cart và không chấp nhận `
 3. Gọi order history hoặc Admin Orders để kiểm tra đơn vừa tạo.
 
 **Expected:** Backend tính lại tổng đúng từ cart và bỏ qua giá client.  
-**Actual predicted from source:** Order được lưu với `total_amount = 1`.
+**Kết quả thực tế:** Product giá 30000000 được thêm vào cart; checkout với total_amount 1 trả HTTP 200 và order history lưu total_amount 1.
 
 **Impact:** Người dùng có thể tạo đơn với giá tùy ý.
 
@@ -137,7 +137,7 @@ README yêu cầu xóa cart sau checkout. Route `/api/checkout` tạo order như
 4. Gọi lại `GET /api/cart`.
 
 **Expected:** Cart rỗng.  
-**Actual predicted from source:** Item cũ vẫn còn trong cart.
+**Kết quả thực tế:** Cart có 1 item trước checkout và vẫn có 1 item sau response checkout HTTP 200.
 
 **Impact:** Người dùng có thể checkout lặp lại item cũ; performance workflow tích lũy cart theo thời gian và làm workload thay đổi.
 
@@ -161,7 +161,7 @@ README yêu cầu thêm cùng sản phẩm phải tăng quantity. `POST /api/car
 3. Gọi `GET /api/cart`.
 
 **Expected:** Một dòng sản phẩm với quantity 2.  
-**Actual predicted from source:** Hai dòng riêng có quantity 1.
+**Kết quả thực tế:** Hai request thêm product ID 1 tạo 2 dòng riêng cùng product ID, mỗi dòng quantity 1.
 
 **Impact:** Cart hiển thị sai và tổng tiền/tương tác checkout có thể không nhất quán.
 
@@ -191,7 +191,7 @@ Với total 1.000.000, công thức tạo discount -9.000.000 và final 10.000.0
 2. Kiểm tra `discount_amount` và `final_amount`.
 
 **Expected:** discount 100.000; final 900.000.  
-**Actual predicted from source:** discount âm và final lớn hơn total.
+**Kết quả thực tế:** `SAVE10` với total 1000000 trả discount_amount -9000000 và final_amount 10000000.
 
 **Impact:** Tính tiền sai cho mọi coupon loại percent.
 
@@ -218,7 +218,7 @@ Với total 1.000.000, công thức tạo discount -9.000.000 và final 10.000.0
 4. Thử đăng nhập đúng ngay sau đó.
 
 **Expected:** Sau hai lần sai, tài khoản chưa bị khóa; lần thứ ba mới khóa trong 30 giây.  
-**Actual predicted from source:** Account bị khóa sau lần sai thứ hai và thời gian khóa là 180 giây.
+**Kết quả thực tế:** Hai login sai trả 401/401; login đúng ngay sau đó và sau 31 giây đều trả 403.
 
 **Impact:** Người dùng hợp lệ bị khóa sớm và lâu hơn yêu cầu; Stress/Spike có credential sai sẽ làm sai kết quả kiểm thử.
 

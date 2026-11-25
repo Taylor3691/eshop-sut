@@ -159,5 +159,5 @@ Evidence run: performance-tests/task1/evidence/endurance/run01/
 3. Resource collection dùng WMI/CIM nên chu kỳ thực tế gần 6 giây thay vì đúng 5 giây; vẫn bao phủ toàn bộ stable window.
 4. Load generator và backend cùng chạy trên localhost. Kết quả phản ánh phần cứng hiện tại, không đại diện cho môi trường mạng/production.
 5. Flow dùng CSV recycle và backend có hành vi tích lũy cart đã được ghi nhận trong human review; điều này có thể ảnh hưởng memory khi chạy lâu hơn.
-6. Báo cáo số liệu cần đi kèm ảnh JMeter/terminal và Task Manager đúng PID trong cùng khung hình để hoàn thiện execution evidence.
+6. Task 1.7 không yêu cầu riêng một ảnh Endurance có JMeter và Task Manager trong cùng khung hình. Có thể bổ sung ảnh này như bằng chứng hỗ trợ; số liệu tài nguyên của lần chạy hiện được lưu trong `backend-resource.csv`.
 

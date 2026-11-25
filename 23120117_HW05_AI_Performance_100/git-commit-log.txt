@@ -1,0 +1,676 @@
+* commit 35ceeb2ec96042dce24385fe4e37a4dfdfe28e2f
+| Author: Danh Vo <vhdanh.fit.hcmus@gmail.com>
+| Date:   Sun Nov 22 00:50:55 2026 +0700
+| 
+|     Update task3 for HW5
+| 
+|  performance-tests/task3/continuous-performance-testing-proposal.md | 2 --
+|  1 file changed, 2 deletions(-)
+| 
+* commit bac8fbafe6f8f52a8ec1bccb3a68c199bb16b27c
+| Author: Danh Vo <vhdanh.fit.hcmus@gmail.com>
+| Date:   Sun Nov 22 00:48:37 2026 +0700
+| 
+|     Update task2 for HW5
+| 
+|  performance-tests/task2/jmeter-raw-jtl-analysis.md | 2 +-
+|  1 file changed, 1 insertion(+), 1 deletion(-)
+| 
+* commit 588d9c8b5007e663ace05d0d0694d4c2612c4225
+| Author: Danh Vo <vhdanh.fit.hcmus@gmail.com>
+| Date:   Sat Nov 21 23:59:44 2026 +0700
+| 
+|     Update task 3 for HW5
+| 
+|  .../continuous-performance-testing-proposal.md    | 265 ++++++++++++++++++++
+|  1 file changed, 265 insertions(+)
+| 
+* commit eb27789200bda25a017868532b35c7911eecf664
+| Author: Danh Vo <vhdanh.fit.hcmus@gmail.com>
+| Date:   Sat Nov 21 23:55:34 2026 +0700
+| 
+|     Update task2 for HW5
+| 
+|  .../task2/jmeter-raw-jtl-analysis.md              | 89 ++++++++-------------
+|  1 file changed, 32 insertions(+), 57 deletions(-)
+| 
+* commit be3eacbfa1ffa20560b15a67a9d3f85f273b341e
+| Author: Danh Vo <vhdanh.fit.hcmus@gmail.com>
+| Date:   Sat Nov 21 23:24:10 2026 +0700
+| 
+|     Create task2 for HW5
+| 
+|  .../task2/jmeter-raw-jtl-analysis.md              | 281 ++++++++++++++++++++
+|  1 file changed, 281 insertions(+)
+| 
+* commit 9afefc835ba71b6b264b998dba4825101b802f5e
+| Author: Danh Vo <vhdanh.fit.hcmus@gmail.com>
+| Date:   Sat Nov 21 21:22:41 2026 +0700
+| 
+|     Create Task1 for HW5
+| 
+|  .../task1/23120117_Endurance_20261121.jmx         |   441 +
+|  .../task1/23120117_Load_20261120.jmx              |   441 +
+|  .../task1/23120117_Spike_20261120.jmx             |   774 +
+|  .../task1/23120117_Stress_20261120.jmx            |  1434 +
+|  performance-tests/task1/endurance-test-guide.md   |   233 +
+|  performance-tests/task1/endurance-test-report.md  |   163 +
+|  .../run01/23120117_Endurance_20261121.jtl         | 58945 ++++++++++++++++++
+|  .../evidence/endurance/run01/backend-resource.csv |   251 +
+|  .../run01/html/content/css/dashboard.css          |    48 +
+|  .../run01/html/content/css/jquery-ui.min.css      |     7 +
+|  .../html/content/css/jquery-ui.structure.min.css  |     5 +
+|  .../html/content/css/jquery-ui.theme.min.css      |     5 +
+|  .../endurance/run01/html/content/css/legends.css  |    61 +
+|  .../run01/html/content/css/theme.blue.css         |   233 +
+|  .../run01/html/content/js/curvedLines.js          |   483 +
+|  .../run01/html/content/js/customGraph.js          |    50 +
+|  .../run01/html/content/js/dashboard-commons.js    |   462 +
+|  .../endurance/run01/html/content/js/dashboard.js  |   235 +
+|  .../endurance/run01/html/content/js/graph.js      |  1416 +
+|  .../endurance/run01/html/content/js/hashtable.js  |   402 +
+|  .../run01/html/content/js/jquery-ui.min.js        |    13 +
+|  .../run01/html/content/js/jquery.cookie.js        |   117 +
+|  .../run01/html/content/js/jquery.flot.stack.js    |    83 +
+|  .../js/jquery.numberformatter-1.2.3.min.js        |     1 +
+|  .../html/content/js/jquery.tablesorter.min.js     |     2 +
+|  .../run01/html/content/pages/CustomsGraphs.html   |   176 +
+|  .../run01/html/content/pages/OverTime.html        |   512 +
+|  .../run01/html/content/pages/ResponseTimes.html   |   373 +
+|  .../run01/html/content/pages/Throughput.html      |   463 +
+|  .../run01/html/content/pages/icon-apache.png      |   Bin 0 -> 4944 bytes
+|  .../evidence/endurance/run01/html/index.html      |   203 +
+|  .../endurance/run01/html/sbadmin2-1.0.7/README.md |    27 +
+|  .../run01/html/sbadmin2-1.0.7/bower.json          |    39 +
+|  .../bower_components/bootstrap/.bower.json        |    48 +
+|  .../bower_components/bootstrap/README.md          |   134 +
+|  .../bootstrap/dist/css/bootstrap.min.css          |     6 +
+|  .../dist/fonts/glyphicons-halflings-regular.eot   |   Bin 0 -> 20127 bytes
+|  .../dist/fonts/glyphicons-halflings-regular.svg   |   288 +
+|  .../dist/fonts/glyphicons-halflings-regular.ttf   |   Bin 0 -> 45404 bytes
+|  .../dist/fonts/glyphicons-halflings-regular.woff  |   Bin 0 -> 23424 bytes
+|  .../dist/fonts/glyphicons-halflings-regular.woff2 |   Bin 0 -> 18028 bytes
+|  .../bootstrap/dist/js/bootstrap.min.js            |     7 +
+|  .../bower_components/flot-axislabels/.bower.json  |    14 +
+|  .../bower_components/flot-axislabels/README.md    |   101 +
+|  .../flot-axislabels/jquery.flot.axislabels.js     |   466 +
+|  .../bower_components/flot.tooltip/.bower.json     |    24 +
+|  .../bower_components/flot.tooltip/bower.json      |    13 +
+|  .../flot.tooltip/js/excanvas.min.js               |     1 +
+|  .../flot.tooltip/js/jquery.flot.js                |  3168 +
+|  .../flot.tooltip/js/jquery.flot.tooltip.js        |   490 +
+|  .../flot.tooltip/js/jquery.flot.tooltip.min.js    |    12 +
+|  .../flot.tooltip/js/jquery.flot.tooltip.source.js |   479 +
+|  .../bower_components/flot/.bower.json             |    19 +
+|  .../bower_components/flot/.travis.yml             |     3 +
+|  .../sbadmin2-1.0.7/bower_components/flot/API.md   |  1498 +
+|  .../bower_components/flot/CONTRIBUTING.md         |    98 +
+|  .../sbadmin2-1.0.7/bower_components/flot/FAQ.md   |    75 +
+|  .../sbadmin2-1.0.7/bower_components/flot/Makefile |    12 +
+|  .../sbadmin2-1.0.7/bower_components/flot/NEWS.md  |  1026 +
+|  .../bower_components/flot/PLUGINS.md              |   143 +
+|  .../bower_components/flot/README.md               |   110 +
+|  .../bower_components/flot/component.json          |     8 +
+|  .../bower_components/flot/excanvas.js             |  1428 +
+|  .../bower_components/flot/excanvas.min.js         |     1 +
+|  .../bower_components/flot/flot.jquery.json        |    27 +
+|  .../bower_components/flot/jquery.colorhelpers.js  |   180 +
+|  .../bower_components/flot/jquery.flot.canvas.js   |   345 +
+|  .../flot/jquery.flot.categories.js                |   190 +
+|  .../flot/jquery.flot.crosshair.js                 |   176 +
+|  .../flot/jquery.flot.errorbars.js                 |   353 +
+|  .../flot/jquery.flot.fillbetween.js               |   226 +
+|  .../bower_components/flot/jquery.flot.image.js    |   241 +
+|  .../bower_components/flot/jquery.flot.js          |  3168 +
+|  .../bower_components/flot/jquery.flot.navigate.js |   346 +
+|  .../bower_components/flot/jquery.flot.pie.js      |   820 +
+|  .../bower_components/flot/jquery.flot.resize.js   |    59 +
+|  .../flot/jquery.flot.selection.js                 |   360 +
+|  .../bower_components/flot/jquery.flot.stack.js    |   188 +
+|  .../bower_components/flot/jquery.flot.symbol.js   |    71 +
+|  .../flot/jquery.flot.threshold.js                 |   142 +
+|  .../bower_components/flot/jquery.flot.time.js     |   432 +
+|  .../bower_components/flot/package.json            |    11 +
+|  .../bower_components/font-awesome/.bower.json     |    36 +
+|  .../bower_components/font-awesome/.npmignore      |    42 +
+|  .../bower_components/font-awesome/bower.json      |    23 +
+|  .../font-awesome/css/font-awesome.css             |  1672 +
+|  .../font-awesome/css/font-awesome.min.css         |     4 +
+|  .../font-awesome/fonts/FontAwesome.otf            |   Bin 0 -> 85908 bytes
+|  .../font-awesome/fonts/fontawesome-webfont.eot    |   Bin 0 -> 56006 bytes
+|  .../font-awesome/fonts/fontawesome-webfont.svg    |   520 +
+|  .../font-awesome/fonts/fontawesome-webfont.ttf    |   Bin 0 -> 112160 bytes
+|  .../font-awesome/fonts/fontawesome-webfont.woff   |   Bin 0 -> 65452 bytes
+|  .../font-awesome/less/bordered-pulled.less        |    16 +
+|  .../bower_components/font-awesome/less/core.less  |    11 +
+|  .../font-awesome/less/extras.less                 |     2 +
+|  .../font-awesome/less/fixed-width.less            |     6 +
+|  .../font-awesome/less/font-awesome.less           |    17 +
+|  .../bower_components/font-awesome/less/icons.less |   552 +
+|  .../font-awesome/less/larger.less                 |    13 +
+|  .../bower_components/font-awesome/less/list.less  |    19 +
+|  .../font-awesome/less/mixins.less                 |    25 +
+|  .../bower_components/font-awesome/less/path.less  |    14 +
+|  .../font-awesome/less/rotated-flipped.less        |    20 +
+|  .../font-awesome/less/spinning.less               |    29 +
+|  .../font-awesome/less/stacked.less                |    20 +
+|  .../font-awesome/less/variables.less              |   561 +
+|  .../font-awesome/scss/_bordered-pulled.scss       |    16 +
+|  .../bower_components/font-awesome/scss/_core.scss |    11 +
+|  .../font-awesome/scss/_extras.scss                |    44 +
+|  .../font-awesome/scss/_fixed-width.scss           |     6 +
+|  .../font-awesome/scss/_icons.scss                 |   552 +
+|  .../font-awesome/scss/_larger.scss                |    13 +
+|  .../bower_components/font-awesome/scss/_list.scss |    19 +
+|  .../font-awesome/scss/_mixins.scss                |    25 +
+|  .../bower_components/font-awesome/scss/_path.scss |    14 +
+|  .../font-awesome/scss/_rotated-flipped.scss       |    20 +
+|  .../font-awesome/scss/_spinning.scss              |    29 +
+|  .../font-awesome/scss/_stacked.scss               |    20 +
+|  .../font-awesome/scss/_variables.scss             |   561 +
+|  .../font-awesome/scss/font-awesome.scss           |    17 +
+|  .../bower_components/jquery/.bower.json           |    37 +
+|  .../bower_components/jquery/bower.json            |    27 +
+|  .../bower_components/jquery/dist/jquery.js        | 10364 +++
+|  .../bower_components/jquery/dist/jquery.min.js    |     2 +
+|  .../bower_components/jquery/dist/jquery.min.map   |     1 +
+|  .../bower_components/metisMenu/.bower.json        |    45 +
+|  .../bower_components/metisMenu/README.md          |   113 +
+|  .../metisMenu/dist/metisMenu.min.css              |    10 +
+|  .../metisMenu/dist/metisMenu.min.js               |     9 +
+|  .../html/sbadmin2-1.0.7/dist/css/sb-admin-2.css   |   431 +
+|  .../html/sbadmin2-1.0.7/dist/js/sb-admin-2.js     |    36 +
+|  .../run01/html/sbadmin2-1.0.7/less/mixins.less    |     1 +
+|  .../html/sbadmin2-1.0.7/less/sb-admin-2.less      |   366 +
+|  .../run01/html/sbadmin2-1.0.7/less/variables.less |    14 +
+|  .../evidence/endurance/run01/html/statistics.json |   114 +
+|  .../load/run01/23120117_Load_20261121.jtl         |  4979 ++
+|  .../load/run01/html/content/css/dashboard.css     |    48 +
+|  .../load/run01/html/content/css/jquery-ui.min.css |     7 +
+|  .../html/content/css/jquery-ui.structure.min.css  |     5 +
+|  .../html/content/css/jquery-ui.theme.min.css      |     5 +
+|  .../load/run01/html/content/css/legends.css       |    61 +
+|  .../load/run01/html/content/css/theme.blue.css    |   233 +
+|  .../load/run01/html/content/js/curvedLines.js     |   483 +
+|  .../load/run01/html/content/js/customGraph.js     |    50 +
+|  .../run01/html/content/js/dashboard-commons.js    |   462 +
+|  .../load/run01/html/content/js/dashboard.js       |   235 +
+|  .../evidence/load/run01/html/content/js/graph.js  |  1416 +
+|  .../load/run01/html/content/js/hashtable.js       |   402 +
+|  .../load/run01/html/content/js/jquery-ui.min.js   |    13 +
+|  .../load/run01/html/content/js/jquery.cookie.js   |   117 +
+|  .../run01/html/content/js/jquery.flot.stack.js    |    83 +
+|  .../js/jquery.numberformatter-1.2.3.min.js        |     1 +
+|  .../html/content/js/jquery.tablesorter.min.js     |     2 +
+|  .../run01/html/content/pages/CustomsGraphs.html   |   176 +
+|  .../load/run01/html/content/pages/OverTime.html   |   512 +
+|  .../run01/html/content/pages/ResponseTimes.html   |   373 +
+|  .../load/run01/html/content/pages/Throughput.html |   463 +
+|  .../load/run01/html/content/pages/icon-apache.png |   Bin 0 -> 4944 bytes
+|  .../task1/evidence/load/run01/html/index.html     |   203 +
+|  .../load/run01/html/sbadmin2-1.0.7/README.md      |    27 +
+|  .../load/run01/html/sbadmin2-1.0.7/bower.json     |    39 +
+|  .../bower_components/bootstrap/.bower.json        |    48 +
+|  .../bower_components/bootstrap/README.md          |   134 +
+|  .../bootstrap/dist/css/bootstrap.min.css          |     6 +
+|  .../dist/fonts/glyphicons-halflings-regular.eot   |   Bin 0 -> 20127 bytes
+|  .../dist/fonts/glyphicons-halflings-regular.svg   |   288 +
+|  .../dist/fonts/glyphicons-halflings-regular.ttf   |   Bin 0 -> 45404 bytes
+|  .../dist/fonts/glyphicons-halflings-regular.woff  |   Bin 0 -> 23424 bytes
+|  .../dist/fonts/glyphicons-halflings-regular.woff2 |   Bin 0 -> 18028 bytes
+|  .../bootstrap/dist/js/bootstrap.min.js            |     7 +
+|  .../bower_components/flot-axislabels/.bower.json  |    14 +
+|  .../bower_components/flot-axislabels/README.md    |   101 +
+|  .../flot-axislabels/jquery.flot.axislabels.js     |   466 +
+|  .../bower_components/flot.tooltip/.bower.json     |    24 +
+|  .../bower_components/flot.tooltip/bower.json      |    13 +
+|  .../flot.tooltip/js/excanvas.min.js               |     1 +
+|  .../flot.tooltip/js/jquery.flot.js                |  3168 +
+|  .../flot.tooltip/js/jquery.flot.tooltip.js        |   490 +
+|  .../flot.tooltip/js/jquery.flot.tooltip.min.js    |    12 +
+|  .../flot.tooltip/js/jquery.flot.tooltip.source.js |   479 +
+|  .../bower_components/flot/.bower.json             |    19 +
+|  .../bower_components/flot/.travis.yml             |     3 +
+|  .../sbadmin2-1.0.7/bower_components/flot/API.md   |  1498 +
+|  .../bower_components/flot/CONTRIBUTING.md         |    98 +
+|  .../sbadmin2-1.0.7/bower_components/flot/FAQ.md   |    75 +
+|  .../sbadmin2-1.0.7/bower_components/flot/Makefile |    12 +
+|  .../sbadmin2-1.0.7/bower_components/flot/NEWS.md  |  1026 +
+|  .../bower_components/flot/PLUGINS.md              |   143 +
+|  .../bower_components/flot/README.md               |   110 +
+|  .../bower_components/flot/component.json          |     8 +
+|  .../bower_components/flot/excanvas.js             |  1428 +
+|  .../bower_components/flot/excanvas.min.js         |     1 +
+|  .../bower_components/flot/flot.jquery.json        |    27 +
+|  .../bower_components/flot/jquery.colorhelpers.js  |   180 +
+|  .../bower_components/flot/jquery.flot.canvas.js   |   345 +
+|  .../flot/jquery.flot.categories.js                |   190 +
+|  .../flot/jquery.flot.crosshair.js                 |   176 +
+|  .../flot/jquery.flot.errorbars.js                 |   353 +
+|  .../flot/jquery.flot.fillbetween.js               |   226 +
+|  .../bower_components/flot/jquery.flot.image.js    |   241 +
+|  .../bower_components/flot/jquery.flot.js          |  3168 +
+|  .../bower_components/flot/jquery.flot.navigate.js |   346 +
+|  .../bower_components/flot/jquery.flot.pie.js      |   820 +
+|  .../bower_components/flot/jquery.flot.resize.js   |    59 +
+|  .../flot/jquery.flot.selection.js                 |   360 +
+|  .../bower_components/flot/jquery.flot.stack.js    |   188 +
+|  .../bower_components/flot/jquery.flot.symbol.js   |    71 +
+|  .../flot/jquery.flot.threshold.js                 |   142 +
+|  .../bower_components/flot/jquery.flot.time.js     |   432 +
+|  .../bower_components/flot/package.json            |    11 +
+|  .../bower_components/font-awesome/.bower.json     |    36 +
+|  .../bower_components/font-awesome/.npmignore      |    42 +
+|  .../bower_components/font-awesome/bower.json      |    23 +
+|  .../font-awesome/css/font-awesome.css             |  1672 +
+|  .../font-awesome/css/font-awesome.min.css         |     4 +
+|  .../font-awesome/fonts/FontAwesome.otf            |   Bin 0 -> 85908 bytes
+|  .../font-awesome/fonts/fontawesome-webfont.eot    |   Bin 0 -> 56006 bytes
+|  .../font-awesome/fonts/fontawesome-webfont.svg    |   520 +
+|  .../font-awesome/fonts/fontawesome-webfont.ttf    |   Bin 0 -> 112160 bytes
+|  .../font-awesome/fonts/fontawesome-webfont.woff   |   Bin 0 -> 65452 bytes
+|  .../font-awesome/less/bordered-pulled.less        |    16 +
+|  .../bower_components/font-awesome/less/core.less  |    11 +
+|  .../font-awesome/less/extras.less                 |     2 +
+|  .../font-awesome/less/fixed-width.less            |     6 +
+|  .../font-awesome/less/font-awesome.less           |    17 +
+|  .../bower_components/font-awesome/less/icons.less |   552 +
+|  .../font-awesome/less/larger.less                 |    13 +
+|  .../bower_components/font-awesome/less/list.less  |    19 +
+|  .../font-awesome/less/mixins.less                 |    25 +
+|  .../bower_components/font-awesome/less/path.less  |    14 +
+|  .../font-awesome/less/rotated-flipped.less        |    20 +
+|  .../font-awesome/less/spinning.less               |    29 +
+|  .../font-awesome/less/stacked.less                |    20 +
+|  .../font-awesome/less/variables.less              |   561 +
+|  .../font-awesome/scss/_bordered-pulled.scss       |    16 +
+|  .../bower_components/font-awesome/scss/_core.scss |    11 +
+|  .../font-awesome/scss/_extras.scss                |    44 +
+|  .../font-awesome/scss/_fixed-width.scss           |     6 +
+|  .../font-awesome/scss/_icons.scss                 |   552 +
+|  .../font-awesome/scss/_larger.scss                |    13 +
+|  .../bower_components/font-awesome/scss/_list.scss |    19 +
+|  .../font-awesome/scss/_mixins.scss                |    25 +
+|  .../bower_components/font-awesome/scss/_path.scss |    14 +
+|  .../font-awesome/scss/_rotated-flipped.scss       |    20 +
+|  .../font-awesome/scss/_spinning.scss              |    29 +
+|  .../font-awesome/scss/_stacked.scss               |    20 +
+|  .../font-awesome/scss/_variables.scss             |   561 +
+|  .../font-awesome/scss/font-awesome.scss           |    17 +
+|  .../bower_components/jquery/.bower.json           |    37 +
+|  .../bower_components/jquery/bower.json            |    27 +
+|  .../bower_components/jquery/dist/jquery.js        | 10364 +++
+|  .../bower_components/jquery/dist/jquery.min.js    |     2 +
+|  .../bower_components/jquery/dist/jquery.min.map   |     1 +
+|  .../bower_components/metisMenu/.bower.json        |    45 +
+|  .../bower_components/metisMenu/README.md          |   113 +
+|  .../metisMenu/dist/metisMenu.min.css              |    10 +
+|  .../metisMenu/dist/metisMenu.min.js               |     9 +
+|  .../html/sbadmin2-1.0.7/dist/css/sb-admin-2.css   |   431 +
+|  .../html/sbadmin2-1.0.7/dist/js/sb-admin-2.js     |    36 +
+|  .../run01/html/sbadmin2-1.0.7/less/mixins.less    |     1 +
+|  .../html/sbadmin2-1.0.7/less/sb-admin-2.less      |   366 +
+|  .../run01/html/sbadmin2-1.0.7/less/variables.less |    14 +
+|  .../evidence/load/run01/html/statistics.json      |   114 +
+|  .../screenshots/hardware_dxdiag_system.png        |   Bin 0 -> 57042 bytes
+|  .../screenshots/hardware_spectable_system.png     |   Bin 0 -> 289681 bytes
+|  .../evidence/screenshots/load_runtime_20vu.png    |   Bin 0 -> 216783 bytes
+|  .../evidence/screenshots/spike_runtime_100vu.png  |   Bin 0 -> 245332 bytes
+|  .../evidence/screenshots/stress_runtime_120vu.png |   Bin 0 -> 228446 bytes
+|  .../spike/run01/23120117_Spike_20261121.jtl       |  5055 ++
+|  .../spike/run01/html/content/css/dashboard.css    |    48 +
+|  .../run01/html/content/css/jquery-ui.min.css      |     7 +
+|  .../html/content/css/jquery-ui.structure.min.css  |     5 +
+|  .../html/content/css/jquery-ui.theme.min.css      |     5 +
+|  .../spike/run01/html/content/css/legends.css      |    61 +
+|  .../spike/run01/html/content/css/theme.blue.css   |   233 +
+|  .../spike/run01/html/content/js/curvedLines.js    |   483 +
+|  .../spike/run01/html/content/js/customGraph.js    |    50 +
+|  .../run01/html/content/js/dashboard-commons.js    |   462 +
+|  .../spike/run01/html/content/js/dashboard.js      |   235 +
+|  .../evidence/spike/run01/html/content/js/graph.js |  1416 +
+|  .../spike/run01/html/content/js/hashtable.js      |   402 +
+|  .../spike/run01/html/content/js/jquery-ui.min.js  |    13 +
+|  .../spike/run01/html/content/js/jquery.cookie.js  |   117 +
+|  .../run01/html/content/js/jquery.flot.stack.js    |    83 +
+|  .../js/jquery.numberformatter-1.2.3.min.js        |     1 +
+|  .../html/content/js/jquery.tablesorter.min.js     |     2 +
+|  .../run01/html/content/pages/CustomsGraphs.html   |   176 +
+|  .../spike/run01/html/content/pages/OverTime.html  |   512 +
+|  .../run01/html/content/pages/ResponseTimes.html   |   373 +
+|  .../run01/html/content/pages/Throughput.html      |   463 +
+|  .../run01/html/content/pages/icon-apache.png      |   Bin 0 -> 4944 bytes
+|  .../task1/evidence/spike/run01/html/index.html    |   203 +
+|  .../spike/run01/html/sbadmin2-1.0.7/README.md     |    27 +
+|  .../spike/run01/html/sbadmin2-1.0.7/bower.json    |    39 +
+|  .../bower_components/bootstrap/.bower.json        |    48 +
+|  .../bower_components/bootstrap/README.md          |   134 +
+|  .../bootstrap/dist/css/bootstrap.min.css          |     6 +
+|  .../dist/fonts/glyphicons-halflings-regular.eot   |   Bin 0 -> 20127 bytes
+|  .../dist/fonts/glyphicons-halflings-regular.svg   |   288 +
+|  .../dist/fonts/glyphicons-halflings-regular.ttf   |   Bin 0 -> 45404 bytes
+|  .../dist/fonts/glyphicons-halflings-regular.woff  |   Bin 0 -> 23424 bytes
+|  .../dist/fonts/glyphicons-halflings-regular.woff2 |   Bin 0 -> 18028 bytes
+|  .../bootstrap/dist/js/bootstrap.min.js            |     7 +
+|  .../bower_components/flot-axislabels/.bower.json  |    14 +
+|  .../bower_components/flot-axislabels/README.md    |   101 +
+|  .../flot-axislabels/jquery.flot.axislabels.js     |   466 +
+|  .../bower_components/flot.tooltip/.bower.json     |    24 +
+|  .../bower_components/flot.tooltip/bower.json      |    13 +
+|  .../flot.tooltip/js/excanvas.min.js               |     1 +
+|  .../flot.tooltip/js/jquery.flot.js                |  3168 +
+|  .../flot.tooltip/js/jquery.flot.tooltip.js        |   490 +
+|  .../flot.tooltip/js/jquery.flot.tooltip.min.js    |    12 +
+|  .../flot.tooltip/js/jquery.flot.tooltip.source.js |   479 +
+|  .../bower_components/flot/.bower.json             |    19 +
+|  .../bower_components/flot/.travis.yml             |     3 +
+|  .../sbadmin2-1.0.7/bower_components/flot/API.md   |  1498 +
+|  .../bower_components/flot/CONTRIBUTING.md         |    98 +
+|  .../sbadmin2-1.0.7/bower_components/flot/FAQ.md   |    75 +
+|  .../sbadmin2-1.0.7/bower_components/flot/Makefile |    12 +
+|  .../sbadmin2-1.0.7/bower_components/flot/NEWS.md  |  1026 +
+|  .../bower_components/flot/PLUGINS.md              |   143 +
+|  .../bower_components/flot/README.md               |   110 +
+|  .../bower_components/flot/component.json          |     8 +
+|  .../bower_components/flot/excanvas.js             |  1428 +
+|  .../bower_components/flot/excanvas.min.js         |     1 +
+|  .../bower_components/flot/flot.jquery.json        |    27 +
+|  .../bower_components/flot/jquery.colorhelpers.js  |   180 +
+|  .../bower_components/flot/jquery.flot.canvas.js   |   345 +
+|  .../flot/jquery.flot.categories.js                |   190 +
+|  .../flot/jquery.flot.crosshair.js                 |   176 +
+|  .../flot/jquery.flot.errorbars.js                 |   353 +
+|  .../flot/jquery.flot.fillbetween.js               |   226 +
+|  .../bower_components/flot/jquery.flot.image.js    |   241 +
+|  .../bower_components/flot/jquery.flot.js          |  3168 +
+|  .../bower_components/flot/jquery.flot.navigate.js |   346 +
+|  .../bower_components/flot/jquery.flot.pie.js      |   820 +
+|  .../bower_components/flot/jquery.flot.resize.js   |    59 +
+|  .../flot/jquery.flot.selection.js                 |   360 +
+|  .../bower_components/flot/jquery.flot.stack.js    |   188 +
+|  .../bower_components/flot/jquery.flot.symbol.js   |    71 +
+|  .../flot/jquery.flot.threshold.js                 |   142 +
+|  .../bower_components/flot/jquery.flot.time.js     |   432 +
+|  .../bower_components/flot/package.json            |    11 +
+|  .../bower_components/font-awesome/.bower.json     |    36 +
+|  .../bower_components/font-awesome/.npmignore      |    42 +
+|  .../bower_components/font-awesome/bower.json      |    23 +
+|  .../font-awesome/css/font-awesome.css             |  1672 +
+|  .../font-awesome/css/font-awesome.min.css         |     4 +
+|  .../font-awesome/fonts/FontAwesome.otf            |   Bin 0 -> 85908 bytes
+|  .../font-awesome/fonts/fontawesome-webfont.eot    |   Bin 0 -> 56006 bytes
+|  .../font-awesome/fonts/fontawesome-webfont.svg    |   520 +
+|  .../font-awesome/fonts/fontawesome-webfont.ttf    |   Bin 0 -> 112160 bytes
+|  .../font-awesome/fonts/fontawesome-webfont.woff   |   Bin 0 -> 65452 bytes
+|  .../font-awesome/less/bordered-pulled.less        |    16 +
+|  .../bower_components/font-awesome/less/core.less  |    11 +
+|  .../font-awesome/less/extras.less                 |     2 +
+|  .../font-awesome/less/fixed-width.less            |     6 +
+|  .../font-awesome/less/font-awesome.less           |    17 +
+|  .../bower_components/font-awesome/less/icons.less |   552 +
+|  .../font-awesome/less/larger.less                 |    13 +
+|  .../bower_components/font-awesome/less/list.less  |    19 +
+|  .../font-awesome/less/mixins.less                 |    25 +
+|  .../bower_components/font-awesome/less/path.less  |    14 +
+|  .../font-awesome/less/rotated-flipped.less        |    20 +
+|  .../font-awesome/less/spinning.less               |    29 +
+|  .../font-awesome/less/stacked.less                |    20 +
+|  .../font-awesome/less/variables.less              |   561 +
+|  .../font-awesome/scss/_bordered-pulled.scss       |    16 +
+|  .../bower_components/font-awesome/scss/_core.scss |    11 +
+|  .../font-awesome/scss/_extras.scss                |    44 +
+|  .../font-awesome/scss/_fixed-width.scss           |     6 +
+|  .../font-awesome/scss/_icons.scss                 |   552 +
+|  .../font-awesome/scss/_larger.scss                |    13 +
+|  .../bower_components/font-awesome/scss/_list.scss |    19 +
+|  .../font-awesome/scss/_mixins.scss                |    25 +
+|  .../bower_components/font-awesome/scss/_path.scss |    14 +
+|  .../font-awesome/scss/_rotated-flipped.scss       |    20 +
+|  .../font-awesome/scss/_spinning.scss              |    29 +
+|  .../font-awesome/scss/_stacked.scss               |    20 +
+|  .../font-awesome/scss/_variables.scss             |   561 +
+|  .../font-awesome/scss/font-awesome.scss           |    17 +
+|  .../bower_components/jquery/.bower.json           |    37 +
+|  .../bower_components/jquery/bower.json            |    27 +
+|  .../bower_components/jquery/dist/jquery.js        | 10364 +++
+|  .../bower_components/jquery/dist/jquery.min.js    |     2 +
+|  .../bower_components/jquery/dist/jquery.min.map   |     1 +
+|  .../bower_components/metisMenu/.bower.json        |    45 +
+|  .../bower_components/metisMenu/README.md          |   113 +
+|  .../metisMenu/dist/metisMenu.min.css              |    10 +
+|  .../metisMenu/dist/metisMenu.min.js               |     9 +
+|  .../html/sbadmin2-1.0.7/dist/css/sb-admin-2.css   |   431 +
+|  .../html/sbadmin2-1.0.7/dist/js/sb-admin-2.js     |    36 +
+|  .../run01/html/sbadmin2-1.0.7/less/mixins.less    |     1 +
+|  .../html/sbadmin2-1.0.7/less/sb-admin-2.less      |   366 +
+|  .../run01/html/sbadmin2-1.0.7/less/variables.less |    14 +
+|  .../evidence/spike/run01/html/statistics.json     |   114 +
+|  .../stress/run01/23120117_Stress_20261121.jtl     | 16215 +++++
+|  .../stress/run01/html/content/css/dashboard.css   |    48 +
+|  .../run01/html/content/css/jquery-ui.min.css      |     7 +
+|  .../html/content/css/jquery-ui.structure.min.css  |     5 +
+|  .../html/content/css/jquery-ui.theme.min.css      |     5 +
+|  .../stress/run01/html/content/css/legends.css     |    61 +
+|  .../stress/run01/html/content/css/theme.blue.css  |   233 +
+|  .../stress/run01/html/content/js/curvedLines.js   |   483 +
+|  .../stress/run01/html/content/js/customGraph.js   |    50 +
+|  .../run01/html/content/js/dashboard-commons.js    |   462 +
+|  .../stress/run01/html/content/js/dashboard.js     |   235 +
+|  .../stress/run01/html/content/js/graph.js         |  1416 +
+|  .../stress/run01/html/content/js/hashtable.js     |   402 +
+|  .../stress/run01/html/content/js/jquery-ui.min.js |    13 +
+|  .../stress/run01/html/content/js/jquery.cookie.js |   117 +
+|  .../run01/html/content/js/jquery.flot.stack.js    |    83 +
+|  .../js/jquery.numberformatter-1.2.3.min.js        |     1 +
+|  .../html/content/js/jquery.tablesorter.min.js     |     2 +
+|  .../run01/html/content/pages/CustomsGraphs.html   |   176 +
+|  .../stress/run01/html/content/pages/OverTime.html |   512 +
+|  .../run01/html/content/pages/ResponseTimes.html   |   373 +
+|  .../run01/html/content/pages/Throughput.html      |   463 +
+|  .../run01/html/content/pages/icon-apache.png      |   Bin 0 -> 4944 bytes
+|  .../task1/evidence/stress/run01/html/index.html   |   203 +
+|  .../stress/run01/html/sbadmin2-1.0.7/README.md    |    27 +
+|  .../stress/run01/html/sbadmin2-1.0.7/bower.json   |    39 +
+|  .../bower_components/bootstrap/.bower.json        |    48 +
+|  .../bower_components/bootstrap/README.md          |   134 +
+|  .../bootstrap/dist/css/bootstrap.min.css          |     6 +
+|  .../dist/fonts/glyphicons-halflings-regular.eot   |   Bin 0 -> 20127 bytes
+|  .../dist/fonts/glyphicons-halflings-regular.svg   |   288 +
+|  .../dist/fonts/glyphicons-halflings-regular.ttf   |   Bin 0 -> 45404 bytes
+|  .../dist/fonts/glyphicons-halflings-regular.woff  |   Bin 0 -> 23424 bytes
+|  .../dist/fonts/glyphicons-halflings-regular.woff2 |   Bin 0 -> 18028 bytes
+|  .../bootstrap/dist/js/bootstrap.min.js            |     7 +
+|  .../bower_components/flot-axislabels/.bower.json  |    14 +
+|  .../bower_components/flot-axislabels/README.md    |   101 +
+|  .../flot-axislabels/jquery.flot.axislabels.js     |   466 +
+|  .../bower_components/flot.tooltip/.bower.json     |    24 +
+|  .../bower_components/flot.tooltip/bower.json      |    13 +
+|  .../flot.tooltip/js/excanvas.min.js               |     1 +
+|  .../flot.tooltip/js/jquery.flot.js                |  3168 +
+|  .../flot.tooltip/js/jquery.flot.tooltip.js        |   490 +
+|  .../flot.tooltip/js/jquery.flot.tooltip.min.js    |    12 +
+|  .../flot.tooltip/js/jquery.flot.tooltip.source.js |   479 +
+|  .../bower_components/flot/.bower.json             |    19 +
+|  .../bower_components/flot/.travis.yml             |     3 +
+|  .../sbadmin2-1.0.7/bower_components/flot/API.md   |  1498 +
+|  .../bower_components/flot/CONTRIBUTING.md         |    98 +
+|  .../sbadmin2-1.0.7/bower_components/flot/FAQ.md   |    75 +
+|  .../sbadmin2-1.0.7/bower_components/flot/Makefile |    12 +
+|  .../sbadmin2-1.0.7/bower_components/flot/NEWS.md  |  1026 +
+|  .../bower_components/flot/PLUGINS.md              |   143 +
+|  .../bower_components/flot/README.md               |   110 +
+|  .../bower_components/flot/component.json          |     8 +
+|  .../bower_components/flot/excanvas.js             |  1428 +
+|  .../bower_components/flot/excanvas.min.js         |     1 +
+|  .../bower_components/flot/flot.jquery.json        |    27 +
+|  .../bower_components/flot/jquery.colorhelpers.js  |   180 +
+|  .../bower_components/flot/jquery.flot.canvas.js   |   345 +
+|  .../flot/jquery.flot.categories.js                |   190 +
+|  .../flot/jquery.flot.crosshair.js                 |   176 +
+|  .../flot/jquery.flot.errorbars.js                 |   353 +
+|  .../flot/jquery.flot.fillbetween.js               |   226 +
+|  .../bower_components/flot/jquery.flot.image.js    |   241 +
+|  .../bower_components/flot/jquery.flot.js          |  3168 +
+|  .../bower_components/flot/jquery.flot.navigate.js |   346 +
+|  .../bower_components/flot/jquery.flot.pie.js      |   820 +
+|  .../bower_components/flot/jquery.flot.resize.js   |    59 +
+|  .../flot/jquery.flot.selection.js                 |   360 +
+|  .../bower_components/flot/jquery.flot.stack.js    |   188 +
+|  .../bower_components/flot/jquery.flot.symbol.js   |    71 +
+|  .../flot/jquery.flot.threshold.js                 |   142 +
+|  .../bower_components/flot/jquery.flot.time.js     |   432 +
+|  .../bower_components/flot/package.json            |    11 +
+|  .../bower_components/font-awesome/.bower.json     |    36 +
+|  .../bower_components/font-awesome/.npmignore      |    42 +
+|  .../bower_components/font-awesome/bower.json      |    23 +
+|  .../font-awesome/css/font-awesome.css             |  1672 +
+|  .../font-awesome/css/font-awesome.min.css         |     4 +
+|  .../font-awesome/fonts/FontAwesome.otf            |   Bin 0 -> 85908 bytes
+|  .../font-awesome/fonts/fontawesome-webfont.eot    |   Bin 0 -> 56006 bytes
+|  .../font-awesome/fonts/fontawesome-webfont.svg    |   520 +
+|  .../font-awesome/fonts/fontawesome-webfont.ttf    |   Bin 0 -> 112160 bytes
+|  .../font-awesome/fonts/fontawesome-webfont.woff   |   Bin 0 -> 65452 bytes
+|  .../font-awesome/less/bordered-pulled.less        |    16 +
+|  .../bower_components/font-awesome/less/core.less  |    11 +
+|  .../font-awesome/less/extras.less                 |     2 +
+|  .../font-awesome/less/fixed-width.less            |     6 +
+|  .../font-awesome/less/font-awesome.less           |    17 +
+|  .../bower_components/font-awesome/less/icons.less |   552 +
+|  .../font-awesome/less/larger.less                 |    13 +
+|  .../bower_components/font-awesome/less/list.less  |    19 +
+|  .../font-awesome/less/mixins.less                 |    25 +
+|  .../bower_components/font-awesome/less/path.less  |    14 +
+|  .../font-awesome/less/rotated-flipped.less        |    20 +
+|  .../font-awesome/less/spinning.less               |    29 +
+|  .../font-awesome/less/stacked.less                |    20 +
+|  .../font-awesome/less/variables.less              |   561 +
+|  .../font-awesome/scss/_bordered-pulled.scss       |    16 +
+|  .../bower_components/font-awesome/scss/_core.scss |    11 +
+|  .../font-awesome/scss/_extras.scss                |    44 +
+|  .../font-awesome/scss/_fixed-width.scss           |     6 +
+|  .../font-awesome/scss/_icons.scss                 |   552 +
+|  .../font-awesome/scss/_larger.scss                |    13 +
+|  .../bower_components/font-awesome/scss/_list.scss |    19 +
+|  .../font-awesome/scss/_mixins.scss                |    25 +
+|  .../bower_components/font-awesome/scss/_path.scss |    14 +
+|  .../font-awesome/scss/_rotated-flipped.scss       |    20 +
+|  .../font-awesome/scss/_spinning.scss              |    29 +
+|  .../font-awesome/scss/_stacked.scss               |    20 +
+|  .../font-awesome/scss/_variables.scss             |   561 +
+|  .../font-awesome/scss/font-awesome.scss           |    17 +
+|  .../bower_components/jquery/.bower.json           |    37 +
+|  .../bower_components/jquery/bower.json            |    27 +
+|  .../bower_components/jquery/dist/jquery.js        | 10364 +++
+|  .../bower_components/jquery/dist/jquery.min.js    |     2 +
+|  .../bower_components/jquery/dist/jquery.min.map   |     1 +
+|  .../bower_components/metisMenu/.bower.json        |    45 +
+|  .../bower_components/metisMenu/README.md          |   113 +
+|  .../metisMenu/dist/metisMenu.min.css              |    10 +
+|  .../metisMenu/dist/metisMenu.min.js               |     9 +
+|  .../html/sbadmin2-1.0.7/dist/css/sb-admin-2.css   |   431 +
+|  .../html/sbadmin2-1.0.7/dist/js/sb-admin-2.js     |    36 +
+|  .../run01/html/sbadmin2-1.0.7/less/mixins.less    |     1 +
+|  .../html/sbadmin2-1.0.7/less/sb-admin-2.less      |   366 +
+|  .../run01/html/sbadmin2-1.0.7/less/variables.less |    14 +
+|  .../evidence/stress/run01/html/statistics.json    |   114 +
+|  performance-tests/task1/flow-data.csv             |   241 +
+|  performance-tests/task1/generate-task1-plans.ps1  |   476 +
+|  performance-tests/task1/seed-test-users.ps1       |    44 +
+|  performance-tests/task1/task1-design.md           |   105 +
+|  performance-tests/task1/task1-human-review.md     |    53 +
+|  performance-tests/task1/task1-issues-report.md    |   250 +
+|  530 files changed, 245868 insertions(+)
+| 
+* commit 13e4a5c9d79992b38d73db99f3388a39f5a5fec2
+| Author: Toan <toan09833@gmail.com>
+| Date:   Tue Oct 6 12:44:26 2026 +0700
+| 
+|     docs: add agent specs and skills
+| 
+|  .agents/skills/domain-testing-bva/SKILL.md | 486 +++++++++++++++++++++++++++
+|  AGENTS.md                                  |  61 ++++
+|  2 files changed, 547 insertions(+)
+| 
+* commit 85af3ba875c88283615e22cb108f13e2fccaf0e9
+| Author: ttbhanh-hcmus <ttbhanh@hcmus.edu.vn>
+| Date:   Fri May 15 08:30:35 2026 +0700
+| 
+|     first upload
+| 
+|  README.md                                 |  290 +-
+|  api_specification.md                      |  214 +
+|  backend/database.js                       |  119 +
+|  backend/database.sqlite                   |  Bin 0 -> 36864 bytes
+|  backend/package-lock.json                 | 1663 +++++
+|  backend/package.json                      |   20 +
+|  backend/server.js                         |  572 ++
+|  backend/test_profile.js                   |    8 +
+|  frontend-admin/.gitignore                 |   24 +
+|  frontend-admin/README.md                  |   16 +
+|  frontend-admin/eslint.config.js           |   21 +
+|  frontend-admin/index.html                 |   13 +
+|  frontend-admin/package-lock.json          | 3681 +++++++++++
+|  frontend-admin/package.json               |   32 +
+|  frontend-admin/postcss.config.js          |    6 +
+|  frontend-admin/public/favicon.svg         |    1 +
+|  frontend-admin/public/icons.svg           |   24 +
+|  frontend-admin/src/App.css                |  184 +
+|  frontend-admin/src/App.jsx                |  922 +++
+|  frontend-admin/src/assets/hero.png        |  Bin 0 -> 13057 bytes
+|  frontend-admin/src/assets/react.svg       |    1 +
+|  frontend-admin/src/assets/vite.svg        |    1 +
+|  frontend-admin/src/index.css              |    8 +
+|  frontend-admin/src/main.jsx               |   10 +
+|  frontend-admin/tailwind.config.js         |   11 +
+|  frontend-admin/vite.config.js             |   11 +
+|  frontend-mobile/.gitignore                |   41 +
+|  frontend-mobile/App.js                    | 1300 ++++
+|  frontend-mobile/app.json                  |   29 +
+|  frontend-mobile/assets/adaptive-icon.png  |  Bin 0 -> 17547 bytes
+|  frontend-mobile/assets/favicon.png        |  Bin 0 -> 1466 bytes
+|  frontend-mobile/assets/icon.png           |  Bin 0 -> 22380 bytes
+|  frontend-mobile/assets/splash-icon.png    |  Bin 0 -> 17547 bytes
+|  frontend-mobile/index.js                  |    8 +
+|  frontend-mobile/package-lock.json         | 8773 +++++++++++++++++++++++++++
+|  frontend-mobile/package.json              |   18 +
+|  frontend-web/.gitignore                   |   24 +
+|  frontend-web/README.md                    |   16 +
+|  frontend-web/eslint.config.js             |   21 +
+|  frontend-web/index.html                   |   13 +
+|  frontend-web/package-lock.json            | 3681 +++++++++++
+|  frontend-web/package.json                 |   32 +
+|  frontend-web/postcss.config.js            |    6 +
+|  frontend-web/public/favicon.svg           |    1 +
+|  frontend-web/public/icons.svg             |   24 +
+|  frontend-web/src/App.css                  |  184 +
+|  frontend-web/src/App.jsx                  |   71 +
+|  frontend-web/src/assets/hero.png          |  Bin 0 -> 13057 bytes
+|  frontend-web/src/assets/react.svg         |    1 +
+|  frontend-web/src/assets/vite.svg          |    1 +
+|  frontend-web/src/context/AuthContext.jsx  |   50 +
+|  frontend-web/src/context/CartContext.jsx  |   36 +
+|  frontend-web/src/index.css                |   14 +
+|  frontend-web/src/main.jsx                 |   10 +
+|  frontend-web/src/pages/Cart.jsx           |   79 +
+|  frontend-web/src/pages/Checkout.jsx       |  151 +
+|  frontend-web/src/pages/ForgotPassword.jsx |  100 +
+|  frontend-web/src/pages/Home.jsx           |  116 +
+|  frontend-web/src/pages/Login.jsx          |   69 +
+|  frontend-web/src/pages/ProductDetail.jsx  |   73 +
+|  frontend-web/src/pages/Profile.jsx        |  217 +
+|  frontend-web/src/pages/Register.jsx       |   83 +
+|  frontend-web/tailwind.config.js           |   11 +
+|  frontend-web/vite.config.js               |    7 +
+|  run_servers.sh                            |    5 +
+|  setup_guide.md                            |  117 +
+|  66 files changed, 23232 insertions(+), 2 deletions(-)
+| 
+* commit 2f9bf2bab45855abf211377a5d5eba10031649e3
+  Author: Hanh Tran <ttbhanh@fit.hcmus.edu.vn>
+  Date:   Fri May 15 08:27:44 2026 +0700
+  
+      Initial commit
+  
+   README.md | 2 ++
+   1 file changed, 2 insertions(+)
+

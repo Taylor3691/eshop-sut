@@ -1,0 +1,4 @@
+interface:
+  display_name: "Task1_skills"
+  short_description: "Sinh ba JMeter plan từ một flow EShop"
+  default_prompt: "Use $task1-skills to design and generate Load, Stress, and Spike JMeter plans from this end-to-end flow."
